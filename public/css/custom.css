@@ -1,0 +1,181 @@
+.navigationBar{
+	margin-bottom: 80px;
+}
+#navImage{
+	 margin-bottom: 10px;
+	/* margin-right: 10px; */ 
+	/* width: 90%; */
+}
+#homeJumbotron{
+	background-image: url(../images/infirm.jpg);
+	background-size: cover;
+	height: 550px;
+}
+/* .loginPanelPadding{
+	padding: 10px;
+}
+.loginBtn{
+    color: #fff;
+    background-color: #990000;
+    border-color: #800000;
+}
+.loginBtn:hover{
+	 background-color: #800000;
+}
+.homePanelHeading{
+	color: #fff !important;
+    background-color: #990000 !important;
+} */
+.homeForm{
+	display: none;
+	margin-top: 5%;
+	background-color: rgba(255,255,255,0.8);
+}
+.homeFormPanel{
+	margin-bottom: 2%;
+}
+.homeFormBtn{
+	padding-bottom: 10px;
+}
+@keyframes pulse1 {
+	to {
+		box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);
+		}
+	}
+.accountOption a{
+	width: 100% !important;
+	margin-bottom: 2%;
+	box-sizing: border-box;
+}
+#setAppointment{
+	height: 70px;
+	background-color: #990000;
+	color: #fff;
+	border-color: #800000;
+	font-size: 20px;
+	box-sizing: border-box;
+	animation: pulse1 1.25s infinite;
+
+
+}
+
+#setAppointment:hover{
+	 background-color: #800000;
+}
+#setAppointmentBtn:hover{
+	text-decoration: none !important;
+}
+.fadeShow{
+	opacity: 0;
+}
+.h3Title{
+	color: #800000;
+}
+@keyframes spin{
+	from{
+		-webkit-transform: rotate(0deg);
+		}
+	to{
+		-webkit-transform: rotate(360deg);
+	}
+}
+.h3Icon:hover{
+	animation: spin 2s infinite;
+}
+#map {
+		padding: 0px;
+        width: 100%;
+        height: 400px;
+        background-color: grey;
+      }
+#pageFooter{
+	background-color: #eee;
+	margin: 0px;
+	width:  100%;
+	margin-top: 4px;
+}
+#pageFooter .text-muted{
+	font-size: 10px;
+	margin-bottom: 1px;
+	margin-top: 2px;
+}
+
+/* schedule-appointment.php */
+#requestLabXrayDiv, #laboratoryresult, #remarksDiv, #prescriptionDiv, #backButtonMedicalDiagnosis, #dentalAppointment0, #medicalAppointment0{
+	display: none;
+}
+#patientProfile, .signup1_dental, .signup2_dental, .signup3_dental, .signup4_dental, .signup1_medical, .signup2_medical, .signup3_medical, .signup4_medical{
+	display: none;
+}
+#signupconfirmDental_modal,
+#signupnextDental_modal,
+#signupbackDental_modal,
+#signupconfirmMedical_modal,
+#signupnextMedical_modal,
+#signupbackMedical_modal, .signup_progressbar, .signup_progressbar_dental{
+	display: none;
+}
+#medicalFormNote{
+	margin: 5px;
+	line-height: 1;
+}
+#medicalFormNote i{
+	margin-top: -5%;
+	font-size: 10px;
+}
+
+/* medical-staff.php */
+.medicalStaff{
+	margin: 5%;
+	text-align: center;
+}
+.medicalStaff dl{
+	margin-top: 5%;
+}
+.medicalStaffImg{
+	/* width: 95%; */
+	/* box-sizing: border-box; */
+	transition: all .1s ease-in-out;
+}
+.medicalStaffImg:hover{
+	/* width: 100%; */
+	transform: scale(1.02);
+}
+
+/*.hidden_staff_id{
+	display: none;
+}*/
+
+/* TABLET */
+@media only screen and (min-width: 600px){
+	#homeJumbotron{
+		background-image: url(../images/infirm.jpg);
+		background-size: cover;
+		height: 550px;
+	}
+	
+}
+
+/* DESKTOP */
+@media only screen and (min-width: 800px){
+	#homeJumbotron{
+		background-image: url(../images/infirm.jpg);
+		background-size: cover;
+		height: 600px;
+	}
+}
+
+/*Medium*/
+@media only screen and (min-width: 992px){
+	#homeJumbotron{
+		background-image: url(../images/infirm.jpg);
+		background-size: cover;
+		height: 600px;
+	}
+	.accountOption a{
+		margin-bottom: 8%;
+	}
+}
+body{
+	/* font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; */
+}
