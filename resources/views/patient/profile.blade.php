@@ -30,12 +30,12 @@
               <div class="panel-body">
               <table class="table" style="margin-bottom: 0px;">
                 <tbody>
-                  <tr><td>Date of Birth</td><td>May 31, 1996</td></tr>
-                  <tr><td>Religion</td><td>Baptist</td></tr>
-                  <tr><td>Nationality</td><td>Filipino</td></tr>
-                  <tr><td>Father</td><td>Felix Mission</td></tr>
-                  <tr><td>Mother</td><td>Corazon Mission</td></tr>
-                  <tr><td>Home Address</td><td>Morales Street, Sibalom, Antique</td></tr>
+                  <tr><td>Date of Birth</td><td>{{$birthday}}</td></tr>
+                  <tr><td>Religion</td><td>{{$religion}}</td></tr>
+                  <tr><td>Nationality</td><td>{{$nationality}}</td></tr>
+                  <tr><td>Father</td><td>{{$father}}</td></tr>
+                  <tr><td>Mother</td><td>{{$mother}}</td></tr>
+                  <tr><td>Home Address</td><td>{{$address}}</td></tr>
                   <tr><td>Residence Telephone Number</td><td>09123456789</td></tr>
                   <tr><td>Personal Contact Number</td><td>09123456789</td></tr>
                 </tbody>
