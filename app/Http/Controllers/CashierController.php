@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-
+use App\MedicalSchedule;
 class CashierController extends Controller
 {
 	public function __construct()
