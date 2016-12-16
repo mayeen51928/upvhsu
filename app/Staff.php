@@ -31,6 +31,11 @@ class Staff extends Model
 
     public function hasDentalSchedules()
     {
-        return $this->hasMany(DentalSchedule::class);
+        return $this->hasMany(DentalSchedule::class, 'staff_id');
+    }
+
+    public function hasMedicalSchedules()
+    {
+        return $this->hasMany(MedicalSchedule::class, 'staff_id');
     }
 }

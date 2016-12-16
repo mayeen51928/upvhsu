@@ -32,13 +32,11 @@
 								<label for="selDentalDate">Date:</label>
 								<select class="form-control" required id="selDentalDate">
 									<option disabled selected> -- select date of appointment -- </option>
-									<option>Date</option>
-									<option>Date</option>
-									<option>Date</option>
-									<option>Date</option>
-									<option>Date</option>
-									<option>Date</option>
-									<option>Date</option>
+									<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
+									<option>{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}</option>
+									<option>{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}</option>
+									<option>{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}</option>
+									<option>{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}</option>
 								</select>
 							</div>
 							<div class="form-group">
@@ -65,13 +63,11 @@
 						<label for="selMedicalDate">Date:</label>
 						<select class="form-control" required id="selMedicalDate">
 							<option disabled selected> -- select date of appointment -- </option>
-							<option>Date</option>
-							<option>Date</option>
-							<option>Date</option>
-							<option>Date</option>
-							<option>Date</option>
-							<option>Date</option>
-							<option>Date</option>
+							<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
+							<option>{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}</option>
+							<option>{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}</option>
+							<option>{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}</option>
+							<option>{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -87,4 +83,11 @@
 			</div>	
 		</div>
 	</div>
+<script>
+  // token and createPostUrl are needed to be passed to AJAX method call
+  var token = '{{csrf_token()}}';
+  var displayDentalSchedule = '/displayschedule_dental';
+  var displayMedicalSchedule = '/displayschedule_medical';
+</script>
+
 @endsection

@@ -144,20 +144,18 @@ $(document).ready( function(){
     $("#selDentalDate").change(function() {
         var dentalDate = $(this).find(':selected')[0].value;
         $.ajax({
-            type: "GET",
-            url: "display-dental-appointment-time.php?dentalDate="+dentalDate,
-            async: true,
-            data: dentalDate,
-            success: function(response)
+            type: "POST",
+            url: displayDentalSchedule,
+            data: {dental_date:  dentalDate, _token: token},
+            success: function(data)
             {
                 $('#selDentalTime').removeAttr('disabled');
-                message = JSON.parse(response);
-                console.log(message);
-                staffIdArray={};
+                console.log(data["start"]);
+                console.log(data["end"]);
+                console.log(data["staff"]);
                 $('#selDentalTime').html("").append("<option disabled selected> -- select date of appointment -- </option>");
-                for(i=0; i<message.length; i++) {
-                    var splitMessage = message[i].split(";");
-                    $('#selDentalTime').append("<option id='optionDentalDateTime_"+(splitMessage[0])+"'>"+splitMessage[1]+" "+splitMessage[2]+" - "+splitMessage[3]+"</option>");
+                for(var i=0; i < data['start'].length; i++) {
+                  $('#selDentalTime').append("<option>"+data['staff'][i]+" "+data['start'][i]+" - "+data['end'][i]+"</option>");
                 }
             }
         });
@@ -166,19 +164,16 @@ $(document).ready( function(){
     $("#selMedicalDate").change(function() {
         var medicalDate = $(this).find(':selected')[0].value;
         $.ajax({
-            type: "GET",
-            url: "display-medical-appointment-doctor.php?medicalDate="+medicalDate,
-            async: true,
-            data: medicalDate,
-            success: function(response)
+            type: "POST",
+            url: displayMedicalSchedule,
+            data: {medical_date:  medicalDate, _token: token},
+            success: function(data)
             {
                 $('#selMedicalDoctor').removeAttr('disabled');
-                message = JSON.parse(response);
-                console.log(message);
-                $('#selMedicalDoctor').html("").append("<option disabled selected> -- select doctor -- </option>");
-                for(i=0; i<message.length; i++) {
-                    var splitMessage = message[i].split(";");
-                    $('#selMedicalDoctor').append("<option id='optionMedicalDoctor_"+(splitMessage[0])+"'>"+splitMessage[1]+" "+splitMessage[2]+"</option>");
+                console.log(data["staff"]);
+                $('#selMedicalDoctor').html("").append("<option disabled selected> -- select date of appointment -- </option>");
+                for(var i=0; i < data['staff'].length; i++) {
+                  $('#selMedicalDoctor').append("<option>"+data['staff'][i]+"</option>");
                 }
             }
         });

@@ -67,11 +67,5 @@ $('#adddentalschedule').click(function(){
     
 });
 
-
-
-
-
-
-
 // ----------------------------- End of Manage Schedule ----------------------
 });

@@ -16,7 +16,8 @@ Route::get('/', 'PagesController@index');
 Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/scheduleappointment', 'PagesController@scheduleappointment');
-
+Route::post('/displayschedule_dental', 'PagesController@displayscheduledental');
+Route::post('/displayschedule_medical', 'PagesController@displayschedulemedical');
 
 /* ROUTES FOR PATIENT ACCOUNT */
 Route::get('/account','PatientController@dashboard');
@@ -36,6 +37,7 @@ Route::get('/doctor','DoctorController@dashboard');
 Route::get('/doctor/profile','DoctorController@profile');
 Route::get('/doctor/manageschedule','DoctorController@manageschedule');
 Route::get('/doctor/searchpatient','DoctorController@searchpatient');
+Route::post('/addschedule_medical', 'DoctorController@addschedule');
 
 /* ROUTES FOR LABORATORY ACCOUNT */
 Route::get('/lab','LabController@dashboard');

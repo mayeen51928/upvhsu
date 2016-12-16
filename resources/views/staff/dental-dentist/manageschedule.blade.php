@@ -10,7 +10,6 @@
 				<div class="panel-heading">Manage your schedule</div>
 				<div class="panel-body" id="manageschedulepanel">
 				<p>Note: The schedules displayed for the patients are 7 days from today.</p>
-				{{-- <form class="form-inline"> --}}
 					<div class="dental_manage">
 					<button type="button" class="btn btn-success btn-xs addmoredentalsched">Add more</button>
 					<div class="table-responsive">
@@ -34,7 +33,6 @@
 					</table>
 					</div>
 					</div>
-				{{-- </form> --}}
 				</div>
 				<div class="panel-footer">
 				<div class="clearfix">

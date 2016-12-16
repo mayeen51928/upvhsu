@@ -10,7 +10,7 @@
 				</div>
 				<div class="panel-content homeFormBtn">
 					<p>Miagao Campus, Iloilo 5023</p>
-					<a href="{{ url('/schedule_appointment') }}" id="setAppointmentBtn">
+					<a href="{{ url('/scheduleappointment') }}" id="setAppointmentBtn">
 						<button class="form-control btn-primary" id="setAppointment">Schedule an Appointment</button>
 					</a>
 				</div>
