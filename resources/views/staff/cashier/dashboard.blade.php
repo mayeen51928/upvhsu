@@ -39,4 +39,20 @@
 		</div>
 	</div>
 </div>
+
+<!-- MODALS -->
+<div class="modal fade" id="confirm_medical_billing" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm Payment?</h4>
+      </div>
+      <div class="modal-body" style="text-align:center; ">
+        <button type="button" class="btn btn-primary" id="addMedicalBillingButton">Confirm</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

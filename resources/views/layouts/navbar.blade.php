@@ -11,13 +11,13 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/">Home</a></li>
-				<li><a href="about.php">About</a></li>
-				<li><a href="announcements.php">Announcements</a></li>
-				<li><a href="medicalstaff">Medical Staff</a></li>
-				<li><a href="schedule-appointment.php">Schedule Appointment</a></li>
+				<li @if(isset($navbar_active) and $navbar_active == 'home') class="active " @endif><a href="/">Home</a></li>
+				<li @if(isset($navbar_active) and $navbar_active == 'about') class="active " @endif><a href="{{ url('/about') }}">About</a></li>
+				<li @if(isset($navbar_active) and $navbar_active == 'announcements') class="active " @endif><a href="{{ url('/announcements') }}">Announcements</a></li>
+				<li @if(isset($navbar_active) and $navbar_active == 'medicalstaff') class="active " @endif><a href="{{ url('/medicalstaff') }}">Medical Staff</a></li>
+				<li @if(isset($navbar_active) and $navbar_active == 'scheduleappointment') class="active " @endif><a href="{{ url('/scheduleappointment') }}">Schedule Appointment</a></li>
 				@if(Auth::check())
-				<li class="dropdown">
+				<li class="dropdown @if(isset($navbar_active) and $navbar_active == 'account') active @endif">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">Account <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						@if(Auth::user()->user_type_id == 1)
@@ -32,6 +32,25 @@
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/dentist/profile') }}">Profile</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'manageschedule')class="active" @endif><a href="{{ url('/dentist/manageschedule') }}">Manage Schedule</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/dentist/searchpatient') }}">Search Patient</a></li>
+							@endif
+							{{-- If Doctor --}}
+					  	@if(Auth::user()->staff->staff_type_id == 2 )
+								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/doctor') }}">Dashboard</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/doctor/profile') }}">Profile</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'manageschedule')class="active" @endif><a href="{{ url('/doctor/manageschedule') }}">Manage Schedule</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/doctor/searchpatient') }}">Search Patient</a></li>
+							@endif
+							{{-- If Laboratory --}}
+					  	@if(Auth::user()->staff->staff_type_id == 3 )
+								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/lab') }}">Dashboard</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/lab/profile') }}">Profile</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/lab/searchpatient') }}">Search Patient</a></li>
+							@endif
+							{{-- If Xray --}}
+					  	@if(Auth::user()->staff->staff_type_id == 4 )
+								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/xray') }}">Dashboard</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/xray/profile') }}">Profile</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/xray/searchpatient') }}">Search Patient</a></li>
 							@endif
 							{{-- If Cashier --}}
 					  	@if(Auth::user()->staff->staff_type_id == 5 )

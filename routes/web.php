@@ -11,12 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'PagesController@index');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index');
+Route::get('/scheduleappointment', 'PagesController@scheduleappointment');
 
 
 /* ROUTES FOR PATIENT ACCOUNT */
@@ -30,6 +29,23 @@ Route::get('/dentist','DentistController@dashboard');
 Route::get('/dentist/profile','DentistController@profile');
 Route::get('/dentist/manageschedule','DentistController@manageschedule');
 Route::get('/dentist/searchpatient','DentistController@searchpatient');
+Route::post('/addschedule_dental', 'DentistController@addschedule');
+
+/* ROUTES FOR MEDICAL DOCTOR ACCOUNT */
+Route::get('/doctor','DoctorController@dashboard');
+Route::get('/doctor/profile','DoctorController@profile');
+Route::get('/doctor/manageschedule','DoctorController@manageschedule');
+Route::get('/doctor/searchpatient','DoctorController@searchpatient');
+
+/* ROUTES FOR LABORATORY ACCOUNT */
+Route::get('/lab','LabController@dashboard');
+Route::get('/lab/profile','LabController@profile');
+Route::get('/lab/searchpatient','LabController@searchpatient');
+
+/* ROUTES FOR XRAY ACCOUNT */
+Route::get('/xray','XrayController@dashboard');
+Route::get('/xray/profile','XrayController@profile');
+Route::get('/xray/searchpatient','XrayController@searchpatient');
 
 /* ROUTES FOR CASHIER ACCOUNT */
 Route::get('/cashier','CashierController@dashboard');

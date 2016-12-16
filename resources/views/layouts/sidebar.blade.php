@@ -21,6 +21,37 @@
 		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/dentist/searchpatient') }}">Search Patient</a></li>
 		  	</ul>
 	  	@endif
+	  	{{-- If Doctor --}}
+  		@if(Auth::user()->staff->staff_type_id == 2 )
+				<ul class="nav nav-sidebar">
+					<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/doctor') }}">Dashboard <span class="sr-only">(current)</span></a></li>
+		  		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/doctor/profile') }}">Profile</a></li>
+		  		<li id="manageSched" @if($sidebar_active == 'manageschedule')class="active" @endif><a href="{{ url('/doctor/manageschedule') }}">Manage Schedule</a></li>
+		  	</ul>
+		  	<ul class="nav nav-sidebar">
+		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/doctor/searchpatient') }}">Search Patient</a></li>
+		  	</ul>
+	  	@endif
+	  	{{-- If Laboratory --}}
+  		@if(Auth::user()->staff->staff_type_id == 3 )
+				<ul class="nav nav-sidebar">
+					<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/lab') }}">Dashboard <span class="sr-only">(current)</span></a></li>
+		  		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/lab/profile') }}">Profile</a></li>
+		  	</ul>
+		  	<ul class="nav nav-sidebar">
+		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/lab/searchpatient') }}">Search Patient</a></li>
+		  	</ul>
+	  	@endif
+	  	{{-- If Xray --}}
+  		@if(Auth::user()->staff->staff_type_id == 4 )
+				<ul class="nav nav-sidebar">
+					<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/xray') }}">Dashboard <span class="sr-only">(current)</span></a></li>
+		  		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/xray/profile') }}">Profile</a></li>
+		  	</ul>
+		  	<ul class="nav nav-sidebar">
+		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/xray/searchpatient') }}">Search Patient</a></li>
+		  	</ul>
+	  	@endif
 	  	{{-- If Cashier --}}
   		@if(Auth::user()->staff->staff_type_id == 5 )
 				<ul class="nav nav-sidebar">

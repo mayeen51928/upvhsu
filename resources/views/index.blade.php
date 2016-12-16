@@ -10,7 +10,7 @@
 				</div>
 				<div class="panel-content homeFormBtn">
 					<p>Miagao Campus, Iloilo 5023</p>
-					<a href="schedule-appointment.php" id="setAppointmentBtn">
+					<a href="{{ url('/schedule_appointment') }}" id="setAppointmentBtn">
 						<button class="form-control btn-primary" id="setAppointment">Schedule an Appointment</button>
 					</a>
 				</div>
@@ -67,6 +67,36 @@
 							</div>
 							<div class="col-md-4 accountOption">
 								<a href="{{ url('/dentist/manageschedule') }}" class="btn btn-info btn-sm" role="button">Manage Schedule</a>
+							</div>
+						@endif
+						@if(Auth::user()->staff->staff_type_id == 2)
+							<p>Hello {{ Auth::user()->staff->staff_first_name }}</p>
+							<div class="col-md-4 accountOption">
+								<a href="{{ url('/doctor') }}" class="btn btn-info btn-sm" role="button">View Account</a>
+							</div>
+							<div class="col-md-4 accountOption">
+								<a href="{{ url('/doctor/searchpatient') }}" class="btn btn-info btn-sm" role="button">Patient Records</a>
+							</div>
+							<div class="col-md-4 accountOption">
+								<a href="{{ url('/doctor/manageschedule') }}" class="btn btn-info btn-sm" role="button">Manage Schedule</a>
+							</div>
+						@endif
+						@if(Auth::user()->staff->staff_type_id == 3)
+							<p>Hello {{ Auth::user()->staff->staff_first_name }}</p>
+							<div class="col-md-4 col-md-offset-1 accountOption">
+								<a href="{{ url('/lab') }}" class="btn btn-info btn-sm" role="button">View Account</a>
+							</div>
+							<div class="col-md-4 col-md-offset-2 accountOption">
+								<a href="{{ url('/lab/searchpatient') }}" class="btn btn-info btn-sm" role="button">Patient Records</a>
+							</div>
+						@endif
+						@if(Auth::user()->staff->staff_type_id == 4)
+							<p>Hello {{ Auth::user()->staff->staff_first_name }}</p>
+							<div class="col-md-4 col-md-offset-1 accountOption">
+								<a href="{{ url('/xray') }}" class="btn btn-info btn-sm" role="button">View Account</a>
+							</div>
+							<div class="col-md-4 col-md-offset-2 accountOption">
+								<a href="{{ url('/xray/searchpatient') }}" class="btn btn-info btn-sm" role="button">Patient Records</a>
 							</div>
 						@endif
 						@if(Auth::user()->staff->staff_type_id == 5)

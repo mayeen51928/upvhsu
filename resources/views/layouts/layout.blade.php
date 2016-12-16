@@ -10,7 +10,9 @@
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
-	<script src="{{asset('js/custom.js')}}"></script>
+	{{-- <script src="{{asset('js/bootstrap-timepicker.js')}}"></script> --}}
+	<script src="{{asset('js/dental-dentist/dental-dentist.js')}}"></script>
+	<script src="{{asset('js/custom1.js')}}"></script>
 	
 </head>
 <body>

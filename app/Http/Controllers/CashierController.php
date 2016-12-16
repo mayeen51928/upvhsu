@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use App\MedicalSchedule;
+
 class CashierController extends Controller
 {
 	public function __construct()
@@ -22,18 +22,21 @@ class CashierController extends Controller
     }
     public function dashboard()
     {
+        $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
     	return view('staff.cashier.dashboard', $params);
     }
 
     public function profile()
     {
+        $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'profile';
     	return view('staff.cashier.profile', $params);
     }
 
     public function searchpatient()
     {
+        $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'searchpatient';
     	return view('staff.cashier.searchpatient', $params);
     }

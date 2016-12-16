@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 
-class PatientController extends Controller
+class DoctorController extends Controller
 {
 	public function __construct()
     {
     	$this->middleware(function ($request, $next) {
     		if(Auth::check()){
-    			if(Auth::user()->user_type_id == 1){
+    			if(Auth::user()->user_type_id == 2 and Auth::user()->staff->staff_type_id == 2){
 					return $next($request);
 				}
     		}
@@ -20,32 +20,31 @@ class PatientController extends Controller
     		}
 		});
     }
-
     public function dashboard()
     {
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
-        return view('patient.dashboard', $params);
+    	return view('staff.medical-doctor.dashboard', $params);
     }
 
     public function profile()
     {
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'profile';
-    	return view('patient.profile', $params);
+    	return view('staff.medical-doctor.profile', $params);
     }
 
-    public function visits()
+    public function manageschedule()
     {
         $params['navbar_active'] = 'account';
-    	$params['sidebar_active'] = 'visits';
-    	return view('patient.visits', $params);
+    	$params['sidebar_active'] = 'manageschedule';
+    	return view('staff.medical-doctor.manageschedule', $params);
     }
 
-    public function bills()
+    public function searchpatient()
     {
         $params['navbar_active'] = 'account';
-    	$params['sidebar_active'] = 'bills';
-    	return view('patient.bills', $params);
+    	$params['sidebar_active'] = 'searchpatient';
+    	return view('staff.medical-doctor.searchpatient', $params);
     }
 }

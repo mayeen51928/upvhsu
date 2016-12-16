@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 
-class PatientController extends Controller
+class LabController extends Controller
 {
 	public function __construct()
     {
     	$this->middleware(function ($request, $next) {
     		if(Auth::check()){
-    			if(Auth::user()->user_type_id == 1){
+    			if(Auth::user()->user_type_id == 2 and Auth::user()->staff->staff_type_id == 3){
 					return $next($request);
 				}
     		}
@@ -20,32 +20,24 @@ class PatientController extends Controller
     		}
 		});
     }
-
     public function dashboard()
     {
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
-        return view('patient.dashboard', $params);
+    	return view('staff.medical-lab.dashboard', $params);
     }
 
     public function profile()
     {
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'profile';
-    	return view('patient.profile', $params);
+    	return view('staff.medical-lab.profile', $params);
     }
 
-    public function visits()
+    public function searchpatient()
     {
         $params['navbar_active'] = 'account';
-    	$params['sidebar_active'] = 'visits';
-    	return view('patient.visits', $params);
-    }
-
-    public function bills()
-    {
-        $params['navbar_active'] = 'account';
-    	$params['sidebar_active'] = 'bills';
-    	return view('patient.bills', $params);
+    	$params['sidebar_active'] = 'searchpatient';
+    	return view('staff.medical-lab.searchpatient', $params);
     }
 }

@@ -38,9 +38,27 @@ class HomeController extends Controller
             {
                 return redirect('/cashier');
             }
-            else{
-                return redirect('/');
-            }
+            else if (Auth::user()->staff->staff_type_id == 2)
+            {
+                return redirect('/doctor');
+        }
+        else if (Auth::user()->staff->staff_type_id == 3)
+        {
+          return redirect('/lab');
+        }
+        else if (Auth::user()->staff->staff_type_id == 4)
+        {
+          return redirect('/xray');
+        }
+        else if (Auth::user()->staff->staff_type_id == 5)
+        {
+          return redirect('/cashier');
+        }
+            
+        }
+        else
+        {
+            return redirect('/');
         }
     }
 }
