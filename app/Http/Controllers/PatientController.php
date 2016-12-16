@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-
+use App\Patient;
+use App\DegreeProgram;
 class PatientController extends Controller
 {
 	public function __construct()
@@ -30,6 +31,11 @@ class PatientController extends Controller
 
     public function profile()
     {
+        $patient = Patient::find(Auth::user()->user_id);
+        $params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
+        $params['sex'] = $patient->sex;
+        $params['degree_program'] = DegreeProgram::find($patient->degree_program_id)->degree_program_description;
+        $params['year_level'] = $patient->year_level;
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'profile';
     	return view('patient.profile', $params);
