@@ -11,10 +11,10 @@
               <div class="panel-body">
               <table class="table" style="margin-bottom: 0px;">
                 <tbody>
-                  <tr><td>Age</td><td>20</td></tr>
-                  <tr><td>Sex</td><td>M</td></tr>
-                  <tr><td>Course</td><td>BS Computer Science</td></tr>
-                  <tr><td>Year Level</td><td>4</td></tr>
+                  <tr><td>Age</td><td>{{$age}}</td></tr>
+                  <tr><td>Sex</td><td>{{$sex}}</td></tr>
+                  <tr><td>Course</td><td>{{$degree_program}}</td></tr>
+                  <tr><td>Year Level</td><td>{{$year_level}}</td></tr>
                 </tbody>
               </table>
               </div>

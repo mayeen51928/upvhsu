@@ -16,7 +16,7 @@ class Patient extends Model
 
     public function degree_program()
     {
-        return $this->hasOne(DegreeProgram::class);
+        return $this->hasOne(DegreeProgram::class, 'degree_program_id');
     }
 
     public function religion()
