@@ -1,5 +1,77 @@
 $(document).ready( function(){
 
+  // -----------------SCEDULE APPOINTMENT (NOT LOGGED IN)---------------------
+
+  $("#selDentalDate").change(function() {
+      var dentalDate = $(this).find(':selected')[0].value;
+      $.ajax({
+          type: "POST",
+          url: displayDentalSchedule,
+          data: {dental_date:  dentalDate, _token: token},
+          success: function(data)
+          {
+              $('#selDentalTime').removeAttr('disabled');
+              console.log(data["start"]);
+              console.log(data["end"]);
+              console.log(data["staff"]);
+              $('#selDentalTime').html("").append("<option disabled selected> -- select date of appointment -- </option>");
+              for(var i=0; i < data['start'].length; i++) {
+                $('#selDentalTime').append("<option id="+data['id'][i]+">"+data['staff'][i]+" "+data['start'][i]+" - "+data['end'][i]+"</option>");
+              }
+          }
+      });
+  });
+
+  $("#selMedicalDate").change(function() {
+      var medicalDate = $(this).find(':selected')[0].value;
+      $.ajax({
+          type: "POST",
+          url: displayMedicalSchedule,
+          data: {medical_date:  medicalDate, _token: token},
+          success: function(data)
+          {
+              $('#selMedicalDoctor').removeAttr('disabled');
+              console.log(data["staff"]);
+              $('#selMedicalDoctor').html("").append("<option disabled selected> -- select date of appointment -- </option>");
+              for(var i=0; i < data['staff'].length; i++) {
+                $('#selMedicalDoctor').append("<option id="+data['id'][i]+">"+data['staff'][i]+"</option>");
+              }
+          }
+      });
+  });
+
+  $("#submitDentalAppointment").click(function() {
+    var scheduleID = $('#selDentalTime').find(':selected')[0].id;
+    console.log("Schedule ID is " + scheduleID);
+    // $.ajax({
+    //       type: "POST",
+    //       url: createDentalAppointment,
+    //       data: {selected_time:  scheduleID, selected_staff:  selectedStaff, _token: token},
+    //       success: function(data)
+    //       {
+    //         console.log(data["dentist"]);
+    //         console.log(data["time"]);
+    //       }
+    //   });
+  });
+
+  $("#submitMedicalAppointment").click(function() {
+    var scheduleID = $('#selMedicalDoctor').find(':selected')[0].id;
+    console.log("Schedule ID is " + scheduleID);
+    // $.ajax({
+    //       type: "POST",
+    //       url: createDentalAppointment,
+    //       data: {selected_time:  scheduleID, selected_staff:  selectedStaff, _token: token},
+    //       success: function(data)
+    //       {
+    //         console.log(data["dentist"]);
+    //         console.log(data["time"]);
+    //       }
+    //   });
+  });
+
+
+
 	numOfClicksMedical = 0;
 	numOfClicksDental = 0;
     percentageDental = 0;
@@ -141,90 +213,8 @@ $(document).ready( function(){
         $('#login_modal_medical').hide();
     });
     
-    $("#selDentalDate").change(function() {
-        var dentalDate = $(this).find(':selected')[0].value;
-        $.ajax({
-            type: "POST",
-            url: displayDentalSchedule,
-            data: {dental_date:  dentalDate, _token: token},
-            success: function(data)
-            {
-                $('#selDentalTime').removeAttr('disabled');
-                console.log(data["start"]);
-                console.log(data["end"]);
-                console.log(data["staff"]);
-                $('#selDentalTime').html("").append("<option disabled selected> -- select date of appointment -- </option>");
-                for(var i=0; i < data['start'].length; i++) {
-                  $('#selDentalTime').append("<option>"+data['staff'][i]+" "+data['start'][i]+" - "+data['end'][i]+"</option>");
-                }
-            }
-        });
-    });
-
-    $("#selMedicalDate").change(function() {
-        var medicalDate = $(this).find(':selected')[0].value;
-        $.ajax({
-            type: "POST",
-            url: displayMedicalSchedule,
-            data: {medical_date:  medicalDate, _token: token},
-            success: function(data)
-            {
-                $('#selMedicalDoctor').removeAttr('disabled');
-                console.log(data["staff"]);
-                $('#selMedicalDoctor').html("").append("<option disabled selected> -- select date of appointment -- </option>");
-                for(var i=0; i < data['staff'].length; i++) {
-                  $('#selMedicalDoctor').append("<option>"+data['staff'][i]+"</option>");
-                }
-            }
-        });
-    });
 
 
-    $("#submitDentalAppointment").click(function() {
-        if($('#dentalNotes').val() && $('#selDentalDate').find(':selected')[0].value && $('#selDentalTime').find(':selected')[0].value){
-            var inputDate = $('#selDentalDate').find(':selected')[0].value;
-            var arrayInputTime = $('#selDentalTime').find(':selected')[0].value;
-            var inputTimeSplit = arrayInputTime.split(" - ");
-            var inputTime = inputTimeSplit[1];
-            var staffIdSplit = $('#selDentalTime').children(":selected").attr("id").split("_");
-            console.log("staffIdSplit: " + staffIdSplit);
-            var staffId = staffIdSplit[1];
-
-            console.log("Array input time " + arrayInputTime);
-
-            console.log("Input time: " + inputTime);
-            console.log("staff ID: " + staffId);
-
-            console.log(inputDate);
-                    console.log(inputTime);
-            $.ajax({
-                type: "POST",
-                url: "schedule-dental-appointment.php",
-                async: true,
-                data: {'reasons':$('#dentalNotes').val(), 'day':inputDate, 'time': inputTime, 'staff_id':staffId},
-                success: function(response)
-                {
-                    message = JSON.parse(response);
-                console.log(message);
-                    if(message==1){
-                        console.log("Success!");
-                        $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
-                        $('#dentalNotes').attr("disabled", "disabled");
-                        $('#selDentalDate').attr("disabled", "disabled");
-                        $('#selDentalTime').attr("disabled", "disabled");
-                        $('#submitDentalAppointment').addClass("disabled");
-                        $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
-                    }
-                    else{
-                        $('#loginModalDental').modal();
-                    }
-                    
-                    
-                }
-            });
-        }
-        return false;
-    });
 
 
 

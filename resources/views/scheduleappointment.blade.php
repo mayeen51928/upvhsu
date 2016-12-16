@@ -88,6 +88,8 @@
   var token = '{{csrf_token()}}';
   var displayDentalSchedule = '/displayschedule_dental';
   var displayMedicalSchedule = '/displayschedule_medical';
+  var createDentalAppointment = '/createappointment_dental';
+  var createMedicalAppointment = '/createappointment_medical';
 </script>
 
 @endsection

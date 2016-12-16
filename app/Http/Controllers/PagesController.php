@@ -30,18 +30,20 @@ class PagesController extends Controller
       $startdatesarray = array();
       $enddatesarray = array();
       $staffnamearray = array();
+      $scheduleidarray = array();
       foreach ($displaySchedules as $displayschedule){
         $datestartdental=explode(" ", $displayschedule->schedule_start);
         $dateenddental=explode(" ", $displayschedule->schedule_end);
-        
+        $scheduleid = $displayschedule->id;
         if ($datestartdental[0] == $dental_date){
           $staff = Staff::where('staff_id', $displayschedule->staff_id)->first();
           array_push($startdatesarray, $datestartdental[1]);
           array_push($enddatesarray, $dateenddental[1]);
           array_push($staffnamearray,  $staff->staff_first_name .' '. $staff->staff_last_name);
+          array_push($scheduleidarray,  $scheduleid);
         }
       }
-      return response()->json(['start' => $startdatesarray,'end' => $enddatesarray,'staff' => $staffnamearray]); 
+      return response()->json(['start' => $startdatesarray,'end' => $enddatesarray,'staff' => $staffnamearray ,'id' => $scheduleidarray]); 
     }
 
     public function displayschedulemedical(Request $request)
@@ -49,11 +51,24 @@ class PagesController extends Controller
       $medical_date = $request->medical_date;
       $displaySchedules = MedicalSchedule::where('schedule_day', $medical_date)->get();
       $staffnamearray = array();
+      $scheduleidarray = array();
       foreach ($displaySchedules as $displayschedule){
         $staff = Staff::where('staff_id', $displayschedule->staff_id)->first();
+        $scheduleid = $displayschedule->id;
         array_push($staffnamearray,  $staff->staff_first_name .' '. $staff->staff_last_name);
+        array_push($scheduleidarray, $scheduleid);
       }
-      return response()->json(['staff' => $staffnamearray]); 
+      return response()->json(['staff' => $staffnamearray, 'id' => $scheduleidarray]); 
+    }
+
+    public function createappointmentdental(Request $request)
+    {
+      
+    }
+
+    public function createappointmentmedical(Request $request)
+    {
+      
     }
 
 

@@ -18,6 +18,8 @@ Route::get('/home', 'HomeController@index');
 Route::get('/scheduleappointment', 'PagesController@scheduleappointment');
 Route::post('/displayschedule_dental', 'PagesController@displayscheduledental');
 Route::post('/displayschedule_medical', 'PagesController@displayschedulemedical');
+Route::post('/createappointment_dental', 'PagesController@createappointmentdental');
+Route::post('/createappointment_medical', 'PagesController@createappointmentmedical');
 
 /* ROUTES FOR PATIENT ACCOUNT */
 Route::get('/account','PatientController@dashboard');
