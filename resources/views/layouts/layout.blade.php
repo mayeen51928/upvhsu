@@ -13,8 +13,9 @@
 	{{-- <script src="{{asset('js/bootstrap-timepicker.js')}}"></script> --}}
 	<script src="{{asset('js/dental-dentist/dental-dentist.js')}}"></script>
 	<script src="{{asset('js/medical-doctor/medical-doctor.js')}}"></script>
-	<script src="{{asset('js/custom1.js')}}"></script> 
+	<script src="{{asset('js/custom1.js')}}"></script>
 	<script src="{{asset('js/custom.js')}}"></script>
+	<script src="{{asset('js/scheduleappointment.js')}}"></script>
 
 	
 </head>

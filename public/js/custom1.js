@@ -1,82 +1,4 @@
 $(document).ready( function(){
-
-  // -----------------SCEDULE APPOINTMENT (NOT LOGGED IN)---------------------
-
-  $("#selDentalDate").change(function() {
-      var dentalDate = $(this).find(':selected')[0].value;
-      $.ajax({
-          type: "POST",
-          url: displayDentalSchedule,
-          data: {dental_date:  dentalDate, _token: token},
-          success: function(data)
-          {
-              $('#selDentalTime').removeAttr('disabled');
-              console.log(data["start"]);
-              console.log(data["end"]);
-              console.log(data["staff"]);
-              $('#selDentalTime').html("").append("<option disabled selected> -- select date of appointment -- </option>");
-              for(var i=0; i < data['start'].length; i++) {
-                $('#selDentalTime').append("<option id="+data['id'][i]+">"+data['staff'][i]+" "+data['start'][i]+" - "+data['end'][i]+"</option>");
-              }
-          }
-      });
-  });
-
-  $("#selMedicalDate").change(function() {
-      var medicalDate = $(this).find(':selected')[0].value;
-      $.ajax({
-          type: "POST",
-          url: displayMedicalSchedule,
-          data: {medical_date:  medicalDate, _token: token},
-          success: function(data)
-          {
-              $('#selMedicalDoctor').removeAttr('disabled');
-              console.log(data["staff"]);
-              $('#selMedicalDoctor').html("").append("<option disabled selected> -- select date of appointment -- </option>");
-              for(var i=0; i < data['staff'].length; i++) {
-                $('#selMedicalDoctor').append("<option id="+data['id'][i]+">"+data['staff'][i]+"</option>");
-              }
-          }
-      });
-  });
-
-  $("#submitDentalAppointment").click(function() {
-    var scheduleID = $('#selDentalTime').find(':selected')[0].id;
-    console.log("Schedule ID is " + scheduleID);
-    // $.ajax({
-    //       type: "POST",
-    //       url: createDentalAppointment,
-    //       data: {selected_time:  scheduleID, selected_staff:  selectedStaff, _token: token},
-    //       success: function(data)
-    //       {
-    //         console.log(data["dentist"]);
-    //         console.log(data["time"]);
-    //       }
-    //   });
-  });
-
-  $("#submitMedicalAppointment").click(function() {
-    var scheduleID = $('#selMedicalDoctor').find(':selected')[0].id;
-    console.log("Schedule ID is " + scheduleID);
-    // $.ajax({
-    //       type: "POST",
-    //       url: createDentalAppointment,
-    //       data: {selected_time:  scheduleID, selected_staff:  selectedStaff, _token: token},
-    //       success: function(data)
-    //       {
-    //         console.log(data["dentist"]);
-    //         console.log(data["time"]);
-    //       }
-    //   });
-  });
-
-
-
-	numOfClicksMedical = 0;
-	numOfClicksDental = 0;
-    percentageDental = 0;
-    percentageMedical = 0
-
 	$('.h3Title').mouseover(
 		function(){
 			$(this).find('.h3Icon').css("animation", "spin 2s");
@@ -121,73 +43,7 @@ $(document).ready( function(){
 
     $('.homeForm:first').delay("200").fadeIn();
     $('.homeForm:last').delay("500").fadeIn();
-    
-    if($('#typeDental').is(':checked')){
-          $('#dentalAppointment0').fadeIn();
-    }
-    if($('#typeMedical').is(':checked')){
-          $('#medicalAppointment0').fadeIn();
-    }
-    $('#typeDental').click(function() {
-        if($(this).is(':checked') && !($('#typeMedical').is(':checked'))){
-            $('#dentalAppointment0').fadeIn();   
-        }
-        else if($(this).is(':checked') && ($('#typeMedical').is(':checked'))){
-            $('#medicalAppointment0').animate({
-                marginLeft: '+=25%'},
-                function() {
-                    $('#medicalAppointment0').removeAttr('style').css({display: 'block'});
-                    $('#medicalAppointment0').removeClass('col-md-offset-6');
-                    $('#dentalAppointment0').fadeIn();
-                });
-        }
-        else if(!($(this).is(':checked')) && ($('#typeMedical').is(':checked'))){
-            $('#dentalAppointment0').fadeOut(function(){
-                $('#medicalAppointment0').addClass('col-md-offset-6');
-                $('#medicalAppointment0').animate({
-                    marginLeft: '-=25%'});
-            });
-        }
-        else if(!($(this).is(':checked')) && !($('#typeMedical').is(':checked'))){
-            $('#dentalAppointment').fadeOut();
-        }
-        else{
-            
-        }
-    });
-    $('#typeMedical').click(function() {
-        if($(this).is(':checked') && !($('#typeDental').is(':checked'))){
-            $('#medicalAppointment0').fadeIn();
-        }
-        else if($(this).is(':checked') && $('#typeDental').is(':checked')){
-           $('#dentalAppointment0').animate({
-               marginLeft: '0%'},
-               function() {
-                $('#medicalAppointment0').removeClass('col-md-offset-3');
-              $('#medicalAppointment0').fadeIn();
-           });    
-        }
-        else{
-            $('#medicalAppointment0').fadeOut(function(){
-                $('#dentalAppointment0').animate({
-                    marginLeft: '25%'});
-            });
-        } 
-    });
-    // 
-    // 
-    // if($('#typeDental').is(':checked')){
-    //       $('#dentalAppointment0').fadeIn();
-    // }
-    // if($('#typeMedical').is(':checked')){
-    //       $('#medicalAppointment0').fadeIn();
-    // }
-    // $('#typeDental').click(function() {
-    //     $('#dentalAppointment0').fadeToggle();
-    // });
-    // $('#typeMedical').click(function() {
-    //     $('#medicalAppointment0').fadeToggle();
-    // });
+
     $('#signupDental_modal').click(function(){
         numOfClicksDental = 0;
         $('.signup1_dental').show();
@@ -218,46 +74,6 @@ $(document).ready( function(){
 
 
 
-// -----------------------------------------MEDICAL APPOINTMENT-------------------------------------------------
-
-    $("#submitMedicalAppointment").click(function() {
-        if($('#medicalNotes').val() && $('#selMedicalDate').find(':selected')[0].value && $('#selMedicalDoctor').find(':selected')[0].value){
-            var inputDate = $('#selMedicalDate').find(':selected')[0].value;
-            // var arrayInputTime = $('#selMedicalDoctor').find(':selected')[0].value;
-            // var inputTimeSplit = arrayInputTime.split(" - ");
-            // var inputTime = inputTimeSplit[1];
-            var staffIdSplit = $('#selMedicalDoctor').children(":selected").attr("id").split("_");
-            console.log("staffIdSplit: " + staffIdSplit);
-            var staffId = staffIdSplit[1];
-
-            $.ajax({
-                type: "POST",
-                url: "schedule-medical-appointment.php",
-                async: true,
-                data: {'reasons':$('#medicalNotes').val(), 'day':inputDate, 'staff_id':staffId},
-                success: function(response)
-                {
-                    message = JSON.parse(response);
-                    console.log(message);
-                    if(message==1){
-                        console.log("Success!");
-                        $('#medicalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
-                        $('#medicalNotes').attr("disabled", "disabled");
-                        $('#selMedicalDate').attr("disabled", "disabled");
-                        $('#selMedicalDoctor').attr("disabled", "disabled");
-                        $('#submitMedicalAppointment').addClass("disabled");
-                        $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
-                    }
-                    else{
-                        $('#loginMedicalModal').modal();
-                    }
-                    
-                    
-                }
-            });
-        }
-        return false;
-    });
 
     $('#login_modal_medical').click(function(){
         console.log($('#user_name_modal_medical').val());
@@ -289,10 +105,7 @@ $(document).ready( function(){
                         console.log("Invalid bes");
                         $('#loginErrorMessageMedical').html("Wrong username/password combination");
                     }
-                    
-                    // alert("Hello");
-                    
-                }
+                  }
             });
          
     });
@@ -336,10 +149,7 @@ $(document).ready( function(){
                     else{
                         $('#loginErrorMessage').html("Wrong username/password combination");
                     }
-                    
-                    // alert("Hello");
-                    
-                }
+                  }
             });
          
     });
