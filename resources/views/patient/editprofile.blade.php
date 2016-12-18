@@ -30,15 +30,15 @@
               <div class="panel-body">
               <table class="table" style="margin-bottom: 0px;">
                 <tbody>
-                  <tr><td>Date of Birth</td><td>{{$birthday}}</td></tr>
-                  <tr><td>Religion</td><td>{{$religion}}</td></tr>
-                  <tr><td>Nationality</td><td>{{$nationality}}</td></tr>
-                  <tr><td>Father</td><td>{{$father}}</td></tr>
-                  <tr><td>Mother</td><td>{{$mother}}</td></tr>
-                  <tr><td>Home Address</td><td>{{$street}}, {{$town}}, {{$province}}, {{$region}}</td></tr>
-                  <tr><td>Residence Telephone Number</td><td>{{$residence_telephone_number}}</td></tr>
-                  <tr><td>Residence Contact Number</td><td>{{$residence_contact_number}}</td></tr>
-                  <tr><td>Personal Contact Number</td><td>{{$personal_contact_number}}</td></tr>
+                  <tr><td>Date of Birth</td><td><input type="text" class="form-control" value="{{$birthday}}"/></td></tr>
+                  <tr><td>Religion</td><td><input type="text" class="form-control" value="{{$religion}}"/></td></tr>
+                  <tr><td>Nationality</td><td><input type="text" class="form-control" value="{{$nationality}}"/></td></tr>
+                  <tr><td>Father</td><td><input type="text" class="form-control" value="{{$father}}"/></td></tr>
+                  <tr><td>Mother</td><td><input type="text" class="form-control" value="{{$mother}}"/></td></tr>
+                  <tr><td>Home Address</td><td><input type="text" class="form-control" value="{{$street}}"/><input type="text" class="form-control" value="{{$town}}"/><input type="text" class="form-control" value="{{$province}}"/><input type="text" class="form-control" value="{{$region}}"/></td></tr>
+                  <tr><td>Residence Telephone Number</td><td><input type="text" class="form-control" value="{{$residence_telephone_number}}"/></td></tr>
+                  <tr><td>Residence Contact Number</td><td><input type="text" class="form-control" value="{{$residence_contact_number}}"/></td></tr>
+                  <tr><td>Personal Contact Number</td><td><input type="text" class="form-control" value="{{$personal_contact_number}}"/></td></tr>
                 </tbody>
               </table>
               </div>

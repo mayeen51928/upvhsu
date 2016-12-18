@@ -24,6 +24,7 @@ Route::post('/createappointment_medical', 'PagesController@createappointmentmedi
 /* ROUTES FOR PATIENT ACCOUNT */
 Route::get('/account','PatientController@dashboard');
 Route::get('/account/profile','PatientController@profile');
+Route::get('/account/profile/edit','PatientController@editprofile');
 Route::get('/account/visits','PatientController@visits');
 Route::get('/account/bills','PatientController@bills');
 

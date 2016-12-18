@@ -11,6 +11,8 @@ use App\Nationality;
 use App\ParentModel;
 use App\HasParent;
 use App\Town;
+use App\Province;
+use App\Region;
 class PatientController extends Controller
 {
 	public function __construct()
@@ -55,12 +57,49 @@ class PatientController extends Controller
                 $params['mother'] = ParentModel::find($parent->parent_id)->parent_first_name;
             }
         }
-        $params['address'] = $patient->street.', '.Town::find($patient->town_id)->town_name;
+        $params['street'] = $patient->street;
+        $params['town'] = Town::find($patient->town_id)->town_name;
+        $params['province'] = Province::find(Town::find($patient->town_id)->province_id)->province_name;
+        $params['region'] = Region::find(Province::find(Town::find($patient->town_id)->province_id)->region_id)->region_name;
+        $params['residence_telephone_number'] = $patient->residence_telephone_number;
+        $params['personal_contact_number'] = $patient->personal_contact_number;
+        $params['residence_contact_number'] = $patient->residence_contact_number;
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'profile';
     	return view('patient.profile', $params);
     }
-
+    public function editprofile()
+    {
+        $patient = Patient::find(Auth::user()->user_id);
+        $params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
+        $params['sex'] = $patient->sex;
+        $params['degree_program'] = DegreeProgram::find($patient->degree_program_id)->degree_program_description;
+        $params['year_level'] = $patient->year_level;
+        $params['birthday'] = $patient->birthday;
+        $params['religion'] = Religion::find($patient->religion_id)->religion_description;
+        $params['nationality'] = Nationality::find($patient->nationality_id)->nationality_description;
+        $parents = HasParent::where('patient_id', Auth::user()->user_id)->get();
+        foreach($parents as $parent)
+        {
+            if (ParentModel::find($parent->parent_id)->sex == 'M')
+            {
+                $params['father'] = ParentModel::find($parent->parent_id)->parent_first_name;
+            }
+            else{
+                $params['mother'] = ParentModel::find($parent->parent_id)->parent_first_name;
+            }
+        }
+        $params['street'] = $patient->street;
+        $params['town'] = Town::find($patient->town_id)->town_name;
+        $params['province'] = Province::find(Town::find($patient->town_id)->province_id)->province_name;
+        $params['region'] = Region::find(Province::find(Town::find($patient->town_id)->province_id)->region_id)->region_name;
+        $params['residence_telephone_number'] = $patient->residence_telephone_number;
+        $params['personal_contact_number'] = $patient->personal_contact_number;
+        $params['residence_contact_number'] = $patient->residence_contact_number;
+        $params['navbar_active'] = 'account';
+        $params['sidebar_active'] = 'profile';
+        return view('patient.editprofile', $params);
+    }
     public function visits()
     {
         $params['navbar_active'] = 'account';
