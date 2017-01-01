@@ -13,6 +13,8 @@ use App\HasParent;
 use App\Town;
 use App\Province;
 use App\Region;
+use App\Guardian;
+use App\HasGuardian;
 class PatientController extends Controller
 {
 	public function __construct()
@@ -51,10 +53,10 @@ class PatientController extends Controller
         {
             if (ParentModel::find($parent->parent_id)->sex == 'M')
             {
-                $params['father'] = ParentModel::find($parent->parent_id)->parent_first_name;
+                $params['father'] = ParentModel::find($parent->parent_id)->parent_first_name.' '.ParentModel::find($parent->parent_id)->parent_last_name;
             }
             else{
-                $params['mother'] = ParentModel::find($parent->parent_id)->parent_first_name;
+                $params['mother'] = ParentModel::find($parent->parent_id)->parent_first_name.' '.ParentModel::find($parent->parent_id)->parent_last_name;
             }
         }
         $params['street'] = $patient->street;
@@ -64,6 +66,13 @@ class PatientController extends Controller
         $params['residence_telephone_number'] = $patient->residence_telephone_number;
         $params['personal_contact_number'] = $patient->personal_contact_number;
         $params['residence_contact_number'] = $patient->residence_contact_number;
+        $guardian = HasGuardian::where('patient_id', Auth::user()->user_id)->first();
+        $params['guardian_first_name'] = Guardian::find($guardian->guardian_id)->guardian_first_name;
+        $params['guardian_middle_name'] = Guardian::find($guardian->guardian_id)->guardian_middle_name;
+        $params['guardian_last_name'] = Guardian::find($guardian->guardian_id)->guardian_last_name;
+        $params['guardian_street'] = Guardian::find($guardian->guardian_id)->street;
+        $params['guardian_town'] = Town::find(Guardian::find($guardian->guardian_id)->town_id)->town_name;
+        $params['guardian_province'] = Province::find(Town::find(Guardian::find($guardian->guardian_id)->town_id)->province_id)->province_name;
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'profile';
     	return view('patient.profile', $params);
@@ -83,10 +92,14 @@ class PatientController extends Controller
         {
             if (ParentModel::find($parent->parent_id)->sex == 'M')
             {
-                $params['father'] = ParentModel::find($parent->parent_id)->parent_first_name;
+                $params['father_first_name'] = ParentModel::find($parent->parent_id)->parent_first_name;
+                $params['father_middle_name'] = ParentModel::find($parent->parent_id)->parent_middle_name;
+                $params['father_last_name'] = ParentModel::find($parent->parent_id)->parent_last_name;
             }
             else{
-                $params['mother'] = ParentModel::find($parent->parent_id)->parent_first_name;
+                $params['mother_first_name'] = ParentModel::find($parent->parent_id)->parent_first_name;
+                $params['mother_middle_name'] = ParentModel::find($parent->parent_id)->parent_middle_name;
+                $params['mother_last_name'] = ParentModel::find($parent->parent_id)->parent_last_name;
             }
         }
         $params['street'] = $patient->street;
@@ -96,6 +109,8 @@ class PatientController extends Controller
         $params['residence_telephone_number'] = $patient->residence_telephone_number;
         $params['personal_contact_number'] = $patient->personal_contact_number;
         $params['residence_contact_number'] = $patient->residence_contact_number;
+        $guardian = HasGuardian::where('patient_id', Auth::user()->user_id)->first();
+        $params['guardian_first_name'] = Guardian::find($guardian->guardian_id)->guardian_first_name;
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'profile';
         return view('patient.editprofile', $params);

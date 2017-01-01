@@ -50,8 +50,8 @@
               <div class="panel-body">
               <table class="table" style="margin-bottom: 0px;">
                 <tbody>
-                  <tr><td>Name</td><td>Natalie Mission</td></tr>
-                  <tr><td>Address</td><td>Iloilo City</td></tr>
+                  <tr><td>Name</td><td>{{$guardian_first_name}} {{$guardian_middle_name}} {{$guardian_last_name}}</td></tr>
+                  <tr><td>Address</td><td>{{$guardian_street}}, {{$guardian_town}}, {{$guardian_province}}</td></tr>
                   <tr><td>Relationship</td><td>Sister</td></tr>
                   <tr><td>Residence Telephone Number</td><td>09123456789</td></tr>
                   <tr><td>Cellphone Number</td><td>09123456789</td></tr>
