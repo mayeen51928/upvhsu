@@ -13,62 +13,62 @@
 							<div class="panel-body">
 								<table class="table" style="margin-bottom: 0px;">
 									<tbody>
-										<tr><td>Age</td><td>{{$age}}</td></tr>
-										<tr><td>Sex</td><td>{{$sex}}</td></tr>
-										<tr><td>Course</td><td>{{$degree_program}}<select class="form-control" name="degree_program" id="degree_program" required title="Select your degree program.">
-											<option disabled selected>select degree program</option>
+										<tr><td>Sex</td><td><select class="form-control" name="sex">
+                    <option value="M" @if($sex=="M") selected @endif>M</option>
+                    <option value="F" @if($sex=="F") selected @endif>F</option></select></td></tr>
+										<tr><td>Course</td><td><select class="form-control" name="degree_program" id="degree_program" required title="Select your degree program.">
+                      <option disabled selected>select degree program</option>
 												<optgroup label="College of Arts and Sciences">
-													<option value="8">BS Applied Mathematics</option>
-													<option value="9">BS Biology</option>
-													<option value="10">BS Chemistry</option>
-													<option value="7">BA Communication and Media Studies</option>
-													<option value="1">BA Community Development</option>
-													<option value="11">BS Computer Science</option>
-													<option value="12">BS Economics</option>
-													<option value="2">BA History</option>
-													<option value="3">BA Literature</option>
-													<option value="4">BA Political Science</option>
-													<option value="5">BA Psychology</option>
-													<option value="13">BS Public Health</option>
-													<option value="6">BA Sociology</option>
-													<option value="14">BS Statistics</option>
-													<option value="15">Master of Chemistry</option>
-													<option value="16">Master of Education (Biology)</option>
-													<option value="17">Master of Education (English as a Second Language)</option>
-													<option value="18">Master of Education (Filipino)</option>
-													<option value="19">Master of Education (Guidance)</option>
-													<option value="20">Master of Education (Mathematics)</option>
-													<option value="21">Master of Education (Physics)</option>
-													<option value="22">Master of Education (Reading)</option>
-													<option value="23">Master of Education (Social Studies)</option>
-													<option value="24">MS Biology</option>
+													<option value="8" @if($degree_program=="8") selected @endif>BS Applied Mathematics</option>
+													<option value="9" @if($degree_program=="9") selected @endif>BS Biology</option>
+													<option value="10" @if($degree_program=="10") selected @endif>BS Chemistry</option>
+													<option value="7" @if($degree_program=="7") selected @endif>BA Communication and Media Studies</option>
+													<option value="1" @if($degree_program=="1") selected @endif>BA Community Development</option>
+													<option value="11" @if($degree_program=="11") selected @endif>BS Computer Science</option>
+													<option value="12" @if($degree_program=="12") selected @endif>BS Economics</option>
+													<option value="2" @if($degree_program=="2") selected @endif>BA History</option>
+													<option value="3" @if($degree_program=="3") selected @endif>BA Literature</option>
+													<option value="4" @if($degree_program=="4") selected @endif>BA Political Science</option>
+													<option value="5" @if($degree_program=="5") selected @endif>BA Psychology</option>
+													<option value="13" @if($degree_program=="13") selected @endif>BS Public Health</option>
+													<option value="6" @if($degree_program=="6") selected @endif>BA Sociology</option>
+													<option value="14" @if($degree_program=="14") selected @endif>BS Statistics</option>
+													<option value="15" @if($degree_program=="15") selected @endif>Master of Chemistry</option>
+													<option value="16" @if($degree_program=="16") selected @endif>Master of Education (Biology)</option>
+													<option value="17" @if($degree_program=="17") selected @endif>Master of Education (English as a Second Language)</option>
+													<option value="18" @if($degree_program=="18") selected @endif>Master of Education (Filipino)</option>
+													<option value="19" @if($degree_program=="19") selected @endif>Master of Education (Guidance)</option>
+													<option value="20" @if($degree_program=="20") selected @endif>Master of Education (Mathematics)</option>
+													<option value="21" @if($degree_program=="21") selected @endif>Master of Education (Physics)</option>
+													<option value="22" @if($degree_program=="22") selected @endif>Master of Education (Reading)</option>
+													<option value="23" @if($degree_program=="23") selected @endif>Master of Education (Social Studies)</option>
+													<option value="24" @if($degree_program=="24") selected @endif>MS Biology</option>
 												</optgroup>
 												<optgroup label="College of Fisheries and Ocean Sciences">
-													<option value="25">BS Fisheries</option>
-													<option value="26">Master of Aquaculture</option>
-													<option value="27">Master of Marine Affairs</option>
-													<option value="28">MS Fisheries (Aquaculture)</option>
-													<option value="29">MS Fisheries (Fisheries Biology)</option>
-													<option value="30">MS Fisheries (Fish Processing Technology)</option>
-													<option value="31">MS Ocean Sciences</option>
-													<option value="32">Professional Masters in Tropical Marines</option>
-													<option value="33">PhD Fisheries</option>
+													<option value="25" @if($degree_program=="25") selected @endif>BS Fisheries</option>
+													<option value="26" @if($degree_program=="26") selected @endif>Master of Aquaculture</option>
+													<option value="27" @if($degree_program=="27") selected @endif>Master of Marine Affairs</option>
+													<option value="28" @if($degree_program=="28") selected @endif>MS Fisheries (Aquaculture)</option>
+													<option value="29" @if($degree_program=="29") selected @endif>MS Fisheries (Fisheries Biology)</option>
+													<option value="30" @if($degree_program=="30") selected @endif>MS Fisheries (Fish Processing Technology)</option>
+													<option value="31" @if($degree_program=="31") selected @endif>MS Ocean Sciences</option>
+													<option value="32" @if($degree_program=="32") selected @endif>Professional Masters in Tropical Marines</option>
+													<option value="33" @if($degree_program=="33") selected @endif>PhD Fisheries</option>
 												</optgroup>
 												<optgroup label="College of Management">
-													<option value="34">BS Accountancy</option>
-													<option value="35">BS Business Administration (Marketing)</option>
-													<option value="36">BS Management</option>
-													<option value="37">Master of Management (Business Management)</option>
-													<option value="38">Master of Management (Public Management)</option>
-													<option value="29">Diploma in Urban and Regional Planning</option>
+													<option value="34" @if($degree_program=="34") selected @endif>BS Accountancy</option>
+													<option value="35" @if($degree_program=="35") selected @endif>BS Business Administration (Marketing)</option>
+													<option value="36" @if($degree_program=="36") selected @endif>BS Management</option>
+													<option value="37" @if($degree_program=="37") selected @endif>Master of Management (Business Management)</option>
+													<option value="38" @if($degree_program=="38") selected @endif>Master of Management (Public Management)</option>
+													<option value="39" @if($degree_program=="39") selected @endif>Diploma in Urban and Regional Planning</option>
 												</optgroup>
 												<optgroup label="School of Technology">
-													<option value="41">BS Chemical Engineering</option>
-													<option value="40">BS Food Technology</option>
+													<option value="41" @if($degree_program=="41") selected @endif>BS Chemical Engineering</option>
+													<option value="40" @if($degree_program=="40") selected @endif>BS Food Technology</option>
 												</optgroup>
 											</select>
 											</td></tr>
-										<tr><td>Year Level</td><td>{{$year_level}}</td></tr>
 									</tbody>
 								</table>
               </div>
@@ -191,11 +191,11 @@
               <div class="panel-body">
               <table class="table" style="margin-bottom: 0px;">
                 <tbody>
-                  <tr><td>Name</td><td>Natalie Mission</td></tr>
-                  <tr><td>Address</td><td>Iloilo City</td></tr>
-                  <tr><td>Relationship</td><td>Sister</td></tr>
-                  <tr><td>Residence Telephone Number</td><td>09123456789</td></tr>
-                  <tr><td>Cellphone Number</td><td>09123456789</td></tr>
+                  <tr><td>Name</td><td><input type="text" class="form-control" value="{{$guardian_first_name}}" placeholder="Guardian's First Name" /><input type="text" class="form-control" value="{{$guardian_middle_name}}" placeholder="Guardian's Middle Name" /><input type="text" class="form-control" value="{{$guardian_last_name}}" placeholder="Guardian's Last Name" /></td></tr>
+                  <tr><td>Address</td><td><input type="text" class="form-control" value="{{$guardian_street}}"/><input type="text" class="form-control" value="{{$guardian_town}}"/><input type="text" class="form-control" value="{{$guardian_province}}"/></td></tr>
+                  <tr><td>Relationship</td><td><input type="text" class="form-control" value="{{$relationship}}"/></td></tr>
+                  <tr><td>Residence Telephone Number</td><td><input type="text" class="form-control" value="{{$guardian_tel_number}}"/></td></tr>
+                  <tr><td>Cellphone Number</td><td><input type="text" class="form-control" value="{{$guardian_cellphone}}"/></td></tr>
                 </tbody>
               </table>
               </div>
