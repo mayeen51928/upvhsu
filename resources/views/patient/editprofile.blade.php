@@ -13,7 +13,7 @@
 							<div class="panel-body">
 								<table class="table" style="margin-bottom: 0px;">
 									<tbody>
-										<tr><td>Sex</td><td><select class="form-control" name="sex">
+										<tr><td>Sex</td><td><select class="form-control" name="sex" id="sex">
                     <option value="M" @if($sex=="M") selected @endif>M</option>
                     <option value="F" @if($sex=="F") selected @endif>F</option></select></td></tr>
 										<tr><td>Course</td><td><select class="form-control" name="degree_program" id="degree_program" required title="Select your degree program.">
@@ -204,7 +204,7 @@
           <div class="col-md-12">
           <div class="clearfix">
           <div class="pull-left">
-          <a href="{{ url('account/profile/edit') }}" class="btn btn-primary" role="button">Edit Profile</a>
+          <button type="submit" class="btn btn-success">Save Changes</button>
           </div>
           </div>
           </div>
