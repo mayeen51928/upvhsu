@@ -127,6 +127,43 @@ class PatientController extends Controller
         $params['sidebar_active'] = 'profile';
         return view('patient.editprofile', $params);
     }
+
+    public function updateprofile(Request $request)
+    {
+        $patient = Patient::find(Auth::user()->user_id);
+        $patient->sex = $request->input('sex');
+        $patient->degree_program_id = $request->input('degree_program');
+        $patient->birthday = $request->input('birthdate');
+        $religion = Religion::where('religion_description', $request->input('religion'))->first();
+        // dd($religion->id);
+        if(count($religion)>0)
+        {
+            $patient->religion_id = $religion->id;
+        }
+        else
+        {
+            $religion = new Religion;
+            $religion->religion_description = $request->input('religion');
+            $religion->save();
+            $patient->religion_id = Religion::where('religion_description', $request->input('religion')->first()->id);
+        }
+        $nationality = Nationality::where('nationality_description', $request->input('nationality'))->first();
+        // dd($religion->id);
+        if(count($nationality)>0)
+        {
+            $patient->nationality_id = $nationality->id;
+        }
+        else
+        {
+            $nationality = new Nationality;
+            $nationality->nationality_description = $request->input('nationality');
+            $nationality->save();
+            $patient->nationality_id = Nationality::where('nationality_description', $request->input('nationality')->first()->id);
+        }
+        $patient->update();
+        // $request->session()->flash('alert-success', 'Update Success!');     
+        return redirect('account/profile');
+    }
     public function visits()
     {
         $params['navbar_active'] = 'account';
