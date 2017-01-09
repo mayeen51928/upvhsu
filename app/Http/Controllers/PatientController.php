@@ -62,7 +62,7 @@ class PatientController extends Controller
         $params['street'] = $patient->street;
         $params['town'] = Town::find($patient->town_id)->town_name;
         $params['province'] = Province::find(Town::find($patient->town_id)->province_id)->province_name;
-        $params['region'] = Region::find(Province::find(Town::find($patient->town_id)->province_id)->region_id)->region_name;
+        // $params['region'] = Region::find(Province::find(Town::find($patient->town_id)->province_id)->region_id)->region_name;
         $params['residence_telephone_number'] = $patient->residence_telephone_number;
         $params['personal_contact_number'] = $patient->personal_contact_number;
         $params['residence_contact_number'] = $patient->residence_contact_number;
@@ -108,7 +108,7 @@ class PatientController extends Controller
         $params['street'] = $patient->street;
         $params['town'] = Town::find($patient->town_id)->town_name;
         $params['province'] = Province::find(Town::find($patient->town_id)->province_id)->province_name;
-        $params['region'] = Region::find(Province::find(Town::find($patient->town_id)->province_id)->region_id)->region_name;
+        // $params['region'] = Region::find(Province::find(Town::find($patient->town_id)->province_id)->region_id)->region_name;
         $params['residence_telephone_number'] = $patient->residence_telephone_number;
         $params['personal_contact_number'] = $patient->personal_contact_number;
         $params['residence_contact_number'] = $patient->residence_contact_number;
@@ -160,6 +160,26 @@ class PatientController extends Controller
             $nationality->save();
             $patient->nationality_id = Nationality::where('nationality_description', $request->input('nationality')->first()->id);
         }
+        $parents = HasParent::where('patient_id', Auth::user()->user_id)->get();
+        foreach($parents as $parent)
+        {
+            if (ParentModel::find($parent->parent_id)->sex == 'M')
+            {
+                $father = ParentModel::find($parent->parent_id);
+                $father->parent_first_name = $request->input('father_first_name');
+                $father->parent_middle_name = $request->input('father_middle_name');
+                $father->parent_last_name = $request->input('father_last_name');
+                $father->update();
+            }
+            else{
+                $mother = ParentModel::find($parent->parent_id);
+                $mother->parent_first_name = $request->input('mother_first_name');
+                $mother->parent_middle_name = $request->input('mother_middle_name');
+                $mother->parent_last_name = $request->input('mother_last_name');
+                $mother->update();
+            }
+        }
+        $patient->street = $request->input('street');
         $patient->update();
         // $request->session()->flash('alert-success', 'Update Success!');     
         return redirect('account/profile');

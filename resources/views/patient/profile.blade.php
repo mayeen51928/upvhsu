@@ -35,7 +35,7 @@
                   <tr><td>Nationality</td><td>{{$nationality}}</td></tr>
                   <tr><td>Father</td><td>{{$father}}</td></tr>
                   <tr><td>Mother</td><td>{{$mother}}</td></tr>
-                  <tr><td>Home Address</td><td>{{$street}}, {{$town}}, {{$province}}, {{$region}}</td></tr>
+                  <tr><td>Home Address</td><td>{{$street}}, {{$town}}, {{$province}}</td></tr>
                   <tr><td>Residence Telephone Number</td><td>{{$residence_telephone_number}}</td></tr>
                   <tr><td>Residence Contact Number</td><td>{{$residence_contact_number}}</td></tr>
                   <tr><td>Personal Contact Number</td><td>{{$personal_contact_number}}</td></tr>
