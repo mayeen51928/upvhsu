@@ -180,6 +180,79 @@ class PatientController extends Controller
             }
         }
         $patient->street = $request->input('street');
+        $province = Province::where('province_name', $request->input('province'))->first();
+        if(count($province)>0)
+        {
+            // $patient->nationality_id = $nationality->id;
+            $town = Town::where('town_name', $request->input('town'))->first();
+            if(count($town)>0)
+            {
+                $patient->town_id = $town->id;
+            }
+            else
+            {
+                $town = new Town;
+                $town->town_name = $request->input('town');
+                $town->province_id = $province->id;
+                //insert the distance from miagao using Google Distance Matrix API
+                $town->save();
+                $patient->town_id = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first()->id;
+            }
+        }
+        else
+        {
+            $province = new Province;
+            $province->province_name = $request->input('province');
+            $province->save();
+            $town = new Town;
+            $town->town_name = $request->input('town');
+            $town->province_id = Province::where('province_name', $request->input('province'))->first()->id;
+            $town->save();
+            $patient->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
+        }
+        $patient->residence_telephone_number = $request->input('residence_telephone_number');
+        $patient->personal_contact_number = $request->input('personal_contact_number');
+        $patient->residence_contact_number = $request->input('residence_contact_number');
+        $guardian = HasGuardian::where('patient_id', Auth::user()->user_id)->first();
+        $guardian_info = Guardian::find($guardian->guardian_id);
+        $guardian_info->guardian_first_name = $request->input('guardian_first_name');
+        $guardian_info->guardian_middle_name = $request->input('guardian_middle_name');
+        $guardian_info->guardian_last_name = $request->input('guardian_last_name');
+        $guardian_info->street;
+        $guardian_province = Province::where('province_name', $request->input('guardian_province'))->first();
+        if(count($guardian_province)>0)
+        {
+            $guardian_town = Town::where('town_name', $request->input('guardian_town'))->first();
+            if(count($guardian_town)>0)
+            {
+                $guardian_info->town_id = $guardian_town->id;
+            }
+            else
+            {
+                $guardian_town = new Town;
+                $guardian_town->town_name = $request->input('guardian_town');
+                $guardian_town->province_id = $guardian_province->id;
+                //insert the distance from miagao using Google Distance Matrix API
+                $guardian_town->save();
+                $guardian_info->town_id = Town::where('town_name', $request->input('guardian_town'))->where('province_id', $guardian_province->id)->first()->id;
+            }
+        }
+        else
+        {
+            $guardian_province = new Province;
+            $guardian_province->province_name = $request->input('guardian_province');
+            $guardian_province->save();
+            $guardian_town = new Town;
+            $guardian_town->town_name = $request->input('guardian_town');
+            $guardian_town->province_id = Province::where('province_name', $request->input('guardian_province'))->first()->id;
+            $guardian_town->save();
+            $guardian_info->town_id = Town::where('town_name', $request->input('guardian_town'))->where('province_id', Province::where('province_name', $request->input('guardian_province'))->first()->id)->first()->id;
+        }
+        $guardian->relationship = $request->input('relationship');
+        $guardian_info->guardian_telephone_number = $request->input('guardian_tel_number');
+        $guardian_info->guardian_contact_number = $request->input('guardian_cellphone');
+        $guardian->update();
+        $guardian_info->update();
         $patient->update();
         // $request->session()->flash('alert-success', 'Update Success!');     
         return redirect('account/profile');
