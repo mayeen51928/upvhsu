@@ -66,9 +66,4 @@
 		</div>
 	</div>
 </div>
-<script>
-    // token and createPostUrl are needed to be passed to AJAX method call
-    var token = '{{csrf_token()}}';
-    var addMedicalSchedule = '/addschedule_medical';
-</script>
 @endsection

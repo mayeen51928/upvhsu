@@ -39,6 +39,7 @@ Route::post('/addschedule_dental', 'DentistController@addschedule');
 /* ROUTES FOR MEDICAL DOCTOR ACCOUNT */
 Route::get('/doctor','DoctorController@dashboard');
 Route::get('/doctor/profile','DoctorController@profile');
+Route::get('/doctor/profile/edit','DoctorController@editprofile');
 Route::get('/doctor/manageschedule','DoctorController@manageschedule');
 Route::get('/doctor/searchpatient','DoctorController@searchpatient');
 Route::post('/addschedule_medical', 'DoctorController@addschedule');

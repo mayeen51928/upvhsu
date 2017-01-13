@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\MedicalSchedule;
+use App\Staff;
 class DoctorController extends Controller
 {
     public function __construct()
@@ -32,6 +33,15 @@ class DoctorController extends Controller
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'profile';
         return view('staff.medical-doctor.profile', $params);
+    }
+    public function editprofile()
+    {
+        $doctor = Staff::find(Auth::user()->user_id);
+        // $params['age'] = (date('Y') - date('Y',strtotime($doctor->birthday)));
+        $params['sex'] = $doctor->sex;
+        $params['navbar_active'] = 'account';
+        $params['sidebar_active'] = 'profile';
+        return view('staff.medical-doctor.editprofile', $params);
     }
 
     public function manageschedule()

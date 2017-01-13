@@ -59,11 +59,14 @@
 								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Search Patient</a></li>
 							@endif
 						@endif
-						<li><a href="{{ url('/logout') }}"
+						<li>
+							<a href="{{ url('/logout') }}" 
 								onclick="event.preventDefault();
-								document.getElementById('logout-form').submit();"
-							><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-						<form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+									document.getElementById('logout-form').submit();"
+							><form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;"> <input type="hidden" name="_token" value="{{{ csrf_token() }}}" /></form>
+							<span class="glyphicon glyphicon-log-out"></span> Logout</a>
+						</li>
+						
 					</ul>
 				</li>
 				@endif

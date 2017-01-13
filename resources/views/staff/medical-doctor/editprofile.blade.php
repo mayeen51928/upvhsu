@@ -11,7 +11,15 @@
         	<div class="panel-body">
         		<table class="table" style="margin-bottom: 0px;">
         			<tbody>
-                <tr><td>Sex</td><td>M</td></tr>
+                <tr>
+                  <td>Sex</td>
+                  <td>
+                    <select class="form-control" name="sex" id="sex">
+                          <option value="F" @if($sex=="F") selected @endif>F</option>
+                          <option value="M" @if($sex=="M") selected @endif>M</option>
+                        </select>
+                      </td>
+                </tr>
                 <tr><td>Position</td><td>Dentist</td></tr>
                 <tr><td>Birthday</td><td>July 1, 1954</td></tr>
                 <tr><td>Civil Status</td><td>Widowed</td></tr>
