@@ -32,6 +32,8 @@ Route::get('/account/bills','PatientController@bills');
 /* ROUTES FOR DENTIST ACCOUNT */
 Route::get('/dentist','DentistController@dashboard');
 Route::get('/dentist/profile','DentistController@profile');
+Route::get('/dentist/profile/edit','DentistController@editprofile');
+Route::post('/dentist/profile/update','DentistController@updateprofile');
 Route::get('/dentist/manageschedule','DentistController@manageschedule');
 Route::get('/dentist/searchpatient','DentistController@searchpatient');
 Route::post('/addschedule_dental', 'DentistController@addschedule');
@@ -40,6 +42,7 @@ Route::post('/addschedule_dental', 'DentistController@addschedule');
 Route::get('/doctor','DoctorController@dashboard');
 Route::get('/doctor/profile','DoctorController@profile');
 Route::get('/doctor/profile/edit','DoctorController@editprofile');
+Route::post('/doctor/profile/update','DoctorController@updateprofile');
 Route::get('/doctor/manageschedule','DoctorController@manageschedule');
 Route::get('/doctor/searchpatient','DoctorController@searchpatient');
 Route::post('/addschedule_medical', 'DoctorController@addschedule');
@@ -47,14 +50,20 @@ Route::post('/addschedule_medical', 'DoctorController@addschedule');
 /* ROUTES FOR LABORATORY ACCOUNT */
 Route::get('/lab','LabController@dashboard');
 Route::get('/lab/profile','LabController@profile');
+Route::get('/lab/profile/edit','LabController@editprofile');
+Route::post('/lab/profile/update','LabController@updateprofile');
 Route::get('/lab/searchpatient','LabController@searchpatient');
 
 /* ROUTES FOR XRAY ACCOUNT */
 Route::get('/xray','XrayController@dashboard');
 Route::get('/xray/profile','XrayController@profile');
+Route::get('/xray/profile/edit','XrayController@editprofile');
+Route::post('/xray/profile/update','XrayController@updateprofile');
 Route::get('/xray/searchpatient','XrayController@searchpatient');
 
 /* ROUTES FOR CASHIER ACCOUNT */
 Route::get('/cashier','CashierController@dashboard');
 Route::get('/cashier/profile','CashierController@profile');
+Route::get('/cashier/profile/edit','CashierController@editprofile');
+Route::post('/cashier/profile/update','CashierController@updateprofile');
 Route::get('/cashier/searchpatient','CashierController@searchpatient');

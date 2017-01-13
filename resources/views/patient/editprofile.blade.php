@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Profile | UP Visayas Health Services Unit')
+@section('title', 'Edit Profile | UP Visayas Health Services Unit')
 @section('content')
 <div class="container-fluid">
 	<div class="row">

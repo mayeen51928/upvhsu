@@ -4,8 +4,8 @@
 <div class="container-fluid">
 	<div class="row">
 		@include('layouts.sidebar')
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="doctorDashboard">
-      <form method="POST" action="/doctor/profile/update">
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierDashboard">
+      <form method="POST" action="/cashier/profile/update">
 			<div class="col-md-9">
         <div class="panel panel-info">
         	<div class="panel-heading">Basic Information</div>
