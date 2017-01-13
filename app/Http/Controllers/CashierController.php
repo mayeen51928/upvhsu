@@ -73,7 +73,7 @@ class CashierController extends Controller
         if(count($province)>0)
         {
             // $cashier->nationality_id = $nationality->id;
-            $town = Town::where('town_name', $request->input('town'))->first();
+            $town = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first();
             if(count($town)>0)
             {
                 $cashier->town_id = $town->id;

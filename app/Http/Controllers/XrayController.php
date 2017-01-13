@@ -73,7 +73,7 @@ class XrayController extends Controller
         if(count($province)>0)
         {
             // $xray->nationality_id = $nationality->id;
-            $town = Town::where('town_name', $request->input('town'))->first();
+            $town = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first();
             if(count($town)>0)
             {
                 $xray->town_id = $town->id;

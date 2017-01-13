@@ -184,7 +184,7 @@ class PatientController extends Controller
         if(count($province)>0)
         {
             // $patient->nationality_id = $nationality->id;
-            $town = Town::where('town_name', $request->input('town'))->first();
+            $town = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first();
             if(count($town)>0)
             {
                 $patient->town_id = $town->id;
@@ -222,7 +222,7 @@ class PatientController extends Controller
         $guardian_province = Province::where('province_name', $request->input('guardian_province'))->first();
         if(count($guardian_province)>0)
         {
-            $guardian_town = Town::where('town_name', $request->input('guardian_town'))->first();
+            $guardian_town = Town::where('town_name', $request->input('guardian_town'))->where('province_id', $guardian_province->id)->first();
             if(count($guardian_town)>0)
             {
                 $guardian_info->town_id = $guardian_town->id;
