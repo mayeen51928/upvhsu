@@ -45,7 +45,7 @@
 									<option disabled selected> -- select doctor and time -- </option>
 								</select>
 							</div>
-							<input type="submit" class="form-control btn btn-success" name="submitdentalappointment" id="submitdentalappointment" value="Set Appointment"/>
+							<button class="btn btn-success" name="submitdentalappointment" id="submitdentalappointment">Set Appointment</button>
 						<!-- </form> -->
 					</div>
 			</div>	
