@@ -10,6 +10,6 @@ class MedicalSchedule extends Model
 
     public function medicalappointment()
     {
-        return $this->hasOne(MedicalAppointment::class, 'medical_schedule_id');
+        return $this->belongsTo(MedicalAppointment::class, 'medical_schedule_id');
     }
 }
