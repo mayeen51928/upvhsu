@@ -25,12 +25,14 @@
 						</tr>
 					</thead>
 					<tbody>
+            @foreach ($dental_appointments_fin as $dental_appointment_fin)
 						<tr>
-							<td id="patient_name"><p class="createNewRecordModalDental">John Mission</p></td>
-							<td>9:00 PM</td>
-							<td>Wisdom tooth.</td>
-							<td><button class="btn btn-primary btn-xs addDentalRecordButton">Update Diagnosis</button></td>
+							<td>{{ $dental_appointment_fin->patient_first_name }} {{ $dental_appointment_fin->patient_last_name }}</td>
+							<td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dental_appointment_fin->schedule_start)->format('H:i:s') }} - {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dental_appointment_fin->schedule_end)->format('H:i:s') }}</td>
+							<td>{{ $dental_appointment_fin->reasons }}</td>
+							<td><button class="btn btn-primary btn-xs addDentalRecordButton" id="{{ $dental_appointment_fin->id }}">Update Diagnosis</button></td>
 						</tr>
+            @endforeach
 					</tbody>
 				</table>
 			</div>
@@ -67,219 +69,57 @@
             </div>
           </div>
         </div>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <tbody>
-              <tr>
-                <td>CONDITION</td>
-                <td>
-                  <select class="form-control condition_55">
-                    <option value="condition_55" disabled selected>55</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control condition_54">
-                    <option value="condition_54" disabled selected>54</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control condition_53">
-                    <option value="condition_53" disabled selected>53</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-                <td>
-                 <select class="form-control condition_52">
-                    <option value="condition_52" disabled selected>52</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control condition_51">
-                    <option value="condition_51" disabled selected>51</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control condition_61">
-                    <option value="condition_61" disabled selected>61</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control condition_62">
-                    <option value="condition_62" disabled selected>62</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control condition_63">
-                    <option value="condition_63" disabled selected>63</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control condition_64">
-                    <option value="condition_64" disabled selected>64</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-                <td>
-                 <select class="form-control condition_65">
-                    <option value="condition_65" disabled selected>65</option>
-                    <option value="1">Caries free</option>
-                    <option value="2">Caries for filting</option>
-                    <option value="3">Caries for extraction</option>
-                    <option value="4">Root fragment</option>
-                    <option value="5">Missing due to carries</option>
-                  </select>
-                </td>
-              </tr>
-
-              <tr>
-                <td>OPERATION</td>
-                <td>
-                  <select class="form-control operation_55">
-                    <option value="operation_55" disabled selected>55</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control operation_54">
-                    <option value="operation_54" disabled selected>54</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control operation_53">
-                    <option value="operation_53" disabled selected>53</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control operation_52">
-                    <option value="operation_52" disabled selected>52</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control operation_51">
-                    <option value="operation_51" disabled selected>51</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control operation_61">
-                    <option value="operation_61" disabled selected>61</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control operation_62">
-                    <option value="operation_62" disabled selected>62</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control operation_63">
-                    <option value="operation_63" disabled selected>63</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control operation_64">
-                    <option value="operation_64" disabled selected>64</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-                <td>
-                  <select class="form-control operation_65">
-                    <option value="operation_65" disabled selected>65</option>
-                    <option value="1">Amalgam filling</option>
-                    <option value="2">Silicate filling</option>
-                    <option value="3">Extraction due to caries</option>
-                    <option value="4">Extraction due to other causes</option>
-                    <option value="5">Cement filling</option>
-                  </select>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div>
+          <img src="images/number_chart.jpg" class="img-responsive" width="867" height="522" alt="Generic placeholder thumbnail" usemap="#planetmap" style="margin-top: 30px;">
+          <map name="planetmap">
+            <area shape="rect" coords="226, 22, 272, 101" class="dental-chart" id="55">
+            <area shape="rect" coords="283, 26, 317, 96" class="dental-chart" id="54">
+            <area shape="rect" coords="337, 20, 355, 91" class="dental-chart" id="53">
+          </map>
         </div>
+<!--         <div>
+          <table>
+            <tr>
+              <th width="10%"></th>
+              <td width="9%" style="text-align:center">55</td>
+              <td width="9%" style="text-align:center">54</td>
+              <td width="9%" style="text-align:center">53</td>
+              <td width="9%" style="text-align:center">52</td>
+              <td width="9%" style="text-align:center">51</td>
+              <td width="9%" style="text-align:center">61</td>
+              <td width="9%" style="text-align:center">62</td>
+              <td width="9%" style="text-align:center">63</td>
+              <td width="9%" style="text-align:center">64</td>
+              <td width="9%" style="text-align:center">65</td>
+            </tr>
+            <tr>
+              <th>OPERATION</th>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+            </tr>
+            <tr>
+              <th>CONDITION</th>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+              <td style="text-align:center">A</td>
+            </tr>
+          </table>
+        </div> -->
       </div>
       <div class="modal-footer">
        <span style="float: left; margin-right: 4px"><button type="button" class="btn btn-info" id="backButtonMedicalDiagnosis">Back</button></span>
@@ -290,4 +130,48 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="create-dental-record-per-tooth-modal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content" style="width:900px; ">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="add-dental-record">
+          <select class="form-control condition">
+            <option value="condition" disabled selected>--options--</option>
+            <option value="1">Caries free</option>
+            <option value="2">Caries for filting</option>
+            <option value="3">Caries for extraction</option>
+            <option value="4">Root fragment</option>
+            <option value="5">Missing due to carries</option>
+          </select>
+          <select class="form-control operation">
+            <option value="operation" disabled selected>--options--</option>
+            <option value="1">Amalgam filling</option>
+            <option value="2">Silicate filling</option>
+            <option value="3">Extraction due to caries</option>
+            <option value="4">Extraction due to other causes</option>
+            <option value="5">Cement filling</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" id="updateDentalRecord">Update</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // token and createPostUrl are needed to be passed to AJAX method call
+  var token = '{{csrf_token()}}';
+  var addDentalRecord = '/addrecord_dental';
+  var addDentalRecordPerTeeth = '/addrecord_dental_teeth';
+  var updateDentalRecord = '/update_dental_teeth';
+</script>
+
 @endsection
