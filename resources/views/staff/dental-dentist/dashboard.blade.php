@@ -77,7 +77,7 @@
             <area shape="rect" coords="337, 20, 355, 91" class="dental-chart" id="53">
           </map>
         </div>
-        <div>
+<!--         <div>
           <table>
             <tr>
               <th width="10%"></th>
@@ -119,7 +119,7 @@
               <td style="text-align:center">A</td>
             </tr>
           </table>
-        </div>
+        </div> -->
       </div>
       <div class="modal-footer">
        <span style="float: left; margin-right: 4px"><button type="button" class="btn btn-info" id="backButtonMedicalDiagnosis">Back</button></span>

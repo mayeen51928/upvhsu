@@ -1,5 +1,8 @@
 $(document).ready( function(){
 
+$.ajaxSetup({
+	headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+});
 
 // ------------------DASHBOARD---------------
 	// $('.addMedicalRecordButton').click(function() {
@@ -438,19 +441,25 @@ $('#addmedicalschedule').click(function(){
         }
     });
     if(schedules.length > 0){
-        $.ajax({
-            url: addMedicalSchedule,
-            type: 'POST',
-            dataType: 'json',
-            data: {schedules:  schedules, _token: token},
-            success: function(data) {
-                $('button').attr('disabled', 'disabled');
-                $('input').attr('disabled', 'disabled');
-                $('#manageschedulepanel').css('background-color', '#d6e9c6');
-            },
-            error: function(xhr, textStatus, errorThrown) {
-            }
+    	$.post('/addschedule_medical',{schedules: schedules} , function(data){
+            $('button').attr('disabled', 'disabled');
+            $('input').attr('disabled', 'disabled');
+            $('#manageschedulepanel').css('background-color', '#d6e9c6');
         });
+
+        // $.ajax({
+        //     url: addMedicalSchedule,
+        //     type: 'POST',
+        //     dataType: 'json',
+        //     data: {schedules:  schedules, _token: token},
+        //     success: function(data) {
+        //         $('button').attr('disabled', 'disabled');
+        //         $('input').attr('disabled', 'disabled');
+        //         $('#manageschedulepanel').css('background-color', '#d6e9c6');
+        //     },
+        //     error: function(xhr, textStatus, errorThrown) {
+        //     }
+        // });
     }
     
 }); 

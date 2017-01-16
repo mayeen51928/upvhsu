@@ -35,7 +35,7 @@
                   <tr><td>Nationality</td><td>{{$nationality}}</td></tr>
                   <tr><td>Father</td><td>{{$father}}</td></tr>
                   <tr><td>Mother</td><td>{{$mother}}</td></tr>
-                  <tr><td>Home Address</td><td>{{$street}}, {{$town}}, {{$province}}, {{$region}}</td></tr>
+                  <tr><td>Home Address</td><td>{{$street}}, {{$town}}, {{$province}}</td></tr>
                   <tr><td>Residence Telephone Number</td><td>{{$residence_telephone_number}}</td></tr>
                   <tr><td>Residence Contact Number</td><td>{{$residence_contact_number}}</td></tr>
                   <tr><td>Personal Contact Number</td><td>{{$personal_contact_number}}</td></tr>
@@ -50,11 +50,11 @@
               <div class="panel-body">
               <table class="table" style="margin-bottom: 0px;">
                 <tbody>
-                  <tr><td>Name</td><td>Natalie Mission</td></tr>
-                  <tr><td>Address</td><td>Iloilo City</td></tr>
-                  <tr><td>Relationship</td><td>Sister</td></tr>
-                  <tr><td>Residence Telephone Number</td><td>09123456789</td></tr>
-                  <tr><td>Cellphone Number</td><td>09123456789</td></tr>
+                  <tr><td>Name</td><td>{{$guardian_first_name}} {{$guardian_middle_name}} {{$guardian_last_name}}</td></tr>
+                  <tr><td>Address</td><td>{{$guardian_street}}, {{$guardian_town}}, {{$guardian_province}}</td></tr>
+                  <tr><td>Relationship</td><td>{{$relationship}}</td></tr>
+                  <tr><td>Residence Telephone Number</td><td>{{$guardian_tel_number}}</td></tr>
+                  <tr><td>Cellphone Number</td><td>{{$guardian_cellphone}}</td></tr>
                 </tbody>
               </table>
               </div>

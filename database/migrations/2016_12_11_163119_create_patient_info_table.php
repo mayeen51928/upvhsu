@@ -35,10 +35,6 @@ class CreatePatientInfoTable extends Migration
             $table->string('street')->nullable();
             $table->integer('town_id')->unsigned()->index()->nullable();
             $table->foreign('town_id')->references('id')->on('towns')->onDelete('cascade');
-            $table->integer('province_id')->unsigned()->index()->nullable();
-            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
-            $table->integer('region_id')->unsigned()->index()->nullable();
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
             $table->string('residence_telephone_number')->nullable();
             $table->string('personal_contact_number')->nullable();
             $table->string('residence_contact_number')->nullable();

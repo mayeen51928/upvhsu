@@ -18,7 +18,7 @@ class CreateTownsTable extends Migration
             $table->string('town_name');
             $table->integer('province_id')->unsigned()->index();
             $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
-            $table->decimal('distance_to_miagao');
+            $table->decimal('distance_to_miagao')->nullable();
             $table->timestamps();
         });
     }

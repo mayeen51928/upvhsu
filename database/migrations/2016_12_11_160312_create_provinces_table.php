@@ -16,8 +16,6 @@ class CreateProvincesTable extends Migration
         Schema::create('provinces', function (Blueprint $table) {
             $table->increments('id');
             $table->string('province_name');
-            $table->integer('region_id')->unsigned()->index();
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
             $table->timestamps();
         });
     }

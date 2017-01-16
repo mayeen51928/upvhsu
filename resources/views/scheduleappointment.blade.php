@@ -45,7 +45,7 @@
 									<option disabled selected> -- select doctor and time -- </option>
 								</select>
 							</div>
-							<input type="submit" class="form-control btn btn-success" name="submitdentalappointment" id="submitdentalappointment" value="Set Appointment"/>
+							<button class="btn btn-success" name="submitdentalappointment" id="submitdentalappointment">Set Appointment</button>
 						<!-- </form> -->
 					</div>
 			</div>	
@@ -77,7 +77,7 @@
 						</select>
 					</div>
 					<p id="medicalFormNote"><i>Note: Medical appointment done online is for note-taking purposes of the doctor.  On-site visit will still be accommodated first.</i></p>
-					<input type="submit" class="form-control btn btn-success" name="submitmedicalappointment" id="submitmedicalappointment" value="Set Appointment"/>
+					<button class="btn btn-success" name="submitmedicalappointment" id="submitmedicalappointment">Set Appointment</button>
 					<!-- </form> -->
 				</div>
 			</div>	

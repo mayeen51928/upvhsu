@@ -1,5 +1,9 @@
 $(document).ready( function(){
 
+  $.ajaxSetup({
+    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+  });
+
   // -----------------SCEDULE APPOINTMENT (NOT LOGGED IN)---------------------
 
   numOfClicksMedical = 0;
@@ -101,12 +105,55 @@ $(document).ready( function(){
   $("#submitdentalappointment").click(function() {
     var scheduleID = $('#selectdentaltime').find(':selected')[0].id;
     console.log("Schedule ID is " + scheduleID);
+<<<<<<< HEAD
+=======
+    $.post('/createappointment_dental',{reasons:$('#dentalNotes').val(), dental_schedule_id: scheduleID} , function(data){
+      $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
+      $('#dentalNotes').attr("disabled", "disabled");
+      $('#selDentalDate').attr("disabled", "disabled");
+      $('#selDentalTime').attr("disabled", "disabled");
+      $('#submitDentalAppointment').addClass("disabled");
+      $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
+      $('#submitdentalappointment').attr("disabled", "disabled");
+    });
+    // $.ajax({
+    //     type: "POST",
+    //     url: "schedule-dental-appointment.php",
+    //     async: true,
+    //     data: {'reasons':$('#dentalNotes').val(), 'day':inputDate, 'time': inputTime, 'staff_id':staffId},
+    //     success: function(response)
+    //     {
+    //         message = JSON.parse(response);
+    //     console.log(message);
+    //         if(message==1){
+    //             console.log("Success!");
+    //             $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
+    //             $('#dentalNotes').attr("disabled", "disabled");
+    //             $('#selDentalDate').attr("disabled", "disabled");
+    //             $('#selDentalTime').attr("disabled", "disabled");
+    //             $('#submitDentalAppointment').addClass("disabled");
+    //             $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
+    //         }
+    //         else{
+    //             $('#loginModalDental').modal();
+    //         }            
+    //     }
+    // });
+>>>>>>> 0f2f8a95bb388be73e732df8f4b0dcc3ff26f14d
   });
 
   $("#submitmedicalappointment").click(function() {
     var scheduleID = $('#selectmedicaldoctor').find(':selected')[0].id;
     console.log("Schedule ID is " + scheduleID);
-
+    $.post('/createappointment_medical',{reasons:$('#medicalNotes').val(), medical_schedule_id: scheduleID} , function(data){
+      $('#medicalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
+      $('#medicalNotes').attr("disabled", "disabled");
+      $('#selMedicalDate').attr("disabled", "disabled");
+      $('#selMedicalDoctor').attr("disabled", "disabled");
+      $('#submitMedicalAppointment').addClass("disabled");
+      $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
+      $("#submitmedicalappointment").attr('disabled','disabled');
+    });
     // $.ajax({
     //     type: "POST",
     //     url: "schedule-medical-appointment.php",
@@ -118,12 +165,12 @@ $(document).ready( function(){
     //         console.log(message);
     //         if(message==1){
     //             console.log("Success!");
-    //             $('#medicalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
-    //             $('#medicalNotes').attr("disabled", "disabled");
-    //             $('#selMedicalDate').attr("disabled", "disabled");
-    //             $('#selMedicalDoctor').attr("disabled", "disabled");
-    //             $('#submitMedicalAppointment').addClass("disabled");
-    //             $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
+                // $('#medicalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
+                // $('#medicalNotes').attr("disabled", "disabled");
+                // $('#selMedicalDate').attr("disabled", "disabled");
+                // $('#selMedicalDoctor').attr("disabled", "disabled");
+                // $('#submitMedicalAppointment').addClass("disabled");
+                // $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
     //         }
     //         else{
     //             $('#loginMedicalModal').modal();

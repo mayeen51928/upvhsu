@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Carbon\Carbon;
 use App\DentalAppointment;
+use App\MedicalAppointment;
 use App\DentalSchedule;
 use App\MedicalSchedule;
 use App\Staff;
@@ -63,12 +64,28 @@ class PagesController extends Controller
 
     public function createappointmentdental(Request $request)
     {
-      
+      if(Auth::check()){
+          if(Auth::user()->user_type_id == 1){
+            $dental_appointment = new DentalAppointment;
+            $dental_appointment->patient_id = Auth::user()->user_id;
+            $dental_appointment->dental_schedule_id = $request->dental_schedule_id;
+            $dental_appointment->reasons = $request->reasons;
+            $dental_appointment->save();
+        }
+      }
     }
 
     public function createappointmentmedical(Request $request)
     {
-      
+      if(Auth::check()){
+          if(Auth::user()->user_type_id == 1){
+            $medical_appointment = new MedicalAppointment;
+            $medical_appointment->patient_id = Auth::user()->user_id;
+            $medical_appointment->medical_schedule_id = $request->medical_schedule_id;
+            $medical_appointment->reasons = $request->reasons;
+            $medical_appointment->save();
+        }
+      }
     }
 
 

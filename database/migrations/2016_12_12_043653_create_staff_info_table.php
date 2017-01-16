@@ -32,10 +32,6 @@ class CreateStaffInfoTable extends Migration
             $table->string('street');
             $table->integer('town_id')->unsigned()->index();
             $table->foreign('town_id')->references('id')->on('towns')->onDelete('cascade');
-            $table->integer('province_id')->unsigned()->index();
-            $table->foreign('province_id')->references('id')->on('provinces')->onDelete('cascade');
-            $table->integer('region_id')->unsigned()->index();
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
             $table->string('personal_contact_number');
             $table->timestamps();
         });
