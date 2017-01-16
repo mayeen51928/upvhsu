@@ -101,29 +101,6 @@ $(document).ready( function(){
   $("#submitdentalappointment").click(function() {
     var scheduleID = $('#selectdentaltime').find(':selected')[0].id;
     console.log("Schedule ID is " + scheduleID);
-    // $.ajax({
-    //     type: "POST",
-    //     url: "schedule-dental-appointment.php",
-    //     async: true,
-    //     data: {'reasons':$('#dentalNotes').val(), 'day':inputDate, 'time': inputTime, 'staff_id':staffId},
-    //     success: function(response)
-    //     {
-    //         message = JSON.parse(response);
-    //     console.log(message);
-    //         if(message==1){
-    //             console.log("Success!");
-    //             $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
-    //             $('#dentalNotes').attr("disabled", "disabled");
-    //             $('#selDentalDate').attr("disabled", "disabled");
-    //             $('#selDentalTime').attr("disabled", "disabled");
-    //             $('#submitDentalAppointment').addClass("disabled");
-    //             $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
-    //         }
-    //         else{
-    //             $('#loginModalDental').modal();
-    //         }            
-    //     }
-    // });
   });
 
   $("#submitmedicalappointment").click(function() {
@@ -543,10 +520,6 @@ $(document).ready( function(){
         console.log($('#allergies_history_medical').val());
         console.log($('#family_history_medical').val());
         console.log($('#maintenance_medication_history_medical').val());
-        // console.log();
-        // console.log();
-        // console.log();
-        // console.log();
         if($('#user_name_modal_medical').val() &&
             $('#password_modal_medical').val() &&
             $('#first_name_medical').val() &&
