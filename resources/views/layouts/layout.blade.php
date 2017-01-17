@@ -17,7 +17,6 @@
 	<script src="{{asset('js/custom1.js')}}"></script>
 	<script src="{{asset('js/custom.js')}}"></script>
 	<script src="{{asset('js/scheduleappointment.js')}}"></script>
-	<script src="{{asset('js/dental-dentist/dental-dentist.js')}}"></script>
 
 	
 </head>

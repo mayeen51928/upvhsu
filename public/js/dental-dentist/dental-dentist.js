@@ -155,6 +155,7 @@ $('.addmoredentalsched').click(function(){
     $('.removedentalsched').click(function(){
         // console.log($(this).closest('tr'));
         $(this).closest('tr').remove();
+
     });
 });
 $('.removedentalsched').click(function(){
