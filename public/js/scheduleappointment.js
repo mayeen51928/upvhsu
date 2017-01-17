@@ -105,8 +105,6 @@ $(document).ready( function(){
   $("#submitdentalappointment").click(function() {
     var scheduleID = $('#selectdentaltime').find(':selected')[0].id;
     console.log("Schedule ID is " + scheduleID);
-<<<<<<< HEAD
-=======
     $.post('/createappointment_dental',{reasons:$('#dentalNotes').val(), dental_schedule_id: scheduleID} , function(data){
       $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
       $('#dentalNotes').attr("disabled", "disabled");
@@ -139,7 +137,6 @@ $(document).ready( function(){
     //         }            
     //     }
     // });
->>>>>>> 0f2f8a95bb388be73e732df8f4b0dcc3ff26f14d
   });
 
   $("#submitmedicalappointment").click(function() {
