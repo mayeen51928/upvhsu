@@ -18,7 +18,6 @@ class CreateDentalRecordsTable extends Migration
             $table->integer('appointment_id')->unsigned()->index();
             $table->foreign('appointment_id')->references('id')->on('dental_appointments')->onDelete('cascade');
             $table->integer('teeth_id')->unsigned()->index();
-            $table->foreign('teeth_id')->references('id')->on('teeth_info')->onDelete('cascade');
             $table->integer('condition_id')->unsigned()->index();
             $table->foreign('condition_id')->references('id')->on('dental_conditions')->onDelete('cascade');
             $table->integer('operation_id')->unsigned()->index();
