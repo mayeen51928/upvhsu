@@ -15,6 +15,8 @@ use App\Province;
 use App\Region;
 use App\Guardian;
 use App\HasGuardian;
+use App\MedicalAppointment;
+use App\MedicalSchedule;
 class PatientController extends Controller
 {
 	public function __construct()
@@ -33,6 +35,12 @@ class PatientController extends Controller
 
     public function dashboard()
     {
+        $medical_appointments = MedicalAppointment::where('patient_id', Auth::user()->user_id)->get();
+        // dd($medical_appointments);
+        // foreach($medical_appointments as $medical_appointment)
+        // {
+        //     dd($medical_appointment->medicalschedule->schedule_day);
+        // }
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
         return view('patient.dashboard', $params);
