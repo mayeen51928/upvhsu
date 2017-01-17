@@ -56,6 +56,10 @@ class HomeController extends Controller
         }
             
         }
+        else if (Auth::user()->user_type_id == 3)
+        {
+          return redirect ('/admin');
+        }
         else
         {
             return redirect('/');

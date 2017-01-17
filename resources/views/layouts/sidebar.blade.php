@@ -62,5 +62,16 @@
 		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Search Patient</a></li>
 		  	</ul>
 	  	@endif
-  	@endif
+  	
+  	@elseif(Auth::user()->user_type_id == 3)
+  		{{-- If Admin --}}
+  		<ul class="nav nav-sidebar">
+  			<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/admin') }}">Dashboard <span class="sr-only">(current)</span></a></li>
+  			<li id="addAccount" @if($sidebar_active == 'addstaffaccount')class="active" @endif><a href="{{ url('/admin/addaccount') }}">Add Staff Account</a></li>
+  			<li id="generateSched" @if($sidebar_active == 'generateschedule')class="active" @endif><a href="{{ url('/dentist/generateschedule') }}">Generate Upperclassmen Physical Examination Schedule</a></li>
+  		</ul>
+  		<ul class="nav nav-sidebar">
+  			<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/dentist/searchpatient') }}">Search Patient</a></li>
+  		</ul>
+	  	@endif
 </div>

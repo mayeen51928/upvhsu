@@ -39,8 +39,16 @@ class DoctorController extends Controller
         $params['civil_status'] = $doctor->civil_status;
         $params['personal_contact_number'] = $doctor->personal_contact_number;
         $params['street'] = $doctor->street;
-        $params['town'] = Town::find($doctor->town_id)->town_name;
-        $params['province'] = Province::find(Town::find($doctor->town_id)->province_id)->province_name;
+        if(!is_null($doctor->town_id))
+            {
+                $params['town'] = Town::find($doctor->town_id)->town_name;
+                $params['province'] = Province::find(Town::find($doctor->town_id)->province_id)->province_name;
+            }
+            else
+            {
+                $params['town'] = '';
+                $params['province'] = '';
+            }
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'profile';
         $params['navbar_active'] = 'account';
@@ -57,8 +65,16 @@ class DoctorController extends Controller
         $params['civil_status'] = $doctor->civil_status;
         $params['personal_contact_number'] = $doctor->personal_contact_number;
         $params['street'] = $doctor->street;
-        $params['town'] = Town::find($doctor->town_id)->town_name;
-        $params['province'] = Province::find(Town::find($doctor->town_id)->province_id)->province_name;
+        if(!is_null($doctor->town_id))
+            {
+                $params['town'] = Town::find($doctor->town_id)->town_name;
+                $params['province'] = Province::find(Town::find($doctor->town_id)->province_id)->province_name;
+            }
+            else
+            {
+                $params['town'] = '';
+                $params['province'] = '';
+            }
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'profile';
         return view('staff.medical-doctor.editprofile', $params);

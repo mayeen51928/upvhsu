@@ -70,3 +70,9 @@ Route::get('/cashier/profile','CashierController@profile');
 Route::get('/cashier/profile/edit','CashierController@editprofile');
 Route::post('/cashier/profile/update','CashierController@updateprofile');
 Route::get('/cashier/searchpatient','CashierController@searchpatient');
+
+/* ROUTES FOR ADMIN ACCOUNT */
+Route::get('/admin', 'AdminController@dashboard');
+Route::get('/admin/addaccount', 'AdminController@addaccount');
+Route::post('/admin/createstaffaccount', 'AdminController@createstaffaccount');
+Route::post('/admin/postannouncement', 'AdminController@postannouncement');
