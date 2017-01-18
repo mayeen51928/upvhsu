@@ -78,8 +78,16 @@ class DentistController extends Controller
 	        $params['civil_status'] = $dentist->civil_status;
 	        $params['personal_contact_number'] = $dentist->personal_contact_number;
 	        $params['street'] = $dentist->street;
-	        $params['town'] = Town::find($dentist->town_id)->town_name;
-	        $params['province'] = Province::find(Town::find($dentist->town_id)->province_id)->province_name;
+	        if(!is_null($dentist->town_id))
+	        {
+	        	$params['town'] = Town::find($dentist->town_id)->town_name;
+	        	$params['province'] = Province::find(Town::find($dentist->town_id)->province_id)->province_name;
+	        }
+	        else
+	        {
+	        	$params['town'] = '';
+	        	$params['province'] = '';
+	        }
 	        $params['navbar_active'] = 'account';
 	        $params['sidebar_active'] = 'profile';
 	        $params['navbar_active'] = 'account';
@@ -96,8 +104,17 @@ class DentistController extends Controller
 	        $params['civil_status'] = $dentist->civil_status;
 	        $params['personal_contact_number'] = $dentist->personal_contact_number;
 	        $params['street'] = $dentist->street;
-	        $params['town'] = Town::find($dentist->town_id)->town_name;
-	        $params['province'] = Province::find(Town::find($dentist->town_id)->province_id)->province_name;
+	        if(!is_null($dentist->town_id))
+	        {
+	        	$params['town'] = Town::find($dentist->town_id)->town_name;
+	        	$params['province'] = Province::find(Town::find($dentist->town_id)->province_id)->province_name;
+	        }
+	        else
+	        {
+	        	$params['town'] = '';
+	        	$params['province'] = '';
+	        }
+	        
 	        $params['navbar_active'] = 'account';
 	        $params['sidebar_active'] = 'profile';
 	        return view('staff.dental-dentist.editprofile', $params);

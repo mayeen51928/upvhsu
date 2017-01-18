@@ -38,8 +38,16 @@ class LabController extends Controller
         $params['civil_status'] = $lab->civil_status;
         $params['personal_contact_number'] = $lab->personal_contact_number;
         $params['street'] = $lab->street;
-        $params['town'] = Town::find($lab->town_id)->town_name;
-        $params['province'] = Province::find(Town::find($lab->town_id)->province_id)->province_name;
+        if(!is_null($lab->town_id))
+            {
+                $params['town'] = Town::find($lab->town_id)->town_name;
+                $params['province'] = Province::find(Town::find($lab->town_id)->province_id)->province_name;
+            }
+            else
+            {
+                $params['town'] = '';
+                $params['province'] = '';
+            }
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'profile';
         $params['navbar_active'] = 'account';
@@ -56,8 +64,16 @@ class LabController extends Controller
         $params['civil_status'] = $lab->civil_status;
         $params['personal_contact_number'] = $lab->personal_contact_number;
         $params['street'] = $lab->street;
-        $params['town'] = Town::find($lab->town_id)->town_name;
-        $params['province'] = Province::find(Town::find($lab->town_id)->province_id)->province_name;
+        if(!is_null($lab->town_id))
+            {
+                $params['town'] = Town::find($lab->town_id)->town_name;
+                $params['province'] = Province::find(Town::find($lab->town_id)->province_id)->province_name;
+            }
+            else
+            {
+                $params['town'] = '';
+                $params['province'] = '';
+            }
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'profile';
         return view('staff.medical-lab.editprofile', $params);

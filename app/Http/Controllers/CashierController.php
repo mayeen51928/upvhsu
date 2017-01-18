@@ -38,8 +38,16 @@ class CashierController extends Controller
         $params['civil_status'] = $cashier->civil_status;
         $params['personal_contact_number'] = $cashier->personal_contact_number;
         $params['street'] = $cashier->street;
-        $params['town'] = Town::find($cashier->town_id)->town_name;
-        $params['province'] = Province::find(Town::find($cashier->town_id)->province_id)->province_name;
+        if(!is_null($cashier->town_id))
+            {
+                $params['town'] = Town::find($cashier->town_id)->town_name;
+                $params['province'] = Province::find(Town::find($cashier->town_id)->province_id)->province_name;
+            }
+            else
+            {
+                $params['town'] = '';
+                $params['province'] = '';
+            }
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'profile';
         $params['navbar_active'] = 'account';
@@ -56,8 +64,16 @@ class CashierController extends Controller
         $params['civil_status'] = $cashier->civil_status;
         $params['personal_contact_number'] = $cashier->personal_contact_number;
         $params['street'] = $cashier->street;
-        $params['town'] = Town::find($cashier->town_id)->town_name;
-        $params['province'] = Province::find(Town::find($cashier->town_id)->province_id)->province_name;
+        if(!is_null($cashier->town_id))
+            {
+                $params['town'] = Town::find($cashier->town_id)->town_name;
+                $params['province'] = Province::find(Town::find($cashier->town_id)->province_id)->province_name;
+            }
+            else
+            {
+                $params['town'] = '';
+                $params['province'] = '';
+            }
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'profile';
         return view('staff.cashier.editprofile', $params);
