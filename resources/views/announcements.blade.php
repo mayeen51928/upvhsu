@@ -15,7 +15,6 @@
 		    </tr>
 		  </thead> 
 		  <tbody>
-
 		  	@foreach($announcements as $announcement)
 		    <tr>
 		      <td>

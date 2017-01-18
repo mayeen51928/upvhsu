@@ -84,8 +84,6 @@ $('.addDentalRecordButton').click(function() {
 
 
 
-return false;
-});
 
 
 
