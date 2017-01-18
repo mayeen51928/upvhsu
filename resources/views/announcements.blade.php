@@ -1,15 +1,21 @@
 @extends('layouts.layout')
-@section('title', 'Schedule Appointment | UP Visayas Health Services Unit')
+@section('title', 'Announcements | UP Visayas Health Services Unit')
 @section('content')
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
 		<table class="table" id="announcements_table">
 			<thead>
 		    <tr>
-		      <th><h1>Announcements</h1></th>
+		      <th><h1>Announcements</h1>@if (session('status'))
+		  <div class="alert alert-success">
+		  	{{ session('status') }}
+		  </div>
+		  @endif</th>
+		      
 		    </tr>
 		  </thead> 
 		  <tbody>
+
 		  	@foreach($announcements as $announcement)
 		    <tr>
 		      <td>

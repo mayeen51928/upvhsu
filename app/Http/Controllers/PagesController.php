@@ -10,6 +10,7 @@ use App\MedicalAppointment;
 use App\DentalSchedule;
 use App\MedicalSchedule;
 use App\Staff;
+use App\Announcement;
 use DB;
 
 class PagesController extends Controller
@@ -31,7 +32,7 @@ class PagesController extends Controller
   public function announcements()
   {
     $params['navbar_active'] = 'announcements';
-    $announcements = DB::table('announcements')
+    $announcements = Announcement::orderBy('created_at', 'desc')
         ->get();
 
     return view('announcements', $params, compact('announcements'));
