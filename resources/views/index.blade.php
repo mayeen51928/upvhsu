@@ -105,8 +105,20 @@
 								<a href="{{ url('/cashier') }}" class="btn btn-info btn-sm" role="button">View Account</a>
 							</div>
 						@endif
+
 					@endif
-					
+					@if(Auth::user()->user_type_id == 3)
+						<p>Hello Admin</p>
+						<div class="col-md-4 accountOption">
+							<a href="{{ url('/admin') }}" class="btn btn-info btn-sm" role="button">Dashboard</a>
+						</div>
+						<div class="col-md-4 accountOption">
+							<a href="{{ url('/admin/addaccount') }}" class="btn btn-info btn-sm" role="button">Add Staff Account</a>
+						</div>
+						<div class="col-md-4 accountOption">
+							<a href="{{ url('/admin/generateschedule') }}" class="btn btn-info btn-sm" role="button">Generate PE Schedule</a>
+						</div>
+					@endif
 				@endif
 			</div>
 		</div>

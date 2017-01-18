@@ -59,6 +59,6 @@ class AdminController extends Controller
         $announcement->announcement_title = $request->announcement_title;
         $announcement->announcement_body = $request->announcement_body;
         $announcement->save();
-        return redirect('admin');
+        return redirect('announcements')->with('status', 'Announcement posted!');
     }
 }
