@@ -82,39 +82,8 @@ $('.addDentalRecordButton').click(function() {
   return false;
 });
 
-$('.dental-chart').click(function() {
-  // e.preventDefault();
-  // e.stopImmediatePropagation();
-  var teethId = $(this).attr('id');
-  $.ajax({
-          type: "POST",
-          url: addDentalRecordPerTeeth,
-          data: {teeth_id:  teethId, appointment_id: appointmentId, _token: token},
-          success: function(data)
-          {
-            $('#create-dental-record-per-tooth-modal').modal();
-            console.log("Clicked dental chart button!");
-            $('#updateDentalRecord').click(function(e) {
-              e.preventDefault();
-              e.stopImmediatePropagation();
-              var condition_id = $('.condition').val();
-              var operation_id = $('.operation').val();
-              $.ajax({
-                      type: "POST",
-                      url: updateDentalRecord,
-                      data: {appointment_id:  appointmentId, teeth_id:  teethId, condition_id: condition_id, operation_id: operation_id, _token: token},
-                      success: function(data)
-                      {
-                         $('#create-dental-record-per-tooth-modal').hide();
-                         console.log("Clicked update dental record button!");
-                      }
-              });
-              return false;
-            });
-          }
-  });
-return false;
-});
+
+
 
 
 
