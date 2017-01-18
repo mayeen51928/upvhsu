@@ -179,3 +179,19 @@
 body{
 	/* font-family: apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; */
 }
+
+#announcements_table{
+	margin-top: 20px;
+}
+
+#announcements_table tbody tr td{
+	width: 80%;
+}
+
+#announcements_table tbody tr td .announcement_date{
+	color: #0000EE;
+}
+
+.announcement_body{
+	display: none;
+}

@@ -16,6 +16,8 @@ Route::get('/', 'PagesController@index');
 Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/scheduleappointment', 'PagesController@scheduleappointment');
+Route::get('/announcements', 'PagesController@announcements');
+// Route::post('/see_more_announcements', 'PagesController@seemoreannouncements');
 Route::post('/displayschedule_dental', 'PagesController@displayscheduledental');
 Route::post('/displayschedule_medical', 'PagesController@displayschedulemedical');
 Route::post('/createappointment_dental', 'PagesController@createappointmentdental');

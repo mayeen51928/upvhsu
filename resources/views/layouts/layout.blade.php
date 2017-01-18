@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="{{asset('css/bootstrap/css/bootstrap.min.css')}}" />
 	<link rel="stylesheet" href="{{asset('css/custom.css')}}"/>
 	<link rel="stylesheet" href="{{asset('css/dashboard.css')}}"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
@@ -17,6 +18,7 @@
 	<script src="{{asset('js/custom1.js')}}"></script>
 	<script src="{{asset('js/custom.js')}}"></script>
 	<script src="{{asset('js/scheduleappointment.js')}}"></script>
+	<script src="{{asset('js/seemoreannouncements.js')}}"></script>
 
 	
 </head>

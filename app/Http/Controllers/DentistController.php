@@ -30,16 +30,16 @@ class DentistController extends Controller
 		}
 		public function dashboard()
 		{
-				$params['navbar_active'] = 'account';
+			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'dashboard';
-				$user = Auth::user();
-				$dental_appointments_fin = DB::table('dental_schedules')
-						->join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')
-						->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
-						->where('dental_schedules.staff_id', '=', $user->user_id)
-						->get();
+			$user = Auth::user();
+			$dental_appointments_fin = DB::table('dental_schedules')
+					->join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')
+					->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
+					->where('dental_schedules.staff_id', '=', $user->user_id)
+					->get();
 
-				return view('staff.dental-dentist.dashboard', $params, compact('dental_appointments_fin'));
+			return view('staff.dental-dentist.dashboard', $params, compact('dental_appointments_fin'));
 		}
 
 		public function addrecord(Request $request)

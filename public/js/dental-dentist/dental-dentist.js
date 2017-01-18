@@ -62,9 +62,9 @@ $('#backButtonMedicalDiagnosis').click(function() {
     }
 });
 
-$('.addDentalRecordButton').click(function(e) {
-  e.preventDefault();
-  e.stopImmediatePropagation();
+$('.addDentalRecordButton').click(function() {
+  // e.preventDefault();
+  // e.stopImmediatePropagation();
   appointmentId = $(this).attr('id');
   $.ajax({
           type: "POST",
@@ -82,9 +82,9 @@ $('.addDentalRecordButton').click(function(e) {
   return false;
 });
 
-$('.dental-chart').click(function(e) {
-  e.preventDefault();
-  e.stopImmediatePropagation();
+$('.dental-chart').click(function() {
+  // e.preventDefault();
+  // e.stopImmediatePropagation();
   var teethId = $(this).attr('id');
   $.ajax({
           type: "POST",

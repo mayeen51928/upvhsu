@@ -117,8 +117,10 @@
 		<h1 class="h3Title"><span class="glyphicon glyphicon-bullhorn h3Icon"></span> Announcements</h1>
 		<div class="panel-content">
 			<ul>
-				<li><a href="">Holiday Schedule</a> (posted on November 15, 2016)</li>
-				<li><a href="">Physical Examination Schedule for Upperclassmen</a> (posted on May 3, 2017)</li>
+				@foreach($announcements as $announcement)
+				<li><a href="">{{ $announcement->announcement_title }}</a> (posted on {{ Carbon\Carbon::parse($announcement->created_at)->toDayDateTimeString() }})</li>
+				@endforeach
+				<a href="{{ url('/announcements') }}">View more...</a>
 			</ul>
 		</div>
 	</div>
