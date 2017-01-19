@@ -25,11 +25,11 @@
 					<div class="panel-body" id="dentalAppointmentPanelBody">
 						<!-- <form action="" method="POST"> -->
 							<div class="form-group">
-								<label for="dentalNotes">Reasons (e.g. molar toothace):</label>
+								<label id="dentalNotesErrorMsg" for="dentalNotes">Reasons (e.g. molar toothace):</label>
 								<textarea class="form-control" rows="5" required name="dentalNotes" id="dentalNotes"></textarea>
 							</div>
 							<div class="form-group">
-								<label for="selectdentaldate">Date:</label>
+								<label for="selectdentaldate" id="selectdentaldateErrorMsg" >Date:</label>
 								<select class="form-control" required id="selectdentaldate">
 									<option disabled selected> -- select date of appointment -- </option>
 									<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
@@ -40,7 +40,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label>Doctor and Time:</label>
+								<label id="selectdentaltimeErrorMsg">Doctor and Time:</label>
 								<select disabled class="form-control" required id="selectdentaltime">
 									<option disabled selected> -- select doctor and time -- </option>
 								</select>

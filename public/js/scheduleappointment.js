@@ -105,15 +105,56 @@ $(document).ready( function(){
   $("#submitdentalappointment").click(function() {
     var scheduleID = $('#selectdentaltime').find(':selected')[0].id;
     console.log("Schedule ID is " + scheduleID);
+    if(!($('#dentalNotes').val()) && scheduleID){
+      $('#dentalNotesErrorMsg').css('color', 'red');
+      $('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace): REQUIRED');
+      $('#selectdentaldateErrorMsg').css('color', 'black');
+      $('#selectdentaldateErrorMsg').html('Date:');
+      $('#selectdentaltimeErrorMsg').css('color', 'black');
+      $('#selectdentaltimeErrorMsg').html('Doctor and Time:');
+    }
+    if($('#dentalNotes').val() && !scheduleID){
+      $('#dentalNotesErrorMsg').css('color', 'black');
+      $('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace):');
+      $('#selectdentaldateErrorMsg').css('color', 'red');
+      $('#selectdentaldateErrorMsg').html('Date: REQUIRED');
+      $('#selectdentaltimeErrorMsg').css('color', 'red');
+      $('#selectdentaltimeErrorMsg').html('Doctor and Time: REQUIRED');
+    }
+    if($('#dentalNotes').val() && scheduleID){
+      $('#dentalNotesErrorMsg').css('color', 'black');
+      $('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace):');
+      $('#selectdentaldateErrorMsg').css('color', 'black');
+      $('#selectdentaldateErrorMsg').html('Date:');
+      $('#selectdentaltimeErrorMsg').css('color', 'black');
+      $('#selectdentaltimeErrorMsg').html('Doctor and Time:');
+    }
+    if(!$('#dentalNotes').val() && !scheduleID){
+      $('#dentalNotesErrorMsg').css('color', 'red');
+      $('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace): REQUIRED');
+      $('#selectdentaldateErrorMsg').css('color', 'red');
+      $('#selectdentaldateErrorMsg').html('Date: REQUIRED');
+      $('#selectdentaltimeErrorMsg').css('color', 'red');
+      $('#selectdentaltimeErrorMsg').html('Doctor and Time: REQUIRED');
+    }
+    // event.preventDefault();
+    if($('#dentalNotes').val() && scheduleID){
     $.post('/createappointment_dental',{reasons:$('#dentalNotes').val(), dental_schedule_id: scheduleID} , function(data){
-      $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
-      $('#dentalNotes').attr("disabled", "disabled");
-      $('#selDentalDate').attr("disabled", "disabled");
-      $('#selDentalTime').attr("disabled", "disabled");
-      $('#submitDentalAppointment').addClass("disabled");
-      $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
-      $('#submitdentalappointment').attr("disabled", "disabled");
+      if(data['success']=='yes'){
+        $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
+        $('#dentalNotes').attr("disabled", "disabled");
+        $('#selDentalDate').attr("disabled", "disabled");
+        $('#selDentalTime').attr("disabled", "disabled");
+        $('#submitDentalAppointment').addClass("disabled");
+        $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
+        $('#submitdentalappointment').attr("disabled", "disabled");
+      }
+      else{
+        $('#loginmodaldental').modal();
+        console.log('hello');
+      }
     });
+  }
     // $.ajax({
     //     type: "POST",
     //     url: "schedule-dental-appointment.php",
@@ -142,7 +183,8 @@ $(document).ready( function(){
   $("#submitmedicalappointment").click(function() {
     var scheduleID = $('#selectmedicaldoctor').find(':selected')[0].id;
     console.log("Schedule ID is " + scheduleID);
-    $.post('/createappointment_medical',{reasons:$('#medicalNotes').val(), medical_schedule_id: scheduleID} , function(data){
+    if($('#medicalNotes').val()){
+      $.post('/createappointment_medical',{reasons:$('#medicalNotes').val(), medical_schedule_id: scheduleID} , function(data){
       $('#medicalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
       $('#medicalNotes').attr("disabled", "disabled");
       $('#selMedicalDate').attr("disabled", "disabled");
@@ -151,6 +193,8 @@ $(document).ready( function(){
       $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
       $("#submitmedicalappointment").attr('disabled','disabled');
     });
+    }
+    
     // $.ajax({
     //     type: "POST",
     //     url: "schedule-medical-appointment.php",
