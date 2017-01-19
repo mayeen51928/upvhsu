@@ -6,7 +6,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Auth;
 class RegisterController extends Controller
 {
     /*
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -62,10 +62,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'user_id' => $data['user_id'],
             'password' => bcrypt($data['password']),
             'user_type_id' => $data['user_type_id'],
         ]);
+        //Add this line to login after registration
+        return Auth::loginUsingId($data['user_id'], true);
+        //
     }
 }
