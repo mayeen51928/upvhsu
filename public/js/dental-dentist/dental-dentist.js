@@ -62,25 +62,26 @@ $('#backButtonMedicalDiagnosis').click(function() {
     }
 });
 
-$('.addDentalRecordButton').click(function() {
+//$('.addDentalRecordButton').click(function() {
   // e.preventDefault();
   // e.stopImmediatePropagation();
-  appointmentId = $(this).attr('id');
-  $.ajax({
-          type: "POST",
-          url: addDentalRecord,
-          data: {appointment_id:  appointmentId, _token: token},
-          success: function(data)
-          {
-            $('.personal-information-name').html("").append("<p>"+data['dental_appointment_info']['patient_first_name']+" "+data['dental_appointment_info']['patient_last_name']+"</p>");
-            $('.personal-information-time').html("").append("<p>"+data['dental_appointment_info']['schedule_start']+"-"+data['dental_appointment_info']['schedule_end']+"</p>");
-            $('.personal-information-reasons').html("").append("<p>"+data['dental_appointment_info']['reasons']+"</p>");
-            $('#create-dental-record-modal').modal();
-            console.log("Clicked add dental diagnosis button!");
-          }
-  });
-  return false;
-});
+//   appointmentId = $(this).attr('id');
+//   $.ajax({
+//           type: "POST",
+//           url: addDentalRecord,
+//           data: {appointment_id:  appointmentId, _token: token},
+//           success: function(data)
+//           {
+//             $('.personal-information-name').html("").append("<p>"+data['dental_appointment_info']['patient_first_name']+" "+data['dental_appointment_info']['patient_last_name']+"</p>");
+//             $('.personal-information-time').html("").append("<p>"+data['dental_appointment_info']['schedule_start']+"-"+data['dental_appointment_info']['schedule_end']+"</p>");
+//             $('.personal-information-reasons').html("").append("<p>"+data['dental_appointment_info']['reasons']+"</p>");
+//             // $('#create-dental-record-modal').modal();
+//             document.location = './dentist/update_dental_record'; 
+//             console.log("Clicked add dental diagnosis button!");
+//           }
+//   });
+//   return false;
+// });
 
 
 
