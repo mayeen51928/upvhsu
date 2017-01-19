@@ -19,6 +19,8 @@ class PagesController extends Controller
   {
   	$params['navbar_active'] = 'home';
     $announcements = DB::table('announcements')
+        ->skip(0)
+        ->take(3)
         ->get();
     return view('index', $params, compact('announcements'));
   }
