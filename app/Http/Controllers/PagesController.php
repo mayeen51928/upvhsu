@@ -96,7 +96,11 @@ class PagesController extends Controller
           $dental_appointment->dental_schedule_id = $request->dental_schedule_id;
           $dental_appointment->reasons = $request->reasons;
           $dental_appointment->save();
+          return response()->json(['success' => 'yes']);
       }
+    }
+    else{
+      return response()->json(['success' => 'no']);
     }
   }
 
