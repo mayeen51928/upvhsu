@@ -174,7 +174,7 @@ $(document).ready( function(){
     //             $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
     //         }
     //         else{
-    //             $('#loginModalDental').modal();
+    //             $('#loginmodaldental').modal();
     //         }            
     //     }
     // });
@@ -293,33 +293,50 @@ $(document).ready( function(){
         var staffIdSplit = $('#selDentalTime').children(":selected").attr("id").split("_");
         var staffId = staffIdSplit[1];
         console.log("staffId: " + staffId);
-        $.ajax({
-                type: "POST",
-                url: "login-from-schedule-appointment.php",
-                async: true,
-                data: {'user_name_modal_dental':$('#user_name_modal_dental').val(), 'password_modal_dental':$('#password_modal_dental').val(), 'staff_id':staffId, 'reasons':$('#dentalNotes').val(), 'day':inputDate, 'time': inputTime},
-                success: function(response)
-                {
-                    message = JSON.parse(response);
-                    console.log(message);
-                    if(message==1){
-                        console.log("Success!");
-                        $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
-                        $('#dentalNotes').attr("disabled", "disabled");
-                        $('#selDentalDate').attr("disabled", "disabled");
-                        $('#selDentalTime').attr("disabled", "disabled");
-                        $('#submitDentalAppointment').addClass("disabled");
-                        $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
-                        $('.navigationBar').load(location.href + " .navigationBar");
-                         $('#loginModalDental').modal("hide");
-                         return false;
+        $.post('/loginfromdentalappointment',{user_name_modal_dental:$('#user_name_modal_dental').val(), password_modal_dental:$('#password_modal_dental').val(), reasons:$('#dentalNotes').val(), dental_schedule_id: scheduleID} , function(data){
+          if(data['success']=='yes'){
+            $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
+            $('#dentalNotes').attr("disabled", "disabled");
+            $('#selDentalDate').attr("disabled", "disabled");
+            $('#selDentalTime').attr("disabled", "disabled");
+            $('#submitDentalAppointment').addClass("disabled");
+            $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
+            $('.navigationBar').load(location.href + " .navigationBar");
+            $('#loginmodaldental').modal("hide");
+            return false;
+          }
+          else{
+           // $('#loginmodaldental').modal();
+          console.log('hello');
+          }
+        });
+        // $.ajax({
+        //         type: "POST",
+        //         url: "login-from-schedule-appointment.php",
+        //         async: true,
+        //         data: {'user_name_modal_dental':$('#user_name_modal_dental').val(), 'password_modal_dental':$('#password_modal_dental').val(), 'staff_id':staffId, 'reasons':$('#dentalNotes').val(), 'day':inputDate, 'time': inputTime},
+        //         success: function(response)
+        //         {
+        //             message = JSON.parse(response);
+        //             console.log(message);
+        //             if(message==1){
+        //                 console.log("Success!");
+        //                 $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
+        //                 $('#dentalNotes').attr("disabled", "disabled");
+        //                 $('#selDentalDate').attr("disabled", "disabled");
+        //                 $('#selDentalTime').attr("disabled", "disabled");
+        //                 $('#submitDentalAppointment').addClass("disabled");
+        //                 $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
+        //                 $('.navigationBar').load(location.href + " .navigationBar");
+        //                  $('#loginmodaldental').modal("hide");
+        //                  return false;
 
-                    }
-                    else{
-                        $('#loginErrorMessage').html("Wrong username/password combination");
-                    }
-                  }
-            });
+        //             }
+        //             else{
+        //                 $('#loginErrorMessage').html("Wrong username/password combination");
+        //             }
+        //           }
+        //     });
          
     });
     $('#selMedicalDoctor').closest('div').css({marginBottom: '0px'})
@@ -446,10 +463,10 @@ $(document).ready( function(){
                         $('#submitDentalAppointment').addClass("disabled");
                         $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
                         $('.navigationBar').load(location.href + " .navigationBar");
-                        $( "#loginModalDental" ).find( "input" ).attr({
+                        $( "#loginmodaldental" ).find( "input" ).attr({
                             disabled: 'disabled'
                         });
-                        setTimeout(function() { $('#loginModalDental').modal("hide"); }, 500);
+                        setTimeout(function() { $('#loginmodaldental').modal("hide"); }, 500);
                         
                         return false;
                 }
