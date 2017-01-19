@@ -77,49 +77,6 @@
             <area shape="rect" coords="337, 20, 355, 91" class="dental-chart" id="53">
           </map>
         </div>
-<!--         <div>
-          <table>
-            <tr>
-              <th width="10%"></th>
-              <td width="9%" style="text-align:center">55</td>
-              <td width="9%" style="text-align:center">54</td>
-              <td width="9%" style="text-align:center">53</td>
-              <td width="9%" style="text-align:center">52</td>
-              <td width="9%" style="text-align:center">51</td>
-              <td width="9%" style="text-align:center">61</td>
-              <td width="9%" style="text-align:center">62</td>
-              <td width="9%" style="text-align:center">63</td>
-              <td width="9%" style="text-align:center">64</td>
-              <td width="9%" style="text-align:center">65</td>
-            </tr>
-            <tr>
-              <th>OPERATION</th>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-            </tr>
-            <tr>
-              <th>CONDITION</th>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-              <td style="text-align:center">A</td>
-            </tr>
-          </table>
-        </div> -->
       </div>
       <div class="modal-footer">
        <span style="float: left; margin-right: 4px"><button type="button" class="btn btn-info" id="backButtonMedicalDiagnosis">Back</button></span>
