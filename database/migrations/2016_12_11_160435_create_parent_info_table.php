@@ -18,10 +18,10 @@ class CreateParentInfoTable extends Migration
             $table->string('parent_first_name');
             $table->string('parent_middle_name')->nullable();
             $table->string('parent_last_name');
-            $table->string('parent_contact_number')->nullable();
-            $table->string('street');
-            $table->integer('town_id')->unsigned()->index();
-            $table->foreign('town_id')->references('id')->on('towns')->onDelete('cascade');
+            // $table->string('parent_contact_number')->nullable();
+            // $table->string('street');
+            // $table->integer('town_id')->unsigned()->index();
+            // $table->foreign('town_id')->references('id')->on('towns')->onDelete('cascade');
             $table->enum('sex', ['M', 'F']);
             $table->timestamps();
         });

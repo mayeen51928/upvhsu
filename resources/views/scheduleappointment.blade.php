@@ -2,10 +2,10 @@
 @section('title', 'Schedule Appointment | UP Visayas Health Services Unit')
 @section('content')
 <div class="container">
-		<div class="col-md-4 col-md-offset-4">
-			<div class="panel panel-default" style="margin-top: 20px;">
-				<div class="panel-heading">Select Type of Appointment</div>
-				<div class="panel-body">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="panel panel-default" style="margin-top: 20px;">
+			<div class="panel-heading">Select Type of Appointment</div>
+			<div class="panel-body">
 				<form class="form-inline">
 					<div class="checkbox col-md-6">
 						<label><input type="checkbox" name="type_dental" id="typeDental"/> Dental</label>
@@ -14,442 +14,295 @@
 						<label><input type="checkbox" name="type_medical" id="typeMedical"/> Medical</label>
 					</div>
 				</form>
-				</div>
-			</div>	
-		</div>
+			</div>
+		</div>	
 	</div>
-	<div class="container">
-		<div class="col-md-6 col-md-offset-3" id="dentalAppointment0">
-			<div class="panel panel-default" id="dentalAppointment">
-				<div class="panel-heading">Schedule Dental Appointment</div>
-					<div class="panel-body" id="dentalAppointmentPanelBody">
-						<!-- <form action="" method="POST"> -->
-							<div class="form-group">
-								<label id="dentalNotesErrorMsg" for="dentalNotes">Reasons (e.g. molar toothace):</label>
-								<textarea class="form-control" rows="5" required name="dentalNotes" id="dentalNotes"></textarea>
-							</div>
-							<div class="form-group">
-								<label for="selectdentaldate" id="selectdentaldateErrorMsg" >Date:</label>
-								<select class="form-control" required id="selectdentaldate">
-									<option disabled selected> -- select date of appointment -- </option>
-									<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
-									<option>{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}</option>
-									<option>{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}</option>
-									<option>{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}</option>
-									<option>{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label id="selectdentaltimeErrorMsg">Doctor and Time:</label>
-								<select disabled class="form-control" required id="selectdentaltime">
-									<option disabled selected> -- select doctor and time -- </option>
-								</select>
-							</div>
-							<button class="btn btn-success" name="submitdentalappointment" id="submitdentalappointment">Set Appointment</button>
-						<!-- </form> -->
-					</div>
-			</div>	
-		</div>
-		<div class="col-md-6 col-md-offset-3" id="medicalAppointment0">
-			<div class="panel panel-default" id="medicalAppointment">
-				<div class="panel-heading">Schedule Medical Appointment</div>
-				<div class="panel-body" id="medicalAppointmentPanelBody">
-					<!-- <form action="" method="POST"> -->
-					<div class="form-group">
-						<label for="medicalNotes">Reasons (e.g. physical pain felt):</label>
-						<textarea class="form-control" rows="5" id="medicalNotes"></textarea>
-					</div>
-					<div class="form-group">
-						<label for="selectmedicaldate">Date:</label>
-						<select class="form-control" required id="selectmedicaldate">
-							<option disabled selected> -- select date of appointment -- </option>
-							<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
-							<option>{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}</option>
-							<option>{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}</option>
-							<option>{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}</option>
-							<option>{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label>Doctor:</label>
-						<select disabled class="form-control" required id="selectmedicaldoctor">
-							<option disabled selected> -- select doctor -- </option>
-						</select>
-					</div>
-					<p id="medicalFormNote"><i>Note: Medical appointment done online is for note-taking purposes of the doctor.  On-site visit will still be accommodated first.</i></p>
-					<button class="btn btn-success" name="submitmedicalappointment" id="submitmedicalappointment">Set Appointment</button>
-					<!-- </form> -->
+</div>
+<div class="container">
+	<div class="col-md-6 col-md-offset-3" id="dentalAppointment0">
+		<div class="panel panel-default" id="dentalAppointment">
+			<div class="panel-heading">Schedule Dental Appointment</div>
+			<div class="panel-body" id="dentalAppointmentPanelBody">
+				<div class="form-group">
+					<label id="dentalNotesErrorMsg" for="dentalNotes">Reasons (e.g. molar toothace):</label>
+					<textarea class="form-control" rows="5" required name="dentalNotes" id="dentalNotes"></textarea>
 				</div>
-			</div>	
-		</div>
+				<div class="form-group">
+					<label for="selectdentaldate" id="selectdentaldateErrorMsg" >Date:</label>
+					<select class="form-control" required id="selectdentaldate">
+						<option disabled selected> -- select date of appointment -- </option>
+						<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
+						<option>{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}</option>
+						<option>{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}</option>
+						<option>{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}</option>
+						<option>{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label id="selectdentaltimeErrorMsg">Doctor and Time:</label>
+					<select disabled class="form-control" required id="selectdentaltime">
+						<option disabled selected> -- select doctor and time -- </option>
+					</select>
+				</div>
+				<button class="btn btn-success" name="submitdentalappointment" id="submitdentalappointment">Set Appointment</button>
+			</div>
+		</div>	
 	</div>
+	<div class="col-md-6 col-md-offset-3" id="medicalAppointment0">
+		<div class="panel panel-default" id="medicalAppointment">
+			<div class="panel-heading">Schedule Medical Appointment</div>
+			<div class="panel-body" id="medicalAppointmentPanelBody">
+				<div class="form-group">
+					<label for="medicalNotes">Reasons (e.g. physical pain felt):</label>
+					<textarea class="form-control" rows="5" id="medicalNotes"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="selectmedicaldate">Date:</label>
+					<select class="form-control" required id="selectmedicaldate">
+						<option disabled selected> -- select date of appointment -- </option>
+						<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
+						<option>{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}</option>
+						<option>{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}</option>
+						<option>{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}</option>
+						<option>{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Doctor:</label>
+					<select disabled class="form-control" required id="selectmedicaldoctor">
+						<option disabled selected> -- select doctor -- </option>
+					</select>
+				</div>
+				<p id="medicalFormNote"><i>Note: Medical appointment done online is for note-taking purposes of the doctor.  On-site visit will still be accommodated first.</i></p>
+				<button class="btn btn-success" name="submitmedicalappointment" id="submitmedicalappointment">Set Appointment</button>
+			</div>
+		</div>	
+	</div>
+</div>
 
-	<!-- SIGN UP MODAL FOR DENTAL APPOINTMENTS -->
-	<div class="modal fade" id="loginmodaldental" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Enter your login credentials</h4>
+{{-- ///////////////////////////////////////////////////////////////////////////////////////// --}}
+{{-- SIGN UP MODAL FOR DENTAL APPOINTMENTS --}}
+<div class="modal fade" id="loginmodaldental" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Enter your login credentials</h4>
+			</div>
+			<div class="modal-body">
+				<div class="progress signup_progressbar_dental">
+					<div class="progress-bar progress-bar-striped active" role="progressbar" id="changeProgressDental" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:0%">0%</div>
 				</div>
-				<div class="modal-body">
-					<div class="progress signup_progressbar_dental">
-						<div class="progress-bar progress-bar-striped active" role="progressbar" id="changeProgressDental" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:0%">0%</div>
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control signup0_dental" name="user_name_modal_dental" id="user_name_modal_dental" placeholder="Username">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control signup0_dental" name="password_modal_dental" id="password_modal_dental" placeholder="Password">
-					</div>
+				<div class="form-group">
+					<input type="text" class="form-control signup0_dental" name="user_name_modal_dental" id="user_name_modal_dental" placeholder="User ID"/>
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control signup0_dental" name="password_modal_dental" id="password_modal_dental" placeholder="Password"/>
+				</div>
+				<div class="form-group signup">
+					<input type="text" class="form-control signup1_dental" name="first_name_dental" id="first_name_dental" placeholder="First Name"/>
+				</div>
+				<div class="form-group signup">
+					<input type="text" class="form-control signup1_dental" name="middle_name_dental" id="middle_name_dental" placeholder="Middle Name"/>
+				</div>
+				<div class="form-group signup">
+					<input type="text" class="form-control signup1_dental" name="last_name_dental" id="last_name_dental" placeholder="Last Name"/>
+				</div>
+				<div class="form-group signup2_dental">
 					<div class="form-group signup">
-						<input type="text" class="form-control signup1_dental" name="first_name_dental" id="first_name_dental" placeholder="First Name">
+						<label>Type of patient:</label><br/>
+						<label class="radio-inline"><input type="radio" name="patient_type_dental" value="1">Student</label>
+						<label class="radio-inline"><input type="radio" name="patient_type_dental" value="2">Faculty</label>
+						<label class="radio-inline"><input type="radio" name="patient_type_dental" value="3">Staff</label>
+						<label class="radio-inline"><input type="radio" name="patient_type_dental" value="4">Dependent</label>
+						<label class="radio-inline"><input type="radio" name="patient_type_dental" value="5">Non-UPV / Out-patient</label>
 					</div>
-					<div class="form-group signup">
-						<input type="text" class="form-control signup1_dental" name="middle_name_dental" id="middle_name_dental" placeholder="Middle Name">
-					</div>
-					<div class="form-group signup">
-						<input type="text" class="form-control signup1_dental" name="last_name_dental" id="last_name_dental" placeholder="Last Name">
-					</div>
-					<div class="form-group signup2_dental">
+					<label>PERSONAL DATA</label><br/>
+					<div class="">
 						<div class="form-group signup">
-							<label>Type of patient:</label><br/>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_student">Student</label>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_faculty">Faculty</label>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_staff">Staff</label>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_dependent">Dependent</label>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_opd">Non-UPV / Out-patient</label>
+							<label>Sex:</label>
+							<label class="radio-inline"><input type="radio" value="F" name="sex_dental">Female</label>
+							<label class="radio-inline"><input type="radio" value="M" name="sex_dental">Male</label>
 						</div>
-						<label>PERSONAL DATA</label><br/>
-						<div class="">
-							<div class="form-group signup">
-								<label>Age:</label>
-								<input type="text" class="form-control" placeholder="Enter age" name="age_dental" id="age_dental" placeholder="Enter age"/>
-							</div>
-							<div class="form-group signup">
-								<label>Sex:</label>
-								<label class="radio-inline"><input type="radio" name="sex_dental">Female</label>
-								<label class="radio-inline"><input type="radio" name="sex_dental">Male</label>
-							</div>
-							<div class="form-group signup">
-								<label>Year Level:</label>
-								<input type="text" class="form-control" placeholder="Enter year level" name="yearlevel_dental" id="yearlevel_dental" placeholder="Enter year level"/>
-							</div>
-							<div class="form-group signup">
-								<label>Degree Program:</label>
-								<select class = "form-control" name="degree_program_dental" id="degree_program_dental" required title="Select the degree program you are currently enrolled in.">
-									<option disabled selected> -- select degree program -- </option>
-									<optgroup label="College of Arts and Sciences">
-										<option value="9">BS Applied Mathematics</option>
-										<option value="10">BS Biology</option>
-										<option value="13">BS Chemistry</option>
-										<option value="1">BA Communication and Media Studies</option>
-										<option value="2">BA Community Development</option>
-										<option value="14">BS Computer Science</option>
-										<option value="15">BS Economics</option>
-										<option value="3">BA History</option>
-										<option value="4">BA Literature</option>
-										<option value="5">BA Political Science</option>
-										<option value="6">BA Psychology</option>
-										<option value="19">BS Public Health</option>
-										<option value="7">BA Sociology</option>
-										<option value="20">BS Statistics</option>
-										</optgroup>
-									<optgroup label="College of Fisheries and Ocean Sciences">
-										<option value="16">BS Fisheries</option>
-									</optgroup>
-									<optgroup label="College of Management">
-										<option value="8">BS Accountancy</option>
-										<option value="11">BS Business Administration (Marketing)</option>
-										<option value="18">BS Management</option>
-									</optgroup>
-									<optgroup label="School of Technology">
-										<option value="12">BS Chemical Engineering</option>
-										<option value="17">BS Food Technology</option>
-									</optgroup>
-								</select>
-							</div>
-							<div class="form-group signup">
-								<label>Date of Birth:</label>
-								<input type="date" class="form-control" name="birthdate_dental" id="birthdate_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Religion:</label>
-								<input type="text" class="form-control" placeholder="Enter religion" name="religion_dental" id="religion_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Nationality:</label>
-								<input type="text" class="form-control" name="nationality_dental" placeholder="Enter nationality" id="nationality_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Father:</label>
-								<input type="text" class="form-control" name="father_dental" placeholder="Enter father name" id="father_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Mother:</label>
-								<input type="text" class="form-control" name="mother_dental" placeholder="Enter mother name" id="mother_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Home Address:</label>
-								<div class="form-inline">
-									<input type="text" class="form-control" name="street_dental" id="street_dental" placeholder="Street"/>
-									<input type="text" class="form-control" name="town_dental" id="town_dental" placeholder="Town / City"/>
-									<input type="text" class="form-control" name="province_dental" id="province_dental" placeholder="Province"/>
-								</div>
-							</div>
+						<div class="form-group signup">
+							<label>Year Level:</label>
+							<input type="text" class="form-control" name="yearlevel_dental" id="yearlevel_dental" placeholder="Enter year level" disabled/>
+						</div>
+						<div class="form-group signup">
+							<label>Degree Program:</label>
+							<select class="form-control" name="degree_program_dental" id="degree_program_dental" title="Select the degree program you are currently enrolled in." disabled="">
+								<option disabled selected>select degree program</option>
+								<optgroup label="College of Arts and Sciences">
+									<option value="8">BS Applied Mathematics</option>
+  									<option value="9">BS Biology</option>
+  									<option value="10">BS Chemistry</option>
+  									<option value="7">BA Communication and Media Studies</option>
+  									<option value="1">BA Community Development</option>
+  									<option value="11">BS Computer Science</option>
+  									<option value="12">BS Economics</option>
+  									<option value="2">BA History</option>
+  									<option value="3">BA Literature</option>
+  									<option value="4">BA Political Science</option>
+  									<option value="5">BA Psychology</option>
+  									<option value="13">BS Public Health</option>
+  									<option value="6">BA Sociology</option>
+  									<option value="14">BS Statistics</option>
+  									<option value="15">Master of Chemistry</option>
+  									<option value="16">Master of Education (Biology)</option>
+  									<option value="17">Master of Education (English as a Second Language)</option>
+  									<option value="18">Master of Education (Filipino)</option>
+  									<option value="19">Master of Education (Guidance)</option>
+  									<option value="20">Master of Education (Mathematics)</option>
+  									<option value="21">Master of Education (Physics)</option>
+  									<option value="22">Master of Education (Reading)</option>
+  									<option value="23">Master of Education (Social Studies)</option>
+  									<option value="24">MS Biology</option>
+  								</optgroup>
+  								<optgroup label="College of Fisheries and Ocean Sciences">
+  									<option value="25">BS Fisheries</option>
+  									<option value="26">Master of Aquaculture</option>
+  									<option value="27">Master of Marine Affairs</option>
+  									<option value="28">MS Fisheries (Aquaculture)</option>
+  									<option value="29">MS Fisheries (Fisheries Biology)</option>
+  									<option value="30">MS Fisheries (Fish Processing Technology)</option>
+  									<option value="31">MS Ocean Sciences</option>
+  									<option value="32">Professional Masters in Tropical Marines</option>
+  									<option value="33">PhD Fisheries</option>
+  								</optgroup>
+  								<optgroup label="College of Management">
+  									<option value="34">BS Accountancy</option>
+  									<option value="35">BS Business Administration (Marketing)</option>
+  									<option value="36">BS Management</option>
+  									<option value="37">Master of Management (Business Management)</option>
+  									<option value="38">Master of Management (Public Management)</option>
+  									<option value="39">Diploma in Urban and Regional Planning</option>
+  								</optgroup>
+  								<optgroup label="School of Technology">
+  									<option value="41">BS Chemical Engineering</option>
+  									<option value="40">BS Food Technology</option>
+  								</optgroup>
+							</select>
+						</div>
+						<div class="form-group signup">
+							<label>Date of Birth:</label>
+							<input type="date" class="form-control" name="birthdate_dental" id="birthdate_dental"/>
+						</div>
+						<div class="form-group signup">
+							<label>Civil Status:</label>
+							<select class="form-control" name="civil_status_dental" id="civil_status_dental" required>
+								<option value="Single">Single</option>
+								<option value="Married">Married</option>
+								<option value="Separated">Separated</option>
+								<option value="Divorced">Divorced</option>
+								<option value="Widowed">Widowed</option>
+							</select>
+						</div>
+						<div class="form-group signup">
+							<label>Religion:</label>
+							<input type="text" class="form-control" placeholder="Enter religion" name="religion_dental" id="religion_dental"/>
+						</div>
+						<div class="form-group signup">
+							<label>Nationality:</label>
+							<input type="text" class="form-control" name="nationality_dental" placeholder="Enter nationality" id="nationality_dental"/>
+						</div>
+						<div class="form-group signup">
+							<label>Father:</label>
+							<input type="text" class="form-control" name="father_first_dental" placeholder="Enter father's given name" id="father_first_dental"/>
+							<input type="text" class="form-control" name="father_middle_dental" placeholder="Enter father's middle name" id="father_middle_dental"/>
+							<input type="text" class="form-control" name="father_last_dental" placeholder="Enter father's last name" id="father_last_dental"/>
+						</div>
+						<div class="form-group signup">
+							<label>Mother:</label>
+							<input type="text" class="form-control" name="mother_first_dental" placeholder="Enter mother's first name" id="mother_first_dental"/>
+							<input type="text" class="form-control" name="mother_middle_dental" placeholder="Enter mother's middle name" id="mother_middle_dental"/>
+							<input type="text" class="form-control" name="mother_last_dental" placeholder="Enter mother's last name" id="mother_last_dental"/>
+						</div>
+						<div class="form-group signup">
+							<label>Home Address:</label>
 							<div class="form-inline">
-								<label>Residence Telephone Number:</label>
-								<input type="text" class="form-control" name="residencetelephonedentcal" id="residencetelephone_dental"/>
-								<label>Residence Cellphone Number:</label>
-								<input type="text" class="form-control" name="residencecellphone_dental" id="residencecellphone_dental"/>
-								<label>Personal Contact Number:</label>
-								<input type="text" class="form-control" name="personalcontactnumber_dental" id="personalcontactnumber_dental"/>
+								<input type="text" class="form-control" name="street_dental" id="street_dental" placeholder="Street"/>
+								<input type="text" class="form-control" name="town_dental" id="town_dental" placeholder="Town / City"/>
+								<input type="text" class="form-control" name="province_dental" id="province_dental" placeholder="Province"/>
 							</div>
 						</div>
-					</div>
-					<div class="form-group signup3_dental">
-						<label>GUARDIAN/PERSON TO BE CONTACTED IN CASE OF EMERGENCY (OTHER THAN PARENTS)</label><br/>
-						<div class="form-group signup">
-							<label>Name:</label>
-							<input type="text" class="form-control" name="guardian_name_dental" placeholder="Enter guardian name" id="guardian_name_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Relationship:</label>
-							<input type="text" class="form-control" name="guardian_relationship_dental" placeholder="Enter relationship with guardian" id="guardian_relationship_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Address:</label>
-							<input type="text" class="form-control" name="guardian_address_dental" placeholder="Enter guardian address" id="guardian_address_dental"/>
-						</div>
-						<div class="form-group signup">
-							<div class="form-inline">
-								<label>Residence Telephone Number:</label>
-								<input type="text" class="form-control" name="guardianresidencetelephone_dental" id="guardianresidencetelephone_dental"/>
-								<label>Residence Cellphone Number:</label>
-								<input type="text" class="form-control" name="guardianresidencecellphone_dental" id="guardianresidencecellphone_dental"/>
-							</div>
+						<div class="form-inline">
+							<label>Residence Telephone Number:</label>
+							<input type="text" class="form-control" name="residencetelephonedentcal" id="residencetelephone_dental"/>
+							<label>Residence Cellphone Number:</label>
+							<input type="text" class="form-control" name="residencecellphone_dental" id="residencecellphone_dental"/>
+							<label>Personal Contact Number:</label>
+							<input type="text" class="form-control" name="personalcontactnumber_dental" id="personalcontactnumber_dental"/>
 						</div>
 					</div>
-					<div class="form-group signup4_dental">
-						<label>PAST MEDICAL HISTORY</label><br/>
-						<div class="form-group signup">
-							<label>Past illnesses since birth:</label>
-							<input type="text" class="form-control" name="illness_history_dental" placeholder="Enter past illnesses since birth" id="illness_history_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Operation undergone since birth:</label>
-							<input type="text" class="form-control" name="operation_history_dental" placeholder="Enter operation undergone since birth" id="operation_history_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Allergies to either food or drugs:</label>
-							<input type="text" class="form-control" name="allergies_history_dental" placeholder="Enter allergies to either food or drugs" id="allergies_history_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Family history of diseases:</label>
-							<input type="text" class="form-control" name="family_history_dental" placeholder="Enter family history of diseases" id="family_history_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Maintenance medication:</label>
-							<input type="text" class="form-control" name="maintenance_medication_history_dental" placeholder="Enter maintenance medication" id="maintenance_medication_history_dental"/>
-						</div>
-					</div>
-					<p id="loginErrorMessage"></p>
 				</div>
-				<div class="modal-footer">
-					<input type="submit" class="btn btn-success form-inline" name="login_modal_dental" id="login_modal_dental" value="Login">
-					<input type="submit" class="btn btn-info form-inline" name="signupDental_modal" id="signupDental_modal" value="Create Patient Account"/>
-					<input type="submit" class="btn btn-default" name="signupbackDental_modal" id="signupbackDental_modal" value="Back"/>
-					<input type="submit" class="btn btn-info" name="signupnextDental_modal" id="signupnextDental_modal" value="Next"/>
-					<input type="submit" class="btn btn-info" name="signupconfirmDental_modal" id="signupconfirmDental_modal" value="Confirm Sign Up"/>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<div class="form-group signup3_dental">
+					<label>GUARDIAN/PERSON TO BE CONTACTED IN CASE OF EMERGENCY (OTHER THAN PARENTS)</label><br/>
+					<div class="form-group signup">
+						<label>Name:</label>
+						<input type="text" class="form-control" name="guardian_first_dental" placeholder="Enter guardian's first name" id="guardian_first_dental"/>
+						<input type="text" class="form-control" name="guardian_middle_dental" placeholder="Enter guardian's middle name" id="guardian_middle_dental"/>
+						<input type="text" class="form-control" name="guardian_last_dental" placeholder="Enter guardian's last name" id="guardian_last_dental"/>
+					</div>
+					<div class="form-group signup">
+						<label>Relationship:</label>
+						<input type="text" class="form-control" name="guardian_relationship_dental" placeholder="Enter relationship with guardian" id="guardian_relationship_dental"/>
+					</div>
+					<div class="form-inline signup">
+						<label>Address:</label>
+						<input type="text" class="form-control" name="guardian_street_dental" placeholder="Street" id="guardian_street_dental"/>
+						<input type="text" class="form-control" name="guardian_town_dental" placeholder="Town / City" id="guardian_town_dental"/>
+						<input type="text" class="form-control" name="guardian_province_dental" placeholder="Province" id="guardian_province_dental"/>
+					</div>
+					<div class="form-group signup">
+						<div class="form-inline">
+							<label>Residence Telephone Number:</label>
+							<input type="text" class="form-control" name="guardianresidencetelephone_dental" id="guardianresidencetelephone_dental"/>
+							<label>Residence Cellphone Number:</label>
+							<input type="text" class="form-control" name="guardianresidencecellphone_dental" id="guardianresidencecellphone_dental"/>
+						</div>
+					</div>
 				</div>
+				<div class="form-group signup4_dental">
+					<label>PAST MEDICAL HISTORY</label><br/>
+					<div class="form-group signup">
+						<label>Past illnesses since birth:</label>
+						<input type="text" class="form-control" name="illness_history_dental" placeholder="Enter past illnesses since birth" id="illness_history_dental"/>
+					</div>
+					<div class="form-group signup">
+						<label>Operation undergone since birth:</label>
+						<input type="text" class="form-control" name="operation_history_dental" placeholder="Enter operation undergone since birth" id="operation_history_dental"/>
+					</div>
+					<div class="form-group signup">
+						<label>Allergies to either food or drugs:</label>
+						<input type="text" class="form-control" name="allergies_history_dental" placeholder="Enter allergies to either food or drugs" id="allergies_history_dental"/>
+					</div>
+					<div class="form-group signup">
+						<label>Family history of diseases:</label>
+						<input type="text" class="form-control" name="family_history_dental" placeholder="Enter family history of diseases" id="family_history_dental"/>
+					</div>
+					<div class="form-group signup">
+						<label>Maintenance medication:</label>
+						<input type="text" class="form-control" name="maintenance_medication_history_dental" placeholder="Enter maintenance medication" id="maintenance_medication_history_dental"/>
+					</div>
+				</div>
+				<p id="login_dental_error"></p>
+			</div>
+			<div class="modal-footer">
+				<input type="submit" class="btn btn-success form-inline" name="login_modal_dental" id="login_modal_dental" value="Login"/>
+				<input type="submit" class="btn btn-info form-inline" name="signupDental_modal" id="signupDental_modal" value="Create Patient Account"/>
+				<input type="submit" class="btn btn-default" name="signupbackDental_modal" id="signupbackDental_modal" value="Back"/>
+				<input type="submit" class="btn btn-info" name="signupnextDental_modal" id="signupnextDental_modal" value="Next"/>
+				<input type="submit" class="btn btn-info" name="signupconfirmDental_modal" id="signupconfirmDental_modal" value="Confirm Sign Up"/>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<!-- SIGN UP MODAL FOR MEDICAL APPOINTMENTS -->
-	<div class="modal fade" id="loginmodalmedical" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Enter your login credentials</h4>
-				</div>
-				<div class="modal-body">
-					<div class="progress signup_progressbar_dental">
-						<div class="progress-bar progress-bar-striped active" role="progressbar" id="changeProgressDental" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:0%">0%</div>
-					</div>
-					<div class="form-group">
-						<input type="text" class="form-control signup0_dental" name="user_name_modal_dental" id="user_name_modal_dental" placeholder="Username">
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control signup0_dental" name="password_modal_dental" id="password_modal_dental" placeholder="Password">
-					</div>
-					<div class="form-group signup">
-						<input type="text" class="form-control signup1_dental" name="first_name_dental" id="first_name_dental" placeholder="First Name">
-					</div>
-					<div class="form-group signup">
-						<input type="text" class="form-control signup1_dental" name="middle_name_dental" id="middle_name_dental" placeholder="Middle Name">
-					</div>
-					<div class="form-group signup">
-						<input type="text" class="form-control signup1_dental" name="last_name_dental" id="last_name_dental" placeholder="Last Name">
-					</div>
-					<div class="form-group signup2_dental">
-						<div class="form-group signup">
-							<label>Type of patient:</label><br/>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_student">Student</label>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_faculty">Faculty</label>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_staff">Staff</label>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_dependent">Dependent</label>
-							<label class="radio-inline"><input type="radio" name="patient_type_dental" id="type_dental_opd">Non-UPV / Out-patient</label>
-						</div>
-						<label>PERSONAL DATA</label><br/>
-						<div class="">
-							<div class="form-group signup">
-								<label>Age:</label>
-								<input type="text" class="form-control" placeholder="Enter age" name="age_dental" id="age_dental" placeholder="Enter age"/>
-							</div>
-							<div class="form-group signup">
-								<label>Sex:</label>
-								<label class="radio-inline"><input type="radio" name="sex_dental">Female</label>
-								<label class="radio-inline"><input type="radio" name="sex_dental">Male</label>
-							</div>
-							<div class="form-group signup">
-								<label>Year Level:</label>
-								<input type="text" class="form-control" placeholder="Enter year level" name="yearlevel_dental" id="yearlevel_dental" placeholder="Enter year level"/>
-							</div>
-							<div class="form-group signup">
-								<label>Degree Program:</label>
-								<select class = "form-control" name="degree_program_dental" id="degree_program_dental" required title="Select the degree program you are currently enrolled in.">
-									<option disabled selected> -- select degree program -- </option>
-									<optgroup label="College of Arts and Sciences">
-										<option value="9">BS Applied Mathematics</option>
-										<option value="10">BS Biology</option>
-										<option value="13">BS Chemistry</option>
-										<option value="1">BA Communication and Media Studies</option>
-										<option value="2">BA Community Development</option>
-										<option value="14">BS Computer Science</option>
-										<option value="15">BS Economics</option>
-										<option value="3">BA History</option>
-										<option value="4">BA Literature</option>
-										<option value="5">BA Political Science</option>
-										<option value="6">BA Psychology</option>
-										<option value="19">BS Public Health</option>
-										<option value="7">BA Sociology</option>
-										<option value="20">BS Statistics</option>
-										</optgroup>
-									<optgroup label="College of Fisheries and Ocean Sciences">
-										<option value="16">BS Fisheries</option>
-									</optgroup>
-									<optgroup label="College of Management">
-										<option value="8">BS Accountancy</option>
-										<option value="11">BS Business Administration (Marketing)</option>
-										<option value="18">BS Management</option>
-									</optgroup>
-									<optgroup label="School of Technology">
-										<option value="12">BS Chemical Engineering</option>
-										<option value="17">BS Food Technology</option>
-									</optgroup>
-								</select>
-							</div>
-							<div class="form-group signup">
-								<label>Date of Birth:</label>
-								<input type="date" class="form-control" name="birthdate_dental" id="birthdate_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Religion:</label>
-								<input type="text" class="form-control" placeholder="Enter religion" name="religion_dental" id="religion_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Nationality:</label>
-								<input type="text" class="form-control" name="nationality_dental" placeholder="Enter nationality" id="nationality_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Father:</label>
-								<input type="text" class="form-control" name="father_dental" placeholder="Enter father name" id="father_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Mother:</label>
-								<input type="text" class="form-control" name="mother_dental" placeholder="Enter mother name" id="mother_dental"/>
-							</div>
-							<div class="form-group signup">
-								<label>Home Address:</label>
-								<div class="form-inline">
-									<input type="text" class="form-control" name="street_dental" id="street_dental" placeholder="Street"/>
-									<input type="text" class="form-control" name="town_dental" id="town_dental" placeholder="Town / City"/>
-									<input type="text" class="form-control" name="province_dental" id="province_dental" placeholder="Province"/>
-								</div>
-							</div>
-							<div class="form-inline">
-								<label>Residence Telephone Number:</label>
-								<input type="text" class="form-control" name="residencetelephonedentcal" id="residencetelephone_dental"/>
-								<label>Residence Cellphone Number:</label>
-								<input type="text" class="form-control" name="residencecellphone_dental" id="residencecellphone_dental"/>
-								<label>Personal Contact Number:</label>
-								<input type="text" class="form-control" name="personalcontactnumber_dental" id="personalcontactnumber_dental"/>
-							</div>
-						</div>
-					</div>
-					<div class="form-group signup3_dental">
-						<label>GUARDIAN/PERSON TO BE CONTACTED IN CASE OF EMERGENCY (OTHER THAN PARENTS)</label><br/>
-						<div class="form-group signup">
-							<label>Name:</label>
-							<input type="text" class="form-control" name="guardian_name_dental" placeholder="Enter guardian name" id="guardian_name_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Relationship:</label>
-							<input type="text" class="form-control" name="guardian_relationship_dental" placeholder="Enter relationship with guardian" id="guardian_relationship_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Address:</label>
-							<input type="text" class="form-control" name="guardian_address_dental" placeholder="Enter guardian address" id="guardian_address_dental"/>
-						</div>
-						<div class="form-group signup">
-							<div class="form-inline">
-								<label>Residence Telephone Number:</label>
-								<input type="text" class="form-control" name="guardianresidencetelephone_dental" id="guardianresidencetelephone_dental"/>
-								<label>Residence Cellphone Number:</label>
-								<input type="text" class="form-control" name="guardianresidencecellphone_dental" id="guardianresidencecellphone_dental"/>
-							</div>
-						</div>
-					</div>
-					<div class="form-group signup4_dental">
-						<label>PAST MEDICAL HISTORY</label><br/>
-						<div class="form-group signup">
-							<label>Past illnesses since birth:</label>
-							<input type="text" class="form-control" name="illness_history_dental" placeholder="Enter past illnesses since birth" id="illness_history_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Operation undergone since birth:</label>
-							<input type="text" class="form-control" name="operation_history_dental" placeholder="Enter operation undergone since birth" id="operation_history_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Allergies to either food or drugs:</label>
-							<input type="text" class="form-control" name="allergies_history_dental" placeholder="Enter allergies to either food or drugs" id="allergies_history_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Family history of diseases:</label>
-							<input type="text" class="form-control" name="family_history_dental" placeholder="Enter family history of diseases" id="family_history_dental"/>
-						</div>
-						<div class="form-group signup">
-							<label>Maintenance medication:</label>
-							<input type="text" class="form-control" name="maintenance_medication_history_dental" placeholder="Enter maintenance medication" id="maintenance_medication_history_dental"/>
-						</div>
-					</div>
-					<p id="loginErrorMessage"></p>
-				</div>
-				<div class="modal-footer">
-					<input type="submit" class="btn btn-success form-inline" name="login_modal_dental" id="login_modal_dental" value="Login">
-					<input type="submit" class="btn btn-info form-inline" name="signupDental_modal" id="signupDental_modal" value="Create Patient Account"/>
-					<input type="submit" class="btn btn-default" name="signupbackDental_modal" id="signupbackDental_modal" value="Back"/>
-					<input type="submit" class="btn btn-info" name="signupnextDental_modal" id="signupnextDental_modal" value="Next"/>
-					<input type="submit" class="btn btn-info" name="signupconfirmDental_modal" id="signupconfirmDental_modal" value="Confirm Sign Up"/>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="loginMedicalModal" role="dialog">
+
+{{-- ///////////////////////////////////////////////////////////////////////////////////// --}}
+{{-- SIGN UP MODAL FOR MEDICAL APPOINTMENTS --}}
+<div class="modal fade" id="loginmodalmedical" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -466,6 +319,7 @@
 					<div class="form-group signup0_medical">
 						<input type="password" class="form-control" name="password_modal_medical" id="password_modal_medical" placeholder="Password">
 					</div>
+					
 					<div class="form-group signup1_medical">
 						<input type="text" class="form-control" name="first_name_medical" id="first_name_medical" placeholder="First Name">
 					</div>

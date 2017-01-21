@@ -22,6 +22,8 @@ Route::post('/displayschedule_dental', 'PagesController@displayscheduledental');
 Route::post('/displayschedule_medical', 'PagesController@displayschedulemedical');
 Route::post('/createappointment_dental', 'PagesController@createappointmentdental');
 Route::post('/createappointment_medical', 'PagesController@createappointmentmedical');
+Route::post('/loginfromdentalappointment', 'PagesController@loginfromdentalappointment');
+Route::post('/signupfromdentalappointment', 'PagesController@signupfromdentalappointment');
 
 /* ROUTES FOR PATIENT ACCOUNT */
 Route::get('/account','PatientController@dashboard');

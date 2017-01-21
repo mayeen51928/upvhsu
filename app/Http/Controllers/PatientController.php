@@ -153,7 +153,7 @@ class PatientController extends Controller
             $religion = new Religion;
             $religion->religion_description = $request->input('religion');
             $religion->save();
-            $patient->religion_id = Religion::where('religion_description', $request->input('religion')->first()->id);
+            $patient->religion_id = Religion::where('religion_description', $request->input('religion'))->first()->id;
         }
         $nationality = Nationality::where('nationality_description', $request->input('nationality'))->first();
         // dd($religion->id);
@@ -166,7 +166,7 @@ class PatientController extends Controller
             $nationality = new Nationality;
             $nationality->nationality_description = $request->input('nationality');
             $nationality->save();
-            $patient->nationality_id = Nationality::where('nationality_description', $request->input('nationality')->first()->id);
+            $patient->nationality_id = Nationality::where('nationality_description', $request->input('nationality'))->first()->id;
         }
         $parents = HasParent::where('patient_id', Auth::user()->user_id)->get();
         foreach($parents as $parent)
