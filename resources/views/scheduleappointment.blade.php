@@ -19,7 +19,7 @@
 	</div>
 </div>
 <div class="container">
-	<div class="col-md-6 col-md-offset-3" id="dentalAppointment0">
+	<div class="col-md-6" id="dentalAppointment0">
 		<div class="panel panel-default" id="dentalAppointment">
 			<div class="panel-heading">Schedule Dental Appointment</div>
 			<div class="panel-body" id="dentalAppointmentPanelBody">
@@ -48,16 +48,16 @@
 			</div>
 		</div>	
 	</div>
-	<div class="col-md-6 col-md-offset-3" id="medicalAppointment0">
+	<div class="col-md-6" id="medicalAppointment0">
 		<div class="panel panel-default" id="medicalAppointment">
 			<div class="panel-heading">Schedule Medical Appointment</div>
 			<div class="panel-body" id="medicalAppointmentPanelBody">
 				<div class="form-group">
-					<label for="medicalNotes">Reasons (e.g. physical pain felt):</label>
+					<label for="medicalNotes" id="medicalNotesErrorMsg">Reasons (e.g. physical pain felt):</label>
 					<textarea class="form-control" rows="5" id="medicalNotes"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="selectmedicaldate">Date:</label>
+					<label for="selectmedicaldate" id="selectmedicaldateErrorMsg">Date:</label>
 					<select class="form-control" required id="selectmedicaldate">
 						<option disabled selected> -- select date of appointment -- </option>
 						<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
@@ -68,7 +68,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label>Doctor:</label>
+					<label id="selectmedicaldoctorErrorMsg">Doctor:</label>
 					<select disabled class="form-control" required id="selectmedicaldoctor">
 						<option disabled selected> -- select doctor -- </option>
 					</select>
@@ -314,7 +314,7 @@
 						<div class="progress-bar progress-bar-striped active" role="progressbar" id="changeProgress" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:0%">0%</div>
 					</div>
 					<div class="form-group signup0_medical">
-						<input type="text" class="form-control" name="user_name_modal_medical" id="user_name_modal_medical" placeholder="Username">
+						<input type="text" class="form-control" name="user_name_modal_medical" id="user_name_modal_medical" placeholder="User ID">
 					</div>
 					<div class="form-group signup0_medical">
 						<input type="password" class="form-control" name="password_modal_medical" id="password_modal_medical" placeholder="Password">
@@ -328,151 +328,184 @@
 					</div>
 					<div class="form-group signup1_medical">
 						<input type="text" class="form-control" name="last_name_medical" id="last_name_medical" placeholder="Last Name">
+					</div><div class="form-group signup2_medical">
+					<div class="form-group signup">
+						<label>Type of patient:</label><br/>
+						<label class="radio-inline"><input type="radio" name="patient_type_medical" value="1">Student</label>
+						<label class="radio-inline"><input type="radio" name="patient_type_medical" value="2">Faculty</label>
+						<label class="radio-inline"><input type="radio" name="patient_type_medical" value="3">Staff</label>
+						<label class="radio-inline"><input type="radio" name="patient_type_medical" value="4">Dependent</label>
+						<label class="radio-inline"><input type="radio" name="patient_type_medical" value="5">Non-UPV / Out-patient</label>
 					</div>
-						<!-- HIDDEN -->
-					<div class="form-group signup2_medical">
+					<label>PERSONAL DATA</label><br/>
+					<div class="">
 						<div class="form-group signup">
-							<label>Type of patient:</label><br/>
-							<label class="radio-inline"><input type="radio" id="type_medical_student" name="patient_type_medical" value="1"/>Student</label>
-							<label class="radio-inline"><input type="radio" id="type_medical_faculty" name="patient_type_medical" value="2"/>Faculty</label>
-							<label class="radio-inline"><input type="radio" id="type_medical_staff" name="patient_type_medical" value="3"/>Staff</label>
-							<label class="radio-inline"><input type="radio" id="type_medical_dependent" name="patient_type_medical" value="4"/>Dependent</label>
-							<label class="radio-inline"><input type="radio" id="type_medical_opd" name="type_medical_opd" value="5"/>Non-UPV / Out-patient</label>
+							<label>Sex:</label>
+							<label class="radio-inline"><input type="radio" value="F" name="sex_medical">Female</label>
+							<label class="radio-inline"><input type="radio" value="M" name="sex_medical">Male</label>
 						</div>
-						<label>PERSONAL DATA</label><br/>
-						<div class="">
-							<div class="form-group signup">
-								<label>Age:</label>
-								<input type="text" class="form-control" name="age_medical" id="age_medical" placeholder="Enter age"/>
-							</div>
-							<div class="form-group signup">
-								<label>Sex:</label>
-								<label class="radio-inline"><input type="radio" value="Female" name="sex_medical">Female</label>
-								<label class="radio-inline"><input type="radio" value="Male" name="sex_medical">Male</label>
-							</div>
-							<div class="form-group signup">
-								<label>Year Level:</label>
-								<input type="text" class="form-control" name="yearlevel_medical" id="yearlevel_medical" placeholder="Enter year level"/>
-							</div>
-							<div class="form-group signup">
-								<label>Degree Program:</label>
-								<select class = "form-control" name="degree_program_medical" id="degree_program_medical" required title="Select the degree program you are currently enrolled in.">
-									<option disabled selected> -- select degree program -- </option>
-									<optgroup label="College of Arts and Sciences">
-										<option value="9">BS Applied Mathematics</option>
-										<option value="10">BS Biology</option>
-										<option value="13">BS Chemistry</option>
-										<option value="1">BA Communication and Media Studies</option>
-										<option value="2">BA Community Development</option>
-										<option value="14">BS Computer Science</option>
-										<option value="15">BS Economics</option>
-										<option value="3">BA History</option>
-										<option value="4">BA Literature</option>
-										<option value="5">BA Political Science</option>
-										<option value="6">BA Psychology</option>
-										<option value="19">BS Public Health</option>
-										<option value="7">BA Sociology</option>
-										<option value="20">BS Statistics</option>
-									</optgroup>
-									<optgroup label="College of Fisheries and Ocean Sciences">
-										<option value="16">BS Fisheries</option>
-									</optgroup>
-									<optgroup label="College of Management">
-										<option value="8">BS Accountancy</option>
-										<option value="11">BS Business Administration (Marketing)</option>
-										<option value="18">BS Management</option>
-									</optgroup>
-									<optgroup label="School of Technology">
-										<option value="12">BS Chemical Engineering</option>
-										<option value="17">BS Food Technology</option>
-									</optgroup>
-								</select>
-							</div>
-							<div class="form-group signup">
-								<label>Date of Birth:</label>
-								<input type="date" class="form-control" name="birthdate_medical" id="birthdate_medical"/>
-							</div>
-							<div class="form-group signup">
-								<label>Religion:</label>
-								<input type="text" class="form-control" name="religion_medical" id="religion_medical"/>
-							</div>
-							<div class="form-group signup">
-								<label>Nationality:</label>
-								<input type="text" class="form-control" name="nationality_medical" id="nationality_medical"/>
-							</div>
-							<div class="form-group signup">
-								<label>Father:</label>
-								<input type="text" class="form-control" name="father_medical" id="father_medical"/>
-							</div>
-							<div class="form-group signup">
-								<label>Mother:</label>
-								<input type="text" class="form-control" name="mother_medical" id="mother_medical"/>
-							</div>
-							<div class="form-group signup">
-								<label>Home Address:</label>
-								<div class="form-inline">
-									<input type="text" class="form-control" name="street_medical" id="street_medical" placeholder="Street"/>
-									<input type="text" class="form-control" name="town_medical" id="town_medical" placeholder="Town / City"/>
-									<input type="text" class="form-control" name="province_medical" id="province_medical" placeholder="Province"/>
-								</div>
-							</div>
+						<div class="form-group signup">
+							<label>Year Level:</label>
+							<input type="text" class="form-control" name="yearlevel_medical" id="yearlevel_medical" placeholder="Enter year level" disabled/>
+						</div>
+						<div class="form-group signup">
+							<label>Degree Program:</label>
+							<select class="form-control" name="degree_program_medical" id="degree_program_medical" title="Select the degree program you are currently enrolled in." disabled="">
+								<option disabled selected>select degree program</option>
+								<optgroup label="College of Arts and Sciences">
+									<option value="8">BS Applied Mathematics</option>
+  									<option value="9">BS Biology</option>
+  									<option value="10">BS Chemistry</option>
+  									<option value="7">BA Communication and Media Studies</option>
+  									<option value="1">BA Community Development</option>
+  									<option value="11">BS Computer Science</option>
+  									<option value="12">BS Economics</option>
+  									<option value="2">BA History</option>
+  									<option value="3">BA Literature</option>
+  									<option value="4">BA Political Science</option>
+  									<option value="5">BA Psychology</option>
+  									<option value="13">BS Public Health</option>
+  									<option value="6">BA Sociology</option>
+  									<option value="14">BS Statistics</option>
+  									<option value="15">Master of Chemistry</option>
+  									<option value="16">Master of Education (Biology)</option>
+  									<option value="17">Master of Education (English as a Second Language)</option>
+  									<option value="18">Master of Education (Filipino)</option>
+  									<option value="19">Master of Education (Guidance)</option>
+  									<option value="20">Master of Education (Mathematics)</option>
+  									<option value="21">Master of Education (Physics)</option>
+  									<option value="22">Master of Education (Reading)</option>
+  									<option value="23">Master of Education (Social Studies)</option>
+  									<option value="24">MS Biology</option>
+  								</optgroup>
+  								<optgroup label="College of Fisheries and Ocean Sciences">
+  									<option value="25">BS Fisheries</option>
+  									<option value="26">Master of Aquaculture</option>
+  									<option value="27">Master of Marine Affairs</option>
+  									<option value="28">MS Fisheries (Aquaculture)</option>
+  									<option value="29">MS Fisheries (Fisheries Biology)</option>
+  									<option value="30">MS Fisheries (Fish Processing Technology)</option>
+  									<option value="31">MS Ocean Sciences</option>
+  									<option value="32">Professional Masters in Tropical Marines</option>
+  									<option value="33">PhD Fisheries</option>
+  								</optgroup>
+  								<optgroup label="College of Management">
+  									<option value="34">BS Accountancy</option>
+  									<option value="35">BS Business Administration (Marketing)</option>
+  									<option value="36">BS Management</option>
+  									<option value="37">Master of Management (Business Management)</option>
+  									<option value="38">Master of Management (Public Management)</option>
+  									<option value="39">Diploma in Urban and Regional Planning</option>
+  								</optgroup>
+  								<optgroup label="School of Technology">
+  									<option value="41">BS Chemical Engineering</option>
+  									<option value="40">BS Food Technology</option>
+  								</optgroup>
+							</select>
+						</div>
+						<div class="form-group signup">
+							<label>Date of Birth:</label>
+							<input type="date" class="form-control" name="birthdate_medical" id="birthdate_medical"/>
+						</div>
+						<div class="form-group signup">
+							<label>Civil Status:</label>
+							<select class="form-control" name="civil_status_medical" id="civil_status_medical" required>
+								<option value="Single">Single</option>
+								<option value="Married">Married</option>
+								<option value="Separated">Separated</option>
+								<option value="Divorced">Divorced</option>
+								<option value="Widowed">Widowed</option>
+							</select>
+						</div>
+						<div class="form-group signup">
+							<label>Religion:</label>
+							<input type="text" class="form-control" placeholder="Enter religion" name="religion_medical" id="religion_medical"/>
+						</div>
+						<div class="form-group signup">
+							<label>Nationality:</label>
+							<input type="text" class="form-control" name="nationality_medical" placeholder="Enter nationality" id="nationality_medical"/>
+						</div>
+						<div class="form-group signup">
+							<label>Father:</label>
+							<input type="text" class="form-control" name="father_first_medical" placeholder="Enter father's given name" id="father_first_medical"/>
+							<input type="text" class="form-control" name="father_middle_medical" placeholder="Enter father's middle name" id="father_middle_medical"/>
+							<input type="text" class="form-control" name="father_last_medical" placeholder="Enter father's last name" id="father_last_medical"/>
+						</div>
+						<div class="form-group signup">
+							<label>Mother:</label>
+							<input type="text" class="form-control" name="mother_first_medical" placeholder="Enter mother's first name" id="mother_first_medical"/>
+							<input type="text" class="form-control" name="mother_middle_medical" placeholder="Enter mother's middle name" id="mother_middle_medical"/>
+							<input type="text" class="form-control" name="mother_last_medical" placeholder="Enter mother's last name" id="mother_last_medical"/>
+						</div>
+						<div class="form-group signup">
+							<label>Home Address:</label>
 							<div class="form-inline">
-								<label>Residence Telephone Number:</label>
-								<input type="text" class="form-control" name="residencetelephone_medical" id="residencetelephone_medical"/>
-								<label>Residence Cellphone Number:</label>
-								<input type="text" class="form-control" name="residencecellphone_medical" id="residencecellphone_medical"/>
-								<label>Personal Contact Number:</label>
-								<input type="text" class="form-control" name="personalcontactnumber_medical" id="personalcontactnumber_medical"/>
+								<input type="text" class="form-control" name="street_medical" id="street_medical" placeholder="Street"/>
+								<input type="text" class="form-control" name="town_medical" id="town_medical" placeholder="Town / City"/>
+								<input type="text" class="form-control" name="province_medical" id="province_medical" placeholder="Province"/>
 							</div>
 						</div>
-					</div>
-					<div class="form-group signup3_medical">
-						<label>GUARDIAN/PERSON TO BE CONTACTED IN CASE OF EMERGENCY (OTHER THAN PARENTS)</label><br/>
-						<div class="form-group signup">
-							<label>Name:</label>
-							<input type="text" class="form-control" name="guardian_name_medical" id="guardian_name_medical"/>
-						</div>
-						<div class="form-group signup">
-							<label>Relationship:</label>
-							<input type="text" class="form-control" name="guardian_relationship_medical" id="guardian_relationship_medical"/>
-						</div>
-						<div class="form-group signup">
-							<label>Address:</label>
-							<input type="text" class="form-control" name="guardian_address_medical" id="guardian_address_medical"/>
-						</div>
-						<div class="form-group signup">
-							<div class="form-inline">
-								<label>Residence Telephone Number:</label>
-								<input type="text" class="form-control" name="guardianresidencetelephone_medical" id="guardianresidencetelephone_medical"/>
-								<label>Residence Cellphone Number:</label>
-								<input type="text" class="form-control" name="guardianresidencecellphone_medical" id="guardianresidencecellphone_medical"/>
-							</div>
+						<div class="form-inline">
+							<label>Residence Telephone Number:</label>
+							<input type="text" class="form-control" name="residencetelephonedentcal" id="residencetelephone_medical"/>
+							<label>Residence Cellphone Number:</label>
+							<input type="text" class="form-control" name="residencecellphone_medical" id="residencecellphone_medical"/>
+							<label>Personal Contact Number:</label>
+							<input type="text" class="form-control" name="personalcontactnumber_medical" id="personalcontactnumber_medical"/>
 						</div>
 					</div>
-					<div class="form-group signup4_medical">
-						<label>PAST MEDICAL HISTORY</label><br/>
-						<div class="form-group signup">
-							<label>Past illnesses since birth:</label>
-							<input type="text" class="form-control" name="illness_history_medical" id="illness_history_medical"/>
-						</div>
-						<div class="form-group signup">
-							<label>Operation undergone since birth:</label>
-							<input type="text" class="form-control" name="operation_history_medical" id="operation_history_medical"/>
-						</div>
-						<div class="form-group signup">
-							<label>Allergies to either food or drugs:</label>
-							<input type="text" class="form-control" name="allergies_history_medical" id="allergies_history_medical"/>
-						</div>
-						<div class="form-group signup">
-							<label>Family history of diseases:</label>
-							<input type="text" class="form-control" name="family_history_medical" id="family_history_medical"/>
-						</div>
-						<div class="form-group signup">
-							<label>Maintenance medication:</label>
-							<input type="text" class="form-control" name="maintenance_medication_history_medical" id="maintenance_medication_history_medical"/>
+				</div>
+				<div class="form-group signup3_medical">
+					<label>GUARDIAN/PERSON TO BE CONTACTED IN CASE OF EMERGENCY (OTHER THAN PARENTS)</label><br/>
+					<div class="form-group signup">
+						<label>Name:</label>
+						<input type="text" class="form-control" name="guardian_first_medical" placeholder="Enter guardian's first name" id="guardian_first_medical"/>
+						<input type="text" class="form-control" name="guardian_middle_medical" placeholder="Enter guardian's middle name" id="guardian_middle_medical"/>
+						<input type="text" class="form-control" name="guardian_last_medical" placeholder="Enter guardian's last name" id="guardian_last_medical"/>
+					</div>
+					<div class="form-group signup">
+						<label>Relationship:</label>
+						<input type="text" class="form-control" name="guardian_relationship_medical" placeholder="Enter relationship with guardian" id="guardian_relationship_medical"/>
+					</div>
+					<div class="form-inline signup">
+						<label>Address:</label>
+						<input type="text" class="form-control" name="guardian_street_medical" placeholder="Street" id="guardian_street_medical"/>
+						<input type="text" class="form-control" name="guardian_town_medical" placeholder="Town / City" id="guardian_town_medical"/>
+						<input type="text" class="form-control" name="guardian_province_medical" placeholder="Province" id="guardian_province_medical"/>
+					</div>
+					<div class="form-group signup">
+						<div class="form-inline">
+							<label>Residence Telephone Number:</label>
+							<input type="text" class="form-control" name="guardianresidencetelephone_medical" id="guardianresidencetelephone_medical"/>
+							<label>Residence Cellphone Number:</label>
+							<input type="text" class="form-control" name="guardianresidencecellphone_medical" id="guardianresidencecellphone_medical"/>
 						</div>
 					</div>
-					<p id="loginErrorMessageMedical"></p>
+				</div>
+				<div class="form-group signup4_medical">
+					<label>PAST MEDICAL HISTORY</label><br/>
+					<div class="form-group signup">
+						<label>Past illnesses since birth:</label>
+						<input type="text" class="form-control" name="illness_history_medical" placeholder="Enter past illnesses since birth" id="illness_history_medical"/>
+					</div>
+					<div class="form-group signup">
+						<label>Operation undergone since birth:</label>
+						<input type="text" class="form-control" name="operation_history_medical" placeholder="Enter operation undergone since birth" id="operation_history_medical"/>
+					</div>
+					<div class="form-group signup">
+						<label>Allergies to either food or drugs:</label>
+						<input type="text" class="form-control" name="allergies_history_medical" placeholder="Enter allergies to either food or drugs" id="allergies_history_medical"/>
+					</div>
+					<div class="form-group signup">
+						<label>Family history of diseases:</label>
+						<input type="text" class="form-control" name="family_history_medical" placeholder="Enter family history of diseases" id="family_history_medical"/>
+					</div>
+					<div class="form-group signup">
+						<label>Maintenance medication:</label>
+						<input type="text" class="form-control" name="maintenance_medication_history_medical" placeholder="Enter maintenance medication" id="maintenance_medication_history_medical"/>
+					</div>
+				</div>
+				<p id="login_medical_error"></p>
 				</div>
 				<div class="modal-footer">
 					<input type="submit" class="btn btn-success" name="login_modal_medical" id="login_modal_medical" value="Login">

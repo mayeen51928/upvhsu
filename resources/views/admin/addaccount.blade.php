@@ -25,9 +25,9 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="staff_middle_na,e" class="col-md-4 control-label">Middle Name</label>
+                <label for="staff_middle_name" class="col-md-4 control-label">Middle Name</label>
                 <div class="col-md-6">
-                  <input id="staff_middle_na,e" type="text" class="form-control" name="staff_middle_na,e" required autofocus>
+                  <input id="staff_middle_name" type="text" class="form-control" name="staff_middle_name" required autofocus>
                 </div>
               </div>
               <div class="form-group">

@@ -110,7 +110,26 @@ class PagesController extends Controller
 				return response()->json(['success' => 'yes']);
 			}
 		}
-		else{
+		else
+		{
+			return response()->json(['success' => 'no']);
+		}
+	}
+
+	public function createappointmentmedical(Request $request)
+	{
+		if(Auth::check()){
+			if(Auth::user()->user_type_id == 1){
+				$medical_appointment = new MedicalAppointment;
+				$medical_appointment->patient_id = Auth::user()->user_id;
+				$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
+				$medical_appointment->reasons = $request->reasons;
+				$medical_appointment->save();
+				return response()->json(['success' => 'yes']);
+			}
+		}
+		else
+		{
 			return response()->json(['success' => 'no']);
 		}
 	}
@@ -121,12 +140,36 @@ class PagesController extends Controller
 		if (count($hashedPassword)==1 && Hash::check($request->password_modal_dental, $hashedPassword->password))
 		{
 			Auth::loginUsingId($request->user_name_modal_dental, true);
+			$dental_appointment = new DentalAppointment;
+			$dental_appointment->patient_id = Auth::user()->user_id;
+			$dental_appointment->dental_schedule_id = $request->dental_schedule_id;
+			$dental_appointment->reasons = $request->reasons;
+			$dental_appointment->save();
 			return response()->json(['passwordmatch' => 'yes']);
 		}
 		else{
 			return response()->json(['passwordmatch' => 'no']);
 		}
 	}
+
+	public function loginfrommedicalappointment(Request $request)
+	{
+		$hashedPassword = User::where('user_id', $request->user_name_modal_medical)->first();
+		if (count($hashedPassword)==1 && Hash::check($request->password_modal_medical, $hashedPassword->password))
+		{
+			Auth::loginUsingId($request->user_name_modal_medical, true);
+			$medical_appointment = new MedicalAppointment;
+			$medical_appointment->patient_id = Auth::user()->user_id;
+			$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
+			$medical_appointment->reasons = $request->reasons;
+			$medical_appointment->save();
+			return response()->json(['passwordmatch' => 'yes']);
+		}
+		else{
+			return response()->json(['passwordmatch' => 'no']);
+		}
+	}
+
 	public function signupfromdentalappointment(Request $request)
 	{
 		$check_if_already_exists = User::where('user_id', $request->user_name)->first();
@@ -306,16 +349,182 @@ class PagesController extends Controller
 		}
 	}
 
-	public function createappointmentmedical(Request $request)
+	public function signupfrommedicalappointment(Request $request)
 	{
-		if(Auth::check()){
-			if(Auth::user()->user_type_id == 1){
-				$medical_appointment = new MedicalAppointment;
-				$medical_appointment->patient_id = Auth::user()->user_id;
-				$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
-				$medical_appointment->reasons = $request->reasons;
-				$medical_appointment->save();
-			}
+		$check_if_already_exists = User::where('user_id', $request->user_name)->first();
+		if(count($check_if_already_exists) == 1)
+		{
+			return response()->json(['user_already_exists' =>'yes']);
+		}
+		else
+		{
+			$user = new User;
+			$user->user_id = $request->user_name;
+			$user->user_type_id = 1;
+			$user->password = bcrypt($request->password);
+			$user->save();
+			$patient = new Patient;
+			$patient->patient_id = $request->user_name;
+			$patient->patient_type_id = $request->patient_type_id;
+			$patient->patient_first_name = $request->first_name;
+			$patient->patient_middle_name = $request->middle_name;
+			$patient->patient_last_name = $request->last_name;
+			$patient->year_level = $request->year_level;
+			$patient->degree_program_id = $request->degree_program_id;
+			$patient->sex = $request->sex;
+			$patient->birthday = $request->birthdate;
+			$patient->civil_status = 'Single';
+			$religion = Religion::where('religion_description', $request->input)->first();
+        // dd($religion->id);
+        if(count($religion)>0)
+        {
+            $patient->religion_id = $religion->id;
+        }
+        else
+        {
+            $religion = new Religion;
+            $religion->religion_description = $request->religion;
+            $religion->save();
+            $patient->religion_id = Religion::where('religion_description', $request->religion)->first()->id;
+        }
+        $nationality = Nationality::where('nationality_description', $request->nationality)->first();
+        // dd($religion->id);
+        if(count($nationality)>0)
+        {
+            $patient->nationality_id = $nationality->id;
+        }
+        else
+        {
+            $nationality = new Nationality;
+            $nationality->nationality_description = $request->nationality;
+            $nationality->save();
+            $patient->nationality_id = Nationality::where('nationality_description', $request->nationality)->first()->id;
+        }
+        $patient->street = $request->street;
+        $province = Province::where('province_name', $request->province)->first();
+        if(count($province)>0)
+        {
+        		$town = Town::where('town_name', $request->town)->where('province_id', $province->id)->first();
+            if(count($town)>0)
+            {
+            	$patient->town_id = $town->id;
+            }
+            else
+            {
+            	$town = new Town;
+            	$town->town_name = $request->town;
+            	$town->province_id = $province->id;
+            	//insert the distance from miagao using Google Distance Matrix API
+            	$town->save();
+            	$patient->town_id = Town::where('town_name', $request->town)->where('province_id', $province->id)->first()->id;
+            }
+         }
+         else
+         {
+         	$province = new Province;
+         	$province->province_name = $request->province;
+            $province->save();
+            $town = new Town;
+            $town->town_name = $request->town;
+            $town->province_id = Province::where('province_name', $request->province)->first()->id;
+            $town->save();
+            $patient->town_id = Town::where('town_name', $request->town)->where('province_id', Province::where('province_name', $request->province)->first()->id)->first()->id;
+         }
+         $patient->residence_telephone_number = $request->residencetelephone;
+         $patient->personal_contact_number = $request->personalcontactnumber;
+         $patient->residence_contact_number = $request->residencecellphone;
+         $patient->save();
+         $check_if_father_exists = ParentModel::where('parent_first_name', $request->father_first_name)->where('parent_middle_name', $request->father_middle_name)->where('parent_last_name', $request->father_last_name)->first();
+         if(count($check_if_father_exists) == 0)
+         {
+         	$father = new ParentModel;
+	         $father->parent_first_name = $request->father_first_name;
+	         $father->parent_middle_name = $request->father_middle_name;
+	         $father->parent_last_name = $request->father_last_name;
+	         $father->sex = 'M';
+	         $father->save();
+         }
+         $check_if_mother_exists = ParentModel::where('parent_first_name', $request->mother_first_name)->where('parent_middle_name', $request->mother_middle_name)->where('parent_last_name', $request->mother_last_name)->first();
+         if(count($check_if_mother_exists) == 0)
+         {
+         	$mother = new ParentModel;
+	         $mother->parent_first_name = $request->mother_first_name;
+	         $mother->parent_middle_name = $request->mother_middle_name;
+	         $mother->parent_last_name = $request->mother_last_name;
+	         $mother->sex = 'F';
+	         $mother->save();
+	      }
+         
+         $has_father = new HasParent;
+         $has_father->patient_id = $request->user_name;
+         $has_father->parent_id = ParentModel::where('parent_first_name', $request->father_first_name)->where('parent_middle_name', $request->father_middle_name)->where('parent_last_name', $request->father_last_name)->first()->id;
+         $has_father->save();
+         $has_mother = new HasParent;
+         $has_mother->patient_id = $request->user_name;
+         $has_mother->parent_id = ParentModel::where('parent_first_name', $request->mother_first_name)->where('parent_middle_name', $request->mother_middle_name)->where('parent_last_name', $request->mother_last_name)->first()->id;
+         $has_mother->save();
+         $check_if_guardian_exists = Guardian::where('guardian_first_name', $request->guardian_first_name)->where('guardian_middle_name', $request->guardian_middle_name)->where('guardian_last_name', $request->guardian_last_name)->first();
+         if(count($check_if_guardian_exists) == 0)
+         {
+         	$guardian = new Guardian;
+	         $guardian->guardian_first_name = $request->guardian_first_name;
+	         $guardian->guardian_middle_name = $request->guardian_middle_name;
+	         $guardian->guardian_last_name = $request->guardian_last_name;
+	         $guardian->guardian_contact_number = $request->guardianresidencecellphone;
+	         $guardian->guardian_telephone_number = $request->guardianresidencetelephone;
+	         $guardian->street = $request->guardian_street;
+	         $guardian_province = Province::where('province_name', $request->guardian_province)->first();
+	         if(count($guardian_province)>0)
+	         {
+	         	$guardian_town = Town::where('town_name', $request->guardian_town)->where('province_id', $guardian_province->id)->first();
+	         	if(count($guardian_town)>0)
+	         	{
+	         		$guardian->town_id = $guardian_town->id;
+	         	}
+	         	else
+	         	{
+	         		$guardian_town = new Town;
+	         		$guardian_town->town_name = $request->guardian_town;
+	         		$guardian_town->province_id = $guardian_province->id;
+	         		//insert the distance from miagao using Google Distance Matrix API
+	         		$guardian_town->save();
+	         		$guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', $guardian_province->id)->first()->id;
+	         	}
+	         }
+	         else
+	         {
+	         	$guardian_province = new Province;
+	            $guardian_province->province_name = $request->guardian_province;
+	            $guardian_province->save();
+	            $guardian_town = new Town;
+	            $guardian_town->town_name = $request->guardian_town;
+	            $guardian_town->province_id = Province::where('province_name', $request->guardian_province)->first()->id;
+	            $guardian_town->save();
+	            $guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', Province::where('province_name', $request->guardian_province)->first()->id)->first()->id;
+	         }
+	         $guardian->save();
+         }
+         $has_guardian = new HasGuardian;
+         $has_guardian->patient_id = $request->user_name;
+         $has_guardian->guardian_id = Guardian::where('guardian_first_name', $request->guardian_first_name)->where('guardian_middle_name', $request->guardian_middle_name)->where('guardian_last_name', $request->guardian_last_name)->first()->id;
+         $has_guardian->relationship = $request->guardian_relationship;
+         $has_guardian->save();
+         $medical_history = new MedicalHistory;
+         $medical_history->patient_id = $request->user_name;
+         $medical_history->illness = $request->illness_history;
+         $medical_history->operation = $request->operation_history;
+         $medical_history->allergies = $request->allergies_history;
+         $medical_history->family = $request->family_history;
+         $medical_history->maintenance_medication = $request->maintenance_medication_history;
+         $medical_history->save();
+
+         $medical_appointment = new MedicalAppointment;
+         $medical_appointment->patient_id = $request->user_name;
+         $medical_appointment->medical_schedule_id = $request->schedule_id;
+         $medical_appointment->reasons = $request->reasons;
+         $medical_appointment->save();
+         Auth::loginUsingId($request->user_name, true);
+         return response()->json(['test' => 'yes']);
 		}
 	}
 }

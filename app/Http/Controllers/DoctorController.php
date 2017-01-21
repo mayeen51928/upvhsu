@@ -101,6 +101,11 @@ class DoctorController extends Controller
                 $town->town_name = $request->input('town');
                 $town->province_id = $province->id;
                 //insert the distance from miagao using Google Distance Matrix API
+                $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
+                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+                $json = json_decode(file_get_contents($url), true);
+                $distance=$json['rows'][0]['elements'][0]['distance']['value'];
+                $town->distance_to_miagao = $distance/1000;
                 $town->save();
                 $doctor->town_id = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first()->id;
             }
@@ -113,6 +118,11 @@ class DoctorController extends Controller
             $town = new Town;
             $town->town_name = $request->input('town');
             $town->province_id = Province::where('province_name', $request->input('province'))->first()->id;
+            $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
+            $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+            $json = json_decode(file_get_contents($url), true);
+            $distance=$json['rows'][0]['elements'][0]['distance']['value'];
+            $town->distance_to_miagao = $distance/1000;
             $town->save();
             $doctor->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
         }

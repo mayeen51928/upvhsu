@@ -70,7 +70,6 @@ class PatientController extends Controller
         $params['street'] = $patient->street;
         $params['town'] = Town::find($patient->town_id)->town_name;
         $params['province'] = Province::find(Town::find($patient->town_id)->province_id)->province_name;
-        // $params['region'] = Region::find(Province::find(Town::find($patient->town_id)->province_id)->region_id)->region_name;
         $params['residence_telephone_number'] = $patient->residence_telephone_number;
         $params['personal_contact_number'] = $patient->personal_contact_number;
         $params['residence_contact_number'] = $patient->residence_contact_number;
@@ -120,7 +119,6 @@ class PatientController extends Controller
         $params['residence_telephone_number'] = $patient->residence_telephone_number;
         $params['personal_contact_number'] = $patient->personal_contact_number;
         $params['residence_contact_number'] = $patient->residence_contact_number;
-        // $guardian = HasGuardian::where('patient_id', Auth::user()->user_id)->first();
         $guardian = HasGuardian::where('patient_id', Auth::user()->user_id)->first();
         $params['guardian_first_name'] = Guardian::find($guardian->guardian_id)->guardian_first_name;
         $params['guardian_middle_name'] = Guardian::find($guardian->guardian_id)->guardian_middle_name;
@@ -156,7 +154,6 @@ class PatientController extends Controller
             $patient->religion_id = Religion::where('religion_description', $request->input('religion'))->first()->id;
         }
         $nationality = Nationality::where('nationality_description', $request->input('nationality'))->first();
-        // dd($religion->id);
         if(count($nationality)>0)
         {
             $patient->nationality_id = $nationality->id;
@@ -203,6 +200,11 @@ class PatientController extends Controller
                 $town->town_name = $request->input('town');
                 $town->province_id = $province->id;
                 //insert the distance from miagao using Google Distance Matrix API
+                $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
+                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+                $json = json_decode(file_get_contents($url), true);
+                $distance=$json['rows'][0]['elements'][0]['distance']['value'];
+                $town->distance_to_miagao = $distance/1000;
                 $town->save();
                 $patient->town_id = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first()->id;
             }
@@ -215,6 +217,11 @@ class PatientController extends Controller
             $town = new Town;
             $town->town_name = $request->input('town');
             $town->province_id = Province::where('province_name', $request->input('province'))->first()->id;
+            $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
+                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+                $json = json_decode(file_get_contents($url), true);
+                $distance=$json['rows'][0]['elements'][0]['distance']['value'];
+                $town->distance_to_miagao = $distance/1000;
             $town->save();
             $patient->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
         }
@@ -262,7 +269,6 @@ class PatientController extends Controller
         $guardian->update();
         $guardian_info->update();
         $patient->update();
-        // $request->session()->flash('alert-success', 'Update Success!');     
         return redirect('account/profile');
     }
     public function visits()
