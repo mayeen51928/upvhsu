@@ -30,7 +30,7 @@
 							<td>{{ $dental_appointment_fin->patient_first_name }} {{ $dental_appointment_fin->patient_last_name }}</td>
 							<td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dental_appointment_fin->schedule_start)->format('H:i:s') }} - {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dental_appointment_fin->schedule_end)->format('H:i:s') }}</td>
 							<td>{{ $dental_appointment_fin->reasons }}</td>
-							<td><button class="btn btn-primary btn-xs addDentalRecordButton" id="{{ $dental_appointment_fin->id }}">Update Diagnosis</button></td>
+							<td><form action="/dentist/updatedentalrecord" method="POST">{{ csrf_field() }}<input type="hidden" value="{{ $dental_appointment_fin->id }}" name="addDentalRecord"><input type="submit" class="btn btn-primary btn-xs addDentalRecordButton" id="{{ $dental_appointment_fin->id }}" value="Update Diagnosis"></form></td>
 						</tr>
             @endforeach
 					</tbody>
@@ -127,8 +127,6 @@
   // token and createPostUrl are needed to be passed to AJAX method call
   var token = '{{csrf_token()}}';
   var addDentalRecord = '/addrecord_dental';
-  var addDentalRecordPerTeeth = '/addrecord_dental_teeth';
-  var updateDentalRecord = '/update_dental_teeth';
 </script>
 
 @endsection

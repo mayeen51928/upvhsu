@@ -58,16 +58,15 @@ class DentistController extends Controller
 			return response()->json(['dental_appointment_info' => $dental_appointment_info]); 
 		}
 
-		public function addrecordperteeth(Request $request)
+		public function updatedentalrecord(Request $request)
 		{
-			$appointment_id = $request->appointment_id;
+			$appointment_id = $request->addDentalRecord;
+			dd($appointment_id);
 			$teeth_id = $request->teeth_id;
-			// $display_latest_dental_record = DB::table('dental_records')
-			// 			->where('appointment_id', '=', $appointment_id)
-			// 			->where('teeth_id', '=', $teeth_id)
-			// 			->orderBy('created_at', 'desc')
-			// 			->first();
-			return response()->json(['appointment_id' => $appointment_id, 'teeth_id' => $teeth_id]); 
+			$params['navbar_active'] = 'account';
+			$params['sidebar_active'] = 'dashboard';
+
+			return view('staff.dental-dentist.adddentalrecord', $params);
 		}
 	    public function profile()
 	    {
@@ -160,25 +159,6 @@ class DentistController extends Controller
 	        $dentist->update();
 	        return redirect('dentist/profile');
 	    }
-
-		public function updaterecordperteeth(Request $request)
-		{
-			$appointment_id = $request->appointment_id;
-			$teeth_id = $request->teeth_id;
-			$condition_id = $request->condition_id;
-			$operation_id = $request->operation_id;
-
-			DB::table('dental_records')->insert([
-			    [	'appointment_id' => $request->appointment_id, 
-			    	'teeth_id' => $request->teeth_id,
-			    	'condition_id' => $request->condition_id,
-			    	'operation_id' => $request->operation_id,
-			    	'created_at' =>  date('Y-m-d H:i:s')
-			    ],
-			]);
-
-			return response()->json(['success' => 'success']); 
-		}
 
 		public function manageschedule()
 		{
