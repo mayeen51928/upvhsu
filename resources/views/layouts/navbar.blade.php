@@ -59,6 +59,11 @@
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/cashier/profile') }}">Profile</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Search Patient</a></li>
 							@endif
+						@elseif(Auth::user()->user_type_id == 3)
+								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/admin') }}">Dashboard</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'addstaffaccount')class="active" @endif><a href="{{ url('/admin/addaccount') }}">Add Staff Account</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'addstudentnumber')class="active" @endif><a href="{{ url('/admin/addstudent') }}">Add Student Number to Database</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'generateschedule')class="active" @endif><a href="{{ url('/admin/addstudent') }}">Generate PE Schedule</a></li>
 						@endif
 						<li>
 							<a href="{{ url('/logout') }}" 

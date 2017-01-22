@@ -13,10 +13,10 @@
             <form method="POST" action="{{ url('/admin/postannouncement') }}">
               {{ csrf_field() }}
             <div class="form-group">
-            <input type="text" class="form-control" name="announcement_title" id="announcement_title" placeholder="Title" />
+            <input type="text" class="form-control" name="announcement_title" id="announcement_title" placeholder="Title" required autofocus/>
             </div>
             <div class="form-group">
-              <textarea class="form-control" rows="10" name="announcement_body" id="announcement_body" placeholder="Body"></textarea>
+              <textarea class="form-control" rows="10" name="announcement_body" id="announcement_body" placeholder="Body" required></textarea>
             </div>
             <input type="submit" class="btn btn-success" name="createannouncment" value="Post Announcment" />
             </form>

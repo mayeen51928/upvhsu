@@ -68,6 +68,7 @@
   		<ul class="nav nav-sidebar">
   			<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/admin') }}">Dashboard <span class="sr-only">(current)</span></a></li>
   			<li id="addAccount" @if($sidebar_active == 'addstaffaccount')class="active" @endif><a href="{{ url('/admin/addaccount') }}">Add Staff Account</a></li>
+  			<li id="addStudentNumber" @if($sidebar_active == 'addstudentnumber')class="active" @endif><a href="{{ url('/admin/addstudent') }}">Add Student Number to Database</a></li>
   			<li id="generateSched" @if($sidebar_active == 'generateschedule')class="active" @endif><a href="{{ url('/dentist/generateschedule') }}">Generate Upperclassmen Physical Examination Schedule</a></li>
   		</ul>
   		<ul class="nav nav-sidebar">

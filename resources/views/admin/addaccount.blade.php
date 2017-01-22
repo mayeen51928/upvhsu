@@ -7,6 +7,12 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="adminDashboard">
       <h1 class="page-header">Admin</h1>
       <div class="col-md-9 col-md-offset-1">
+        @if (session('status'))
+        <div class="alert alert-success alert-dismissable">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          {{ session('status') }}
+        </div>
+        @endif
         <div class="panel panel-info">
           <div class="panel-heading">Add Account</div>
           <div class="panel-body">
@@ -15,25 +21,25 @@
               <div class="form-group">
                 <label for="staff_id" class="col-md-4 control-label">Staff ID</label>
                 <div class="col-md-6">
-                  <input id="staff_id" type="text" class="form-control" name="staff_id" required autofocus>
+                  <input id="staff_id" type="text" class="form-control" name="staff_id" required autofocus placeholder="Enter Staff ID"/>
                 </div>
               </div>
               <div class="form-group">
                 <label for="staff_first_name" class="col-md-4 control-label">First Name</label>
                 <div class="col-md-6">
-                  <input id="staff_first_name" type="text" class="form-control" name="staff_first_name" required>
+                  <input id="staff_first_name" type="text" class="form-control" name="staff_first_name" required placeholder="Enter Staff First Name"/>
                 </div>
               </div>
               <div class="form-group">
                 <label for="staff_middle_name" class="col-md-4 control-label">Middle Name</label>
                 <div class="col-md-6">
-                  <input id="staff_middle_name" type="text" class="form-control" name="staff_middle_name" required autofocus>
+                  <input id="staff_middle_name" type="text" class="form-control" name="staff_middle_name" required autofocus placeholder="Enter Staff Middle Name"/>
                 </div>
               </div>
               <div class="form-group">
                 <label for="staff_last_name" class="col-md-4 control-label">Last Name</label>
                 <div class="col-md-6">
-                  <input id="staff_last_name" type="text" class="form-control" name="staff_last_name" required autofocus>
+                  <input id="staff_last_name" type="text" class="form-control" name="staff_last_name" required autofocus placeholder="Enter Staff Last Name"/>
                 </div>
               </div>
               <div class="form-group">
@@ -52,7 +58,7 @@
               <div class="form-group">
                 <label for="password" class="col-md-4 control-label">Password</label>
                 <div class="col-md-6">
-                  <input id="staff_password" type="password" class="form-control" name="staff_password" required>
+                  <input id="staff_password" type="password" class="form-control" name="staff_password" required placeholder="Enter temporary password"/>
                 </div>
               </div>
               {{-- <div class="form-group">
