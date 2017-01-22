@@ -23,12 +23,14 @@
 								<th>Date</th>
 								<th>Doctor</th>
 							</tr>
-						</thead>
+            </thead>
 						<tbody>
-							<tr>
-								<td><a>Date</a></td>
-								<td>Doctor</td>
-							</tr>
+            @foreach($medical_appointments as $medical_appointment)
+                <tr>
+                  <td><a>{{$medical_appointment->schedule_day}}</a></td>
+                  <td>{{$medical_appointment->staff_first_name}} {{$medical_appointment->staff_last_name}}</td>
+                </tr>
+              @endforeach
 						</tbody>
 					</table>
 				</div>
@@ -45,10 +47,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><a>Date</a></td>
-								<td>Time</td>
-								<td>Dentis</td>
+							@foreach($dental_appointments as $dental_appointment)
+                <tr>
+                  <td><a>{{$dental_appointment->schedule_start}}</a></td>
+                  <td>{{$dental_appointment->schedule_end}}</td>
+                  <td>{{$dental_appointment->staff_first_name}} {{$dental_appointment->staff_last_name}}</td>
+                </tr>
+              @endforeach
 							</tr>
 						</tbody>
 					</table>

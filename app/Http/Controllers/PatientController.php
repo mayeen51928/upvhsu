@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 use App\Patient;
 use App\DegreeProgram;
 use App\Religion;
@@ -35,12 +36,8 @@ class PatientController extends Controller
 
     public function dashboard()
     {
-        $medical_appointments = MedicalAppointment::where('patient_id', Auth::user()->user_id)->get();
-        // dd($medical_appointments);
-        // foreach($medical_appointments as $medical_appointment)
-        // {
-        //     dd($medical_appointment->medicalschedule->schedule_day);
-        // }
+        $params['medical_appointments'] = DB::table('medical_appointments')->join('medical_schedules', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->get();
+        $params['dental_appointments'] = DB::table('dental_appointments')->join('dental_schedules', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->get();
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
         return view('patient.dashboard', $params);
@@ -218,10 +215,10 @@ class PatientController extends Controller
             $town->town_name = $request->input('town');
             $town->province_id = Province::where('province_name', $request->input('province'))->first()->id;
             $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
-                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
-                $json = json_decode(file_get_contents($url), true);
-                $distance=$json['rows'][0]['elements'][0]['distance']['value'];
-                $town->distance_to_miagao = $distance/1000;
+            $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+            $json = json_decode(file_get_contents($url), true);
+            $distance=$json['rows'][0]['elements'][0]['distance']['value'];
+            $town->distance_to_miagao = $distance/1000;
             $town->save();
             $patient->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
         }
