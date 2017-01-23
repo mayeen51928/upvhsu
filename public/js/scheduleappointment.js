@@ -349,6 +349,8 @@ $(document).ready( function(){
 	    }
 	    else
 	    {
+        $("#degree_program_dental option[value=default]").prop('selected', true);
+        $('#yearlevel_dental').val('');
 	    	$("#degree_program_dental").attr('disabled', 'disabled');
 	    	$('#yearlevel_dental').attr('disabled', 'disabled');
 	    }
@@ -362,12 +364,15 @@ $(document).ready( function(){
 	    }
 	    else
 	    {
+        $("#degree_program_medical option[value=default]").prop('selected', true);
+        $('#yearlevel_medical').val('');
 	    	$("#degree_program_medical").attr('disabled', 'disabled');
 	    	$('#yearlevel_medical').attr('disabled', 'disabled');
 	    }
     });
     
     $('#signupconfirmDental_modal').click(function(){
+      $('#login_dental_error').html('');
     	var scheduleID = $('#selectdentaltime').find(':selected')[0].id;
         if(
         	$('#user_name_modal_dental').val() &&
@@ -457,16 +462,28 @@ $(document).ready( function(){
                 maintenance_medication_history:$('#maintenance_medication_history_dental').val(),
 	        } ,
 	        function(data){
-	        	$('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
-	        	$('#dentalNotes').attr("disabled", "disabled");
-	        	$('#selDentalDate').attr("disabled", "disabled");
-	        	$('#selDentalTime').attr("disabled", "disabled");
-	        	$('#submitDentalAppointment').addClass("disabled");
-	        	$('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
-	        	$('#navigationBar').load(location.href + " #navigationBar");
-	        	$( "#loginmodaldental" ).find( "input" ).attr({disabled: 'disabled'});
-	        	setTimeout(function() { $('#loginmodaldental').modal("hide"); }, 500);
+            if(data['message'] == 'Success')
+            {
+              $('#login_dental_error').html('');
+              $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
+              $('#dentalNotes').attr("disabled", "disabled");
+              $('#selDentalDate').attr("disabled", "disabled");
+              $('#selDentalTime').attr("disabled", "disabled");
+              $('#submitDentalAppointment').addClass("disabled");
+              $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
+              $('#navigationBar').load(location.href + " #navigationBar");
+              $( "#loginmodaldental" ).find( "input" ).attr({disabled: 'disabled'});
+              setTimeout(function() { $('#loginmodaldental').modal("hide"); }, 500);
+            }
+	        	else
+            {
+              $('#login_dental_error').css('color', 'red').delay(2000).html(data['message']);
+            }
 	        });
+        }
+        else
+        {
+          $('#login_dental_error').css('color', 'red').delay(2000).html('Please fill out all fields!');
         }
     });
     
@@ -594,6 +611,7 @@ $(document).ready( function(){
     });
 
     $('#signupconfirmMedical_modal').click(function(){
+      $('#login_medical_error').html('');
     	var scheduleID = $('#selectmedicaldoctor').find(':selected')[0].id;
     	if(
         	$('#user_name_modal_medical').val() &&
@@ -683,16 +701,29 @@ $(document).ready( function(){
                 maintenance_medication_history:$('#maintenance_medication_history_medical').val(),
 	        } ,
 	        function(data){
-	        	$('#medicalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
-	        	$('#medicalNotes').attr("disabled", "disabled");
-	        	$('#selMedicalDate').attr("disabled", "disabled");
-	        	$('#selMedicalTime').attr("disabled", "disabled");
-	        	$('#submitMedicalAppointment').addClass("disabled");
-	        	$('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
-	        	$('#navigationBar').load(location.href + " #navigationBar");
-	        	$( "#loginmodalmedical" ).find( "input" ).attr({disabled: 'disabled'});
-	        	setTimeout(function() { $('#loginmodalmedical').modal("hide"); }, 500);
+            if(data['message'] == 'Success')
+            {
+              $('#login_medical_error').html('');
+              $('#medicalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
+              $('#medicalNotes').attr("disabled", "disabled");
+              $('#selMedicalDate').attr("disabled", "disabled");
+              $('#selMedicalTime').attr("disabled", "disabled");
+              $('#submitMedicalAppointment').addClass("disabled");
+              $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
+              $('#navigationBar').load(location.href + " #navigationBar");
+              $( "#loginmodalmedical" ).find( "input" ).attr({disabled: 'disabled'});
+              setTimeout(function() { $('#loginmodalmedical').modal("hide"); }, 500);
+            }
+            else
+            {
+              $('#login_medical_error').css('color', 'red').delay(2000).html(data['message']);
+            }
+	        	
 	        });
+        }
+        else
+        {
+          $('#login_medical_error').css('color', 'red').delay(2000).html('Please fill out all fields!');
         }
     });
 });

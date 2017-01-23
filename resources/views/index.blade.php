@@ -39,6 +39,8 @@
 							<strong>{{ $errors->first('password') }}</strong>
 						</span>
 						@endif
+						<small>To register, please schedule an appointment first.</small>
+						<br/><br/>
 						<div class="form-group">
 							<button type="submit" class="btn btn-success">Login</button>
 						</div>

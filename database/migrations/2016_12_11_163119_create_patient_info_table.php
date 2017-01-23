@@ -25,6 +25,7 @@ class CreatePatientInfoTable extends Migration
             $table->integer('year_level');
             $table->integer('degree_program_id')->unsigned()->index()->nullable();
             $table->foreign('degree_program_id')->references('id')->on('degree_programs')->onDelete('cascade');
+            $table->enum('graduated', ['0', '1']);
             $table->enum('sex', ['M', 'F']);
             $table->date('birthday');
             $table->enum('civil_status', ['Single', 'Married', 'Separated', 'Divorced', 'Widowed']);

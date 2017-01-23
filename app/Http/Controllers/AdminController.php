@@ -7,6 +7,7 @@ use App\User;
 use App\Staff;
 use App\Announcement;
 use App\StudentNumber;
+use DB;
 class AdminController extends Controller
 {
     public function __construct()
@@ -74,5 +75,14 @@ class AdminController extends Controller
         $announcement->announcement_body = $request->announcement_body;
         $announcement->save();
         return redirect('announcements')->with('status', 'Announcement posted!');
+    }
+
+    public function generateschedule()
+    {
+        $params['schedules'] = DB::table('patient_info')->join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->where('patient_type_id', 1)->orderBy('distance_to_miagao', 'desc')->get();
+        // check also if the student has graduated
+        $params['navbar_active'] = 'account';
+        $params['sidebar_active'] = 'generateschedule';
+        return view('admin.generateschedule', $params);
     }
 }

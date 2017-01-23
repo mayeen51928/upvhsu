@@ -8,10 +8,22 @@
 			<div class="panel-body">
 				<form class="form-inline">
 					<div class="checkbox col-md-6">
-						<label><input type="checkbox" name="type_dental" id="typeDental"/> Dental</label>
+						<label><input type="checkbox" name="type_dental" id="typeDental"
+						@if(Auth::check())
+							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)
+							disabled
+							@endif
+						@endif 
+						/> Dental</label>
 					</div>
 					<div class="checkbox col-md-6">
-						<label><input type="checkbox" name="type_medical" id="typeMedical"/> Medical</label>
+						<label><input type="checkbox" name="type_medical" id="typeMedical"
+						@if(Auth::check())
+							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)
+							disabled
+							@endif
+						@endif
+						/> Medical</label>
 					</div>
 				</form>
 			</div>
@@ -131,7 +143,7 @@
 						<div class="form-group signup">
 							<label>Degree Program:</label>
 							<select class="form-control" name="degree_program_dental" id="degree_program_dental" title="Select the degree program you are currently enrolled in." disabled="">
-								<option disabled selected>select degree program</option>
+								<option disabled selected value="default">select degree program</option>
 								<optgroup label="College of Arts and Sciences">
 									<option value="8">BS Applied Mathematics</option>
   									<option value="9">BS Biology</option>
@@ -351,7 +363,7 @@
 						<div class="form-group signup">
 							<label>Degree Program:</label>
 							<select class="form-control" name="degree_program_medical" id="degree_program_medical" title="Select the degree program you are currently enrolled in." disabled="">
-								<option disabled selected>select degree program</option>
+								<option disabled selected value="default">select degree program</option>
 								<optgroup label="College of Arts and Sciences">
 									<option value="8">BS Applied Mathematics</option>
   									<option value="9">BS Biology</option>

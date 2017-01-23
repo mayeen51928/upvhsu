@@ -26,16 +26,6 @@ class Patient extends Model
 
     public function town()
     {
-        return $this->hasOne(Town::class);
-    }
-
-    public function province()
-    {
-        return $this->hasOne(Province::class);
-    }
-
-    public function region()
-    {
-        return $this->hasOne(Region::class);
+        return $this->belongsTo(Town::class, 'town_id');
     }
 }

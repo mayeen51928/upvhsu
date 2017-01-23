@@ -83,3 +83,4 @@ Route::post('/admin/createstaffaccount', 'AdminController@createstaffaccount');
 Route::post('/admin/postannouncement', 'AdminController@postannouncement');
 Route::get('/admin/addstudent', 'AdminController@addstudent');
 Route::post('/admin/createstudent', 'AdminController@createstudent');
+Route::get('/admin/generateschedule', 'AdminController@generateschedule');
