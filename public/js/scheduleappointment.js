@@ -299,6 +299,7 @@ $(document).ready( function(){
         		$('#selDentalTime').attr("disabled", "disabled");
         		$('#submitDentalAppointment').addClass("disabled");
         		$('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
+            $('#submitdentalappointment').attr("disabled", "disabled");
         		$('#navigationBar').load(location.href + " #navigationBar");
         		$('#loginmodaldental').modal("hide");
         	}
@@ -328,6 +329,7 @@ $(document).ready( function(){
                     $('#submitMedicalAppointment').addClass("disabled");
                     $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
                     $('#navigationBar').load(location.href + " #navigationBar");
+                    $("#submitmedicalappointment").attr('disabled','disabled');
                     $('#loginmodalmedical').modal("hide");
         	}
         	else
@@ -473,6 +475,7 @@ $(document).ready( function(){
               $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
               $('#navigationBar').load(location.href + " #navigationBar");
               $( "#loginmodaldental" ).find( "input" ).attr({disabled: 'disabled'});
+              $('#submitdentalappointment').attr("disabled", "disabled");
               setTimeout(function() { $('#loginmodaldental').modal("hide"); }, 500);
             }
 	        	else
@@ -712,6 +715,7 @@ $(document).ready( function(){
               $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
               $('#navigationBar').load(location.href + " #navigationBar");
               $( "#loginmodalmedical" ).find( "input" ).attr({disabled: 'disabled'});
+              $("#submitmedicalappointment").attr('disabled','disabled');
               setTimeout(function() { $('#loginmodalmedical').modal("hide"); }, 500);
             }
             else
