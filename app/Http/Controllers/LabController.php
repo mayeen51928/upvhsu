@@ -16,6 +16,9 @@ class LabController extends Controller
     			if(Auth::user()->user_type_id == 2 and Auth::user()->staff->staff_type_id == 3){
 					return $next($request);
 				}
+                else{
+                    return back();
+                }
     		}
     		else{
     			return redirect('/');

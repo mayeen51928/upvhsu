@@ -16,6 +16,9 @@ class CashierController extends Controller
     			if(Auth::user()->user_type_id == 2 and Auth::user()->staff->staff_type_id == 5){
 					return $next($request);
 				}
+                else{
+                    return back();
+                }
     		}
     		else{
     			return redirect('/');

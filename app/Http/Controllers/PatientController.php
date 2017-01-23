@@ -27,6 +27,9 @@ class PatientController extends Controller
     			if(Auth::user()->user_type_id == 1){
 					return $next($request);
 				}
+                else{
+                    return back();
+                }
     		}
     		else{
     			return redirect('/');

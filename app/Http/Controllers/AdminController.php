@@ -17,6 +17,9 @@ class AdminController extends Controller
     			if(Auth::user()->user_type_id == 3){
 					return $next($request);
 				}
+                else{
+                    return back();
+                }
     		}
     		else{
     			return redirect('/');

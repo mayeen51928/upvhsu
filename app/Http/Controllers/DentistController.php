@@ -21,7 +21,10 @@ class DentistController extends Controller
 				if(Auth::check()){
 					if(Auth::user()->user_type_id == 2 and Auth::user()->staff->staff_type_id == 1){
 					return $next($request);
-				}
+					}
+					else{
+						return back();
+					}
 				}
 				else{
 					return redirect('/');
