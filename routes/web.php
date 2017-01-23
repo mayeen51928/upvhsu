@@ -17,7 +17,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/scheduleappointment', 'PagesController@scheduleappointment');
 Route::get('/announcements', 'PagesController@announcements');
-// Route::post('/see_more_announcements', 'PagesController@seemoreannouncements');
 Route::post('/displayschedule_dental', 'PagesController@displayscheduledental');
 Route::post('/displayschedule_medical', 'PagesController@displayschedulemedical');
 Route::post('/createappointment_dental', 'PagesController@createappointmentdental');
@@ -33,14 +32,15 @@ Route::get('/account/bills','PatientController@bills');
 
 /* ROUTES FOR DENTIST ACCOUNT */
 Route::get('/dentist','DentistController@dashboard');
-Route::post('/dentist/updatedentalrecord','DentistController@updatedentalrecord');
 Route::get('/dentist/profile','DentistController@profile');
 Route::get('/dentist/profile/edit','DentistController@editprofile');
 Route::post('/dentist/profile/update','DentistController@updateprofile');
 Route::get('/dentist/manageschedule','DentistController@manageschedule');
 Route::get('/dentist/searchpatient','DentistController@searchpatient');
 Route::post('/addschedule_dental', 'DentistController@addschedule');
-Route::post('/addrecord_dental', 'DentistController@addrecord');
+Route::post('/dentist/updatedentalrecord','DentistController@updatedentalrecord');
+Route::post('/update_dental_record_modal','DentistController@updatedentalrecordmodal');
+Route::post('/insert_dental_record_modal','DentistController@insertdentalrecordmodal');
 
 /* ROUTES FOR MEDICAL DOCTOR ACCOUNT */
 Route::get('/doctor','DoctorController@dashboard');

@@ -164,7 +164,7 @@ $(document).ready( function(){
               $('#remarkModalFooter').html('Last modified: ' + date);
           }
       });
-      $('#prescriptionModal').modal();
+      $('#update-dental-record-modal').modal();
   });
 
   $('.view_dental_history').click(function() {

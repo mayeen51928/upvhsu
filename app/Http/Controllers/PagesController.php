@@ -40,15 +40,6 @@ class PagesController extends Controller
     return view('announcements', $params, compact('announcements'));
   }
 
-  public function seemoreannouncements(Request $request)
-  {
-    // $announcement_id = $request->announcement_id;
-    // $see_more_announcements = DB::table('announcements')
-    //         ->where('announcements.id', '=', $announcement_id)
-    //         ->first();
-    // return response()->json(['see_more_announcements' => $see_more_announcements]);
-  }
-
   public function displayscheduledental(Request $request)
   {
     $dental_date = $request->dental_date;

@@ -50,7 +50,7 @@ class AdminController extends Controller
         $staff_info->staff_middle_name = $request->staff_middle_name;
         $staff_info->staff_last_name = $request->staff_last_name;
         $staff_info->save();
-        return redirect('admin/addaccount');
+        return redirect('/dentist/updatedentalrecord');
     }
 
     public function postannouncement(Request $request)

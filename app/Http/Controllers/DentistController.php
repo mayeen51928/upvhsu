@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\DentalSchedule;
-use App\DentalAppointment;
 use App\DentalRecord;
+use App\DentalAppointment;
 use App\Patient;
 use DB;
 use App\Staff;
 use App\Town;
 use App\Province;
+use Log;
 
 class DentistController extends Controller
 {
@@ -20,8 +21,8 @@ class DentistController extends Controller
 			$this->middleware(function ($request, $next) {
 				if(Auth::check()){
 					if(Auth::user()->user_type_id == 2 and Auth::user()->staff->staff_type_id == 1){
-					return $next($request);
-				}
+						return $next($request);
+					}
 				}
 				else{
 					return redirect('/');
@@ -39,34 +40,141 @@ class DentistController extends Controller
 					->where('dental_schedules.staff_id', '=', $user->user_id)
 					->get();
 
+
 			return view('staff.dental-dentist.dashboard', $params, compact('dental_appointments_fin'));
-		}
-
-		public function addrecord(Request $request)
-		{
-			$appointment_id = $request->appointment_id;
-			$dental_appointment_info = DB::table('dental_appointments')
-						->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
-						->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')
-						->where('dental_appointments.id', '=', $appointment_id)
-						->first();
-
-			$schedule_start = date_create($dental_appointment_info->schedule_start);
-			$dental_appointment_info->schedule_start = date_format($schedule_start,"H:i:s");
-			$schedule_end = date_create($dental_appointment_info->schedule_end);
-			$dental_appointment_info->schedule_end = date_format($schedule_end,"H:i:s");
-			return response()->json(['dental_appointment_info' => $dental_appointment_info]); 
 		}
 
 		public function updatedentalrecord(Request $request)
 		{
 			$appointment_id = $request->addDentalRecord;
-			dd($appointment_id);
-			$teeth_id = $request->teeth_id;
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'dashboard';
 
-			return view('staff.dental-dentist.adddentalrecord', $params);
+			$patient_infos = DB::table('dental_appointments')
+					->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
+					->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')
+					->where('dental_appointments.id', '=', $appointment_id)
+					->get();
+
+			$appointment_ids = DB::table('dental_appointments')
+					->where('dental_appointments.id', '=', $appointment_id)
+					->get();
+
+			$stacks_condition = array();
+			$stacks_operation = array();
+			for ($x = 55; $x >= 51; $x--)
+			{
+		    $dental_chart_results = DB::table('dental_records')
+		    ->orderBy('created_at', 'desc')
+				->where('teeth_id', '=', $x)
+				->pluck('condition_id')
+				->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "pink";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "violet";
+				}
+				else{
+					$dental_chart_results = "yellow";
+				}
+				array_push($stacks_condition, $dental_chart_results);
+
+
+				$dental_chart_results = DB::table('dental_records')
+		    ->orderBy('created_at', 'desc')
+				->where('teeth_id', '=', $x)
+				->pluck('operation_id')
+				->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "pink";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "violet";
+				}
+				else{
+					$dental_chart_results = "yellow";
+				}
+				array_push($stacks_operation, $dental_chart_results);
+			}
+					
+			return view('staff.dental-dentist.adddentalrecord', $params, compact('appointment_ids', 'patient_infos', 'stacks_condition', 'stacks_operation'));
+		}
+
+		public function updatedentalrecordmodal(Request $request)
+		{
+			$teeth_id = $request->teeth_id;
+			$teeth_info_condition = DB::table('dental_records')
+		    ->orderBy('created_at', 'desc')
+				->where('teeth_id', '=', $teeth_id)
+				->pluck('condition_id')
+				->first();
+
+			$teeth_info_operation = DB::table('dental_records')
+		    ->orderBy('created_at', 'desc')
+				->where('teeth_id', '=', $teeth_id)
+				->pluck('operation_id')
+				->first();
+
+			if(count($teeth_info_operation) > 0){
+				$status = 1;
+			}
+			else{
+				$status = 0;
+			} 
+
+			return response()->json(['condition_id' => $teeth_info_condition, 'operation_id' => $teeth_info_operation, 'status' => $status,]); 
+
+		}
+
+		public function insertdentalrecordmodal(Request $request)
+		{
+	  //     	$current_dental_record = DB::table('dental_records')
+			// 			->where('dental_records.teeth_id', '=', $request->teeth_id)
+			// 			->where('dental_records.appointment_id', '=', $request->appointment_id)
+			// 			->get();
+
+			// if(count($current_dental_record) == 0)
+	      	{
+		      	$dental_record = new DentalRecord();
+	            $dental_record->teeth_id = $request->teeth_id;
+	            $dental_record->condition_id = $request->condition_id;
+	            $dental_record->operation_id = $request->operation_id;
+	            $dental_record->appointment_id = $request->appointment_id;
+	            $dental_record->save();
+	      	}
+	      	// else
+	      	// {
+	      	// 	$update = [['condition_id'=>$request->condition_id],['operation_id' => $request->operation_id]];
+
+		      // 	$dental_record = DB::table('dental_records')
+		      // 		->where('dental_records.teeth_id', $request->teeth_id)
+		      // 		->where('dental_records.appointment_id', $request->appointment_id)
+	       //      ->update($update);
+	      	// };
+
+	      	return response()->json(['color' => $color]); 
+				 
 		}
 	    public function profile()
 	    {
@@ -162,14 +270,14 @@ class DentistController extends Controller
 
 		public function manageschedule()
 		{
-				$params['navbar_active'] = 'account';
+			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'manageschedule';
 			return view('staff.dental-dentist.manageschedule', $params);
 		}
 
 		public function searchpatient()
 		{
-				$params['navbar_active'] = 'account';
+			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'searchpatient';
 			return view('staff.dental-dentist.searchpatient', $params);
 		}
