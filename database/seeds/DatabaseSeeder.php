@@ -10,6 +10,58 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('user_types')->insert([
+            'user_type_description' => 'Patient',
+            ]);
+
+        DB::table('user_types')->insert([
+            'user_type_description' => 'Staff',
+            ]);
+
+        DB::table('user_types')->insert([
+            'user_type_description' => 'Admin',
+            ]);
+
+        DB::table('patient_types')->insert([
+            'patient_type_description' => 'Student',
+            ]);
+
+        DB::table('patient_types')->insert([
+            'patient_type_description' => 'Faculty',
+            ]);
+
+        DB::table('patient_types')->insert([
+            'patient_type_description' => 'Staff',
+            ]);
+
+        DB::table('patient_types')->insert([
+            'patient_type_description' => 'Dependent',
+            ]);
+
+        DB::table('patient_types')->insert([
+            'patient_type_description' => 'OPD',
+            ]);
+
+        DB::table('staff_types')->insert([
+            'staff_type_description' => 'Dentist',
+            ]);
+
+        DB::table('staff_types')->insert([
+            'staff_type_description' => 'Doctor',
+            ]);
+
+        DB::table('staff_types')->insert([
+            'staff_type_description' => 'Lab',
+            ]);
+
+        DB::table('staff_types')->insert([
+            'staff_type_description' => 'X-ray',
+            ]);
+
+        DB::table('staff_types')->insert([
+            'staff_type_description' => 'Cashier',
+            ]);
+
         // $this->call(UsersTableSeeder::class);
         DB::table('users')->insert([
             'user_id' => 'admin',
