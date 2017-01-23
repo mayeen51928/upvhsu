@@ -21,6 +21,10 @@ Route::post('/displayschedule_dental', 'PagesController@displayscheduledental');
 Route::post('/displayschedule_medical', 'PagesController@displayschedulemedical');
 Route::post('/createappointment_dental', 'PagesController@createappointmentdental');
 Route::post('/createappointment_medical', 'PagesController@createappointmentmedical');
+Route::post('/loginfromdentalappointment', 'PagesController@loginfromdentalappointment');
+Route::post('/loginfrommedicalappointment', 'PagesController@loginfrommedicalappointment');
+Route::post('/signupfromdentalappointment', 'PagesController@signupfromdentalappointment');
+Route::post('/signupfrommedicalappointment', 'PagesController@signupfrommedicalappointment');
 
 /* ROUTES FOR PATIENT ACCOUNT */
 Route::get('/account','PatientController@dashboard');
@@ -77,3 +81,11 @@ Route::get('/admin', 'AdminController@dashboard');
 Route::get('/admin/addaccount', 'AdminController@addaccount');
 Route::post('/admin/createstaffaccount', 'AdminController@createstaffaccount');
 Route::post('/admin/postannouncement', 'AdminController@postannouncement');
+Route::get('/admin/addstudent', 'AdminController@addstudent');
+Route::post('/admin/createstudent', 'AdminController@createstudent');
+Route::get('/admin/generateschedule', 'AdminController@generateschedule');
+
+//For wrong URLs
+Route::get('/{any}', function($any){
+	return back();
+})->where('any', '.*');

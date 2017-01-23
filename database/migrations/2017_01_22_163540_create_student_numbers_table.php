@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMedicalSchedulesTable extends Migration
+class CreateStudentNumbersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateMedicalSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('medical_schedules', function (Blueprint $table) {
+        Schema::create('student_numbers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('staff_id');
-            $table->foreign('staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
-            $table->date('schedule_day');
-            $table->enum('booked', ['0', '1']);
+            $table->string('student_number');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateMedicalSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medical_schedules');
+        Schema::dropIfExists('student_numbers');
     }
 }

@@ -19,6 +19,7 @@ class CreateDentalSchedulesTable extends Migration
             $table->foreign('staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
             $table->dateTime('schedule_start');
             $table->dateTime('schedule_end');
+            $table->enum('booked', ['0', '1']);
             $table->timestamps();
         });
     }

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Staff;
 use App\Announcement;
+use App\StudentNumber;
+use DB;
 class AdminController extends Controller
 {
     public function __construct()
@@ -15,6 +17,9 @@ class AdminController extends Controller
     			if(Auth::user()->user_type_id == 3){
 					return $next($request);
 				}
+                else{
+                    return back();
+                }
     		}
     		else{
     			return redirect('/');
@@ -35,10 +40,15 @@ class AdminController extends Controller
         $params['sidebar_active'] = 'addstaffaccount';
         return view('admin.addaccount', $params);
     }
-
+    public function addstudent()
+    {
+        $params['navbar_active'] = 'account';
+        $params['sidebar_active'] = 'addstudentnumber';
+        return view('admin.addstudent', $params);
+    }
     public function createstaffaccount(Request $request)
     {
-        $staff = new User();
+        $staff = new User;
         $staff->user_id = $request->staff_id;
         $staff->user_type_id = 2;
         $staff->password = bcrypt($request->staff_password);
@@ -50,7 +60,15 @@ class AdminController extends Controller
         $staff_info->staff_middle_name = $request->staff_middle_name;
         $staff_info->staff_last_name = $request->staff_last_name;
         $staff_info->save();
-        return redirect('/dentist/updatedentalrecord');
+        return redirect('admin/addaccount')->with('status', 'Staff account added!');
+    }
+
+    public function createstudent(Request $request)
+    {
+        $student = new StudentNumber;
+        $student->student_number = $request->student_number;
+        $student->save();
+        return redirect('admin/addstudent')->with('status', 'Student number added!');
     }
 
     public function postannouncement(Request $request)
@@ -60,5 +78,14 @@ class AdminController extends Controller
         $announcement->announcement_body = $request->announcement_body;
         $announcement->save();
         return redirect('announcements')->with('status', 'Announcement posted!');
+    }
+
+    public function generateschedule()
+    {
+        $params['schedules'] = DB::table('patient_info')->join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->where('patient_type_id', 1)->orderBy('distance_to_miagao', 'desc')->get();
+        // check also if the student has graduated
+        $params['navbar_active'] = 'account';
+        $params['sidebar_active'] = 'generateschedule';
+        return view('admin.generateschedule', $params);
     }
 }
