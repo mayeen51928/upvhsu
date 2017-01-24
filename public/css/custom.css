@@ -196,6 +196,10 @@ body{
 	display: none;
 }
 
-svg:hover polygon {
-    fill: red;
+svg {
+	margin-top:20px;
+}
+
+.updateDentalDiagnosis{
+	margin-top:50px;
 }

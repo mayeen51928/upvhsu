@@ -39,6 +39,7 @@ class DentistController extends Controller
 					->join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')
 					->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
 					->where('dental_schedules.staff_id', '=', $user->user_id)
+					->where('dental_appointments.status', '=', '0')
 					->get();
 
 			$params['navbar_active'] = 'account';
@@ -76,19 +77,19 @@ class DentistController extends Controller
 					$dental_chart_results = "white";
 				}
 				elseif($dental_chart_results == 1){
-					$dental_chart_results = "red";
-				}
-				elseif($dental_chart_results == 2){
 					$dental_chart_results = "blue";
 				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "pink";
+					$dental_chart_results = "yellow";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "violet";
+					$dental_chart_results = "cyan";
 				}
 				else{
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "pink";
 				}
 				array_push($stacks_condition, $dental_chart_results);
 
@@ -103,19 +104,19 @@ class DentistController extends Controller
 					$dental_chart_results = "white";
 				}
 				elseif($dental_chart_results == 1){
-					$dental_chart_results = "red";
-				}
-				elseif($dental_chart_results == 2){
 					$dental_chart_results = "blue";
 				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "pink";
+					$dental_chart_results = "yellow";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "violet";
+					$dental_chart_results = "cyan";
 				}
 				else{
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "pink";
 				}
 				array_push($stacks_operation, $dental_chart_results);
 			}
@@ -175,9 +176,19 @@ class DentistController extends Controller
 	       //      ->update($update);
 	      	// };
 
-	      	return response()->json(['color' => $color]); 
+	      	return response()->json(['success' => 'success']); 
 				 
 		}
+
+		public function updatedentaldiagnosis(Request $request)
+		{
+			DB::table('dental_appointments')
+	            ->where('dental_appointments.id', $request->appointment_id)
+	            ->update(['status' => '1']);
+	      	return response()->json(['success' => $request->appointment_id]); 
+				 
+		}
+
 	    public function profile()
 	    {
 	        $dentist = Staff::find(Auth::user()->user_id);
