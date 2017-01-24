@@ -65,7 +65,7 @@ class PagesController extends Controller
 	public function displayscheduledental(Request $request)
 	{
 		$dental_date = $request->dental_date;
-		$display_schedules = DentalSchedule::all();
+		$display_schedules = DentalSchedule::where('booked', '0')->get();
 		$startdatesarray = array();
 		$enddatesarray = array();
 		$staffnamearray = array();
@@ -109,6 +109,9 @@ class PagesController extends Controller
 				$dental_appointment->dental_schedule_id = $request->dental_schedule_id;
 				$dental_appointment->reasons = $request->reasons;
 				$dental_appointment->save();
+				$dental_schedule_booked = DentalSchedule::find($request->dental_schedule_id);
+				$dental_schedule_booked->booked = '1';
+				$dental_schedule_booked->update();
 				return response()->json(['success' => 'yes']);
 			}
 		}
@@ -127,6 +130,9 @@ class PagesController extends Controller
 				$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
 				$medical_appointment->reasons = $request->reasons;
 				$medical_appointment->save();
+				$medical_schedule_booked = MedicalSchedule::find($request->medical_schedule_id);
+				$medical_schedule_booked->booked = '1';
+				$medical_schedule_booked->update();
 				return response()->json(['success' => 'yes']);
 			}
 		}
@@ -147,6 +153,9 @@ class PagesController extends Controller
 			$dental_appointment->dental_schedule_id = $request->dental_schedule_id;
 			$dental_appointment->reasons = $request->reasons;
 			$dental_appointment->save();
+			$dental_schedule_booked = DentalSchedule::find($request->dental_schedule_id);
+			$dental_schedule_booked->booked = '1';
+			$dental_schedule_booked->update();
 			return response()->json(['passwordmatch' => 'yes']);
 		}
 		else{
@@ -165,6 +174,9 @@ class PagesController extends Controller
 			$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
 			$medical_appointment->reasons = $request->reasons;
 			$medical_appointment->save();
+			$medical_schedule_booked = MedicalSchedule::find($request->medical_schedule_id);
+			$medical_schedule_booked->booked = '1';
+			$medical_schedule_booked->update();
 			return response()->json(['passwordmatch' => 'yes']);
 		}
 		else{
@@ -183,7 +195,7 @@ class PagesController extends Controller
 		{
 			$check_student_database = StudentNumber::where('student_number', $request->user_name)->first();
 			// dd($check_student_database);
-			if(count($check_student_database) == 1)
+			if(($request->patient_type_id == 1 && count($check_student_database) == 1) || $request->patient_type_id != 1)
 			{
 				$user = new User;
 				$user->user_id = $request->user_name;
@@ -196,8 +208,16 @@ class PagesController extends Controller
 				$patient->patient_first_name = $request->first_name;
 				$patient->patient_middle_name = $request->middle_name;
 				$patient->patient_last_name = $request->last_name;
-				$patient->year_level = $request->year_level;
-				$patient->degree_program_id = $request->degree_program_id;
+				if($request->patient_type_id != 1)
+				{
+					$patient->year_level = 0;
+				}
+				else
+				{
+					$patient->year_level = $request->year_level;
+					$patient->degree_program_id = $request->degree_program_id;
+				}
+				$patient->graduated = '0';
 				$patient->sex = $request->sex;
 				$patient->birthday = $request->birthdate;
 				$patient->civil_status = 'Single';
@@ -324,6 +344,11 @@ class PagesController extends Controller
 							$guardian_town->town_name = $request->guardian_town;
 							$guardian_town->province_id = $guardian_province->id;
 	         		//insert the distance from miagao using Google Distance Matrix API
+	         				$location = preg_replace("/\s+/", "+",$request->guardian_town." ".$request->guardian_province);
+							$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+							$json = json_decode(file_get_contents($url), true);
+							$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+							$guardian_town->distance_to_miagao = $distance/1000;
 							$guardian_town->save();
 							$guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', $guardian_province->id)->first()->id;
 						}
@@ -336,6 +361,11 @@ class PagesController extends Controller
 						$guardian_town = new Town;
 						$guardian_town->town_name = $request->guardian_town;
 						$guardian_town->province_id = Province::where('province_name', $request->guardian_province)->first()->id;
+						$location = preg_replace("/\s+/", "+",$request->guardian_town." ".$request->guardian_province);
+						$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+						$json = json_decode(file_get_contents($url), true);
+						$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+						$guardian_town->distance_to_miagao = $distance/1000;
 						$guardian_town->save();
 						$guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', Province::where('province_name', $request->guardian_province)->first()->id)->first()->id;
 					}
@@ -360,12 +390,22 @@ class PagesController extends Controller
 				$dental_appointment->dental_schedule_id = $request->schedule_id;
 				$dental_appointment->reasons = $request->reasons;
 				$dental_appointment->save();
+				$dental_schedule_booked = DentalSchedule::find($request->schedule_id);
+				$dental_schedule_booked->booked = '1';
+				$dental_schedule_booked->update();
 				Auth::loginUsingId($request->user_name, true);
 				return response()->json(['message' => 'Success']);
 			}
 			else
 			{
-				return response()->json(['message' =>'User is not included in the student database. Please contact UPV HSU immediately.']);
+				if($request->patient_type_id == '1')
+				{
+					return response()->json(['message' =>'User is not included in the student database. Please contact UPV HSU immediately.']);
+				}
+				else
+				{
+					return response()->json(['message' =>'Error! Please refresh page and try again.']);
+				}
 			}
 		}
 	}
@@ -381,7 +421,7 @@ class PagesController extends Controller
 		{
 			$check_student_database = StudentNumber::where('student_number', $request->user_name)->first();
 			// dd($check_student_database);
-			if(count($check_student_database) == 1)
+			if(($request->patient_type_id == '1' && count($check_student_database) == 1) || $request->patient_type_id != '1')
 			{
 				$user = new User;
 				$user->user_id = $request->user_name;
@@ -394,8 +434,16 @@ class PagesController extends Controller
 				$patient->patient_first_name = $request->first_name;
 				$patient->patient_middle_name = $request->middle_name;
 				$patient->patient_last_name = $request->last_name;
-				$patient->year_level = $request->year_level;
-				$patient->degree_program_id = $request->degree_program_id;
+				if($request->patient_type_id != 1)
+				{
+					$patient->year_level = 0;
+				}
+				else
+				{
+					$patient->year_level = $request->year_level;
+					$patient->degree_program_id = $request->degree_program_id;
+				}
+				$patient->graduated = '0';
 				$patient->sex = $request->sex;
 				$patient->birthday = $request->birthdate;
 				$patient->civil_status = 'Single';
@@ -548,12 +596,23 @@ class PagesController extends Controller
 				$medical_appointment->medical_schedule_id = $request->schedule_id;
 				$medical_appointment->reasons = $request->reasons;
 				$medical_appointment->save();
+				$medical_schedule_booked = MedicalSchedule::find($request->schedule_id);
+				$medical_schedule_booked->booked = '1';
+				$medical_schedule_booked->update();
 				Auth::loginUsingId($request->user_name, true);
 				return response()->json(['message' => 'Success']);
 			}
 			else
 			{
-				return response()->json(['message' =>'User is not included in the student database. Please contact UPV HSU immediately.']);
+				if($request->patient_type_id == '1')
+				{
+					return response()->json(['message' =>'User is not included in the student database. Please contact UPV HSU immediately.']);
+				}
+				else
+				{
+					return response()->json(['message' =>'Error! Please refresh page and try again.']);
+				}
+				
 			}
 			
 		}

@@ -152,13 +152,13 @@ class DoctorController extends Controller
     {
         $schedules = $request->schedules;
         for($i=0; $i < sizeof($schedules); $i++){
-            $checker_if_exists = MedicalSchedule::where('staff_id', Auth::user()->user_id)->where('schedule_day', $schedules[$i]);
-            // if(count($checker_if_exists) == 0){
+            $checker_if_exists = MedicalSchedule::where('staff_id', Auth::user()->user_id)->where('schedule_day', $schedules[$i])->first();
+            if(count($checker_if_exists) == 0){
                 $schedule = new MedicalSchedule();
                 $schedule->staff_id = Auth::user()->user_id;
                 $schedule->schedule_day = $schedules[$i];
                 $schedule->save();
-            // }
+            }
             
         }
         

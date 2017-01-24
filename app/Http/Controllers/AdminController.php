@@ -82,7 +82,7 @@ class AdminController extends Controller
 
     public function generateschedule()
     {
-        $params['schedules'] = DB::table('patient_info')->join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->where('patient_type_id', 1)->orderBy('distance_to_miagao', 'desc')->get();
+        $params['schedules'] = DB::table('patient_info')->join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->where('patient_type_id', 1)->where('graduated', '0')->orderBy('distance_to_miagao', 'desc')->get();
         // check also if the student has graduated
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'generateschedule';
