@@ -46,21 +46,41 @@ class PagesController extends Controller
 
 	public function announcements()
 	{
+		$user = Auth::user();
+
 		$params['navbar_active'] = 'announcements';
 		$announcements = Announcement::orderBy('created_at', 'desc')
 		->get();
 
-		return view('announcements', $params, compact('announcements'));
+		return view('announcements', $params, compact('announcements', 'user'));
 	}
 
-	public function seemoreannouncements(Request $request)
-	{
-    // $announcement_id = $request->announcement_id;
-    // $see_more_announcements = DB::table('announcements')
-    //         ->where('announcements.id', '=', $announcement_id)
-    //         ->first();
-    // return response()->json(['see_more_announcements' => $see_more_announcements]);
-	}
+	public function editannouncement(Request $request)
+    {
+    	$params['navbar_active'] = 'announcements';
+    	$announcement = Announcement::where('id', $request->announcementId)->first();
+    	$params['id'] = $request->announcementId;
+    	$params['announcement_title'] = $announcement->announcement_title;
+    	$params['announcement_body'] = $announcement->announcement_body;
+
+        return view('editannouncement', $params);
+    }
+
+    public function updateannouncement(Request $request)
+    {
+    	$update_announcement = Announcement::where('id', $request->announcementId)->first();
+    	$update_announcement->announcement_title = $request->input('announcement_title');
+    	$update_announcement->announcement_body = $request->input('announcement_body');
+    	$update_announcement->update();
+    	return redirect('announcements');
+    }
+
+    public function deleteannouncement(Request $request)
+    {
+    	$delete_announcement = Announcement::where('id', $request->announcementId)->first();
+    	$delete_announcement->delete();
+    	return redirect('announcements');
+    }
 
 	public function displayscheduledental(Request $request)
 	{

@@ -18,6 +18,7 @@ use App\Guardian;
 use App\HasGuardian;
 use App\MedicalAppointment;
 use App\MedicalSchedule;
+use Illuminate\Support\Facades\Input;
 class PatientController extends Controller
 {
 	public function __construct()
@@ -73,6 +74,7 @@ class PatientController extends Controller
         $params['residence_telephone_number'] = $patient->residence_telephone_number;
         $params['personal_contact_number'] = $patient->personal_contact_number;
         $params['residence_contact_number'] = $patient->residence_contact_number;
+        $params['picture'] = $patient->picture;
         $guardian = HasGuardian::where('patient_id', Auth::user()->user_id)->first();
         $params['guardian_first_name'] = Guardian::find($guardian->guardian_id)->guardian_first_name;
         $params['guardian_middle_name'] = Guardian::find($guardian->guardian_id)->guardian_middle_name;
@@ -165,7 +167,16 @@ class PatientController extends Controller
             $nationality->save();
             $patient->nationality_id = Nationality::where('nationality_description', $request->input('nationality'))->first()->id;
         }
+
+        if (Input::file('picture') != NULL) { 
+            $path = '..\public\images';
+            $file_name = Input::file('picture')->getClientOriginalName(); 
+            Input::file('picture')->move($path, $file_name);
+            $patient->picture = $file_name;
+        }
+
         $parents = HasParent::where('patient_id', Auth::user()->user_id)->get();
+
         foreach($parents as $parent)
         {
             if (ParentModel::find($parent->parent_id)->sex == 'M')

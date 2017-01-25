@@ -5,7 +5,7 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
-			<form method="POST" action="/account/profile/update">
+			<form method="POST" action="/account/profile/update" enctype="multipart/form-data">
 				{{ csrf_field() }}
 				<div class="col-md-9">
 					<div class="panel panel-info">
@@ -85,8 +85,8 @@
             </div>
           </div>
           <div class="col-xs-3 col-sm-3 col-md-3">
-            Image here
-            {{-- <img src="images/mayenne.jpg" width="220" height="220" class="img-responsive" alt="Generic placeholder thumbnail"> --}}
+            <label for="picture">Select Profile Picture</label>
+            <input type="file" name="picture" id="picture" class="picture"/>
           </div>
           <div class="col-md-6">
             <div class="panel panel-info">
