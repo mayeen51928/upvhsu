@@ -13,8 +13,10 @@
                 <tbody>
                   <tr><td>Age</td><td>{{$age}}</td></tr>
                   <tr><td>Sex</td><td>{{$sex}}</td></tr>
+                  @if(Auth::user()->patient->patient_type_id==1)
                   <tr><td>Course</td><td>{{$degree_program}}</td></tr>
                   <tr><td>Year Level</td><td>{{$year_level}}</td></tr>
+                  @endif
                 </tbody>
               </table>
               </div>

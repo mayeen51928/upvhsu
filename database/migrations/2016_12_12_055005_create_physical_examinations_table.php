@@ -21,8 +21,22 @@ class CreatePhysicalExaminationsTable extends Migration
             $table->foreign('staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
             $table->integer('medical_appointment_id')->unsigned()->index()->nullable();
             $table->foreign('medical_appointment_id')->references('id')->on('medical_appointments')->onDelete('cascade');
-            $table->decimal('height');
-            $table->decimal('weight');
+            $table->text('height')->nullable();
+            $table->text('weight')->nullable();
+            $table->text('blood_pressure')->nullable();
+            $table->text('pulse_rate')->nullable();
+            $table->text('right_eye')->nullable();
+            $table->text('left_eye')->nullable();
+            $table->text('head')->nullable();
+            $table->text('eent')->nullable();
+            $table->text('neck')->nullable();
+            $table->text('chest')->nullable();
+            $table->text('heart')->nullable();
+            $table->text('lungs')->nullable();
+            $table->text('abdomen')->nullable();
+            $table->text('back')->nullable();
+            $table->text('skin')->nullable();
+            $table->text('extremities')->nullable();
             $table->timestamps();
         });
     }

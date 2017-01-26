@@ -54,6 +54,7 @@ Route::post('/doctor/profile/update','DoctorController@updateprofile');
 Route::get('/doctor/manageschedule','DoctorController@manageschedule');
 Route::get('/doctor/searchpatient','DoctorController@searchpatient');
 Route::post('/addschedule_medical', 'DoctorController@addschedule');
+Route::post('/addorupdatediagnosis', 'DoctorController@addorupdatediagnosis');
 
 /* ROUTES FOR LABORATORY ACCOUNT */
 Route::get('/lab','LabController@dashboard');

@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use Auth;
+use App\Patient;
 use App\MedicalSchedule;
+use App\MedicalAppointment;
 use App\Staff;
 use App\Town;
 use App\Province;
+use App\PhysicalExamination;
+use App\CbcResult;
+use App\ChestXrayResult;
+use App\DrugTestResult;
+use App\Prescription;
+use App\Remark;
+use App\UrinalysisResult;
+use App\FecalysisResult;
+
 class DoctorController extends Controller
 {
     public function __construct()
@@ -28,6 +40,8 @@ class DoctorController extends Controller
     }
     public function dashboard()
     {
+        $params['medical_appointments'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
+        // dd($params['medical_appointments']);
         $params['navbar_active'] = 'account';
         $params['sidebar_active'] = 'dashboard';
         return view('staff.medical-doctor.dashboard', $params);
@@ -163,5 +177,80 @@ class DoctorController extends Controller
         }
         
         return response()->json(['success' => 'success']); 
+    }
+
+    public function addorupdatediagnosis(Request $request)
+    {
+        $counter = 0;
+        $appointment_id = $request->appointment_id;
+
+        $medical_appointment = MedicalAppointment::find($appointment_id);
+        $patient_info = Patient::where('patient_id', $medical_appointment->patient_id)->first();
+        $physical_examination = PhysicalExamination::where('medical_appointment_id', $appointment_id)->first();
+        $cbc_result = CbcResult::where('medical_appointment_id', $appointment_id)->first();
+        $chest_xray_result = ChestXrayResult::where('medical_appointment_id', $appointment_id)->first();
+        $drug_test_result = DrugTestResult::where('medical_appointment_id', $appointment_id)->first();
+        $fecalysis_result = FecalysisResult::where('medical_appointment_id', $appointment_id)->first();
+        $urinalysis_result = UrinalysisResult::where('medical_appointment_id', $appointment_id)->first();
+        $prescription = Prescription::where('medical_appointment_id', $appointment_id)->first();
+        $remark = Remark::where('medical_appointment_id', $appointment_id)->first();
+        if(count($physical_examination) == 1)
+        {
+            $counter++;
+        }
+        if(count($cbc_result) == 1)
+        {
+            $counter++;
+        }
+        if(count($chest_xray_result) == 1)
+        {
+            $counter++;
+        }
+        if(count($drug_test_result) == 1)
+        {
+            $counter++;
+        }
+        if(count($fecalysis_result) == 1)
+        {
+            $counter++;
+        }
+        if(count($urinalysis_result) == 1)
+        {
+            $counter++;
+        }
+        if(count($remark) == 1)
+        {
+            $counter++;
+        }
+        if(count($prescription) == 1)
+        {
+            $counter++;
+        }
+
+        if($counter > 0)
+        {
+            return response()->json([
+                'hasRecord' => 'yes',
+                'patient_name' =>$patient_info->patient_first_name.' '.$patient_info->patient_last_name,
+                'reasons' => $medical_appointment->reasons,
+                'physical_examination' => $physical_examination,
+                'cbc_result' => $cbc_result,
+                'chest_xray_result' => $chest_xray_result,
+                'drug_test_result' => $drug_test_result,
+                'fecalysis_result' => $fecalysis_result,
+                'urinalysis_result' => $urinalysis_result,
+                'remark' => $remark,
+                'prescription' => $prescription,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'patient_name' =>$patient_info->patient_first_name.' '.$patient_info->patient_last_name,
+                'reasons' => $medical_appointment->reasons,
+                'hasRecord' => 'no',
+                ]);
+        }
+        
     }
 }

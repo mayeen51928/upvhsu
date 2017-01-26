@@ -171,9 +171,10 @@
 </div>
 <div class="container" id="pageFooter">
 	<div class="col-md-8">
-		<p class="text-muted">Copyright © 2016. All Rights Reserved.</p>
+		<p class="text-muted">Copyright © 2017. All Rights Reserved.</p>
 		<p class="text-muted">Health Services Unit, University of the Philippines Visayas, Miagao, Iloilo, Philippines, 5023</p>
 		<p class="text-muted">Phone/Fax: +63 (33) 315 8556  |  E-mail: crs.upvisayas@up.edu.ph </p>
+		<p class="text-muted">Developers: Mayenne Joi R. Catuiran | John Eiman S. Mission</p>
 	</div>
 	<div class="col-md-4 text-muted">
 		<a class="text-muted">CRSIS</a> | 

@@ -22,6 +22,7 @@
                         </select>
                       </td>
                     </tr>
+                    @if(Auth::user()->patient->patient_type_id == 1)
 										<tr>
                       <td>Course</td>
                       <td>
@@ -79,6 +80,11 @@
   											</select>
 											</td>
                     </tr>
+                    <tr>
+                      <td>Year Level</td>
+                      <td><input type="text" class="form-control" value="{{$year_level}}" placeholder="Year Level" name="year_level" id="year_level"/></td>
+                    </tr>
+                    @endif
 									</tbody>
 								</table>
               </div>

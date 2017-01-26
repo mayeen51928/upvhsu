@@ -4,102 +4,267 @@ $.ajaxSetup({
 	headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
 });
 
+
+
 // ------------------DASHBOARD---------------
-	// $('.addMedicalRecordButton').click(function() {
-	// 	if($(this).attr('id')){
-	// 		var patient_id = $(this).attr('id');
-	// 		console.log(patient_id);
-	// 		var patientIdSplit = patient_id.split("_");
-	// 		create_record_patient_id = patientIdSplit[1];
-	// 		console.log("Patient id is..." + create_record_patient_id);
-	// 		appointment_id = patientIdSplit[2];
-	// 		console.log("Appointment is..." + appointment_id)
-	// 		$.ajax({
-	// 				type: "POST",
-	// 				url: "display-medical-info-modal.php",
-	// 				async: true,
-	// 				data: {'create_record_patient_id':create_record_patient_id, 'appointment_id':appointment_id},
-	// 				success: function(response)
-	// 				{
-	// 						message = JSON.parse(response);
-	// 						console.log(message);
-	// 						var splitMessage = message.split("(;;)");
-	// 						$('.personal-information-name').html("").append("<p>"+splitMessage[1]+" "+splitMessage[1]+"</p>");
-	// 						$('.personal-information-reasons').html("").append("<p>"+splitMessage[3]+"</p>");
-	// 						if (splitMessage[5]==0){
-	// 								$('#height').val('');
-	// 								$('#weight').val('');
-	// 								$('#blood-pressure').val('');
-	// 								$('#pulse-rate').val('');
-	// 								$('#right-eye').val('');
-	// 								$('#left-eye').val('');
-	// 								$('#head').val('');
-	// 								$('#eent').val('');
-	// 								$('#neck').val('');
-	// 								$('#chest').val('');
-	// 								$('#heart').val('');
-	// 								$('#lungs').val('');
-	// 								$('#abdomen').val('');
-	// 								$('#back').val('');
-	// 								$('#skin').val('');
-	// 								$('#extremities').val('');
-	// 								$('#hemoglobin').val('');
-	// 								$('#hemasocrit').val('');
-	// 								$('#wbc').val('');
-	// 								$('#pus-cells').val('');
-	// 								$('#rbc').val('');
-	// 								$('#albumin').val('');
-	// 								$('#sugar').val('');
-	// 								$('#macroscopic').val('');
-	// 								$('#microscopic').val('');
-	// 								$('#drug-test').val('');
-	// 								$('#chest-xray').val('');
-	// 								$('#remarks').val('');
-	// 								$('#prescription').val('');
-	// 								$('#requestLab').removeAttr('disabled');
-	// 								$('#requestXray').removeAttr('disabled');
-	// 								$('.medical-button-container').html("").append("<button type='button' class='btn btn-primary add-medical-record-button' id='add-medical-record-button'>Submit</button>");
-	// 						}
-	// 						else{
-	// 								$('#height').val(splitMessage[13]);
-	// 								$('#weight').val(splitMessage[14]);
-	// 								$('#blood-pressure').val(splitMessage[15]);
-	// 								$('#pulse-rate').val(splitMessage[16]);
-	// 								$('#right-eye').val(splitMessage[17]);
-	// 								$('#left-eye').val(splitMessage[18]);
-	// 								$('#head').val(splitMessage[19]);
-	// 								$('#eent').val(splitMessage[20]);
-	// 								$('#neck').val(splitMessage[21]);
-	// 								$('#chest').val(splitMessage[22]);
-	// 								$('#heart').val(splitMessage[23]);
-	// 								$('#lungs').val(splitMessage[24]);
-	// 								$('#abdomen').val(splitMessage[25]);
-	// 								$('#back').val(splitMessage[26]);
-	// 								$('#skin').val(splitMessage[27]);
-	// 								$('#extremities').val(splitMessage[26]);
-	// 								$('#hemoglobin').val(splitMessage[6]);
-	// 								$('#hemasocrit').val(splitMessage[7]);
-	// 								$('#wbc').val(splitMessage[8]);
-	// 								$('#pus-cells').val(splitMessage[31]);
-	// 								$('#rbc').val(splitMessage[32]);
-	// 								$('#albumin').val(splitMessage[33]);
-	// 								$('#sugar').val(splitMessage[34]);
-	// 								$('#macroscopic').val(splitMessage[11]);
-	// 								$('#microscopic').val(splitMessage[12]);
-	// 								$('#drug-test').val(splitMessage[10]);
-	// 								$('#chest-xray').val(splitMessage[9]);
-	// 								$('#remarks').val(splitMessage[30]);
-	// 								$('#prescription').val(splitMessage[29]);
-	// 								$('#requestLab').attr('disabled', 'disabled');
-	// 								$('#requestXray').attr('disabled', 'disabled');
-	// 								$('.medical-button-container').html("").append("<button type='button' class='btn btn-primary update-medical-record-button' id='update-medical-record-button'>Update</button>");
-	// 						}
-	// 						$('#create-medical-record-modal').modal();
-	// 				}
-	// 		});
-	// 	}
-	// 	return false;
-	// });
+numOfClicksMedical_Diagnosis = 0;
+percentageMedical_Diagnosis = 20;
+$('#nextButtonMedicalDiagnosis').click(function(){
+numOfClicksMedical_Diagnosis ++;
+	if(numOfClicksMedical_Diagnosis == 1){
+		$('#physicalexamination').hide();
+		$('#laboratoryresult').show();
+		$('#backButtonMedicalDiagnosis').show();
+		percentageMedical_Diagnosis += 20;
+		$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('2 of 5');
+	}
+	if(numOfClicksMedical_Diagnosis == 2){
+		$('#laboratoryresult').hide();
+		$('#remarksDiv').show();
+		percentageMedical_Diagnosis += 20;
+		$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('3 of 5');
+	}
+	if(numOfClicksMedical_Diagnosis == 3){
+		$('#remarksDiv').hide();
+		$('#prescriptionDiv').show();
+		percentageMedical_Diagnosis +=20;
+		$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('4 of 5');
+	}
+	if(numOfClicksMedical_Diagnosis == 4){
+		$('#prescriptionDiv').hide();
+		$('#requestLabXrayDiv').show();
+		$('#nextButtonMedicalDiagnosis').hide();
+		percentageMedical_Diagnosis +=20;
+		$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('5 of 5');
+	}
+});
+$('#backButtonMedicalDiagnosis').click(function() {
+	numOfClicksMedical_Diagnosis --;
+	if(numOfClicksMedical_Diagnosis == 3){
+	   $('#prescriptionDiv').show();
+		$('#requestLabXrayDiv').hide();
+		$('#nextButtonMedicalDiagnosis').show();
+		percentageMedical_Diagnosis -= 20;
+		$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('4 of 5');
+	}
+	if(numOfClicksMedical_Diagnosis == 2){
+		$('#remarksDiv').show();
+		$('#prescriptionDiv').hide();
+		percentageMedical_Diagnosis -= 20;
+		$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('3 of 5');
+	}
+	if(numOfClicksMedical_Diagnosis == 1){
+		$('#laboratoryresult').show();
+		$('#remarksDiv').hide();
+		percentageMedical_Diagnosis -= 20;
+		$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('2 of 5');
+	}
+	if(numOfClicksMedical_Diagnosis == 0){
+		$('#physicalexamination').show();
+		$('#laboratoryresult').hide();
+		$('#backButtonMedicalDiagnosis').hide();
+		percentageMedical_Diagnosis -= 20;
+		$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('1 of 5');
+	}
+});
+$('.addMedicalRecordButton').click(function() {
+	if($(this).attr('id')){
+		var appointment_id = $(this).attr('id').split("_")[1];
+		$.post('/addorupdatediagnosis',
+		{
+			appointment_id: appointment_id,
+		} , function(data){
+			$('.personal-information-name').html("").append("<p>"+data['patient_name']+"</p>");
+			$('.personal-information-reasons').html("").append("<p>"+data['reasons']+"</p>");
+			if(data['hasRecord'] == 'no')
+			{
+				$('#height').val('');
+				$('#weight').val('');
+				$('#blood-pressure').val('');
+				$('#pulse-rate').val('');
+				$('#right-eye').val('');
+				$('#left-eye').val('');
+				$('#head').val('');
+				$('#eent').val('');
+				$('#neck').val('');
+				$('#chest').val('');
+				$('#heart').val('');
+				$('#lungs').val('');
+				$('#abdomen').val('');
+				$('#back').val('');
+				$('#skin').val('');
+				$('#extremities').val('');
+				$('#hemoglobin').val('');
+				$('#hemasocrit').val('');
+				$('#wbc').val('');
+				$('#pus-cells').val('');
+				$('#rbc').val('');
+				$('#albumin').val('');
+				$('#sugar').val('');
+				$('#macroscopic').val('');
+				$('#microscopic').val('');
+				$('#drug-test').val('');
+				$('#chest-xray').val('');
+				$('#remarks').val('');
+				$('#prescription').val('');
+				$('#requestCBC').removeAttr('disabled').removeAttr('checked');
+				$('#requestUrinalysis').removeAttr('disabled').removeAttr('checked');
+				$('#requestFecalysis').removeAttr('disabled').removeAttr('checked');
+				$('#requestDrugTest').removeAttr('disabled').removeAttr('checked');
+				$('#requestXray').removeAttr('disabled').removeAttr('checked');
+				$('.medical-button-container').html("").append("<button type='button' class='btn btn-primary add-medical-record-button' id='add-medical-record-button'>Submit</button>");
+				
+			}
+			else
+			{
+				if(data['physical_examination'])
+				{
+					$('#height').val(data['physical_examination']['height']);
+					$('#weight').val(data['physical_examination']['weight']);
+					$('#blood-pressure').val(data['physical_examination']['blood_pressure']);
+					$('#pulse-rate').val(data['physical_examination']['pulse_rate']);
+					$('#right-eye').val(data['physical_examination']['right_eye']);
+					$('#left-eye').val(data['physical_examination']['left_eye']);
+					$('#head').val(data['physical_examination']['head']);
+					$('#eent').val(data['physical_examination']['eent']);
+					$('#neck').val(data['physical_examination']['neck']);
+					$('#chest').val(data['physical_examination']['chest']);
+					$('#heart').val(data['physical_examination']['heart']);
+					$('#lungs').val(data['physical_examination']['lungs']);
+					$('#abdomen').val(data['physical_examination']['abdomen']);
+					$('#back').val(data['physical_examination']['back']);
+					$('#skin').val(data['physical_examination']['skin']);
+					$('#extremities').val(data['physical_examination']['extremities']);
+				}
+				else
+				{
+					$('#height').val('');
+					$('#weight').val('');
+					$('#blood-pressure').val('');
+					$('#pulse-rate').val('');
+					$('#right-eye').val('');
+					$('#left-eye').val('');
+					$('#head').val('');
+					$('#eent').val('');
+					$('#neck').val('');
+					$('#chest').val('');
+					$('#heart').val('');
+					$('#lungs').val('');
+					$('#abdomen').val('');
+					$('#back').val('');
+					$('#skin').val('');
+					$('#extremities').val('');
+				}
+				if(data['cbc_result'])
+				{
+
+					$('#hemoglobin').val(data['cbc_result']['hemoglobin']);
+					$('#hemasocrit').val(data['cbc_result']['hemasocrit']);
+					$('#wbc').val(data['cbc_result']['wbc']);
+					$('#requestCBC').attr('checked', 'checked').attr('disabled', 'disabled');
+					$('#requestUrinalysis').attr('disabled', 'disabled');
+					$('#requestFecalysis').attr('disabled', 'disabled');
+					$('#requestDrugTest').attr('disabled', 'disabled');
+					$('#requestXray').attr('disabled', 'disabled');
+
+				}
+				else
+				{
+					$('#hemoglobin').val('');
+					$('#hemasocrit').val('');
+					$('#wbc').val('');
+					console.log('cbc_result');
+					$('#requestCBC').removeAttr('checked');
+				}
+				if(data['urinalysis_result'])
+				{
+					$('#pus-cells').val(data['urinalysis']['pus_cells']);
+					$('#rbc').val(data['urinalysis']['rbc']);
+					$('#albumin').val(data['urinalysis']['albumin']);
+					$('#sugar').val(data['urinalysis']['sugar']);
+					$('#requestCBC').attr('disabled', 'disabled');
+					$('#requestUrinalysis').attr('disabled', 'disabled').attr('checked', 'checked');
+					$('#requestFecalysis').attr('disabled', 'disabled');
+					$('#requestDrugTest').attr('disabled', 'disabled');
+					$('#requestXray').attr('disabled', 'disabled');
+				}
+				else
+				{
+					$('#pus-cells').val('');
+					$('#rbc').val('');
+					$('#albumin').val('');
+					$('#sugar').val('');
+					$('#requestUrinalysis').removeAttr('checked');
+				}
+				if(data['fecalysis_result'])
+				{
+					$('#macroscopic').val(data['fecalysis_result']['macroscopic']);
+					$('#microscopic').val(data['fecalysis_result']['microscopic']);
+					$('#requestCBC').attr('disabled', 'disabled');
+					$('#requestUrinalysis').attr('disabled', 'disabled');
+					$('#requestFecalysis').attr('disabled', 'disabled').attr('checked', 'checked');
+					$('#requestDrugTest').attr('disabled', 'disabled');
+					$('#requestXray').attr('disabled', 'disabled');
+				}
+				else
+				{
+					$('#macroscopic').val('');
+					$('#microscopic').val('');
+					$('#requestFecalysis').removeAttr('checked');
+				}
+				if(data['drug_test_result'])
+				{
+					$('#drug-test').val(data['drug_test_result']['drug_test']).attr('checked', 'checked');
+					$('#chest-xray').val(data['chest_xray_result']['xray_result']);
+					$('#requestCBC').attr('disabled', 'disabled');
+					$('#requestUrinalysis').attr('disabled', 'disabled');
+					$('#requestFecalysis').attr('disabled', 'disabled');
+					$('#requestDrugTest').attr('disabled', 'disabled').attr('checked', 'checked');
+					$('#requestXray').attr('disabled', 'disabled');
+				}
+				else
+				{
+					$('#drug-test').val('');
+					$('#requestDrugTest').removeAttr('checked');
+				}
+				if(data['chest_xray_result'])
+				{
+					$('#chest-xray').val(data['chest_xray_result']['xray_result']);
+					$('#requestCBC').attr('disabled', 'disabled');
+					$('#requestUrinalysis').attr('disabled', 'disabled');
+					$('#requestFecalysis').attr('disabled', 'disabled');
+					$('#requestDrugTest').attr('disabled', 'disabled');
+					$('#requestXray').attr('disabled', 'disabled').attr('checked', 'checked');
+				}
+				else
+				{
+					$('#chest-xray').val('');
+					$('#requestXray').removeAttr('checked');
+				}
+				if(data['remark'])
+				{
+					$('#remarks').val(data['remark']['remark']);
+				}
+				else
+				{
+					$('#remarks').val('');
+				}
+				if(data['prescription'])
+				{
+					$('#prescription').val(data['prescription']['prescription']);
+				}
+				else
+				{
+					$('#prescription').val('');
+				}
+				// $('#requestCBC').attr('disabled', 'disabled');
+				// $('#requestXray').attr('disabled', 'disabled');
+				$('.medical-button-container').html("").append("<button type='button' class='btn btn-primary update-medical-record-button' id='update-medical-record-button'>Update</button>");
+			}
+			$('#create-medical-record-modal').modal();
+		});
+	}
+});
 
 	// $(document).on('click', '.medical-button-container #add-medical-record-button', function(){ 
 	// 	if ($('#height').val() || $('#weight').val() || $('#blood-pressure').val() || $('#pulse-rate').val() || $('#right-eye').val() || $('#left-eye').val() || $('#head').val() || $('#eent').val() || $('#neck').val() || $('#neck').val() || $('#chest').val() || $('#heart').val() || $('#heart').val() || $('#lungs').val() || $('#abdomen').val() || $('#back').val() || $('#skin').val() || $('#extremities').val()) {

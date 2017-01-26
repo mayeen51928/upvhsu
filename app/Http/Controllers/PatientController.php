@@ -51,8 +51,12 @@ class PatientController extends Controller
         $patient = Patient::find(Auth::user()->user_id);
         $params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
         $params['sex'] = $patient->sex;
-        $params['degree_program'] = DegreeProgram::find($patient->degree_program_id)->degree_program_description;
-        $params['year_level'] = $patient->year_level;
+        if(Auth::user()->patient->patient_type_id ==1 )
+        {
+            $params['degree_program'] = DegreeProgram::find($patient->degree_program_id)->degree_program_description;
+            $params['year_level'] = $patient->year_level;
+        }
+        
         $params['birthday'] = $patient->birthday;
         $params['religion'] = Religion::find($patient->religion_id)->religion_description;
         $params['nationality'] = Nationality::find($patient->nationality_id)->nationality_description;
@@ -92,8 +96,11 @@ class PatientController extends Controller
         $patient = Patient::find(Auth::user()->user_id);
         $params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
         $params['sex'] = $patient->sex;
-        $params['degree_program'] = $patient->degree_program_id;
-        $params['year_level'] = $patient->year_level;
+        if(Auth::user()->patient->patient_type_id == 1)
+        {
+           $params['degree_program'] = $patient->degree_program_id;
+           $params['year_level'] = $patient->year_level; 
+        }
         $params['birthday'] = $patient->birthday;
         $params['religion'] = Religion::find($patient->religion_id)->religion_description;
         $params['nationality'] = Nationality::find($patient->nationality_id)->nationality_description;
@@ -138,7 +145,12 @@ class PatientController extends Controller
     {
         $patient = Patient::find(Auth::user()->user_id);
         $patient->sex = $request->input('sex');
-        $patient->degree_program_id = $request->input('degree_program');
+        if(Auth::user()->patient->patient_type_id == 1)
+        {
+            $patient->degree_program_id = $request->input('degree_program');
+            $patient->year_level = $request->input('year_level');
+        }
+        
         $patient->birthday = $request->input('birthdate');
         $religion = Religion::where('religion_description', $request->input('religion'))->first();
         // dd($religion->id);
