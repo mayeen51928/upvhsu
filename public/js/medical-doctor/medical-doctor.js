@@ -157,11 +157,11 @@ $('.addMedicalRecordButton').click(function() {
 				}
 				if(data['cbc_result'])
 				{
-
+					console.log("Hello!");
 					$('#hemoglobin').val(data['cbc_result']['hemoglobin']);
 					$('#hemasocrit').val(data['cbc_result']['hemasocrit']);
 					$('#wbc').val(data['cbc_result']['wbc']);
-					$('#requestCBC').attr('checked', 'checked').attr('disabled', 'disabled');
+					$('#requestCBC').attr('checked', true).attr('disabled', 'disabled');
 					$('#requestUrinalysis').attr('disabled', 'disabled');
 					$('#requestFecalysis').attr('disabled', 'disabled');
 					$('#requestDrugTest').attr('disabled', 'disabled');
