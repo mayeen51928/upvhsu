@@ -19,18 +19,17 @@ $('.dental_chart').click(function(){
 			}
 		  }
 	  });
-	$('#update-dental-record-modal-'+teethId).modal();
+	window.setTimeout(function(){
+            $('#update-dental-record-modal').modal('show');
+        }, 1000)
 });
 
 
-$('#updateDentalRecord').click(function(){
+$('.updateDentalRecord').click(function(){
 	if($('.condition').val() && $('.operation').val()){
 		var appointmentId = $('.appointment').val();
 		var conditionId = $('.condition').val();
 		var operationId = $('.operation').val();
-		console.log(appointmentId);
-		console.log(conditionId);
-		console.log(operationId);
 		if (operationId == null) { operationId = 0; };
 		if (conditionId == null) { conditionId = 0; };
 		$.ajax({
@@ -39,14 +38,67 @@ $('#updateDentalRecord').click(function(){
 			  data: {teeth_id:  teethId, condition_id:  conditionId, operation_id:  operationId, appointment_id:  appointmentId,  _token: token},
 			  success: function(data)
 			  {
-			  	console.log("Hi!");
-				$('#operation_'+teethId).css({ fill: "cyan" });
-				$('#update-dental-record-modal-'+teethId).modal("hide");
+			  	console.log('#condition_'+teethId);
+			  	if (conditionId == 0) {
+			  		$('#condition_'+teethId).css({ fill: "white" });
+			  	}
+			  	else if (conditionId == 1) {
+			  		$('#condition_'+teethId).css({ fill: "blue" });
+			  	}
+			  	else if (conditionId == 2) {
+			  		$('#condition_'+teethId).css({ fill: "red" });
+			  	}
+			  	else if (conditionId == 3) {
+			  		$('#condition_'+teethId).css({ fill: "yellow" });
+			  	}
+			  	else if (conditionId == 4) {
+			  		$('#condition_'+teethId).css({ fill: "cyan" });
+			  	}
+			  	else {
+			  		$('#condition_'+teethId).css({ fill: "pink" });
+			  	};
+			  	if (operationId == 0) {
+			  		$('#operation_'+teethId).css({ fill: "white" });
+			  	}
+			  	else if (operationId == 1) {
+			  		$('#operation_'+teethId).css({ fill: "blue" });
+			  	}
+			  	else if (operationId == 2) {
+			  		$('#operation_'+teethId).css({ fill: "red" });
+			  	}
+			  	else if (operationId == 3) {
+			  		$('#operation_'+teethId).css({ fill: "yellow" });
+			  	}
+			  	else if (operationId == 4) {
+			  		$('#operation_'+teethId).css({ fill: "cyan" });
+			  	}
+			  	else {
+			  		$('#operation_'+teethId).css({ fill: "pink" });
+			  	};
+				$('#update-dental-record-modal').modal("hide");
 			  }
 		  });
 	}
 	
 	
+});
+
+$('.updateDentalDiagnosis').click(function(){
+	var id = $(this).attr('id').split("_");
+	appointmentId = id[1];
+	console.log(appointmentId);
+		$.ajax({
+		  type: "POST",
+		  url: updateDentalDiagnosis,
+		  data: {appointment_id:  appointmentId, _token: token},
+		  success: function(data)
+		  {
+		  	console.log(data['success']);
+		  	setTimeout(function() {
+			  window.location.href = "http://localhost:8000/dentist";
+			}, 5000);
+		  }
+	  });
 });
 
 

@@ -5,7 +5,7 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
-          <div class="col-md-9">
+          <div class="col-xs-7 col-sm-7 col-md-9">
             <div class="panel panel-info">
               <div class="panel-heading">Basic Information</div>
               <div class="panel-body">
@@ -22,11 +22,10 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-3 col-sm-3 col-md-3">
-            Image here
-            {{-- <img src="images/mayenne.jpg" width="220" height="220" class="img-responsive" alt="Generic placeholder thumbnail"> --}}
+          <div class="col-xs-5 col-sm-5 col-md-3">
+              <img src="<?php echo asset('images/{{$picture}}')?>"  alt="Profile picture" height="200px" width="200px">
           </div>
-          <div class="col-md-6">
+          <div class="col-xs-12 col-sm-12 col-md-6">
             <div class="panel panel-info">
               <div class="panel-heading">Personal Data</div>
               <div class="panel-body">
@@ -46,7 +45,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-xs-12 col-sm-12 col-md-6">
             <div class="panel panel-info">
               <div class="panel-heading">Guardian/Person to be Contacted in Case of Emergency</div>
               <div class="panel-body">
@@ -62,7 +61,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-12">
+          <div class="col-xs-12 col-sm-12 col-md-12">
           <div class="clearfix">
           <div class="pull-left">
           <a href="{{ url('account/profile/edit') }}" class="btn btn-primary" role="button">Edit Profile</a>
