@@ -319,26 +319,22 @@
           <label>Please check the laboratory request you want to make:</label>
           <div class="row">
             <div class="col-md-12 col-md-offset-5 col-sm-12 col-sm-offset-4 col-xs-12 col-xs-offset-4 ">
-              <div class="form-group">
-                
-              </div>
-              <div class="form-group">
-                <div class="checkbox">
+              <div class="form-group" id="requestsFromDoctor">
+                <div class="checkbox requestCheckbox">
                   <label><input type="checkbox" id="requestCBC">CBC</label>
                 </div>
-                <div class="checkbox">
+                <div class="checkbox requestCheckbox">
                   <label><input type="checkbox" id="requestUrinalysis">Urinalysis</label>
                 </div>
-                <div class="checkbox">
+                <div class="checkbox requestCheckbox">
                   <label><input type="checkbox" id="requestFecalysis">Fecalysis</label>
                 </div>
-                <div class="checkbox">
+                <div class="checkbox requestCheckbox">
                   <label><input type="checkbox" id="requestDrugTest">Drug Test</label>
                 </div>
-                <div class="checkbox">
+                <div class="checkbox requestCheckbox">
                   <label><input type="checkbox" id="requestXray">X-Ray</label>
                 </div>
-                
               </div>
             </div>
           </div>
@@ -348,7 +344,7 @@
         <span style="float: left; margin-right: 4px"><button type="button" class="btn btn-info" id="backButtonMedicalDiagnosis">Back</button></span>
         <span style="float: left"><button type="button" class="btn btn-info" id="nextButtonMedicalDiagnosis">Next</button></span>
         <span class="medical-button-container"></span>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        <button type="button" id="closeButtonMedicalDiagnosis" class="btn btn-danger">Cancel</button>
       </div>
     </div>
   </div>
