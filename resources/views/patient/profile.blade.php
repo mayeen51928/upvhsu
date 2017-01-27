@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="col-xs-5 col-sm-5 col-md-3">
-              <img src="<?php echo asset('images/{{$picture}}')?>"  alt="Profile picture" height="200px" width="200px">
+              <img src="{{ URL::asset('/images/' . $picture) }}"  alt="Profile picture" height="200px" width="200px">
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6">
             <div class="panel panel-info">
