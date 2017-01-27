@@ -42,7 +42,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" id="xButtonMedicalDiagnosis" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Patient Record</h4>
         <div class="progress">
           <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" id="changeProgress_MedicalDiagnosis" style="width:20%">1 of 5</div>

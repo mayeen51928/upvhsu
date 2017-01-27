@@ -179,7 +179,7 @@ class DoctorController extends Controller
         return response()->json(['success' => 'success']); 
     }
 
-    public function addorupdatediagnosis(Request $request)
+    public function viewmedicaldiagnosis(Request $request)
     {
         $counter = 0;
         $appointment_id = $request->appointment_id;
