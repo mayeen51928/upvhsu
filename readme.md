@@ -27,7 +27,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-This system is a compliance to the requirements on the subjects CMSC 198.1 and CMSC 198.2
-Developers:
-Mayenne Joi R. Catuiran
-John Eiman S. Mission
+## This system is a compliance to the requirements on the subjects CMSC 198.1 and CMSC 198.2
+## Developers:
+## Mayenne Joi R. Catuiran
+## John Eiman S. Mission
