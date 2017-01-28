@@ -21,9 +21,9 @@ class CreateDrugTestResultsTable extends Migration
             $table->foreign('medical_appointment_id')->references('id')->on('medical_appointments')->onDelete('cascade');
             $table->integer('doctor_id')->nullable();
             $table->foreign('doctor_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
-            $table->integer('lab_staff_id');
+            $table->integer('lab_staff_id')->nullable();
             $table->foreign('lab_staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
-            $table->text('drug_test_result');
+            $table->text('drug_test_result')->nullable();
             $table->timestamps();
         });
     }

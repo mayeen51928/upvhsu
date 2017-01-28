@@ -119,7 +119,7 @@ class DoctorController extends Controller
                 $town->province_id = $province->id;
                 //insert the distance from miagao using Google Distance Matrix API
                 $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
-                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
                 $json = json_decode(file_get_contents($url), true);
                 $distance=$json['rows'][0]['elements'][0]['distance']['value'];
                 $town->distance_to_miagao = $distance/1000;
@@ -136,7 +136,7 @@ class DoctorController extends Controller
             $town->town_name = $request->input('town');
             $town->province_id = Province::where('province_name', $request->input('province'))->first()->id;
             $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
-            $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+            $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
             $json = json_decode(file_get_contents($url), true);
             $distance=$json['rows'][0]['elements'][0]['distance']['value'];
             $town->distance_to_miagao = $distance/1000;
@@ -252,5 +252,61 @@ class DoctorController extends Controller
                 ]);
         }
         
+    }
+
+    public function addmedicaldiagnosis(Request $request)
+    {
+        $physical_examination = new PhysicalExamination;
+        $physical_examination->medical_appointment_id = $request->appointment_id;
+        $physical_examination->height = $request->height;
+        $physical_examination->weight = $request->weight;
+        $physical_examination->blood_pressure = $request->blood_pressure;
+        $physical_examination->pulse_rate = $request->pulse_rate;
+        $physical_examination->right_eye = $request->right_eye;
+        $physical_examination->left_eye = $request->left_eye;
+        $physical_examination->head = $request->head;
+        $physical_examination->eent = $request->eent;
+        $physical_examination->neck = $request->neck;
+        $physical_examination->chest = $request->chest;
+        $physical_examination->heart = $request->heart;
+        $physical_examination->lungs = $request->lungs;
+        $physical_examination->abdomen = $request->abdomen;
+        $physical_examination->back = $request->back;
+        $physical_examination->skin = $request->skin;
+        $physical_examination->extremities = $request->extremities;
+        $physical_examination->save();
+        if($request->request_cbc == 'yes')
+        {
+            $cbc = new CbcResult;
+            $cbc->medical_appointment_id = $request->appointment_id;
+            $cbc->save();
+        }
+        if($request->request_urinalysis == 'yes')
+        {
+            $urinalysis = new UrinalysisResult;
+            $urinalysis->medical_appointment_id = $request->appointment_id;
+            $urinalysis->save();
+        }
+        if($request->request_fecalysis == 'yes')
+        {
+            $fecalysis = new FecalysisResult;
+            $fecalysis->medical_appointment_id = $request->appointment_id;
+            $fecalysis->save();
+        }
+        if($request->request_drug_test == 'yes')
+        {
+            $drug_test = new DrugTestResult;
+            $drug_test->medical_appointment_id = $request->appointment_id;
+            $drug_test->save();
+        }
+        if($request->request_xray == 'yes')
+        {
+            $request_xray = new ChestXrayResult;
+            $request_xray->medical_appointment_id = $request->appointment_id;
+            $request_xray->save();
+        }
+        return response()->json([
+            'appointment_id' => $physical_examination,
+        ]);
     }
 }

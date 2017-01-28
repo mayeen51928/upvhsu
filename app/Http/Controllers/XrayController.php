@@ -104,7 +104,7 @@ class XrayController extends Controller
                 $town->province_id = $province->id;
                 //insert the distance from miagao using Google Distance Matrix API
                 $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
-                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
                 $json = json_decode(file_get_contents($url), true);
                 $distance=$json['rows'][0]['elements'][0]['distance']['value'];
                 $town->distance_to_miagao = $distance/1000;
@@ -121,7 +121,7 @@ class XrayController extends Controller
             $town->town_name = $request->input('town');
             $town->province_id = Province::where('province_name', $request->input('province'))->first()->id;
             $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
-            $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+            $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
             $json = json_decode(file_get_contents($url), true);
             $distance=$json['rows'][0]['elements'][0]['distance']['value'];
             $town->distance_to_miagao = $distance/1000;

@@ -27,7 +27,7 @@
             @foreach($medical_appointments as $medical_appointment)
           	<tr>
               <td>{{$medical_appointment->patient_first_name}} {{$medical_appointment->patient_last_name}}</td>
-              <td>Heartache</td>
+              <td>{{$medical_appointment->reasons}}</td>
               <td><button class="btn btn-primary btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment->id}}">Update Diagnosis</button></td>
               <td><button class="btn btn-primary btn-xs addBillingToMedical">Add Billing</button></td>
             </tr>

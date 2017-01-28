@@ -134,6 +134,114 @@ $('.addMedicalRecordButton').click(function() {
 				// $('#requestDrugTest').removeAttr('disabled').removeAttr('checked');
 				// $('#requestXray').removeAttr('disabled').removeAttr('checked');
 				$('.medical-button-container').html("").append("<button type='button' class='btn btn-primary add-medical-record-button' id='add-medical-record-button_"+appointment_id+"'>Submit</button>");
+				$('.medical-button-container .add-medical-record-button').click(function(){
+					if ($('#height').val() ||
+						$('#weight').val() ||
+						$('#blood-pressure').val() ||
+						$('#pulse-rate').val() ||
+						$('#right-eye').val() ||
+						$('#left-eye').val() ||
+						$('#head').val() ||
+						$('#eent').val() ||
+						$('#neck').val() ||
+						$('#neck').val() ||
+						$('#chest').val() ||
+						$('#heart').val() ||
+						$('#heart').val() ||
+						$('#lungs').val() ||
+						$('#abdomen').val() ||
+						$('#back').val() ||
+						$('#skin').val() ||
+						$('#extremities').val()) {
+							var appointment_id = $(this).attr('id').split("_")[1];
+							var height = $('#height').val();
+							var weight = $('#weight').val();
+							var bloodPressure = $('#blood-pressure').val();
+							var pulseRate = $('#pulse-rate').val();
+							var rightEye = $('#right-eye').val();
+							var leftEye = $('#left-eye').val();
+							var head = $('#head').val();
+							var eent = $('#eent').val();
+							var neck = $('#neck').val();
+							var chest = $('#chest').val();
+							var heart = $('#heart').val();
+							var lungs = $('#lungs').val();
+							var abdomen = $('#abdomen').val();
+							var back = $('#back').val();
+							var skin = $('#skin').val();
+							var extremities = $('#extremities').val();
+							var remarks = $('#remarks').val();
+							var prescription = $('#prescription').val();
+							if($('#requestCBC').is(':checked')){
+								var request_cbc='yes';
+							}
+							else
+							{
+								var request_cbc='no';
+							}
+							if($('#requestUrinalysis').is(':checked')){
+								var request_urinalysis='yes';
+							}
+							else
+							{
+								var request_urinalysis='no';
+							}
+							if($('#requestFecalysis').is(':checked')){
+								var request_fecalysis='yes';
+							}
+							else
+							{
+								var request_fecalysis='no';
+							}
+							if($('#requestDrugTest').is(':checked')){
+								var request_drug_test='yes';
+							}
+							else
+							{
+								var request_drug_test='no';
+							}
+							if($('#requestXray').is(':checked')){
+								var request_xray='yes';
+							}
+							else
+							{
+								var request_xray='no';
+							}
+							$.post('/addmedicaldiagnosis',
+							{
+								appointment_id: appointment_id,
+								height: height,
+								weight: weight,
+								blood_pressure: bloodPressure,
+								pulse_rate: pulseRate,
+								right_eye: rightEye,
+								left_eye: leftEye,
+								head: head,
+								eent: eent,
+								neck: neck,
+								chest: chest,
+								heart: heart,
+								lungs: lungs,
+								abdomen: abdomen,
+								back: back,
+								skin: skin,
+								extremities: extremities,
+								remarks: remarks,
+								prescription: prescription,
+								request_cbc: request_cbc,
+								request_urinalysis: request_urinalysis,
+								request_fecalysis: request_fecalysis,
+								request_drug_test: request_drug_test,
+								request_xray: request_xray,
+							} ,
+							function(data){
+								// console.log(data['appointment_id']);
+								$('#create-medical-record-modal').modal("hide");
+							}
+						);
+					}
+				});
+
 				
 			}
 			else
@@ -200,10 +308,10 @@ $('.addMedicalRecordButton').click(function() {
 				}
 				if(data['urinalysis_result'])
 				{
-					$('#pus-cells').val(data['urinalysis']['pus_cells']);
-					$('#rbc').val(data['urinalysis']['rbc']);
-					$('#albumin').val(data['urinalysis']['albumin']);
-					$('#sugar').val(data['urinalysis']['sugar']);
+					$('#pus-cells').val(data['urinalysis_result']['pus_cells']);
+					$('#rbc').val(data['urinalysis_result']['rbc']);
+					$('#albumin').val(data['urinalysis_result']['albumin']);
+					$('#sugar').val(data['urinalysis_result']['sugar']);
 					$('#requestCBC').attr('disabled', 'disabled');
 					$('#requestUrinalysis').attr('disabled', 'disabled').attr('checked', 'checked');
 					$('#requestFecalysis').attr('disabled', 'disabled');
@@ -287,108 +395,6 @@ $('.addMedicalRecordButton').click(function() {
 			}
 			$('#create-medical-record-modal').modal().delay(500);
 		});
-	}
-});
-$('.medical-button-container #add-medical-record-button').click(function(){
-	if ($('#height').val() ||
-		$('#weight').val() ||
-		$('#blood-pressure').val() ||
-		$('#pulse-rate').val() ||
-		$('#right-eye').val() ||
-		$('#left-eye').val() ||
-		$('#head').val() ||
-		$('#eent').val() ||
-		$('#neck').val() ||
-		$('#neck').val() ||
-		$('#chest').val() ||
-		$('#heart').val() ||
-		$('#heart').val() ||
-		$('#lungs').val() ||
-		$('#abdomen').val() ||
-		$('#back').val() ||
-		$('#skin').val() ||
-		$('#extremities').val()) {
-			var patient_id = create_record_patient_id;
-			var appointment_id_fin = appointment_id;
-			var height = $('#height').val();
-			var weight = $('#weight').val();
-			var bloodPressure = $('#blood-pressure').val();
-			var pulseRate = $('#pulse-rate').val();
-			var rightEye = $('#right-eye').val();
-			var leftEye = $('#left-eye').val();
-			var head = $('#head').val();
-			var eent = $('#eent').val();
-			var neck = $('#neck').val();
-			var chest = $('#chest').val();
-			var heart = $('#heart').val();
-			var lungs = $('#lungs').val();
-			var abdomen = $('#abdomen').val();
-			var back = $('#back').val();
-			var skin = $('#skin').val();
-			var extremities = $('#extremities').val();
-			var hemoglobin = $('#hemoglobin').val();
-			var hemasocrit = $('#hemasocrit').val();
-			var wbc = $('#wbc').val();
-			var pusCells = $('#pus-cells').val();
-			var rbc = $('#rbc').val();
-			var albumin = $('#albumin').val();
-			var sugar = $('#sugar').val();
-			var macroscopic = $('#macroscopic').val();
-			var microscopic = $('#microscopic').val();
-			var drugTest = $('#drug-test').val();
-			var chestXray = $('#chest-xray').val();
-			var remarks = $('#remarks').val();
-			var prescription = $('#prescription').val();
-			// var num_of_request = 0;
-			// if($('#requestLab').is(':checked')){
-			// 	num_of_request=1;
-			// }
-			// if($('#requestXray').is(':checked')){
-			// 	num_of_request =2;
-			// }
-			// if($('#requestLab').is(':checked')){
-			// 	if($('#requestXray').is(':checked')){
-			// 		num_of_request =3;
-			// 	}
-			// }
-			$.post('/addmedicaldiagnosis',
-			{
-				appointment_id: appointment_id,
-				height:height,
-				weight:weight,
-				blood_pressure:bloodPressure,
-				pulse_rate:pulseRate,
-				right_eye:rightEye,
-				left_eye:leftEye,
-				head:head,
-				eent:eent,
-				neck:neck,
-				chest:chest,
-				heart:heart,
-				lungs:lungs,
-				abdomen:abdomen,
-				back:back,
-				skin:skin,
-				extremities:extremities,
-				hemoglobin:hemoglobin,
-				hemasocrit:hemasocrit,
-				wbc:wbc,
-				pus_cells:pusCells,
-				rbc:rbc,
-				albumin:albumin,
-				sugar:sugar,
-				macroscopic:macroscopic,
-				microscopic:microscopic,
-				drug_test:drugTest,
-				chest_xray:chestXray,
-				remarks:remarks,
-				prescription:prescription,
-				request_number:num_of_request
-			} ,
-			function(data){
-				$('#create-medical-record-modal').modal("hide");
-			}
-		);
 	}
 });
 
