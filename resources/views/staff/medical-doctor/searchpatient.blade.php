@@ -7,7 +7,7 @@
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
 			<div class="col-md-4 col-md-offset-4" style="text-align: center;">
 				<h4>Search Patient Record</h4>
-				<input class="form-control" type="text" name="searchPatient" id="searchPatient"/>
+				<input class="form-control" type="text" name="search_patient" id="search_patient"/>
 				<table id="searchTable" class="table" style="display: none">
 					<tr><th>Search Results</th></tr>
 					<tbody id="searchResults" >
@@ -75,7 +75,14 @@
   </div>
 </div>
 
-<div class="modal fade" id="viewMedicalRecordBasedOnDateModal" role="dialog">
+<script>
+  // token and createPostUrl are needed to be passed to AJAX method call
+  var token = '{{csrf_token()}}';
+  var searchPatientRecord = '/search_patient_record';
+  var displayPatientRecordSearch = '/display_patient_record_search';
+</script>
+
+<!-- <div class="modal fade" id="viewMedicalRecordBasedOnDateModal" role="dialog">
   <div class="modal-dialog modal-lg" >
     <div class="modal-content">
     <div class="modal-header">
@@ -84,9 +91,9 @@
     </div>
     <div class="modal-body">
       <div class="row" id="remarkModal">
-      <!-- <div class="col-xs-3 col-sm-3 col-md-3">
+      <div class="col-xs-3 col-sm-3 col-md-3">
         <img src="images/mayenne.jpg" width="220" height="220" class="img-responsive" alt="Generic placeholder thumbnail">
-      </div> -->
+      </div>
       <div class="col-md-6">
         <div class="panel panel-primary">
           <div class="panel-heading">Physical Examination</div>
@@ -210,5 +217,5 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 @endsection
