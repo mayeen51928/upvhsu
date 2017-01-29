@@ -58,6 +58,8 @@ Route::get('/doctor/profile/edit','DoctorController@editprofile');
 Route::post('/doctor/profile/update','DoctorController@updateprofile');
 Route::get('/doctor/manageschedule','DoctorController@manageschedule');
 Route::get('/doctor/searchpatient','DoctorController@searchpatient');
+Route::post('/search_patient_record','DoctorController@searchpatientrecord');
+Route::post('/display_patient_record_search','DoctorController@displaypatientrecordsearch');
 Route::post('/addschedule_medical', 'DoctorController@addschedule');
 Route::post('/viewmedicaldiagnosis', 'DoctorController@viewmedicaldiagnosis');
 Route::post('/addmedicaldiagnosis', 'DoctorController@addmedicaldiagnosis');

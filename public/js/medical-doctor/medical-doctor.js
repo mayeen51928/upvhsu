@@ -1,5 +1,4 @@
 $(document).ready( function(){
-
 $.ajaxSetup({
 	headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
 });
@@ -771,126 +770,78 @@ $('#addmedicalschedule').click(function(){
 
 // ------------------PROFILE---------------
 // ------------------SEARCH PATIENT---------------
+$("#search_patient").keyup(function(){
+	if($('#search_patient').val()){
+		$("#search_patient").css("background-color", "yellow");
+		var searchString = $('#search_patient').val();
+		console.log(searchString);
+		$.ajax({
+			  type: "POST",
+			  url: searchPatientRecord,
+			  data: { search_string: searchString ,  _token: token},
+			  success: function(data)
+			  {
+			  	if(data['counter']>0){
+			  		output = '';
+	  				for(var i=0; i < data['searchpatientidarray'].length; i++)
+	  				{
+	  					output += "<tr><td><a class='searchQueryResults' id='resultId_"+data['searchpatientidarray'][i]+"'>"+data['searchpatientfirstnamearray'][i]+" "+data['searchpatientlastnamearray'][i]+"</a></td></tr>";
+	  				}
+	  				$('#searchResults').html(output);
+  					$('#searchTable').show();
 
-	// $('#searchPatient').keyup(function() {
-	// 	if($('#searchPatient').val()){
-	// 		$.ajax({
-	// 			url: 'search-patient.php',
-	// 			type: 'POST',
-	// 			async: true,
-	// 			data: {
-	// 				'search_string': $('#searchPatient').val()
-	// 			},
-	// 			success:function(response){
-	// 				output = '';
-	// 				message=JSON.parse(response);
-	// 				console.log(message);
-	// 				if(message=='null'){
-	// 					$('#searchResults').html("");
-	// 					$('#searchTable').hide();
-	// 				}
-	// 				else{
-	// 					for(i=0; i<message.length; i++) {
-	// 						messageSplit = message[i].split("(;;)");
-	// 						output += "<tr><td><a class='searchQueryResults' id='resultId_"+messageSplit[0]+"'>"+messageSplit[1]+"</a></td></tr>";
-	// 					}
-	// 					$('#searchResults').html(output);
-	// 					$('#searchTable').show();
-	// 					$('.searchQueryResults').click(function() {
-	// 						var patientId = $(this).attr('id').split('_')[1];
-	// 						console.log(patientId);
-	// 						$.ajax({
-	// 							url: 'search-patient-get-info.php',
-	// 							type: 'POST',
-	// 							async: true,
-	// 							data: {
-	// 								'patient_id': patientId
-	// 							},
-	// 							success:function(response){
-	// 								output = '';
-	// 								message=jQuery.parseJSON(response);
-	// 								$('#ageTd').html(message.age);
-	// 								$('#sexTd').html(message.sex);
-	// 								$('#courseTd').html(message.degree_program);
-	// 								$('#yearlevelTd').html(message.year_level);
-	// 								$('#birthdateTd').html(message.birthdate);
-	// 								$('#religionTd').html(message.religion);
-	// 								$('#nationlityTd').html(message.nationality);
-	// 								$('#fatherTd').html(message.father);
-	// 								$('#motherTd').html(message.mother);
-	// 								$('#homeaddressTd').html(message.street + ', ' + message.town + ', ' + message.province);
-	// 								$('#restelTd').html(message.residence_telephone);
-	// 								$('#perosnalcontactnumberTd').html(message.personal_contact_number);
-	// 								$('#guardiannameTd').html(message.guardian_name);
-	// 								$('#guardianaddressTd').html(message.guardian_address);
-	// 								$('#guardianrelationshipTd').html(message.guardian_relationship);
-	// 								$('#guardiantelTd').html(message.guardian_residence_telephone);
-	// 								$('#guardiancpTd').html(message.guardian_residence_cellphone);
-	// 								if($('#determine-view-record-button').val()==1){
-	// 										$('#patientInfoModalFooter').html('<a href="view-medical-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View Medical Records</a><a href="add-new-medical-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
-	// 								}
-	// 								if($('#determine-view-record-button').val()==2){
-	// 										$('#patientInfoModalFooter').html('<a href="view-medical-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View medical Records</a><a href="add-new-medical-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
-	// 								}
-	// 							}
-	// 						});
-	// 						$('#searchPatientRecordInfo').modal();
-	// 					});
-	// 				}
-	// 			}
-	// 		});
-	// 	}
-	// 	else{
-	// 		$('#searchTable').hide();
-	// 		$('#searchResults').html("");
-	// 	}
-	// });
+  					$('.searchQueryResults').click(function() {
+            	var patientId = $(this).attr('id').split('_')[1];
+            	console.log(patientId);
+            	$.ajax({
+								  type: "POST",
+								  url: displayPatientRecordSearch,
+								  data: { patient_id: patientId ,  _token: token},
+								  success: function(data)
+								  {
+								  	console.log("Patient id " + data['patient_id']);
+								  	output = '';
+										message=jQuery.parseJSON(response);
+										$('#ageTd').html(message.age);
+										$('#sexTd').html(message.sex);
+										$('#courseTd').html(message.degree_program);
+										$('#yearlevelTd').html(message.year_level);
+										$('#birthdateTd').html(message.birthdate);
+										$('#religionTd').html(message.religion);
+										$('#nationlityTd').html(message.nationality);
+										$('#fatherTd').html(message.father);
+										$('#motherTd').html(message.mother);
+										$('#homeaddressTd').html(message.street + ', ' + message.town + ', ' + message.province);
+										$('#restelTd').html(message.residence_telephone);
+										$('#perosnalcontactnumberTd').html(message.personal_contact_number);
+										$('#guardiannameTd').html(message.guardian_name);
+										$('#guardianaddressTd').html(message.guardian_address);
+										$('#guardianrelationshipTd').html(message.guardian_relationship);
+										$('#guardiantelTd').html(message.guardian_residence_telephone);
+										$('#guardiancpTd').html(message.guardian_residence_cellphone);
+                    if($('#determine-view-record-button').val()==1){
+                        $('#patientInfoModalFooter').html('<a href="view-medical-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View Medical Records</a><a href="add-new-medical-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
+                    }
+                    if($('#determine-view-record-button').val()==2){
+                        $('#patientInfoModalFooter').html('<a href="view-dental-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View Dental Records</a><a href="add-new-dental-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
+                    }
+								  }
+							  });
+								$('#searchPatientRecordInfo').modal();
+            });
+			  	}
+			  	else{
+			  		$('#searchResults').html("<br/>No result found");
+  					$('#searchTable').show();
+			  	}
+			  }
+		  });
+	}
+	else{
+		$("#search_patient").css("background-color", "pink");
+		$('#searchTable').hide();
+		$('#searchResults').html("");
+	}
+});
 
-	// $('.viewMedicalRecordBasedOnDate').click(function(){
-	// 	var date=$(this).attr('id');
-	// 	console.log(date);
-	// 	$.ajax({
-	// 		type: 'POST',
-	// 		url: 'view-medical-records-ajax.php',
-	// 		async: true,
-	// 		data:{
-	// 			'patient_id': $('#patient_id').val(),
-	// 			'date': date
-	// 		},
-	// 		success: function(response){
-	// 			message=jQuery.parseJSON(response);
-	// 			$('#heightTd').html(message.height);
-	// 			$('#weightTd').html(message.weight);
-	// 			$('#bpTd').html(message.blood_pressure);
-	// 			$('#prTd').html(message.pulse_rate);
-	// 			$('#righteyeTd').html(message.right_eye);
-	// 			$('#lefteyeTd').html(message.left_eye);
-	// 			$('#headTd').html(message.head);
-	// 			$('#eentTd').html(message.eent);
-	// 			$('#neckTd').html(message.neck);
-	// 			$('#chestTd').html(message.chest);
-	// 			$('#heartTd').html(message.heart);
-	// 			$('#lungsTd').html(message.lungs);
-	// 			$('#abdomenTd').html(message.abdomen);
-	// 			$('#backTd').html(message.back);
-	// 							$('#skinTd').html(message.skin);
-	// 			$('#extremitiesTd').html(message.extremities);
-	// 			$('#hemoglobinTd').html(message.hemoglobin);
-	// 			$('#hemasocritTd').html(message.hemasocrit);
-	// 			$('#wbcTd').html(message.wbc);
-	// 			$('#puscellsTd').html(message.pus_cells);
-	// 			$('#rbcTd').html(message.rbc);
-	// 			$('#albuminTd').html(message.albumin);
-	// 			$('#sugarTd').html(message.sugar);
-	// 			$('#macroscopicTd').html(message.macroscopic);
-	// 			$('#microscopicTd').html(message.microscopic);
-	// 			$('#drugtestTd').html(message.drug_test_result);
-	// 			$('#chestxrayTd').html(message.chest_xray_result);
-	// 			$('#remarksTd').html(message.remark);
-	// 			$('#prescriptionTd').html(message.prescription);
-	// 			$('#viewMedicalRecordBasedOnDateModalTitle').html('Detailed Patient Record ('+ date +')')
-	// 			$('#viewMedicalRecordBasedOnDateModal').modal();
-	// 		}
-	// 	});
-	// });
 });
