@@ -33,6 +33,7 @@ class CreateStaffInfoTable extends Migration
             $table->integer('town_id')->unsigned()->index()->nullable();
             $table->foreign('town_id')->references('id')->on('towns')->onDelete('cascade');
             $table->string('personal_contact_number')->nullable();
+            $table->string('picture')->nullable();
             $table->timestamps();
         });
     }
