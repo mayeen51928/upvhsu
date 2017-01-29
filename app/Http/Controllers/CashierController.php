@@ -88,6 +88,8 @@ class CashierController extends Controller
         $cashier->sex = $request->input('sex');
         $cashier->birthday = $request->input('birthday');
         $cashier->street = $request->input('street');
+        $cashier->position = $request->input('position');
+        $cashier->civil_status = $request->civil_status;
         $province = Province::where('province_name', $request->input('province'))->first();
         if(count($province)>0)
         {

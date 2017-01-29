@@ -88,6 +88,8 @@ class XrayController extends Controller
         $xray->sex = $request->input('sex');
         $xray->birthday = $request->input('birthday');
         $xray->street = $request->input('street');
+        $xray->position = $request->input('position');
+        $xray->civil_status = $request->civil_status;
         $province = Province::where('province_name', $request->input('province'))->first();
         if(count($province)>0)
         {

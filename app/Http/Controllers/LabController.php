@@ -88,6 +88,8 @@ class LabController extends Controller
         $lab->sex = $request->input('sex');
         $lab->birthday = $request->input('birthday');
         $lab->street = $request->input('street');
+        $lab->position = $request->input('position');
+        $lab->civil_status = $request->civil_status;
         $province = Province::where('province_name', $request->input('province'))->first();
         if(count($province)>0)
         {

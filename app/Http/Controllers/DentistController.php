@@ -246,6 +246,8 @@ class DentistController extends Controller
 	        $dentist->sex = $request->input('sex');
 	        $dentist->birthday = $request->input('birthday');
 	        $dentist->street = $request->input('street');
+	        $dentist->position = $request->input('position');
+	        $dentist->civil_status = $request->civil_status;
 	        $province = Province::where('province_name', $request->input('province'))->first();
 	        if(count($province)>0)
 	        {
