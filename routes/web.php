@@ -61,7 +61,8 @@ Route::get('/doctor/searchpatient','DoctorController@searchpatient');
 Route::post('/search_patient_record','DoctorController@searchpatientrecord');
 Route::post('/display_patient_record_search','DoctorController@displaypatientrecordsearch');
 Route::post('/addschedule_medical', 'DoctorController@addschedule');
-Route::post('/addorupdatediagnosis', 'DoctorController@addorupdatediagnosis');
+Route::post('/viewmedicaldiagnosis', 'DoctorController@viewmedicaldiagnosis');
+Route::post('/addmedicaldiagnosis', 'DoctorController@addmedicaldiagnosis');
 
 /* ROUTES FOR LABORATORY ACCOUNT */
 Route::get('/lab','LabController@dashboard');

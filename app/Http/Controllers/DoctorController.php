@@ -148,6 +148,7 @@ class DoctorController extends Controller
 		return redirect('doctor/profile');
 	}
 
+    
 	public function manageschedule()
 	{
 		$params['navbar_active'] = 'account';
@@ -179,10 +180,10 @@ class DoctorController extends Controller
 		return response()->json(['success' => 'success']); 
 	}
 
-	public function addorupdatediagnosis(Request $request)
-	{
-		$counter = 0;
-		$appointment_id = $request->appointment_id;
+    public function viewmedicaldiagnosis(Request $request)
+    {
+        $counter = 0;
+        $appointment_id = $request->appointment_id;
 
 		$medical_appointment = MedicalAppointment::find($appointment_id);
 		$patient_info = Patient::where('patient_id', $medical_appointment->patient_id)->first();
@@ -307,4 +308,61 @@ class DoctorController extends Controller
 
 		return response()->json(['patient_id' => $patient_id]);
 	}
+
+
+    public function addmedicaldiagnosis(Request $request)
+    {
+        $physical_examination = new PhysicalExamination;
+        $physical_examination->medical_appointment_id = $request->appointment_id;
+        $physical_examination->height = $request->height;
+        $physical_examination->weight = $request->weight;
+        $physical_examination->blood_pressure = $request->blood_pressure;
+        $physical_examination->pulse_rate = $request->pulse_rate;
+        $physical_examination->right_eye = $request->right_eye;
+        $physical_examination->left_eye = $request->left_eye;
+        $physical_examination->head = $request->head;
+        $physical_examination->eent = $request->eent;
+        $physical_examination->neck = $request->neck;
+        $physical_examination->chest = $request->chest;
+        $physical_examination->heart = $request->heart;
+        $physical_examination->lungs = $request->lungs;
+        $physical_examination->abdomen = $request->abdomen;
+        $physical_examination->back = $request->back;
+        $physical_examination->skin = $request->skin;
+        $physical_examination->extremities = $request->extremities;
+        $physical_examination->save();
+        if($request->request_cbc == 'yes')
+        {
+            $cbc = new CbcResult;
+            $cbc->medical_appointment_id = $request->appointment_id;
+            $cbc->save();
+        }
+        if($request->request_urinalysis == 'yes')
+        {
+            $urinalysis = new UrinalysisResult;
+            $urinalysis->medical_appointment_id = $request->appointment_id;
+            $urinalysis->save();
+        }
+        if($request->request_fecalysis == 'yes')
+        {
+            $fecalysis = new FecalysisResult;
+            $fecalysis->medical_appointment_id = $request->appointment_id;
+            $fecalysis->save();
+        }
+        if($request->request_drug_test == 'yes')
+        {
+            $drug_test = new DrugTestResult;
+            $drug_test->medical_appointment_id = $request->appointment_id;
+            $drug_test->save();
+        }
+        if($request->request_xray == 'yes')
+        {
+            $request_xray = new ChestXrayResult;
+            $request_xray->medical_appointment_id = $request->appointment_id;
+            $request_xray->save();
+        }
+        return response()->json([
+            'appointment_id' => $physical_examination,
+        ]);
+    }
 }

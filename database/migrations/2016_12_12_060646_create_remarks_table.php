@@ -21,7 +21,7 @@ class CreateRemarksTable extends Migration
             $table->foreign('staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
             $table->integer('medical_appointment_id')->unsigned()->index()->nullable();
             $table->foreign('medical_appointment_id')->references('id')->on('medical_appointments')->onDelete('cascade');
-            $table->text('remark');
+            $table->text('remark')->nullable();
             $table->timestamps();
         });
     }

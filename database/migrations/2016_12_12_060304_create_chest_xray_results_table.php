@@ -21,9 +21,9 @@ class CreateChestXrayResultsTable extends Migration
             $table->foreign('medical_appointment_id')->references('id')->on('medical_appointments')->onDelete('cascade');
             $table->integer('doctor_id')->nullable();
             $table->foreign('doctor_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
-            $table->integer('xray_staff_id');
+            $table->integer('xray_staff_id')->nullable();
             $table->foreign('xray_staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
-            $table->text('xray_result');
+            $table->text('xray_result')->nullable();
             $table->timestamps();
         });
     }

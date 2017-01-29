@@ -74,5 +74,122 @@ class DatabaseSeeder extends Seeder
         DB::table('degree_programs')->insert([
             'degree_program_description' => 'BA History',
         ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BA Literature',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BA Political Science',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BA Psychology',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BA Sociology',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BA Communication and Media Studies',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Applied Mathematics',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Biology',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Chemistry',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Computer Science',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Economics',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Public Health',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Statistics',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Chemistry',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Education (Biology)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Education (English as a Second Language)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Education (Filipino)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Education (Guidance)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Education (Mathematics)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Education (Physics)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Education (Reading)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Education (Social Studies)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'MS Biology',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Fisheries',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Aquaculture',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Marine Affairs',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'MS Fisheries (Aquaculture)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'MS Fisheries (Fisheries Biology)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'MS Fisheries (Fish Processing Technology)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'MS Ocean Sciences',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Professional Masters in Tropical Marines',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'PhD Fisheries',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Accountancy',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Business Administration (Marketing)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Management',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Management (Business Management)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Master of Management (Public Management)',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'Diploma in Urban and Regional Planning',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Chemical Engineering',
+        ]);
+        DB::table('degree_programs')->insert([
+            'degree_program_description' => 'BS Food Technology',
+        ]);
     }
 }
