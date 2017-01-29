@@ -103,6 +103,8 @@ class DoctorController extends Controller
         $doctor->sex = $request->input('sex');
         $doctor->birthday = $request->input('birthday');
         $doctor->street = $request->input('street');
+        $doctor->position = $request->input('position');
+        $doctor->civil_status = $request->civil_status;
         $province = Province::where('province_name', $request->input('province'))->first();
         if(count($province)>0)
         {
@@ -305,8 +307,78 @@ class DoctorController extends Controller
             $request_xray->medical_appointment_id = $request->appointment_id;
             $request_xray->save();
         }
-        return response()->json([
-            'appointment_id' => $physical_examination,
-        ]);
+    }
+
+    public function updatemedicaldiagnosis(Request $request)
+    {
+        $appointment_id = $request->appointment_id;
+        $physical_examination = PhysicalExamination::where('medical_appointment_id', $appointment_id)->first();
+        if(count($physical_examination) == 0)
+        {
+            $physical_examination = new PhysicalExamination;
+            $physical_examination->medical_appointment_id = $request->appointment_id;
+            $physical_examination->height = $request->height;
+            $physical_examination->weight = $request->weight;
+            $physical_examination->blood_pressure = $request->blood_pressure;
+            $physical_examination->pulse_rate = $request->pulse_rate;
+            $physical_examination->right_eye = $request->right_eye;
+            $physical_examination->left_eye = $request->left_eye;
+            $physical_examination->head = $request->head;
+            $physical_examination->eent = $request->eent;
+            $physical_examination->neck = $request->neck;
+            $physical_examination->chest = $request->chest;
+            $physical_examination->heart = $request->heart;
+            $physical_examination->lungs = $request->lungs;
+            $physical_examination->abdomen = $request->abdomen;
+            $physical_examination->back = $request->back;
+            $physical_examination->skin = $request->skin;
+            $physical_examination->extremities = $request->extremities;
+            $physical_examination->save();
+        }
+        $finished_appointment_counter = 0;
+        $prescription = Prescription::where('medical_appointment_id', $appointment_id)->first();
+        if(count($prescription) == 0 && $request->prescription != '')
+        {
+            $prescription = new Prescription;
+            $prescription->medical_appointment_id = $request->appointment_id;
+            $prescription->prescription = $request->prescription;
+            $prescription->save();
+            $finished_appointment_counter++;
+        }
+        elseif(count($prescription) == 1)
+        {
+            $finished_appointment_counter++;
+        }
+        else
+        {
+            
+        }
+        $remark = Remark::where('medical_appointment_id', $appointment_id)->first();
+        if(count($remark) == 0 && $request->remarks != '')
+        {
+            $remark = new Remark;
+            $remark->medical_appointment_id = $request->appointment_id;
+            $remark->remark = $request->remarks;
+            $remark->save();
+            $finished_appointment_counter++;
+        }
+        elseif(count($remark) == 1)
+        {
+            $finished_appointment_counter++;
+        }
+        else
+        {
+            
+        }
+
+        if($finished_appointment_counter == 2)
+        {
+            $medical_appointment = MedicalAppointment::find($appointment_id);
+            $medical_appointment->status = '1';
+            $medical_appointment->update();
+            return response()->json([
+                'status' =>'done'
+            ]);
+        }
     }
 }

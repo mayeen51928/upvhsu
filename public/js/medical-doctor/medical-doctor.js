@@ -86,6 +86,7 @@ $('#backButtonMedicalDiagnosis').click(function() {
 	}
 });
 $('.addMedicalRecordButton').click(function() {
+	// $('#confirmModal').modal();
 	$('#requestsFromDoctor').load(location.href + " #requestsFromDoctor");
 	if($(this).attr('id')){
 		var appointment_id = $(this).attr('id').split("_")[1];
@@ -133,7 +134,7 @@ $('.addMedicalRecordButton').click(function() {
 				// $('#requestFecalysis').removeAttr('disabled').removeAttr('checked');
 				// $('#requestDrugTest').removeAttr('disabled').removeAttr('checked');
 				// $('#requestXray').removeAttr('disabled').removeAttr('checked');
-				$('.medical-button-container').html("").append("<button type='button' class='btn btn-primary add-medical-record-button' id='add-medical-record-button_"+appointment_id+"'>Submit</button>");
+				$('.medical-button-container').html("").append("<button type='button' class='btn btn-success add-medical-record-button' id='add-medical-record-button_"+appointment_id+"'>Add</button>");
 				$('.medical-button-container .add-medical-record-button').click(function(){
 					if ($('#height').val() ||
 						$('#weight').val() ||
@@ -241,8 +242,6 @@ $('.addMedicalRecordButton').click(function() {
 						);
 					}
 				});
-
-				
 			}
 			else
 			{
@@ -264,6 +263,7 @@ $('.addMedicalRecordButton').click(function() {
 					$('#back').val(data['physical_examination']['back']);
 					$('#skin').val(data['physical_examination']['skin']);
 					$('#extremities').val(data['physical_examination']['extremities']);
+					$('#physicalexamination input').attr('disabled', 'disabled');
 				}
 				else
 				{
@@ -283,6 +283,7 @@ $('.addMedicalRecordButton').click(function() {
 					$('#back').val('');
 					$('#skin').val('');
 					$('#extremities').val('');
+					$('#physicalexamination input').removeAttr('disabled');
 				}
 				if(data['cbc_result'])
 				{
@@ -304,7 +305,6 @@ $('.addMedicalRecordButton').click(function() {
 					$('#hemasocrit').val('');
 					$('#wbc').val('');
 					console.log('cbc_result');
-					// $('#requestCBC').removeAttr('checked');
 				}
 				if(data['urinalysis_result'])
 				{
@@ -378,20 +378,117 @@ $('.addMedicalRecordButton').click(function() {
 				if(data['remark'])
 				{
 					$('#remarks').val(data['remark']['remark']);
+					$('#remarks').attr('disabled', 'disabled');
 				}
 				else
 				{
 					$('#remarks').val('');
+					$('#remarks').removeAttr('disabled');
 				}
 				if(data['prescription'])
 				{
 					$('#prescription').val(data['prescription']['prescription']);
+					$('#prescription').attr('disabled', 'disabled');
 				}
 				else
 				{
 					$('#prescription').val('');
+					$('#prescription').removeAttr('disabled');
 				}
-				$('.medical-button-container').html("").append("<button type='button' class='btn btn-primary update-medical-record-button' id='update-medical-record-button_"+appointment_id+"'>Update</button>");
+				$('.medical-button-container').html("").append("<button type='button' class='btn btn-success update-medical-record-button' id='update-medical-record-button_"+appointment_id+"'>Update</button>");
+				$('.medical-button-container .update-medical-record-button').click(function(){
+
+							var appointment_id = $(this).attr('id').split("_")[1];
+							var height = $('#height').val();
+							var weight = $('#weight').val();
+							var bloodPressure = $('#blood-pressure').val();
+							var pulseRate = $('#pulse-rate').val();
+							var rightEye = $('#right-eye').val();
+							var leftEye = $('#left-eye').val();
+							var head = $('#head').val();
+							var eent = $('#eent').val();
+							var neck = $('#neck').val();
+							var chest = $('#chest').val();
+							var heart = $('#heart').val();
+							var lungs = $('#lungs').val();
+							var abdomen = $('#abdomen').val();
+							var back = $('#back').val();
+							var skin = $('#skin').val();
+							var extremities = $('#extremities').val();
+							var remarks = $('#remarks').val();
+							var prescription = $('#prescription').val();
+							if($('#requestCBC').is(':checked')){
+								var request_cbc='yes';
+							}
+							else
+							{
+								var request_cbc='no';
+							}
+							if($('#requestUrinalysis').is(':checked')){
+								var request_urinalysis='yes';
+							}
+							else
+							{
+								var request_urinalysis='no';
+							}
+							if($('#requestFecalysis').is(':checked')){
+								var request_fecalysis='yes';
+							}
+							else
+							{
+								var request_fecalysis='no';
+							}
+							if($('#requestDrugTest').is(':checked')){
+								var request_drug_test='yes';
+							}
+							else
+							{
+								var request_drug_test='no';
+							}
+							if($('#requestXray').is(':checked')){
+								var request_xray='yes';
+							}
+							else
+							{
+								var request_xray='no';
+							}
+							$.post('/updatemedicaldiagnosis',
+							{
+								appointment_id: appointment_id,
+								height: height,
+								weight: weight,
+								blood_pressure: bloodPressure,
+								pulse_rate: pulseRate,
+								right_eye: rightEye,
+								left_eye: leftEye,
+								head: head,
+								eent: eent,
+								neck: neck,
+								chest: chest,
+								heart: heart,
+								lungs: lungs,
+								abdomen: abdomen,
+								back: back,
+								skin: skin,
+								extremities: extremities,
+								remarks: remarks,
+								prescription: prescription,
+								request_cbc: request_cbc,
+								request_urinalysis: request_urinalysis,
+								request_fecalysis: request_fecalysis,
+								request_drug_test: request_drug_test,
+								request_xray: request_xray,
+							} ,
+							function(data){
+								if(data['status'] && data['status'] == 'done')
+								{
+									// $('#addMedicalRecordButton_'+appointment_id).closest("tr").remove();
+								}
+								$('#create-medical-record-modal').modal("hide");
+							}
+						);
+					
+				});
 			}
 			$('#create-medical-record-modal').modal().delay(500);
 		});

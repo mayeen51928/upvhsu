@@ -14,6 +14,7 @@
 					Info here
 				</div>
 			</div>
+      @if(count($medical_appointments) > 0)
 			<h2 class="sub-header">Appointments</h2>
       <div class="table-responsive">
         <table class="table table-striped">
@@ -28,13 +29,16 @@
           	<tr>
               <td>{{$medical_appointment->patient_first_name}} {{$medical_appointment->patient_last_name}}</td>
               <td>{{$medical_appointment->reasons}}</td>
-              <td><button class="btn btn-primary btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment->id}}">Update Diagnosis</button></td>
-              <td><button class="btn btn-primary btn-xs addBillingToMedical">Add Billing</button></td>
+              <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment->id}}">Diagnosis</button></td>
+              <td><button class="btn btn-primary btn-xs addBillingToMedical">Billing</button></td>
             </tr>
             @endforeach
           </tbody>
         </table>
       </div>
+      @else
+        <p>There are no online appointments as of the moment.</p>
+      @endif
 		</div>
 	</div>
 </div>
@@ -52,11 +56,11 @@
         {{-- PERSONAL INFORMATION --}}
         <div class="personal-information">
           <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="col-md-3 col-sm-12 col-xs-12">
               <h4>Name</h4>
               <div class="personal-information-name"></div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="col-md-9 col-sm-12 col-xs-12">
               <h4>Reasons</h4>
               <div class="personal-information-reasons"></div>
             </div>
@@ -69,7 +73,7 @@
             <div class="col-md-3 col-sm-6 col-xs-6">
               <div class="form-group">
                 <label for="height">Height:</label>
-                <input type="text" class="form-control" id="height">
+                <input type="text" class="form-control" id="height" autofocus/>
               </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6">
@@ -361,6 +365,19 @@
       </div>
       <div class="modal-footer">
         <div class="medical-bill-confirm" id="medical-bill-confirm-button" style="text-align:center; "></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="confirmModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Are you sure to save changes?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="saveChanges" class="btn btn-success">Yes</button>
+        <button type="button" id="cancelChanges" class="btn btn-danger" data-dismiss="modal">No</button>
       </div>
     </div>
   </div>
