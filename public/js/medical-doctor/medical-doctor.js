@@ -244,6 +244,8 @@ $('.addMedicalRecordButton').click(function() {
 			}
 			else
 			{
+				$('.requestCheckbox').addClass('checkbox disabled requestCheckbox');
+				$('.requestCheckbox input').attr('disabled', 'disabled');
 				if(data['physical_examination'])
 				{
 					$('#height').val(data['physical_examination']['height']);
@@ -286,24 +288,16 @@ $('.addMedicalRecordButton').click(function() {
 				}
 				if(data['cbc_result'])
 				{
-					console.log("Hello!");
 					$('#hemoglobin').val(data['cbc_result']['hemoglobin']);
 					$('#hemasocrit').val(data['cbc_result']['hemasocrit']);
 					$('#wbc').val(data['cbc_result']['wbc']);
-					$('#requestCBC').attr('checked', true).attr('disabled', 'disabled');
-					$('#requestUrinalysis').attr('disabled', 'disabled');
-					$('#requestFecalysis').attr('disabled', 'disabled');
-					$('#requestDrugTest').attr('disabled', 'disabled');
-					$('#requestXray').attr('disabled', 'disabled');
-					$('.requestCheckbox').addClass('checkbox disabled requestCheckbox');
-
+					$('#requestCBC').attr('checked', 'checked').attr('disabled', 'disabled');
 				}
 				else
 				{
 					$('#hemoglobin').val('');
 					$('#hemasocrit').val('');
 					$('#wbc').val('');
-					console.log('cbc_result');
 				}
 				if(data['urinalysis_result'])
 				{
@@ -311,12 +305,7 @@ $('.addMedicalRecordButton').click(function() {
 					$('#rbc').val(data['urinalysis_result']['rbc']);
 					$('#albumin').val(data['urinalysis_result']['albumin']);
 					$('#sugar').val(data['urinalysis_result']['sugar']);
-					$('#requestCBC').attr('disabled', 'disabled');
 					$('#requestUrinalysis').attr('disabled', 'disabled').attr('checked', 'checked');
-					$('#requestFecalysis').attr('disabled', 'disabled');
-					$('#requestDrugTest').attr('disabled', 'disabled');
-					$('#requestXray').attr('disabled', 'disabled');
-					$('.requestCheckbox').addClass('checkbox disabled requestCheckbox');
 				}
 				else
 				{
@@ -324,55 +313,35 @@ $('.addMedicalRecordButton').click(function() {
 					$('#rbc').val('');
 					$('#albumin').val('');
 					$('#sugar').val('');
-					// $('#requestUrinalysis').removeAttr('checked');
 				}
 				if(data['fecalysis_result'])
 				{
 					$('#macroscopic').val(data['fecalysis_result']['macroscopic']);
 					$('#microscopic').val(data['fecalysis_result']['microscopic']);
-					$('#requestCBC').attr('disabled', 'disabled');
-					$('#requestUrinalysis').attr('disabled', 'disabled');
 					$('#requestFecalysis').attr('disabled', 'disabled').attr('checked', 'checked');
-					$('#requestDrugTest').attr('disabled', 'disabled');
-					$('#requestXray').attr('disabled', 'disabled');
-					$('.requestCheckbox').addClass('checkbox disabled requestCheckbox');
 				}
 				else
 				{
 					$('#macroscopic').val('');
 					$('#microscopic').val('');
-					// $('#requestFecalysis').removeAttr('checked');
 				}
 				if(data['drug_test_result'])
 				{
 					$('#drug-test').val(data['drug_test_result']['drug_test']).attr('checked', 'checked');
-					$('#chest-xray').val(data['chest_xray_result']['xray_result']);
-					$('#requestCBC').attr('disabled', 'disabled');
-					$('#requestUrinalysis').attr('disabled', 'disabled');
-					$('#requestFecalysis').attr('disabled', 'disabled');
 					$('#requestDrugTest').attr('disabled', 'disabled').attr('checked', 'checked');
-					$('#requestXray').attr('disabled', 'disabled');
-					$('.requestCheckbox').addClass('checkbox disabled requestCheckbox');
 				}
 				else
 				{
 					$('#drug-test').val('');
-					// $('#requestDrugTest').removeAttr('checked');
 				}
 				if(data['chest_xray_result'])
 				{
 					$('#chest-xray').val(data['chest_xray_result']['xray_result']);
-					$('#requestCBC').attr('disabled', 'disabled');
-					$('#requestUrinalysis').attr('disabled', 'disabled');
-					$('#requestFecalysis').attr('disabled', 'disabled');
-					$('#requestDrugTest').attr('disabled', 'disabled');
 					$('#requestXray').attr('disabled', 'disabled').attr('checked', 'checked');
-					$('.requestCheckbox').addClass('checkbox disabled requestCheckbox');
 				}
 				else
 				{
 					$('#chest-xray').val('');
-					// $('#requestXray').removeAttr('checked');
 				}
 				if(data['remark'])
 				{
