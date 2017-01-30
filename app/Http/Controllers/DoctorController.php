@@ -304,11 +304,14 @@ class DoctorController extends Controller
 
 	public function displaypatientrecordsearch(Request $request){
 		$patient_id = $request->patient_id;
-		// $display_patient_record_modal = DB::table('patient_info')
-		// 			->where('patient_info.patient_id', '=', $patient_id)
-		// 			->get();
+		$display_patient_record_modal = DB::table('patient_info')
+					->join('religions', 'patient_info.religion_id', 'religions.id')
+					->join('nationalities', 'patient_info.nationality_id', 'nationalities.id')
+					->where('patient_info.patient_id', '=', $patient_id)
+					->first();
+		
 
-		return response()->json(['patient_id' => $patient_id]);
+		return response()->json(['patient_info' => $display_patient_record_modal]);
 	}
 
 

@@ -286,7 +286,6 @@ $('.addMedicalRecordButton').click(function() {
 				}
 				if(data['cbc_result'])
 				{
-					console.log("Hello!");
 					$('#hemoglobin').val(data['cbc_result']['hemoglobin']);
 					$('#hemasocrit').val(data['cbc_result']['hemasocrit']);
 					$('#wbc').val(data['cbc_result']['wbc']);
@@ -494,133 +493,6 @@ $('.addMedicalRecordButton').click(function() {
 	}
 });
 
-	// numOfClicksMedical_Diagnosis = 0;
-	// percentageMedical_Diagnosis = 20;
-	// $('#nextButtonMedicalDiagnosis').click(function(){
-	// 	numOfClicksMedical_Diagnosis ++;
-	// 			if(numOfClicksMedical_Diagnosis == 1){
-	// 					$('#physicalexamination').hide();
-	// 					$('#laboratoryresult').show();
-	// 					$('#backButtonMedicalDiagnosis').show();
-	// 					percentageMedical_Diagnosis += 20;
-	// 					$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('2 of 5');
-	// 			}
-	// 			if(numOfClicksMedical_Diagnosis == 2){
-	// 					$('#laboratoryresult').hide();
-	// 					$('#remarksDiv').show();
-	// 					percentageMedical_Diagnosis += 20;
-	// 					$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('3 of 5');
-	// 			}
-	// 			if(numOfClicksMedical_Diagnosis == 3){
-	// 					$('#remarksDiv').hide();
-	// 					$('#prescriptionDiv').show();
-	// 					percentageMedical_Diagnosis +=20;
-	// 					$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('4 of 5');
-	// 			}
-	// 			if(numOfClicksMedical_Diagnosis == 4){
-	// 					$('#prescriptionDiv').hide();
-	// 					$('#requestLabXrayDiv').show();
-	// 					$('#nextButtonMedicalDiagnosis').hide();
-	// 					percentageMedical_Diagnosis +=20;
-	// 					$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('5 of 5');
-	// 			}
-	// 			console.log(numOfClicksMedical_Diagnosis);
-	// });
-
-	// $('#backButtonMedicalDiagnosis').click(function() {
-	// 			numOfClicksMedical_Diagnosis --;
-	// 			if(numOfClicksMedical_Diagnosis == 3){
-	// 				 $('#prescriptionDiv').show();
-	// 					$('#requestLabXrayDiv').hide();
-	// 					$('#nextButtonMedicalDiagnosis').show();
-	// 					percentageMedical_Diagnosis -= 20;
-	// 					$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('4 of 5');
-	// 			}
-	// 			if(numOfClicksMedical_Diagnosis == 2){
-	// 					$('#remarksDiv').show();
-	// 					$('#prescriptionDiv').hide();
-	// 					percentageMedical_Diagnosis -= 20;
-	// 					$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('3 of 5');
-	// 			}
-	// 			if(numOfClicksMedical_Diagnosis == 1){
-	// 					$('#laboratoryresult').show();
-	// 					$('#remarksDiv').hide();
-	// 					percentageMedical_Diagnosis -= 20;
-	// 					$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('2 of 5');
-	// 			}
-	// 			if(numOfClicksMedical_Diagnosis == 0){
-	// 					$('#physicalexamination').show();
-	// 					$('#laboratoryresult').hide();
-	// 					$('#backButtonMedicalDiagnosis').hide();
-	// 					percentageMedical_Diagnosis -= 20;
-	// 					$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('1 of 5');
-	// 			}
-	// 	});
-
-	// 	$(document).on('click', '.medical-button-container #update-medical-record-button', function(){ 
-	// 			if ($('#height').val() || $('#weight').val() || $('#blood-pressure').val() || $('#pulse-rate').val() || $('#right-eye').val() || $('#left-eye').val() || $('#head').val() || $('#eent').val() || $('#neck').val() || $('#neck').val() || $('#chest').val() || $('#heart').val() || $('#heart').val() || $('#lungs').val() || $('#abdomen').val() || $('#back').val() || $('#skin').val() || $('#extremities').val() || $('#hemoglobin').val() || $('#hemasocrit').val() || $('#wbc').val() || $('#pus-cells').val() || $('#rbc').val() || $('#albumin').val() || $('#sugar').val() || $('#macroscopic').val() || $('#microscopic').val() || $('#drug-test').val() || $('#chest-xray').val() || $('#remarks').val() || $('#prescription').val()) {
-	// 					var patient_id = create_record_patient_id;
-	// 					var appointment_id_fin = appointment_id;
-	// 					var height = $('#height').val();
-	// 					var weight = $('#weight').val();
-	// 					var bloodPressure = $('#blood-pressure').val();
-	// 					var pulseRate = $('#pulse-rate').val();
-	// 					var rightEye = $('#right-eye').val();
-	// 					var leftEye = $('#left-eye').val();
-	// 					var head = $('#head').val();
-	// 					var eent = $('#eent').val();
-	// 					var neck = $('#neck').val();
-	// 					var chest = $('#chest').val();
-	// 					var heart = $('#heart').val();
-	// 					var lungs = $('#lungs').val();
-	// 					var abdomen = $('#abdomen').val();
-	// 					var back = $('#back').val();
-	// 					var skin = $('#skin').val();
-	// 					var extremities = $('#extremities').val();
-	// 					var remarks = $('#remarks').val();
-	// 					var prescription = $('#prescription').val();
-	// 					$.ajax({
-	// 							type: "POST",
-	// 							url: "update-medical-record-modal.php",
-	// 							async: true,
-	// 							data: 
-	// 							{   'create_record_patient_id':patient_id,
-	// 									'appointment_id':appointment_id_fin,
-	// 									'height':height,
-	// 									'weight':weight,
-	// 									'blood-pressure':bloodPressure,
-	// 									'pulse-rate':pulseRate,
-	// 									'right-eye':rightEye,
-	// 									'left-eye':leftEye,
-	// 									'head':head,
-	// 									'eent':eent,
-	// 									'neck':neck,
-	// 									'chest':chest,
-	// 									'heart':heart,
-	// 									'lungs':lungs,
-	// 									'abdomen':abdomen,
-	// 									'back':back,
-	// 									'skin':skin,
-	// 									'extremities':extremities,
-	// 									'remarks':remarks,
-	// 									'prescription':prescription,
-	// 							},
-	// 							success: function(response)
-	// 							{
-	// 									message = JSON.parse(response);
-	// 									console.log(message);
-	// 									if(message==1){
-	// 											console.log("Success!");
-	// 											 $('#create-medical-record-modal').modal("hide");
-
-	// 									}  
-	// 							}
-	// 					});
-	// 			}
-	// 			return false;
-	// 	});
-
-
 	// $('.addBillingToMedical').click(function() {
 	// 			if($(this).attr('id')){
 	// 					var medicalBillingId = $(this).attr('id');
@@ -772,9 +644,7 @@ $('#addmedicalschedule').click(function(){
 // ------------------SEARCH PATIENT---------------
 $("#search_patient").keyup(function(){
 	if($('#search_patient').val()){
-		$("#search_patient").css("background-color", "yellow");
 		var searchString = $('#search_patient').val();
-		console.log(searchString);
 		$.ajax({
 			  type: "POST",
 			  url: searchPatientRecord,
@@ -792,42 +662,46 @@ $("#search_patient").keyup(function(){
 
   					$('.searchQueryResults').click(function() {
             	var patientId = $(this).attr('id').split('_')[1];
-            	console.log(patientId);
             	$.ajax({
 								  type: "POST",
 								  url: displayPatientRecordSearch,
 								  data: { patient_id: patientId ,  _token: token},
 								  success: function(data)
 								  {
-								  	console.log("Patient id " + data['patient_id']);
-								  	output = '';
-										message=jQuery.parseJSON(response);
-										$('#ageTd').html(message.age);
-										$('#sexTd').html(message.sex);
-										$('#courseTd').html(message.degree_program);
-										$('#yearlevelTd').html(message.year_level);
-										$('#birthdateTd').html(message.birthdate);
-										$('#religionTd').html(message.religion);
-										$('#nationlityTd').html(message.nationality);
-										$('#fatherTd').html(message.father);
-										$('#motherTd').html(message.mother);
-										$('#homeaddressTd').html(message.street + ', ' + message.town + ', ' + message.province);
-										$('#restelTd').html(message.residence_telephone);
-										$('#perosnalcontactnumberTd').html(message.personal_contact_number);
-										$('#guardiannameTd').html(message.guardian_name);
-										$('#guardianaddressTd').html(message.guardian_address);
-										$('#guardianrelationshipTd').html(message.guardian_relationship);
-										$('#guardiantelTd').html(message.guardian_residence_telephone);
-										$('#guardiancpTd').html(message.guardian_residence_cellphone);
-                    if($('#determine-view-record-button').val()==1){
-                        $('#patientInfoModalFooter').html('<a href="view-medical-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View Medical Records</a><a href="add-new-medical-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
-                    }
-                    if($('#determine-view-record-button').val()==2){
-                        $('#patientInfoModalFooter').html('<a href="view-dental-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View Dental Records</a><a href="add-new-dental-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
-                    }
+										  output = '';
+											var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
+											$('#ageTd').html(age);
+											$('#sexTd').html(data['patient_info']['sex']);
+											$('#courseTd').html(data['patient_info']['degree_program_description']);
+											$('#yearlevelTd').html(data['patient_info']['year_level']);
+											$('#birthdateTd').html(data['patient_info']['birthday']);
+											$('#religionTd').html(data['patient_info']['religion_description']);
+											$('#nationlityTd').html(data['patient_info']['nationality_description']);
+											// if (data['patient_info']['father'] == "M") {
+											// 	$('#fatherTd').html(data['patient_info']['parent_first_name']+' '+data['patient_info']['parent_last_name']);
+											// };
+											// if (data['patient_info']['father'] == "M") {
+											// 	$('#motherTd').html(data['patient_info']['parent_first_name'] + ' ' + data['patient_info']['parent_last_name']);
+											// };
+											$('#homeaddressTd').html(data['patient_info']['street'] + ', ' + data['patient_info']['town_name'] + ', ' + data['patient_info']['province_name']);
+											$('#restelTd').html(data['patient_info']['residence_telephone_number']);
+											$('#personalcontactnumberTd').html(data['patient_info']['personal_contact_number']);
+											// $('#guardiannameTd').html(message.guardian_name);
+											// $('#guardianaddressTd').html(message.guardian_address);
+											// $('#guardianrelationshipTd').html(message.guardian_relationship);
+											// $('#guardiantelTd').html(message.guardian_residence_telephone);
+											// $('#guardiancpTd').html(message.guardian_residence_cellphone);
+		                  // if($('#determine-view-record-button').val()==1){
+		                  //     $('#patientInfoModalFooter').html('<a href="view-medical-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View Medical Records</a><a href="add-new-medical-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
+		                  // }
+		                  // if($('#determine-view-record-button').val()==2){
+		                  //     $('#patientInfoModalFooter').html('<a href="view-dental-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View Dental Records</a><a href="add-new-dental-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
+		                  // }
 								  }
 							  });
-								$('#searchPatientRecordInfo').modal();
+								setTimeout(function() {
+								    $('#searchPatientRecordInfo').modal();
+								}, 2000);
             });
 			  	}
 			  	else{
@@ -838,7 +712,6 @@ $("#search_patient").keyup(function(){
 		  });
 	}
 	else{
-		$("#search_patient").css("background-color", "pink");
 		$('#searchTable').hide();
 		$('#searchResults').html("");
 	}
