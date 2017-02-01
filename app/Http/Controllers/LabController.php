@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 use App\Staff;
 use App\Town;
 use App\Province;
@@ -27,6 +28,43 @@ class LabController extends Controller
     }
     public function dashboard()
     {
+        $params['cbc_requests'] = DB::table('cbc_results')
+        ->join('medical_appointments', 'cbc_results.medical_appointment_id', 'medical_appointments.id')
+        ->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
+        ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
+        ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
+        ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'cbc_results.*')
+        ->where('status', '0')
+        ->get();
+
+        $params['drug_test_requests'] = DB::table('drug_test_results')
+        ->join('medical_appointments', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')
+        ->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
+        ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
+        ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
+        ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'drug_test_results.*')
+        ->where('status', '0')
+        ->get();
+
+        $params['fecalysis_requests'] = DB::table('fecalysis_results')
+        ->join('medical_appointments', 'fecalysis_results.medical_appointment_id', 'medical_appointments.id')
+        ->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
+        ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
+        ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
+        ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'fecalysis_results.*')
+        ->where('status', '0')
+        ->get();
+
+        $params['urinalysis_requests'] = DB::table('urinalysis_results')
+        ->join('medical_appointments', 'urinalysis_results.medical_appointment_id', 'medical_appointments.id')
+        ->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
+        ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
+        ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
+        ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'urinalysis_results.*')
+        ->where('status', '0')
+        ->get();
+
+        // dd($params['cbc_requests']);
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
     	return view('staff.medical-lab.dashboard', $params);

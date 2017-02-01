@@ -27,7 +27,7 @@
 						<tbody>
             @foreach($medical_appointments as $medical_appointment)
                 <tr>
-                  <td><a>{{$medical_appointment->schedule_day}}</a></td>
+                  <td><a>{{date_format(date_create($medical_appointment->schedule_day), 'F j, Y')}}</a></td>
                   <td>{{$medical_appointment->staff_first_name}} {{$medical_appointment->staff_last_name}}</td>
                 </tr>
               @endforeach
@@ -49,8 +49,9 @@
 						<tbody>
 							@foreach($dental_appointments as $dental_appointment)
                 <tr>
-                  <td><a>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dental_appointment->schedule_start)->format('M d,Y') }}</a></td>
-                  <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dental_appointment->schedule_start)->format('H:i:s') }} - {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dental_appointment->schedule_end)->format('H:i:s') }}</td>
+                  <td><a>{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a></td>
+                  <td>
+                  {{date_format(date_create($dental_appointment->schedule_start), 'H:i:s')}} - {{date_format(date_create($dental_appointment->schedule_end), 'H:i:s')}}</td>
                   <td>{{$dental_appointment->staff_first_name}} {{$dental_appointment->staff_last_name}}</td>
                 </tr>
               @endforeach

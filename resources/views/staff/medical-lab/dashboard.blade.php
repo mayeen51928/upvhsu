@@ -5,36 +5,108 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
-			<h1 class="page-header">{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</h1>
-			<div class="row placeholders">
-				<div class="col-xs-3 col-sm-3 col-md-3 placeholder">
-					<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-				</div>
-				<div class="col-xs-9 col-sm-9 col-md-9 placeholder">
-					Info here
-				</div>
-			</div>
-			<h2 class="sub-header">Requests for Laboratory Examination</h2>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Date</th>
-              <th>Requestor</th>
-              <th></th>
-            </tr>
-
-          </thead>
-          <tbody>
-            <tr>
-              <td id="patient_name">John Mission</p></td>
-              <td>December 13, 2016</td>
-              <td>Patrick Garcia</td>
-              <td><button class="btn btn-primary btn-xs addLaboratoryResult">Add Laboratory Result</button></td>
-            </tr>
-          </tbody>
-        </table>
+			<h4 class="page-header">Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
+			<h3 class="sub-header">Requests for Laboratory Examination</h3>
+      <p>The requests are sorted by time and date of requests, from the most recent requests.</p>
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-pills">
+            <li class="active"><a data-toggle="pill" href="#cbc_requests">CBC</a></li>
+            <li><a data-toggle="pill" href="#drug_test_requests">Drug Test</a></li>
+            <li><a data-toggle="pill" href="#fecalysis_requests">Fecalysis</a></li>
+            <li><a data-toggle="pill" href="#urinalysis_requests">Urinalysis</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="table-responsive tab-pane fade in active" id="cbc_requests">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Patient</th>
+                    <th>Date</th>
+                    <th>Requestor</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($cbc_requests as $cbc_request)
+                  <tr>
+                    <td id="patient_name">{{$cbc_request->patient_first_name}} {{$cbc_request->patient_last_name}}</p></td>
+                    <td>{{date_format(date_create($cbc_request->created_at), 'F j, Y')}}</td>
+                    <td>{{$cbc_request->staff_first_name}} {{$cbc_request->staff_last_name}}</td>
+                    <td><button class="btn btn-primary btn-xs addLaboratoryResult">Laboratory Diagnosis</button></td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive tab-pane fade" id="drug_test_requests">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Patient</th>
+                    <th>Date</th>
+                    <th>Requestor</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($drug_test_requests as $drug_test_request)
+                  <tr>
+                    <td id="patient_name">{{$drug_test_request->patient_first_name}} {{$drug_test_request->patient_last_name}}</p></td>
+                    <td>{{date_format(date_create($drug_test_request->created_at), 'F j, Y')}}</td>
+                    <td>{{$drug_test_request->staff_first_name}} {{$drug_test_request->staff_last_name}}</td>
+                    <td><button class="btn btn-primary btn-xs addLaboratoryResult">Laboratory Diagnosis</button></td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive tab-pane fade" id="fecalysis_requests">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Date</th>
+                  <th>Requestor</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($fecalysis_requests as $fecalysis_request)
+                  <tr>
+                    <td id="patient_name">{{$fecalysis_request->patient_first_name}} {{$fecalysis_request->patient_last_name}}</p></td>
+                    <td>{{date_format(date_create($fecalysis_request->created_at), 'F j, Y')}}</td>
+                    <td>{{$fecalysis_request->staff_first_name}} {{$fecalysis_request->staff_last_name}}</td>
+                    <td><button class="btn btn-primary btn-xs addLaboratoryResult">Laboratory Diagnosis</button></td>
+                  </tr>
+                  @endforeach
+              </tbody>
+            </table>
+          </div>
+          <div class="table-responsive tab-pane fade" id="urinalysis_requests">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Date</th>
+                  <th>Requestor</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($urinalysis_requests as $urinalysis_request)
+                  <tr>
+                    <td id="patient_name">{{$urinalysis_request->patient_first_name}} {{$urinalysis_request->patient_last_name}}</p></td>
+                    <td>{{date_format(date_create($urinalysis_request->created_at), 'F j, Y')}}</td>
+                    <td>{{$urinalysis_request->staff_first_name}} {{$urinalysis_request->staff_last_name}}</td>
+                    <td><button class="btn btn-primary btn-xs addLaboratoryResult">Laboratory Diagnosis</button></td>
+                  </tr>
+                  @endforeach
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
       </div>
 		</div>
 	</div>
