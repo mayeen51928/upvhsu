@@ -86,7 +86,7 @@
                     <td id="patient_name">{{$fecalysis_request->patient_first_name}} {{$fecalysis_request->patient_last_name}}</p></td>
                     <td>{{date_format(date_create($fecalysis_request->created_at), 'F j, Y')}}</td>
                     <td>{{$fecalysis_request->staff_first_name}} {{$fecalysis_request->staff_last_name}}</td>
-                    <td><button class="btn btn-info btn-xs addFecalysisResult">Diagnosis</button></td>
+                    <td><button class="btn btn-info btn-xs addFecalysisResult" id="addFecalysisResult_{{$fecalysis_request->id}}">Diagnosis</button></td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -112,7 +112,7 @@
                     <td id="patient_name">{{$urinalysis_request->patient_first_name}} {{$urinalysis_request->patient_last_name}}</p></td>
                     <td>{{date_format(date_create($urinalysis_request->created_at), 'F j, Y')}}</td>
                     <td>{{$urinalysis_request->staff_first_name}} {{$urinalysis_request->staff_last_name}}</td>
-                    <td><button class="btn btn-info btn-xs addUrinalysisResult">Diagnosis</button></td>
+                    <td><button class="btn btn-info btn-xs addUrinalysisResult" id="addUrinalysisResult_{{$urinalysis_request->id}}">Diagnosis</button></td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -129,7 +129,7 @@
 </div>
 
 {{-- CBC Modal --}}
-<div class="modal fade" id="add-cbc-result" role="dialog">
+<div class="modal fade" id="add-cbc-result" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -161,7 +161,7 @@
 </div>
 
 {{-- Drug Test Modal --}}
-<div class="modal fade" id="add-drug-test-result" role="dialog">
+<div class="modal fade" id="add-drug-test-result" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -185,7 +185,7 @@
 </div>
 
 {{-- Fecalysis Modal --}}
-<div class="modal fade" id="add-fecalysis-result" role="dialog">
+<div class="modal fade" id="add-fecalysis-result" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -213,7 +213,7 @@
 </div>
 
 {{-- Urinalysis Modal --}}
-<div class="modal fade" id="add-urinalysis-result" role="dialog">
+<div class="modal fade" id="add-urinalysis-result" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">

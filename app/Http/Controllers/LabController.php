@@ -62,6 +62,8 @@ class LabController extends Controller
         ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
         ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'fecalysis_results.*')
         ->where('status', '0')
+        ->where('macroscopic', null)
+        ->where('microscopic', null)
         ->get();
 
         $params['urinalysis_requests'] = DB::table('urinalysis_results')
@@ -71,6 +73,10 @@ class LabController extends Controller
         ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
         ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'urinalysis_results.*')
         ->where('status', '0')
+        ->where('pus_cells', null)
+        ->where('rbc', null)
+        ->where('albumin', null)
+        ->where('sugar', null)
         ->get();
 
         // dd($params['cbc_requests']);
@@ -95,6 +101,26 @@ class LabController extends Controller
         $drug_test->lab_staff_id = Auth::user()->user_id;
         $drug_test->drug_test_result = $request->drug_test_result;
         $drug_test->update();
+    }
+
+    public function addfecalysisresult(Request $request)
+    {
+        $fecalysis = FecalysisResult::find($request->fecalysis_id);
+        $fecalysis->lab_staff_id = Auth::user()->user_id;
+        $fecalysis->macroscopic = $request->macroscopic;
+        $fecalysis->microscopic = $request->microscopic;
+        $fecalysis->update();
+    }
+
+    public function addurinalysisresult(Request $request)
+    {
+        $urinalysis = UrinalysisResult::find($request->urinalysis_id);
+        $urinalysis->lab_staff_id = Auth::user()->user_id;
+        $urinalysis->pus_cells = $request->pus_cells;
+        $urinalysis->rbc = $request->rbc;
+        $urinalysis->albumin = $request->albumin;
+        $urinalysis->sugar = $request->sugar;
+        $urinalysis->update();
     }
 
     public function profile()

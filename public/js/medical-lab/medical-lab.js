@@ -4,26 +4,26 @@ $.ajaxSetup({
 });
 // ------------------DASHBOARD---------------
 $('.addCbcResult').click(function(){
-  var cbc_id = $(this).attr('id').split("_")[1];
-  $('#add-cbc-result').modal();
-  $('#addCbcResultButton').click(function(){
-    if($('#hemoglobin-lab').val() && $('#hemasocrit-lab').val() && $('#wbc-lab').val())
-    {
-      var hemoglobin = $('#hemoglobin-lab').val();
-      var hemasocrit = $('#hemasocrit-lab').val();
-      var wbc = $('#wbc-lab').val();
-      $.post('/addcbcresult',
-      {
-        cbc_id: cbc_id,
-        hemoglobin: hemoglobin,
-        hemasocrit: hemasocrit,
-        wbc: wbc,
-      } , function(data){
-        $('#addCbcResult_'+cbc_id).closest("tr").remove();
-        $('#add-cbc-result').modal('hide');
-      });
-    }
-  });
+	var cbc_id = $(this).attr('id').split("_")[1];
+	$('#add-cbc-result').modal();
+	$('#addCbcResultButton').click(function(){
+		if($('#hemoglobin-lab').val() && $('#hemasocrit-lab').val() && $('#wbc-lab').val())
+		{
+			var hemoglobin = $('#hemoglobin-lab').val();
+	      var hemasocrit = $('#hemasocrit-lab').val();
+	      var wbc = $('#wbc-lab').val();
+	      $.post('/addcbcresult',
+	      {
+	      	cbc_id: cbc_id,
+	      	hemoglobin: hemoglobin,
+	      	hemasocrit: hemasocrit,
+	      	wbc: wbc,
+	      } , function(data){
+	      	$('#addCbcResult_'+cbc_id).closest("tr").remove();
+	      	$('#add-cbc-result').modal('hide');
+	      });
+	   }
+	});
 });
 $('.addDrugTestResult').click(function(){
   var drug_test_id = $(this).attr('id').split("_")[1];
@@ -43,12 +43,50 @@ $('.addDrugTestResult').click(function(){
     }
   });
 });
-  $('.addFecalysisResult').click(function(){
-    $('#add-fecalysis-result').modal();
-  });
-  $('.addUrinalysisResult').click(function(){
-    $('#add-urinalysis-result').modal();
-  });
+$('.addFecalysisResult').click(function(){
+	var fecalysis_id = $(this).attr('id').split("_")[1];
+	$('#add-fecalysis-result').modal();
+	$('#addFecalysisResultButton').click(function(){
+		if($('#macroscopic-lab').val() && $('#microscopic-lab').val())
+		{
+			var macroscopic = $('#macroscopic-lab').val();
+			var microscopic = $('#microscopic-lab').val();
+			$.post('/addfecalysisresult',
+			{
+				fecalysis_id: fecalysis_id,
+				macroscopic: macroscopic,
+				microscopic: microscopic,
+			} , function(data){
+				$('#addFecalysisResult_'+fecalysis_id).closest("tr").remove();
+				$('#add-fecalysis-result').modal('hide');
+			});
+		}
+	});
+});
+$('.addUrinalysisResult').click(function(){
+	var urinalysis_id = $(this).attr('id').split("_")[1];
+	$('#add-urinalysis-result').modal();
+	$('#addUrinalysisResultButton').click(function(){
+		if($('#pus-cells-lab').val() && $('#rbc-lab').val() && $('#albumin-lab').val() && $('#sugar-lab').val())
+		{
+			var pus_cells = $('#pus-cells-lab').val();
+			var rbc = $('#rbc-lab').val();
+			var albumin = $('#albumin-lab').val();
+			var sugar = $('#sugar-lab').val();
+			$.post('/addurinalysisresult',
+			{
+				urinalysis_id: urinalysis_id,
+				pus_cells: pus_cells,
+				rbc: rbc,
+				albumin: albumin,
+				sugar: sugar,
+			} , function(data){
+				$('#addUrinalysisResult_'+urinalysis_id).closest("tr").remove();
+				$('#add-urinalysis-result').modal('hide');
+			});
+		}
+	});
+});
 // ------------------PROFILE---------------
 // ------------------SEARCH PATIENT---------------
   // $('#searchPatient').keyup(function() {
