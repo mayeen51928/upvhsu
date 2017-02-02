@@ -1,68 +1,53 @@
 $(document).ready( function(){
+$.ajaxSetup({
+  headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+});
 // ------------------DASHBOARD---------------
-  $('.addLaboratoryResult').click(function(){
-    $('#add-laboratory-result').modal();
-    // console.log($(this).attr('id'));
-    // var rowToRemove = $(this).attr('id');
-    // var buttonId = ($(this).attr('id').split('_'));
-    // var patient_id = buttonId[1];
-    // var appointment_id = buttonId[2];
-    // var staff_id = buttonId[3];
-    // $('#add-laboratory-result').modal();
-    // $('#addLabResultButton').click(function(){
-    //   if($('#hemoglobin-lab').val()
-    //       && $('#hemasocrit-lab').val()
-    //       && $('#wbc-lab').val()
-    //       && $('#pus-cells-lab').val()
-    //       && $('#rbc-lab').val()
-    //       && $('#albumin-lab').val()
-    //       && $('#sugar-lab').val()
-    //       && $('#macroscopic-lab').val()
-    //       && $('#microscopic-lab').val()
-    //       && $('#drug-test-lab').val())
-    //   {
-    //     var hemoglobin = $('#hemoglobin-lab').val();
-    //     var hemasocrit = $('#hemasocrit-lab').val();
-    //     var wbc = $('#wbc-lab').val();
-    //     var pusCells = $('#pus-cells-lab').val();
-    //     var rbc = $('#rbc-lab').val();
-    //     var albumin = $('#albumin-lab').val();
-    //     var sugar = $('#sugar-lab').val();
-    //     var macroscopic = $('#macroscopic-lab').val();
-    //     var microscopic = $('#microscopic-lab').val();
-    //     var drugTest = $('#drug-test-lab').val();
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "add-lab-results.php",
-    //         async: true,
-    //         data: 
-    //         {   'patient_id':patient_id,
-    //             'appointment_id':appointment_id,
-    //             'staff_id': staff_id,
-    //             'hemoglobin':hemoglobin,
-    //             'hemasocrit':hemasocrit,
-    //             'wbc':wbc,
-    //             'pus-cells':pusCells,
-    //             'rbc':rbc,
-    //             'albumin':albumin,
-    //             'sugar':sugar,
-    //             'macroscopic':macroscopic,
-    //             'microscopic':microscopic,
-    //             'drug-test':drugTest,
-    //         },
-    //         success: function(response)
-    //         {
-    //             message = JSON.parse(response);
-    //             console.log(message);
-    //             if(message==1){
-    //                 console.log("Success!");
-    //                 $('#'+rowToRemove).parents('tr').remove();
-    //                 $('#add-laboratory-result').modal('hide');
-    //             }
-    //         }
-    //     });
-    //   }
-    // });
+$('.addCbcResult').click(function(){
+  var cbc_id = $(this).attr('id').split("_")[1];
+  $('#add-cbc-result').modal();
+  $('#addCbcResultButton').click(function(){
+    if($('#hemoglobin-lab').val() && $('#hemasocrit-lab').val() && $('#wbc-lab').val())
+    {
+      var hemoglobin = $('#hemoglobin-lab').val();
+      var hemasocrit = $('#hemasocrit-lab').val();
+      var wbc = $('#wbc-lab').val();
+      $.post('/addcbcresult',
+      {
+        cbc_id: cbc_id,
+        hemoglobin: hemoglobin,
+        hemasocrit: hemasocrit,
+        wbc: wbc,
+      } , function(data){
+        $('#addCbcResult_'+cbc_id).closest("tr").remove();
+        $('#add-cbc-result').modal('hide');
+      });
+    }
+  });
+});
+$('.addDrugTestResult').click(function(){
+  var drug_test_id = $(this).attr('id').split("_")[1];
+  $('#add-drug-test-result').modal();
+  $('#addDrugTestResultButton').click(function(){
+    if($('#drug-test-lab').val())
+    {
+      var drug_test_result = $('#drug-test-lab').val();
+      $.post('/adddrugtestresult',
+      {
+        drug_test_id: drug_test_id,
+        drug_test_result: drug_test_result,
+      } , function(data){
+        $('#addDrugTestResult_'+drug_test_id).closest("tr").remove();
+        $('#add-drug-test-result').modal('hide');
+      });
+    }
+  });
+});
+  $('.addFecalysisResult').click(function(){
+    $('#add-fecalysis-result').modal();
+  });
+  $('.addUrinalysisResult').click(function(){
+    $('#add-urinalysis-result').modal();
   });
 // ------------------PROFILE---------------
 // ------------------SEARCH PATIENT---------------
