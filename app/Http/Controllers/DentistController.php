@@ -68,10 +68,10 @@ class DentistController extends Controller
 			for ($x = 55; $x >= 51; $x--)
 			{
 		    $dental_chart_results = DB::table('dental_records')
-		    ->orderBy('created_at', 'desc')
-				->where('teeth_id', '=', $x)
-				->pluck('condition_id')
-				->first();
+				    ->orderBy('created_at', 'desc')
+						->where('teeth_id', '=', $x)
+						->pluck('condition_id')
+						->first();
 
 				if($dental_chart_results == 0){
 					$dental_chart_results = "white";
@@ -95,10 +95,10 @@ class DentistController extends Controller
 
 
 				$dental_chart_results = DB::table('dental_records')
-		    ->orderBy('created_at', 'desc')
-				->where('teeth_id', '=', $x)
-				->pluck('operation_id')
-				->first();
+			    ->orderBy('created_at', 'desc')
+					->where('teeth_id', '=', $x)
+					->pluck('operation_id')
+					->first();
 
 				if($dental_chart_results == 0){
 					$dental_chart_results = "white";
@@ -120,8 +120,417 @@ class DentistController extends Controller
 				}
 				array_push($stacks_operation, $dental_chart_results);
 			}
+
+
+			$stacks_condition2 = array();
+			$stacks_operation2 = array();
+			for ($x = 61; $x <= 65; $x++)
+			{
+		    $dental_chart_results = DB::table('dental_records')
+				    ->orderBy('created_at', 'desc')
+						->where('teeth_id', '=', $x)
+						->pluck('condition_id')
+						->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_condition2, $dental_chart_results);
+
+
+				$dental_chart_results = DB::table('dental_records')
+			    ->orderBy('created_at', 'desc')
+					->where('teeth_id', '=', $x)
+					->pluck('operation_id')
+					->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_operation2, $dental_chart_results);
+			}
+
+
+			$stacks_condition3 = array();
+			$stacks_operation3 = array();
+			for ($x = 18; $x >= 11; $x--)
+			{
+		    $dental_chart_results = DB::table('dental_records')
+				    ->orderBy('created_at', 'desc')
+						->where('teeth_id', '=', $x)
+						->pluck('condition_id')
+						->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_condition3, $dental_chart_results);
+
+
+				$dental_chart_results = DB::table('dental_records')
+			    ->orderBy('created_at', 'desc')
+					->where('teeth_id', '=', $x)
+					->pluck('operation_id')
+					->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_operation3, $dental_chart_results);
+			}
+
+			$stacks_condition4 = array();
+			$stacks_operation4 = array();
+			for ($x = 21; $x <= 28; $x++)
+			{
+		    $dental_chart_results = DB::table('dental_records')
+				    ->orderBy('created_at', 'desc')
+						->where('teeth_id', '=', $x)
+						->pluck('condition_id')
+						->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_condition4, $dental_chart_results);
+
+
+				$dental_chart_results = DB::table('dental_records')
+			    ->orderBy('created_at', 'desc')
+					->where('teeth_id', '=', $x)
+					->pluck('operation_id')
+					->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_operation4, $dental_chart_results);
+			}
+
+			$stacks_condition5 = array();
+			$stacks_operation5 = array();
+			for ($x = 48; $x >= 41; $x--)
+			{
+		    $dental_chart_results = DB::table('dental_records')
+				    ->orderBy('created_at', 'desc')
+						->where('teeth_id', '=', $x)
+						->pluck('condition_id')
+						->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_condition5, $dental_chart_results);
+
+
+				$dental_chart_results = DB::table('dental_records')
+			    ->orderBy('created_at', 'desc')
+					->where('teeth_id', '=', $x)
+					->pluck('operation_id')
+					->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_operation5, $dental_chart_results);
+			}
+
+			$stacks_condition6 = array();
+			$stacks_operation6 = array();
+			for ($x = 31; $x <= 38; $x++)
+			{
+		    $dental_chart_results = DB::table('dental_records')
+				    ->orderBy('created_at', 'desc')
+						->where('teeth_id', '=', $x)
+						->pluck('condition_id')
+						->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_condition6, $dental_chart_results);
+
+
+				$dental_chart_results = DB::table('dental_records')
+			    ->orderBy('created_at', 'desc')
+					->where('teeth_id', '=', $x)
+					->pluck('operation_id')
+					->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_operation6, $dental_chart_results);
+			}
+
+
+			$stacks_condition7 = array();
+			$stacks_operation7 = array();
+			for ($x = 85; $x >= 81; $x--)
+			{
+		    $dental_chart_results = DB::table('dental_records')
+				    ->orderBy('created_at', 'desc')
+						->where('teeth_id', '=', $x)
+						->pluck('condition_id')
+						->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_condition7, $dental_chart_results);
+
+
+				$dental_chart_results = DB::table('dental_records')
+			    ->orderBy('created_at', 'desc')
+					->where('teeth_id', '=', $x)
+					->pluck('operation_id')
+					->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_operation7, $dental_chart_results);
+			}
+
+			$stacks_condition8 = array();
+			$stacks_operation8 = array();
+			for ($x = 71; $x <= 75; $x++)
+			{
+		    $dental_chart_results = DB::table('dental_records')
+				    ->orderBy('created_at', 'desc')
+						->where('teeth_id', '=', $x)
+						->pluck('condition_id')
+						->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_condition8, $dental_chart_results);
+
+
+				$dental_chart_results = DB::table('dental_records')
+			    ->orderBy('created_at', 'desc')
+					->where('teeth_id', '=', $x)
+					->pluck('operation_id')
+					->first();
+
+				if($dental_chart_results == 0){
+					$dental_chart_results = "white";
+				}
+				elseif($dental_chart_results == 1){
+					$dental_chart_results = "blue";
+				}
+				elseif($dental_chart_results == 2){
+					$dental_chart_results = "red";
+				}
+				elseif($dental_chart_results == 3){
+					$dental_chart_results = "yellow";
+				}
+				elseif($dental_chart_results == 4){
+					$dental_chart_results = "cyan";
+				}
+				else{
+					$dental_chart_results = "pink";
+				}
+				array_push($stacks_operation8, $dental_chart_results);
+			}
 					
-			return view('staff.dental-dentist.adddentalrecord', $params, compact('appointment_ids', 'patient_infos', 'stacks_condition', 'stacks_operation'));
+			return view('staff.dental-dentist.adddentalrecord', $params, compact('appointment_ids', 'patient_infos', 'stacks_condition', 'stacks_operation', 'stacks_condition2', 'stacks_operation2', 'stacks_condition3', 'stacks_operation3', 'stacks_condition4', 'stacks_operation4', 'stacks_condition5', 'stacks_operation5', 'stacks_condition6', 'stacks_operation6', 'stacks_condition7', 'stacks_operation7', 'stacks_condition8', 'stacks_operation8'));
 		}
 
 		public function updatedentalrecordmodal(Request $request)

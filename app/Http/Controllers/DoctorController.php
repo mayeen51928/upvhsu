@@ -307,6 +307,9 @@ class DoctorController extends Controller
 		$display_patient_record_modal = DB::table('patient_info')
 					->join('religions', 'patient_info.religion_id', 'religions.id')
 					->join('nationalities', 'patient_info.nationality_id', 'nationalities.id')
+					->join('degree_programs', 'patient_info.degree_program_id', 'degree_programs.id')
+					->join('has_parent', 'patient_info.patient_id', 'has_parent.patient_id')
+					->join('parent_info', 'has_parent.parent_id', 'parent_info.id')
 					->where('patient_info.patient_id', '=', $patient_id)
 					->first();
 		

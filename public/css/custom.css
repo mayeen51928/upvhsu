@@ -214,3 +214,22 @@ svg {
 .hide_announcement:hover{
 	cursor: pointer;
 }
+
+/*#responsive {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    background-size: contain;
+}
+
+.dental_chart {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    background-size: contain;
+}*/
+
+#svg_container{
+	height: 522px;
+	width: 867px; 
+}

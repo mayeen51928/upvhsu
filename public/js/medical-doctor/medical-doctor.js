@@ -639,34 +639,36 @@ $("#search_patient").keyup(function(){
 								  success: function(data)
 								  {
 										  output = '';
+										  console.log(data['patient_info']['sex']);
 											var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
 											$('#ageTd').html(age);
-											$('#sexTd').html(data['patient_info']['sex']);
+											if(data['patient_info']['sex'] == 'F'){
+												$('#sexTd').html('Female');
+											}
+											else{
+												$('#sexTd').html('Male');
+											}
 											$('#courseTd').html(data['patient_info']['degree_program_description']);
 											$('#yearlevelTd').html(data['patient_info']['year_level']);
 											$('#birthdateTd').html(data['patient_info']['birthday']);
 											$('#religionTd').html(data['patient_info']['religion_description']);
-											$('#nationlityTd').html(data['patient_info']['nationality_description']);
-											// if (data['patient_info']['father'] == "M") {
-											// 	$('#fatherTd').html(data['patient_info']['parent_first_name']+' '+data['patient_info']['parent_last_name']);
-											// };
-											// if (data['patient_info']['father'] == "M") {
-											// 	$('#motherTd').html(data['patient_info']['parent_first_name'] + ' ' + data['patient_info']['parent_last_name']);
-											// };
-											$('#homeaddressTd').html(data['patient_info']['street'] + ', ' + data['patient_info']['town_name'] + ', ' + data['patient_info']['province_name']);
-											$('#restelTd').html(data['patient_info']['residence_telephone_number']);
-											$('#personalcontactnumberTd').html(data['patient_info']['personal_contact_number']);
+											$('#nationalityTd').html(data['patient_info']['nationality_description']);
+											if (data['patient_info']['father'] == "M") {
+												$('#fatherTd').html(data['patient_info']['parent_first_name']+' '+data['patient_info']['parent_last_name']);
+											};
+											if (data['patient_info']['father'] == "M") {
+												$('#motherTd').html(data['patient_info']['parent_first_name'] + ' ' + data['patient_info']['parent_last_name']);
+											};
+											// $('#homeaddressTd').html(data['patient_info']['street'] + ', ' + data['patient_info']['town_name'] + ', ' + data['patient_info']['province_name']);
+											// $('#restelTd').html(data['patient_info']['residence_telephone_number']);
+											// $('#personalcontactnumberTd').html(data['patient_info']['personal_contact_number']);
 											// $('#guardiannameTd').html(message.guardian_name);
 											// $('#guardianaddressTd').html(message.guardian_address);
 											// $('#guardianrelationshipTd').html(message.guardian_relationship);
 											// $('#guardiantelTd').html(message.guardian_residence_telephone);
 											// $('#guardiancpTd').html(message.guardian_residence_cellphone);
-		                  // if($('#determine-view-record-button').val()==1){
-		                  //     $('#patientInfoModalFooter').html('<a href="view-medical-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View Medical Records</a><a href="add-new-medical-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
-		                  // }
-		                  // if($('#determine-view-record-button').val()==2){
-		                  //     $('#patientInfoModalFooter').html('<a href="view-dental-records.php?patient_id=' + patientId +'" class="btn btn-info" role="button">View Dental Records</a><a href="add-new-dental-record-no-appointment.php?patient_id=' + patientId +'" class="btn btn-info" role="button">Add New Record</a>');
-		                  // }
+		                  $('#patientInfoModalFooter').html('<form action="/viewmedicalrecords" method="POST">{{ csrf_field() }}<input type="hidden" value="'+data['patient_info']['patient_id']+'" name="announcementId"><input type="submit" class="btn btn-primary btn-sm" id="' + data['patient_info']['patient_id']+'" value="View Medical Records"></form>')
+								  		
 								  }
 							  });
 								setTimeout(function() {
