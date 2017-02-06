@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 use App\Staff;
 use App\Town;
 use App\Province;
+use App\ChestXrayResult;
 class XrayController extends Controller
 {
 	public function __construct()
@@ -27,9 +29,26 @@ class XrayController extends Controller
     }
     public function dashboard()
     {
+        $params['xray_requests'] = DB::table('chest_xray_results')
+        ->join('medical_appointments', 'chest_xray_results.medical_appointment_id', 'medical_appointments.id')
+        ->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
+        ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
+        ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
+        ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'chest_xray_results.*')
+        ->where('status', '0')
+        ->where('xray_result', null)
+        ->get();
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
     	return view('staff.medical-xray.dashboard', $params);
+    }
+
+    public function addxrayresult(Request $request)
+    {
+        $xray = ChestXrayResult::find($request->xray_id);
+        $xray->xray_staff_id = Auth::user()->user_id;
+        $xray->xray_result = $request->chest_xray;
+        $xray->update();
     }
 
     public function profile()
