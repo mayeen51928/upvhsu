@@ -233,3 +233,7 @@ svg {
 	height: 522px;
 	width: 867px; 
 }
+
+#searchResults td a{
+	cursor: pointer;
+}

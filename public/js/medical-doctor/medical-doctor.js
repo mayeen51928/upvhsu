@@ -129,11 +129,6 @@ $('.addMedicalRecordButton').click(function() {
 				$('#chest-xray').val('');
 				$('#remarks').val('');
 				$('#prescription').val('');
-				// $('#requestCBC').removeAttr('disabled').removeAttr('checked');
-				// $('#requestUrinalysis').removeAttr('disabled').removeAttr('checked');
-				// $('#requestFecalysis').removeAttr('disabled').removeAttr('checked');
-				// $('#requestDrugTest').removeAttr('disabled').removeAttr('checked');
-				// $('#requestXray').removeAttr('disabled').removeAttr('checked');
 				$('.medical-button-container').html("").append("<button type='button' class='btn btn-success add-medical-record-button' id='add-medical-record-button_"+appointment_id+"'>Add</button>");
 				$('.medical-button-container .add-medical-record-button').click(function(){
 					if ($('#height').val() ||
@@ -563,13 +558,11 @@ $('.addMedicalRecordButton').click(function() {
 $('.addmoremedicalsched').click(function(){
     $(this).parents('.medical_manage').find('tbody').append('<tr class="schedule_tr"><td><input type="date" class="form-control"/></td><td><button class="btn btn-danger btn-sm removemedicalsched">Remove</button></td></tr>');
     $('.removemedicalsched').click(function(){
-        // console.log($(this).closest('tr'));
-        $(this).closest('tr').remove();
+    	$(this).closest('tr').remove();
     });
 });
 $('.removemedicalsched').click(function(){
-    // console.log($(this).closest('tr'));
-    $(this).closest('tr').remove();
+	$(this).closest('tr').remove();
 });
 $('#addmedicalschedule').click(function(){
     var schedules = [];
@@ -585,20 +578,6 @@ $('#addmedicalschedule').click(function(){
             $('input').attr('disabled', 'disabled');
             $('#manageschedulepanel').css('background-color', '#d6e9c6');
         });
-
-        // $.ajax({
-        //     url: addMedicalSchedule,
-        //     type: 'POST',
-        //     dataType: 'json',
-        //     data: {schedules:  schedules, _token: token},
-        //     success: function(data) {
-        //         $('button').attr('disabled', 'disabled');
-        //         $('input').attr('disabled', 'disabled');
-        //         $('#manageschedulepanel').css('background-color', '#d6e9c6');
-        //     },
-        //     error: function(xhr, textStatus, errorThrown) {
-        //     }
-        // });
     }
     
 }); 
@@ -608,21 +587,17 @@ $('#addmedicalschedule').click(function(){
 
 
 
-
-
-
 // ------------------PROFILE---------------
 // ------------------SEARCH PATIENT---------------
-$("#search_patient").keyup(function(){
+$("#search_patient").keypress(function(){
 	if($('#search_patient').val()){
 		var searchString = $('#search_patient').val();
-		$.ajax({
-			  type: "POST",
-			  url: searchPatientRecord,
-			  data: { search_string: searchString ,  _token: token},
-			  success: function(data)
-			  {
-			  	if(data['counter']>0){
+		$.post('/searchpatientrecord',
+			{
+				search_string: searchString
+			}, function(data) {
+				if(data['counter']>0)
+				{
 			  		output = '';
 	  				for(var i=0; i < data['searchpatientidarray'].length; i++)
 	  				{
@@ -630,64 +605,60 @@ $("#search_patient").keyup(function(){
 	  				}
 	  				$('#searchResults').html(output);
   					$('#searchTable').show();
-
-  					$('.searchQueryResults').click(function() {
-            	var patientId = $(this).attr('id').split('_')[1];
-            	$.ajax({
-								  type: "POST",
-								  url: displayPatientRecordSearch,
-								  data: { patient_id: patientId ,  _token: token},
-								  success: function(data)
-								  {
-										  output = '';
-										  console.log(data['patient_info']['sex']);
-											var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
-											$('#ageTd').html(age);
-											if(data['patient_info']['sex'] == 'F'){
-												$('#sexTd').html('Female');
-											}
-											else{
-												$('#sexTd').html('Male');
-											}
-											$('#courseTd').html(data['patient_info']['degree_program_description']);
-											$('#yearlevelTd').html(data['patient_info']['year_level']);
-											$('#birthdateTd').html(data['patient_info']['birthday']);
-											$('#religionTd').html(data['patient_info']['religion_description']);
-											$('#nationalityTd').html(data['patient_info']['nationality_description']);
-											if (data['patient_info']['father'] == "M") {
-												$('#fatherTd').html(data['patient_info']['parent_first_name']+' '+data['patient_info']['parent_last_name']);
-											};
-											if (data['patient_info']['father'] == "M") {
-												$('#motherTd').html(data['patient_info']['parent_first_name'] + ' ' + data['patient_info']['parent_last_name']);
-											};
-											// $('#homeaddressTd').html(data['patient_info']['street'] + ', ' + data['patient_info']['town_name'] + ', ' + data['patient_info']['province_name']);
-											// $('#restelTd').html(data['patient_info']['residence_telephone_number']);
-											// $('#personalcontactnumberTd').html(data['patient_info']['personal_contact_number']);
-											// $('#guardiannameTd').html(message.guardian_name);
-											// $('#guardianaddressTd').html(message.guardian_address);
-											// $('#guardianrelationshipTd').html(message.guardian_relationship);
-											// $('#guardiantelTd').html(message.guardian_residence_telephone);
-											// $('#guardiancpTd').html(message.guardian_residence_cellphone);
-		                  $('#patientInfoModalFooter').html('<form action="/viewmedicalrecords" method="POST">{{ csrf_field() }}<input type="hidden" value="'+data['patient_info']['patient_id']+'" name="announcementId"><input type="submit" class="btn btn-primary btn-sm" id="' + data['patient_info']['patient_id']+'" value="View Medical Records"></form>')
-								  		
-								  }
-							  });
-								setTimeout(function() {
-								    $('#searchPatientRecordInfo').modal();
-								}, 2000);
-            });
-			  	}
-			  	else{
-			  		$('#searchResults').html("<br/>No result found");
-  					$('#searchTable').show();
-			  	}
-			  }
-		  });
+  					$('.searchQueryResults').click(function()
+  					{
+  						var patientId = $(this).attr('id').split('_')[1];
+  						$.post('/displaypatientrecordsearch',
+  						{
+  							patient_id: patientId
+  						}, function(data) {
+  							output = '';
+  							var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
+  							$('#ageTd').html(age);
+  							if(data['patient_info']['sex'] == 'F')
+  							{
+  								$('#sexTd').html('Female');
+  							}
+  							else
+  							{
+  								$('#sexTd').html('Male');
+  							}
+  							if(data['patient_info']['display_course_and_year_level'] == 1)
+  							{
+  								$('#courseRow').show();
+  								$('#yearlevelRow').show();
+  								$('#courseTd').html(data['patient_info']['degree_program_description']);
+  								$('#yearlevelTd').html(data['patient_info']['year_level']);
+  							}
+  							$('#birthdateTd').html(data['patient_info']['birthday']);
+  							$('#religionTd').html(data['patient_info']['religion']);
+  							$('#nationalityTd').html(data['patient_info']['nationality']);
+  							$('#fatherTd').html(data['patient_info']['father_first_name']+' '+data['patient_info']['father_last_name']);
+  							$('#motherTd').html(data['patient_info']['mother_first_name'] + ' ' + data['patient_info']['mother_last_name']);
+							$('#homeaddressTd').html(data['patient_info']['street'] + ', ' + data['patient_info']['town'] + ', ' + data['patient_info']['province']);
+							$('#restelTd').html(data['patient_info']['residence_telephone_number']);
+							$('#personalcontactnumberTd').html(data['patient_info']['personal_contact_number']);
+							$('#guardiannameTd').html(data['patient_info']['guardian_first_name'] + ' ' +data['patient_info']['guardian_last_name']);
+							$('#guardianaddressTd').html(data['patient_info']['guardian_street'] + ', ' + data['patient_info']['guardian_town'] + ', ' +data['patient_info']['guardian_province']);
+							$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
+							$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
+							$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
+							$('#patientInfoModalFooter').html('<form action="/viewmedicalrecords" method="POST"><input type="hidden" value="'+data['patient_info']['patient_id']+'" name="announcementId"><input type="submit" class="btn btn-primary btn-sm" id="' + data['patient_info']['patient_id']+'" value="View Medical Records"></form>');
+							$('#searchPatientRecordInfo').modal();
+						});
+  					});
+  				}
+  				else
+  				{
+  					$('#searchTable').hide();
+  					$('#searchResults').html("");
+  				}
+  			});
 	}
-	else{
+	else
+	{
 		$('#searchTable').hide();
 		$('#searchResults').html("");
 	}
 });
-
 });

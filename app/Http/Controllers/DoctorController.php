@@ -6,11 +6,19 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\Patient;
+use App\DegreeProgram;
+use App\Religion;
+use App\Nationality;
+use App\ParentModel;
+use App\HasParent;
+use App\Town;
+use App\Province;
+use App\Region;
+use App\Guardian;
+use App\HasGuardian;
 use App\MedicalSchedule;
 use App\MedicalAppointment;
 use App\Staff;
-use App\Town;
-use App\Province;
 use App\PhysicalExamination;
 use App\CbcResult;
 use App\ChestXrayResult;
@@ -263,27 +271,16 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatientrecord(Request $request){
+
+		// To fix: when searching for first name and last name combination
 		$counter = 0;
 		$search_string = $request->search_string;
-		$search_patient_id_records = DB::table('patient_info')
-					->where('patient_info.patient_first_name', 'like', '%'.$search_string.'%')
-					->orWhere('patient_info.patient_last_name', 'like', '%'.$search_string.'%')
-					->pluck('patient_id')
-					->all();
-		$search_patient_first_name_records = DB::table('patient_info')
-					->where('patient_info.patient_first_name', 'like', '%'.$search_string.'%')
-					->orWhere('patient_info.patient_last_name', 'like', '%'.$search_string.'%')
-					->pluck('patient_first_name')
-					->all();
-		$search_patient_last_name_records = DB::table('patient_info')
-					->where('patient_info.patient_first_name', 'like', '%'.$search_string.'%')
-					->orWhere('patient_info.patient_last_name', 'like', '%'.$search_string.'%')
-					->pluck('patient_last_name')
-					->all();
+		$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string.'%')->orWhere('patient_last_name', 'like', '%'.$search_string.'%')->pluck('patient_id')->all();
+		$search_patient_first_name_records = Patient::where('patient_info.patient_first_name', 'like', '%'.$search_string.'%')->orWhere('patient_info.patient_last_name', 'like', '%'.$search_string.'%')->pluck('patient_first_name')->all();
+		$search_patient_last_name_records = Patient::where('patient_info.patient_first_name', 'like', '%'.$search_string.'%')->orWhere('patient_info.patient_last_name', 'like', '%'.$search_string.'%')->pluck('patient_last_name')->all();
 		if(count($search_patient_id_records) > 0){
 			$counter++;
 		}
-
 		$searchpatientidarray = array();
 		foreach ($search_patient_id_records as $search_patient_id_record){
 			array_push($searchpatientidarray, $search_patient_id_record);
@@ -303,18 +300,54 @@ class DoctorController extends Controller
 	}
 
 	public function displaypatientrecordsearch(Request $request){
-		$patient_id = $request->patient_id;
-		$display_patient_record_modal = DB::table('patient_info')
-					->join('religions', 'patient_info.religion_id', 'religions.id')
-					->join('nationalities', 'patient_info.nationality_id', 'nationalities.id')
-					->join('degree_programs', 'patient_info.degree_program_id', 'degree_programs.id')
-					->join('has_parent', 'patient_info.patient_id', 'has_parent.patient_id')
-					->join('parent_info', 'has_parent.parent_id', 'parent_info.id')
-					->where('patient_info.patient_id', '=', $patient_id)
-					->first();
-		
-
-		return response()->json(['patient_info' => $display_patient_record_modal]);
+		$patient = Patient::find($request->patient_id);
+		$params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
+		$params['sex'] = $patient->sex;
+        if($patient->patient_type_id == 1)
+        {
+        	$params['display_course_and_year_level'] = 1;
+        	$params['degree_program'] = $patient->degree_program_id;
+        	$params['year_level'] = $patient->year_level; 
+        }
+        else
+        {
+        	$params['display_course_and_year_level'] = 0;
+        }
+        $params['birthday'] = date_format(date_create($patient->birthday), 'F j, Y');
+        $params['religion'] = Religion::find($patient->religion_id)->religion_description;
+        $params['nationality'] = Nationality::find($patient->nationality_id)->nationality_description;
+        $parents = HasParent::where('patient_id', $request->patient_id)->get();
+        foreach($parents as $parent)
+        {
+            if (ParentModel::find($parent->parent_id)->sex == 'M')
+            {
+            	$params['father_first_name'] = ParentModel::find($parent->parent_id)->parent_first_name;
+                $params['father_middle_name'] = ParentModel::find($parent->parent_id)->parent_middle_name;
+                $params['father_last_name'] = ParentModel::find($parent->parent_id)->parent_last_name;
+            }
+            else{
+                $params['mother_first_name'] = ParentModel::find($parent->parent_id)->parent_first_name;
+                $params['mother_middle_name'] = ParentModel::find($parent->parent_id)->parent_middle_name;
+                $params['mother_last_name'] = ParentModel::find($parent->parent_id)->parent_last_name;
+            }
+        }
+        $params['street'] = $patient->street;
+        $params['town'] = Town::find($patient->town_id)->town_name;
+        $params['province'] = Province::find(Town::find($patient->town_id)->province_id)->province_name;
+        $params['residence_telephone_number'] = $patient->residence_telephone_number;
+        $params['personal_contact_number'] = $patient->personal_contact_number;
+        $params['residence_contact_number'] = $patient->residence_contact_number;
+        $guardian = HasGuardian::where('patient_id', $request->patient_id)->first();
+        $params['guardian_first_name'] = Guardian::find($guardian->guardian_id)->guardian_first_name;
+        $params['guardian_middle_name'] = Guardian::find($guardian->guardian_id)->guardian_middle_name;
+        $params['guardian_last_name'] = Guardian::find($guardian->guardian_id)->guardian_last_name;
+        $params['guardian_street'] = Guardian::find($guardian->guardian_id)->street;
+        $params['guardian_town'] = Town::find(Guardian::find($guardian->guardian_id)->town_id)->town_name;
+        $params['guardian_province'] = Province::find(Town::find(Guardian::find($guardian->guardian_id)->town_id)->province_id)->province_name;
+        $params['relationship'] = $guardian->relationship;
+        $params['guardian_tel_number'] = Guardian::find($guardian->guardian_id)->guardian_telephone_number;
+        $params['guardian_cellphone'] = Guardian::find($guardian->guardian_id)->guardian_contact_number;
+		return response()->json(['patient_info' => $params]);
 	}
 
 

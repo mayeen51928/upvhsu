@@ -36,8 +36,8 @@
                   <tbody>
                     <tr><td>Age</td><td id="ageTd"></td></tr>
                     <tr><td>Sex</td><td id="sexTd"></td></tr>
-                    <tr><td>Course</td><td id="courseTd"></td></tr>
-                    <tr><td>Year Level</td><td id="yearlevelTd"></td></tr>
+                    <tr id="courseRow" style="display: none;"><td>Course</td><td id="courseTd"></td></tr>
+                    <tr id="yearlevelRow" style="display: none;"><td>Year Level</td><td id="yearlevelTd"></td></tr>
                     <tr><td>Date of Birth</td><td id="birthdateTd"></td></tr>
                     <tr><td>Religion</td><td id="religionTd"></td></tr>
                     <tr><td>Nationality</td><td id="nationalityTd"></td></tr>
@@ -74,14 +74,6 @@
     </div>
   </div>
 </div>
-
-<script>
-  // token and createPostUrl are needed to be passed to AJAX method call
-  var token = '{{csrf_token()}}';
-  var searchPatientRecord = '/search_patient_record';
-  var displayPatientRecordSearch = '/display_patient_record_search';
-</script>
-
 <!-- <div class="modal fade" id="viewMedicalRecordBasedOnDateModal" role="dialog">
   <div class="modal-dialog modal-lg" >
     <div class="modal-content">
