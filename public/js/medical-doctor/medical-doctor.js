@@ -10,6 +10,7 @@ numOfClicksMedical_Diagnosis = 0;
 percentageMedical_Diagnosis = 20;
 $('#closeButtonMedicalDiagnosis, #xButtonMedicalDiagnosis').click(function(){
 	$('#create-medical-record-modal').modal('hide');
+	$('#requestsFromDoctor').load(location.href + " #requestsFromDoctor");
 	setTimeout(function(){
 		numOfClicksMedical_Diagnosis = 0;
 		percentageMedical_Diagnosis = 20;
