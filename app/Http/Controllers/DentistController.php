@@ -73,23 +73,23 @@ class DentistController extends Controller
 						->pluck('condition_id')
 						->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#ff4000";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ffff00";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#00ff00";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#00ffff";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#0000ff";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_condition, $dental_chart_results);
 
@@ -100,23 +100,23 @@ class DentistController extends Controller
 					->pluck('operation_id')
 					->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#bf00ff";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ff0080";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#ff0000";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#808080";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#194d19";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_operation, $dental_chart_results);
 			}
@@ -132,23 +132,23 @@ class DentistController extends Controller
 						->pluck('condition_id')
 						->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#ff4000";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ffff00";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#00ff00";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#00ffff";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#0000ff";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_condition2, $dental_chart_results);
 
@@ -159,23 +159,23 @@ class DentistController extends Controller
 					->pluck('operation_id')
 					->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#bf00ff";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ff0080";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#ff0000";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#808080";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#194d19";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_operation2, $dental_chart_results);
 			}
@@ -191,23 +191,23 @@ class DentistController extends Controller
 						->pluck('condition_id')
 						->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#ff4000";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ffff00";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#00ff00";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#00ffff";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#0000ff";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_condition3, $dental_chart_results);
 
@@ -218,23 +218,23 @@ class DentistController extends Controller
 					->pluck('operation_id')
 					->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#bf00ff";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ff0080";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#ff0000";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#808080";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#194d19";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_operation3, $dental_chart_results);
 			}
@@ -249,23 +249,23 @@ class DentistController extends Controller
 						->pluck('condition_id')
 						->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#ff4000";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ffff00";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#00ff00";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#00ffff";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#0000ff";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_condition4, $dental_chart_results);
 
@@ -276,23 +276,23 @@ class DentistController extends Controller
 					->pluck('operation_id')
 					->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#bf00ff";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ff0080";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#ff0000";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#808080";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#194d19";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_operation4, $dental_chart_results);
 			}
@@ -307,23 +307,23 @@ class DentistController extends Controller
 						->pluck('condition_id')
 						->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#ff4000";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ffff00";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#00ff00";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#00ffff";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#0000ff";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_condition5, $dental_chart_results);
 
@@ -334,23 +334,23 @@ class DentistController extends Controller
 					->pluck('operation_id')
 					->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#bf00ff";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ff0080";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#ff0000";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#808080";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#194d19";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_operation5, $dental_chart_results);
 			}
@@ -365,23 +365,23 @@ class DentistController extends Controller
 						->pluck('condition_id')
 						->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#ff4000";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ffff00";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#00ff00";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#00ffff";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#0000ff";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_condition6, $dental_chart_results);
 
@@ -392,23 +392,23 @@ class DentistController extends Controller
 					->pluck('operation_id')
 					->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#bf00ff";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ff0080";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#ff0000";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#808080";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#194d19";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_operation6, $dental_chart_results);
 			}
@@ -424,23 +424,23 @@ class DentistController extends Controller
 						->pluck('condition_id')
 						->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#ff4000";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ffff00";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#00ff00";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#00ffff";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "0000ff";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_condition7, $dental_chart_results);
 
@@ -451,23 +451,23 @@ class DentistController extends Controller
 					->pluck('operation_id')
 					->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#bf00ff";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ff0080";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#ff0000";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#808080";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#194d19";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_operation7, $dental_chart_results);
 			}
@@ -482,23 +482,23 @@ class DentistController extends Controller
 						->pluck('condition_id')
 						->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#ff4000";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ffff00";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#00ff00";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#00ffff";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#0000ff";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_condition8, $dental_chart_results);
 
@@ -509,23 +509,23 @@ class DentistController extends Controller
 					->pluck('operation_id')
 					->first();
 
-				if($dental_chart_results == 0){
-					$dental_chart_results = "white";
-				}
-				elseif($dental_chart_results == 1){
-					$dental_chart_results = "blue";
+				if($dental_chart_results == 1){
+					$dental_chart_results = "#bf00ff";
 				}
 				elseif($dental_chart_results == 2){
-					$dental_chart_results = "red";
+					$dental_chart_results = "#ff0080";
 				}
 				elseif($dental_chart_results == 3){
-					$dental_chart_results = "yellow";
+					$dental_chart_results = "#ff0000";
 				}
 				elseif($dental_chart_results == 4){
-					$dental_chart_results = "cyan";
+					$dental_chart_results = "#808080";
+				}
+				elseif($dental_chart_results == 5){
+					$dental_chart_results = "#194d19";
 				}
 				else{
-					$dental_chart_results = "pink";
+					$dental_chart_results = "white";
 				}
 				array_push($stacks_operation8, $dental_chart_results);
 			}

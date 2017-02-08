@@ -19,6 +19,7 @@ use App\Prescription;
 use App\Remark;
 use App\UrinalysisResult;
 use App\FecalysisResult;
+use App\MedicalBilling;
 
 class DoctorController extends Controller
 {
@@ -443,4 +444,108 @@ class DoctorController extends Controller
             ]);
         }
     }
+
+    public function addbillingmedical(Request $request){
+		$appointment_id = $request->appointment_id;
+		$checker = 0;
+
+		$display_patient_type = DB::table('patient_info')
+					->join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')
+					->first();
+
+		$patient_name = $display_patient_type->patient_first_name . ' ' . $display_patient_type->patient_last_name;
+				
+		$physical_examination_checker = DB::table('physical_examinations')
+					->where('physical_examinations.medical_appointment_id', '=', $appointment_id)
+					->first();
+		if(count($physical_examination_checker) > 0){
+			$checker = 1;
+		}
+
+		$medical_billing_checker = DB::table('medical_billings')
+					->where('medical_billings.medical_appointment_id', '=', $appointment_id)
+					->first();
+		if(count($medical_billing_checker) > 0){
+			$checker = $medical_billing_checker->amount;
+		}
+
+		// $cbc_result_checker = DB::table('cbc_results')
+		// 			->where('cbc_results.medical_appointment_id', '=', $appointment_id)
+		// 			->first();
+		// if(count($cbc_result_checker) > 0){
+		// 	$checker = 2;
+		// }
+
+		// $drug_test_result_checker = DB::table('drug_test_results')
+		// 			->where('drug_test_results.medical_appointment_id', '=', $appointment_id)
+		// 			->first();
+		// if(count($drug_test_result_checker) > 0){
+		// 	$checker = 2;
+		// }
+
+		// $fecalysis_result_checker = DB::table('fecalysis_results')
+		// 			->where('fecalysis_results.medical_appointment_id', '=', $appointment_id)
+		// 			->first();
+		// if(count($fecalysis_result_checker) > 0){
+		// 	$checker = 2;
+		// }
+
+		// $urinalysis_result_checker = DB::table('urinalysis_results')
+		// 			->where('urinalysis_results.medical_appointment_id', '=', $appointment_id)
+		// 			->first();
+		// if(count($urinalysis_result_checker) > 0){
+		// 	$checker = 2;
+		// }
+
+
+
+
+		if($display_patient_type->patient_type_id == 1){
+			$display_medical_services_name = DB::table('upv_student_services')
+						->pluck('service_name')
+						->all();
+		}
+
+		$servicenamearray = array();
+		foreach ($display_medical_services_name as $display_medical_service_name){
+			array_push($servicenamearray, $display_medical_service_name);
+		}
+
+		if($display_patient_type->patient_type_id == 1){
+			$display_medical_services_rate = DB::table('upv_student_services')
+						->pluck('service_rate')
+						->all();
+		}
+
+		$serviceratearray = array();
+		foreach ($display_medical_services_rate as $display_medical_service_rate){
+			array_push($serviceratearray, $display_medical_service_rate);
+		}				
+		
+		return response()->json(['patient_type' => $display_patient_type, 
+								'servicenamearray' => $servicenamearray, 
+								'serviceratearray' => $serviceratearray, 
+								'patient_name' => $patient_name,
+								'checker' => $checker
+								]);
+	}
+
+	public function confirmbillingmedical(Request $request){
+		$appointment_id = $request->appointment_id;
+		$amount = $request->amount;
+		$search_patient_id_records = DB::table('medical_appointments')
+					->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
+					->where('medical_appointments.id', '=', $appointment_id)
+					->first();
+
+		$billing = new MedicalBilling;
+        $billing->patient_id = $search_patient_id_records->patient_id;
+        $billing->staff_id = $search_patient_id_records->staff_id;
+        $billing->medical_appointment_id = $appointment_id;
+        $billing->status = 'unpaid';
+        $billing->amount = $amount;
+        $billing->save();
+
+        return response()->json(['success' => 'success']); 
+	}
 }

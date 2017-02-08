@@ -221,15 +221,62 @@ svg {
     width: 100%;
     background-size: contain;
 }
-
+*/
 .dental_chart {
     display: inline-block;
     position: relative;
     width: 100%;
     background-size: contain;
-}*/
-
-#svg_container{
-	height: 522px;
-	width: 867px; 
 }
+
+#condition_1{
+	color: black;
+  	background-color: #ff4000;
+  	border-color: #ff4000;
+}
+#condition_2{
+	color: black;
+  	background-color: #ffff00;
+  	border-color: #ffff00;
+}
+#condition_3{
+	color: black;
+  	background-color: #00ff00;
+  	border-color: #00ff00;
+}
+#condition_4{
+	color: black;
+  	background-color: #00ffff;
+  	border-color: #00ffff;
+}
+#condition_5{
+	color: black;
+  	background-color: #0000ff;
+  	border-color: #0000ff;
+}
+#operation_1{
+	color: black;
+  	background-color: #bf00ff;
+  	border-color: #bf00ff;
+}
+#operation_2{
+	color: black;
+  	background-color: #ff0080;
+  	border-color: #ff0080;
+}
+#operation_3{
+	color: black;
+  	background-color: #ff0000;
+  	border-color: #ff0000;
+}
+#operation_4{
+	color: black;
+  	background-color: #808080;
+  	border-color: #808080;
+}
+#operation_5{
+	color: black;
+  	background-color: #194d19;
+  	border-color: #194d19;
+}
+

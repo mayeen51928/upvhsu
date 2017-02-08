@@ -26,7 +26,7 @@ $('.dental_chart').click(function(){
 
 
 $('.updateDentalRecord').click(function(){
-	if($('.condition').val() && $('.operation').val()){
+	if($('.condition').val() || $('.operation').val()){
 		var appointmentId = $('.appointment').val();
 		var conditionId = $('.condition').val();
 		var operationId = $('.operation').val();
@@ -39,41 +39,42 @@ $('.updateDentalRecord').click(function(){
 			  success: function(data)
 			  {
 			  	console.log('#condition_'+teethId);
-			  	if (conditionId == 0) {
-			  		$('#condition_'+teethId).css({ fill: "white" });
-			  	}
-			  	else if (conditionId == 1) {
-			  		$('#condition_'+teethId).css({ fill: "blue" });
+			  	if (conditionId == 1) {
+			  		$('#condition_'+teethId).css({ fill: "#ff4000" });
 			  	}
 			  	else if (conditionId == 2) {
-			  		$('#condition_'+teethId).css({ fill: "red" });
+			  		$('#condition_'+teethId).css({ fill: "#ffff00" });
 			  	}
 			  	else if (conditionId == 3) {
-			  		$('#condition_'+teethId).css({ fill: "yellow" });
+			  		$('#condition_'+teethId).css({ fill: "#00ff00" });
 			  	}
 			  	else if (conditionId == 4) {
-			  		$('#condition_'+teethId).css({ fill: "cyan" });
+			  		$('#condition_'+teethId).css({ fill: "#00ffff" });
+			  	}
+			  	else if (conditionId == 5) {
+			  		$('#condition_'+teethId).css({ fill: "#0000ff" });
 			  	}
 			  	else {
-			  		$('#condition_'+teethId).css({ fill: "pink" });
-			  	};
-			  	if (operationId == 0) {
-			  		$('#operation_'+teethId).css({ fill: "white" });
+			  		$('#condition_'+teethId).css({ fill: "white" });
 			  	}
-			  	else if (operationId == 1) {
-			  		$('#operation_'+teethId).css({ fill: "blue" });
+			  	
+			  	if (operationId == 1) {
+			  		$('#operation_'+teethId).css({ fill: "#bf00ff" });
 			  	}
 			  	else if (operationId == 2) {
-			  		$('#operation_'+teethId).css({ fill: "red" });
+			  		$('#operation_'+teethId).css({ fill: "#ff0080" });
 			  	}
 			  	else if (operationId == 3) {
-			  		$('#operation_'+teethId).css({ fill: "yellow" });
+			  		$('#operation_'+teethId).css({ fill: "#ff0000" });
 			  	}
 			  	else if (operationId == 4) {
-			  		$('#operation_'+teethId).css({ fill: "cyan" });
+			  		$('#operation_'+teethId).css({ fill: "#808080" });
+			  	}
+			  	else if (operationId == 5) {
+			  		$('#operation_'+teethId).css({ fill: "#194d19" });
 			  	}
 			  	else {
-			  		$('#operation_'+teethId).css({ fill: "pink" });
+			  		$('#operation_'+teethId).css({ fill: "white" });
 			  	};
 				$('#update-dental-record-modal').modal("hide");
 			  }
@@ -82,6 +83,13 @@ $('.updateDentalRecord').click(function(){
 	
 	
 });
+
+$('.dental_chart').hover(function(){
+    var id = $(this).attr('id').split("_");
+    console.log(id[1]);
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+
 
 $('.updateDentalDiagnosis').click(function(){
 	var id = $(this).attr('id').split("_");
@@ -99,6 +107,11 @@ $('.updateDentalDiagnosis').click(function(){
 			}, 5000);
 		  }
 	  });
+});
+
+$('.legend-button').hover(function(){
+    var id = $(this).attr('id').split("_");
+    console.log(id[1]);
 });
 
 

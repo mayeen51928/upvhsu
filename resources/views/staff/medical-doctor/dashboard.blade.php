@@ -29,8 +29,8 @@
           	<tr>
               <td>{{$medical_appointment->patient_first_name}} {{$medical_appointment->patient_last_name}}</td>
               <td>{{$medical_appointment->reasons}}</td>
-              <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment->id}}">Diagnosis</button></td>
-              <td><button class="btn btn-primary btn-xs addBillingToMedical">Billing</button></td>
+              <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment->id}}">Update Diagnosis</button></td>
+              <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment->id}}">Billing</button></td>
             </tr>
             @endforeach
           </tbody>
@@ -358,6 +358,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="patient_name"></div>
       </div>
       <div class="modal-body">
         <table class="displayServices"></table>
@@ -369,17 +370,12 @@
     </div>
   </div>
 </div>
-<div id="confirmModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>Are you sure to save changes?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="saveChanges" class="btn btn-success">Yes</button>
-        <button type="button" id="cancelChanges" class="btn btn-danger" data-dismiss="modal">No</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+<script>
+  // token and createPostUrl are needed to be passed to AJAX method call
+  var token = '{{csrf_token()}}';
+  var addBillingMedical = '/add_billing_medical';
+  var confirmBillingMedical = '/confirm_billing_medical';
+</script>
 @endsection
