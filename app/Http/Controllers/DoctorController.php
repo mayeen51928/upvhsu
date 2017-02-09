@@ -275,6 +275,7 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatient(){
+		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		return view('staff.medical-doctor.searchpatient', $params);
 	}
@@ -359,6 +360,13 @@ class DoctorController extends Controller
 		return response()->json(['patient_info' => $params]);
 	}
 
+	public function viewrecords($id)
+	{
+		$params['records'] = MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->get();
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'searchpatient';
+		return view('staff.medical-doctor.viewrecords', $params);
+	}
 
     public function addmedicaldiagnosis(Request $request)
     {

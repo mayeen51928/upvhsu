@@ -59,6 +59,7 @@ Route::post('/doctor/profile/update','DoctorController@updateprofile');
 Route::get('/doctor/manageschedule','DoctorController@manageschedule');
 Route::get('/doctor/searchpatient','DoctorController@searchpatient');
 Route::post('/searchpatientrecord','DoctorController@searchpatientrecord');
+Route::get('/doctor/viewrecords/{id}', 'DoctorController@viewrecords');
 Route::post('/displaypatientrecordsearch','DoctorController@displaypatientrecordsearch');
 Route::post('/addschedule_medical', 'DoctorController@addschedule');
 Route::post('/viewmedicaldiagnosis', 'DoctorController@viewmedicaldiagnosis');

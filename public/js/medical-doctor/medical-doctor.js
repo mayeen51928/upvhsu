@@ -637,7 +637,7 @@ $("#search_patient").keypress(function(){
 							$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
 							$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
 							$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
-							$('#patientInfoModalFooter').html('<form action="/viewmedicalrecords" method="POST"><input type="hidden" value="'+data['patient_info']['patient_id']+'" name="announcementId"><input type="submit" class="btn btn-primary btn-sm" id="' + data['patient_info']['patient_id']+'" value="View Medical Records"></form>');
+							$('#patientInfoModalFooter').html('<a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button">View Records</a>');
 							$('#searchPatientRecordInfo').modal();
 						});
   					});
