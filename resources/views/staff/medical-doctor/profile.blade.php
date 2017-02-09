@@ -23,8 +23,7 @@
         </div>
       </div>
       <div class="col-xs-3 col-sm-3 col-md-3">
-      	Image here
-      	{{-- <img src="images/mayenne.jpg" width="220" height="220" class="img-responsive" alt="Generic placeholder thumbnail"> --}}
+      	<img src="{{ URL::asset('/images/' . $picture) }}"  alt="Profile picture" height="200px" width="200px">
       </div>
       <div class="col-md-12">
           <div class="clearfix">

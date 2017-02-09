@@ -191,5 +191,43 @@ class DatabaseSeeder extends Seeder
         DB::table('degree_programs')->insert([
             'degree_program_description' => 'BS Food Technology',
         ]);
+        DB::table('dental_conditions')->insert([
+            'condition_description' => 'Caries free',
+        ]);
+        DB::table('dental_conditions')->insert([
+            'condition_description' => 'Caries for filting',
+        ]);
+        DB::table('dental_conditions')->insert([
+            'condition_description' => 'Caries for extraction',
+        ]);
+        DB::table('dental_conditions')->insert([
+            'condition_description' => 'Root fragment',
+        ]);
+        DB::table('dental_conditions')->insert([
+            'condition_description' => 'Missing due to carries',
+        ]);
+        DB::table('dental_conditions')->insert([
+            'condition_description' => 'Null',
+        ]);
+
+        DB::table('dental_operations')->insert([
+            'operation_description' => 'Amalgam filling',
+        ]);
+        DB::table('dental_operations')->insert([
+            'operation_description' => 'Silicate filling',
+        ]);
+        DB::table('dental_operations')->insert([
+            'operation_description' => 'Extraction due to caries',
+        ]);
+        DB::table('dental_operations')->insert([
+            'operation_description' => 'Extraction due to other causes',
+        ]);
+        DB::table('dental_operations')->insert([
+            'operation_description' => 'Cement filling',
+        ]);
+        DB::table('dental_operations')->insert([
+            'operation_description' => 'Null',
+        ]);
+
     }
 }

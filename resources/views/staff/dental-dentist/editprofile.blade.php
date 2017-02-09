@@ -60,8 +60,8 @@
         </div>
       </div>
       <div class="col-xs-3 col-sm-3 col-md-3">
-      	Image here
-      	{{-- <img src="images/mayenne.jpg" width="220" height="220" class="img-responsive" alt="Generic placeholder thumbnail"> --}}
+      	<label for="picture">Select Profile Picture</label>
+            <input type="file" name="picture" id="picture" class="picture"/>
       </div>
       <div class="col-md-12">
           <div class="clearfix">

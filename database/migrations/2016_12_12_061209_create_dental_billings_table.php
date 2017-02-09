@@ -15,6 +15,7 @@ class CreateDentalBillingsTable extends Migration
     {
         Schema::create('dental_billings', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('dental_service_id')->nullable();
             $table->integer('appointment_id')->unsigned()->index();
             $table->foreign('appointment_id')->references('id')->on('dental_appointments')->onDelete('cascade');
             $table->enum('status', ['paid', 'unpaid']);

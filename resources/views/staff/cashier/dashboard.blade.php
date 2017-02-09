@@ -23,16 +23,19 @@
               <th>Doctor</th>
               <th>Amount</th>
               <th>Consultation Date</th>
+              <th></th>
             </tr>
           </thead>
            <tbody>
-           	<tr>
-              <td>John Mission</td>
-              <td>Patrick Garcia</td>
-              <td>300</td>
-              <td>December 13, 2016</td>
-              <td><button class="btn btn-primary btn-xs addMedicalBilling">Pay Bill</button></td>
+            @foreach ($unpaid_bills as $unpaid_bill)
+            <tr>
+              <td>{{ $unpaid_bill->patient_first_name }} {{ $unpaid_bill->patient_last_name }}</td>
+              <td>{{ $unpaid_bill->staff_first_name }} {{ $unpaid_bill->staff_last_name }}</td>
+              <td>{{ $unpaid_bill->amount }}</td>
+              <td>{{ $unpaid_bill->schedule_day }}</td>
+              <td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{ $unpaid_bill->medical_appointment_id }}">Pay Bill</button></td>
             </tr>
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -55,4 +58,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  // token and createPostUrl are needed to be passed to AJAX method call
+  var token = '{{csrf_token()}}';
+  var confirmMedicalBilling = '/confirm_medical_billing';
+</script>
 @endsection

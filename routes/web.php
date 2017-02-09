@@ -92,6 +92,7 @@ Route::get('/cashier/profile','CashierController@profile');
 Route::get('/cashier/profile/edit','CashierController@editprofile');
 Route::post('/cashier/profile/update','CashierController@updateprofile');
 Route::get('/cashier/searchpatient','CashierController@searchpatient');
+Route::post('/confirm_medical_billing','CashierController@confirmmedicalbilling');
 
 /* ROUTES FOR ADMIN ACCOUNT */
 Route::get('/admin', 'AdminController@dashboard');

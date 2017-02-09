@@ -464,98 +464,6 @@ $('.addMedicalRecordButton').click(function() {
 	}
 });
 
-	// $('.addBillingToMedical').click(function() {
-	// 			if($(this).attr('id')){
-	// 					var medicalBillingId = $(this).attr('id');
-	// 					var medical_billing_id = medicalBillingId.split("_");
-	// 					medical_billing_patient_id = medical_billing_id[1];
-	// 					medical_billing_appointment_id = medical_billing_id[2];
-	// 					console.log(medical_billing_patient_id);
-	// 					console.log(medical_billing_appointment_id);
-	// 					$.ajax({
-	// 							type: "POST",
-	// 							url: "medical-check-billing.php",
-	// 							async: true,
-	// 							data: {'medical_billing_patient_id':medical_billing_patient_id, 'medical_billing_appointment_id':medical_billing_appointment_id},
-	// 							success: function(response)
-	// 							{
-	// 									output = '';
-	// 									message = JSON.parse(response);
-	// 									console.log(message);
-	// 									for(i=0; i<message.length; i++) {
-	// 											var splitMessage = message[i].split("(;;)");
-	// 											var counter = splitMessage[0];
-	// 											var medicalService = splitMessage[1];
-	// 											var medicalServiceRate = splitMessage[2];
-	// 											output += "<tr><td><input type='checkbox' class='checkboxMedicalService' id="+medicalServiceRate+"></td><td class='medicalService' style='padding-left:15px; '>"+medicalService+"</td><td class='medicalServiceRate' style='padding-left:15px; '>"+medicalServiceRate+"</td></tr>";
-	// 									}
-	// 									$('.displayServices').html(output);
-	// 									if(counter=="null"){
-	// 											$(".displayServices :input").attr("disabled", true);
-	// 											$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled>");
-	// 											$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm' id='medical-bill-confirm-button' disabled>Confirm</button>");
-	// 									}
-	// 									else if(counter=="not_null"){
-	// 											$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled>");
-	// 											$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm' id='medical-bill-confirm-button'>Confirm</button>");
-	// 									}
-	// 									else{
-	// 											$(".displayServices :input").attr("disabled", true);
-	// 											$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled value="+splitMessage[0]+">");
-	// 											$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm' id='medical-bill-confirm-button' disabled>Confirm</button>");
-	// 									}
-	// 									$("#medical-bill").val();
-	// 									var fin = 0;
-	// 									$('.checkboxMedicalService').click(function(){
-	// 											if ($(this).is(':checked')){
-	// 													var medicalBillRate = parseFloat($(this).attr('id'));
-	// 													console.log(medicalBillRate);
-	// 													fin = parseFloat(fin+medicalBillRate);
-	// 													console.log(fin);
-	// 													$("#medical-bill").val(fin);
-	// 											};
-	// 									});
-	// 									$('#medicalBillingModal').modal();
-
-	// 							}
-	// 					});
-	// 			}
-	// 			return false;
-	// 	});
-
-
-	// $(document).on('click', '.medical-bill-confirm #medical-bill-confirm-button', function(){
-	// 	if($('#medical-bill').val()){
-	// 			var patient_id = medical_billing_patient_id;
-	// 			var appointment_id = medical_billing_appointment_id;
-	// 			var medical_billing_amount = $('#medical-bill').val();
-	// 			console.log(patient_id);
-	// 			console.log(appointment_id);
-	// 			console.log(medical_billing_amount);
-	// 			$.ajax({
-	// 					type: "POST",
-	// 					url: "add-medical-billing.php",
-	// 					async: true,
-	// 					data:
-	// 					{   'patient_id':patient_id,
-	// 							'appointment_id':appointment_id,
-	// 							'medical_billing_amount':medical_billing_amount,
-	// 					},
-	// 					success: function(response)
-	// 					{
-	// 							message = JSON.parse(response);
-	// 							console.log(message);
-	// 							if(message==1){
-	// 									console.log("Success!");
-	// 									$('#medicalBillingModal').modal("hide");
-	// 							}  
-	// 					}
-	// 			});
-	// 	} 
-	// 	return false;
-	// });
-
-
 
 // ----------------------------- Manage Schedule -----------------------------
 
@@ -628,7 +536,13 @@ $('.addBillingToMedical').click(function(){
 			$('.patient_name').html('<h4>'+ data['patient_name']+'</h4>');
 			for(var i=0; i < data['servicenamearray'].length; i++)
 			{
-				output += "<tr><td width='20%'><input type='checkbox' class='checkboxMedicalService' id="+data['serviceratearray'][i]+"></td><td width='60%' class='medicalService'>"+data['servicenamearray'][i]+"</td><td width='60%' class='medicalServiceRate'>"+data['serviceratearray'][i]+"</td></tr>";
+				if(data['servicetypearray'][i] == 'medical'){
+					output += "<tr><td width='20%'><input type='checkbox' class='checkboxMedicalService' id="+data['serviceratearray'][i]+"_"+data['serviceidarray'][i]+"></td><td width='60%' class='medicalService'>"+data['servicenamearray'][i]+"</td><td width='60%' class='medicalServiceRate'>"+data['serviceratearray'][i]+"</td></tr>";
+				}
+				else{
+					output += "<tr><td width='20%'><input type='checkbox' class='checkboxMedicalService' id="+data['serviceratearray'][i]+" disabled></td><td width='60%' class='medicalService'>"+data['servicenamearray'][i]+"</td><td width='60%' class='medicalServiceRate'>"+data['serviceratearray'][i]+"</td></tr>";
+				}
+				
 			}
 			$('.displayServices').html(output);
 			if(data['checker'] == '0'){
@@ -664,12 +578,17 @@ $('.addBillingToMedical').click(function(){
 
 $(document).on('click', '.medical-bill-confirm', function(){
 	var appointmentId = $(this).attr('id').split('_')[1];
-	var amount = $("#medical-bill").val();
-	if($('#medical-bill').val()){
+		checked_services_array=[];
+		$("input:checkbox").each(function(){
+		    var $this = $(this);
+		    if($this.is(":checked")){
+		        checked_services_array.push($this.attr("id"));
+		    }
+		});
 		$.ajax({
 		  type: "POST",
 		  url: confirmBillingMedical,
-		  data: {appointment_id:  appointmentId, amount:  amount, _token: token},
+		  data: {appointment_id:  appointmentId, checked_services_array:  checked_services_array, _token: token},
 		  success: function(data)
 		  {
 		  	console.log(data['success']);
@@ -677,7 +596,6 @@ $(document).on('click', '.medical-bill-confirm', function(){
 		  }
 	  });
 	
-	} 
 	return false;
 });
 

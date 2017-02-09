@@ -15,10 +15,7 @@ class CreateMedicalBillingsTable extends Migration
     {
         Schema::create('medical_billings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('patient_id')->nullable();
-            $table->foreign('patient_id')->references('patient_id')->on('patient_info')->onDelete('cascade');
-            $table->integer('staff_id')->nullable();
-            $table->foreign('staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
+            $table->integer('medical_service_id')->nullable();
             $table->integer('medical_appointment_id')->unsigned()->index()->nullable();
             $table->foreign('medical_appointment_id')->references('id')->on('medical_appointments')->onDelete('cascade');
             $table->enum('status', ['paid', 'unpaid']);

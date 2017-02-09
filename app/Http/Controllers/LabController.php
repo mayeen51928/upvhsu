@@ -132,6 +132,7 @@ class LabController extends Controller
         $params['civil_status'] = $lab->civil_status;
         $params['personal_contact_number'] = $lab->personal_contact_number;
         $params['street'] = $lab->street;
+        $params['picture'] = $lab->picture;
         if(!is_null($lab->town_id))
             {
                 $params['town'] = Town::find($lab->town_id)->town_name;
@@ -221,6 +222,12 @@ class LabController extends Controller
             $lab->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
         }
         $lab->personal_contact_number = $request->input('personal_contact_number');
+        if (Input::file('picture') != NULL) { 
+            $path = '..\public\images';
+            $file_name = Input::file('picture')->getClientOriginalName(); 
+            Input::file('picture')->move($path, $file_name);
+            $lab->picture = $file_name;
+        }
         $lab->update();
         return redirect('lab/profile');
     }

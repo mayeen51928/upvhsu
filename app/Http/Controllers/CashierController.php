@@ -7,6 +7,8 @@ use Auth;
 use App\Staff;
 use App\Town;
 use App\Province;
+use App\MedicalBilling;
+use DB;
 class CashierController extends Controller
 {
 	public function __construct()
@@ -27,9 +29,17 @@ class CashierController extends Controller
     }
     public function dashboard()
     {
+        $unpaid_bills = DB::table('medical_billings')
+                    ->join('staff_info', 'staff_info.staff_id', '=', 'medical_billings.staff_id')
+                    ->join('patient_info', 'patient_info.patient_id', '=', 'medical_billings.patient_id')
+                    ->join('medical_appointments', 'medical_appointments.id', '=', 'medical_billings.medical_appointment_id')
+                    ->join('medical_schedules', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')
+                    ->where('medical_billings.status', '=', 'unpaid')
+                    ->get();
+
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
-    	return view('staff.cashier.dashboard', $params);
+    	return view('staff.cashier.dashboard', $params, compact('unpaid_bills'));
     }
 
     public function profile()
@@ -41,6 +51,7 @@ class CashierController extends Controller
         $params['civil_status'] = $cashier->civil_status;
         $params['personal_contact_number'] = $cashier->personal_contact_number;
         $params['street'] = $cashier->street;
+        $params['picture'] = $cashier->picture;
         if(!is_null($cashier->town_id))
             {
                 $params['town'] = Town::find($cashier->town_id)->town_name;
@@ -130,6 +141,14 @@ class CashierController extends Controller
             $town->save();
             $cashier->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
         }
+
+        if (Input::file('picture') != NULL) { 
+            $path = '..\public\images';
+            $file_name = Input::file('picture')->getClientOriginalName(); 
+            Input::file('picture')->move($path, $file_name);
+            $cashier->picture = $file_name;
+        }
+
         $cashier->personal_contact_number = $request->input('personal_contact_number');
         $cashier->update();
         return redirect('cashier/profile');
@@ -140,5 +159,13 @@ class CashierController extends Controller
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'searchpatient';
     	return view('staff.cashier.searchpatient', $params);
+    }
+
+    public function confirmmedicalbilling(Request $request)
+    {
+        DB::table('medical_billings')
+            ->where('medical_appointment_id', $request->appointment_id)
+            ->update(['status' => 'paid']);
+        return response()->json(['success' => 'success']); 
     }
 }

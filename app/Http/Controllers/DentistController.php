@@ -607,6 +607,7 @@ class DentistController extends Controller
 	        $params['civil_status'] = $dentist->civil_status;
 	        $params['personal_contact_number'] = $dentist->personal_contact_number;
 	        $params['street'] = $dentist->street;
+	        $params['picture'] = $dentist->picture;
 	        if(!is_null($dentist->town_id))
 	        {
 	        	$params['town'] = Town::find($dentist->town_id)->town_name;
@@ -658,6 +659,14 @@ class DentistController extends Controller
 	        $dentist->position = $request->input('position');
 	        $dentist->civil_status = $request->civil_status;
 	        $province = Province::where('province_name', $request->input('province'))->first();
+
+	        if (Input::file('picture') != NULL) { 
+	            $path = '..\public\images';
+	            $file_name = Input::file('picture')->getClientOriginalName(); 
+	            Input::file('picture')->move($path, $file_name);
+	            $dentist->picture = $file_name;
+	        }
+	        
 	        if(count($province)>0)
 	        {
 	            // $dentist->nationality_id = $nationality->id;

@@ -60,6 +60,7 @@ class XrayController extends Controller
         $params['civil_status'] = $xray->civil_status;
         $params['personal_contact_number'] = $xray->personal_contact_number;
         $params['street'] = $xray->street;
+        $params['picture'] = $xray->picture;
         if(!is_null($xray->town_id))
             {
                 $params['town'] = Town::find($xray->town_id)->town_name;
@@ -149,6 +150,14 @@ class XrayController extends Controller
             $town->save();
             $xray->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
         }
+
+        if (Input::file('picture') != NULL) { 
+            $path = '..\public\images';
+            $file_name = Input::file('picture')->getClientOriginalName(); 
+            Input::file('picture')->move($path, $file_name);
+            $patient->picture = $file_name;
+        }
+
         $xray->personal_contact_number = $request->input('personal_contact_number');
         $xray->update();
         return redirect('xray/profile');
