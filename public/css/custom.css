@@ -280,3 +280,11 @@ svg {
   	border-color: #194d19;
 }
 
+#svg_container{
+	height: 522px;
+	width: 867px; 
+}
+
+#searchResults td a{
+	cursor: pointer;
+}
