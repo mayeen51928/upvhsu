@@ -7,7 +7,11 @@
 			<div class="panel-heading">Select Type of Appointment</div>
 			<div class="panel-body">
 				<form class="form-inline">
-					<div class="checkbox col-md-6">
+					<div class="checkbox col-md-6 @if(Auth::check())
+							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)
+							disabled
+							@endif
+						@endif ">
 						<label><input type="checkbox" name="type_dental" id="typeDental"
 						@if(Auth::check())
 							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)
@@ -16,7 +20,11 @@
 						@endif 
 						/> Dental</label>
 					</div>
-					<div class="checkbox col-md-6">
+					<div class="checkbox col-md-6 @if(Auth::check())
+							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)
+							disabled
+							@endif
+						@endif ">
 						<label><input type="checkbox" name="type_medical" id="typeMedical"
 						@if(Auth::check())
 							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)

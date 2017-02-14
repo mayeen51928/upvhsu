@@ -796,14 +796,19 @@ class DentistController extends Controller
 		{
 				$schedules = $request->schedules;
 				for($i=0; $i < sizeof($schedules); $i++){
+					if($schedules[$i]!=''){
 						$explode_schedules = explode(";;;", $schedules[$i]);
 						$start = $explode_schedules[0];
 						$end = $explode_schedules[1];
-						$schedule = new DentalSchedule();
-						$schedule->staff_id = Auth::user()->user_id;
-						$schedule->schedule_start = $start;
-						$schedule->schedule_end = $end;
-						$schedule->save();
+						$checker_if_exists = DentalSchedule::where('staff_id', Auth::user()->user_id)->where('schedule_start', $start)->where('schedule_end', $end)->first();
+						if(count($checker_if_exists) == 0){
+							$schedule = new DentalSchedule();
+							$schedule->staff_id = Auth::user()->user_id;
+							$schedule->schedule_start = $start;
+							$schedule->schedule_end = $end;
+							$schedule->save();
+						}
+					}
 				}
 				
 				return response()->json(['success' => 'success']); 

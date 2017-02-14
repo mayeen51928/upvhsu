@@ -186,14 +186,15 @@ class DoctorController extends Controller
 	{
 		$schedules = $request->schedules;
 		for($i=0; $i < sizeof($schedules); $i++){
-			$checker_if_exists = MedicalSchedule::where('staff_id', Auth::user()->user_id)->where('schedule_day', $schedules[$i])->first();
-			if(count($checker_if_exists) == 0){
-				$schedule = new MedicalSchedule();
-				$schedule->staff_id = Auth::user()->user_id;
-				$schedule->schedule_day = $schedules[$i];
-				$schedule->save();
+			if($schedules[$i]!=''){
+				$checker_if_exists = MedicalSchedule::where('staff_id', Auth::user()->user_id)->where('schedule_day', $schedules[$i])->first();
+				if(count($checker_if_exists) == 0){
+					$schedule = new MedicalSchedule();
+					$schedule->staff_id = Auth::user()->user_id;
+					$schedule->schedule_day = $schedules[$i];
+					$schedule->save();
+				}
 			}
-			
 		}
 		
 		return response()->json(['success' => 'success']); 
@@ -275,6 +276,7 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatient(){
+		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		return view('staff.medical-doctor.searchpatient', $params);
 	}
@@ -282,30 +284,31 @@ class DoctorController extends Controller
 	public function searchpatientrecord(Request $request){
 
 		// To fix: when searching for first name and last name combination
+		// already fixed chereettt
 		$counter = 0;
-		$search_string = $request->search_string;
-		$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string.'%')->orWhere('patient_last_name', 'like', '%'.$search_string.'%')->pluck('patient_id')->all();
-		$search_patient_first_name_records = Patient::where('patient_info.patient_first_name', 'like', '%'.$search_string.'%')->orWhere('patient_info.patient_last_name', 'like', '%'.$search_string.'%')->pluck('patient_first_name')->all();
-		$search_patient_last_name_records = Patient::where('patient_info.patient_first_name', 'like', '%'.$search_string.'%')->orWhere('patient_info.patient_last_name', 'like', '%'.$search_string.'%')->pluck('patient_last_name')->all();
+		$search_string = explode(" ",$request->search_string);
+		for($i=0; $i < sizeof($search_string); $i++)
+		{
+			$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->pluck('patient_id')->all();
+		}
 		if(count($search_patient_id_records) > 0){
+			$searchpatientfirstnamearray = array();
+			$searchpatientlastnamearray = array();
+			$searchpatientidarray = array();
+			foreach ($search_patient_id_records as $search_patient_id_record)
+			{
+				array_push($searchpatientfirstnamearray, Patient::find($search_patient_id_record)->patient_first_name);
+				array_push($searchpatientlastnamearray, Patient::find($search_patient_id_record)->patient_last_name);
+				array_push($searchpatientidarray, $search_patient_id_record);
+			}
 			$counter++;
+			return response()->json(['searchpatientidarray' => $searchpatientidarray, 'searchpatientfirstnamearray' => $searchpatientfirstnamearray, 'searchpatientlastnamearray' => $searchpatientlastnamearray, 'counter' => $counter]);
 		}
-		$searchpatientidarray = array();
-		foreach ($search_patient_id_records as $search_patient_id_record){
-			array_push($searchpatientidarray, $search_patient_id_record);
-		}
-
-		$searchpatientfirstnamearray = array();
-		foreach ($search_patient_first_name_records as $search_patient_first_name_record){
-			array_push($searchpatientfirstnamearray, $search_patient_first_name_record);
-		}
-
-		$searchpatientlastnamearray = array();
-		foreach ($search_patient_last_name_records as $search_patient_last_name_record){
-			array_push($searchpatientlastnamearray, $search_patient_last_name_record);
-		}
-					
-		return response()->json(['searchpatientidarray' => $searchpatientidarray, 'searchpatientfirstnamearray' => $searchpatientfirstnamearray, 'searchpatientlastnamearray' => $searchpatientlastnamearray, 'counter' => $counter]); 
+		else
+		{
+			return response()->json(['counter' => $counter]);
+		}	
+		 
 	}
 
 	public function displaypatientrecordsearch(Request $request){
@@ -359,6 +362,20 @@ class DoctorController extends Controller
 		return response()->json(['patient_info' => $params]);
 	}
 
+	public function viewrecords($id)
+	{
+		$params['records'] = MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->get();
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'searchpatient';
+		return view('staff.medical-doctor.viewrecords', $params);
+	}
+
+	public function addrecordswithoutappointment($id)
+	{
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'searchpatient';
+		return view('staff.medical-doctor.addrecords', $params);
+	}
 
     public function addmedicaldiagnosis(Request $request)
     {
