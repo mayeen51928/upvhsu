@@ -29,7 +29,7 @@
           	<tr>
               <td>{{$medical_appointment->patient_first_name}} {{$medical_appointment->patient_last_name}}</td>
               <td>{{$medical_appointment->reasons}}</td>
-              <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment->id}}">Update Diagnosis</button></td>
+              <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment->id}}">Diagnosis</button></td>
               <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment->id}}">Billing</button></td>
             </tr>
             @endforeach

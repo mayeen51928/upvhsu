@@ -60,6 +60,7 @@ Route::get('/doctor/manageschedule','DoctorController@manageschedule');
 Route::get('/doctor/searchpatient','DoctorController@searchpatient');
 Route::post('/searchpatientrecord','DoctorController@searchpatientrecord');
 Route::get('/doctor/viewrecords/{id}', 'DoctorController@viewrecords');
+Route::get('/doctor/addrecords/{id}', 'DoctorController@addrecordswithoutappointment');
 Route::post('/displaypatientrecordsearch','DoctorController@displaypatientrecordsearch');
 Route::post('/addschedule_medical', 'DoctorController@addschedule');
 Route::post('/viewmedicaldiagnosis', 'DoctorController@viewmedicaldiagnosis');
@@ -105,6 +106,6 @@ Route::post('/admin/createstudent', 'AdminController@createstudent');
 Route::get('/admin/generateschedule', 'AdminController@generateschedule');
 
 //For wrong URLs
-Route::get('/{any}', function($any){
-	return back();
-})->where('any', '.*');
+// Route::get('/{any}', function($any){
+// 	return back();
+// })->where('any', '.*');

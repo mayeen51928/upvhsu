@@ -583,13 +583,16 @@ $(document).on('click', '.medical-bill-confirm', function(){
 
 
 // ------------------SEARCH PATIENT---------------
-$("#search_patient").keypress(function(){
+$("#search_patient").keyup(function(){
+	
 	if($('#search_patient').val()){
 		var searchString = $('#search_patient').val();
 		$.post('/searchpatientrecord',
 			{
 				search_string: searchString
 			}, function(data) {
+				$('#searchResults').html("");
+				// $('#searchTable').hide();
 				if(data['counter']>0)
 				{
 			  		output = '';
@@ -637,15 +640,15 @@ $("#search_patient").keypress(function(){
 							$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
 							$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
 							$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
-							$('#patientInfoModalFooter').html('<a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button">View Records</a>');
+							$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button">View Records</a>');
 							$('#searchPatientRecordInfo').modal();
 						});
   					});
   				}
   				else
   				{
-  					$('#searchTable').hide();
-  					$('#searchResults').html("");
+  					// $('#searchTable').hide();
+  					$('#searchResults').html("<tr><td>No results found.</td></tr>");
   				}
   			});
 	}
