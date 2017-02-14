@@ -50,6 +50,7 @@ class DentistController extends Controller
 		public function updatedentalrecord(Request $request)
 		{
 			$appointment_id = $request->addDentalRecord;
+			$patient_id = $request->addDentalRecord2;
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'dashboard';
 
@@ -62,14 +63,17 @@ class DentistController extends Controller
 			$appointment_ids = DB::table('dental_appointments')
 					->where('dental_appointments.id', '=', $appointment_id)
 					->get();
-
 			$stacks_condition = array();
 			$stacks_operation = array();
 			for ($x = 55; $x >= 51; $x--)
 			{
 		    $dental_chart_results = DB::table('dental_records')
-				    ->orderBy('created_at', 'desc')
-						->where('teeth_id', '=', $x)
+		    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+				    ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 						->pluck('condition_id')
 						->first();
 
@@ -95,8 +99,12 @@ class DentistController extends Controller
 
 
 				$dental_chart_results = DB::table('dental_records')
-			    ->orderBy('created_at', 'desc')
-					->where('teeth_id', '=', $x)
+					->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+			    	->orderBy('dental_records.created_at', 'desc')
+					->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 					->pluck('operation_id')
 					->first();
 
@@ -121,14 +129,17 @@ class DentistController extends Controller
 				array_push($stacks_operation, $dental_chart_results);
 			}
 
-
 			$stacks_condition2 = array();
 			$stacks_operation2 = array();
 			for ($x = 61; $x <= 65; $x++)
 			{
 		    $dental_chart_results = DB::table('dental_records')
-				    ->orderBy('created_at', 'desc')
-						->where('teeth_id', '=', $x)
+		    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+				    ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 						->pluck('condition_id')
 						->first();
 
@@ -154,8 +165,12 @@ class DentistController extends Controller
 
 
 				$dental_chart_results = DB::table('dental_records')
-			    ->orderBy('created_at', 'desc')
-					->where('teeth_id', '=', $x)
+				->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+			    ->orderBy('dental_records.created_at', 'desc')
+					->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 					->pluck('operation_id')
 					->first();
 
@@ -180,14 +195,17 @@ class DentistController extends Controller
 				array_push($stacks_operation2, $dental_chart_results);
 			}
 
-
 			$stacks_condition3 = array();
 			$stacks_operation3 = array();
 			for ($x = 18; $x >= 11; $x--)
 			{
 		    $dental_chart_results = DB::table('dental_records')
-				    ->orderBy('created_at', 'desc')
-						->where('teeth_id', '=', $x)
+		    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+				    ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 						->pluck('condition_id')
 						->first();
 
@@ -213,8 +231,12 @@ class DentistController extends Controller
 
 
 				$dental_chart_results = DB::table('dental_records')
-			    ->orderBy('created_at', 'desc')
-					->where('teeth_id', '=', $x)
+				->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+			    ->orderBy('dental_records.created_at', 'desc')
+					->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 					->pluck('operation_id')
 					->first();
 
@@ -244,8 +266,12 @@ class DentistController extends Controller
 			for ($x = 21; $x <= 28; $x++)
 			{
 		    $dental_chart_results = DB::table('dental_records')
-				    ->orderBy('created_at', 'desc')
-						->where('teeth_id', '=', $x)
+		    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+				    ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 						->pluck('condition_id')
 						->first();
 
@@ -271,8 +297,12 @@ class DentistController extends Controller
 
 
 				$dental_chart_results = DB::table('dental_records')
-			    ->orderBy('created_at', 'desc')
-					->where('teeth_id', '=', $x)
+				->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+			    ->orderBy('dental_records.created_at', 'desc')
+					->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 					->pluck('operation_id')
 					->first();
 
@@ -302,8 +332,12 @@ class DentistController extends Controller
 			for ($x = 48; $x >= 41; $x--)
 			{
 		    $dental_chart_results = DB::table('dental_records')
-				    ->orderBy('created_at', 'desc')
-						->where('teeth_id', '=', $x)
+		    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+				    ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 						->pluck('condition_id')
 						->first();
 
@@ -329,8 +363,12 @@ class DentistController extends Controller
 
 
 				$dental_chart_results = DB::table('dental_records')
-			    ->orderBy('created_at', 'desc')
-					->where('teeth_id', '=', $x)
+				->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+			    ->orderBy('dental_records.created_at', 'desc')
+					->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 					->pluck('operation_id')
 					->first();
 
@@ -360,8 +398,12 @@ class DentistController extends Controller
 			for ($x = 31; $x <= 38; $x++)
 			{
 		    $dental_chart_results = DB::table('dental_records')
-				    ->orderBy('created_at', 'desc')
-						->where('teeth_id', '=', $x)
+		    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+				    ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 						->pluck('condition_id')
 						->first();
 
@@ -387,8 +429,12 @@ class DentistController extends Controller
 
 
 				$dental_chart_results = DB::table('dental_records')
-			    ->orderBy('created_at', 'desc')
-					->where('teeth_id', '=', $x)
+				->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+			    ->orderBy('dental_records.created_at', 'desc')
+					->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 					->pluck('operation_id')
 					->first();
 
@@ -413,14 +459,17 @@ class DentistController extends Controller
 				array_push($stacks_operation6, $dental_chart_results);
 			}
 
-
 			$stacks_condition7 = array();
 			$stacks_operation7 = array();
 			for ($x = 85; $x >= 81; $x--)
 			{
 		    $dental_chart_results = DB::table('dental_records')
-				    ->orderBy('created_at', 'desc')
-						->where('teeth_id', '=', $x)
+		    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+				    ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 						->pluck('condition_id')
 						->first();
 
@@ -446,8 +495,12 @@ class DentistController extends Controller
 
 
 				$dental_chart_results = DB::table('dental_records')
-			    ->orderBy('created_at', 'desc')
-					->where('teeth_id', '=', $x)
+				->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+			    ->orderBy('dental_records.created_at', 'desc')
+					->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 					->pluck('operation_id')
 					->first();
 
@@ -477,8 +530,12 @@ class DentistController extends Controller
 			for ($x = 71; $x <= 75; $x++)
 			{
 		    $dental_chart_results = DB::table('dental_records')
-				    ->orderBy('created_at', 'desc')
-						->where('teeth_id', '=', $x)
+		    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+				    ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 						->pluck('condition_id')
 						->first();
 
@@ -504,8 +561,12 @@ class DentistController extends Controller
 
 
 				$dental_chart_results = DB::table('dental_records')
-			    ->orderBy('created_at', 'desc')
-					->where('teeth_id', '=', $x)
+				->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
+			    ->orderBy('dental_records.created_at', 'desc')
+					->where([
+							['teeth_id', '=', $x],
+							['patient_id', '=', $patient_id],
+						])
 					->pluck('operation_id')
 					->first();
 
@@ -538,13 +599,19 @@ class DentistController extends Controller
 			$teeth_id = $request->teeth_id;
 			$teeth_info_condition = DB::table('dental_records')
 		    ->orderBy('created_at', 'desc')
-				->where('teeth_id', '=', $teeth_id)
+				->where([
+							['teeth_id', '=', $x],
+							// ['patient_id', '=', $patient_id],
+						])
 				->pluck('condition_id')
 				->first();
 
 			$teeth_info_operation = DB::table('dental_records')
 		    ->orderBy('created_at', 'desc')
-				->where('teeth_id', '=', $teeth_id)
+				->where([
+							['teeth_id', '=', $x],
+							// ['patient_id', '=', $patient_id],
+						])
 				->pluck('operation_id')
 				->first();
 

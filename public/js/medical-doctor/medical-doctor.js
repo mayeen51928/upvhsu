@@ -513,7 +513,7 @@ $('.addBillingToMedical').click(function(){
 			for(var i=0; i < data['servicenamearray'].length; i++)
 			{
 				if(data['servicetypearray'][i] == 'medical'){
-					output += "<tr><td width='20%'><input type='checkbox' class='checkboxMedicalService' id="+data['serviceratearray'][i]+"_"+data['serviceidarray'][i]+"></td><td width='60%' class='medicalService'>"+data['servicenamearray'][i]+"</td><td width='60%' class='medicalServiceRate'>"+data['serviceratearray'][i]+"</td></tr>";
+					output += "<tr><td width='20%'><input type='checkbox' class='checkboxMedicalService' id="+data['serviceratearray'][i]+" value="+data['serviceidarray'][i]+"></td><td width='60%' class='medicalService'>"+data['servicenamearray'][i]+"</td><td width='60%' class='medicalServiceRate'>"+data['serviceratearray'][i]+"</td></tr>";
 				}
 				else{
 					output += "<tr><td width='20%'><input type='checkbox' class='checkboxMedicalService' id="+data['serviceratearray'][i]+" disabled></td><td width='60%' class='medicalService'>"+data['servicenamearray'][i]+"</td><td width='60%' class='medicalServiceRate'>"+data['serviceratearray'][i]+"</td></tr>";
@@ -554,24 +554,25 @@ $('.addBillingToMedical').click(function(){
 
 $(document).on('click', '.medical-bill-confirm', function(){
 	var appointmentId = $(this).attr('id').split('_')[1];
-		checked_services_array=[];
-		$("input:checkbox").each(function(){
-		    var $this = $(this);
-		    if($this.is(":checked")){
-		        checked_services_array.push($this.attr("id"));
-		    }
-		});
-		$.ajax({
+	checked_services_array_id=[];
+	checked_services_array_rate=[];
+	$("input:checkbox").each(function(){
+	    var $this = $(this);
+	    if($this.is(":checked")){
+	        checked_services_array_id.push($this.attr("value"));
+	        checked_services_array_rate.push($this.attr("id"));
+	    }
+	});
+	$.ajax({
 		  type: "POST",
 		  url: confirmBillingMedical,
-		  data: {appointment_id:  appointmentId, checked_services_array:  checked_services_array, _token: token},
+		  data: {appointment_id:  appointmentId, checked_services_array_id:  checked_services_array_id, checked_services_array_rate:  checked_services_array_rate, _token: token},
 		  success: function(data)
 		  {
 		  	console.log(data['success']);
 		  	$('#medicalBillingModal').modal("hide");
 		  }
-	  });
-	
+  	});
 	return false;
 });
 

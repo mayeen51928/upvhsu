@@ -18,6 +18,7 @@
 	<script src="{{asset('js/medical-lab/medical-lab.js')}}"></script>
 	<script src="{{asset('js/medical-xray/medical-xray.js')}}"></script>
 	<script src="{{asset('js/cashier/cashier.js')}}"></script>
+	<script src="{{asset('js/patient/patient.js')}}"></script>
 	{{-- <script src="{{asset('js/custom1.js')}}"></script> --}}
 	<script src="{{asset('js/custom.js')}}"></script>
 	<script src="{{asset('js/scheduleappointment.js')}}"></script>

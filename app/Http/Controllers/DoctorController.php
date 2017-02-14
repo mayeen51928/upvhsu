@@ -503,11 +503,14 @@ class DoctorController extends Controller
 			$checker = 1;
 		}
 
+		$checker = 0;
 		$medical_billing_checker = DB::table('medical_billings')
 					->where('medical_billings.medical_appointment_id', '=', $appointment_id)
-					->first();
+					->get();
 		if(count($medical_billing_checker) > 0){
-			$checker = $medical_billing_checker->amount;
+			foreach ($medical_billing_checker as $medical_amount) {
+				$checker += $medical_amount->amount;
+			}
 		}
 
 
@@ -563,15 +566,16 @@ class DoctorController extends Controller
 
 		
 		$appointment_id = $request->appointment_id;
-		$ps = $request->checked_services_array;
-		foreach ($ps as $p) {
-			$billing = new MedicalBilling;
-			$billing->medical_service_id = $p;
+		$ps = $request->checked_services_array_id;
+		$ls = $request->checked_services_array_rate;
+		for($i=0; $i < sizeof($ps); $i++){
+		    $billing = new MedicalBilling;
+			$billing->medical_service_id = $ps[$i];
 	        $billing->medical_appointment_id = $appointment_id;
 	        $billing->status = 'unpaid';
-	        $billing->amount = 300;
+	        $billing->amount = $ls[$i];
 	        $billing->save();
 		}
-        return response()->json(['success' => 'success']); 
+		return response()->json(['success' => 'success']); 
 	}
 }

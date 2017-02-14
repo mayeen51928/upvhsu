@@ -312,4 +312,70 @@ class PatientController extends Controller
     	$params['sidebar_active'] = 'bills';
     	return view('patient.bills', $params);
     }
+
+    public function viewdentalrecord(Request $request)
+    {
+        $patient_id = $request->patient_id;
+
+        $stacks_condition = array();
+        $stacks_operation = array();
+        for ($x = 55; $x >= 51; $x--)
+        {
+        $dental_chart_results = DB::table('dental_records')
+                ->orderBy('created_at', 'desc')
+                    ->where('teeth_id', '=', $x)
+                    ->pluck('condition_id')
+                    ->first();
+
+            if($dental_chart_results == 1){
+                $dental_chart_results = "#ff4000";
+            }
+            elseif($dental_chart_results == 2){
+                $dental_chart_results = "#ffff00";
+            }
+            elseif($dental_chart_results == 3){
+                $dental_chart_results = "#00ff00";
+            }
+            elseif($dental_chart_results == 4){
+                $dental_chart_results = "#00ffff";
+            }
+            elseif($dental_chart_results == 5){
+                $dental_chart_results = "#0000ff";
+            }
+            else{
+                $dental_chart_results = "white";
+            }
+            array_push($stacks_condition, $dental_chart_results);
+
+
+            $dental_chart_results = DB::table('dental_records')
+            ->orderBy('created_at', 'desc')
+                ->where('teeth_id', '=', $x)
+               
+                ->pluck('operation_id')
+                ->first();
+
+            if($dental_chart_results == 1){
+                $dental_chart_results = "#bf00ff";
+            }
+            elseif($dental_chart_results == 2){
+                $dental_chart_results = "#ff0080";
+            }
+            elseif($dental_chart_results == 3){
+                $dental_chart_results = "#ff0000";
+            }
+            elseif($dental_chart_results == 4){
+                $dental_chart_results = "#808080";
+            }
+            elseif($dental_chart_results == 5){
+                $dental_chart_results = "#194d19";
+            }
+            else{
+                $dental_chart_results = "white";
+            }
+            array_push($stacks_operation, $dental_chart_results);
+        }
+
+        return response()->json(['stacks_condition' => $stacks_condition, 'stacks_operation' => $stacks_operation]); 
+    }
 }

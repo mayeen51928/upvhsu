@@ -48,13 +48,13 @@
 						</thead>
 						<tbody>
 							@foreach($dental_appointments as $dental_appointment)
-                <tr>
-                  <td><a>{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a></td>
-                  <td>
-                  {{date_format(date_create($dental_appointment->schedule_start), 'H:i:s')}} - {{date_format(date_create($dental_appointment->schedule_end), 'H:i:s')}}</td>
-                  <td>{{$dental_appointment->staff_first_name}} {{$dental_appointment->staff_last_name}}</td>
-                </tr>
-              @endforeach
+			                <tr>
+			                  <td><a class="dental_appointments_prescription" id="{{ $dental_appointment->patient_id }}">{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a></td>
+			                  <td>
+			                  {{date_format(date_create($dental_appointment->schedule_start), 'H:i:s')}} - {{date_format(date_create($dental_appointment->schedule_end), 'H:i:s')}}</td>
+			                  <td>{{$dental_appointment->staff_first_name}} {{$dental_appointment->staff_last_name}}</td>
+			                </tr>
+			              @endforeach
 							</tr>
 						</tbody>
 					</table>
@@ -82,5 +82,23 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="view-dental-record-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="width:900px; ">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Patient Record</h4>
+        </div>
+        <div class="modal-body">
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  // token and createPostUrl are needed to be passed to AJAX method call
+  var token = '{{csrf_token()}}';
+  var viewDentalRecord = '/view_dental_record';
+</script>
 
 @endsection
