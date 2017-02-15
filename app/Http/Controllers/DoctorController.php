@@ -49,7 +49,9 @@ class DoctorController extends Controller
 	}
 	public function dashboard()
 	{
-		$params['medical_appointments'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
+		$params['medical_appointments_today'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
+		$params['medical_appointments_past'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','<', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
+		$params['medical_appointments_future'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','>', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
 		// dd($params['medical_appointments']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
@@ -372,9 +374,79 @@ class DoctorController extends Controller
 
 	public function addrecordswithoutappointment($id)
 	{
+		$params['patient_info'] = Patient::find($id);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		return view('staff.medical-doctor.addrecords', $params);
+	}
+
+	public function addrecord(Request $request)
+	{
+		// dd($request->requestCBC); //returns "on"
+		// Add medical appointment
+		$medical_schedule_id = MedicalSchedule::where('schedule_day', date('Y-m-d'))->where('staff_id', Auth::user()->user_id)->first()->id;
+		// dd($medical_schedule_id);
+		$medical_appointment = new MedicalAppointment;
+		$medical_appointment->patient_id = $request->patient_id;
+		$medical_appointment->medical_schedule_id = $medical_schedule_id;
+		$medical_appointment->reasons = 'Walk-in patient';
+		$medical_appointment->save();
+
+		$medical_appointment_id = MedicalAppointment::where('medical_schedule_id', $medical_schedule_id)->where('patient_id', $request->patient_id)->first()->id;
+		
+		$physical_examination = new PhysicalExamination;
+        $physical_examination->medical_appointment_id = $medical_appointment_id;
+        $physical_examination->height = $request->height;
+        $physical_examination->weight = $request->weight;
+        $physical_examination->blood_pressure = $request->bloodpressure;
+        $physical_examination->pulse_rate = $request->pulserate;
+        $physical_examination->right_eye = $request->righteye;
+        $physical_examination->left_eye = $request->lefteye;
+        $physical_examination->head = $request->head;
+        $physical_examination->eent = $request->eent;
+        $physical_examination->neck = $request->neck;
+        $physical_examination->chest = $request->chest;
+        $physical_examination->heart = $request->heart;
+        $physical_examination->lungs = $request->lungs;
+        $physical_examination->abdomen = $request->abdomen;
+        $physical_examination->back = $request->back;
+        $physical_examination->skin = $request->skin;
+        $physical_examination->extremities = $request->extremities;
+        $physical_examination->save();
+        if($request->requestCBC == 'on')
+        {
+            $cbc = new CbcResult;
+            $cbc->medical_appointment_id = $medical_appointment_id;
+            $cbc->save();
+        }
+        if($request->requestUrinalysis == 'on')
+        {
+            $urinalysis = new UrinalysisResult;
+            $urinalysis->medical_appointment_id = $medical_appointment_id;
+            $urinalysis->save();
+        }
+        if($request->requestFecalysis == 'on')
+        {
+            $fecalysis = new FecalysisResult;
+            $fecalysis->medical_appointment_id = $medical_appointment_id;
+            $fecalysis->save();
+        }
+        if($request->requestDrugTest == 'on')
+        {
+            $drug_test = new DrugTestResult;
+            $drug_test->medical_appointment_id = $medical_appointment_id;
+            $drug_test->save();
+        }
+        if($request->requestXray == 'on')
+        {
+            $request_xray = new ChestXrayResult;
+            $request_xray->medical_appointment_id = $medical_appointment_id;
+            $request_xray->save();
+        }
+		$params['patient_info'] = Patient::find($request->patient_id);
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'searchpatient';
+		return back()->with('status', 'Record successfully added!');
 	}
 
     public function addmedicaldiagnosis(Request $request)

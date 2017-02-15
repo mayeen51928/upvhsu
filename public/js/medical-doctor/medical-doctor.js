@@ -641,8 +641,15 @@ $("#search_patient").keyup(function(){
 							$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
 							$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
 							$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
-							$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button">View Records</a>');
+							$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button" id="addnewrecordfromsearch">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearch>View Records</a>');
 							$('#searchPatientRecordInfo').modal();
+
+							$('#addnewrecordfromsearch').click(function() {
+								$('#searchPatientRecordInfo').modal('hide');
+							});
+							$('#viewrecordsfromsearch').click(function() {
+								$('#searchPatientRecordInfo').modal('hide');
+							});
 						});
   					});
   				}
@@ -658,5 +665,9 @@ $("#search_patient").keyup(function(){
 		$('#searchTable').hide();
 		$('#searchResults').html("");
 	}
+});
+
+$('#addnewrecordsubmit').click(function() {
+	$('#proceedToAddNewMedicalRecord').modal('hide');
 });
 });
