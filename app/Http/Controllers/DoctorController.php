@@ -278,6 +278,9 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatient(){
+		// $params['patients'] = Patient::leftjoin('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->distinct()->get();
+		$params['patients'] = Patient::all();
+		// dd($params['patients']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		return view('staff.medical-doctor.searchpatient', $params);
@@ -287,30 +290,36 @@ class DoctorController extends Controller
 
 		// To fix: when searching for first name and last name combination
 		// already fixed chereettt
-		$counter = 0;
-		$search_string = explode(" ",$request->search_string);
-		for($i=0; $i < sizeof($search_string); $i++)
+		if($request->search_string!='')
 		{
-			$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->pluck('patient_id')->all();
-		}
-		if(count($search_patient_id_records) > 0){
-			$searchpatientfirstnamearray = array();
-			$searchpatientlastnamearray = array();
-			$searchpatientidarray = array();
-			foreach ($search_patient_id_records as $search_patient_id_record)
+			$counter = 0;
+			$search_string = explode(" ",$request->search_string);
+			for($i=0; $i < sizeof($search_string); $i++)
 			{
-				array_push($searchpatientfirstnamearray, Patient::find($search_patient_id_record)->patient_first_name);
-				array_push($searchpatientlastnamearray, Patient::find($search_patient_id_record)->patient_last_name);
-				array_push($searchpatientidarray, $search_patient_id_record);
+				$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->pluck('patient_id')->all();
 			}
-			$counter++;
-			return response()->json(['searchpatientidarray' => $searchpatientidarray, 'searchpatientfirstnamearray' => $searchpatientfirstnamearray, 'searchpatientlastnamearray' => $searchpatientlastnamearray, 'counter' => $counter]);
+			if(count($search_patient_id_records) > 0){
+				$searchpatientfirstnamearray = array();
+				$searchpatientlastnamearray = array();
+				$searchpatientidarray = array();
+				foreach ($search_patient_id_records as $search_patient_id_record)
+				{
+					array_push($searchpatientfirstnamearray, Patient::find($search_patient_id_record)->patient_first_name);
+					array_push($searchpatientlastnamearray, Patient::find($search_patient_id_record)->patient_last_name);
+					array_push($searchpatientidarray, $search_patient_id_record);
+				}
+				$counter++;
+				return response()->json(['searchpatientidarray' => $searchpatientidarray, 'searchpatientfirstnamearray' => $searchpatientfirstnamearray, 'searchpatientlastnamearray' => $searchpatientlastnamearray, 'counter' => $counter]);
+			}
+			else
+			{
+				return response()->json(['counter' => $counter]);
+			}
 		}
 		else
 		{
 			return response()->json(['counter' => $counter]);
-		}	
-		 
+		}
 	}
 
 	public function displaypatientrecordsearch(Request $request){
@@ -370,6 +379,11 @@ class DoctorController extends Controller
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		return view('staff.medical-doctor.viewrecords', $params);
+	}
+
+	public function viewindividualrecordfromsearch(Request $request)
+	{
+		
 	}
 
 	public function addrecordswithoutappointment($id)

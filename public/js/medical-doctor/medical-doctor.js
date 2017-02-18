@@ -585,13 +585,17 @@ $(document).on('click', '.medical-bill-confirm', function(){
 
 // ------------------SEARCH PATIENT---------------
 $("#search_patient").keyup(function(){
-	
 	if($('#search_patient').val()){
+		$('#searchlistofallpatients').hide();
+		$('#searchTable').hide();
+		// $('#searchResults').html("");
+		$('#searchloading').show();
 		var searchString = $('#search_patient').val();
 		$.post('/searchpatientrecord',
 			{
 				search_string: searchString
 			}, function(data) {
+				// $('#searchlistofallpatients').hide();
 				$('#searchResults').html("");
 				// $('#searchTable').hide();
 				if(data['counter']>0)
@@ -599,8 +603,9 @@ $("#search_patient").keyup(function(){
 			  		output = '';
 	  				for(var i=0; i < data['searchpatientidarray'].length; i++)
 	  				{
-	  					output += "<tr><td><a class='searchQueryResults' id='resultId_"+data['searchpatientidarray'][i]+"'>"+data['searchpatientfirstnamearray'][i]+" "+data['searchpatientlastnamearray'][i]+"</a></td></tr>";
+	  					output += "<tr><td><a class='searchQueryResults' id='resultId_"+data['searchpatientidarray'][i]+"'>"+data['searchpatientlastnamearray'][i]+", "+data['searchpatientfirstnamearray'][i]+"</a></td></tr>";
 	  				}
+	  				$('#searchloading').hide();
 	  				$('#searchResults').html(output);
   					$('#searchTable').show();
   					$('.searchQueryResults').click(function()
@@ -655,15 +660,25 @@ $("#search_patient").keyup(function(){
   				}
   				else
   				{
-  					// $('#searchTable').hide();
+  					$('#searchloading').hide();
+  					$('#searchlistofallpatients').hide();
+  					$('#searchTable').show();
   					$('#searchResults').html("<tr><td>No results found.</td></tr>");
   				}
   			});
 	}
-	else
-	{
+	else if($('#search_patient').val()==''){
+		$('#searchloading').hide();
 		$('#searchTable').hide();
 		$('#searchResults').html("");
+		$('#searchlistofallpatients').show();
+	}
+	else
+	{
+		$('#searchloading').hide();
+		$('#searchTable').hide();
+		$('#searchResults').html("");
+		$('#searchlistofallpatients').show();
 	}
 });
 
