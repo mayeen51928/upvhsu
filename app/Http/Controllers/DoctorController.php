@@ -278,9 +278,7 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatient(){
-		// $params['patients'] = Patient::leftjoin('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->distinct()->get();
-		$params['patients'] = Patient::all();
-		// dd($params['patients']);
+		$params['patients'] = MedicalAppointment::select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		return view('staff.medical-doctor.searchpatient', $params);
@@ -383,7 +381,7 @@ class DoctorController extends Controller
 
 	public function viewindividualrecordfromsearch(Request $request)
 	{
-		
+
 	}
 
 	public function addrecordswithoutappointment($id)

@@ -682,6 +682,56 @@ $("#search_patient").keyup(function(){
 	}
 });
 
+$('.listofallpatients').click(function()
+{
+	var patientId = $(this).attr('id').split('_')[1];
+	$.post('/displaypatientrecordsearch',
+	{
+		patient_id: patientId
+	}, function(data) {
+		output = '';
+		var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
+		$('#ageTd').html(age);
+		if(data['patient_info']['sex'] == 'F')
+		{
+			$('#sexTd').html('Female');
+		}
+		else
+		{
+			$('#sexTd').html('Male');
+		}
+		if(data['patient_info']['display_course_and_year_level'] == 1)
+		{
+			$('#courseRow').show();
+			$('#yearlevelRow').show();
+			$('#courseTd').html(data['patient_info']['degree_program_description']);
+			$('#yearlevelTd').html(data['patient_info']['year_level']);
+		}
+		$('#birthdateTd').html(data['patient_info']['birthday']);
+		$('#religionTd').html(data['patient_info']['religion']);
+		$('#nationalityTd').html(data['patient_info']['nationality']);
+		$('#fatherTd').html(data['patient_info']['father_first_name']+' '+data['patient_info']['father_last_name']);
+		$('#motherTd').html(data['patient_info']['mother_first_name'] + ' ' + data['patient_info']['mother_last_name']);
+		$('#homeaddressTd').html(data['patient_info']['street'] + ', ' + data['patient_info']['town'] + ', ' + data['patient_info']['province']);
+		$('#restelTd').html(data['patient_info']['residence_telephone_number']);
+		$('#personalcontactnumberTd').html(data['patient_info']['personal_contact_number']);
+		$('#guardiannameTd').html(data['patient_info']['guardian_first_name'] + ' ' +data['patient_info']['guardian_last_name']);
+		$('#guardianaddressTd').html(data['patient_info']['guardian_street'] + ', ' + data['patient_info']['guardian_town'] + ', ' +data['patient_info']['guardian_province']);
+		$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
+		$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
+		$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
+		$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button" id="addnewrecordfromsearch">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearch>View Records</a>');
+		$('#searchPatientRecordInfo').modal();
+
+		$('#addnewrecordfromsearch').click(function() {
+			$('#searchPatientRecordInfo').modal('hide');
+		});
+		$('#viewrecordsfromsearch').click(function() {
+			$('#searchPatientRecordInfo').modal('hide');
+		});
+	});
+});
+
 $('#addnewrecordsubmit').click(function() {
 	$('#proceedToAddNewMedicalRecord').modal('hide');
 });

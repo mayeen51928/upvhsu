@@ -16,10 +16,10 @@
           </tbody>
 				</table>
         <table class="table" id="searchlistofallpatients">
-        <tr><th>List of all patients</th></tr>
+        <tr><th>List of All Patients</th></tr>
           <tbody>
             @foreach($patients as $patient)
-              <tr><td><a>{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
+              <tr><td><a class="listofallpatients" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
             @endforeach
           </tbody>
         </table>
