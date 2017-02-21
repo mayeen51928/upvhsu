@@ -84,10 +84,56 @@ $('.updateDentalRecord').click(function(){
 	
 });
 
-$('.dental_chart').hover(function(){
+$('.dental_chart').mouseover(function(){
     var id = $(this).attr('id').split("_");
-    console.log(id[1]);
-    $('[data-toggle="tooltip"]').tooltip(); 
+    var teethId = id[1];
+    var type = id[0];
+    $.ajax({
+    	type: "POST",
+    	url: hoverDentalChart,
+    	data: {teeth_id:  teethId, type:  type, _token: token},
+    	success: function(data)
+    	{
+    		console.log(data['id']);
+    		console.log(data['type']);
+    		console.log('#'+data['type']+'_'+data['id']);
+    		$('#'+data['type']+'_'+data['id']).css('background-color', '#d6e9c6');    
+    	}
+    });
+});
+
+$('.dental_chart').mouseout(function(){
+    $('#condition_1').css({	'background-color':'#ff4000',
+    						'border-color':'#ff4000'
+    					});
+    $('#condition_2').css({	'background-color':'#ffff00',
+    						'border-color':'#ffff00'
+    					});
+    $('#condition_3').css({	'background-color':'#00ff00',
+    						'border-color':'#00ff00'
+    					});
+    $('#condition_4').css({	'background-color':'#00ffff',
+    						'border-color':'#00ffff'
+    					});
+    $('#condition_5').css({	'background-color':'#0000ff',
+    						'border-color':'#0000ff'
+    					});
+    $('#operation_1').css({	'background-color':'#bf00ff',
+    						'border-color':'#bf00ff'
+    					});
+    $('#operation_2').css({	'background-color':'#ff0080',
+    						'border-color':'#ff0080'
+    					});
+    $('#operation_3').css({	'background-color':'#ff0000',
+    						'border-color':'#ff0000'
+    					});
+    $('#operation_4').css({	'background-color':'#808080',
+    						'border-color':'#808080'
+    					});
+    $('#operation_5').css({	'background-color':'#194d19',
+    						'border-color':'#194d19'
+    					});
+    
 });
 
 
@@ -109,10 +155,6 @@ $('.updateDentalDiagnosis').click(function(){
 	  });
 });
 
-$('.legend-button').hover(function(){
-    var id = $(this).attr('id').split("_");
-    console.log(id[1]);
-});
 
 
 

@@ -30,13 +30,15 @@ class CashierController extends Controller
     public function dashboard()
     {
         $unpaid_bills = DB::table('medical_billings')
-                    ->join('staff_info', 'staff_info.staff_id', '=', 'medical_billings.staff_id')
-                    ->join('patient_info', 'patient_info.patient_id', '=', 'medical_billings.patient_id')
                     ->join('medical_appointments', 'medical_appointments.id', '=', 'medical_billings.medical_appointment_id')
                     ->join('medical_schedules', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')
+                    ->join('patient_info', 'medical_appointments.patient_id', '=', 'patient_info.patient_id')
+                    ->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')
                     ->where('medical_billings.status', '=', 'unpaid')
                     ->get();
-
+        // foreach ($unpaid_bills as $unpaid_bill) {
+        //     if ($unpaid_bills->medical_appointment_id)
+        // }
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
     	return view('staff.cashier.dashboard', $params, compact('unpaid_bills'));
