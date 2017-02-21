@@ -583,13 +583,17 @@ $(document).on('click', '.medical-bill-confirm-button', function(){
 
 // ------------------SEARCH PATIENT---------------
 $("#search_patient").keyup(function(){
-	
 	if($('#search_patient').val()){
+		$('#searchlistofallpatients').hide();
+		$('#searchTable').hide();
+		// $('#searchResults').html("");
+		$('#searchloading').show();
 		var searchString = $('#search_patient').val();
 		$.post('/searchpatientrecord',
 			{
 				search_string: searchString
 			}, function(data) {
+				// $('#searchlistofallpatients').hide();
 				$('#searchResults').html("");
 				// $('#searchTable').hide();
 				if(data['counter']>0)
@@ -597,8 +601,9 @@ $("#search_patient").keyup(function(){
 			  		output = '';
 	  				for(var i=0; i < data['searchpatientidarray'].length; i++)
 	  				{
-	  					output += "<tr><td><a class='searchQueryResults' id='resultId_"+data['searchpatientidarray'][i]+"'>"+data['searchpatientfirstnamearray'][i]+" "+data['searchpatientlastnamearray'][i]+"</a></td></tr>";
+	  					output += "<tr><td><a class='searchQueryResults' id='resultId_"+data['searchpatientidarray'][i]+"'>"+data['searchpatientlastnamearray'][i]+", "+data['searchpatientfirstnamearray'][i]+"</a></td></tr>";
 	  				}
+	  				$('#searchloading').hide();
 	  				$('#searchResults').html(output);
   					$('#searchTable').show();
   					$('.searchQueryResults').click(function()
@@ -639,22 +644,93 @@ $("#search_patient").keyup(function(){
 							$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
 							$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
 							$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
-							$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button">View Records</a>');
+							$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button" id="addnewrecordfromsearch">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearch>View Records</a>');
 							$('#searchPatientRecordInfo').modal();
+
+							$('#addnewrecordfromsearch').click(function() {
+								$('#searchPatientRecordInfo').modal('hide');
+							});
+							$('#viewrecordsfromsearch').click(function() {
+								$('#searchPatientRecordInfo').modal('hide');
+							});
 						});
   					});
   				}
   				else
   				{
-  					// $('#searchTable').hide();
+  					$('#searchloading').hide();
+  					$('#searchlistofallpatients').hide();
+  					$('#searchTable').show();
   					$('#searchResults').html("<tr><td>No results found.</td></tr>");
   				}
   			});
 	}
-	else
-	{
+	else if($('#search_patient').val()==''){
+		$('#searchloading').hide();
 		$('#searchTable').hide();
 		$('#searchResults').html("");
+		$('#searchlistofallpatients').show();
 	}
+	else
+	{
+		$('#searchloading').hide();
+		$('#searchTable').hide();
+		$('#searchResults').html("");
+		$('#searchlistofallpatients').show();
+	}
+});
+
+$('.listofallpatients').click(function()
+{
+	var patientId = $(this).attr('id').split('_')[1];
+	$.post('/displaypatientrecordsearch',
+	{
+		patient_id: patientId
+	}, function(data) {
+		output = '';
+		var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
+		$('#ageTd').html(age);
+		if(data['patient_info']['sex'] == 'F')
+		{
+			$('#sexTd').html('Female');
+		}
+		else
+		{
+			$('#sexTd').html('Male');
+		}
+		if(data['patient_info']['display_course_and_year_level'] == 1)
+		{
+			$('#courseRow').show();
+			$('#yearlevelRow').show();
+			$('#courseTd').html(data['patient_info']['degree_program_description']);
+			$('#yearlevelTd').html(data['patient_info']['year_level']);
+		}
+		$('#birthdateTd').html(data['patient_info']['birthday']);
+		$('#religionTd').html(data['patient_info']['religion']);
+		$('#nationalityTd').html(data['patient_info']['nationality']);
+		$('#fatherTd').html(data['patient_info']['father_first_name']+' '+data['patient_info']['father_last_name']);
+		$('#motherTd').html(data['patient_info']['mother_first_name'] + ' ' + data['patient_info']['mother_last_name']);
+		$('#homeaddressTd').html(data['patient_info']['street'] + ', ' + data['patient_info']['town'] + ', ' + data['patient_info']['province']);
+		$('#restelTd').html(data['patient_info']['residence_telephone_number']);
+		$('#personalcontactnumberTd').html(data['patient_info']['personal_contact_number']);
+		$('#guardiannameTd').html(data['patient_info']['guardian_first_name'] + ' ' +data['patient_info']['guardian_last_name']);
+		$('#guardianaddressTd').html(data['patient_info']['guardian_street'] + ', ' + data['patient_info']['guardian_town'] + ', ' +data['patient_info']['guardian_province']);
+		$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
+		$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
+		$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
+		$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button" id="addnewrecordfromsearch">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearch>View Records</a>');
+		$('#searchPatientRecordInfo').modal();
+
+		$('#addnewrecordfromsearch').click(function() {
+			$('#searchPatientRecordInfo').modal('hide');
+		});
+		$('#viewrecordsfromsearch').click(function() {
+			$('#searchPatientRecordInfo').modal('hide');
+		});
+	});
+});
+
+$('#addnewrecordsubmit').click(function() {
+	$('#proceedToAddNewMedicalRecord').modal('hide');
 });
 });

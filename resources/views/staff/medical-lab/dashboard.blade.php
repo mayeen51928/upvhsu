@@ -10,7 +10,7 @@
       <p>The requests are sorted by time and date of requests, from the most recent requests.</p>
       <div class="row">
         <div class="col-md-12">
-          <ul class="nav nav-pills">
+          <ul class="nav nav-pills nav-justified">
             <li class="active"><a data-toggle="pill" href="#cbc_requests">CBC</a></li>
             <li><a data-toggle="pill" href="#drug_test_requests">Drug Test</a></li>
             <li><a data-toggle="pill" href="#fecalysis_requests">Fecalysis</a></li>

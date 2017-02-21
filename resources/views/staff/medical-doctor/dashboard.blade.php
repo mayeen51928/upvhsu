@@ -5,40 +5,87 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
-			<h1 class="page-header">{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</h1>
-			<div class="row placeholders">
-				<div class="col-xs-3 col-sm-3 col-md-3 placeholder">
-					<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-				</div>
-				<div class="col-xs-9 col-sm-9 col-md-9 placeholder">
-					Info here
-				</div>
-			</div>
-      @if(count($medical_appointments) > 0)
-			<h2 class="sub-header">Appointments</h2>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Reasons</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($medical_appointments as $medical_appointment)
-          	<tr>
-              <td>{{$medical_appointment->patient_first_name}} {{$medical_appointment->patient_last_name}}</td>
-              <td>{{$medical_appointment->reasons}}</td>
-              <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment->id}}">Diagnosis</button></td>
-              <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment->id}}">Billing</button></td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
+			<h4 class="page-header">Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
+      <h3 class="sub-header">Appointments</h3>
+      <ul class="nav nav-pills nav-justified">
+        <li><a data-toggle="pill" href="#pastappointment">Past</a></li>
+        <li class="active"><a data-toggle="pill" href="#todayappointment">Today</a></li>
+        <li><a data-toggle="pill" href="#futureappointment">Future</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="table-responsive tab-pane fade in active" id="todayappointment">
+        @if(count($medical_appointments_today) > 0)
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reasons</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($medical_appointments_today as $medical_appointment_today)
+            	<tr>
+                <td>{{$medical_appointment_today->patient_first_name}} {{$medical_appointment_today->patient_last_name}}</td>
+                <td>{{$medical_appointment_today->reasons}}</td>
+                <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment_today->id}}">Diagnosis</button></td>
+                <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment_today->id}}">Billing</button></td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+           @else
+          <p>There are no online appointments as of the moment.</p>
+        @endif
+        </div>
+        <div class="table-responsive tab-pane fade" id="pastappointment">
+        @if(count($medical_appointments_past) > 0)
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reasons</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($medical_appointments_past as $medical_appointment_past)
+              <tr>
+                <td>{{$medical_appointment_past->patient_first_name}} {{$medical_appointment_past->patient_last_name}}</td>
+                <td>{{$medical_appointment_past->reasons}}</td>
+                <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment_past->id}}">Diagnosis</button></td>
+                <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment_past->id}}">Billing</button></td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+           @else
+          <p>There are no online appointments as of the moment.</p>
+        @endif
+        </div>
+        <div class="table-responsive tab-pane fade" id="futureappointment">
+        @if(count($medical_appointments_future) > 0)
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Reasons</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($medical_appointments_future as $medical_appointment_future)
+              <tr>
+                <td>{{$medical_appointment_future->patient_first_name}} {{$medical_appointment_future->patient_last_name}}</td>
+                <td>{{$medical_appointment_future->reasons}}</td>
+                <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment_future->id}}">Diagnosis</button></td>
+                <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment_future->id}}">Billing</button></td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+           @else
+          <p>There are no online appointments as of the moment.</p>
+        @endif
+        </div>
       </div>
-      @else
-        <p>There are no online appointments as of the moment.</p>
-      @endif
 		</div>
 	</div>
 </div>

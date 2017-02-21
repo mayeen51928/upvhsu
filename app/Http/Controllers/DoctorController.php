@@ -49,7 +49,9 @@ class DoctorController extends Controller
 	}
 	public function dashboard()
 	{
-		$params['medical_appointments'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
+		$params['medical_appointments_today'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
+		$params['medical_appointments_past'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','<', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
+		$params['medical_appointments_future'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','>', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
 		// dd($params['medical_appointments']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
@@ -276,6 +278,7 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatient(){
+		$params['patients'] = MedicalAppointment::select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		return view('staff.medical-doctor.searchpatient', $params);
@@ -285,30 +288,36 @@ class DoctorController extends Controller
 
 		// To fix: when searching for first name and last name combination
 		// already fixed chereettt
-		$counter = 0;
-		$search_string = explode(" ",$request->search_string);
-		for($i=0; $i < sizeof($search_string); $i++)
+		if($request->search_string!='')
 		{
-			$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->pluck('patient_id')->all();
-		}
-		if(count($search_patient_id_records) > 0){
-			$searchpatientfirstnamearray = array();
-			$searchpatientlastnamearray = array();
-			$searchpatientidarray = array();
-			foreach ($search_patient_id_records as $search_patient_id_record)
+			$counter = 0;
+			$search_string = explode(" ",$request->search_string);
+			for($i=0; $i < sizeof($search_string); $i++)
 			{
-				array_push($searchpatientfirstnamearray, Patient::find($search_patient_id_record)->patient_first_name);
-				array_push($searchpatientlastnamearray, Patient::find($search_patient_id_record)->patient_last_name);
-				array_push($searchpatientidarray, $search_patient_id_record);
+				$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->pluck('patient_id')->all();
 			}
-			$counter++;
-			return response()->json(['searchpatientidarray' => $searchpatientidarray, 'searchpatientfirstnamearray' => $searchpatientfirstnamearray, 'searchpatientlastnamearray' => $searchpatientlastnamearray, 'counter' => $counter]);
+			if(count($search_patient_id_records) > 0){
+				$searchpatientfirstnamearray = array();
+				$searchpatientlastnamearray = array();
+				$searchpatientidarray = array();
+				foreach ($search_patient_id_records as $search_patient_id_record)
+				{
+					array_push($searchpatientfirstnamearray, Patient::find($search_patient_id_record)->patient_first_name);
+					array_push($searchpatientlastnamearray, Patient::find($search_patient_id_record)->patient_last_name);
+					array_push($searchpatientidarray, $search_patient_id_record);
+				}
+				$counter++;
+				return response()->json(['searchpatientidarray' => $searchpatientidarray, 'searchpatientfirstnamearray' => $searchpatientfirstnamearray, 'searchpatientlastnamearray' => $searchpatientlastnamearray, 'counter' => $counter]);
+			}
+			else
+			{
+				return response()->json(['counter' => $counter]);
+			}
 		}
 		else
 		{
 			return response()->json(['counter' => $counter]);
-		}	
-		 
+		}
 	}
 
 	public function displaypatientrecordsearch(Request $request){
@@ -370,11 +379,86 @@ class DoctorController extends Controller
 		return view('staff.medical-doctor.viewrecords', $params);
 	}
 
+	public function viewindividualrecordfromsearch(Request $request)
+	{
+
+	}
+
 	public function addrecordswithoutappointment($id)
 	{
+		$params['patient_info'] = Patient::find($id);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		return view('staff.medical-doctor.addrecords', $params);
+	}
+
+	public function addrecord(Request $request)
+	{
+		// dd($request->requestCBC); //returns "on"
+		// Add medical appointment
+		$medical_schedule_id = MedicalSchedule::where('schedule_day', date('Y-m-d'))->where('staff_id', Auth::user()->user_id)->first()->id;
+		// dd($medical_schedule_id);
+		$medical_appointment = new MedicalAppointment;
+		$medical_appointment->patient_id = $request->patient_id;
+		$medical_appointment->medical_schedule_id = $medical_schedule_id;
+		$medical_appointment->reasons = 'Walk-in patient';
+		$medical_appointment->save();
+
+		$medical_appointment_id = MedicalAppointment::where('medical_schedule_id', $medical_schedule_id)->where('patient_id', $request->patient_id)->first()->id;
+		
+		$physical_examination = new PhysicalExamination;
+        $physical_examination->medical_appointment_id = $medical_appointment_id;
+        $physical_examination->height = $request->height;
+        $physical_examination->weight = $request->weight;
+        $physical_examination->blood_pressure = $request->bloodpressure;
+        $physical_examination->pulse_rate = $request->pulserate;
+        $physical_examination->right_eye = $request->righteye;
+        $physical_examination->left_eye = $request->lefteye;
+        $physical_examination->head = $request->head;
+        $physical_examination->eent = $request->eent;
+        $physical_examination->neck = $request->neck;
+        $physical_examination->chest = $request->chest;
+        $physical_examination->heart = $request->heart;
+        $physical_examination->lungs = $request->lungs;
+        $physical_examination->abdomen = $request->abdomen;
+        $physical_examination->back = $request->back;
+        $physical_examination->skin = $request->skin;
+        $physical_examination->extremities = $request->extremities;
+        $physical_examination->save();
+        if($request->requestCBC == 'on')
+        {
+            $cbc = new CbcResult;
+            $cbc->medical_appointment_id = $medical_appointment_id;
+            $cbc->save();
+        }
+        if($request->requestUrinalysis == 'on')
+        {
+            $urinalysis = new UrinalysisResult;
+            $urinalysis->medical_appointment_id = $medical_appointment_id;
+            $urinalysis->save();
+        }
+        if($request->requestFecalysis == 'on')
+        {
+            $fecalysis = new FecalysisResult;
+            $fecalysis->medical_appointment_id = $medical_appointment_id;
+            $fecalysis->save();
+        }
+        if($request->requestDrugTest == 'on')
+        {
+            $drug_test = new DrugTestResult;
+            $drug_test->medical_appointment_id = $medical_appointment_id;
+            $drug_test->save();
+        }
+        if($request->requestXray == 'on')
+        {
+            $request_xray = new ChestXrayResult;
+            $request_xray->medical_appointment_id = $medical_appointment_id;
+            $request_xray->save();
+        }
+		$params['patient_info'] = Patient::find($request->patient_id);
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'searchpatient';
+		return back()->with('status', 'Record successfully added!');
 	}
 
     public function addmedicaldiagnosis(Request $request)

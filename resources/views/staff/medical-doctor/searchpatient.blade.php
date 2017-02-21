@@ -7,19 +7,29 @@
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
 			<div class="col-md-4 col-md-offset-4" style="text-align: center;">
 				<h4>Search Patient Record</h4>
+
 				<input class="form-control" type="text" name="search_patient" id="search_patient"/>
+        <img class="img-responsive" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
 				<table id="searchTable" class="table" style="display: none">
-					<tr><th>Search Results</th></tr>
-					<tbody id="searchResults" >
-					</tbody>
+          <tr><th>Search Results</th></tr>
+          <tbody id="searchResults">
+          </tbody>
 				</table>
+        <table class="table" id="searchlistofallpatients">
+        <tr><th>List of All Patients</th></tr>
+          <tbody>
+            @foreach($patients as $patient)
+              <tr><td><a class="listofallpatients" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
+            @endforeach
+          </tbody>
+        </table>
 			</div>
 		</div>
 	</div>
 </div>
 
 
-<div class="modal fade" id="searchPatientRecordInfo" role="dialog">
+<div class="modal fade" id="searchPatientRecordInfo" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div class="modal-header">
