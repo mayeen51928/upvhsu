@@ -520,7 +520,6 @@ class DoctorController extends Controller
 			$checker = 1;
 		}
 
-		$checker = 0;
 		$medical_billing_checker = DB::table('medical_billings')
 					->where('medical_billings.medical_appointment_id', '=', $appointment_id)
 					->get();
@@ -528,6 +527,13 @@ class DoctorController extends Controller
 			foreach ($medical_billing_checker as $medical_amount) {
 				$checker += $medical_amount->amount;
 			}
+			$checker = $checker - 1;
+			$dental_records_result = DB::table('medical_billings')
+						->where([
+							['medical_appointment_id', '=', $appointment_id],
+						])
+						->pluck('medical_service_id')
+						->all();
 		}
 
 
@@ -564,14 +570,29 @@ class DoctorController extends Controller
 				array_push($serviceidarray, $display_medical_service_id);
 			}	
 		}
-		return response()->json(['patient_type' => $display_patient_type, 
-								'servicenamearray' => $servicenamearray, 
-								'serviceratearray' => $serviceratearray,
-								'servicetypearray' => $servicetypearray, 
-								'serviceidarray' => $serviceidarray, 
-								'patient_name' => $patient_name,
-								'checker' => $checker
-								]);
+
+		if(count($medical_billing_checker) > 0){
+			return response()->json(['patient_type' => $display_patient_type, 
+							'servicenamearray' => $servicenamearray, 
+							'serviceratearray' => $serviceratearray,
+							'servicetypearray' => $servicetypearray, 
+							'serviceidarray' => $serviceidarray, 
+							'patient_name' => $patient_name,
+							'checker' => $checker,
+							'dental_records_result' => $dental_records_result,
+							]);
+		}
+		else{
+			return response()->json(['patient_type' => $display_patient_type, 
+							'servicenamearray' => $servicenamearray, 
+							'serviceratearray' => $serviceratearray,
+							'servicetypearray' => $servicetypearray, 
+							'serviceidarray' => $serviceidarray, 
+							'patient_name' => $patient_name,
+							'checker' => $checker,
+							]);
+		}
+		
 	}
 
 	public function confirmbillingmedical(Request $request){

@@ -26,7 +26,7 @@
         <div class="row">
           <div class="col-md-9">
              <svg height="545" width="867">
-              <polygon data-toggle="tooltip" title="Hooray!" class="dental_chart" id="condition_55" points="234,78,244,74,256,75,262,76,267,79,269,84,271,92,271,102,271,108,266,113,260,113,256,112,253,110,246,112,237,111,233,105,230,97,230,89,232,82,233,79" style="fill:{{ $stacks_condition[0] }};stroke:black;stroke-width:3" />
+              <polygon class="dental_chart" id="condition_55" points="234,78,244,74,256,75,262,76,267,79,269,84,271,92,271,102,271,108,266,113,260,113,256,112,253,110,246,112,237,111,233,105,230,97,230,89,232,82,233,79" style="fill:{{ $stacks_condition[0] }};stroke:black;stroke-width:3" />
               <polygon class="dental_chart" id="operation_55" points="234,78,244,74,256,75,262,76,267,79,267,69,268,62,270,55,273,48,275,41,274,33,273,26,270,24,268,26,267,33,267,40,266,44,261,51,257,56, 255, 59, 254, 64,250,71,245,64,240,57,238,47,236,39,234,29,232,24,229,23,227,26,227,36,229,46,231,54,234,62,235,69,234,77" style="fill:{{ $stacks_operation[0] }};stroke:black;stroke-width:3" />
               <polygon class="dental_chart" id="condition_54" points="285,73,291,70,298,70,303,71,310,73,315,76,316,81,319,88,319,97,315,104,308,107,302,105,298,103,292,103,285,99,281,94,281,87,281,79,283,75" style="fill:{{ $stacks_condition[1] }};stroke:black;stroke-width:3" />
               <polygon class="dental_chart" id="operation_54" points="285,73,291,70,298,70,303,71,310,73,315,76,316,68,319,60,321,51,321,43, 321,35,318,30,315,33,312,41,308,54,304,61,299,66,296,63,293,57,290,50,290,40,289,35,285,30,282,34,282,41,284,46,285,55,285,65,285,70" style="fill:{{ $stacks_operation[1] }};stroke:black;stroke-width:3" />
@@ -141,19 +141,19 @@
           </div>
           <div class="col-md-3">
             <h4>Legend</h4>
-            <label>Condition</label>
-            <button type="button" class="btn btn-info btn-block legend-button" id="condition_1">Amalgam filling</button>
-            <button type="button" class="btn btn-info btn-block legend-button" id="condition_2">Silicate filling</button>
-            <button type="button" class="btn btn-info btn-block legend-button" id="condition_3">Extraction due to caries</button>
-            <button type="button" class="btn btn-info btn-block legend-button" id="condition_4">Extraction due to other causes</button>
-            <button type="button" class="btn btn-info btn-block legend-button" id="condition_5">Cement filling</button>
-            <br/>
             <label>Operation</label>
             <button type="button" class="btn btn-info btn-block legend-button" id="operation_1">Caries free</button>
             <button type="button" class="btn btn-info btn-block legend-button" id="operation_2">Caries for filting </button>
             <button type="button" class="btn btn-info btn-block legend-button" id="operation_3">Caries for extraction</button>
             <button type="button" class="btn btn-info btn-block legend-button" id="operation_4">Root fragment</button>
             <button type="button" class="btn btn-info btn-block legend-button" id="operation_5">Missing due to carries </button>
+            <br/>
+            <label>Condition</label>
+            <button type="button" class="btn btn-info btn-block legend-button" id="condition_1">Amalgam filling</button>
+            <button type="button" class="btn btn-info btn-block legend-button" id="condition_2">Silicate filling</button>
+            <button type="button" class="btn btn-info btn-block legend-button" id="condition_3">Extraction due to caries</button>
+            <button type="button" class="btn btn-info btn-block legend-button" id="condition_4">Extraction due to other causes</button>
+            <button type="button" class="btn btn-info btn-block legend-button" id="condition_5">Cement filling</button>
           </div>
         </div>
         <div class="row">
@@ -214,6 +214,7 @@
   var updateDentalRecordModal = '/update_dental_record_modal';
   var insertDentalRecordModal = '/insert_dental_record_modal';
   var updateDentalDiagnosis = '/update_dental_diagnosis';
+  var hoverDentalChart = '/hover_dental_chart';
 </script>
 
 @endsection

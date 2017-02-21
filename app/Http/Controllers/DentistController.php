@@ -600,8 +600,7 @@ class DentistController extends Controller
 			$teeth_info_condition = DB::table('dental_records')
 		    ->orderBy('created_at', 'desc')
 				->where([
-							['teeth_id', '=', $x],
-							// ['patient_id', '=', $patient_id],
+							['teeth_id', '=', $teeth_id]
 						])
 				->pluck('condition_id')
 				->first();
@@ -609,8 +608,7 @@ class DentistController extends Controller
 			$teeth_info_operation = DB::table('dental_records')
 		    ->orderBy('created_at', 'desc')
 				->where([
-							['teeth_id', '=', $x],
-							// ['patient_id', '=', $patient_id],
+							['teeth_id', '=', $teeth_id]
 						])
 				->pluck('operation_id')
 				->first();
@@ -810,7 +808,32 @@ class DentistController extends Controller
 						}
 					}
 				}
-				
 				return response()->json(['success' => 'success']); 
+		}
+
+		public function hoverdentalchart(Request $request)
+		{
+				$teeth_id = $request->teeth_id;
+				$type = $request->type;
+				if($type == 'operation'){
+					$dental_chart_hover_result = DB::table('dental_records')
+			            ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $teeth_id],
+						])
+						->pluck('condition_id')
+						->first();
+				}
+				else{
+					$dental_chart_hover_result = DB::table('dental_records')
+			            ->orderBy('dental_records.created_at', 'desc')
+						->where([
+							['teeth_id', '=', $teeth_id],
+						])
+						->pluck('operation_id')
+						->first();
+				}
+	
+				return response()->json(['id' => $dental_chart_hover_result, 'type' => $type]); 
 		}
 }
