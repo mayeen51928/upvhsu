@@ -21,8 +21,8 @@ class CreateUrinalysisResultsTable extends Migration
             $table->foreign('lab_staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
             $table->text('pus_cells')->nullable();
             $table->text('rbc')->nullable();
-            $table->text('albumin')->nullable();
-            $table->text('sugar')->nullable();
+            $table->enum('albumin', ['negative', 'positive'])->nullable();
+            $table->enum('sugar', ['negative', 'positive'])->nullable();
             $table->timestamps();
         });
     }
