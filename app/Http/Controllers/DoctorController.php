@@ -579,7 +579,7 @@ class DoctorController extends Controller
         if($finished_appointment_counter == 2)
         {
             $medical_appointment = MedicalAppointment::find($appointment_id);
-            $medical_appointment->status = '1';
+            // $medical_appointment->status = '1';
             $medical_appointment->update();
             return response()->json([
                 'status' =>'done'

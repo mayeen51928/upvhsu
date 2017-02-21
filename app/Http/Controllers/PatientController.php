@@ -18,6 +18,7 @@ use App\Guardian;
 use App\HasGuardian;
 use App\MedicalAppointment;
 use App\MedicalSchedule;
+use App\Prescription;
 use Illuminate\Support\Facades\Input;
 class PatientController extends Controller
 {
@@ -45,6 +46,22 @@ class PatientController extends Controller
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
         return view('patient.dashboard', $params);
+    }
+
+    public function getremarkspatientdashboard(Request $request)
+    {
+        $prescription = Prescription::where('medical_appointment_id', $request->medical_appointment_id)->first();
+        if (count($prescription) == 1)
+        {
+            return response()->json(['success' => '1',
+                'prescription' => $prescription->prescription,
+                'date' => date_format(date_create($prescription->created_at), 'F j, Y')]);
+        }
+        else
+        {
+            return response()->json(['success' => '0']);
+        }
+
     }
 
     public function profile()

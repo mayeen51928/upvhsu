@@ -306,3 +306,6 @@ svg {
 #searchlistofallpatients tr td a{
 	cursor: pointer;
 }
+a.medical_appointments_prescription{
+	cursor: pointer;
+}

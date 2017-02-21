@@ -32,6 +32,7 @@ Route::post('/signupfrommedicalappointment', 'PagesController@signupfrommedicala
 
 /* ROUTES FOR PATIENT ACCOUNT */
 Route::get('/account','PatientController@dashboard');
+Route::post('/getremarkspatientdashboard', 'PatientController@getremarkspatientdashboard');
 Route::get('/account/profile','PatientController@profile');
 Route::get('/account/profile/edit','PatientController@editprofile');
 Route::post('/account/profile/update','PatientController@updateprofile');

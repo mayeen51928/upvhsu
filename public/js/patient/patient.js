@@ -55,6 +55,21 @@ $('.dental_appointments_prescription').click(function(){
         }
       });
 });
+$('.medical_appointments_prescription').click(function(){
+    $('#remarkModal').html('');
+    $('#remarkModalFooter').html('');
+    var medical_appointment_id = $(this).attr('id').split("_")[1];
+    $.post('/getremarkspatientdashboard', {medical_appointment_id: medical_appointment_id}, function(data, textStatus, xhr) {
+        if(data['success']==1)
+        {
+            $('#remarkModal').html(data['prescription']);
+            $('#remarkModalFooter').html('Added on: ' + data['date']);
+        }
+        $('#prescriptionModal').modal();
+    });
+    
+
+});
 // ------------------PROFILE---------------
 // ------------------VISITS HISTORY---------------
 // ------------------BILLING RECORDS---------------
