@@ -36,9 +36,7 @@ class CashierController extends Controller
                     ->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')
                     ->where('medical_billings.status', '=', 'unpaid')
                     ->get();
-        // foreach ($unpaid_bills as $unpaid_bill) {
-        //     if ($unpaid_bills->medical_appointment_id)
-        // }
+                    
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
     	return view('staff.cashier.dashboard', $params, compact('unpaid_bills'));
