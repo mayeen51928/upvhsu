@@ -172,7 +172,12 @@
         <div class="laboratory-result-lab" id="laboratoryresult-lab"  style="padding:5px;">
           <div class="form-group">
             <label for="drug-test-lab">Drug Test:</label>
-            <textarea class="form-control" rows="7" name="drug-test-lab" id="drug-test-lab" required></textarea>
+            <select class="form-control" required name="drug-test-lab" id="drug-test-lab">
+              <option disabled selected>Select Drug Test Result</option>
+              <option value="Negative">Negative</option>
+              <option value="Positive">Positive</option>
+            </select>
+            {{-- <textarea class="form-control" rows="7" name="drug-test-lab" id="drug-test-lab" required></textarea> --}}
           </div>
         </div>
       </div>
@@ -232,11 +237,21 @@
           </div>
           <div class="form-group">
             <label for="albumin-lab">Albumin:</label>
-            <textarea class="form-control" rows="7" name="albumin-lab" id="albumin-lab" required></textarea>
+            <select class="form-control" required  name="albumin-lab" id="albumin-lab">
+              <option disabled selected>Select Albumin Result</option>
+              <option value="Negative">Negative</option>
+              <option value="Positive">Positive</option>
+            </select>
+            {{-- <textarea class="form-control" rows="7" name="albumin-lab" id="albumin-lab" required></textarea> --}}
           </div>
           <div class="form-group">
             <label for="sugar-lab">Sugar:</label>
-            <textarea class="form-control" rows="7" name="sugar-lab" id="sugar-lab" required></textarea>
+            <select class="form-control" required name="sugar-lab" id="sugar-lab">
+              <option disabled selected>Select Sugar Result</option>
+              <option value="Negative">Negative</option>
+              <option value="Positive">Positive</option>
+            </select>
+            {{-- <textarea class="form-control" rows="7" name="sugar-lab" id="sugar-lab" required></textarea> --}}
           </div>
         </div>
       </div>

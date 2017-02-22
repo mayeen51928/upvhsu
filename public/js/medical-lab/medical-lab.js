@@ -5,6 +5,7 @@ $.ajaxSetup({
 // ------------------DASHBOARD---------------
 $('.addCbcResult').click(function(){
 	var cbc_id = $(this).attr('id').split("_")[1];
+  $('#hemoglobin-lab, #hemasocrit-lab, #wbc-lab').val('');
 	$('#add-cbc-result').modal();
 	$('#addCbcResultButton').click(function(){
 		if($('#hemoglobin-lab').val() && $('#hemasocrit-lab').val() && $('#wbc-lab').val())
@@ -27,6 +28,10 @@ $('.addCbcResult').click(function(){
 });
 $('.addDrugTestResult').click(function(){
   var drug_test_id = $(this).attr('id').split("_")[1];
+  $('#drug-test-lab option').prop('selected', function()
+  {
+    return this.defaultSelected;
+  });
   $('#add-drug-test-result').modal();
   $('#addDrugTestResultButton').click(function(){
     if($('#drug-test-lab').val())
@@ -45,6 +50,7 @@ $('.addDrugTestResult').click(function(){
 });
 $('.addFecalysisResult').click(function(){
 	var fecalysis_id = $(this).attr('id').split("_")[1];
+  $('#macroscopic-lab, #microscopic-lab').val('');
 	$('#add-fecalysis-result').modal();
 	$('#addFecalysisResultButton').click(function(){
 		if($('#macroscopic-lab').val() && $('#microscopic-lab').val())
@@ -65,6 +71,11 @@ $('.addFecalysisResult').click(function(){
 });
 $('.addUrinalysisResult').click(function(){
 	var urinalysis_id = $(this).attr('id').split("_")[1];
+  $('#rbc-lab, #pus-cells-lab').val('');
+  $('#albumin-lab option, #sugar-lab option').prop('selected', function()
+  {
+    return this.defaultSelected;
+  });
 	$('#add-urinalysis-result').modal();
 	$('#addUrinalysisResultButton').click(function(){
 		if($('#pus-cells-lab').val() && $('#rbc-lab').val() && $('#albumin-lab').val() && $('#sugar-lab').val())
