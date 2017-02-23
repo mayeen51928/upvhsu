@@ -1,4 +1,19 @@
 $(document).ready( function(){
+
+  var homeJumbotron = 1 + Math.floor(Math.random() * 3);
+  if(homeJumbotron == 1)
+  {
+    $('#homeJumbotron').css('background-image', 'url(../images/infirm.jpg)');
+  }
+  else if(homeJumbotron == 2)
+  {
+    $('#homeJumbotron').css('background-image', 'url(../images/infirm1.jpg)');
+  }
+  else if(homeJumbotron == 3)
+  {
+    $('#homeJumbotron').css('background-image', 'url(../images/infirm2.jpg)');
+  }
+
   numOfClicksMedical = 0;
   numOfClicksDental = 0;
   percentageDental = 0;
