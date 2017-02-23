@@ -53,6 +53,7 @@ Route::post('/update_dental_record_modal','DentistController@updatedentalrecordm
 Route::post('/insert_dental_record_modal','DentistController@insertdentalrecordmodal');
 Route::post('/update_dental_diagnosis','DentistController@updatedentaldiagnosis');
 Route::post('/hover_dental_chart','DentistController@hoverdentalchart');
+Route::post('/additional_dental_record','DentistController@additionaldentalrecord');
 
 /* ROUTES FOR MEDICAL DOCTOR ACCOUNT */
 Route::get('/doctor','DoctorController@dashboard');

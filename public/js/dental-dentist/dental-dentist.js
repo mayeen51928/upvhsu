@@ -94,10 +94,8 @@ $('.dental_chart').mouseover(function(){
     	data: {teeth_id:  teethId, type:  type, _token: token},
     	success: function(data)
     	{
-    		console.log(data['id']);
-    		console.log(data['type']);
-    		console.log('#'+data['type']+'_'+data['id']);
-    		$('#'+data['type']+'_'+data['id']).css('background-color', '#d6e9c6');    
+    		$('#'+data['type']+'_'+data['id']).css('background-color', '#d6e9c6'); 
+    		// animation: pulse1 1.25s infinite;   
     	}
     });
 });
@@ -155,7 +153,42 @@ $('.updateDentalDiagnosis').click(function(){
 	  });
 });
 
+$('.addedDentalRecord').click(function(){
+	$('#confirm_additional_dental_record').modal('show');
+});
 
+$('.confirmAdditionalDentalRecord').click(function(){
+	var id = $(this).attr('id').split("_");
+	appointmentId = id[1];
+  var dentalCaries = $("#selDentalCaries").find(':selected')[0].value;
+  var gingivitis = $("#selGingivitis").find(':selected')[0].value;
+  var peridontalPocket = $("#selPeridontalPocket").find(':selected')[0].value;
+  var oralDebris = $("#selOralDebris").find(':selected')[0].value;
+  var calculus = $("#selCalculus").find(':selected')[0].value;
+  var neoplasm = $("#selNeoplasm").find(':selected')[0].value;
+  var dentalFacioAnomaly = $("#selDentalFacioAnomaly").find(':selected')[0].value;
+  var teethPresent = $("#teethPresent").value;
+	console.log(dentalCaries);
+	$.ajax({
+		  type: "POST",
+		  url: additionalDentalRecord,
+		  data: {	appointment_id:appointmentId,
+		  				dental_caries:dentalCaries, 
+		  				gingivitis:gingivitis, 
+		  				peridontal_pocket:peridontalPocket, 
+		  				oral_debris:oralDebris,
+		  				calculus:calculus,
+		  				neoplasm:neoplasm,
+		  				dental_facio_anomaly:dentalFacioAnomaly,
+		  				teeth_present:teethPresent,
+		  				_token: token
+		  			},
+		  success: function(data)
+		  {
+		  	
+		  }
+	 });
+});
 
 
 

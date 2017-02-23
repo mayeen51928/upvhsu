@@ -7,12 +7,14 @@ use Auth;
 use App\DentalSchedule;
 use App\DentalRecord;
 use App\DentalAppointment;
+use App\AdditionalDentalRecord;
 use App\Patient;
 use DB;
 use App\Staff;
 use App\Town;
 use App\Province;
 use Log;
+
 
 class DentistController extends Controller
 {
@@ -40,6 +42,7 @@ class DentistController extends Controller
 					->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
 					->where('dental_schedules.staff_id', '=', $user->user_id)
 					->where('dental_appointments.status', '=', '0')
+					// ->where('dental_appointments.created_at', '=', date('Y-m-d'))
 					->get();
 
 			$params['navbar_active'] = 'account';
@@ -835,5 +838,20 @@ class DentistController extends Controller
 				}
 	
 				return response()->json(['id' => $dental_chart_hover_result, 'type' => $type]); 
+		}
+
+		public function additionaldentalrecord(Request $request)
+		{
+				$additional_dental_record = new AdditionalDentalRecord;
+				$additional_dental_record->appointment_id = $request->appointment_id;
+				$additional_dental_record->dental_caries = $request->dental_caries;
+				$additional_dental_record->gingivitis = $request->gingivitis;
+				$additional_dental_record->peridontal_pocket = $request->peridontal_pocket;
+				$additional_dental_record->oral_debris = $request->oral_debris;
+				$additional_dental_record->calculus = $request->calculus;
+				$additional_dental_record->neoplasm = $request->neoplasm;
+				$additional_dental_record->dental_facio_anomaly = $request->dental_facio_anomaly;
+				$additional_dental_record->teeth_present = $request->teeth_present;
+				$additional_dental_record->save();
 		}
 }
