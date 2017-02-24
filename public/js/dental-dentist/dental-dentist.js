@@ -27,7 +27,8 @@ $('.dental_chart').click(function(){
 
 $('.updateDentalRecord').click(function(){
 	if($('.condition').val() || $('.operation').val()){
-		var appointmentId = $('.appointment').val();
+		var id = $(this).attr('id').split("_");
+		appointmentId = id[1];
 		var conditionId = $('.condition').val();
 		var operationId = $('.operation').val();
 		if (operationId == null) { operationId = 0; };
@@ -185,7 +186,18 @@ $('.confirmAdditionalDentalRecord').click(function(){
 		  			},
 		  success: function(data)
 		  {
-		  	
+		  	$('#confirm_additional_dental_record').modal('hide');
+		  	$('#selDentalCaries').attr("disabled", "disabled");
+		  	$('#selGingivitis').attr("disabled", "disabled");
+		  	$('#selPeridontalPocket').attr("disabled", "disabled");
+		  	$('#selOralDebris').attr("disabled", "disabled");
+		  	$('#selCalculus').attr("disabled", "disabled");
+		  	$('#selNeoplasm').attr("disabled", "disabled");
+		  	$('#selDentalFacioAnomaly').attr("disabled", "disabled");
+		  	$('#teethPresent').attr("disabled", "disabled");
+		  	$('#additionalDentalRecordInput').attr("disabled", "disabled");
+				$('.addedDentalRecord').attr("disabled", "disabled");
+				$('#additionalDentalRecordPanelBody').css('background-color', '#d6e9c6');
 		  }
 	 });
 });
