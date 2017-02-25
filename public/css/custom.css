@@ -68,8 +68,27 @@
 	opacity: 0;
 }
 .h3Title{
-	color: #800000;
+	text-align: center;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
 }
+#h3Title1{
+	background-color: #004425;
+}
+#h3Title2{
+	background-color: #f3a948;
+}
+#h3Title3{
+	background-color: #7b1113;
+}
+#h3Title4{
+	background-color: #4e63ea;
+}
+
 @keyframes spin{
 	from{
 		-webkit-transform: rotate(0deg);

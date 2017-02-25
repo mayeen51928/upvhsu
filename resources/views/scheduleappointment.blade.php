@@ -12,7 +12,7 @@
 							disabled
 							@endif
 						@endif ">
-						<label><input type="checkbox" name="type_dental" id="typeDental"
+						<label><input type="checkbox" @if((Auth::check() and Auth::user()->user_type_id == 1) or !Auth::check()) name="type_dental" id="typeDental" @endif
 						@if(Auth::check())
 							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)
 							disabled
@@ -25,7 +25,7 @@
 							disabled
 							@endif
 						@endif ">
-						<label><input type="checkbox" name="type_medical" id="typeMedical"
+						<label><input type="checkbox" @if((Auth::check() and Auth::user()->user_type_id == 1) or !Auth::check()) name="type_medical" id="typeMedical" @endif
 						@if(Auth::check())
 							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)
 							disabled
