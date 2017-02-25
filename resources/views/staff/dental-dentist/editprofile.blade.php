@@ -5,7 +5,7 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dentistDashboard">
-      <form method="POST" action="/dentist/profile/update">
+      <form method="POST" action="/dentist/profile/update" enctype="multipart/form-data">
 			<div class="col-md-9">
         <div class="panel panel-info">
         	<div class="panel-heading">Basic Information</div>
@@ -61,7 +61,7 @@
       </div>
       <div class="col-xs-3 col-sm-3 col-md-3">
       	<label for="picture">Select Profile Picture</label>
-            <input type="file" name="picture" id="picture" class="picture"/>
+        <input type="file" name="picture" id="picture" class="picture"/>
       </div>
       <div class="col-md-12">
           <div class="clearfix">
