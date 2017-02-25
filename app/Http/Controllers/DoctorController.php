@@ -28,7 +28,7 @@ use App\Remark;
 use App\UrinalysisResult;
 use App\FecalysisResult;
 use App\MedicalBilling;
-
+use Illuminate\Support\Facades\Input;
 class DoctorController extends Controller
 {
 	public function __construct()

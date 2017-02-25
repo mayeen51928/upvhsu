@@ -82,6 +82,12 @@ class PagesController extends Controller
     	return redirect('announcements');
     }
 
+    public function medicalstaff()
+    {
+    	$params['staffs'] = Staff::orderBy('staff_last_name')->get();
+    	$params['navbar_active'] = 'medicalstaff';
+		return view('medicalstaff', $params);
+    }
 	public function displayscheduledental(Request $request)
 	{
 		$dental_date = $request->dental_date;

@@ -20,7 +20,7 @@ Route::get('/announcements', 'PagesController@announcements');
 Route::post('/announcement/edit','PagesController@editannouncement');
 Route::post('/announcement/update','PagesController@updateannouncement');
 Route::post('/announcement/delete','PagesController@deleteannouncement');
-
+Route::get('/medicalstaff', 'PagesController@medicalstaff');
 Route::post('/displayschedule_dental', 'PagesController@displayscheduledental');
 Route::post('/displayschedule_medical', 'PagesController@displayschedulemedical');
 Route::post('/createappointment_dental', 'PagesController@createappointmentdental');
