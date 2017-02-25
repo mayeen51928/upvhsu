@@ -14,6 +14,7 @@ use App\Staff;
 use App\Town;
 use App\Province;
 use Log;
+use Illuminate\Support\Facades\Input;
 
 
 class DentistController extends Controller
@@ -727,14 +728,7 @@ class DentistController extends Controller
 	        $dentist->position = $request->input('position');
 	        $dentist->civil_status = $request->civil_status;
 	        $province = Province::where('province_name', $request->input('province'))->first();
-
-	        if (Input::file('picture') != NULL) { 
-	            $path = '..\public\images';
-	            $file_name = Input::file('picture')->getClientOriginalName(); 
-	            Input::file('picture')->move($path, $file_name);
-	            $dentist->picture = $file_name;
-	        }
-	        
+	   
 	        if(count($province)>0)
 	        {
 	            // $dentist->nationality_id = $nationality->id;
@@ -774,6 +768,14 @@ class DentistController extends Controller
 	            $town->save();
 	            $dentist->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
 	        }
+
+	        if (Input::file('picture') != NULL) { 
+	            $path = '..\public\images';
+	            $file_name = Input::file('picture')->getClientOriginalName(); 
+	            Input::file('picture')->move($path, $file_name);
+	            $dentist->picture = $file_name;
+	        }
+	        
 	        $dentist->personal_contact_number = $request->input('personal_contact_number');
 	        $dentist->update();
 	        return redirect('dentist/profile');
