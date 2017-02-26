@@ -61,6 +61,7 @@ class DentistController extends Controller
 			$patient_infos = DB::table('dental_appointments')
 					->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
 					->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')
+					->orderBy('dental_schedules.schedule_start', 'desc')
 					->where('dental_appointments.id', '=', $appointment_id)
 					->get();
 
@@ -594,8 +595,17 @@ class DentistController extends Controller
 				}
 				array_push($stacks_operation8, $dental_chart_results);
 			}
+
+			$additional_dental_records = DB::table('additional_dental_records')
+				->where('appointment_id', '=', $appointment_id)
+				->first();
+
+			$counter = 0;
+			if(count($additional_dental_records) > 0){
+				$counter = 1;
+			}
 					
-			return view('staff.dental-dentist.adddentalrecord', $params, compact('appointment_ids', 'patient_infos', 'stacks_condition', 'stacks_operation', 'stacks_condition2', 'stacks_operation2', 'stacks_condition3', 'stacks_operation3', 'stacks_condition4', 'stacks_operation4', 'stacks_condition5', 'stacks_operation5', 'stacks_condition6', 'stacks_operation6', 'stacks_condition7', 'stacks_operation7', 'stacks_condition8', 'stacks_operation8'));
+			return view('staff.dental-dentist.adddentalrecord', $params, compact('appointment_ids', 'patient_infos', 'stacks_condition', 'stacks_operation', 'stacks_condition2', 'stacks_operation2', 'stacks_condition3', 'stacks_operation3', 'stacks_condition4', 'stacks_operation4', 'stacks_condition5', 'stacks_operation5', 'stacks_condition6', 'stacks_operation6', 'stacks_condition7', 'stacks_operation7', 'stacks_condition8', 'stacks_operation8', 'counter', 'additional_dental_records'));
 		}
 
 		public function updatedentalrecordmodal(Request $request)

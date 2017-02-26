@@ -95,7 +95,7 @@ $('.dental_chart').mouseover(function(){
     	data: {teeth_id:  teethId, type:  type, _token: token},
     	success: function(data)
     	{
-    		$('#'+data['type']+'_'+data['id']).css('background-color', '#d6e9c6'); 
+    		$('#'+data['type']+'_'+data['id']).css('animation', 'pulse1 1.25s infinite'); 
     		// animation: pulse1 1.25s infinite;   
     	}
     });
@@ -168,8 +168,7 @@ $('.confirmAdditionalDentalRecord').click(function(){
   var calculus = $("#selCalculus").find(':selected')[0].value;
   var neoplasm = $("#selNeoplasm").find(':selected')[0].value;
   var dentalFacioAnomaly = $("#selDentalFacioAnomaly").find(':selected')[0].value;
-  var teethPresent = $("#teethPresent").value;
-	console.log(dentalCaries);
+  var teethPresent = $("#teethPresent").val();
 	$.ajax({
 		  type: "POST",
 		  url: additionalDentalRecord,

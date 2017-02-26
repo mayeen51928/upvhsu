@@ -167,9 +167,124 @@
 			  		<div class="panel-group">
 			  			<div class="panel panel-success">
 			  				<div class="panel-heading">
-			  					<h4>Date of last examination: <b>July 21, 1996</b></h4>
-			  					<h4>Age last birthday: <b>19</b></h4>
+			  					<h4>Date of last examination: <b>{{ Carbon\Carbon::parse($patient_info->schedule_start )->format('M d, Y') }}</b></h4>
+			  					<h4>Age last birthday: <b>{{ $patient_info->birthday }}</b></h4>
 			  				</div>
+			  				@if($counter == 1)
+			  				<div class="panel-body" id="additionalDentalRecordPanelBody" style="background-color:#d6e9c6; ">
+			  					<div class="row" style="background-color:#f8f8f8; padding:5px">
+			  						<div class="col-md-7 col-sm-7 col-xs-12">
+			  							<h4>Presence of dental caries</h4>
+			  						</div>
+			  						<div class="col-md-5 col-sm-5 col-xs-12">
+			  							<select class="form-control" id="selDentalCaries" disabled>
+			  								@if($additional_dental_records->dental_caries == 'Yes')
+			  								<option value="yes" selected>Yes</option>
+			  								@else
+			  								<option value="no" selected>No</option>
+			  								@endif
+			  							</select>
+			  						</div>
+			  					</div>
+			  					<div class="row" style="padding:5px">
+			  						<div class="col-md-7 col-sm-7 col-xs-12">
+			  							<h4>Presence of gingivitis</h4>
+			  						</div>
+			  						<div class="col-md-5 col-sm-5 col-xs-12">
+			  							<select class="form-control" id="selGingivitis" disabled>
+												@if($additional_dental_records->gingivitis == 'Yes')
+			  								<option value="yes" selected>Yes</option>
+			  								@else
+			  								<option value="no" selected>No</option>
+			  								@endif
+											</select>
+										</div>
+									</div>
+									<div class="row" style="background-color:#f8f8f8; padding:5px">
+										<div class="col-md-7 col-sm-7 col-xs-12">
+											<h4>Presence of peridontal pocket</h4>
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<select class="form-control" id="selPeridontalPocket" disabled>
+												@if($additional_dental_records->peridontal_pocket == 'Yes')
+			  								<option value="yes" selected>Yes</option>
+			  								@else
+			  								<option value="no" selected>No</option>
+			  								@endif
+											</select>
+										</div>
+									</div>
+									<div class="row" style="padding:5px">
+										<div class="col-md-7 col-sm-7 col-xs-12">
+											<h4>Presence of oral debris</h4>
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<select class="form-control" id="selOralDebris" disabled>
+												@if($additional_dental_records->oral_debris == 'Yes')
+			  								<option value="yes" selected>Yes</option>
+			  								@else
+			  								<option value="no" selected>No</option>
+			  								@endif
+											</select>
+										</div>
+									</div>
+									<div class="row" style="background-color:#f8f8f8; padding:5px">
+										<div class="col-md-7 col-sm-7 col-xs-12">
+											<h4>Presence of calculus</h4>
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<select class="form-control" id="selCalculus" disabled>
+												@if($additional_dental_records->calculus == 'Yes')
+			  								<option value="yes" selected>Yes</option>
+			  								@else
+			  								<option value="no" selected>No</option>
+			  								@endif
+											</select>
+										</div>
+									</div>
+									<div class="row" style="padding:5px">
+										<div class="col-md-7 col-sm-7 col-xs-12">
+											<h4>Presence of neoplasm</h4>
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<select class="form-control" id="selNeoplasm" disabled>
+												@if($additional_dental_records->neoplasm == 'Yes')
+			  								<option value="yes" selected>Yes</option>
+			  								@else
+			  								<option value="no" selected>No</option>
+			  								@endif
+											</select>
+										</div>
+									</div>
+									<div class="row" style="background-color:#f8f8f8; padding:5px">
+										<div class="col-md-7 col-sm-7 col-xs-12">
+											<h4>Presence of dental-facio anomaly</h4>
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<select class="form-control" id="selDentalFacioAnomaly" disabled>
+												@if($additional_dental_records->dental_facio_anomaly == 'Yes')
+			  								<option value="yes" selected>Yes</option>
+			  								@else
+			  								<option value="no" selected>No</option>
+			  								@endif
+											</select>
+										</div>
+									</div>
+									<div class="row" style="padding:5px">
+										<div class="col-md-7 col-sm-7 col-xs-12">
+											<h4>Number of teeth present</h4>
+										</div>
+										<div class="col-md-5 col-sm-5 col-xs-12">
+											<input type="text" class="form-control" id="teethPresent" value="{{ $additional_dental_records->teeth_present }}" disabled>
+										</div>
+									</div>
+								</div>
+								<div class="panel-footer">
+									@foreach ($appointment_ids as $appointment_id)
+									<button class="btn btn-primary btn-block addedDentalRecord" id="addedDentalRecord_{{ $appointment_id->id }}" disabled>Save diagnosis</button>
+						      @endforeach
+						    </div>
+			  				@else
 			  				<div class="panel-body" id="additionalDentalRecordPanelBody">
 			  					<div class="row" style="background-color:#f8f8f8; padding:5px">
 			  						<div class="col-md-7 col-sm-7 col-xs-12">
@@ -189,7 +304,7 @@
 			  						</div>
 			  						<div class="col-md-5 col-sm-5 col-xs-12">
 			  							<select class="form-control" id="selGingivitis">
-												<option disabled selected>--- option ---</option>
+			  								<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
 											</select>
@@ -263,12 +378,13 @@
 											<input type="text" class="form-control" id="teethPresent">
 										</div>
 									</div>
-								</div>
-								<div class="panel-footer">
+			  				</div>
+			  				<div class="panel-footer">
 									@foreach ($appointment_ids as $appointment_id)
 									<button class="btn btn-primary btn-block addedDentalRecord" id="addedDentalRecord_{{ $appointment_id->id }}">Save diagnosis</button>
 						      @endforeach
 						    </div>
+			  				@endif
 						  </div>
 						</div>
 					</div>
