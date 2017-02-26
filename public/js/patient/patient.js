@@ -7,10 +7,11 @@ $(document).ready( function(){
 $('.dental_appointments_prescription').click(function(){
 	var id = $(this).attr('id').split("_");
 	var patientId = id[1];
+	var appointmentId = id[2];
 	$.ajax({
 		type: "POST",
 		url: viewDentalRecordDashboard,
-		data: {patient_id:  patientId, _token: token},
+		data: {patient_id:patientId, appointment_id:appointmentId, _token: token},
 		success: function(data)
 		{
 			output = '';
@@ -126,7 +127,17 @@ $('.dental_appointments_prescription').click(function(){
 			output += '<polygon class="dental_chart" id="operation_74" points="547,495,550,486,553,480,556,483,563,483,567,481,574,480,579,480,582,480,587,482,589,496,590,509,588,520,585,526,583,527,581,515,579,502,577,493,570,489,565,490,559,503,557,515,555,529,554,530,548,526,546,515,546,510" style="fill:'+data['stacks_operation8'][3]+';stroke:black;stroke-width:3" />'
 			output += '<polygon class="dental_chart" id="condition_75" points="600,477,595,470,594,460,594,448,596,445,601,445,607,447,609,448,613,445,617,444,623,445,626,448,627,448,632,446,637,446,641,452,640,463,638,475,632,479,623,480,617,480,612,480" style="fill:'+data['stacks_condition8'][4]+';stroke:black;stroke-width:3" />'
 			output += '<polygon class="dental_chart" id="operation_75" points="597,497,598,487,600,477,612,481,631,479,637,476,636,490,639,502,641,514,644,520,644,531,642,534,639,533,637,527,633,513,625,497,619,490,615,490,609,500,604,513,600,526,598,531,595,532,594,526,594,526" style="fill:'+data['stacks_operation8'][4]+';stroke:black;stroke-width:3" />'
-			$('#view-dental-record-modal-body').html(output)		
+
+			$('#view-dental-record-modal-body').html(output);
+			$('#selDentalCaries').html('<option selected>'+data['additional_dental_records']['dental_caries']+'</option>');	
+			$('#selGingivitis').html('<option selected>'+data['additional_dental_records']['gingivitis']+'</option>');
+			$('#selPeridontalPocket').html('<option selected>'+data['additional_dental_records']['perindontal_pocket']+'</option>');				
+			$('#selOralDebris').html('<option selected>'+data['additional_dental_records']['oral_debris']+'</option>');		
+			$('#selCalculus').html('<option selected>'+data['additional_dental_records']['calculus']+'</option>');		
+			$('#selNeoplasm').html('<option selected>'+data['additional_dental_records']['neoplasm']+'</option>');		
+			$('#selDentalFacioAnomaly').html('<option selected>'+data['additional_dental_records']['dental_facio_anomaly']+'</option>');		
+			$('#teethPresent').html('<option selected>'+data['additional_dental_records']['teeth_present']+'</option>');		
+					
 			$('#view-dental-record-modal').modal("show");
 		}
 	});

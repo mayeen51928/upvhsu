@@ -320,6 +320,8 @@ class PatientController extends Controller
 	{
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'visits';
+		$params['medical_appointments'] = DB::table('medical_appointments')->join('medical_schedules', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->where('medical_appointments.status', '=', '1')->get();
+		$params['dental_appointments'] = DB::table('dental_appointments')->join('dental_schedules', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->where('dental_appointments.status', '=', '1')->get();
 		return view('patient.visits', $params);
 	}
 
@@ -333,6 +335,7 @@ class PatientController extends Controller
 	public function viewdentalrecorddashboard(Request $request)
 	{
 		$patient_id = $request->patient_id;
+		$appointment_id = $request->appointment_id;
 
 		$stacks_condition = array();
 		$stacks_operation = array();
@@ -368,7 +371,6 @@ class PatientController extends Controller
 			$dental_chart_results = DB::table('dental_records')
 			->orderBy('created_at', 'desc')
 				->where('teeth_id', '=', $x)
-			   
 				->pluck('operation_id')
 				->first();
 
@@ -854,6 +856,11 @@ class PatientController extends Controller
 			}
 			array_push($stacks_operation8, $dental_chart_results);
 		}
+
+		$additional_dental_records = DB::table('additional_dental_records')
+				->where('appointment_id', '=', $appointment_id)
+				->first();
+
 		return response()->json([
 			'stacks_condition' => $stacks_condition, 
 			'stacks_operation' => $stacks_operation,
@@ -871,6 +878,7 @@ class PatientController extends Controller
 			'stacks_operation7' => $stacks_operation7,
 			'stacks_condition8' => $stacks_condition8, 
 			'stacks_operation8' => $stacks_operation8,
+			'additional_dental_records' => $additional_dental_records,
 			]); 
 	}
 }
