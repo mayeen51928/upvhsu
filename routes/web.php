@@ -67,6 +67,7 @@ Route::get('/doctor/viewrecords/{id}', 'DoctorController@viewrecords');
 Route::get('/doctor/addrecords/{id}', 'DoctorController@addrecordswithoutappointment');
 Route::post('/doctor/addrecord', 'DoctorController@addrecord');
 Route::post('/displaypatientrecordsearch','DoctorController@displaypatientrecordsearch');
+Route::post('/viewindividualrecordfromsearch', 'DoctorController@viewindividualrecordfromsearch');
 Route::post('/addschedule_medical', 'DoctorController@addschedule');
 Route::post('/viewmedicaldiagnosis', 'DoctorController@viewmedicaldiagnosis');
 Route::post('/addmedicaldiagnosis', 'DoctorController@addmedicaldiagnosis');

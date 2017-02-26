@@ -153,13 +153,13 @@
 			</div>
 		</div>
 		<div class="col-md-6 fadeShow">
-			<h3 class="h3Title" id="h3Title3"><span class="glyphicon glyphicon-user h3Icon"></span> Medical Staff</h3>
+			<h3 class="h3Title" id="h3Title3"><span class="glyphicon glyphicon-user h3Icon"></span> HSU Staff</h3>
 			<div class="panel-content">
 				<ul>
 					<li>Rolly Manalo, DMD</li>
 					<li>Mayenne Catuiran, MD</li>
 					<li>Eiman Mission, RN</li>
-					<a href="medical-staff.php">View more...</a>
+					<a href="{{ url('/medicalstaff') }}">View more...</a>
 				</ul>
 			</div>
 		</div>

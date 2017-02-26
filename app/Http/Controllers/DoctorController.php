@@ -324,10 +324,12 @@ class DoctorController extends Controller
 		$patient = Patient::find($request->patient_id);
 		$params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
 		$params['sex'] = $patient->sex;
+		$params['picture'] = $patient->picture;
         if($patient->patient_type_id == 1)
         {
         	$params['display_course_and_year_level'] = 1;
-        	$params['degree_program'] = $patient->degree_program_id;
+        	$params['degree_program_description'] = DegreeProgram::find($patient->degree_program_id)->degree_program_description;
+        	
         	$params['year_level'] = $patient->year_level; 
         }
         else
@@ -373,7 +375,8 @@ class DoctorController extends Controller
 
 	public function viewrecords($id)
 	{
-		$params['records'] = MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->get();
+		$params['records'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->get();
+		// dd($params['records']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		return view('staff.medical-doctor.viewrecords', $params);
@@ -381,7 +384,78 @@ class DoctorController extends Controller
 
 	public function viewindividualrecordfromsearch(Request $request)
 	{
+		$counter = 0;
 
+		$appointment_id = $request->medical_appointment_id;
+		// dd($appointment_id);
+		$medical_appointment = MedicalAppointment::find($appointment_id);
+		// dd($medical_appointment);
+		$patient_info = Patient::where('patient_id', $medical_appointment->patient_id)->first();
+		$physical_examination = PhysicalExamination::where('medical_appointment_id', $appointment_id)->first();
+		$cbc_result = CbcResult::where('medical_appointment_id', $appointment_id)->first();
+		$chest_xray_result = ChestXrayResult::where('medical_appointment_id', $appointment_id)->first();
+		$drug_test_result = DrugTestResult::where('medical_appointment_id', $appointment_id)->first();
+		$fecalysis_result = FecalysisResult::where('medical_appointment_id', $appointment_id)->first();
+		$urinalysis_result = UrinalysisResult::where('medical_appointment_id', $appointment_id)->first();
+		$prescription = Prescription::where('medical_appointment_id', $appointment_id)->first();
+		$remark = Remark::where('medical_appointment_id', $appointment_id)->first();
+		if(count($physical_examination) == 1)
+		{
+			$counter++;
+		}
+		if(count($cbc_result) == 1)
+		{
+			$counter++;
+		}
+		if(count($chest_xray_result) == 1)
+		{
+			$counter++;
+		}
+		if(count($drug_test_result) == 1)
+		{
+			$counter++;
+		}
+		if(count($fecalysis_result) == 1)
+		{
+			$counter++;
+		}
+		if(count($urinalysis_result) == 1)
+		{
+			$counter++;
+		}
+		if(count($remark) == 1)
+		{
+			$counter++;
+		}
+		if(count($prescription) == 1)
+		{
+			$counter++;
+		}
+
+		if($counter > 0)
+		{
+			return response()->json([
+				'hasRecord' => 'yes',
+				'patient_name' =>$patient_info->patient_first_name.' '.$patient_info->patient_last_name,
+				'reasons' => $medical_appointment->reasons,
+				'physical_examination' => $physical_examination,
+				'cbc_result' => $cbc_result,
+				'chest_xray_result' => $chest_xray_result,
+				'drug_test_result' => $drug_test_result,
+				'fecalysis_result' => $fecalysis_result,
+				'urinalysis_result' => $urinalysis_result,
+				'remark' => $remark,
+				'prescription' => $prescription,
+			]);
+		}
+		else
+		{
+			return response()->json([
+				'patient_name' =>$patient_info->patient_first_name.' '.$patient_info->patient_last_name,
+				'reasons' => $medical_appointment->reasons,
+				'hasRecord' => 'no',
+				]);
+		}
 	}
 
 	public function addrecordswithoutappointment($id)
