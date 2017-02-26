@@ -95,8 +95,7 @@ $('.dental_chart').mouseover(function(){
     	data: {teeth_id:  teethId, type:  type, _token: token},
     	success: function(data)
     	{
-    		$('#'+data['type']+'_'+data['id']).css('animation', 'pulse1 1.25s infinite'); 
-    		// animation: pulse1 1.25s infinite;   
+    		$('#'+data['type']+'_'+data['id']).effect( "pulsate", {times:1}, 1000 );
     	}
     });
 });

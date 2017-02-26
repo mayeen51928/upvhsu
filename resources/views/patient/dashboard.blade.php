@@ -19,12 +19,12 @@
 							</tr>
             </thead>
 						<tbody>
-            @foreach($medical_appointments as $medical_appointment)
-                <tr>
-                  <td><a class="medical_appointments_prescription" id="medicalappointmentid_{{$medical_appointment->id}}">{{date_format(date_create($medical_appointment->schedule_day), 'F j, Y')}}</a></td>
-                  <td>{{$medical_appointment->staff_first_name}} {{$medical_appointment->staff_last_name}}</td>
-                </tr>
-              @endforeach
+							@foreach($medical_appointments as $medical_appointment)
+							<tr>
+								<td><a class="medical_appointments_prescription" id="medicalappointmentid_{{$medical_appointment->id}}">{{date_format(date_create($medical_appointment->schedule_day), 'F j, Y')}}</a></td>
+								<td>{{$medical_appointment->staff_first_name}} {{$medical_appointment->staff_last_name}}</td>
+							</tr>
+							@endforeach
 						</tbody>
 					</table>
 				</div>
@@ -42,14 +42,12 @@
 						</thead>
 						<tbody>
 							@foreach($dental_appointments as $dental_appointment)
-			                <tr>
-			                  <td><a class="dental_appointments_prescription" id="dentalappointmentid_{{$dental_appointment->patient_id }}">{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a></td>
-			                  <td>
-			                  {{date_format(date_create($dental_appointment->schedule_start), 'H:i:s')}} - {{date_format(date_create($dental_appointment->schedule_end), 'H:i:s')}}</td>
-			                  <td>{{$dental_appointment->staff_first_name}} {{$dental_appointment->staff_last_name}}</td>
-			                </tr>
-			              @endforeach
+							<tr>
+								<td><a class="dental_appointments_prescription" id="dentalappointmentid_{{$dental_appointment->patient_id }}">{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a></td>
+								<td>{{date_format(date_create($dental_appointment->schedule_start), 'H:i:s')}} - {{date_format(date_create($dental_appointment->schedule_end), 'H:i:s')}}</td>
+								<td>{{$dental_appointment->staff_first_name}} {{$dental_appointment->staff_last_name}}</td>
 							</tr>
+							@endforeach
 						</tbody>
 					</table>
 				</div>
@@ -84,7 +82,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Patient Record</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="view-dental-record-modal-body">
         </div>
       </div>
     </div>
@@ -92,7 +90,7 @@
 <script>
   // token and createPostUrl are needed to be passed to AJAX method call
   var token = '{{csrf_token()}}';
-  var viewDentalRecord = '/view_dental_record';
+  var viewDentalRecordDashboard = '/view_dental_record_dashboard';
 </script>
 
 @endsection
