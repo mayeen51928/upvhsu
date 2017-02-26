@@ -88,6 +88,17 @@ class PagesController extends Controller
     	$params['navbar_active'] = 'medicalstaff';
 		return view('medicalstaff', $params);
     }
+
+    public function viewmedicalstaffinfo(Request $request)
+    {
+    	$schedules = MedicalSchedule::where('schedule_day', '>', date('Y-m-d'))->where('staff_id', $request->staff_id)->get();
+    	$schedules_formatted = array();
+		foreach ($schedules as $schedule){
+			array_push($schedules_formatted, date_format(date_create($schedule->schedule_day), 'F j, Y'));
+		}
+		// dd($schedules_formatted);
+    	return response()->json(['staff_info' => Staff::find($request->staff_id), 'schedules' => $schedules_formatted]); 
+    }
 	public function displayscheduledental(Request $request)
 	{
 		$dental_date = $request->dental_date;
