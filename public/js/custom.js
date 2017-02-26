@@ -53,4 +53,19 @@ $(document).ready( function(){
   });
   $('.homeForm:first').delay("200").fadeIn();
   $('.homeForm:last').delay("500").fadeIn();
+
+  // --------------------- Staff Page -----------------------
+  $('.medicalStaffImg').click(function() {
+    $('#staff-modal-body table').html('');
+    var staffId = $(this).attr('id').split('_')[1];
+    $.post('/viewmedicalstaffinfo', {staff_id: staffId}, function(data, textStatus, xhr) {
+      $('#staff-modal-title').html(data['staff_info']['staff_first_name'] + ' ' + data['staff_info']['staff_last_name'] + "'s Schedule");
+      for(var i=0; i < data['schedules'].length; i++)
+          {
+            $('#staff-modal-body table').append("<tr><td>" + data['schedules'][i] +"</td></tr>");
+          }
+      $('#staffinfomodal').modal();
+    });
+    
+  });
 });
