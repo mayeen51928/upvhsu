@@ -34,7 +34,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 style="text-align:center; ">Patient Information</h3>
+        <h3 style="text-align:center; ">Patient Information</h3><img class="img-circle center-block" id="searchPatientRecordInfoImg" height="100" width="100" src="{{asset('images/blankprofpic.png')}}"/>
       </div>
       <div class="modal-body">
         <div class="row" id="remarkModal">

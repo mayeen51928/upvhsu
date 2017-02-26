@@ -15,7 +15,7 @@
 				<li @if(isset($navbar_active) and $navbar_active == 'home') class="active " @endif><a href="/">Home</a></li>
 				<li @if(isset($navbar_active) and $navbar_active == 'about') class="active " @endif><a href="{{ url('/about') }}">About</a></li>
 				<li @if(isset($navbar_active) and $navbar_active == 'announcements') class="active " @endif><a href="{{ url('/announcements') }}">Announcements</a></li>
-				<li @if(isset($navbar_active) and $navbar_active == 'medicalstaff') class="active " @endif><a href="{{ url('/medicalstaff') }}">Medical Staff</a></li>
+				<li @if(isset($navbar_active) and $navbar_active == 'medicalstaff') class="active " @endif><a href="{{ url('/medicalstaff') }}">Staff</a></li>
 				<li @if(isset($navbar_active) and $navbar_active == 'scheduleappointment') class="active " @endif><a href="{{ url('/scheduleappointment') }}">Schedule Appointment</a></li>
 				@if(Auth::check())
 				<li class="dropdown @if(isset($navbar_active) and $navbar_active == 'account') active @endif">
