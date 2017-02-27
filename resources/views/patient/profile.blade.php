@@ -5,7 +5,15 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
-          <div class="col-xs-7 col-sm-7 col-md-9">
+    <div class="col-md-3">
+          @if(is_null($picture))
+        <img src="{{asset('images/blankprofpic.png')}}"  alt="Profile picture" class="img-circle center-block" height="220px" width="220px"/>
+        @else
+        <img src="{{ URL::asset('/images/' . $picture) }}"  alt="Profile picture" class="img-circle center-block" height="220px" width="220px"/>
+        @endif
+          </div>
+          <br/>
+          <div class="col-md-9">
             <div class="panel panel-info">
               <div class="panel-heading">Basic Information</div>
               <div class="panel-body">
@@ -22,14 +30,8 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-5 col-sm-5 col-md-3">
-          @if(is_null($picture))
-        <img src="{{asset('images/blankprofpic.png')}}"  alt="Profile picture" height="200px" width="200px"/>
-        @else
-        <img src="{{ URL::asset('/images/' . $picture) }}"  alt="Profile picture" height="200px" width="200px"/>
-        @endif
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-6">
+          
+          <div class="col-md-6">
             <div class="panel panel-info">
               <div class="panel-heading">Personal Data</div>
               <div class="panel-body">
@@ -49,7 +51,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-6">
+          <div class="col-md-6">
             <div class="panel panel-info">
               <div class="panel-heading">Guardian/Person to be Contacted in Case of Emergency</div>
               <div class="panel-body">
@@ -65,9 +67,9 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="col-md-12">
           <div class="clearfix">
-          <div class="pull-left">
+          <div class="pull-right">
           <a href="{{ url('account/profile/edit') }}" class="btn btn-primary" role="button">Edit Profile</a>
           </div>
           </div>

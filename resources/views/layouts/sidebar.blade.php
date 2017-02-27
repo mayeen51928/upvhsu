@@ -4,7 +4,6 @@
 		<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/account') }}">Dashboard <span class="sr-only">(current)</span></a></li>
   		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/account/profile') }}">Profile</a></li>
   		<li id="visitHistory" @if($sidebar_active == 'visits')class="active" @endif><a href="{{ url('/account/visits') }}">Visits History</a></li>
-  		<li @if($sidebar_active == 'bills')class="active" @endif><a href="{{ url('/account/bills') }}">Billing Records</a></li>
   	</ul>
   	<ul class="nav nav-sidebar">
   		<li><a href="{{url('/scheduleappointment')}}">Schedule Appointment</a></li>

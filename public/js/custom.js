@@ -55,7 +55,7 @@ $(document).ready( function(){
   $('.homeForm:last').delay("500").fadeIn();
 
   // --------------------- Staff Page -----------------------
-  $('.medicalStaffImg').click(function() {
+  $('.medicalStaff .medicalStaffImg').click(function() {
     $('#staff-modal-body table').html('');
     var staffId = $(this).attr('id').split('_')[1];
     $.post('/viewmedicalstaffinfo', {staff_id: staffId}, function(data, textStatus, xhr) {

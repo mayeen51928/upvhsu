@@ -23,12 +23,12 @@
                 </tr>
                 <tr>
                   <td>Position</td>
-                  <td><input type="text" class="form-control" value="{{$position}}" placeholder="Position" name="position" id="position"/></td>
+                  <td><input type="text" class="form-control" value="{{$position}}" placeholder="Position" name="position" id="position" required/></td>
                 </tr>
                 <tr>
                   <td>Birthday</td>
                   <td>
-                    <input type="date" class="form-control" value="{{$birthday}}" name="birthday" id="birthday"/>
+                    <input type="date" class="form-control" value="{{$birthday}}" name="birthday" id="birthday" required/>
                   </td>
                 </tr>
                 <tr>
@@ -46,22 +46,36 @@
                 <tr>
                   <td>Address</td>
                   <td>
-                    <input type="text" class="form-control" value="{{$street}}" name="street" id="street" placeholder="House No. / Street" />
-                    <input type="text" class="form-control" value="{{$town}}" name="town" id="town" placeholder="Town / City" />
-                    <input type="text" class="form-control" value="{{$province}}" name="province" id="province" placeholder="Province" /></td>
+                    <input type="text" class="form-control" value="{{$street}}" name="street" id="street" placeholder="House No. / Street" required />
+                    <input type="text" class="form-control" value="{{$town}}" name="town" id="town" placeholder="Town / City" required />
+                    <input type="text" class="form-control" value="{{$province}}" name="province" id="province" placeholder="Province" required /></td>
                 </tr>
                 <tr>
                   <td>Contact Number</td>
-                  <td><input type="text" class="form-control" value="{{$personal_contact_number}}" name="personal_contact_number" id="personal_contact_number" placeholder="Contact Number" /></td>
+                  <td><input type="text" class="form-control" value="{{$personal_contact_number}}" name="personal_contact_number" id="personal_contact_number" placeholder="Contact Number" required /></td>
                 </tr>
             	</tbody>
           	</table>
           </div>
         </div>
       </div>
-      <div class="col-xs-3 col-sm-3 col-md-3">
-      	<label for="picture">Select Profile Picture</label>
-        <input type="file" name="picture" id="picture" class="picture"/>
+      <div class="col-md-3">
+        <div class="panel panel-info">
+          <div class="panel-heading">Edit Profile Picture</div>
+          <div class="panel-body">
+            <label for="picture">Select Profile Picture</label>
+            <input type="file" name="picture" id="picture" class="picture"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="panel panel-info">
+          <div class="panel-heading">Password Settings</div>
+          <div class="panel-body">
+            <small>Protect your account by changing your password regularly.</small>
+            <input type="password" class="form-control" name="updatepassword" placeholder="Enter new password here" />
+          </div>
+        </div>
       </div>
       <div class="col-md-12">
           <div class="clearfix">

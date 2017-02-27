@@ -111,6 +111,12 @@ class DoctorController extends Controller
 	
     public function updateprofile(Request $request)
     {
+    	if($request->updatepassword != "")
+        {
+            $user = Auth::user();
+            $user->password = bcrypt($request->updatepassword);
+            $user->update();
+        }
         $doctor = Staff::find(Auth::user()->user_id);
         $doctor->sex = $request->input('sex');
         $doctor->birthday = $request->input('birthday');

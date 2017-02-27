@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Auth;
 use DB;
 use App\Staff;
@@ -176,6 +177,12 @@ class LabController extends Controller
 
     public function updateprofile(Request $request)
     {
+        if($request->updatepassword != "")
+        {
+            $user = Auth::user();
+            $user->password = bcrypt($request->updatepassword);
+            $user->update();
+        }
         $lab = Staff::find(Auth::user()->user_id);
         $lab->sex = $request->input('sex');
         $lab->birthday = $request->input('birthday');

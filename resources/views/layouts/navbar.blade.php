@@ -25,7 +25,6 @@
 						<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/account') }}">Dashboard</a></li>
 						<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/account/profile') }}">Profile</a></li>
 						<li @if(isset($sidebar_active) and $sidebar_active == 'visits')class="active" @endif><a href="{{ url('/account/visits') }}">Visits History</a></li>
-						<li @if(isset($sidebar_active) and $sidebar_active == 'bills')class="active" @endif><a href="{{ url('/account/bills') }}">Billing Records</a></li>
 						@elseif(Auth::user()->user_type_id == 2)
 				  		{{-- If Dentist --}}
 					  	@if(Auth::user()->staff->staff_type_id == 1 )

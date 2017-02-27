@@ -731,6 +731,12 @@ class DentistController extends Controller
 
 	    public function updateprofile(Request $request)
 	    {
+	    	if($request->updatepassword != "")
+	        {
+	            $user = Auth::user();
+	            $user->password = bcrypt($request->updatepassword);
+	            $user->update();
+	        }
 	        $dentist = Staff::find(Auth::user()->user_id);
 	        $dentist->sex = $request->input('sex');
 	        $dentist->birthday = $request->input('birthday');

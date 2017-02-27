@@ -5,6 +5,14 @@
   <div class="row">
     @include('layouts.sidebar')
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="dentistDashboard">
+      <div class="col-md-3">
+      @if(is_null($picture))
+        <img src="{{asset('images/blankprofpic.png')}}"  alt="Profile picture" class="img-circle center-block" height="200px" width="200px"/>
+        @else
+        <img src="{{ URL::asset('/images/' . $picture) }}"  alt="Profile picture" class="img-circle center-block" height="200px" width="200px"/>
+        @endif
+      </div>
+      <br/>
       <div class="col-md-9">
         <div class="panel panel-info">
           <div class="panel-heading">Basic Information</div>
@@ -22,16 +30,9 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-3 col-sm-3 col-md-3">
-      @if(is_null($picture))
-        <img src="{{asset('images/blankprofpic.png')}}"  alt="Profile picture" height="200px" width="200px"/>
-        @else
-        <img src="{{ URL::asset('/images/' . $picture) }}"  alt="Profile picture" height="200px" width="200px"/>
-        @endif
-      </div>
       <div class="col-md-12">
           <div class="clearfix">
-          <div class="pull-left">
+          <div class="pull-right">
           <a href="{{ url('xray/profile/edit') }}" class="btn btn-primary" role="button">Edit Profile</a>
           </div>
           </div>

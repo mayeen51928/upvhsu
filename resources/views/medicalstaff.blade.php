@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Schedule Appointment | UP Visayas Health Services Unit')
+@section('title', 'Staff | UP Visayas Health Services Unit')
 @section('content')
 <div class="container">
 <br/>
@@ -10,9 +10,9 @@
 		<div class="medicalStaff">
 			<div class="medicalStaffImg" id="medicalStaffImg_{{$staff->staff_id}}">
 				@if(is_null($staff->picture))
-				<img class="img-circle img-responsive center-block" src="{{asset('images/medicalstaff.png')}}"/>
+				<img height="220px" width="220px" class="img-circle center-block" src="{{asset('images/medicalstaff.png')}}"/>
 				@else
-				<img class="img-circle img-responsive center-block" src="{{asset('images/'.$staff->picture)}}"/>
+				<img height="220px" width="220px" class="img-circle center-block" src="{{asset('images/'.$staff->picture)}}"/>
 				@endif
 				</div>
 				<dl class="medicalStaffInfo">

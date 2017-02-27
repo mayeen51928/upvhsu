@@ -37,6 +37,7 @@ class PatientController extends Controller
 				return redirect('/');
 			}
 		});
+
 	}
 
 	public function dashboard()
@@ -162,6 +163,12 @@ class PatientController extends Controller
 
 	public function updateprofile(Request $request)
 	{
+        if($request->updatepassword != "")
+        {
+            $user = Auth::user();
+            $user->password = bcrypt($request->updatepassword);
+            $user->update();
+        }
 		$patient = Patient::find(Auth::user()->user_id);
 		$patient->sex = $request->input('sex');
 		if(Auth::user()->patient->patient_type_id == 1)

@@ -5,7 +5,12 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
-			<h4 class="page-header">Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
+			<h4 class="page-header">@if(!is_null(Auth::user()->staff->picture))
+      <img src="{{asset('images/'.Auth::user()->staff->picture)}}" height="50" width="50" class="img-circle"/> 
+      @else
+      <img src="{{asset('images/blankprofpic.png')}}" height="50" width="50" class="img-circle"/> 
+      @endif
+      Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
       <h3 class="sub-header">Appointments</h3>
       <ul class="nav nav-pills nav-justified">
         <li class="active"><a data-toggle="pill" href="#todayappointment">Today</a></li>
