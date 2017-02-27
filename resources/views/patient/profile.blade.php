@@ -5,14 +5,16 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
+    <div class="row">
     <div class="col-md-3">
           @if(is_null($picture))
         <img src="{{asset('images/blankprofpic.png')}}"  alt="Profile picture" class="img-circle center-block" height="220px" width="220px"/>
         @else
         <img src="{{ URL::asset('/images/' . $picture) }}"  alt="Profile picture" class="img-circle center-block" height="220px" width="220px"/>
         @endif
+        <br/>
           </div>
-          <br/>
+          
           <div class="col-md-9">
             <div class="panel panel-info">
               <div class="panel-heading">Basic Information</div>
@@ -30,7 +32,8 @@
               </div>
             </div>
           </div>
-          
+          </div>
+          <div class="row">
           <div class="col-md-6">
             <div class="panel panel-info">
               <div class="panel-heading">Personal Data</div>
@@ -67,10 +70,13 @@
               </div>
             </div>
           </div>
+          </div>
+          <div class="row">
           <div class="col-md-12">
           <div class="clearfix">
           <div class="pull-right">
           <a href="{{ url('account/profile/edit') }}" class="btn btn-primary" role="button">Edit Profile</a>
+          </div>
           </div>
           </div>
           </div>

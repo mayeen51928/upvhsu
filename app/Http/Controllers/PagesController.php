@@ -140,7 +140,7 @@ class PagesController extends Controller
 	public function createappointmentdental(Request $request)
 	{
 		if(Auth::check()){
-			if(Auth::user()->user_type_id == 1){
+			if(Auth::user()->user_type_id != 2 || Auth::user()->user_type_id != 3){
 				$dental_appointment = new DentalAppointment;
 				$dental_appointment->patient_id = Auth::user()->user_id;
 				$dental_appointment->dental_schedule_id = $request->dental_schedule_id;
@@ -150,6 +150,10 @@ class PagesController extends Controller
 				$dental_schedule_booked->booked = '1';
 				$dental_schedule_booked->update();
 				return response()->json(['success' => 'yes']);
+			}
+			else
+			{
+				return response()->json(['success' => 'no']);
 			}
 		}
 		else
@@ -161,16 +165,19 @@ class PagesController extends Controller
 	public function createappointmentmedical(Request $request)
 	{
 		if(Auth::check()){
-			if(Auth::user()->user_type_id == 1){
+			if(Auth::user()->user_type_id != 2 || Auth::user()->user_type_id != 3){
 				$medical_appointment = new MedicalAppointment;
 				$medical_appointment->patient_id = Auth::user()->user_id;
 				$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
 				$medical_appointment->reasons = $request->reasons;
 				$medical_appointment->save();
 				$medical_schedule_booked = MedicalSchedule::find($request->medical_schedule_id);
-				$medical_schedule_booked->booked = '1';
 				$medical_schedule_booked->update();
 				return response()->json(['success' => 'yes']);
+			}
+			else
+			{
+				return response()->json(['success' => 'no']);
 			}
 		}
 		else
@@ -654,7 +661,6 @@ class PagesController extends Controller
 				$medical_appointment->reasons = $request->reasons;
 				$medical_appointment->save();
 				$medical_schedule_booked = MedicalSchedule::find($request->schedule_id);
-				$medical_schedule_booked->booked = '1';
 				$medical_schedule_booked->update();
 				Auth::loginUsingId($request->user_name, true);
 				return response()->json(['message' => 'Success']);
