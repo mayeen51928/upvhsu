@@ -181,7 +181,7 @@ class PagesController extends Controller
 
 	public function loginfromdentalappointment(Request $request)
 	{
-		$hashedPassword = User::where('user_id', $request->user_name_modal_dental)->first();
+		$hashedPassword = User::where('user_id', $request->user_name_modal_dental)->where('user_type_id', '1')->first();
 		if (count($hashedPassword)==1 && Hash::check($request->password_modal_dental, $hashedPassword->password))
 		{
 			Auth::loginUsingId($request->user_name_modal_dental, true);
@@ -202,7 +202,7 @@ class PagesController extends Controller
 
 	public function loginfrommedicalappointment(Request $request)
 	{
-		$hashedPassword = User::where('user_id', $request->user_name_modal_medical)->first();
+		$hashedPassword = User::where('user_id', $request->user_name_modal_medical)->where('user_type_id', '1')->first();
 		if (count($hashedPassword)==1 && Hash::check($request->password_modal_medical, $hashedPassword->password))
 		{
 			Auth::loginUsingId($request->user_name_modal_medical, true);
@@ -449,7 +449,7 @@ class PagesController extends Controller
 
 	public function signupfrommedicalappointment(Request $request)
 	{
-		$check_if_already_exists = User::where('user_id', $request->user_name)->first();
+		$check_if_already_exists = User::where('user_id', $request->user_name)->where('user_type_id', '1')->first();
 		if(count($check_if_already_exists) == 1)
 		{
 			return response()->json(['message' =>'User already exists.']);

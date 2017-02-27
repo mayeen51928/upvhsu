@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Auth;
 use DB;
 use App\Staff;
@@ -104,6 +105,12 @@ class XrayController extends Controller
 
     public function updateprofile(Request $request)
     {
+        if($request->updatepassword != "")
+        {
+            $user = Auth::user();
+            $user->password = bcrypt($request->updatepassword);
+            $user->update();
+        }
         $xray = Staff::find(Auth::user()->user_id);
         $xray->sex = $request->input('sex');
         $xray->birthday = $request->input('birthday');

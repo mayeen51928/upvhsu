@@ -39,7 +39,7 @@
 }
 @keyframes pulse1 {
 	to {
-		box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);
+		box-shadow: 0 0 0 20px rgba(128,0,0, 0);
 		}
 	}
 .accountOption a{
@@ -68,6 +68,9 @@
 	opacity: 0;
 }
 .h3Title{
+	color: #7b1113;
+}
+.h1Title{
 	text-align: center;
     color: white;
     padding-top: 5px;
@@ -76,16 +79,16 @@
     padding-right: 5px;
     border-radius: 5px;
 }
-#h3Title1{
+#h1Title1{
 	background-color: #004425;
 }
-#h3Title2{
+#h1Title2{
 	background-color: #f3a948;
 }
-#h3Title3{
+#h1Title3{
 	background-color: #7b1113;
 }
-#h3Title4{
+#h1Title4{
 	background-color: #4e63ea;
 }
 
@@ -307,16 +310,16 @@ svg {
 	cursor: pointer;
 }
 
-#setAppointment:hover 
+/* #setAppointment:hover 
 {
   -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
 }
 @-webkit-keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
 @-moz-keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
 @-ms-keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
-@keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}}
+@keyframes pulse {to {box-shadow: 0 0 0 20px rgba(232, 76, 61, 0);}} */
 
-.viewrecordsfromsearch tr td a{
+.viewrecordsfromsearch tr td a, .dental_appointments_prescription{
 	cursor: pointer;
 }
 

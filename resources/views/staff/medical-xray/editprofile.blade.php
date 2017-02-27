@@ -59,9 +59,23 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-3 col-sm-3 col-md-3">
-      	<label for="picture">Select Profile Picture</label>
-        <input type="file" name="picture" id="picture" class="picture"/>
+      <div class="col-md-3">
+        <div class="panel panel-info">
+          <div class="panel-heading">Edit Profile Picture</div>
+          <div class="panel-body">
+            <label for="picture">Select Profile Picture</label>
+            <input type="file" name="picture" id="picture" class="picture"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="panel panel-info">
+          <div class="panel-heading">Password Settings</div>
+          <div class="panel-body">
+            <small>Protect your account by changing your password regularly.</small>
+            <input type="password" class="form-control" name="updatepassword" placeholder="Enter new password here" />
+          </div>
+        </div>
       </div>
       <div class="col-md-12">
           <div class="clearfix">

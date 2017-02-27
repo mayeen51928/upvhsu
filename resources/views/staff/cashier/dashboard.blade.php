@@ -5,7 +5,13 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
-			<h1 class="page-header">{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</h1>
+			<h4 class="page-header">
+      @if(!is_null(Auth::user()->staff->picture))
+      <img src="{{asset('images/'.Auth::user()->staff->picture)}}" height="50" width="50" class="img-circle"/> 
+      @else
+      <img src="{{asset('images/blankprofpic.png')}}" height="50" width="50" class="img-circle"/> 
+      @endif
+      Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
 			<div class="row placeholders">
 				<div class="col-xs-3 col-sm-3 col-md-3 placeholder">
 					<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">

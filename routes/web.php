@@ -38,7 +38,6 @@ Route::get('/account/profile','PatientController@profile');
 Route::get('/account/profile/edit','PatientController@editprofile');
 Route::post('/account/profile/update','PatientController@updateprofile');
 Route::get('/account/visits','PatientController@visits');
-Route::get('/account/bills','PatientController@bills');
 Route::post('/view_dental_record','PatientController@viewdentalrecord');
 
 /* ROUTES FOR DENTIST ACCOUNT */

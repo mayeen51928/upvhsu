@@ -162,6 +162,12 @@ class PatientController extends Controller
 
     public function updateprofile(Request $request)
     {
+        if($request->updatepassword != "")
+        {
+            $user = Auth::user();
+            $user->password = bcrypt($request->updatepassword);
+            $user->update();
+        }
         $patient = Patient::find(Auth::user()->user_id);
         $patient->sex = $request->input('sex');
         if(Auth::user()->patient->patient_type_id == 1)
@@ -322,13 +328,7 @@ class PatientController extends Controller
     	$params['sidebar_active'] = 'visits';
     	return view('patient.visits', $params);
     }
-
-    public function bills()
-    {
-        $params['navbar_active'] = 'account';
-    	$params['sidebar_active'] = 'bills';
-    	return view('patient.bills', $params);
-    }
+    
 
     public function viewdentalrecord(Request $request)
     {
