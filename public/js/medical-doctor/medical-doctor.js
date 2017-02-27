@@ -323,7 +323,7 @@ $('.addMedicalRecordButton').click(function() {
 				}
 				if(data['drug_test_result'])
 				{
-					$('#drug-test').val(data['drug_test_result']['drug_test']).attr('checked', 'checked');
+					$('#drug-test').val(data['drug_test_result']['drug_test_result']);
 					$('#requestDrugTest').attr('disabled', 'disabled').attr('checked', 'checked');
 				}
 				else

@@ -42,8 +42,9 @@ class PatientController extends Controller
 
 	public function dashboard()
 	{
-		$params['medical_appointments'] = DB::table('medical_appointments')->join('medical_schedules', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->get();
-		$params['dental_appointments'] = DB::table('dental_appointments')->join('dental_schedules', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->get();
+		$params['medical_appointments'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->get();
+		$params['dental_appointments'] = DB::table('dental_schedules')->join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->get();
+        // dd($params['dental_appointments']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
 		return view('patient.dashboard', $params);
@@ -207,12 +208,8 @@ class PatientController extends Controller
 		if (Input::file('picture') != NULL) { 
 			$path = '..\public\images';
 			$file_name = Input::file('picture')->getClientOriginalName(); 
-			$file_name_fin = $patient->patient_id.'_'.$file_name;
-			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
-			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
-				Input::file('picture')->move($path, $file_name_fin);
-				$patient->picture = $file_name_fin;
-			}
+			Input::file('picture')->move($path, $file_name);
+			$patient->picture = $file_name;
 		}
 
 		$parents = HasParent::where('patient_id', Auth::user()->user_id)->get();
@@ -872,10 +869,6 @@ class PatientController extends Controller
 				->where('appointment_id', '=', $appointment_id)
 				->first();
 
-		$dental_billing_records = DB::table('dental_billings')
-				->where('appointment_id', '=', $appointment_id)
-				->get();
-
 		return response()->json([
 			'stacks_condition' => $stacks_condition, 
 			'stacks_operation' => $stacks_operation,
@@ -894,7 +887,6 @@ class PatientController extends Controller
 			'stacks_condition8' => $stacks_condition8, 
 			'stacks_operation8' => $stacks_operation8,
 			'additional_dental_records' => $additional_dental_records,
-			'dental_billing_records' => $dental_billing_records,
 			]); 
 	}
 }
