@@ -888,5 +888,4 @@ class PatientController extends Controller
 			'additional_dental_records' => $additional_dental_records,
 			]); 
 	}
->>>>>>> 0adfa283cc9de5e15b0577cde9e3e1e4bb4d6b54
 }
