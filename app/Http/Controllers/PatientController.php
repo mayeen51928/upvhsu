@@ -200,8 +200,12 @@ class PatientController extends Controller
 		if (Input::file('picture') != NULL) { 
 			$path = '..\public\images';
 			$file_name = Input::file('picture')->getClientOriginalName(); 
-			Input::file('picture')->move($path, $file_name);
-			$patient->picture = $file_name;
+			$file_name_fin = $patient->patient_id.'_'.$file_name;
+			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
+			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
+				Input::file('picture')->move($path, $file_name_fin);
+				$patient->picture = $file_name_fin;
+			}
 		}
 
 		$parents = HasParent::where('patient_id', Auth::user()->user_id)->get();
@@ -861,6 +865,10 @@ class PatientController extends Controller
 				->where('appointment_id', '=', $appointment_id)
 				->first();
 
+		$dental_billing_records = DB::table('dental_billings')
+				->where('appointment_id', '=', $appointment_id)
+				->get();
+
 		return response()->json([
 			'stacks_condition' => $stacks_condition, 
 			'stacks_operation' => $stacks_operation,
@@ -879,6 +887,7 @@ class PatientController extends Controller
 			'stacks_condition8' => $stacks_condition8, 
 			'stacks_operation8' => $stacks_operation8,
 			'additional_dental_records' => $additional_dental_records,
+			'dental_billing_records' => $dental_billing_records,
 			]); 
 	}
 }

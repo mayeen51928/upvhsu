@@ -86,11 +86,14 @@
         	<ul class="nav nav-pills nav-justified">
 		        <li class="active"><a data-toggle="pill" href="#dental_chart_dashboard">Dental Chart</a></li>
 		        <li><a data-toggle="pill" href="#additional_dental_record_dashboard">Additional Dental Record</a></li>
+		        <li><a data-toggle="pill" href="#dental_billing_dashboard">Dental Billing Record</a></li>
 		      </ul>
 		      <br/>
 		      <div class="tab-content">
         		<div class="table-responsive tab-pane fade in active" id="dental_chart_dashboard">
         			<div id="view-dental-record-modal-body">
+        			</div>
+        			<div class="row">
         			</div>
         		</div>
 
@@ -98,7 +101,7 @@
         			<div class="panel-group">
         				<div class="panel panel-success">
 	        				<div class="panel-heading">
-	        					<h4 style="text-align:center;">Additional Dental Record</h4>
+	        					<h5 style="text-align:center;">Additional Dental Record</h5>
 	        				</div>
 				  				<div class="panel-body" id="additionalDentalRecordPanelBody" style="background-color:#d6e9c6; ">
 				  					<div class="row" style="background-color:#f8f8f8; padding:5px">
@@ -175,6 +178,30 @@
 									</div>
 							  </div>
         			</div>
+        		</div>
+
+        		<div class="table-responsive tab-pane fade in active" id="dental_billing_dashboard">
+        			<div class="panel-group">
+						    <div class="panel panel-success">
+						      <div class="panel-heading">
+						      	<h5 style="text-align:center;">Dental Billing Record</h5>
+						      </div>
+						      <div class="panel-body">
+						      	<table class="table" id="dental_billing_record_dashboard">
+									    <thead>
+									      <tr>
+									        <th>Date</th>
+									        <th>Doctor</th>
+									        <th>Status</th>
+									        <th>Print Receipt</th>
+									      </tr>
+									    </thead>
+									    <tbody>    
+									    </tbody>
+									  </table>
+						      </div>
+						    </div>
+						  </div>
         		</div>
         	</div>
         </div>

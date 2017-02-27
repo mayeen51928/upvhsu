@@ -167,8 +167,8 @@
 			  		<div class="panel-group">
 			  			<div class="panel panel-success">
 			  				<div class="panel-heading">
-			  					<h4>Date of last examination: <b>{{ Carbon\Carbon::parse($patient_info->schedule_start )->format('M d, Y') }}</b></h4>
-			  					<h4>Age last birthday: <b>{{ $patient_info->birthday }}</b></h4>
+			  					<!-- <h4>Date of last examination: <b>{{ Carbon\Carbon::parse($patient_info->schedule_start )->format('M d, Y') }}</b></h4> -->
+			  					<h4>Patient's birthday: <b>{{ Carbon\Carbon::parse($patient_info->birthday)->format('M d, Y') }}</b></h4>
 			  				</div>
 			  				@if($counter == 1)
 			  				<div class="panel-body" id="additionalDentalRecordPanelBody" style="background-color:#d6e9c6; ">
@@ -291,7 +291,7 @@
 			  							<h4>Presence of dental caries</h4>
 			  						</div>
 			  						<div class="col-md-5 col-sm-5 col-xs-12">
-			  							<select class="form-control" id="selDentalCaries">
+			  							<select class="form-control" id="selDentalCaries" required>
 			  								<option disabled selected>--- option ---</option>
 			  								<option value="yes">Yes</option>
 			  								<option value="no">No</option>
@@ -303,7 +303,7 @@
 			  							<h4>Presence of gingivitis</h4>
 			  						</div>
 			  						<div class="col-md-5 col-sm-5 col-xs-12">
-			  							<select class="form-control" id="selGingivitis">
+			  							<select class="form-control" id="selGingivitis" required>
 			  								<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -315,7 +315,7 @@
 											<h4>Presence of peridontal pocket</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selPeridontalPocket">
+											<select class="form-control" id="selPeridontalPocket" required>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -327,7 +327,7 @@
 											<h4>Presence of oral debris</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selOralDebris">
+											<select class="form-control" id="selOralDebris" required>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -339,7 +339,7 @@
 											<h4>Presence of calculus</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selCalculus">
+											<select class="form-control" id="selCalculus" required>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -351,7 +351,7 @@
 											<h4>Presence of neoplasm</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selNeoplasm">
+											<select class="form-control" id="selNeoplasm" required>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -363,7 +363,7 @@
 											<h4>Presence of dental-facio anomaly</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selDentalFacioAnomaly">
+											<select class="form-control" id="selDentalFacioAnomaly" required>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -375,7 +375,7 @@
 											<h4>Number of teeth present</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<input type="text" class="form-control" id="teethPresent">
+											<input type="text" class="form-control" id="teethPresent" required>
 										</div>
 									</div>
 			  				</div>
@@ -439,6 +439,7 @@
 		<div class="modal-content">
 		  <div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h5><b>Saving additional dental record</b></h5>
 		  </div>
 		  <div class="modal-body">
 				<h4>Are you sure you want to save this?</h4>

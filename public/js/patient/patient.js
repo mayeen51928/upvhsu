@@ -137,7 +137,18 @@ $('.dental_appointments_prescription').click(function(){
 			$('#selNeoplasm').html('<option selected>'+data['additional_dental_records']['neoplasm']+'</option>');		
 			$('#selDentalFacioAnomaly').html('<option selected>'+data['additional_dental_records']['dental_facio_anomaly']+'</option>');		
 			$('#teethPresent').html('<option selected>'+data['additional_dental_records']['teeth_present']+'</option>');		
-					
+			
+			output2 = '';
+			for(var i=0; i < data['dental_billing_records'].length; i++)
+			{
+				// if(data['dental_billing_records.status'][i] == 'paid'){
+				// 	output2 += "<tr><td>hello</td><td>hello</td><td>hello</td><td>hello</td></tr>";
+				// }
+				// else{
+					output2 += "<tr><td>hi</td><td>hi</td><td>hi</td><td>hi</td></tr>";
+				// }	
+			}
+			$("#dental_billing_record_dashboard > tbody").append(output2);
 			$('#view-dental-record-modal').modal("show");
 		}
 	});
