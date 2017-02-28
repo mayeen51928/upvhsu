@@ -42,6 +42,7 @@ class PatientController extends Controller
 
 	public function dashboard()
 	{
+        //haha
 		$params['medical_appointments'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->get();
 		$params['dental_appointments'] = DB::table('dental_schedules')->join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->get();
         // dd($params['dental_appointments']);
