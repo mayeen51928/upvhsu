@@ -260,7 +260,7 @@ class DoctorController extends Controller
 		{
 			$counter++;
 		}
-
+		// dd($counter);
 		if($counter > 0)
 		{
 			return response()->json([
@@ -471,6 +471,19 @@ class DoctorController extends Controller
 
 	public function addrecordswithoutappointment($id)
 	{
+		$medical_schedule = MedicalSchedule::where('schedule_day', date('Y-m-d'))->where('staff_id', Auth::user()->user_id)->first();
+		// $params['has_existing_appointment'] = 1;
+		if(count($medical_schedule) > 0)
+		{
+			$params['has_existing_appointment'] = count(MedicalAppointment::where('medical_schedule_id',$medical_schedule->id)->where('patient_id', $id)->get());
+		}
+		else
+		{
+			$params['has_existing_appointment'] = 2; //Doctor did not add a schedule for today. Therefore, he is not allowed to add records today.
+		}
+		
+		// dd(count($medical_schedule));
+		// dd($params['has_existing_appointment']);
 		$params['patient_info'] = Patient::find($id);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
@@ -490,7 +503,7 @@ class DoctorController extends Controller
 		$medical_appointment->save();
 
 		$medical_appointment_id = MedicalAppointment::where('medical_schedule_id', $medical_schedule_id)->where('patient_id', $request->patient_id)->first()->id;
-		
+		// dd($medical_appointment_id);
 		$physical_examination = new PhysicalExamination;
         $physical_examination->medical_appointment_id = $medical_appointment_id;
         $physical_examination->height = $request->height;

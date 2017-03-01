@@ -88,6 +88,8 @@ $('#backButtonMedicalDiagnosis').click(function() {
 $('.addMedicalRecordButton').click(function() {
 	// $('#confirmModal').modal();
 	$('#requestsFromDoctor').load(location.href + " #requestsFromDoctor");
+	$('#create-medical-record-modal input').removeAttr('disabled');
+	$('#create-medical-record-modal #height').focus();
 	if($(this).attr('id')){
 		var appointment_id = $(this).attr('id').split("_")[1];
 		
@@ -100,6 +102,7 @@ $('.addMedicalRecordButton').click(function() {
 
 			if(data['hasRecord'] == 'no')
 			{
+
 				$('#height').val('');
 				$('#weight').val('');
 				$('#blood-pressure').val('');

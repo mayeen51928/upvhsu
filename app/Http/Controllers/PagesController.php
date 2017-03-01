@@ -40,6 +40,12 @@ class PagesController extends Controller
 
 	public function scheduleappointment()
 	{
+		// if(Auth::check() && Auth::user()->user_type_id==1)
+		// {
+		// 	$params['medicalscheduleschecker'] = MedicalAppointment::where('patient_id', Auth::user()->user_id)->get();
+		// 	$params['']
+		// }
+		
 		$params['navbar_active'] = 'scheduleappointment';
 		return view('scheduleappointment', $params);
 	}
@@ -129,10 +135,24 @@ class PagesController extends Controller
 		$staffnamearray = array();
 		$scheduleidarray = array();
 		foreach ($display_schedules as $display_schedule){
-			$staff = Staff::where('staff_id', $display_schedule->staff_id)->first();
-			$scheduleid = $display_schedule->id;
-			array_push($staffnamearray,  $staff->staff_first_name .' '. $staff->staff_last_name);
-			array_push($scheduleidarray, $scheduleid);
+			if(Auth::check())
+			{
+				if(count(MedicalAppointment::where('medical_schedule_id', $display_schedule->id)->where('patient_id', Auth::user()->user_id)->first())==0)
+				{
+					$staff = Staff::where('staff_id', $display_schedule->staff_id)->first();
+					$scheduleid = $display_schedule->id;
+					array_push($staffnamearray,  $staff->staff_first_name .' '. $staff->staff_last_name);
+					array_push($scheduleidarray, $scheduleid);
+				}
+			}
+			else
+			{
+				$staff = Staff::where('staff_id', $display_schedule->staff_id)->first();
+					$scheduleid = $display_schedule->id;
+					array_push($staffnamearray,  $staff->staff_first_name .' '. $staff->staff_last_name);
+					array_push($scheduleidarray, $scheduleid);
+			}
+			
 		}
 		return response()->json(['staff' => $staffnamearray, 'id' => $scheduleidarray]); 
 	}
@@ -141,15 +161,23 @@ class PagesController extends Controller
 	{
 		if(Auth::check()){
 			if(Auth::user()->user_type_id != 2 || Auth::user()->user_type_id != 3){
-				$dental_appointment = new DentalAppointment;
-				$dental_appointment->patient_id = Auth::user()->user_id;
-				$dental_appointment->dental_schedule_id = $request->dental_schedule_id;
-				$dental_appointment->reasons = $request->reasons;
-				$dental_appointment->save();
-				$dental_schedule_booked = DentalSchedule::find($request->dental_schedule_id);
-				$dental_schedule_booked->booked = '1';
-				$dental_schedule_booked->update();
-				return response()->json(['success' => 'yes']);
+				if(count(DentalAppointment::where('dental_schedule_id', $request->dental_schedule_id)->where('patient_id', Auth::user()->user_id)->first())==0)
+				{
+					$dental_appointment = new DentalAppointment;
+					$dental_appointment->patient_id = Auth::user()->user_id;
+					$dental_appointment->dental_schedule_id = $request->dental_schedule_id;
+					$dental_appointment->reasons = $request->reasons;
+					$dental_appointment->save();
+					$dental_schedule_booked = DentalSchedule::find($request->dental_schedule_id);
+					$dental_schedule_booked->booked = '1';
+					$dental_schedule_booked->update();
+					return response()->json(['success' => 'yes']);
+				}
+				else
+				{
+					return response()->json(['success' => 'alreadyexists']);
+				}
+				
 			}
 			else
 			{
@@ -166,14 +194,22 @@ class PagesController extends Controller
 	{
 		if(Auth::check()){
 			if(Auth::user()->user_type_id != 2 || Auth::user()->user_type_id != 3){
-				$medical_appointment = new MedicalAppointment;
-				$medical_appointment->patient_id = Auth::user()->user_id;
-				$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
-				$medical_appointment->reasons = $request->reasons;
-				$medical_appointment->save();
-				$medical_schedule_booked = MedicalSchedule::find($request->medical_schedule_id);
-				$medical_schedule_booked->update();
-				return response()->json(['success' => 'yes']);
+				// dd(count(MedicalAppointment::where('medical_schedule_id', $request->medical_schedule_id)->where('patient_id', Auth::user()->user_id)->first()));
+				if(count(MedicalAppointment::where('medical_schedule_id', $request->medical_schedule_id)->where('patient_id', Auth::user()->user_id)->first())==0)
+				{
+					$medical_appointment = new MedicalAppointment;
+					$medical_appointment->patient_id = Auth::user()->user_id;
+					$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
+					$medical_appointment->reasons = $request->reasons;
+					$medical_appointment->save();
+					$medical_schedule_booked = MedicalSchedule::find($request->medical_schedule_id);
+					$medical_schedule_booked->update();
+					return response()->json(['success' => 'yes']);
+				}
+				else
+				{
+					return response()->json(['success' => 'alreadyexists']);
+				}
 			}
 			else
 			{
@@ -213,15 +249,22 @@ class PagesController extends Controller
 		if (count($hashedPassword)==1 && Hash::check($request->password_modal_medical, $hashedPassword->password))
 		{
 			Auth::loginUsingId($request->user_name_modal_medical, true);
-			$medical_appointment = new MedicalAppointment;
-			$medical_appointment->patient_id = Auth::user()->user_id;
-			$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
-			$medical_appointment->reasons = $request->reasons;
-			$medical_appointment->save();
-			$medical_schedule_booked = MedicalSchedule::find($request->medical_schedule_id);
-			$medical_schedule_booked->booked = '1';
-			$medical_schedule_booked->update();
-			return response()->json(['passwordmatch' => 'yes']);
+			if(count(MedicalAppointment::where('medical_schedule_id', $request->medical_schedule_id)->where('patient_id', Auth::user()->user_id)->first())==0)
+			{
+				$medical_appointment = new MedicalAppointment;
+				$medical_appointment->patient_id = Auth::user()->user_id;
+				$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
+				$medical_appointment->reasons = $request->reasons;
+				$medical_appointment->save();
+				$medical_schedule_booked = MedicalSchedule::find($request->medical_schedule_id);
+				$medical_schedule_booked->update();
+				return response()->json(['passwordmatch' => 'yes']);
+			}
+			else
+			{
+				Auth::logout();
+				return response()->json(['passwordmatch' => 'alreadyexists']);
+			}		
 		}
 		else{
 			return response()->json(['passwordmatch' => 'no']);

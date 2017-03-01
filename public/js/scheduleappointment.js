@@ -185,6 +185,10 @@ $(document).ready( function(){
   					$('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
   					$('#submitdentalappointment').attr("disabled", "disabled");
   				}
+          else if (data['success']=='alreadyexists')
+          {
+            alert('Appointment already exists!');
+          }
   				else
   				{
   					$('#loginmodaldental').modal();
@@ -245,8 +249,14 @@ $(document).ready( function(){
 	  				$('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
 	  				$("#submitmedicalappointment").attr('disabled','disabled');
   				}
+          else if (data['success']=='alreadyexists')
+          {
+            alert('Appointment already exists!');
+          }
   				else
   				{
+            $('#loginmodalmedical #user_name_modal_medical').val('');
+            $('#loginmodalmedical #password_modal_medical').val('');
   					$('#loginmodalmedical').modal();
   				}
   			});
@@ -332,6 +342,10 @@ $(document).ready( function(){
                     $("#submitmedicalappointment").attr('disabled','disabled');
                     $('#loginmodalmedical').modal("hide");
         	}
+          else if(data['passwordmatch'] == 'alreadyexists')
+          {
+            $('#login_medical_error').css('color', 'red').delay(2000).html('Error! You have existing appointment with this schedule.');
+          }
         	else
         	{
         		$('#login_medical_error').css('color', 'red').delay(2000).html('Your login credentials are incorrect.');
