@@ -585,6 +585,80 @@ $(document).on('click', '.medical-bill-confirm-button', function(){
 
 
 // ------------------SEARCH PATIENT---------------
+function leapYear(year)
+{
+  return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+}
+$("#search_month").change(function(){
+	var month = $(this).find(':selected')[0].value;
+	// console.log(month);
+	$('#search_date').html('');
+	$('#search_date').append('<option value="00" selected></option>');
+	if(month==0)
+	{
+		for(var i=1; i<32; i++)
+		{
+			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		}
+	}
+	if(month == 01 || month == 03 || month == 05 || month == 07|| month == 08 || month == 10|| month == 12)
+	{
+		
+		for(var i=1; i<32; i++)
+		{
+			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		}
+	}
+	else if(month == 02)
+	{
+		if(leapYear($('#search_year').find(':selected')[0].value))
+		{
+			for(var i=1; i<30; i++)
+			{
+				$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+			}
+		}
+		else
+		{
+			for(var i=1; i<29; i++)
+			{
+				$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+			}
+		}
+		
+	}
+	else if(month==04 || month==06 || month==09 || month == 11)
+	{
+		for(var i=1; i<31; i++)
+		{
+			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		}
+	}
+});
+$("#search_year").change(function(){
+	var year = $(this).find(':selected')[0].value;
+	var month = $('#search_month').find(':selected')[0].value;
+	if(leapYear(year) == true && month==02)
+	{
+		$('#search_date').html('');
+		$('#search_date').append('<option value="00" selected></option>');
+		// $('#search_date').append('<option value="00">none</option>');
+		for(var i=1; i<30; i++)
+		{
+			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		}
+	}
+	else
+	{
+		$('#search_date').html('');
+		$('#search_date').append('<option value="00" selected></option>');
+		// $('#search_date').append('<option value="00">none</option>');
+		for(var i=1; i<29; i++)
+		{
+			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		}
+	}
+});
 $("#search_patient").keyup(function(){
 	// if($('#search_patient').val()){
 		$('#searchlistofallpatients').hide();

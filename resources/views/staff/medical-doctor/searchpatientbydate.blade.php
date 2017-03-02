@@ -4,12 +4,19 @@
 <div class="container-fluid">
 	<div class="row">
 		@include('layouts.sidebar')
+
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
-			<div class="col-md-4 col-md-offset-4" style="text-align: center;">
-				<h4>Search Patient Record</h4>
+    <div class="row">
+      <div class="col-md-12" style="text-align: center;">
+      <h4>Search Patient Record</h4>
         <p><i>You can also search by <a href="{{ url('/doctor/searchpatient') }}">name</a>.</i></p>
+      </div>
+    </div>
+    <div class="row">
+			<div class="col-md-3 col-md-offset-1">
+        <label>Month</label>
         <select class="form-control" name="search_month" id="search_month">
-          <option selected disabled>Select Month</option>
+          <option value="00" selected></option>
           <option value="01">January</option>
           <option value="02">February</option>
           <option value="03">March</option>
@@ -23,13 +30,60 @@
           <option value="11">November</option>
           <option value="12">December</option>
         </select>
-				<input class="form-control" type="text" name="search_month" id="search_month" placeholder="Month" />
-        <img class="img-responsive" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
-				<table id="searchTable" class="table" style="display: none">
+        <label>Day</label>
+        <select class="form-control" name="search_date" id="search_date">
+          <option value="00" selected></option>
+          <option value="01">1</option>
+          <option value="02">2</option>
+          <option value="03">3</option>
+          <option value="04">4</option>
+          <option value="05">5</option>
+          <option value="06">6</option>
+          <option value="07">7</option>
+          <option value="08">8</option>
+          <option value="09">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+        </select>
+        <label>Year</label>
+        <select class="form-control" name="search_year" id="search_year">
+          {{-- <option selected disabled>Select year</option> --}}
+          <option value="00" selected></option>
+          <option value="1996">1996</option>
+          <option value="2017">2017</option>
+        </select>
+        <br/>
+        <button type="button" class="form-control btn btn-info" id="searchbydatebutton">Search</button>
+				{{-- <input class="form-control" type="text" name="search_month" id="search_month" placeholder="Month" /> --}}
+        
+			</div>
+      <div class="col-md-7">
+      <img class="img-responsive" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
+        <table id="searchTable" class="table" style="display: none">
           <tr><th>Search Results</th></tr>
           <tbody id="searchResults">
           </tbody>
-				</table>
+        </table>
         <table class="table" id="searchlistofallpatients">
         <tr><th>List of All Patients Who Have Existing Medical Records</th></tr>
           <tbody>
@@ -38,7 +92,8 @@
             @endforeach
           </tbody>
         </table>
-			</div>
+      </div>
+      </div>
 		</div>
 	</div>
 </div>
