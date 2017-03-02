@@ -37,9 +37,9 @@
 					<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/lab') }}">Dashboard <span class="sr-only">(current)</span></a></li>
 		  		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/lab/profile') }}">Profile</a></li>
 		  	</ul>
-		  	<ul class="nav nav-sidebar">
+		  	{{-- <ul class="nav nav-sidebar">
 		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/lab/searchpatient') }}">Search Patient</a></li>
-		  	</ul>
+		  	</ul> --}}
 	  	@endif
 	  	{{-- If Xray --}}
   		@if(Auth::user()->staff->staff_type_id == 4 )
@@ -47,9 +47,9 @@
 					<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/xray') }}">Dashboard <span class="sr-only">(current)</span></a></li>
 		  		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/xray/profile') }}">Profile</a></li>
 		  	</ul>
-		  	<ul class="nav nav-sidebar">
+		  	{{-- <ul class="nav nav-sidebar">
 		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/xray/searchpatient') }}">Search Patient</a></li>
-		  	</ul>
+		  	</ul> --}}
 	  	@endif
 	  	{{-- If Cashier --}}
   		@if(Auth::user()->staff->staff_type_id == 5 )
@@ -57,9 +57,9 @@
 					<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/cashier') }}">Dashboard <span class="sr-only">(current)</span></a></li>
 		  		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/cashier/profile') }}">Profile</a></li>
 		  	</ul>
-		  	<ul class="nav nav-sidebar">
+		  	{{-- <ul class="nav nav-sidebar">
 		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Search Patient</a></li>
-		  	</ul>
+		  	</ul> --}}
 	  	@endif
   	
   	@elseif(Auth::user()->user_type_id == 3)
@@ -70,8 +70,8 @@
   			<li id="addStudentNumber" @if($sidebar_active == 'addstudentnumber')class="active" @endif><a href="{{ url('/admin/addstudent') }}">Add Student Number to Database</a></li>
   			<li id="generateSched" @if($sidebar_active == 'generateschedule')class="active" @endif><a href="{{ url('/admin/generateschedule') }}">Generate Upperclassmen Physical Examination Schedule</a></li>
   		</ul>
-  		<ul class="nav nav-sidebar">
+  		{{-- <ul class="nav nav-sidebar">
   			<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/admin/searchpatient') }}">Search Patient</a></li>
-  		</ul>
+  		</ul> --}}
 	  	@endif
 </div>

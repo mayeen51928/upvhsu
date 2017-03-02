@@ -7,8 +7,23 @@
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
 			<div class="col-md-4 col-md-offset-4" style="text-align: center;">
 				<h4>Search Patient Record</h4>
-        <p><i>You can also search by <a href="{{ url('/doctor/searchpatientbydate') }}">date</a>.</i></p>
-				<input class="form-control" type="text" name="search_patient" id="search_patient" placeholder="Enter patient's name here" />
+        <p><i>You can also search by <a href="{{ url('/doctor/searchpatient') }}">name</a>.</i></p>
+        <select class="form-control" name="search_month" id="search_month">
+          <option selected disabled>Select Month</option>
+          <option value="01">January</option>
+          <option value="02">February</option>
+          <option value="03">March</option>
+          <option value="04">April</option>
+          <option value="05">May</option>
+          <option value="06">June</option>
+          <option value="07">July</option>
+          <option value="08">August</option>
+          <option value="09">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+				<input class="form-control" type="text" name="search_month" id="search_month" placeholder="Month" />
         <img class="img-responsive" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
 				<table id="searchTable" class="table" style="display: none">
           <tr><th>Search Results</th></tr>

@@ -295,10 +295,18 @@ class DoctorController extends Controller
 		return view('staff.medical-doctor.searchpatient', $params);
 	}
 
-	public function searchpatientrecord(Request $request){
+	public function searchpatientbydate(){
+		$params['patients'] = MedicalAppointment::select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'searchpatient';
+		return view('staff.medical-doctor.searchpatientbydate', $params);
+	}
+
+	public function searchpatientnamerecord(Request $request){
 
 		// To fix: when searching for first name and last name combination
 		// already fixed chereettt
+		// dd($request->search_string);
 		if($request->search_string!='')
 		{
 			$counter = 0;
@@ -327,7 +335,7 @@ class DoctorController extends Controller
 		}
 		else
 		{
-			return response()->json(['counter' => $counter]);
+			return response()->json(['counter' => 'blankstring']);
 		}
 	}
 

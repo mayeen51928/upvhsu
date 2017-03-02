@@ -586,13 +586,13 @@ $(document).on('click', '.medical-bill-confirm-button', function(){
 
 // ------------------SEARCH PATIENT---------------
 $("#search_patient").keyup(function(){
-	if($('#search_patient').val()){
+	// if($('#search_patient').val()){
 		$('#searchlistofallpatients').hide();
 		$('#searchTable').hide();
 		// $('#searchResults').html("");
 		$('#searchloading').show();
 		var searchString = $('#search_patient').val();
-		$.post('/searchpatientrecord',
+		$.post('/searchpatientnamerecord',
 			{
 				search_string: searchString
 			}, function(data) {
@@ -673,6 +673,13 @@ $("#search_patient").keyup(function(){
 						});
   					});
   				}
+  				else if(data['counter'] == 'blankstring')
+  				{
+  					$('#searchloading').hide();
+					$('#searchTable').hide();
+					$('#searchResults').html("");
+					$('#searchlistofallpatients').show();
+  				}
   				else
   				{
   					$('#searchloading').hide();
@@ -681,20 +688,20 @@ $("#search_patient").keyup(function(){
   					$('#searchResults').html("<tr><td>No results found.</td></tr>");
   				}
   			});
-	}
-	else if($('#search_patient').val()==''){
-		$('#searchloading').hide();
-		$('#searchTable').hide();
-		$('#searchResults').html("");
-		$('#searchlistofallpatients').show();
-	}
-	else
-	{
-		$('#searchloading').hide();
-		$('#searchTable').hide();
-		$('#searchResults').html("");
-		$('#searchlistofallpatients').show();
-	}
+	// }
+	// else if($('#search_patient').val()==''){
+	// 	$('#searchloading').hide();
+	// 	$('#searchTable').hide();
+	// 	$('#searchResults').html("");
+	// 	$('#searchlistofallpatients').show();
+	// }
+	// else
+	// {
+	// 	$('#searchloading').hide();
+	// 	$('#searchTable').hide();
+	// 	$('#searchResults').html("");
+	// 	$('#searchlistofallpatients').show();
+	// }
 });
 
 $('.listofallpatients').click(function()
