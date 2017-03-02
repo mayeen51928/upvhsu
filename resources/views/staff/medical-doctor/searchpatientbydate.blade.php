@@ -31,7 +31,7 @@
           <option value="12">December</option>
         </select>
         <label>Day</label>
-        <select class="form-control" name="search_date" id="search_date">
+        <select class="form-control" name="search_date" id="search_date" disabled>
           <option value="00" selected></option>
           <option value="01">1</option>
           <option value="02">2</option>
@@ -68,7 +68,7 @@
         <label>Year</label>
         <select class="form-control" name="search_year" id="search_year">
           {{-- <option selected disabled>Select year</option> --}}
-          <option value="00" selected></option>
+          <option value="0000" selected></option>
           <option value="1996">1996</option>
           <option value="2017">2017</option>
         </select>
@@ -80,7 +80,7 @@
       <div class="col-md-7">
       <img class="img-responsive" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
         <table id="searchTable" class="table" style="display: none">
-          <tr><th>Search Results</th></tr>
+          <tr><th colspan="2">Search Results</th></tr>
           <tbody id="searchResults">
           </tbody>
         </table>
@@ -97,8 +97,6 @@
 		</div>
 	</div>
 </div>
-
-
 <div class="modal fade" id="searchPatientRecordInfo" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg" >
     <div class="modal-content">
@@ -154,140 +152,140 @@
     </div>
   </div>
 </div>
-<!-- <div class="modal fade" id="viewMedicalRecordBasedOnDateModal" role="dialog">
-  <div class="modal-dialog modal-lg" >
+<div class="modal fade" id="viewMedicalRecordBasedOnDateModal" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h3 id="viewMedicalRecordBasedOnDateModalTitle">Detailed Patient Record</h3>
-    </div>
-    <div class="modal-body">
-      <div class="row" id="remarkModal">
-      <div class="col-xs-3 col-sm-3 col-md-3">
-        <img src="images/mayenne.jpg" width="220" height="220" class="img-responsive" alt="Generic placeholder thumbnail">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 id="viewMedicalRecordBasedOnDateModalTitle">Detailed Patient Record</h3>
       </div>
-      <div class="col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">Physical Examination</div>
-          <div class="panel-body">
-          <table class="table" style="margin-bottom: 0px;">
-            <tbody>
-               <tr><td>Height</td><td id="heightTd"></td></tr>
-              <tr><td>Weight</td><td id="weightTd"></td></tr>
-              <tr><td>Blood Pressure</td><td id="bpTd"></td></tr>
-              <tr><td>Pulse Rate</td><td id="prTd"></td></tr>
-              <tr><td>Right Eye</td><td id="righteyeTd"></td></tr>
-              <tr><td>Left Eye</td><td id="lefteyeTd"></td></tr>
-              <tr><td>Head</td><td id="headTd"></td></tr>
-              <tr><td>EENT</td><td id="eentTd"></td></tr>
-              <tr><td>Neck</td><td id="neckTd"></td></tr>
-              <tr><td>Chest</td><td id="chestTd"></td></tr>
-              <tr><td>Heart</td><td id="heartTd"></td></tr>
-              <tr><td>Lungs</td><td id="lungsTd"></td></tr>
-              <tr><td>Abdomen</td><td id="abdomenTd"></td></tr>
-              <tr><td>Back</td><td id="backTd"></td></tr>
-              <tr><td>Skin</td><td id="skinTd"></td></tr>
-              <tr><td>Extremeties</td><td id="extremitiesTd"></td></tr>
-            </tbody>
-          </table>
+      <div class="modal-body">
+        <div class="row" id="remarkModal">
+          <!-- <div class="col-xs-3 col-sm-3 col-md-3">
+          <img src="images/mayenne.jpg" width="220" height="220" class="img-responsive" alt="Generic placeholder thumbnail">
+          </div> -->
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Physical Examination</div>
+              <div class="panel-body">
+              <table class="table" style="margin-bottom: 0px;">
+                <tbody>
+                  <tr><td>Height</td><td id="heightTd"></td></tr>
+                  <tr><td>Weight</td><td id="weightTd"></td></tr>
+                  <tr><td>Blood Pressure</td><td id="bpTd"></td></tr>
+                  <tr><td>Pulse Rate</td><td id="prTd"></td></tr>
+                  <tr><td>Right Eye</td><td id="righteyeTd"></td></tr>
+                  <tr><td>Left Eye</td><td id="lefteyeTd"></td></tr>
+                  <tr><td>Head</td><td id="headTd"></td></tr>
+                  <tr><td>EENT</td><td id="eentTd"></td></tr>
+                  <tr><td>Neck</td><td id="neckTd"></td></tr>
+                  <tr><td>Chest</td><td id="chestTd"></td></tr>
+                  <tr><td>Heart</td><td id="heartTd"></td></tr>
+                  <tr><td>Lungs</td><td id="lungsTd"></td></tr>
+                  <tr><td>Abdomen</td><td id="abdomenTd"></td></tr>
+                  <tr><td>Back</td><td id="backTd"></td></tr>
+                  <tr><td>Skin</td><td id="skinTd"></td></tr>
+                  <tr><td>Extremeties</td><td id="extremitiesTd"></td></tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">CBC Results</div>
-          <div class="panel-body">
-          <table class="table" style="margin-bottom: 0px;">
-            <tbody>
-              <tr><td>Hemoglobin</td><td id="hemoglobinTd"></td></tr>
-              <tr><td>Hemasocrit</td><td id="hemasocritTd"></td></tr>
-              <tr><td>WBC</td><td id="wbcTd"></td></tr>
-            </tbody>
-          </table>
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">CBC Results</div>
+              <div class="panel-body">
+                <table class="table" style="margin-bottom: 0px;">
+                  <tbody>
+                    <tr><td>Hemoglobin</td><td id="hemoglobinTd"></td></tr>
+                    <tr><td>Hemasocrit</td><td id="hemasocritTd"></td></tr>
+                    <tr><td>WBC</td><td id="wbcTd"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">Urinalysis Results</div>
-          <div class="panel-body">
-          <table class="table" style="margin-bottom: 0px;">
-            <tbody>
-              <tr><td>Pus Cells</td><td id="puscellsTd"></td></tr>
-              <tr><td>RBC</td><td id="rbcTd"></td></tr>
-              <tr><td>Albumin</td><td id="albuminTd"></td></tr>
-              <tr><td>Sugar</td><td id="sugarTd"></td></tr>
-            </tbody>
-          </table>
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Urinalysis Results</div>
+              <div class="panel-body">
+                <table class="table" style="margin-bottom: 0px;">
+                  <tbody>
+                    <tr><td>Pus Cells</td><td id="puscellsTd"></td></tr>
+                    <tr><td>RBC</td><td id="rbcTd"></td></tr>
+                    <tr><td>Albumin</td><td id="albuminTd"></td></tr>
+                    <tr><td>Sugar</td><td id="sugarTd"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">Fecalysis Results</div>
-          <div class="panel-body">
-          <table class="table" style="margin-bottom: 0px;">
-            <tbody>
-              <tr><td>Macroscopic</td><td id="macroscopicTd"></td></tr>
-              <tr><td>Microscopic (Parasites)</td><td id="microscopicTd"></td></tr>
-            </tbody>
-          </table>
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Fecalysis Results</div>
+              <div class="panel-body">
+                <table class="table" style="margin-bottom: 0px;">
+                  <tbody>
+                    <tr><td>Macroscopic</td><td id="macroscopicTd"></td></tr>
+                    <tr><td>Microscopic (Parasites)</td><td id="microscopicTd"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-        </div>
-        </div>
         </div>
         <div class="row">
-        <div class="col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">Drug Test</div>
-          <div class="panel-body">
-          <table class="table" style="margin-bottom: 0px;">
-            <tbody>
-              <tr><td id="drugtestTd"></td></tr>
-            </tbody>
-          </table>
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Drug Test</div>
+              <div class="panel-body">
+                <table class="table" style="margin-bottom: 0px;">
+                  <tbody>
+                    <tr><td id="drugtestTd"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Chest X-Ray</div>
+              <div class="panel-body">
+                <table class="table" style="margin-bottom: 0px;">
+                  <tbody>
+                    <tr><td id="chestxrayTd"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+              <div class="panel-heading">Remarks</div>
+              <div class="panel-body">
+                <table class="table" style="margin-bottom: 0px;">
+                  <tbody>
+                    <tr><td id="remarksTd"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="panel panel-primary">
+            <div class="panel-heading">Prescription</div>
+            <div class="panel-body">
+              <table class="table" style="margin-bottom: 0px;">
+                <tbody>
+                  <tr><td id="prescriptionTd"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">Chest X-Ray</div>
-          <div class="panel-body">
-          <table class="table" style="margin-bottom: 0px;">
-            <tbody>
-              <tr><td id="chestxrayTd"></td></tr>
-            </tbody>
-          </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">Remarks</div>
-          <div class="panel-body">
-          <table class="table" style="margin-bottom: 0px;">
-            <tbody>
-              <tr><td id="remarksTd"></td></tr>
-            </tbody>
-          </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">Prescription</div>
-          <div class="panel-body">
-          <table class="table" style="margin-bottom: 0px;">
-            <tbody>
-              <tr><td id="prescriptionTd"></td></tr>
-            </tbody>
-          </table>
-          </div>
-        </div>
-      </div>
-      </div>
       </div>
     </div>
   </div>
-</div> -->
+</div>
 @endsection

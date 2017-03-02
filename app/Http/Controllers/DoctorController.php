@@ -339,6 +339,201 @@ class DoctorController extends Controller
 		}
 	}
 
+	public function searchpatientbydaterecord(Request $request){
+
+		// To fix: when searching for first name and last name combination
+		// already fixed chereettt
+		// dd($request->search_string);
+		if($request->search_month!='00' || $request->search_date!='00' || $request->search_year!='00')
+		{
+			$counter = 0;
+			if($request->search_month!='00' && $request->search_date=='00' && $request->search_year=='00')
+			{
+				$search_by_months = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->get();
+				if(count($search_by_months)>0)
+				{
+					$searchpatientnamearray = array();
+					$searchpatientscheduledayarray = array();
+					$searchpatientappointmentidyarray = array();
+					foreach($search_by_months as $search_by_month){
+						$get_appointment_ids = MedicalAppointment::where('medical_schedule_id', $search_by_month->id)->get();
+						foreach($get_appointment_ids as $get_appointment_id){
+							
+							array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+							array_push($searchpatientscheduledayarray, date_format(date_create(MedicalSchedule::find($get_appointment_id->medical_schedule_id)->schedule_day), 'F j, Y'));
+							array_push($searchpatientappointmentidyarray, $get_appointment_id->id);
+						}
+					}
+					$counter++;
+					return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'counter' => $counter]);
+				}
+				else
+				{
+					return response()->json(['counter' => $counter]);
+				}
+			}
+			if($request->search_month=='00' && $request->search_date!='00' && $request->search_year=='00')
+			{
+				$search_by_dates = MedicalSchedule::whereDay('schedule_day', $request->search_date)->get();
+				if(count($search_by_dates)>0)
+				{
+					$searchpatientnamearray = array();
+					$searchpatientscheduledayarray = array();
+					$searchpatientappointmentidyarray = array();
+					foreach($search_by_dates as $search_by_date){
+						$get_appointment_ids = MedicalAppointment::where('medical_schedule_id', $search_by_date->id)->get();
+						foreach($get_appointment_ids as $get_appointment_id){
+							
+							array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+							array_push($searchpatientscheduledayarray, date_format(date_create(MedicalSchedule::find($get_appointment_id->medical_schedule_id)->schedule_day), 'F j, Y'));
+							array_push($searchpatientappointmentidyarray, $get_appointment_id->id);
+						}
+					}
+					$counter++;
+					return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'counter' => $counter]);
+				}
+				else
+				{
+					return response()->json(['counter' => $counter]);
+				}
+			}
+			if($request->search_month=='00' && $request->search_date=='00' && $request->search_year!='00')
+			{
+				$sarch_by_years = MedicalSchedule::whereYear('schedule_day', $request->search_year)->get();
+				if(count($sarch_by_years)>0)
+				{
+					$searchpatientnamearray = array();
+					$searchpatientscheduledayarray = array();
+					$searchpatientappointmentidyarray = array();
+					foreach($sarch_by_years as $sarch_by_year){
+						$get_appointment_ids = MedicalAppointment::where('medical_schedule_id', $sarch_by_year->id)->get();
+						foreach($get_appointment_ids as $get_appointment_id){
+							
+							array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+							array_push($searchpatientscheduledayarray, date_format(date_create(MedicalSchedule::find($get_appointment_id->medical_schedule_id)->schedule_day), 'F j, Y'));
+							array_push($searchpatientappointmentidyarray, $get_appointment_id->id);
+						}
+					}
+					$counter++;
+					return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'counter' => $counter]);
+				}
+				else
+				{
+					return response()->json(['counter' => $counter]);
+				}
+			}
+			if($request->search_month!='00' && $request->search_date!='00' && $request->search_year=='00')
+			{
+				$search_by_month_dates = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->get();
+				if(count($search_by_month_dates)>0)
+				{
+					$searchpatientnamearray = array();
+					$searchpatientscheduledayarray = array();
+					$searchpatientappointmentidyarray = array();
+					foreach($search_by_month_dates as $search_by_month_date){
+						$get_appointment_ids = MedicalAppointment::where('medical_schedule_id', $search_by_month_date->id)->get();
+						foreach($get_appointment_ids as $get_appointment_id){
+							
+							array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+							array_push($searchpatientscheduledayarray, date_format(date_create(MedicalSchedule::find($get_appointment_id->medical_schedule_id)->schedule_day), 'F j, Y'));
+							array_push($searchpatientappointmentidyarray, $get_appointment_id->id);
+						}
+					}
+					$counter++;
+					return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'counter' => $counter]);
+				}
+				else
+				{
+					return response()->json(['counter' => $counter]);
+				}
+			}
+			if($request->search_month!='00' && $request->search_date!='00' && $request->search_year!='00')
+			{
+				$search_by_month_date_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->whereYear('schedule_day', $request->search_year)->get();
+				if(count($search_by_month_date_years)>0)
+				{
+					$searchpatientnamearray = array();
+					$searchpatientscheduledayarray = array();
+					$searchpatientappointmentidyarray = array();
+					foreach($search_by_month_date_years as $search_by_month_date_year){
+						$get_appointment_ids = MedicalAppointment::where('medical_schedule_id', $search_by_month_date_year->id)->get();
+						foreach($get_appointment_ids as $get_appointment_id){
+							
+							array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+							array_push($searchpatientscheduledayarray, date_format(date_create(MedicalSchedule::find($get_appointment_id->medical_schedule_id)->schedule_day), 'F j, Y'));
+							array_push($searchpatientappointmentidyarray, $get_appointment_id->id);
+						}
+					}
+					$counter++;
+					return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'counter' => $counter]);
+				}
+				else
+				{
+					return response()->json(['counter' => $counter]);
+				}
+			}
+			if($request->search_month!='00' && $request->search_date=='00' && $request->search_year!='00')
+			{
+				$search_by_month_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereYear('schedule_day', $request->search_year)->get();
+				if(count($search_by_month_years)>0)
+				{
+					$searchpatientnamearray = array();
+					$searchpatientscheduledayarray = array();
+					$searchpatientappointmentidyarray = array();
+					foreach($search_by_month_years as $search_by_month_year){
+						$get_appointment_ids = MedicalAppointment::where('medical_schedule_id', $search_by_month_year->id)->get();
+						foreach($get_appointment_ids as $get_appointment_id){
+							
+							array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+							array_push($searchpatientscheduledayarray, date_format(date_create(MedicalSchedule::find($get_appointment_id->medical_schedule_id)->schedule_day), 'F j, Y'));
+							array_push($searchpatientappointmentidyarray, $get_appointment_id->id);
+						}
+					}
+					$counter++;
+					return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'counter' => $counter]);
+				}
+				else
+				{
+					return response()->json(['counter' => $counter]);
+				}
+				
+			}
+		}
+		else
+		{
+			return response()->json(['counter' => 'blankstring']);
+		}
+			// dd($searchpatientappointmentidyarray);
+			// dd($searchpatientscheduledayarray);
+			// dd($searchpatientnamearray);
+			// $search_date = MedicalSchedule::whereYear('schedule_day', $request->search_year)->whereMonth('schedule_day', $request->search_month)->get();
+			
+			// 	$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->pluck('patient_id')->all();
+			// }
+		// 	if(count($search_patient_id_records) > 0){
+		// 		$searchpatientfirstnamearray = array();
+		// 		$searchpatientlastnamearray = array();
+		// 		$searchpatientidarray = array();
+		// 		foreach ($search_patient_id_records as $search_patient_id_record)
+		// 		{
+		// 			array_push($searchpatientfirstnamearray, Patient::find($search_patient_id_record)->patient_first_name);
+		// 			array_push($searchpatientlastnamearray, Patient::find($search_patient_id_record)->patient_last_name);
+		// 			array_push($searchpatientidarray, $search_patient_id_record);
+		// 		}
+		// 		$counter++;
+		// 		return response()->json(['searchpatientidarray' => $searchpatientidarray, 'searchpatientfirstnamearray' => $searchpatientfirstnamearray, 'searchpatientlastnamearray' => $searchpatientlastnamearray, 'counter' => $counter]);
+		// 	}
+		// 	else
+		// 	{
+		// 		return response()->json(['counter' => $counter]);
+		// 	}
+		// }
+		// else
+		// {
+		// 	return response()->json(['counter' => 'blankstring']);
+		// }
+	}
+
 	public function displaypatientrecordsearch(Request $request){
 		$patient = Patient::find($request->patient_id);
 		$params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));

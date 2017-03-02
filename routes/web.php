@@ -65,6 +65,7 @@ Route::get('/doctor/manageschedule','DoctorController@manageschedule');
 Route::get('/doctor/searchpatient','DoctorController@searchpatient');
 Route::get('/doctor/searchpatient/date', 'DoctorController@searchpatientbydate');
 Route::post('/searchpatientnamerecord','DoctorController@searchpatientnamerecord');
+Route::post('/searchpatientbydaterecord', 'DoctorController@searchpatientbydaterecord');
 Route::get('/doctor/viewrecords/{id}', 'DoctorController@viewrecords');
 Route::get('/doctor/addrecords/{id}', 'DoctorController@addrecordswithoutappointment');
 Route::post('/doctor/addrecord', 'DoctorController@addrecord');

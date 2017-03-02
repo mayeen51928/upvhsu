@@ -10,7 +10,7 @@
         <p><i>You can also search by <a href="{{ url('/doctor/searchpatient/date') }}">date</a>.</i></p>
 				<input class="form-control" type="text" name="search_patient" id="search_patient" placeholder="Enter patient's name here" />
         <br/>
-        <img class="img-responsive" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
+        <img class="img-responsive center-block" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
 				<table id="searchTable" class="table" style="display: none">
           <tr><th>Search Results</th></tr>
           <tbody id="searchResults">

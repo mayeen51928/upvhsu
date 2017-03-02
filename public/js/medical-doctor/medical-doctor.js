@@ -592,14 +592,17 @@ function leapYear(year)
 $("#search_month").change(function(){
 	var month = $(this).find(':selected')[0].value;
 	// console.log(month);
+	
 	$('#search_date').html('');
+	$('#search_date').removeAttr('disabled');
 	$('#search_date').append('<option value="00" selected></option>');
 	if(month==0)
 	{
-		for(var i=1; i<32; i++)
-		{
-			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
-		}
+		// for(var i=1; i<32; i++)
+		// {
+		// 	$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		// }
+		$('#search_date').attr('disabled', 'disabled');
 	}
 	if(month == 01 || month == 03 || month == 05 || month == 07|| month == 08 || month == 10|| month == 12)
 	{
@@ -648,7 +651,7 @@ $("#search_year").change(function(){
 			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
 		}
 	}
-	else
+	if(leapYear(year) == false && month==02)
 	{
 		$('#search_date').html('');
 		$('#search_date').append('<option value="00" selected></option>');
@@ -658,6 +661,168 @@ $("#search_year").change(function(){
 			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
 		}
 	}
+});
+$('#searchbydatebutton').click(function() {
+	console.log($('#search_month').find(':selected')[0].value);
+	console.log($('#search_date').find(':selected')[0].value);
+	console.log($('#search_year').find(':selected')[0].value);
+	$('#searchlistofallpatients').hide();
+		$('#searchTable').hide();
+		// $('#searchResults').html("");
+		$('#searchloading').show();
+	$.post('/searchpatientbydaterecord',
+			{
+				search_month: $('#search_month').find(':selected')[0].value,
+				search_date: $('#search_date').find(':selected')[0].value,
+				search_year: $('#search_year').find(':selected')[0].value,
+			}, function(data) {
+				// $('#searchlistofallpatients').hide();
+				$('#searchResults').html("");
+				// $('#searchTable').hide();
+				if(data['counter']>0)
+				{
+			  		output = '';
+	  				for(var i=0; i < data['searchpatientappointmentidyarray'].length; i++)
+	  				{
+	  					output += "<tr><td>" + data['searchpatientscheduledayarray'][i] + "</td><td><a class='searchQueryResults medicalrecorddate' id='medicalrecorddate_"+data['searchpatientappointmentidyarray'][i]+"'>"+data['searchpatientnamearray'][i]+"</a></td></tr>";
+	  				}
+	  				$('#searchlistofallpatients').hide();
+	  				$('#searchloading').hide();
+	  				$('#searchResults').html(output);
+  					$('#searchTable').show();
+	  				$('.medicalrecorddate').click(function() {
+						var medicalAppointmentId = $(this).attr('id').split('_')[1];
+						$.post('/viewindividualrecordfromsearch',
+							{
+								medical_appointment_id: medicalAppointmentId}, function(data, textStatus, xhr)
+							{
+								if(data['physical_examination'])
+									{
+										$('#heightTd').html(data['physical_examination']['height']);
+										$('#weightTd').html(data['physical_examination']['weight']);
+										$('#bpTd').html(data['physical_examination']['blood_pressure']);
+										$('#prTd').html(data['physical_examination']['pulse_rate']);
+										$('#righteyeTd').html(data['physical_examination']['right_eye']);
+										$('#lefteyeTd').html(data['physical_examination']['left_eye']);
+										$('#headTd').html(data['physical_examination']['head']);
+										$('#eentTd').html(data['physical_examination']['eent']);
+										$('#neckTd').html(data['physical_examination']['neck']);
+										$('#chestTd').html(data['physical_examination']['chest']);
+										$('#heartTd').html(data['physical_examination']['heart']);
+										$('#lungsTd').html(data['physical_examination']['lungs']);
+										$('#abdomenTd').html(data['physical_examination']['abdomen']);
+										$('#backTd').html(data['physical_examination']['back']);
+										$('#skinTd').html(data['physical_examination']['skin']);
+										$('#extremitiesTd').html(data['physical_examination']['extremities']);
+									}
+									else
+									{
+										$('#heightTd').html('');
+										$('#weightTd').html('');
+										$('#bpTd').html('');
+										$('#prTd').html('');
+										$('#righteyeTd').html('');
+										$('#lefteyeTd').html('');
+										$('#headTd').html('');
+										$('#eentTd').html('');
+										$('#neckTd').html('');
+										$('#chestTd').html('');
+										$('#heartTd').html('');
+										$('#lungsTd').html('');
+										$('#abdomenTd').html('');
+										$('#backTd').html('');
+										$('#skinTd').html('');
+										$('#extremitiesTd').html('');
+									}
+									if(data['cbc_result'])
+									{
+										$('#hemoglobinTd').html(data['cbc_result']['hemoglobin']);
+										$('#hemasocritTd').html(data['cbc_result']['hemasocrit']);
+										$('#wbcTd').html(data['cbc_result']['wbc']);
+									}
+									else
+									{
+										$('#hemoglobinTd').html('');
+										$('#hemasocritTd').html('');
+										$('#wbcTd').html('');
+									}
+									if(data['urinalysis_result'])
+									{
+										$('#puscellsTd').html(data['urinalysis_result']['pus_cells']);
+										$('#rbcTd').html(data['urinalysis_result']['rbc']);
+										$('#albuminTd').html(data['urinalysis_result']['albumin']);
+										$('#sugarTd').html(data['urinalysis_result']['sugar']);
+									}
+									else
+									{
+										$('#puscellsTd').html('');
+										$('#rbcTd').html('');
+										$('#albuminTd').html('');
+										$('#sugarTd').html('');
+									}
+									if(data['fecalysis_result'])
+									{
+										$('#macroscopicTd').html(data['fecalysis_result']['macroscopic']);
+										$('#microscopicTd').html(data['fecalysis_result']['microscopic']);
+									}
+									else
+									{
+										$('#macroscopicTd').html('');
+										$('#microscopicTd').html('');
+									}
+									if(data['drug_test_result'])
+									{
+										$('#drugtestTd').html(data['drug_test_result']['drug_test'])
+									}
+									else
+									{
+										$('#drugtestTd').html('');
+									}
+									if(data['chest_xray_result'])
+									{
+										$('#chestxrayTd').html(data['chest_xray_result']['xray_result']);
+									}
+									else
+									{
+										$('#cchestxrayTd').html('');
+									}
+									if(data['remark'])
+									{
+										$('#remarksTd').html(data['remark']['remark']);
+									}
+									else
+									{
+										$('#remarksTd').html('');
+									}
+									if(data['prescription'])
+									{
+										$('#prescriptionTd').html(data['prescription']['prescription']);
+									}
+									else
+									{
+										$('#prescriptionTd').html('');
+									}
+
+								$('#viewMedicalRecordBasedOnDateModal').modal();
+						});
+					});
+					
+  				}
+  				else if(data['counter'] == 'blankstring')
+  				{
+  					$('#searchloading').hide();
+					$('#searchTable').hide();
+					$('#searchResults').html("");
+					$('#searchlistofallpatients').show();
+  				}
+  				else
+  				{
+  					$('#searchloading').hide();
+  					$('#searchlistofallpatients').hide();
+  					$('#searchTable').show();
+  					$('#searchResults').html("<tr><td>No results found.</td></tr>");
+  				}
+  			});
 });
 $("#search_patient").keyup(function(){
 	// if($('#search_patient').val()){
