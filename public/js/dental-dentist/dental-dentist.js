@@ -303,10 +303,10 @@ $("#search_patientdental").keyup(function(){
 	  				$('#searchloadingdental').hide();
 	  				$('#searchResultsdental').html(output);
   					$('#searchTabledental').show();
-  					$('.searchQueryResults').click(function()
+  					$('.searchQueryResultsDental').click(function()
   					{
   						var patientId = $(this).attr('id').split('_')[1];
-  						$.post('/displaypatientrecordsearch',
+  						$.post('/displaypatientrecordsearchdental',
   						{
   							patient_id: patientId
   						}, function(data) {
@@ -347,7 +347,7 @@ $("#search_patientdental").keyup(function(){
 							$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
 							$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
 							$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
-							$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button" id="addnewrecordfromsearch">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearch>View Records</a>');
+							$('#patientInfoModalFooter').html('<a href="/dentist/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearchdental>View Records</a>');
 							if(data['patient_info']['picture'])
 							{
 								$('#searchPatientRecordInfoImg').attr('src', '/images/'+data['patient_info']['picture']);
@@ -356,13 +356,13 @@ $("#search_patientdental").keyup(function(){
 							{
 								$('#searchPatientRecordInfoImg').attr('src', '/images/blankprofpic.png');
 							}
-							$('#searchPatientRecordInfo').modal();
+							$('#searchPatientRecordInfoDental').modal();
 
 							$('#addnewrecordfromsearch').click(function() {
-								$('#searchPatientRecordInfo').modal('hide');
+								$('#searchPatientRecordInfoDental').modal('hide');
 							});
 							$('#viewrecordsfromsearch').click(function() {
-								$('#searchPatientRecordInfo').modal('hide');
+								$('#searchPatientRecordInfoDental').modal('hide');
 							});
 						});
   					});
@@ -427,7 +427,7 @@ $('.listofallpatientsdental').click(function()
 		$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
 		$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
 		$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
-		$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button" id="addnewrecordfromsearch">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearch>View Records</a>');
+		$('#patientInfoModalFooter').html('<a href="/dentist/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearchdental>View Records</a>');
 		if(data['patient_info']['picture'])
 		{
 			$('#searchPatientRecordInfoImg').attr('src', '/images/'+data['patient_info']['picture']);
