@@ -19,9 +19,9 @@ $('.dental_chart').click(function(){
 			}
 		  }
 	  });
-	window.setTimeout(function(){
-            $('#update-dental-record-modal').modal('show');
-        }, 1000)
+		window.setTimeout(function(){
+			$('#update-dental-record-modal').modal('show');
+    }, 5000)
 });
 
 
@@ -39,7 +39,8 @@ $('.updateDentalRecord').click(function(){
 			  data: {teeth_id:  teethId, condition_id:  conditionId, operation_id:  operationId, appointment_id:  appointmentId,  _token: token},
 			  success: function(data)
 			  {
-			  	console.log('#condition_'+teethId);
+			  	console.log("condition id "+conditionId);
+			  	console.log("operation id "+operationId);
 			  	if (conditionId == 1) {
 			  		$('#condition_'+teethId).css({ fill: "#ff4000" });
 			  	}
