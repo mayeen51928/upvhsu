@@ -942,7 +942,7 @@ class DentistController extends Controller
 						->where([
 							['teeth_id', '=', $teeth_id],
 						])
-						->pluck('condition_id')
+						->pluck('operation_id')
 						->first();
 				}
 				else{
@@ -951,7 +951,7 @@ class DentistController extends Controller
 						->where([
 							['teeth_id', '=', $teeth_id],
 						])
-						->pluck('operation_id')
+						->pluck('condition_id')
 						->first();
 				}
 	
