@@ -48,6 +48,8 @@ Route::get('/dentist/profile/edit','DentistController@editprofile');
 Route::post('/dentist/profile/update','DentistController@updateprofile');
 Route::get('/dentist/manageschedule','DentistController@manageschedule');
 Route::get('/dentist/searchpatient','DentistController@searchpatient');
+Route::post('/searchpatientnamerecorddental', 'DentistController@searchpatientnamerecorddental');
+Route::post('/displaypatientrecordsearchdental', 'DentistController@displaypatientrecordsearchdental');
 Route::post('/addschedule_dental', 'DentistController@addschedule');
 Route::post('/dentist/updatedentalrecord','DentistController@updatedentalrecord');
 Route::post('/update_dental_record_modal','DentistController@updatedentalrecordmodal');

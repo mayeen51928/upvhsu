@@ -9,6 +9,13 @@ use App\DentalRecord;
 use App\DentalAppointment;
 use App\AdditionalDentalRecord;
 use App\Patient;
+use App\DegreeProgram;
+use App\Religion;
+use App\Nationality;
+use App\ParentModel;
+use App\HasParent;
+use App\HasGuardian;
+use App\Guardian;
 use DB;
 use App\Staff;
 use App\Town;
@@ -810,11 +817,100 @@ class DentistController extends Controller
 
 		public function searchpatient()
 		{
+			$params['patients'] = DentalAppointment::select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'searchpatient';
 			return view('staff.dental-dentist.searchpatient', $params);
 		}
+		public function searchpatientnamerecorddental(Request $request){
 
+			// To fix: when searching for first name and last name combination
+			// already fixed chereettt
+			// dd($request->search_string);
+			if($request->search_string!='')
+			{
+				$counter = 0;
+				$search_string = explode(" ",$request->search_string);
+				for($i=0; $i < sizeof($search_string); $i++)
+				{
+					$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->pluck('patient_id')->all();
+				}
+				if(count($search_patient_id_records) > 0){
+					$searchpatientfirstnamearray = array();
+					$searchpatientlastnamearray = array();
+					$searchpatientidarray = array();
+					foreach ($search_patient_id_records as $search_patient_id_record)
+					{
+						array_push($searchpatientfirstnamearray, Patient::find($search_patient_id_record)->patient_first_name);
+						array_push($searchpatientlastnamearray, Patient::find($search_patient_id_record)->patient_last_name);
+						array_push($searchpatientidarray, $search_patient_id_record);
+					}
+					$counter++;
+					return response()->json(['searchpatientidarray' => $searchpatientidarray, 'searchpatientfirstnamearray' => $searchpatientfirstnamearray, 'searchpatientlastnamearray' => $searchpatientlastnamearray, 'counter' => $counter]);
+				}
+				else
+				{
+					return response()->json(['counter' => $counter]);
+				}
+			}
+			else
+			{
+				return response()->json(['counter' => 'blankstring']);
+			}
+		}
+		public function displaypatientrecordsearchdental(Request $request)
+		{
+			$patient = Patient::find($request->patient_id);
+			$params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
+			$params['sex'] = $patient->sex;
+			$params['picture'] = $patient->picture;
+	        if($patient->patient_type_id == 1)
+	        {
+	        	$params['display_course_and_year_level'] = 1;
+	        	$params['degree_program_description'] = DegreeProgram::find($patient->degree_program_id)->degree_program_description;
+	        	
+	        	$params['year_level'] = $patient->year_level; 
+	        }
+	        else
+	        {
+	        	$params['display_course_and_year_level'] = 0;
+	        }
+	        $params['birthday'] = date_format(date_create($patient->birthday), 'F j, Y');
+	        $params['religion'] = Religion::find($patient->religion_id)->religion_description;
+	        $params['nationality'] = Nationality::find($patient->nationality_id)->nationality_description;
+	        $parents = HasParent::where('patient_id', $request->patient_id)->get();
+	        foreach($parents as $parent)
+	        {
+	            if (ParentModel::find($parent->parent_id)->sex == 'M')
+	            {
+	            	$params['father_first_name'] = ParentModel::find($parent->parent_id)->parent_first_name;
+	                $params['father_middle_name'] = ParentModel::find($parent->parent_id)->parent_middle_name;
+	                $params['father_last_name'] = ParentModel::find($parent->parent_id)->parent_last_name;
+	            }
+	            else{
+	                $params['mother_first_name'] = ParentModel::find($parent->parent_id)->parent_first_name;
+	                $params['mother_middle_name'] = ParentModel::find($parent->parent_id)->parent_middle_name;
+	                $params['mother_last_name'] = ParentModel::find($parent->parent_id)->parent_last_name;
+	            }
+	        }
+	        $params['street'] = $patient->street;
+	        $params['town'] = Town::find($patient->town_id)->town_name;
+	        $params['province'] = Province::find(Town::find($patient->town_id)->province_id)->province_name;
+	        $params['residence_telephone_number'] = $patient->residence_telephone_number;
+	        $params['personal_contact_number'] = $patient->personal_contact_number;
+	        $params['residence_contact_number'] = $patient->residence_contact_number;
+	        $guardian = HasGuardian::where('patient_id', $request->patient_id)->first();
+	        $params['guardian_first_name'] = Guardian::find($guardian->guardian_id)->guardian_first_name;
+	        $params['guardian_middle_name'] = Guardian::find($guardian->guardian_id)->guardian_middle_name;
+	        $params['guardian_last_name'] = Guardian::find($guardian->guardian_id)->guardian_last_name;
+	        $params['guardian_street'] = Guardian::find($guardian->guardian_id)->street;
+	        $params['guardian_town'] = Town::find(Guardian::find($guardian->guardian_id)->town_id)->town_name;
+	        $params['guardian_province'] = Province::find(Town::find(Guardian::find($guardian->guardian_id)->town_id)->province_id)->province_name;
+	        $params['relationship'] = $guardian->relationship;
+	        $params['guardian_tel_number'] = Guardian::find($guardian->guardian_id)->guardian_telephone_number;
+	        $params['guardian_cellphone'] = Guardian::find($guardian->guardian_id)->guardian_contact_number;
+			return response()->json(['patient_info' => $params]);
+		}
 		public function addschedule(Request $request)
 		{
 				$schedules = $request->schedules;
