@@ -5,6 +5,7 @@
 	<div class="row">
   	@include('layouts.sidebar')
   	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="viewAllMedicalRecordsDiv">
+      @if($has_existing_appointment==0)
   		<form action="/doctor/addrecord" method="POST">
   			{{csrf_field()}}
         <input type="hidden" name="patient_id" value="{{$patient_info['patient_id']}}"/>
@@ -328,6 +329,11 @@
 	        </div>
         </div>
       </form>
+      @elseif($has_existing_appointment==2)
+      <p>Not allowed! You have no schedule for today.</p>
+      @else
+      <p>This patient has an appointment with you today.</p>
+      @endif
     </div>
   </div>
 </div>

@@ -48,6 +48,7 @@
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Scheduled Date</th>
                 <th>Reasons</th>
               </tr>
             </thead>
@@ -55,6 +56,7 @@
               @foreach($medical_appointments_past as $medical_appointment_past)
               <tr>
                 <td>{{$medical_appointment_past->patient_first_name}} {{$medical_appointment_past->patient_last_name}}</td>
+                <td>{{date_format(date_create($medical_appointment_past->schedule_day), 'F j, Y')}}</td>
                 <td>{{$medical_appointment_past->reasons}}</td>
                 <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment_past->id}}">Diagnosis</button></td>
                 <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment_past->id}}">Billing</button></td>
@@ -72,6 +74,7 @@
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Scheduled Date</th>
                 <th>Reasons</th>
               </tr>
             </thead>
@@ -79,9 +82,8 @@
               @foreach($medical_appointments_future as $medical_appointment_future)
               <tr>
                 <td>{{$medical_appointment_future->patient_first_name}} {{$medical_appointment_future->patient_last_name}}</td>
+                <td>{{date_format(date_create($medical_appointment_future->schedule_day), 'F j, Y')}}</td>
                 <td>{{$medical_appointment_future->reasons}}</td>
-                <td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment_future->id}}">Diagnosis</button></td>
-                <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment_future->id}}">Billing</button></td>
               </tr>
               @endforeach
             </tbody>

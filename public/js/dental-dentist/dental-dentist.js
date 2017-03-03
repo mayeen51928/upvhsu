@@ -279,4 +279,173 @@ $('#adddentalschedule').click(function(){
 });
 
 // ----------------------------- End of Manage Schedule ----------------------
+// ------------------------------ Search Patient ----------------------------
+$("#search_patientdental").keyup(function(){
+	// if($('#search_patient').val()){
+		$('#searchlistofallpatientsdental').hide();
+		$('#searchTabledental').hide();
+		// $('#searchResultsdental').html("");
+		$('#searchloadingdental').show();
+		var searchString = $('#search_patientdental').val();
+		$.post('/searchpatientnamerecorddental',
+			{
+				search_string: searchString
+			}, function(data) {
+				// $('#searchlistofallpatientsdental').hide();
+				$('#searchResultsdental').html("");
+				// $('#searchTabledental').hide();
+				if(data['counter']>0)
+				{
+			  		output = '';
+	  				for(var i=0; i < data['searchpatientidarray'].length; i++)
+	  				{
+	  					output += "<tr><td><a class='searchQueryResultsDental' id='resultId_"+data['searchpatientidarray'][i]+"'>"+data['searchpatientlastnamearray'][i]+", "+data['searchpatientfirstnamearray'][i]+"</a></td></tr>";
+	  				}
+	  				$('#searchloadingdental').hide();
+	  				$('#searchResultsdental').html(output);
+  					$('#searchTabledental').show();
+  					$('.searchQueryResults').click(function()
+  					{
+  						var patientId = $(this).attr('id').split('_')[1];
+  						$.post('/displaypatientrecordsearch',
+  						{
+  							patient_id: patientId
+  						}, function(data) {
+  							output = '';
+  							var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
+  							$('#ageTd').html(age);
+  							if(data['patient_info']['sex'] == 'F')
+  							{
+  								$('#sexTd').html('Female');
+  							}
+  							else
+  							{
+  								$('#sexTd').html('Male');
+  							}
+  							if(data['patient_info']['display_course_and_year_level'] == 1)
+  							{
+  								$('#courseTd').html(data['patient_info']['degree_program_description']);
+  								$('#yearlevelTd').html(data['patient_info']['year_level']);
+  								$('#courseRow').show();
+  								$('#yearlevelRow').show();
+  							}
+  							else{
+  								$('#courseTd').html('');
+  								$('#yearlevelTd').html('');
+  								$('#courseRow').hide();
+  								$('#yearlevelRow').hide();
+  							}
+  							$('#birthdateTd').html(data['patient_info']['birthday']);
+  							$('#religionTd').html(data['patient_info']['religion']);
+  							$('#nationalityTd').html(data['patient_info']['nationality']);
+  							$('#fatherTd').html(data['patient_info']['father_first_name']+' '+data['patient_info']['father_last_name']);
+  							$('#motherTd').html(data['patient_info']['mother_first_name'] + ' ' + data['patient_info']['mother_last_name']);
+							$('#homeaddressTd').html(data['patient_info']['street'] + ', ' + data['patient_info']['town'] + ', ' + data['patient_info']['province']);
+							$('#restelTd').html(data['patient_info']['residence_telephone_number']);
+							$('#personalcontactnumberTd').html(data['patient_info']['personal_contact_number']);
+							$('#guardiannameTd').html(data['patient_info']['guardian_first_name'] + ' ' +data['patient_info']['guardian_last_name']);
+							$('#guardianaddressTd').html(data['patient_info']['guardian_street'] + ', ' + data['patient_info']['guardian_town'] + ', ' +data['patient_info']['guardian_province']);
+							$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
+							$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
+							$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
+							$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button" id="addnewrecordfromsearch">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearch>View Records</a>');
+							if(data['patient_info']['picture'])
+							{
+								$('#searchPatientRecordInfoImg').attr('src', '/images/'+data['patient_info']['picture']);
+							}
+							else
+							{
+								$('#searchPatientRecordInfoImg').attr('src', '/images/blankprofpic.png');
+							}
+							$('#searchPatientRecordInfo').modal();
+
+							$('#addnewrecordfromsearch').click(function() {
+								$('#searchPatientRecordInfo').modal('hide');
+							});
+							$('#viewrecordsfromsearch').click(function() {
+								$('#searchPatientRecordInfo').modal('hide');
+							});
+						});
+  					});
+  				}
+  				else if(data['counter'] == 'blankstring')
+  				{
+  					$('#searchloadingdental').hide();
+					$('#searchTabledental').hide();
+					$('#searchResultsdental').html("");
+					$('#searchlistofallpatientsdental').show();
+  				}
+  				else
+  				{
+  					$('#searchloadingdental').hide();
+  					$('#searchlistofallpatientsdental').hide();
+  					$('#searchTabledental').show();
+  					$('#searchResultsdental').html("<tr><td>No results found.</td></tr>");
+  				}
+  			});
+});
+$('.listofallpatientsdental').click(function()
+{
+	var patientId = $(this).attr('id').split('_')[1];
+	$.post('/displaypatientrecordsearchdental',
+	{
+		patient_id: patientId
+	}, function(data) {
+		output = '';
+		var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
+		$('#ageTd').html(age);
+		if(data['patient_info']['sex'] == 'F')
+		{
+			$('#sexTd').html('Female');
+		}
+		else
+		{
+			$('#sexTd').html('Male');
+		}
+		if(data['patient_info']['display_course_and_year_level'] == 1)
+		{
+			$('#courseTd').html(data['patient_info']['degree_program_description']);
+			$('#yearlevelTd').html(data['patient_info']['year_level']);
+			$('#courseRow').show();
+			$('#yearlevelRow').show();
+		}
+		else{
+			$('#courseTd').html('');
+			$('#yearlevelTd').html('');
+			$('#courseRow').hide();
+			$('#yearlevelRow').hide();
+		}
+		$('#birthdateTd').html(data['patient_info']['birthday']);
+		$('#religionTd').html(data['patient_info']['religion']);
+		$('#nationalityTd').html(data['patient_info']['nationality']);
+		$('#fatherTd').html(data['patient_info']['father_first_name']+' '+data['patient_info']['father_last_name']);
+		$('#motherTd').html(data['patient_info']['mother_first_name'] + ' ' + data['patient_info']['mother_last_name']);
+		$('#homeaddressTd').html(data['patient_info']['street'] + ', ' + data['patient_info']['town'] + ', ' + data['patient_info']['province']);
+		$('#restelTd').html(data['patient_info']['residence_telephone_number']);
+		$('#personalcontactnumberTd').html(data['patient_info']['personal_contact_number']);
+		$('#guardiannameTd').html(data['patient_info']['guardian_first_name'] + ' ' +data['patient_info']['guardian_last_name']);
+		$('#guardianaddressTd').html(data['patient_info']['guardian_street'] + ', ' + data['patient_info']['guardian_town'] + ', ' +data['patient_info']['guardian_province']);
+		$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
+		$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
+		$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
+		$('#patientInfoModalFooter').html('<a href="/doctor/addrecords/'+ patientId +'" class="btn btn-info" role="button" id="addnewrecordfromsearch">Add New Record</a><a href="/doctor/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearch>View Records</a>');
+		if(data['patient_info']['picture'])
+		{
+			$('#searchPatientRecordInfoImg').attr('src', '/images/'+data['patient_info']['picture']);
+		}
+		else
+		{
+			$('#searchPatientRecordInfoImg').attr('src', '/images/blankprofpic.png');
+		}
+		$('#searchPatientRecordInfoDental').modal();
+
+		$('#addnewrecordfromsearch').click(function() {
+			$('#searchPatientRecordInfoDental').modal('hide');
+		});
+		$('#viewrecordsfromsearch').click(function() {
+			$('#searchPatientRecordInfoDental').modal('hide');
+		});
+	});
+});
+// ------------------------------ End of Search Patient ---------------------
 });

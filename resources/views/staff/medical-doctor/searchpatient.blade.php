@@ -7,16 +7,17 @@
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
 			<div class="col-md-4 col-md-offset-4" style="text-align: center;">
 				<h4>Search Patient Record</h4>
-
-				<input class="form-control" type="text" name="search_patient" id="search_patient"/>
-        <img class="img-responsive" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
+        <p><i>You can also search by <a href="{{ url('/doctor/searchpatient/date') }}">date</a>.</i></p>
+				<input class="form-control" type="text" name="search_patient" id="search_patient" placeholder="Enter patient's name here" />
+        <br/>
+        <img class="img-responsive center-block" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
 				<table id="searchTable" class="table" style="display: none">
           <tr><th>Search Results</th></tr>
           <tbody id="searchResults">
           </tbody>
 				</table>
         <table class="table" id="searchlistofallpatients">
-        <tr><th>List of All Patients</th></tr>
+        <tr><th>List of All Patients Who Have Existing Medical Records</th></tr>
           <tbody>
             @foreach($patients as $patient)
               <tr><td><a class="listofallpatients" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>

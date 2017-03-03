@@ -2,32 +2,41 @@
 @section('title', 'Search Patient | UP Visayas Health Services Unit')
 @section('content')
 <div class="container-fluid">
-	<div class="row">
-		@include('layouts.sidebar')
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
-			<div class="col-md-4 col-md-offset-4" style="text-align: center;">
-				<h4>Search Patient Record</h4>
-				<input class="form-control" type="text" name="searchPatient" id="searchPatient"/>
-				<table id="searchTable" class="table" style="display: none">
-					<tr><th>Search Results</th></tr>
-					<tbody id="searchResults" >
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    @include('layouts.sidebar')
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
+      <div class="col-md-4 col-md-offset-4" style="text-align: center;">
+        <h4>Search Patient Record</h4>
+        <p><i>You can also search by <a href="{{ url('/dentist/searchpatient/date') }}">date</a>.</i></p>
+        <input class="form-control" type="text" name="search_patientdental" id="search_patientdental" placeholder="Enter patient's name here" />
+        <br/>
+        <img class="img-responsive center-block" src="{{asset('images/loading.gif')}}" id="searchloadingdental" style="display: none;"/>
+        <table id="searchTabledental" class="table" style="display: none">
+          <tr><th>Search Results</th></tr>
+          <tbody id="searchResultsdental">
+          </tbody>
+        </table>
+        <table class="table" id="searchlistofallpatientsdental">
+        <tr><th>List of All Patients Who Have Existing Dental Records</th></tr>
+          <tbody>
+            @foreach($patients as $patient)
+              <tr><td><a class="listofallpatientsdental" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-<div class="modal fade" id="searchPatientRecordInfo" role="dialog">
+<div class="modal fade" id="searchPatientRecordInfoDental" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3>Patient Information</h3>
+        <h3 style="text-align:center; ">Patient Information</h3><img class="img-circle center-block" id="searchPatientRecordInfoImg" height="100" width="100" src="{{asset('images/blankprofpic.png')}}"/>
       </div>
       <div class="modal-body">
-        <div class="row" id="remarkModal">
+        <div class="row">
           <div class="col-md-6">
             <div class="panel panel-info">
               <div class="panel-heading">Personal Data</div>
@@ -36,8 +45,8 @@
                   <tbody>
                     <tr><td>Age</td><td id="ageTd"></td></tr>
                     <tr><td>Sex</td><td id="sexTd"></td></tr>
-                    <tr><td>Course</td><td id="courseTd"></td></tr>
-                    <tr><td>Year Level</td><td id="yearlevelTd"></td></tr>
+                    <tr id="courseRow" style="display: none;"><td>Course</td><td id="courseTd"></td></tr>
+                    <tr id="yearlevelRow" style="display: none;"><td>Year Level</td><td id="yearlevelTd"></td></tr>
                     <tr><td>Date of Birth</td><td id="birthdateTd"></td></tr>
                     <tr><td>Religion</td><td id="religionTd"></td></tr>
                     <tr><td>Nationality</td><td id="nationalityTd"></td></tr>
