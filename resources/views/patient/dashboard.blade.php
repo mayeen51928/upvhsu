@@ -107,7 +107,7 @@
         			<div class="panel-group">
         				<div class="panel panel-success">
 	        				<div class="panel-heading">
-	        					<h5 style="text-align:center;">Additional Dental Record</h5>
+	        					<h5 class="text-center">Additional Dental Record</h5>
 	        				</div>
 				  				<div class="panel-body" id="additionalDentalRecordPanelBody" style="background-color:#d6e9c6; ">
 				  					<div class="row" style="background-color:#f8f8f8; padding:5px">
@@ -190,7 +190,7 @@
         			<div class="panel-group">
 						    <div class="panel panel-success">
 						      <div class="panel-heading">
-						      	<h5 style="text-align:center;">Dental Billing Record</h5>
+						      	<h5 class="text-center">Dental Billing Record</h5>
 						      </div>
 						      <div class="panel-body">
 						      	<table class="table" id="dental_billing_record_dashboard">

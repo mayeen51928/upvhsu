@@ -97,13 +97,29 @@ class PagesController extends Controller
 
     public function viewmedicalstaffinfo(Request $request)
     {
-    	$schedules = MedicalSchedule::where('schedule_day', '>', date('Y-m-d'))->where('staff_id', $request->staff_id)->get();
-    	$schedules_formatted = array();
-		foreach ($schedules as $schedule){
-			array_push($schedules_formatted, date_format(date_create($schedule->schedule_day), 'F j, Y'));
-		}
-		// dd($schedules_formatted);
-    	return response()->json(['staff_info' => Staff::find($request->staff_id), 'schedules' => $schedules_formatted]); 
+    	if(Staff::find($request->staff_id)->staff_type_id == 2)
+    	{
+    		$schedules = MedicalSchedule::where('schedule_day', '>', date('Y-m-d'))->where('staff_id', $request->staff_id)->orderBy('schedule_day')->get();
+	    	$schedules_formatted = array();
+			foreach ($schedules as $schedule){
+				array_push($schedules_formatted, date_format(date_create($schedule->schedule_day), 'F j, Y'));
+			}
+			// dd($schedules_formatted);
+	    	return response()->json(['staff_info' => Staff::find($request->staff_id), 'schedules' => $schedules_formatted]); 
+    	}
+    	if(Staff::find($request->staff_id)->staff_type_id == 1)
+    	{
+    		$schedules = DentalSchedule::where('schedule_start', '>', date('Y-m-d'))->where('staff_id', $request->staff_id)->orderBy('schedule_start')->get();
+	    	$schedules_formatted = array();
+	    	$schedules_time = array();
+			foreach ($schedules as $schedule){
+				array_push($schedules_formatted, date_format(date_create($schedule->schedule_start), 'F j, Y'));
+				array_push($schedules_time,date_format(date_create($schedule->schedule_start), 'H:i:s').' - '.date_format(date_create($schedule->schedule_end), 'H:i:s'));
+			}
+			// dd($schedules_formatted);
+	    	return response()->json(['staff_info' => Staff::find($request->staff_id), 'schedules' => $schedules_formatted, 'times' =>$schedules_time]); 
+    	}
+    	
     }
 	public function displayscheduledental(Request $request)
 	{

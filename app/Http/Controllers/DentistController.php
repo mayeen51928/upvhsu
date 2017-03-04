@@ -936,7 +936,7 @@ class DentistController extends Controller
 				$counter = 0;
 				if($request->search_month!='00' && $request->search_date=='00' && $request->search_year=='00')
 				{
-					$search_by_months = DentalSchedule::whereMonth('schedule_start', $request->search_month)->get();
+					$search_by_months = DentalSchedule::whereMonth('schedule_start', $request->search_month)->orderBy('schedule_start', 'asc')->get();
 					if(count($search_by_months)>0)
 					{
 						$searchpatientnamearray = array();
@@ -963,7 +963,7 @@ class DentistController extends Controller
 				}
 				if($request->search_month=='00' && $request->search_date!='00' && $request->search_year=='00')
 				{
-					$search_by_dates = DentalSchedule::whereDay('schedule_start', $request->search_date)->get();
+					$search_by_dates = DentalSchedule::whereDay('schedule_start', $request->search_date)->orderBy('schedule_start', 'asc')->get();
 					if(count($search_by_dates)>0)
 					{
 						$searchpatientnamearray = array();
@@ -989,7 +989,7 @@ class DentistController extends Controller
 				}
 				if($request->search_month=='00' && $request->search_date=='00' && $request->search_year!='00')
 				{
-					$sarch_by_years = DentalSchedule::whereYear('schedule_start', $request->search_year)->get();
+					$sarch_by_years = DentalSchedule::whereYear('schedule_start', $request->search_year)->orderBy('schedule_start', 'asc')->get();
 					if(count($sarch_by_years)>0)
 					{
 						$searchpatientnamearray = array();
@@ -1015,7 +1015,7 @@ class DentistController extends Controller
 				}
 				if($request->search_month!='00' && $request->search_date!='00' && $request->search_year=='00')
 				{
-					$search_by_month_dates = DentalSchedule::whereMonth('schedule_start', $request->search_month)->whereDay('schedule_start', $request->search_date)->get();
+					$search_by_month_dates = DentalSchedule::whereMonth('schedule_start', $request->search_month)->whereDay('schedule_start', $request->search_date)->orderBy('schedule_start', 'asc')->get();
 					if(count($search_by_month_dates)>0)
 					{
 						$searchpatientnamearray = array();
@@ -1041,7 +1041,7 @@ class DentistController extends Controller
 				}
 				if($request->search_month!='00' && $request->search_date!='00' && $request->search_year!='00')
 				{
-					$search_by_month_date_years = DentalSchedule::whereMonth('schedule_start', $request->search_month)->whereDay('schedule_start', $request->search_date)->whereYear('schedule_start', $request->search_year)->get();
+					$search_by_month_date_years = DentalSchedule::whereMonth('schedule_start', $request->search_month)->whereDay('schedule_start', $request->search_date)->whereYear('schedule_start', $request->search_year)->orderBy('schedule_start', 'asc')->get();
 					if(count($search_by_month_date_years)>0)
 					{
 						$searchpatientnamearray = array();
@@ -1067,7 +1067,7 @@ class DentistController extends Controller
 				}
 				if($request->search_month!='00' && $request->search_date=='00' && $request->search_year!='00')
 				{
-					$search_by_month_years = DentalSchedule::whereMonth('schedule_start', $request->search_month)->whereYear('schedule_start', $request->search_year)->get();
+					$search_by_month_years = DentalSchedule::whereMonth('schedule_start', $request->search_month)->whereYear('schedule_start', $request->search_year)->orderBy('schedule_start', 'asc')->get();
 					if(count($search_by_month_years)>0)
 					{
 						$searchpatientnamearray = array();

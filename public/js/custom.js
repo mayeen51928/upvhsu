@@ -55,15 +55,24 @@ $(document).ready( function(){
   $('.homeForm:last').delay("500").fadeIn();
 
   // --------------------- Staff Page -----------------------
-  $('.medicalStaff .medicalStaffImg').click(function() {
+  $('.medicalStaff .clickToShowSchedule').click(function() {
     $('#staff-modal-body table').html('');
     var staffId = $(this).attr('id').split('_')[1];
     $.post('/viewmedicalstaffinfo', {staff_id: staffId}, function(data, textStatus, xhr) {
       $('#staff-modal-title').html(data['staff_info']['staff_first_name'] + ' ' + data['staff_info']['staff_last_name'] + "'s Schedule");
-      for(var i=0; i < data['schedules'].length; i++)
-          {
-            $('#staff-modal-body table').append("<tr><td>" + data['schedules'][i] +"</td></tr>");
-          }
+      if(data['times'])
+      {
+        for(var i=0; i < data['schedules'].length; i++)
+        {
+          $('#staff-modal-body table').append("<tr><td class='text-center'>" + data['schedules'][i] +"</td><td>" + data['times'][i] + "</tr>");
+        }
+      }
+      else{
+        for(var i=0; i < data['schedules'].length; i++)
+        {
+          $('#staff-modal-body table').append("<tr><td class='text-center'>" + data['schedules'][i] +"</td></tr>");
+        }
+      }
       $('#staffinfomodal').modal();
     });
     

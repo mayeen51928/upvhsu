@@ -57,7 +57,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Confirm Payment?</h4>
       </div>
-      <div class="modal-body" style="text-align:center; ">
+      <div class="modal-body text-center">
         <button type="button" class="btn btn-primary" id="addMedicalBillingButton">Confirm</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>

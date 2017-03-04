@@ -319,7 +319,7 @@ class DoctorController extends Controller
 			$search_string = explode(" ",$request->search_string);
 			for($i=0; $i < sizeof($search_string); $i++)
 			{
-				$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->pluck('patient_id')->all();
+				$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->orderBy('patient_last_name', 'asc')->pluck('patient_id')->all();
 			}
 			if(count($search_patient_id_records) > 0){
 				$searchpatientfirstnamearray = array();
@@ -346,16 +346,12 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatientbydaterecord(Request $request){
-
-		// To fix: when searching for first name and last name combination
-		// already fixed chereettt
-		// dd($request->search_string);
 		if($request->search_month!='00' || $request->search_date!='00' || $request->search_year!='00')
 		{
 			$counter = 0;
 			if($request->search_month!='00' && $request->search_date=='00' && $request->search_year=='00')
 			{
-				$search_by_months = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->get();
+				$search_by_months = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_months)>0)
 				{
 					$searchpatientnamearray = array();
@@ -380,7 +376,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month=='00' && $request->search_date!='00' && $request->search_year=='00')
 			{
-				$search_by_dates = MedicalSchedule::whereDay('schedule_day', $request->search_date)->get();
+				$search_by_dates = MedicalSchedule::whereDay('schedule_day', $request->search_date)->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_dates)>0)
 				{
 					$searchpatientnamearray = array();
@@ -405,7 +401,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month=='00' && $request->search_date=='00' && $request->search_year!='00')
 			{
-				$sarch_by_years = MedicalSchedule::whereYear('schedule_day', $request->search_year)->get();
+				$sarch_by_years = MedicalSchedule::whereYear('schedule_day', $request->search_year)->orderBy('schedule_day', 'asc')->get();
 				if(count($sarch_by_years)>0)
 				{
 					$searchpatientnamearray = array();
@@ -430,7 +426,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month!='00' && $request->search_date!='00' && $request->search_year=='00')
 			{
-				$search_by_month_dates = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->get();
+				$search_by_month_dates = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_month_dates)>0)
 				{
 					$searchpatientnamearray = array();
@@ -455,7 +451,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month!='00' && $request->search_date!='00' && $request->search_year!='00')
 			{
-				$search_by_month_date_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->whereYear('schedule_day', $request->search_year)->get();
+				$search_by_month_date_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->whereYear('schedule_day', $request->search_year)->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_month_date_years)>0)
 				{
 					$searchpatientnamearray = array();
@@ -480,7 +476,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month!='00' && $request->search_date=='00' && $request->search_year!='00')
 			{
-				$search_by_month_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereYear('schedule_day', $request->search_year)->get();
+				$search_by_month_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereYear('schedule_day', $request->search_year)->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_month_years)>0)
 				{
 					$searchpatientnamearray = array();
@@ -509,35 +505,6 @@ class DoctorController extends Controller
 		{
 			return response()->json(['counter' => 'blankstring']);
 		}
-			// dd($searchpatientappointmentidyarray);
-			// dd($searchpatientscheduledayarray);
-			// dd($searchpatientnamearray);
-			// $search_date = MedicalSchedule::whereYear('schedule_day', $request->search_year)->whereMonth('schedule_day', $request->search_month)->get();
-			
-			// 	$search_patient_id_records = Patient::where('patient_first_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_middle_name', 'like', '%'.$search_string[$i].'%')->orWhere('patient_last_name', 'like', '%'.$search_string[$i].'%')->pluck('patient_id')->all();
-			// }
-		// 	if(count($search_patient_id_records) > 0){
-		// 		$searchpatientfirstnamearray = array();
-		// 		$searchpatientlastnamearray = array();
-		// 		$searchpatientidarray = array();
-		// 		foreach ($search_patient_id_records as $search_patient_id_record)
-		// 		{
-		// 			array_push($searchpatientfirstnamearray, Patient::find($search_patient_id_record)->patient_first_name);
-		// 			array_push($searchpatientlastnamearray, Patient::find($search_patient_id_record)->patient_last_name);
-		// 			array_push($searchpatientidarray, $search_patient_id_record);
-		// 		}
-		// 		$counter++;
-		// 		return response()->json(['searchpatientidarray' => $searchpatientidarray, 'searchpatientfirstnamearray' => $searchpatientfirstnamearray, 'searchpatientlastnamearray' => $searchpatientlastnamearray, 'counter' => $counter]);
-		// 	}
-		// 	else
-		// 	{
-		// 		return response()->json(['counter' => $counter]);
-		// 	}
-		// }
-		// else
-		// {
-		// 	return response()->json(['counter' => 'blankstring']);
-		// }
 	}
 
 	public function displaypatientrecordsearch(Request $request){
@@ -595,7 +562,7 @@ class DoctorController extends Controller
 
 	public function viewrecords($id)
 	{
-		$params['records'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->get();
+		$params['records'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->orderBy('schedule_day', 'desc')->get();
 		// dd($params['records']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
