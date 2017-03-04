@@ -62,6 +62,7 @@
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/admin') }}">Dashboard</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'addstaffaccount')class="active" @endif><a href="{{ url('/admin/addaccount') }}">Add Staff Account</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'addstudentnumber')class="active" @endif><a href="{{ url('/admin/addstudent') }}">Add Student Number to Database</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'editservices')class="active" @endif><a href="{{ url('/admin/editservices') }}">Edit Services' Rates</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'generateschedule')class="active" @endif><a href="{{ url('/admin/generateschedule') }}">Generate PE Schedule</a></li>
 						@endif
 						<li>

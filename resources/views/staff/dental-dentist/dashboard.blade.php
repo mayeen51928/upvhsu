@@ -27,14 +27,14 @@
 							</tr>
 						</thead>
 						<tbody>
-	           			@foreach ($dental_appointments_fin as $dental_appointment_fin)
+	           	@foreach ($dental_appointments_fin as $dental_appointment_fin)
 							<tr>
 								<td>{{ $dental_appointment_fin->patient_first_name }} {{ $dental_appointment_fin->patient_last_name }}</td>
 								<td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dental_appointment_fin->schedule_start)->format('H:i:s') }} - {{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dental_appointment_fin->schedule_end)->format('H:i:s') }}</td>
 								<td>{{ $dental_appointment_fin->reasons }}</td>
 								<td><form action="/dentist/updatedentalrecord" method="POST">{{ csrf_field() }}<input type="hidden" value="{{ $dental_appointment_fin->id }}" name="addDentalRecord"><input type="hidden" value="{{ $dental_appointment_fin->patient_id }}" name="addDentalRecord2"><input type="submit" class="btn btn-primary btn-xs addDentalRecordButton" id="{{ $dental_appointment_fin->id }}" value="Update Diagnosis"></form></td>
 							</tr>
-	            		@endforeach
+	            @endforeach
 						</tbody>
 					</table>
 				</div>

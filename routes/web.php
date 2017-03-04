@@ -114,7 +114,11 @@ Route::post('/admin/createstaffaccount', 'AdminController@createstaffaccount');
 Route::post('/admin/postannouncement', 'AdminController@postannouncement');
 Route::get('/admin/addstudent', 'AdminController@addstudent');
 Route::post('/admin/createstudent', 'AdminController@createstudent');
+Route::get('/admin/editservices', 'AdminController@modifyservices');
 Route::get('/admin/generateschedule', 'AdminController@generateschedule');
+Route::post('/display_medical_services', 'AdminController@viewservicesmedical');
+Route::post('/display_dental_services', 'AdminController@viewservicesdental');
+Route::post('/edit_medical_services', 'AdminController@editmedicalservices');
 
 //For wrong URLs
 // Route::get('/{any}', function($any){

@@ -7,7 +7,6 @@
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<div class="personal-information">
 				<div class="row page-header">
-					@foreach($patient_infos as $patient_info)
 					<div class="col-md-4 col-sm-4 col-xs-4">
 						<h4>Name</h4>
 						<div>{{ $patient_info->patient_first_name }} {{ $patient_info->patient_last_name }}</div>
@@ -20,7 +19,6 @@
 						<h4>Reasons</h4>
 						<div>{{ $patient_info->reasons }}</div>
 					</div>
-					@endforeach
 				</div>
 			</div>  
 			<ul class="nav nav-pills nav-justified">
@@ -280,9 +278,7 @@
 									</div>
 								</div>
 								<div class="panel-footer">
-									@foreach ($appointment_ids as $appointment_id)
-									<button class="btn btn-primary btn-block addedDentalRecord" id="addedDentalRecord_{{ $appointment_id->id }}" disabled>Save diagnosis</button>
-						      @endforeach
+									<button class="btn btn-primary btn-block addedDentalRecord" id="addedDentalRecord_{{ $patient_info->id }}" disabled>Save diagnosis</button>
 						    </div>
 			  				@else
 			  				<div class="panel-body" id="additionalDentalRecordPanelBody">
@@ -380,9 +376,7 @@
 									</div>
 			  				</div>
 			  				<div class="panel-footer">
-									@foreach ($appointment_ids as $appointment_id)
-									<button class="btn btn-primary btn-block addedDentalRecord" id="addedDentalRecord_{{ $appointment_id->id }}">Save diagnosis</button>
-						      @endforeach
+									<button class="btn btn-primary btn-block addedDentalRecord" id="addedDentalRecord_{{ $patient_info->id }}">Save diagnosis</button>
 						    </div>
 			  				@endif
 						  </div>
@@ -424,10 +418,8 @@
 			</div>
 		  </div>
 		  <div class="modal-footer">
-		  	@foreach ($appointment_ids as $appointment_id)
-				<button type="button" class="btn btn-info updateDentalRecord" id="updateDentalRecord_{{ $appointment_id->id }}">Update</button>
+				<button type="button" class="btn btn-info updateDentalRecord" id="updateDentalRecord_{{ $patient_info->id }}">Update</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-		  	@endforeach
 		  </div>
 		</div>
   </div>
@@ -445,10 +437,8 @@
 				<h4>Are you sure you want to save this?</h4>
 		  </div>
 		  <div class="modal-footer">
-				@foreach ($appointment_ids as $appointment_id)
-				<button type="button" class="btn btn-info confirmAdditionalDentalRecord" id="confirmAdditionalDentalRecord_{{ $appointment_id->id }}">Save</button>
+				<button type="button" class="btn btn-info confirmAdditionalDentalRecord" id="confirmAdditionalDentalRecord_{{ $patient_info->id }}">Save</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-			  @endforeach
 		  </div>
 		</div>
   </div>

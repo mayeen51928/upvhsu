@@ -9,14 +9,14 @@ $('.dental_chart').click(function(){
 		  data: {teeth_id:  teethId, _token: token},
 		  success: function(data)
 		  {
-			if (data['status'] == 1) {
-				$('.condition').val(data['condition_id']);
-				$('.operation').val(data['operation_id']);
-			}
-			else{
-				$('.condition').val(0);
-				$('.operation').val(0);
-			}
+				if (data['status'] == 1) {
+					$('.condition').val(data['condition_id']);
+					$('.operation').val(data['operation_id']);
+				}
+				else{
+					$('.condition').val(0);
+					$('.operation').val(0);
+				}
 		  }
 	  });
 		window.setTimeout(function(){
@@ -101,39 +101,6 @@ $('.dental_chart').mouseover(function(){
     });
 });
 
-$('.dental_chart').mouseout(function(){
-    $('#condition_1').css({	'background-color':'#ff4000',
-    						'border-color':'#ff4000'
-    					});
-    $('#condition_2').css({	'background-color':'#ffff00',
-    						'border-color':'#ffff00'
-    					});
-    $('#condition_3').css({	'background-color':'#00ff00',
-    						'border-color':'#00ff00'
-    					});
-    $('#condition_4').css({	'background-color':'#00ffff',
-    						'border-color':'#00ffff'
-    					});
-    $('#condition_5').css({	'background-color':'#0000ff',
-    						'border-color':'#0000ff'
-    					});
-    $('#operation_1').css({	'background-color':'#bf00ff',
-    						'border-color':'#bf00ff'
-    					});
-    $('#operation_2').css({	'background-color':'#ff0080',
-    						'border-color':'#ff0080'
-    					});
-    $('#operation_3').css({	'background-color':'#ff0000',
-    						'border-color':'#ff0000'
-    					});
-    $('#operation_4').css({	'background-color':'#808080',
-    						'border-color':'#808080'
-    					});
-    $('#operation_5').css({	'background-color':'#194d19',
-    						'border-color':'#194d19'
-    					});
-    
-});
 
 
 $('.updateDentalDiagnosis').click(function(){

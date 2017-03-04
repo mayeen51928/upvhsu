@@ -62,19 +62,17 @@ class DentistController extends Controller
 		{
 			$appointment_id = $request->addDentalRecord;
 			$patient_id = $request->addDentalRecord2;
+
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'dashboard';
 
-			$patient_infos = DB::table('dental_appointments')
+			$patient_info = DB::table('dental_appointments')
 					->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
 					->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')
 					->orderBy('dental_schedules.schedule_start', 'desc')
 					->where('dental_appointments.id', '=', $appointment_id)
-					->get();
+					->first();
 
-			$appointment_ids = DB::table('dental_appointments')
-					->where('dental_appointments.id', '=', $appointment_id)
-					->get();
 			$stacks_condition = array();
 			$stacks_operation = array();
 			for ($x = 55; $x >= 51; $x--)
@@ -612,7 +610,7 @@ class DentistController extends Controller
 				$counter = 1;
 			}
 					
-			return view('staff.dental-dentist.adddentalrecord', $params, compact('appointment_ids', 'patient_infos', 'stacks_condition', 'stacks_operation', 'stacks_condition2', 'stacks_operation2', 'stacks_condition3', 'stacks_operation3', 'stacks_condition4', 'stacks_operation4', 'stacks_condition5', 'stacks_operation5', 'stacks_condition6', 'stacks_operation6', 'stacks_condition7', 'stacks_operation7', 'stacks_condition8', 'stacks_operation8', 'counter', 'additional_dental_records'));
+			return view('staff.dental-dentist.adddentalrecord', $params, compact('patient_info', 'stacks_condition', 'stacks_operation', 'stacks_condition2', 'stacks_operation2', 'stacks_condition3', 'stacks_operation3', 'stacks_condition4', 'stacks_operation4', 'stacks_condition5', 'stacks_operation5', 'stacks_condition6', 'stacks_operation6', 'stacks_condition7', 'stacks_operation7', 'stacks_condition8', 'stacks_operation8', 'counter', 'additional_dental_records'));
 		}
 
 		public function updatedentalrecordmodal(Request $request)
