@@ -767,8 +767,11 @@ class DentistController extends Controller
 	                $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
 	                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 	                $json = json_decode(file_get_contents($url), true);
-	                $distance=$json['rows'][0]['elements'][0]['distance']['value'];
-	                $town->distance_to_miagao = $distance/1000;
+	                if($json['rows'][0]['elements'][0]['status'] == 'OK')
+					{
+						$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+						$town->distance_to_miagao = $distance/1000;
+					}
 	                $town->save();
 	                $dentist->town_id = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first()->id;
 	            }
@@ -784,8 +787,11 @@ class DentistController extends Controller
 	            $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
 	            $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 	            $json = json_decode(file_get_contents($url), true);
-	            $distance=$json['rows'][0]['elements'][0]['distance']['value'];
-	            $town->distance_to_miagao = $distance/1000;
+	            if($json['rows'][0]['elements'][0]['status'] == 'OK')
+				{
+					$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+					$town->distance_to_miagao = $distance/1000;
+				}
 	            $town->save();
 	            $dentist->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
 	        }
@@ -908,6 +914,189 @@ class DentistController extends Controller
 	        $params['guardian_tel_number'] = Guardian::find($guardian->guardian_id)->guardian_telephone_number;
 	        $params['guardian_cellphone'] = Guardian::find($guardian->guardian_id)->guardian_contact_number;
 			return response()->json(['patient_info' => $params]);
+		}
+		public function viewrecords($id)
+		{
+			$params['records'] = DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->where('patient_id', $id)->get();
+			// dd($params['records']);
+			$params['navbar_active'] = 'account';
+			$params['sidebar_active'] = 'searchpatient';
+			return view('staff.dental-dentist.viewrecords', $params);
+		}
+		public function searchpatientbydate(){
+			$params['patients'] = DentalAppointment::select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
+			$params['navbar_active'] = 'account';
+			$params['sidebar_active'] = 'searchpatient';
+			return view('staff.dental-dentist.searchpatientbydate', $params);
+		}
+
+		public function searchpatientbydaterecorddental(Request $request){
+			if($request->search_month!='00' || $request->search_date!='00' || $request->search_year!='00')
+			{
+				$counter = 0;
+				if($request->search_month!='00' && $request->search_date=='00' && $request->search_year=='00')
+				{
+					$search_by_months = DentalSchedule::whereMonth('schedule_start', $request->search_month)->get();
+					if(count($search_by_months)>0)
+					{
+						$searchpatientnamearray = array();
+						$searchpatientscheduledayarray = array();
+						$searchpatientappointmentidyarray = array();
+						$searchpatientscheduletimearray = array();
+						foreach($search_by_months as $search_by_month){
+							$get_appointment_ids = DentalAppointment::where('dental_schedule_id', $search_by_month->id)->get();
+							foreach($get_appointment_ids as $get_appointment_id){
+								
+								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);
+								array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+							}
+						}
+						$counter++;
+						return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'searchpatientscheduletimearray' => $searchpatientscheduletimearray,'counter' => $counter]);
+					}
+					else
+					{
+						return response()->json(['counter' => $counter]);
+					}
+				}
+				if($request->search_month=='00' && $request->search_date!='00' && $request->search_year=='00')
+				{
+					$search_by_dates = DentalSchedule::whereDay('schedule_start', $request->search_date)->get();
+					if(count($search_by_dates)>0)
+					{
+						$searchpatientnamearray = array();
+						$searchpatientscheduledayarray = array();
+						$searchpatientappointmentidyarray = array();
+						$searchpatientscheduletimearray = array();
+						foreach($search_by_dates as $search_by_date){
+							$get_appointment_ids = DentalAppointment::where('dental_schedule_id', $search_by_date->id)->get();
+							foreach($get_appointment_ids as $get_appointment_id){
+								
+								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+							}
+						}
+						$counter++;
+						return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'searchpatientscheduletimearray' => $searchpatientscheduletimearray,'counter' => $counter]);
+					}
+					else
+					{
+						return response()->json(['counter' => $counter]);
+					}
+				}
+				if($request->search_month=='00' && $request->search_date=='00' && $request->search_year!='00')
+				{
+					$sarch_by_years = DentalSchedule::whereYear('schedule_start', $request->search_year)->get();
+					if(count($sarch_by_years)>0)
+					{
+						$searchpatientnamearray = array();
+						$searchpatientscheduledayarray = array();
+						$searchpatientappointmentidyarray = array();
+						$searchpatientscheduletimearray = array();
+						foreach($sarch_by_years as $sarch_by_year){
+							$get_appointment_ids = DentalAppointment::where('dental_schedule_id', $sarch_by_year->id)->get();
+							foreach($get_appointment_ids as $get_appointment_id){
+								
+								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+							}
+						}
+						$counter++;
+						return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'searchpatientscheduletimearray' => $searchpatientscheduletimearray,'counter' => $counter]);
+					}
+					else
+					{
+						return response()->json(['counter' => $counter]);
+					}
+				}
+				if($request->search_month!='00' && $request->search_date!='00' && $request->search_year=='00')
+				{
+					$search_by_month_dates = DentalSchedule::whereMonth('schedule_start', $request->search_month)->whereDay('schedule_start', $request->search_date)->get();
+					if(count($search_by_month_dates)>0)
+					{
+						$searchpatientnamearray = array();
+						$searchpatientscheduledayarray = array();
+						$searchpatientappointmentidyarray = array();
+						$searchpatientscheduletimearray = array();
+						foreach($search_by_month_dates as $search_by_month_date){
+							$get_appointment_ids = DentalAppointment::where('dental_schedule_id', $search_by_month_date->id)->get();
+							foreach($get_appointment_ids as $get_appointment_id){
+								
+								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+							}
+						}
+						$counter++;
+						return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'searchpatientscheduletimearray' => $searchpatientscheduletimearray,'counter' => $counter]);
+					}
+					else
+					{
+						return response()->json(['counter' => $counter]);
+					}
+				}
+				if($request->search_month!='00' && $request->search_date!='00' && $request->search_year!='00')
+				{
+					$search_by_month_date_years = DentalSchedule::whereMonth('schedule_start', $request->search_month)->whereDay('schedule_start', $request->search_date)->whereYear('schedule_start', $request->search_year)->get();
+					if(count($search_by_month_date_years)>0)
+					{
+						$searchpatientnamearray = array();
+						$searchpatientscheduledayarray = array();
+						$searchpatientappointmentidyarray = array();
+						$searchpatientscheduletimearray = array();
+						foreach($search_by_month_date_years as $search_by_month_date_year){
+							$get_appointment_ids = DentalAppointment::where('dental_schedule_id', $search_by_month_date_year->id)->get();
+							foreach($get_appointment_ids as $get_appointment_id){
+								
+								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+							}
+						}
+						$counter++;
+						return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'searchpatientscheduletimearray' => $searchpatientscheduletimearray,'counter' => $counter]);
+					}
+					else
+					{
+						return response()->json(['counter' => $counter]);
+					}
+				}
+				if($request->search_month!='00' && $request->search_date=='00' && $request->search_year!='00')
+				{
+					$search_by_month_years = DentalSchedule::whereMonth('schedule_start', $request->search_month)->whereYear('schedule_start', $request->search_year)->get();
+					if(count($search_by_month_years)>0)
+					{
+						$searchpatientnamearray = array();
+						$searchpatientscheduledayarray = array();
+						$searchpatientappointmentidyarray = array();
+						$searchpatientscheduletimearray = array();
+						foreach($search_by_month_years as $search_by_month_year){
+							$get_appointment_ids = DentalAppointment::where('dental_schedule_id', $search_by_month_year->id)->get();
+							foreach($get_appointment_ids as $get_appointment_id){
+								
+								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
+								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+							}
+						}
+						$counter++;
+						return response()->json(['searchpatientappointmentidyarray' => $searchpatientappointmentidyarray, 'searchpatientscheduledayarray' => $searchpatientscheduledayarray, 'searchpatientnamearray' => $searchpatientnamearray, 'searchpatientscheduletimearray' => $searchpatientscheduletimearray,'counter' => $counter]);
+					}
+					else
+					{
+						return response()->json(['counter' => $counter]);
+					}
+					
+				}
+			}
+			else
+			{
+				return response()->json(['counter' => 'blankstring']);
+			}
 		}
 		public function addschedule(Request $request)
 		{

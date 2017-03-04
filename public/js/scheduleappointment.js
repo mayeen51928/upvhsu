@@ -182,6 +182,8 @@ $(document).ready( function(){
   					$('#selDentalDate').attr("disabled", "disabled");
   					$('#selDentalTime').attr("disabled", "disabled");
   					$('#submitDentalAppointment').addClass("disabled");
+            $('#selectdentaldate').attr('disabled', 'disabled');
+            $('#selectdentaldoctor').attr('disabled', 'disabled');
   					$('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
   					$('#submitdentalappointment').attr("disabled", "disabled");
   				}
@@ -191,6 +193,10 @@ $(document).ready( function(){
           }
   				else
   				{
+            $('#login_dental_error').html('');
+            $('#loginmodaldental #user_name_modal_dental').val('');
+            $('#loginmodadental #password_modal_dental').val('');
+            $('#loginmodaldental').modal();
   					$('#loginmodaldental').modal();
   				}
   			});
@@ -246,6 +252,8 @@ $(document).ready( function(){
 	  				$('#selMedicalDate').attr("disabled", "disabled");
 	  				$('#selMedicalDoctor').attr("disabled", "disabled");
 	  				$('#submitMedicalAppointment').addClass("disabled");
+            $('#selectmedicaldate').attr('disabled', 'disabled');
+            $('#selectmedicaldoctor').attr('disabled', 'disabled');
 	  				$('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
 	  				$("#submitmedicalappointment").attr('disabled','disabled');
   				}
@@ -255,6 +263,7 @@ $(document).ready( function(){
           }
   				else
   				{
+            $('#login_medical_error').html('');
             $('#loginmodalmedical #user_name_modal_medical').val('');
             $('#loginmodalmedical #password_modal_medical').val('');
   					$('#loginmodalmedical').modal();
@@ -308,6 +317,8 @@ $(document).ready( function(){
         		$('#selDentalDate').attr("disabled", "disabled");
         		$('#selDentalTime').attr("disabled", "disabled");
         		$('#submitDentalAppointment').addClass("disabled");
+            $('#selectdentaldate').attr('disabled', 'disabled');
+            $('#selectdentaltime').attr('disabled', 'disabled');
         		$('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
             $('#submitdentalappointment').attr("disabled", "disabled");
         		$('#navigationBar').load(location.href + " #navigationBar");
@@ -332,11 +343,13 @@ $(document).ready( function(){
         } , function(data){
         	if(data['passwordmatch']=='yes')
         	{
-        		$('#login_dental_error').html('');
+        		$('#login_medical_error').html('');
         		$('#medicalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
                     $('#medicalNotes').attr("disabled", "disabled");
                     $('#selMedicalDate').attr("disabled", "disabled");
                     $('#submitMedicalAppointment').addClass("disabled");
+                    $('#selectmedicaldate').attr('disabled', 'disabled');
+                    $('#selectmedicaldoctor').attr('disabled', 'disabled');
                     $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
                     $('#navigationBar').load(location.href + " #navigationBar");
                     $("#submitmedicalappointment").attr('disabled','disabled');
@@ -433,6 +446,7 @@ $(document).ready( function(){
             $('#maintenance_medication_history_dental').val()
             )
         {
+          $('#loginmodaldental input, #loginmodaldental select, ').attr('disabled', 'disabled');
         	$.post('/signupfromdentalappointment',{
 	    		user_name:$('#user_name_modal_dental').val(),
 	            password:$('#password_modal_dental').val(),
@@ -483,8 +497,8 @@ $(document).ready( function(){
               $('#login_dental_error').html('');
               $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
               $('#dentalNotes').attr("disabled", "disabled");
-              $('#selDentalDate').attr("disabled", "disabled");
-              $('#selDentalTime').attr("disabled", "disabled");
+              $('#selectdentaldate').attr('disabled', 'disabled');
+              $('#selectdentaldoctor').attr('disabled', 'disabled');
               $('#submitDentalAppointment').addClass("disabled");
               $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
               $('#navigationBar').load(location.href + " #navigationBar");
@@ -630,6 +644,7 @@ $(document).ready( function(){
     $('#signupconfirmMedical_modal').click(function(){
       $('#login_medical_error').html('');
     	var scheduleID = $('#selectmedicaldoctor').find(':selected')[0].id;
+      $('#loginmodalmedical input, #loginmodalmedical select').attr('disabled', 'disabled');
     	if(
         	$('#user_name_modal_medical').val() &&
         	$('#password_modal_medical').val() &&
@@ -673,6 +688,7 @@ $(document).ready( function(){
             $('#maintenance_medication_history_medical').val()
             )
         {
+          // $('#loginmodalmedical input, #loginmodalmedical select').attr('disabled', 'disabled');
         	$.post('/signupfrommedicalappointment',{
 	    		user_name:$('#user_name_modal_medical').val(),
 	            password:$('#password_modal_medical').val(),
@@ -723,8 +739,8 @@ $(document).ready( function(){
               $('#login_medical_error').html('');
               $('#medicalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
               $('#medicalNotes').attr("disabled", "disabled");
-              $('#selMedicalDate').attr("disabled", "disabled");
-              $('#selMedicalTime').attr("disabled", "disabled");
+              $('#selectmedicaldate').attr('disabled', 'disabled');
+              $('#selectmedicaldoctor').attr('disabled', 'disabled');
               $('#submitMedicalAppointment').addClass("disabled");
               $('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
               $('#navigationBar').load(location.href + " #navigationBar");
@@ -734,6 +750,7 @@ $(document).ready( function(){
             }
             else
             {
+              $('#loginmodalmedical input, #loginmodalmedical select').removeAttr('disabled');
               $('#login_medical_error').css('color', 'red').delay(2000).html(data['message']);
             }
 	        	
@@ -741,6 +758,7 @@ $(document).ready( function(){
         }
         else
         {
+          $('#loginmodalmedical input, #loginmodalmedical select').removeAttr('disabled');
           $('#login_medical_error').css('color', 'red').delay(2000).html('Please fill out all fields!');
         }
     });
