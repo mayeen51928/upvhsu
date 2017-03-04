@@ -447,5 +447,151 @@ $('.listofallpatientsdental').click(function()
 		});
 	});
 });
+function leapYear(year)
+{
+  return ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+}
+$("#search_month").change(function(){
+	var month = $(this).find(':selected')[0].value;
+	// console.log(month);
+	
+	$('#search_date').html('');
+	$('#search_date').removeAttr('disabled');
+	$('#search_date').append('<option value="00" selected></option>');
+	if(month==0)
+	{
+		// for(var i=1; i<32; i++)
+		// {
+		// 	$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		// }
+		$('#search_date').attr('disabled', 'disabled');
+	}
+	if(month == 01 || month == 03 || month == 05 || month == 07|| month == 08 || month == 10|| month == 12)
+	{
+		
+		for(var i=1; i<32; i++)
+		{
+			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		}
+	}
+	else if(month == 02)
+	{
+		if(leapYear($('#search_year').find(':selected')[0].value))
+		{
+			for(var i=1; i<30; i++)
+			{
+				$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+			}
+		}
+		else
+		{
+			for(var i=1; i<29; i++)
+			{
+				$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+			}
+		}
+		
+	}
+	else if(month==04 || month==06 || month==09 || month == 11)
+	{
+		for(var i=1; i<31; i++)
+		{
+			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		}
+	}
+});
+$("#search_year").change(function(){
+	var year = $(this).find(':selected')[0].value;
+	var month = $('#search_month').find(':selected')[0].value;
+	if(leapYear(year) == true && month==02)
+	{
+		$('#search_date').html('');
+		$('#search_date').append('<option value="00" selected></option>');
+		// $('#search_date').append('<option value="00">none</option>');
+		for(var i=1; i<30; i++)
+		{
+			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		}
+	}
+	if(leapYear(year) == false && month==02)
+	{
+		$('#search_date').html('');
+		$('#search_date').append('<option value="00" selected></option>');
+		// $('#search_date').append('<option value="00">none</option>');
+		for(var i=1; i<29; i++)
+		{
+			$('#search_date').append('<option value="'+i+'">' + i + '</option>');
+		}
+	}
+});
+$('#searchbydatebuttondental').click(function() {
+	console.log($('#search_month').find(':selected')[0].value);
+	console.log($('#search_date').find(':selected')[0].value);
+	console.log($('#search_year').find(':selected')[0].value);
+	$('#searchlistofallpatients').hide();
+		$('#searchTable').hide();
+		// $('#searchResults').html("");
+		$('#searchloading').show();
+	$.post('/searchpatientbydaterecorddental',
+			{
+				search_month: $('#search_month').find(':selected')[0].value,
+				search_date: $('#search_date').find(':selected')[0].value,
+				search_year: $('#search_year').find(':selected')[0].value,
+			}, function(data) {
+				// $('#searchlistofallpatients').hide();
+				$('#searchResults').html("");
+				// $('#searchTable').hide();
+				if(data['counter']>0)
+				{
+			  		output = '';
+	  				for(var i=0; i < data['searchpatientappointmentidyarray'].length; i++)
+	  				{
+	  					output += "<tr><td>" + data['searchpatientscheduledayarray'][i] + "</td><td>" + data['searchpatientscheduletimearray'][i]+"</td><td><a class='searchQueryResults dentalrecorddate' id='dentalrecorddate_"+data['searchpatientappointmentidyarray'][i]+"'>"+data['searchpatientnamearray'][i]+"</a></td></tr>";
+	  				}
+	  				$('#searchlistofallpatients').hide();
+	  				$('#searchloading').hide();
+	  				$('#searchResults').html(output);
+  					$('#searchTable').show();
+	  				$('.dentalrecorddate').click(function() {
+						var dentalAppointmentId = $(this).attr('id').split('_')[1];
+						$.post('/viewindividualrecordfromsearchdental',
+							{
+								dental_appointment_id: dentalAppointmentId}, function(data, textStatus, xhr)
+							{
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								$('#viewDentalRecordBasedOnDateModal').modal();
+						});
+					});
+					
+  				}
+  				else if(data['counter'] == 'blankstring')
+  				{
+  					$('#searchloading').hide();
+					$('#searchTable').hide();
+					$('#searchResults').html("");
+					$('#searchlistofallpatients').show();
+  				}
+  				else
+  				{
+  					$('#searchloading').hide();
+  					$('#searchlistofallpatients').hide();
+  					$('#searchTable').show();
+  					$('#searchResults').html("<tr><td>No results found.</td></tr>");
+  				}
+  			});
+});
 // ------------------------------ End of Search Patient ---------------------
 });
