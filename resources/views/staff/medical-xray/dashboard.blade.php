@@ -33,6 +33,7 @@
               <td>{{date_format(date_create($xray_request->created_at), 'F j, Y')}}</td>
               <td>{{$xray_request->staff_first_name}} {{$xray_request->staff_last_name}}</td>
               <td><button class="btn btn-info btn-xs addXrayResult" id="addXrayResult_{{$xray_request->id}}">Diagnosis</button></td>
+              <td><button class="btn btn-primary btn-xs addBillingToXray" id="addBillingToXray_{{$xray_request->medical_appointment_id}}">Billing</button></td>
             </tr>
             @endforeach
           </tbody>
@@ -70,4 +71,29 @@
 		</div>
 	</div>
 </div>
+
+<div id="xrayBillingModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="patient_name"></div>
+      </div>
+      <div class="modal-body">
+        <table class="displayServices"></table>
+        <div class="xray-bill-input" id="xray-bill-input-text"></div> 
+      </div>
+      <div class="modal-footer">
+        <div class="xray-bill-confirm" id="xray-bill-confirm-button" style="text-align:center; "></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // token and createPostUrl are needed to be passed to AJAX method call
+  var token = '{{csrf_token()}}';
+  var addBillingXray = '/add_billing_xray';
+  var confirmBillingXray = '/confirm_billing_xray';
+</script>
 @endsection

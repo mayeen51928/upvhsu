@@ -7,6 +7,7 @@ use App\User;
 use App\Staff;
 use App\Announcement;
 use App\StudentNumber;
+use App\MedicalService;
 use DB;
 class AdminController extends Controller
 {
@@ -96,6 +97,31 @@ class AdminController extends Controller
 		}
 
 		return response()->json(['display_medical_services' => $display_medical_services, 'counter' => $counter]); 
+	}
+
+	public function updatemedicalservices(Request $request)
+	{
+		$medicalservices = $request->medical_services;
+		$patient_type_id = $request->patient_type_id;
+
+		$checker_if_exists = MedicalService::where('patient_type_id', $patient_type_id)->delete();
+
+		for($i=0; $i < sizeof($medicalservices); $i++){
+			if($medicalservices[$i]!=''){
+				$explode_medical_services = explode("(:::)", $medicalservices[$i]);
+				$service_description = $explode_medical_services[0];
+				$service_rate = $explode_medical_services[1];
+				$service_type = $explode_medical_services[2];
+
+				$medical_service = new MedicalService();
+				$medical_service->patient_type_id = '1';
+				$medical_service->service_description = $service_description;
+				$medical_service->service_rate = $service_rate;
+				$medical_service->service_type = $service_type;
+				$medical_service->save();
+			}
+		}
+		return response()->json(['success' => 'success']); 
 	}
 
 	public function createstaffaccount(Request $request)

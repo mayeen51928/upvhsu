@@ -81,5 +81,6 @@
   var displayMedicalServices = '/display_medical_services';
   var displayDentalServices = '/display_dental_services';
   var editMedicalServices = '/edit_medical_services';
+  var updateMedicalServices = '/update_medical_services';
 </script>
 @endsection

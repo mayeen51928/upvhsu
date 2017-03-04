@@ -511,45 +511,30 @@ $('.addBillingToMedical').click(function(){
 		  success: function(data)
 		  {
 		  	output = '';
-			$('.patient_name').html('<h4>'+ data['patient_name']+'</h4>');
-			for(var i=0; i < data['servicenamearray'].length; i++)
-			{
-				if(data['servicetypearray'][i] == 'medical'){
-					output += "<tr><td width='20%'><input type='checkbox' class='checkboxMedicalService' id="+data['serviceratearray'][i]+" value="+data['serviceidarray'][i]+"></td><td width='60%' class='medicalService'>"+data['servicenamearray'][i]+"</td><td width='60%' class='medicalServiceRate'>"+data['serviceratearray'][i]+"</td></tr>";
+				$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
+				output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
+				for (var i = 0; i < data['display_medical_services'].length; i++){
+					output += "<tr><td><input type='checkbox' class='checkboxMedicalService' id="+data['display_medical_services'][i].service_rate+" value="+data['display_medical_services'][i].id+"></td><td class='medicalService'>"+data['display_medical_services'][i].service_description+"</td><td class='medicalServiceRate'>"+data['display_medical_services'][i].service_rate+"</td></tr>";
 				}
-				else{
-					output += "<tr><td width='20%'><input type='checkbox' class='checkboxMedicalService' id="+data['serviceratearray'][i]+" disabled></td><td width='60%' class='medicalService'>"+data['servicenamearray'][i]+"</td><td width='60%' class='medicalServiceRate'>"+data['serviceratearray'][i]+"</td></tr>";
-				}	
-			}
-			$('.displayServices').html(output);
-			if(data['checker'] == '0'){
-				$(".displayServices :input").attr("disabled", true);
-				$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled>");
-				$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm-button' id='medicalBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-			}
-			else if(data['checker'] == '1'){
-				$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled>");
-				$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm-button' id='medicalBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-			}
-			else{
-				for(var i=0; i < data['servicenamearray'].length; i++)
-				{
+				$('.displayServices').html(output);
+				if(data['checker'] == '0'){
 					$(".displayServices :input").attr("disabled", true);
-					$("input[value='" + data['dental_records_result'][i] + "']").prop('checked', true);
-					$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled value="+data['checker']+">");
+					$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled>");
 					$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm-button' id='medicalBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
 				}
-			}
-			$("#medical-bill").val();
-			var fin = 0;
-			$('.checkboxMedicalService').click(function(){
-				if ($(this).is(':checked')){
-					var medicalBillRate = parseFloat($(this).attr('id'));
-					fin = parseFloat(fin+medicalBillRate);
-					$("#medical-bill").val(fin);
-				};
-			});
-			$('#medicalBillingModal').modal();
+				else{
+					$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled>");
+					$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm-button' id='medicalBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+				}
+				var fin = 0;
+				$('.checkboxMedicalService').click(function(){
+					if ($(this).is(':checked')){
+						var medicalBillRate = parseFloat($(this).attr('id'));
+						fin = parseFloat(fin+medicalBillRate);
+						$("#medical-bill").val(fin);
+					};
+				});
+				$('#medicalBillingModal').modal();
 		  }
 	  });
 });
@@ -572,6 +557,7 @@ $(document).on('click', '.medical-bill-confirm-button', function(){
 		  success: function(data)
 		  {
 		  	$('#medicalBillingModal').modal("hide");
+		  	$('#addBillingToMedical_'+appointmentId).closest("tr").remove();
 		  }
   	});
 	return false;

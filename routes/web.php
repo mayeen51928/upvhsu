@@ -101,6 +101,8 @@ Route::get('/xray/profile','XrayController@profile');
 Route::get('/xray/profile/edit','XrayController@editprofile');
 Route::post('/xray/profile/update','XrayController@updateprofile');
 Route::get('/xray/searchpatient','XrayController@searchpatient');
+Route::post('/add_billing_xray','XrayController@addbillingxray');
+Route::post('/confirm_billing_xray','XrayController@confirmbillingxray');
 
 /* ROUTES FOR CASHIER ACCOUNT */
 Route::get('/cashier','CashierController@dashboard');
@@ -122,6 +124,7 @@ Route::get('/admin/generateschedule', 'AdminController@generateschedule');
 Route::post('/display_medical_services', 'AdminController@viewservicesmedical');
 Route::post('/display_dental_services', 'AdminController@viewservicesdental');
 Route::post('/edit_medical_services', 'AdminController@editmedicalservices');
+Route::post('/update_medical_services', 'AdminController@updatemedicalservices');
 
 //For wrong URLs
 // Route::get('/{any}', function($any){

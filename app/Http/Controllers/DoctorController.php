@@ -894,117 +894,61 @@ class DoctorController extends Controller
         }
     }
 
-    public function addbillingmedical(Request $request){
+	public function addbillingmedical(Request $request){
 		$appointment_id = $request->appointment_id;
-		$checker = 0;
 
-		$display_patient_type = DB::table('patient_info')
+		$patient_info = DB::table('patient_info')
 					->join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')
 					->first();
+		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
 
-		$patient_name = $display_patient_type->patient_first_name . ' ' . $display_patient_type->patient_last_name;
-				
+		$checker = 0;
 		$physical_examination_checker = DB::table('physical_examinations')
 					->where('physical_examinations.medical_appointment_id', '=', $appointment_id)
 					->first();
-		if(count($physical_examination_checker) > 0){
+		$remarks_checker = DB::table('remarks')
+					->where('remarks.medical_appointment_id', '=', $appointment_id)
+					->first();
+		$prescription_checker = DB::table('prescriptions')
+					->where('prescriptions.medical_appointment_id', '=', $appointment_id)
+					->first();
+		if(count($physical_examination_checker)>0 && count($remarks_checker)>0 && count($prescription_checker)>0){
 			$checker = 1;
 		}
 
-		$medical_billing_checker = DB::table('medical_billings')
-					->where('medical_billings.medical_appointment_id', '=', $appointment_id)
-					->get();
-		if(count($medical_billing_checker) > 0){
-			foreach ($medical_billing_checker as $medical_amount) {
-				$checker += $medical_amount->amount;
-			}
-			$checker = $checker - 1;
-			$dental_records_result = DB::table('medical_billings')
-						->where([
-							['medical_appointment_id', '=', $appointment_id],
+
+		if($patient_info->patient_type_id == 1){
+			$display_medical_services = DB::table('medical_services')
+					->where([
+							['patient_type_id', '=', 1],
+							['service_type', '=', 'medical'],
 						])
-						->pluck('medical_service_id')
-						->all();
+					->get();
 		}
 
-
-		if($display_patient_type->patient_type_id == 1){
-			$display_medical_services_name = DB::table('upv_student_services')
-						->pluck('service_name')
-						->all();
-			$servicenamearray = array();
-			foreach ($display_medical_services_name as $display_medical_service_name){
-				array_push($servicenamearray, $display_medical_service_name);
-			}
-
-			$display_medical_services_rate = DB::table('upv_student_services')
-						->pluck('service_rate')
-						->all();
-			$serviceratearray = array();
-			foreach ($display_medical_services_rate as $display_medical_service_rate){
-				array_push($serviceratearray, $display_medical_service_rate);
-			}
-
-			$display_medical_services_type = DB::table('upv_student_services')
-						->pluck('service_type')
-						->all();
-			$servicetypearray = array();
-			foreach ($display_medical_services_type as $display_medical_service_type){
-				array_push($servicetypearray, $display_medical_service_type);
-			}
-
-			$display_medical_services_id = DB::table('upv_student_services')
-						->pluck('id')
-						->all();
-			$serviceidarray = array();
-			foreach ($display_medical_services_id as $display_medical_service_id){
-				array_push($serviceidarray, $display_medical_service_id);
-			}	
-		}
-
-		if(count($medical_billing_checker) > 0){
-			return response()->json(['patient_type' => $display_patient_type, 
-							'servicenamearray' => $servicenamearray, 
-							'serviceratearray' => $serviceratearray,
-							'servicetypearray' => $servicetypearray, 
-							'serviceidarray' => $serviceidarray, 
-							'patient_name' => $patient_name,
-							'checker' => $checker,
-							'dental_records_result' => $dental_records_result,
-							]);
-		}
-		else{
-			return response()->json(['patient_type' => $display_patient_type, 
-							'servicenamearray' => $servicenamearray, 
-							'serviceratearray' => $serviceratearray,
-							'servicetypearray' => $servicetypearray, 
-							'serviceidarray' => $serviceidarray, 
-							'patient_name' => $patient_name,
-							'checker' => $checker,
-							]);
-		}
-		
+		return response()->json(['patient_info' => $patient_info, 
+						'display_medical_services' => $display_medical_services, 
+						'checker' => $checker
+		]);
 	}
 
-	public function confirmbillingmedical(Request $request){
-		
-		// $search_patient_id_records = DB::table('medical_appointments')
-		// 			->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
-		// 			->where('medical_appointments.id', '=', $appointment_id)
-		// 			->first();
-
-		
+	public function confirmbillingmedical(Request $request){		
 		$appointment_id = $request->appointment_id;
 		$ps = $request->checked_services_array_id;
 		$ls = $request->checked_services_array_rate;
 		for($i=0; $i < sizeof($ps); $i++){
 		    $billing = new MedicalBilling;
-			$billing->medical_service_id = $ps[$i];
-	        $billing->medical_appointment_id = $appointment_id;
-	        $billing->status = 'unpaid';
-	        $billing->amount = $ls[$i];
-	        $billing->save();
+				$billing->medical_service_id = $ps[$i];
+        $billing->medical_appointment_id = $appointment_id;
+        $billing->status = 'unpaid';
+        $billing->amount = $ls[$i];
+        $billing->save();
 		}
+
+		DB::table('medical_appointments')
+		      ->where('id', $appointment_id)
+		      ->update(['status' => '1']);
+
 		return response()->json(['success' => 'success']); 
 	}
 }

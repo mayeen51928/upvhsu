@@ -41,10 +41,13 @@ $(document).ready( function(){
                 output += "<tr><th>Service Description</th><th>Service Rate</td><th>Type</th><th></th></tr>"
                 for(var i=0; i < data['display_medical_services'].length; i++)
                 {
-                  if(data['display_medical_services'][i].service_type == 'lab'){selectType = "<select class='form-control'><option value='lab' selected>lab</option><option value='medical'>medical</option><option value='xray'>xray</option></select>";};
-                  if(data['display_medical_services'][i].service_type == 'medical'){selectType = "<select class='form-control'><option value='lab'>lab</option><option value='medical' selected>medical</option><option value='xray'>xray</option></select>";};
-                  if(data['display_medical_services'][i].service_type == 'xray'){selectType = "<select class='form-control'><option value='lab'>lab</option><option value='medical'>medical</option><option value='xray' selected>xray</option></select>";};
-                  output += "<tr class='medical_services_tr'><td><input type='text' class='form-control medical_services_description' value='"+data['display_medical_services'][i].service_description+"'></td><td><input type='text' class='form-control medical_services_rate' value='"+data['display_medical_services'][i].service_rate+"'></td><td class='medical_services_type'>"+selectType+"</td><td><button class='btn btn-danger btn-sm removemedicalservice'>x</button></td></tr>";
+                  if(data['display_medical_services'][i].service_type == 'medical'){selectType = "<select class='form-control medical_services_type'><option value='medical' selected>medical</option><option value='xray'>xray</option><option value='cbc'>cbc</option><option value='drugtest'>drug test</option><option value='fecalysis'>fecalysis</option><option value='urinalysis'>urinalysis</option></select>";};
+                  if(data['display_medical_services'][i].service_type == 'xray'){selectType = "<select class='form-control medical_services_type'><option value='medical' >medical</option><option value='xray' selected>xray</option><option value='cbc'>cbc</option><option value='drugtest'>drug test</option><option value='fecalysis'>fecalysis</option><option value='urinalysis'>urinalysis</option></select>";};
+                  if(data['display_medical_services'][i].service_type == 'cbc'){selectType = "<select class='form-control medical_services_type'><option value='medical' >medical</option><option value='xray'>xray</option><option value='cbc' selected>cbc</option><option value='drugtest'>drug test</option><option value='fecalysis'>fecalysis</option><option value='urinalysis'>urinalysis</option></select>";};
+                  if(data['display_medical_services'][i].service_type == 'drugtest'){selectType = "<select class='form-control medical_services_type'><option value='medical' >medical</option><option value='xray'>xray</option><option value='cbc'>cbc</option><option value='drugtest' selected>drug test</option><option value='fecalysis'>fecalysis</option><option value='urinalysis'>urinalysis</option></select>";};
+                  if(data['display_medical_services'][i].service_type == 'fecalysis'){selectType = "<select class='form-control medical_services_type'><option value='medical' >medical</option><option value='xray'>xray</option><option value='cbc'>cbc</option><option value='drugtest'>drug test</option><option value='fecalysis' selected>fecalysis</option><option value='urinalysis'>urinalysis</option></select>";};
+                  if(data['display_medical_services'][i].service_type == 'urinalysis'){selectType = "<select class='form-control medical_services_type'><option value='medical' >medical</option><option value='xray'>xray</option><option value='cbc'>cbc</option><option value='drugtest'>drug test</option><option value='fecalysis'>fecalysis</option><option value='urinalysis' selected>urinalysis</option></select>";};
+                  output += "<tr class='medical_services_tr'><td><input type='text' class='form-control medical_services_description' value='"+data['display_medical_services'][i].service_description+"'></td><td><input type='text' class='form-control medical_services_rate' value='"+data['display_medical_services'][i].service_rate+"'></td><td>"+selectType+"</td><td><button class='btn btn-danger btn-sm removemedicalservice'>x</button></td></tr>";
                 }
                 footer += '<button type="button" class="btn btn-danger" data-dismiss="modal">Back</button><button type="button" class="btn btn-success" id="editMedicalServicesModal">Save Changes</button>';
                 $('#savechangesbuttonmedical').html(footer);
@@ -60,27 +63,27 @@ $(document).ready( function(){
 
                 $("#editMedicalServicesModal").click(function(){
                   var medicalservices = [];
+                  console.log("Patient type "+patientTypeId);
                   $('.medical_services_tr').each(function(){
                     if($(this).find('.medical_services_description').val() && $(this).find('.medical_services_rate').val() && $(this).find('.medical_services_type').val()){
-                      medicalservices.push($(this).find('medical_services_description').val() + ' ' + $(this).find('.medical_services_rate').val() + ' ' + $(this).find('.medical_services_type').val());
+                      medicalservices.push($(this).find('.medical_services_description').val() + '(:::)' + $(this).find('.medical_services_rate').val() + '(:::)' + $(this).find('.medical_services_type').val());
                     }
                   });
-                  console.log(medicalservices);
-                  // if(schedules.length > 0){
-                  //   $.ajax({
-                  //     url: addDentalSchedule,
-                  //     type: 'POST',
-                  //     dataType: 'json',
-                  //     data: {medicalservices:  medicalservices, _token: token},
-                  //     success: function(data) {
-                  //       $("#typeOfPatientMedical").val($("#typeOfPatientMedical option:first").val());
-                  //       $('#displayMedicalServices').html('<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Successful!</div>');
-                  //       $('#editMedicalServices').modal('hide');
-                  //     },
-                  //     error: function(xhr, textStatus, errorThrown) {
-                  //     }
-                  //   });
-                  // }
+                  if(medicalservices.length > 0){
+                    $.ajax({
+                      url: updateMedicalServices,
+                      type: 'POST',
+                      dataType: 'json',
+                      data: {medical_services:medicalservices, patiend_id:patientTypeId,  _token: token},
+                      success: function(data) {
+                        $("#typeOfPatientMedical").val($("#typeOfPatientMedical option:first").val());
+                        $('#displayMedicalServices').html('<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Successful!</div>');
+                        $('#editMedicalServices').modal('hide');
+                      },
+                      error: function(xhr, textStatus, errorThrown) {
+                      }
+                    });
+                  }
                 });
               }
           });
@@ -90,7 +93,7 @@ $(document).ready( function(){
   });
 
   $('.addmoremedicalservices').click(function(){
-    $(this).parents('.dental_manage').find('tbody').append("<tr class='medical_services_tr'><td><input type='text' class='form-control medical_services_description'></td><td><input type='text' class='form-control medical_services_rate'></td><td><select class='form-control medical_services_type'><option selected disabled>-- type --</option><option value='lab'>lab</option><option value='medical'>medical</option><option value='xray'>xray</option></select></td><td><button class='btn btn-danger btn-sm removemedicalservice'>x</button></td></tr>");
+    $(this).parents('.dental_manage').find('tbody').append("<tr class='medical_services_tr'><td><input type='text' class='form-control medical_services_description'></td><td><input type='text' class='form-control medical_services_rate'></td><td><select class='form-control medical_services_type'><option selected disabled>-- type --</option><option value='medical'>medical</option><option value='xray'>xray</option><option value='cbc'>cbc</option><option value='drugtest'>drug test</option><option value='fecalysis'>fecalysis</option><option value='urinalysis'>urinalysis</option></select></td><td><button class='btn btn-danger btn-sm removemedicalservice'>x</button></td></tr>");
     $('.removemedicalservice').click(function(){
       $(this).closest('tr').remove();
     });
@@ -113,3 +116,4 @@ $(document).ready( function(){
     });
   });
 })
+

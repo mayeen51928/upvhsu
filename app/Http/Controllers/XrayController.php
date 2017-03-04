@@ -10,6 +10,7 @@ use App\Staff;
 use App\Town;
 use App\Province;
 use App\ChestXrayResult;
+use App\MedicalBilling;
 class XrayController extends Controller
 {
 	public function __construct()
@@ -50,6 +51,56 @@ class XrayController extends Controller
 		$xray->xray_staff_id = Auth::user()->user_id;
 		$xray->xray_result = $request->chest_xray;
 		$xray->update();
+	}
+
+	public function addbillingxray(Request $request){
+		$appointment_id = $request->appointment_id;
+
+		$patient_info = DB::table('patient_info')
+					->join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')
+					->first();
+		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
+
+		$checker = 0;
+		$xray_result_checker = DB::table('chest_xray_results')
+					->where([
+							['medical_appointment_id', '=', $appointment_id],
+							['xray_result', '!=', NULL],
+						])
+					->first();
+		if(count($xray_result_checker)>0){
+			$checker = 1;
+		}
+
+
+		if($patient_info->patient_type_id == 1){
+			$display_xray_services = DB::table('medical_services')
+					->where([
+							['patient_type_id', '=', 1],
+							['service_type', '=', 'xray'],
+						])
+					->get();
+		}
+		
+		return response()->json(['patient_info' => $patient_info, 
+						'display_xray_services' => $display_xray_services, 
+						'checker' => $checker
+		]);
+	}
+
+	public function confirmbillingxray(Request $request){	
+		$appointment_id = $request->appointment_id;
+		$ps = $request->checked_services_array_id;
+		$ls = $request->checked_services_array_rate;
+		for($i=0; $i < sizeof($ps); $i++){
+		    $billing = new MedicalBilling;
+			$billing->medical_service_id = $ps[$i];
+	        $billing->medical_appointment_id = $appointment_id;
+	        $billing->status = 'unpaid';
+	        $billing->amount = $ls[$i];
+	        $billing->save();
+		}
+		return response()->json(['success' => 'success']); 
 	}
 
 	public function profile()
@@ -103,66 +154,66 @@ class XrayController extends Controller
 		return view('staff.medical-xray.editprofile', $params);
 	}
 
-    public function updateprofile(Request $request)
-    {
-        if($request->updatepassword != "")
-        {
-            $user = Auth::user();
-            $user->password = bcrypt($request->updatepassword);
-            $user->update();
-        }
-        $xray = Staff::find(Auth::user()->user_id);
-        $xray->sex = $request->input('sex');
-        $xray->birthday = $request->input('birthday');
-        $xray->street = $request->input('street');
-        $xray->position = $request->input('position');
-        $xray->civil_status = $request->civil_status;
-        $province = Province::where('province_name', $request->input('province'))->first();
-        if(count($province)>0)
-        {
-            // $xray->nationality_id = $nationality->id;
-            $town = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first();
-            if(count($town)>0)
-            {
-                $xray->town_id = $town->id;
-            }
-            else
-            {
-                $town = new Town;
-                $town->town_name = $request->input('town');
-                $town->province_id = $province->id;
-                //insert the distance from miagao using Google Distance Matrix API
-                $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
-                $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
-                $json = json_decode(file_get_contents($url), true);
-                if($json['rows'][0]['elements'][0]['status'] == 'OK')
+	public function updateprofile(Request $request)
+	{
+		if($request->updatepassword != "")
+		{
+			$user = Auth::user();
+			$user->password = bcrypt($request->updatepassword);
+			$user->update();
+		}
+		$xray = Staff::find(Auth::user()->user_id);
+		$xray->sex = $request->input('sex');
+		$xray->birthday = $request->input('birthday');
+		$xray->street = $request->input('street');
+		$xray->position = $request->input('position');
+		$xray->civil_status = $request->civil_status;
+		$province = Province::where('province_name', $request->input('province'))->first();
+		if(count($province)>0)
+		{
+			// $xray->nationality_id = $nationality->id;
+			$town = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first();
+			if(count($town)>0)
+			{
+				$xray->town_id = $town->id;
+			}
+			else
+			{
+				$town = new Town;
+				$town->town_name = $request->input('town');
+				$town->province_id = $province->id;
+				//insert the distance from miagao using Google Distance Matrix API
+				$location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
+				$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+				$json = json_decode(file_get_contents($url), true);
+				if($json['rows'][0]['elements'][0]['status'] == 'OK')
 				{
 					$distance=$json['rows'][0]['elements'][0]['distance']['value'];
 					$town->distance_to_miagao = $distance/1000;
 				}
-                $town->save();
-                $xray->town_id = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first()->id;
-            }
-        }
-        else
-        {
-            $province = new Province;
-            $province->province_name = $request->input('province');
-            $province->save();
-            $town = new Town;
-            $town->town_name = $request->input('town');
-            $town->province_id = Province::where('province_name', $request->input('province'))->first()->id;
-            $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
-            $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
-            $json = json_decode(file_get_contents($url), true);
-            if($json['rows'][0]['elements'][0]['status'] == 'OK')
+				$town->save();
+				$xray->town_id = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first()->id;
+			}
+		}
+		else
+		{
+			$province = new Province;
+			$province->province_name = $request->input('province');
+			$province->save();
+			$town = new Town;
+			$town->town_name = $request->input('town');
+			$town->province_id = Province::where('province_name', $request->input('province'))->first()->id;
+			$location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
+			$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+			$json = json_decode(file_get_contents($url), true);
+			if($json['rows'][0]['elements'][0]['status'] == 'OK')
 			{
 				$distance=$json['rows'][0]['elements'][0]['distance']['value'];
 				$town->distance_to_miagao = $distance/1000;
 			}
-            $town->save();
-            $xray->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
-        }
+			$town->save();
+			$xray->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
+		}
 
 		if (Input::file('picture') != NULL) { 
 			$path = '..\public\images';

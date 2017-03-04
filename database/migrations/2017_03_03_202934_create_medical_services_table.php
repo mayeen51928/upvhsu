@@ -17,7 +17,7 @@ class CreateMedicalServicesTable extends Migration
             $table->increments('id');
             $table->string('service_description');
             $table->string('service_rate');
-            $table->enum('service_type', ['lab', 'medical', 'xray']);
+            $table->enum('service_type', ['medical', 'xray', 'cbc', 'drugtest', 'feaclysis', 'urinalysis']);
             $table->integer('patient_type_id')->unsigned()->index();
             $table->foreign('patient_type_id')->references('id')->on('patient_types')->onDelete('cascade');
             $table->timestamps();
