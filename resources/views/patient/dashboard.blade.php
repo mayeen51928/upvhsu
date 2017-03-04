@@ -50,7 +50,7 @@
 							@foreach($dental_appointments as $dental_appointment)
 							<tr>
 								<td><a class="dental_appointments_prescription" id="dentalappointmentid_{{ $dental_appointment->patient_id }}_{{ $dental_appointment->id }}">{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a></td>
-								<td>{{date_format(date_create($dental_appointment->schedule_start), 'H:i:s')}} - {{date_format(date_create($dental_appointment->schedule_end), 'H:i:s')}}</td>
+								<td>{{date_format(date_create($dental_appointment->schedule_start), 'h:i A')}} - {{date_format(date_create($dental_appointment->schedule_end), 'h:i A')}}</td>
 								<td>{{$dental_appointment->staff_first_name}} {{$dental_appointment->staff_last_name}}</td>
 							</tr>
 							@endforeach

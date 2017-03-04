@@ -950,7 +950,7 @@ class DentistController extends Controller
 								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
 								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
 								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);
-								array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+								array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'h:i A').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'h:i A'));
 							}
 						}
 						$counter++;
@@ -976,7 +976,7 @@ class DentistController extends Controller
 								
 								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
 								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
-								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'h:i A').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'h:i A'));
 							}
 						}
 						$counter++;
@@ -1002,7 +1002,7 @@ class DentistController extends Controller
 								
 								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
 								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
-								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'h:i A').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'h:i A'));
 							}
 						}
 						$counter++;
@@ -1028,7 +1028,7 @@ class DentistController extends Controller
 								
 								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
 								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
-								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'h:i A').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'h:i A'));
 							}
 						}
 						$counter++;
@@ -1054,7 +1054,7 @@ class DentistController extends Controller
 								
 								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
 								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
-								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'h:i A').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'h:i A'));
 							}
 						}
 						$counter++;
@@ -1080,7 +1080,7 @@ class DentistController extends Controller
 								
 								array_push($searchpatientnamearray, Patient::find($get_appointment_id->patient_id)->patient_last_name.', '.Patient::find($get_appointment_id->patient_id)->patient_first_name);
 								array_push($searchpatientscheduledayarray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'F j, Y'));
-								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'H:i:s').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'H:i:s'));
+								array_push($searchpatientappointmentidyarray, $get_appointment_id->id);array_push($searchpatientscheduletimearray, date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_start), 'h:i A').' - '.date_format(date_create(DentalSchedule::find($get_appointment_id->dental_schedule_id)->schedule_end), 'h:i A'));
 							}
 						}
 						$counter++;
