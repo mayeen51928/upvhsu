@@ -352,8 +352,11 @@ class PagesController extends Controller
 						$location = preg_replace("/\s+/", "+",$request->town." ".$request->province);
 						$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 						$json = json_decode(file_get_contents($url), true);
-						$distance=$json['rows'][0]['elements'][0]['distance']['value'];
-						$town->distance_to_miagao = $distance/1000;
+						if($json['rows'][0]['elements'][0]['status'] == 'OK')
+						{
+							$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+							$town->distance_to_miagao = $distance/1000;
+						}
 						$town->save();
 						$patient->town_id = Town::where('town_name', $request->town)->where('province_id', $province->id)->first()->id;
 					}
@@ -369,8 +372,11 @@ class PagesController extends Controller
 					$location = preg_replace("/\s+/", "+",$request->town." ".$request->province);
 					$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 					$json = json_decode(file_get_contents($url), true);
-					$distance=$json['rows'][0]['elements'][0]['distance']['value'];
-					$town->distance_to_miagao = $distance/1000;
+					if($json['rows'][0]['elements'][0]['status'] == 'OK')
+					{
+						$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+						$town->distance_to_miagao = $distance/1000;
+					}
 					$town->save();
 					$patient->town_id = Town::where('town_name', $request->town)->where('province_id', Province::where('province_name', $request->province)->first()->id)->first()->id;
 				}
@@ -434,8 +440,11 @@ class PagesController extends Controller
 	         				$location = preg_replace("/\s+/", "+",$request->guardian_town." ".$request->guardian_province);
 							$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 							$json = json_decode(file_get_contents($url), true);
-							$distance=$json['rows'][0]['elements'][0]['distance']['value'];
-							$guardian_town->distance_to_miagao = $distance/1000;
+							if($json['rows'][0]['elements'][0]['status'] == 'OK')
+							{
+								$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+								$guardian_town->distance_to_miagao = $distance/1000;
+							}
 							$guardian_town->save();
 							$guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', $guardian_province->id)->first()->id;
 						}
@@ -451,8 +460,11 @@ class PagesController extends Controller
 						$location = preg_replace("/\s+/", "+",$request->guardian_town." ".$request->guardian_province);
 						$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 						$json = json_decode(file_get_contents($url), true);
-						$distance=$json['rows'][0]['elements'][0]['distance']['value'];
-						$guardian_town->distance_to_miagao = $distance/1000;
+						if($json['rows'][0]['elements'][0]['status'] == 'OK')
+						{
+							$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+							$guardian_town->distance_to_miagao = $distance/1000;
+						}
 						$guardian_town->save();
 						$guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', Province::where('province_name', $request->guardian_province)->first()->id)->first()->id;
 					}
@@ -578,8 +590,11 @@ class PagesController extends Controller
             			$location = preg_replace("/\s+/", "+",$request->town." ".$request->province);
 						$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 						$json = json_decode(file_get_contents($url), true);
-						$distance=$json['rows'][0]['elements'][0]['distance']['value'];
-						$town->distance_to_miagao = $distance/1000;
+						if($json['rows'][0]['elements'][0]['status'] == 'OK')
+						{
+							$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+							$town->distance_to_miagao = $distance/1000;
+						}
 						$town->save();
 						$patient->town_id = Town::where('town_name', $request->town)->where('province_id', $province->id)->first()->id;
 					}
@@ -595,8 +610,11 @@ class PagesController extends Controller
 					$location = preg_replace("/\s+/", "+",$request->town." ".$request->province);
 					$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 					$json = json_decode(file_get_contents($url), true);
-					$distance=$json['rows'][0]['elements'][0]['distance']['value'];
-					$town->distance_to_miagao = $distance/1000;
+					if($json['rows'][0]['elements'][0]['status'] == 'OK')
+					{
+						$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+						$town->distance_to_miagao = $distance/1000;
+					}
 					$town->save();
 					$patient->town_id = Town::where('town_name', $request->town)->where('province_id', Province::where('province_name', $request->province)->first()->id)->first()->id;
 				}
@@ -660,8 +678,11 @@ class PagesController extends Controller
 	         				$location = preg_replace("/\s+/", "+",$request->guardian_town." ".$request->guardian_province);
 							$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 							$json = json_decode(file_get_contents($url), true);
-							$distance=$json['rows'][0]['elements'][0]['distance']['value'];
-							$guardian_town->distance_to_miagao = $distance/1000;
+							if($json['rows'][0]['elements'][0]['status'] == 'OK')
+							{
+								$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+								$guardian_town->distance_to_miagao = $distance/1000;
+							}
 							$guardian_town->save();
 							$guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', $guardian_province->id)->first()->id;
 						}
@@ -677,8 +698,11 @@ class PagesController extends Controller
 						$location = preg_replace("/\s+/", "+",$request->guardian_town." ".$request->guardian_province);
 						$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
 						$json = json_decode(file_get_contents($url), true);
-						$distance=$json['rows'][0]['elements'][0]['distance']['value'];
-						$guardian_town->distance_to_miagao = $distance/1000;
+						if($json['rows'][0]['elements'][0]['status'] == 'OK')
+						{
+							$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+							$guardian_town->distance_to_miagao = $distance/1000;
+						}
 						$guardian_town->save();
 						$guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', Province::where('province_name', $request->guardian_province)->first()->id)->first()->id;
 					}

@@ -135,8 +135,11 @@ class XrayController extends Controller
                 $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
                 $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
                 $json = json_decode(file_get_contents($url), true);
-                $distance=$json['rows'][0]['elements'][0]['distance']['value'];
-                $town->distance_to_miagao = $distance/1000;
+                if($json['rows'][0]['elements'][0]['status'] == 'OK')
+				{
+					$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+					$town->distance_to_miagao = $distance/1000;
+				}
                 $town->save();
                 $xray->town_id = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first()->id;
             }
@@ -152,8 +155,11 @@ class XrayController extends Controller
             $location = preg_replace("/\s+/", "+",$request->input('town')." ".$request->input('province'));
             $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
             $json = json_decode(file_get_contents($url), true);
-            $distance=$json['rows'][0]['elements'][0]['distance']['value'];
-            $town->distance_to_miagao = $distance/1000;
+            if($json['rows'][0]['elements'][0]['status'] == 'OK')
+			{
+				$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+				$town->distance_to_miagao = $distance/1000;
+			}
             $town->save();
             $xray->town_id = Town::where('town_name', $request->input('town'))->where('province_id', Province::where('province_name', $request->input('province'))->first()->id)->first()->id;
         }
