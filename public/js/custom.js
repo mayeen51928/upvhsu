@@ -36,6 +36,7 @@ $(document).ready( function(){
 
   //Home Login
   $('#login').click(function(){
+    
     if(!($('#user_name').val()) && !($('#password').val())){
       $('#loginErrorMessage').html('Enter username and password');
       return false;
@@ -53,6 +54,13 @@ $(document).ready( function(){
   });
   $('.homeForm:first').delay("200").fadeIn();
   $('.homeForm:last').delay("500").fadeIn();
+
+  $('#loginbutton').click(function(){
+    if($('#user_name').val() && $('#password').val()){
+      $('#user_name').attr('disabled', 'disabled');
+      $('#password').attr('disabled', 'disabled');
+  }
+  });
 
   // --------------------- Staff Page -----------------------
   $('.medicalStaff .clickToShowSchedule').click(function() {

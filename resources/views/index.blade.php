@@ -42,7 +42,7 @@
 						<small>To register, please schedule an appointment first.</small>
 						<br/><br/>
 						<div class="form-group">
-							<button type="submit" class="btn btn-success">Login</button>
+							<button type="submit" id="loginbutton" class="btn btn-success">Login</button>
 						</div>
 					</form>
 				</div>
