@@ -89,7 +89,10 @@ $('.addMedicalRecordButton').click(function() {
 	// $('#confirmModal').modal();
 	$('#requestsFromDoctor').load(location.href + " #requestsFromDoctor");
 	$('#create-medical-record-modal input').removeAttr('disabled');
+	$('#create-medical-record-modal textarea').removeAttr('disabled');
+	$('#create-medical-record-modal #hemoglobin, #create-medical-record-modal #hemasocrit, #create-medical-record-modal #wbc, #create-medical-record-modal #pus-cells, #create-medical-record-modal #rbc, #create-medical-record-modal #albumin, #create-medical-record-modal #sugar, #create-medical-record-modal #macroscopic, #create-medical-record-modal #microscopic, #create-medical-record-modal #drug-test, #create-medical-record-modal #chest-xray').attr('disabled', 'disabled');
 	$('#create-medical-record-modal #height').focus();
+	$('.medical-button-container').html("");
 	if($(this).attr('id')){
 		var appointment_id = $(this).attr('id').split("_")[1];
 		
@@ -362,7 +365,10 @@ $('.addMedicalRecordButton').click(function() {
 					$('#prescription').val('');
 					$('#prescription').removeAttr('disabled');
 				}
-				$('.medical-button-container').html("").append("<button type='button' class='btn btn-success update-medical-record-button' id='update-medical-record-button_"+appointment_id+"'>Update</button>");
+				if(!data['prescription'] || !data['prescription'])
+				{
+					$('.medical-button-container').append("<button type='button' class='btn btn-success update-medical-record-button' id='update-medical-record-button_"+appointment_id+"'>Update</button>");
+				}
 				$('.medical-button-container .update-medical-record-button').click(function(){
 
 							var appointment_id = $(this).attr('id').split("_")[1];
