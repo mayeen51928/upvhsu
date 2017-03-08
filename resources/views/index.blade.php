@@ -86,19 +86,19 @@
 						@if(Auth::user()->staff->staff_type_id == 3)
 							<p>Hello {{ Auth::user()->staff->staff_first_name }}</p>
 							<div class="col-md-4 col-md-offset-1 accountOption">
-								<a href="{{ url('/lab') }}" class="btn btn-info btn-sm" role="button">View Account</a>
+								<a href="{{ url('/lab') }}" class="btn btn-info btn-sm" role="button">Dashboard</a>
 							</div>
 							<div class="col-md-4 col-md-offset-2 accountOption">
-								<a href="{{ url('/lab/searchpatient') }}" class="btn btn-info btn-sm" role="button">Patient Records</a>
+								<a href="{{ url('/lab/profile') }}" class="btn btn-info btn-sm" role="button">Patient Profile</a>
 							</div>
 						@endif
 						@if(Auth::user()->staff->staff_type_id == 4)
 							<p>Hello {{ Auth::user()->staff->staff_first_name }}</p>
 							<div class="col-md-4 col-md-offset-1 accountOption">
-								<a href="{{ url('/xray') }}" class="btn btn-info btn-sm" role="button">View Account</a>
+								<a href="{{ url('/xray') }}" class="btn btn-info btn-sm" role="button">Dashboard</a>
 							</div>
 							<div class="col-md-4 col-md-offset-2 accountOption">
-								<a href="{{ url('/xray/searchpatient') }}" class="btn btn-info btn-sm" role="button">Patient Records</a>
+								<a href="{{ url('/xray/profile') }}" class="btn btn-info btn-sm" role="button">Profile</a>
 							</div>
 						@endif
 						@if(Auth::user()->staff->staff_type_id == 5)
@@ -165,7 +165,7 @@
 		</div>
 		<div class="col-md-12 fadeShow">
 			<h3 class="h1Title" id="h1Title4"><span class="glyphicon glyphicon-map-marker h3Icon"></span> Location</h3>
-			<iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7842.285803765714!2d122.2301799153447!3d10.646004606670068!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc19cd3690ea64d5f!2sUPV+Infirmary!5e0!3m2!1sen!2sph!4v1476282280584" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+			<iframe id="map" class="col-md-12" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7842.285803765714!2d122.2301799153447!3d10.646004606670068!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc19cd3690ea64d5f!2sUPV+Infirmary!5e0!3m2!1sen!2sph!4v1476282280584" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
 		</div>
 	</div>
 </div>

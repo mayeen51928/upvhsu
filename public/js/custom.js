@@ -18,10 +18,11 @@ $(document).ready( function(){
   numOfClicksDental = 0;
   percentageDental = 0;
   percentageMedical = 0;
-  $('.h3Title').mouseover(
+  $('.h1Title').mouseover(
     function(){
       $(this).find('.h3Icon').css("animation", "spin 2s");
-    });
+    }
+  );
   $(window).scroll( function(){
     /* Check the location of each desired element */
     $('.fadeShow').each( function(i){
