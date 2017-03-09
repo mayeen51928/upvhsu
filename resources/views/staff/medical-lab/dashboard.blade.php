@@ -40,6 +40,7 @@
                     <td>{{date_format(date_create($cbc_request->created_at), 'F j, Y')}}</td>
                     <td>{{$cbc_request->staff_first_name}} {{$cbc_request->staff_last_name}}</td>
                     <td><button class="btn btn-info btn-xs addCbcResult" id="addCbcResult_{{$cbc_request->id}}">Diagnosis</button></td>
+                    <td><button class="btn btn-primary btn-xs addBillingToCbc" id="addBillingToCbc_{{$cbc_request->medical_appointment_id}}">Billing</button></td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -66,6 +67,7 @@
                     <td>{{date_format(date_create($drug_test_request->created_at), 'F j, Y')}}</td>
                     <td>{{$drug_test_request->staff_first_name}} {{$drug_test_request->staff_last_name}}</td>
                     <td><button class="btn btn-info btn-xs addDrugTestResult" id="addDrugTestResult_{{$drug_test_request->id}}">Diagnosis</button></td>
+                    <td><button class="btn btn-primary btn-xs addBillingToDrug" id="addBillingToDrug_{{$drug_test_request->medical_appointment_id}}">Billing</button></td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -92,6 +94,7 @@
                     <td>{{date_format(date_create($fecalysis_request->created_at), 'F j, Y')}}</td>
                     <td>{{$fecalysis_request->staff_first_name}} {{$fecalysis_request->staff_last_name}}</td>
                     <td><button class="btn btn-info btn-xs addFecalysisResult" id="addFecalysisResult_{{$fecalysis_request->id}}">Diagnosis</button></td>
+                    <td><button class="btn btn-primary btn-xs addBillingToFecalysis" id="addBillingToFecalysis_{{$fecalysis_request->medical_appointment_id}}">Billing</button></td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -118,6 +121,7 @@
                     <td>{{date_format(date_create($urinalysis_request->created_at), 'F j, Y')}}</td>
                     <td>{{$urinalysis_request->staff_first_name}} {{$urinalysis_request->staff_last_name}}</td>
                     <td><button class="btn btn-info btn-xs addUrinalysisResult" id="addUrinalysisResult_{{$urinalysis_request->id}}">Diagnosis</button></td>
+                    <td><button class="btn btn-primary btn-xs addBillingToUrinalysis" id="addBillingToUrinalysis_{{$urinalysis_request->medical_appointment_id}}">Billing</button></td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -267,4 +271,88 @@
     </div>
   </div>
 </div>
+
+<div id="cbcBillingModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="patient_name"></div>
+      </div>
+      <div class="modal-body">
+        <table class="displayServices"></table>
+        <div class="cbc-bill-input" id="cbc-bill-input-text"></div> 
+      </div>
+      <div class="modal-footer">
+        <div class="cbc-bill-confirm" id="cbc-bill-confirm-button" style="text-align:center; "></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="drugBillingModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="patient_name"></div>
+      </div>
+      <div class="modal-body">
+        <table class="displayServices"></table>
+        <div class="drug-bill-input" id="drug-bill-input-text"></div> 
+      </div>
+      <div class="modal-footer">
+        <div class="drug-bill-confirm" id="drug-bill-confirm-button" style="text-align:center; "></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="fecalysisBillingModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="patient_name"></div>
+      </div>
+      <div class="modal-body">
+        <table class="displayServices"></table>
+        <div class="fecalysis-bill-input" id="fecalysis-bill-input-text"></div> 
+      </div>
+      <div class="modal-footer">
+        <div class="fecalysis-bill-confirm" id="fecalysis-bill-confirm-button" style="text-align:center; "></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="urinalysisBillingModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="patient_name"></div>
+      </div>
+      <div class="modal-body">
+        <table class="displayServices"></table>
+        <div class="urinalysis-bill-input" id="urinalysis-bill-input-text"></div> 
+      </div>
+      <div class="modal-footer">
+        <div class="urinalysis-bill-confirm" id="urinalysis-bill-confirm-button" style="text-align:center; "></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // token and createPostUrl are needed to be passed to AJAX method call
+  var token = '{{csrf_token()}}';
+  var addBillingCbc = '/add_billing_cbc';
+  var confirmBillingCbc = '/confirm_billing_cbc';
+  var addBillingDrug = '/add_billing_drug';
+  var confirmBillingDrug = '/confirm_billing_drug';
+  var addBillingFecalysis = '/add_billing_fecalysis';
+  var confirmBillingFecalysis = '/confirm_billing_fecalysis';
+  var addBillingUrinalysis = '/add_billing_urinalysis';
+  var confirmBillingUrinalysis = '/confirm_billing_urinalysis';
+</script>
+
 @endsection

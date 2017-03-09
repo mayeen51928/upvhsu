@@ -20,7 +20,6 @@ $('.addCbcResult').click(function(){
 	      	hemasocrit: hemasocrit,
 	      	wbc: wbc,
 	      } , function(data){
-	      	$('#addCbcResult_'+cbc_id).closest("tr").remove();
 	      	$('#add-cbc-result').modal('hide');
 	      });
 	   }
@@ -42,7 +41,6 @@ $('.addDrugTestResult').click(function(){
         drug_test_id: drug_test_id,
         drug_test_result: drug_test_result,
       } , function(data){
-        $('#addDrugTestResult_'+drug_test_id).closest("tr").remove();
         $('#add-drug-test-result').modal('hide');
       });
     }
@@ -63,7 +61,6 @@ $('.addFecalysisResult').click(function(){
 				macroscopic: macroscopic,
 				microscopic: microscopic,
 			} , function(data){
-				$('#addFecalysisResult_'+fecalysis_id).closest("tr").remove();
 				$('#add-fecalysis-result').modal('hide');
 			});
 		}
@@ -92,12 +89,308 @@ $('.addUrinalysisResult').click(function(){
 				albumin: albumin,
 				sugar: sugar,
 			} , function(data){
-				$('#addUrinalysisResult_'+urinalysis_id).closest("tr").remove();
 				$('#add-urinalysis-result').modal('hide');
 			});
 		}
 	});
 });
+
+$('.addBillingToCbc').click(function(){
+  var id = $(this).attr('id').split("_");
+  appointmentId = id[1];
+  $.ajax({
+    type: "POST",
+    url: addBillingCbc,
+    data: {appointment_id:  appointmentId, _token: token},
+    success: function(data)
+    {
+      output = '';
+      $('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
+      output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
+      for (var i = 0; i < data['display_cbc_services'].length; i++){
+        output += "<tr><td><input type='checkbox' class='checkboxCbcService' id="+data['display_cbc_services'][i].service_rate+" value="+data['display_cbc_services'][i].id+"></td><td class='cbcService'>"+data['display_cbc_services'][i].service_description+"</td><td class='cbcServiceRate'>"+data['display_cbc_services'][i].service_rate+"</td></tr>";
+      }
+      $('.displayServices').html(output);
+      if(data['checker'] == '0'){
+        $(".displayServices :input").attr("disabled", true);
+        $('.cbc-bill-input').html("").append("<input type='text' class='form-control' id='cbc-bill' disabled>");
+        $('.cbc-bill-confirm').html("").append("<button type='button' class='btn btn-primary cbc-bill-confirm-button' id='cbcBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+      }
+      else{
+        $('.cbc-bill-input').html("").append("<input type='text' class='form-control' id='cbc-bill' disabled>");
+        $('.cbc-bill-confirm').html("").append("<button type='button' class='btn btn-primary cbc-bill-confirm-button' id='cbcBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+      }
+      var fin = 0;
+      $('.checkboxCbcService').click(function(){
+        if ($(this).is(':checked')){
+          var cbcBillRate = parseFloat($(this).attr('id'));
+          fin = parseFloat(fin+cbcBillRate);
+          $("#cbc-bill").val(fin);
+        };
+      });
+      $('#cbcBillingModal').modal();
+    }
+  });
+});
+
+$(document).on('click', '.cbc-bill-confirm-button', function(){
+  var appointmentId = $(this).attr('id').split('_')[1];
+  checked_services_array_id=[];
+  checked_services_array_rate=[];
+  $("input:checkbox").each(function(){
+      var $this = $(this);
+      if($this.is(":checked")){
+          checked_services_array_id.push($this.attr("value"));
+          checked_services_array_rate.push($this.attr("id"));
+      }
+  });
+  $.ajax({
+      type: "POST",
+      url: confirmBillingCbc,
+      data: {appointment_id:  appointmentId, checked_services_array_id:  checked_services_array_id, checked_services_array_rate:  checked_services_array_rate, _token: token},
+      success: function(data)
+      {
+        $('#addBillingToCbc_'+appointmentId).closest("tr").remove();
+        $('#cbcBillingModal').modal("hide");
+      }
+    });
+  return false;
+});
+
+$('.addBillingToDrug').click(function(){
+  var id = $(this).attr('id').split("_");
+  appointmentId = id[1];
+  $.ajax({
+    type: "POST",
+    url: addBillingDrug,
+    data: {appointment_id:  appointmentId, _token: token},
+    success: function(data)
+    {
+      output = '';
+      $('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
+      output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
+      for (var i = 0; i < data['display_drug_services'].length; i++){
+        output += "<tr><td><input type='checkbox' class='checkboxDrugService' id="+data['display_drug_services'][i].service_rate+" value="+data['display_drug_services'][i].id+"></td><td class='drugService'>"+data['display_drug_services'][i].service_description+"</td><td class='drugServiceRate'>"+data['display_drug_services'][i].service_rate+"</td></tr>";
+      }
+      $('.displayServices').html(output);
+      if(data['checker'] == '0'){
+        $(".displayServices :input").attr("disabled", true);
+        $('.drug-bill-input').html("").append("<input type='text' class='form-control' id='drug-bill' disabled>");
+        $('.drug-bill-confirm').html("").append("<button type='button' class='btn btn-primary drug-bill-confirm-button' id='drugBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+      }
+      else{
+        $('.drug-bill-input').html("").append("<input type='text' class='form-control' id='drug-bill' disabled>");
+        $('.drug-bill-confirm').html("").append("<button type='button' class='btn btn-primary drug-bill-confirm-button' id='drugBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+      }
+      var fin = 0;
+      $('.checkboxDrugService').click(function(){
+        if ($(this).is(':checked')){
+          var drugBillRate = parseFloat($(this).attr('id'));
+          fin = parseFloat(fin+drugBillRate);
+          $("#drug-bill").val(fin);
+        };
+      });
+      $('#drugBillingModal').modal();
+    }
+  });
+});
+
+$(document).on('click', '.drug-bill-confirm-button', function(){
+  var appointmentId = $(this).attr('id').split('_')[1];
+  checked_services_array_id=[];
+  checked_services_array_rate=[];
+  $("input:checkbox").each(function(){
+      var $this = $(this);
+      if($this.is(":checked")){
+          checked_services_array_id.push($this.attr("value"));
+          checked_services_array_rate.push($this.attr("id"));
+      }
+  });
+  $.ajax({
+      type: "POST",
+      url: confirmBillingDrug,
+      data: {appointment_id:  appointmentId, checked_services_array_id:  checked_services_array_id, checked_services_array_rate:  checked_services_array_rate, _token: token},
+      success: function(data)
+      {
+        $('#addBillingToDrug_'+appointmentId).closest("tr").remove();
+        $('#drugBillingModal').modal("hide");
+      }
+    });
+  return false;
+});
+
+$('.addBillingToFecalysis').click(function(){
+  var id = $(this).attr('id').split("_");
+  appointmentId = id[1];
+  $.ajax({
+    type: "POST",
+    url: addBillingFecalysis,
+    data: {appointment_id:  appointmentId, _token: token},
+    success: function(data)
+    {
+      output = '';
+      $('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
+      output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
+      for (var i = 0; i < data['display_fecalysis_services'].length; i++){
+        output += "<tr><td><input type='checkbox' class='checkboxFecalysisService' id="+data['display_fecalysis_services'][i].service_rate+" value="+data['display_fecalysis_services'][i].id+"></td><td class='fecalysisService'>"+data['display_fecalysis_services'][i].service_description+"</td><td class='fecalysisServiceRate'>"+data['display_fecalysis_services'][i].service_rate+"</td></tr>";
+      }
+      $('.displayServices').html(output);
+      if(data['checker'] == '0'){
+        $(".displayServices :input").attr("disabled", true);
+        $('.fecalysis-bill-input').html("").append("<input type='text' class='form-control' id='fecalysis-bill' disabled>");
+        $('.fecalysis-bill-confirm').html("").append("<button type='button' class='btn btn-primary fecalysis-bill-confirm-button' id='fecalysisBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+      }
+      else{
+        $('.fecalysis-bill-input').html("").append("<input type='text' class='form-control' id='fecalysis-bill' disabled>");
+        $('.fecalysis-bill-confirm').html("").append("<button type='button' class='btn btn-primary fecalysis-bill-confirm-button' id='fecalysisBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+      }
+      var fin = 0;
+      $('.checkboxFecalysisService').click(function(){
+        if ($(this).is(':checked')){
+          var fecalysisBillRate = parseFloat($(this).attr('id'));
+          fin = parseFloat(fin+fecalysisBillRate);
+          $("#fecalysis-bill").val(fin);
+        };
+      });
+      $('#fecalysisBillingModal').modal();
+    }
+  });
+});
+
+$(document).on('click', '.fecalysis-bill-confirm-button', function(){
+  var appointmentId = $(this).attr('id').split('_')[1];
+  checked_services_array_id=[];
+  checked_services_array_rate=[];
+  $("input:checkbox").each(function(){
+      var $this = $(this);
+      if($this.is(":checked")){
+          checked_services_array_id.push($this.attr("value"));
+          checked_services_array_rate.push($this.attr("id"));
+      }
+  });
+  $.ajax({
+      type: "POST",
+      url: confirmBillingFecalysis,
+      data: {appointment_id:  appointmentId, checked_services_array_id:  checked_services_array_id, checked_services_array_rate:  checked_services_array_rate, _token: token},
+      success: function(data)
+      {
+        $('#addBillingToFecalysis_'+appointmentId).closest("tr").remove();
+        $('#fecalysisBillingModal').modal("hide");
+      }
+    });
+  return false;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('.addBillingToUrinalysis').click(function(){
+  var id = $(this).attr('id').split("_");
+  appointmentId = id[1];
+  $.ajax({
+    type: "POST",
+    url: addBillingUrinalysis,
+    data: {appointment_id:  appointmentId, _token: token},
+    success: function(data)
+    {
+      output = '';
+      $('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
+      output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
+      for (var i = 0; i < data['display_urinalysis_services'].length; i++){
+        output += "<tr><td><input type='checkbox' class='checkboxUrinalysisService' id="+data['display_urinalysis_services'][i].service_rate+" value="+data['display_urinalysis_services'][i].id+"></td><td class='urinalysisService'>"+data['display_urinalysis_services'][i].service_description+"</td><td class='urinalysisServiceRate'>"+data['display_urinalysis_services'][i].service_rate+"</td></tr>";
+      }
+      $('.displayServices').html(output);
+      if(data['checker'] == '0'){
+        $(".displayServices :input").attr("disabled", true);
+        $('.urinalysis-bill-input').html("").append("<input type='text' class='form-control' id='urinalysis-bill' disabled>");
+        $('.urinalysis-bill-confirm').html("").append("<button type='button' class='btn btn-primary urinalysis-bill-confirm-button' id='urinalysisBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+      }
+      else{
+        $('.urinalysis-bill-input').html("").append("<input type='text' class='form-control' id='urinalysis-bill' disabled>");
+        $('.urinalysis-bill-confirm').html("").append("<button type='button' class='btn btn-primary urinalysis-bill-confirm-button' id='urinalysisBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+      }
+      var fin = 0;
+      $('.checkboxUrinalysisService').click(function(){
+        if ($(this).is(':checked')){
+          var urinalysisBillRate = parseFloat($(this).attr('id'));
+          fin = parseFloat(fin+urinalysisBillRate);
+          $("#urinalysis-bill").val(fin);
+        };
+      });
+      $('#urinalysisBillingModal').modal();
+    }
+  });
+});
+
+$(document).on('click', '.urinalysis-bill-confirm-button', function(){
+  var appointmentId = $(this).attr('id').split('_')[1];
+  checked_services_array_id=[];
+  checked_services_array_rate=[];
+  $("input:checkbox").each(function(){
+      var $this = $(this);
+      if($this.is(":checked")){
+          checked_services_array_id.push($this.attr("value"));
+          checked_services_array_rate.push($this.attr("id"));
+      }
+  });
+  $.ajax({
+      type: "POST",
+      url: confirmBillingUrinalysis,
+      data: {appointment_id:  appointmentId, checked_services_array_id:  checked_services_array_id, checked_services_array_rate:  checked_services_array_rate, _token: token},
+      success: function(data)
+      {
+        $('#addBillingToUrinalysis_'+appointmentId).closest("tr").remove();
+        $('#urinalysisBillingModal').modal("hide");
+      }
+    });
+  return false;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ------------------PROFILE---------------
 // ------------------SEARCH PATIENT---------------
   // $('#searchPatient').keyup(function() {

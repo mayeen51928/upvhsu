@@ -40,6 +40,8 @@ Route::post('/account/profile/update','PatientController@updateprofile');
 Route::get('/account/visits','PatientController@visits');
 Route::post('/view_dental_record','PatientController@viewdentalrecord');
 Route::post('/view_dental_record_dashboard','PatientController@viewdentalrecorddashboard');
+Route::post('/view_medical_record_dashboard','PatientController@viewmedicalrecorddashboard');
+Route::post('/print_medical_receipt','PatientController@printmedicalreceipt');
 
 /* ROUTES FOR DENTIST ACCOUNT */
 Route::get('/dentist','DentistController@dashboard');
@@ -93,6 +95,14 @@ Route::get('/lab/profile','LabController@profile');
 Route::get('/lab/profile/edit','LabController@editprofile');
 Route::post('/lab/profile/update','LabController@updateprofile');
 Route::get('/lab/searchpatient','LabController@searchpatient');
+Route::post('/add_billing_cbc','LabController@addbillingcbc');
+Route::post('/confirm_billing_cbc','LabController@confirmbillingcbc');
+Route::post('/add_billing_drug','LabController@addbillingdrug');
+Route::post('/confirm_billing_drug','LabController@confirmbillingdrug');
+Route::post('/add_billing_fecalysis','LabController@addbillingfecalysis');
+Route::post('/confirm_billing_fecalysis','LabController@confirmbillingfecalysis');
+Route::post('/add_billing_urinalysis','LabController@addbillingurinalysis');
+Route::post('/confirm_billing_urinalysis','LabController@confirmbillingurinalysis');
 
 /* ROUTES FOR XRAY ACCOUNT */
 Route::get('/xray','XrayController@dashboard');
@@ -111,6 +121,7 @@ Route::get('/cashier/profile/edit','CashierController@editprofile');
 Route::post('/cashier/profile/update','CashierController@updateprofile');
 Route::get('/cashier/searchpatient','CashierController@searchpatient');
 Route::post('/confirm_medical_billing','CashierController@confirmmedicalbilling');
+Route::post('/display_medical_billing','CashierController@displaymedicalbilling');
 
 /* ROUTES FOR ADMIN ACCOUNT */
 Route::get('/admin', 'AdminController@dashboard');

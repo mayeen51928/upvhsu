@@ -33,15 +33,15 @@
             </tr>
           </thead>
            <tbody>
-            @foreach ($unpaid_bills as $unpaid_bill)
+            @for ($i = 0; $i < 1; $i++)
             <tr>
-              <td>{{ $unpaid_bill->patient_first_name }} {{ $unpaid_bill->patient_last_name }}</td>
-              <td>{{ $unpaid_bill->staff_first_name }} {{ $unpaid_bill->staff_last_name }}</td>
-              <td>{{ $unpaid_bill->amount }}</td>
-              <td>{{ $unpaid_bill->schedule_day }}</td>
-              <td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{ $unpaid_bill->medical_appointment_id }}">Pay Bill</button></td>
+              <td>{{ $unpaid_bills_info[$i]->patient_first_name }} {{ $unpaid_bills_info[$i]->patient_last_name }}</td>
+              <td>{{ $unpaid_bills_info[$i]->staff_first_name }} {{ $unpaid_bills_info[$i]->staff_first_name }}</td>
+              <td>{{ $unpaid_bills[$i]->amount }}</td>
+              <td>{{ $unpaid_bills_info[$i]->schedule_day }}</td>
+              <td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{ $unpaid_bills[$i]->medical_appointment_id }}_{{ $unpaid_bills[$i]->amount }}">Pay Bill</button></td>
             </tr>
-            @endforeach
+            @endfor
           </tbody>
         </table>
       </div>
@@ -51,13 +51,25 @@
 
 <!-- MODALS -->
 <div class="modal fade" id="confirm_medical_billing" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Confirm Payment?</h4>
       </div>
-      <div class="modal-body text-center">
+      <div class="modal-body">
+        <table id="displayMedicalBillingTableModal" class="table" style="display: none">
+          <tbody id="displayMedicalBillingModal">
+          </tbody>
+        </table>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+          <label>Total</label>
+          <input type="text" id="display_amount_modal" class="form-control" disabled>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer text-center">
         <button type="button" class="btn btn-primary" id="addMedicalBillingButton">Confirm</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
       </div>
@@ -69,5 +81,6 @@
   // token and createPostUrl are needed to be passed to AJAX method call
   var token = '{{csrf_token()}}';
   var confirmMedicalBilling = '/confirm_medical_billing';
+  var displayMedicalBilling = '/display_medical_billing';
 </script>
 @endsection

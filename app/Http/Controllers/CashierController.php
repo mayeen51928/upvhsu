@@ -8,6 +8,7 @@ use App\Staff;
 use App\Town;
 use App\Province;
 use App\MedicalBilling;
+use App\MedicalSchedule;
 use DB;
 class CashierController extends Controller
 {
@@ -29,17 +30,24 @@ class CashierController extends Controller
     }
     public function dashboard()
     {
-        $unpaid_bills = DB::table('medical_billings')
-                    ->join('medical_appointments', 'medical_appointments.id', '=', 'medical_billings.medical_appointment_id')
-                    ->join('medical_schedules', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')
-                    ->join('patient_info', 'medical_appointments.patient_id', '=', 'patient_info.patient_id')
-                    ->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')
-                    ->where('medical_billings.status', '=', 'unpaid')
-                    ->get();
-                    
-        $params['navbar_active'] = 'account';
+      $unpaid_bills = DB::table('medical_billings')
+  			->select(DB::raw('medical_billings.medical_appointment_id, sum(medical_billings.amount) as amount'))
+            ->groupBy(DB::raw("medical_billings.medical_appointment_id"))
+            ->where('medical_billings.status', '=', 'unpaid')
+            ->get();
+
+      foreach ($unpaid_bills as $unpaid_bill) {
+      	$unpaid_bills_info = DB::table('medical_schedules')
+  					->join('medical_appointments', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
+  					->join('staff_info', 'staff_info.staff_id', '=', 'medical_schedules.staff_id')
+  					->join('patient_info', 'patient_info.patient_id', '=', 'medical_appointments.patient_id')
+            ->where('medical_appointments.id', '=', $unpaid_bill->medical_appointment_id)
+            ->get();
+      }
+
+    	$params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
-    	return view('staff.cashier.dashboard', $params, compact('unpaid_bills'));
+    	return view('staff.cashier.dashboard', $params, compact('unpaid_bills', 'unpaid_bills_info'));
     }
 
     public function profile()
@@ -165,6 +173,15 @@ class CashierController extends Controller
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'searchpatient';
     	return view('staff.cashier.searchpatient', $params);
+    }
+
+    public function displaymedicalbilling(Request $request)
+    {
+        $display_medical_billing = DB::table('medical_billings')
+        		->join('medical_services', 'medical_services.id', '=', 'medical_billings.medical_service_id')
+        		->where('medical_billings.medical_appointment_id', '=', $request->appointment_id)
+        		->get();    
+        return response()->json(['display_medical_billing' => $display_medical_billing ]);
     }
 
     public function confirmmedicalbilling(Request $request)

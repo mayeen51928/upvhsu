@@ -18,6 +18,7 @@
                 <option value="3">Staff</option>
                 <option value="4">Dependent</option>
                 <option value="5">OPD</option>
+                <option value="6">Senior Citizen</option>
               </select>
             </div>
             <br/>
@@ -40,6 +41,7 @@
                 <option value="3">Staff</option>
                 <option value="4">Dependent</option>
                 <option value="5">OPD</option>
+                <option value="6">Senior Citizen</option>
               </select>
             </div>
             <br/>

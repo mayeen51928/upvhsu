@@ -54,17 +54,47 @@ class PatientController extends Controller
 	public function getremarkspatientdashboard(Request $request)
 	{
 		$prescription = Prescription::where('medical_appointment_id', $request->medical_appointment_id)->first();
+
+		$display_medical_billing = DB::table('medical_billings')
+        		->join('medical_services', 'medical_services.id', '=', 'medical_billings.medical_service_id')
+        		->where('medical_billings.medical_appointment_id', '=', $request->medical_appointment_id)
+        		->get();
+
+    $payment_status = "unpaid";
+    $medical_billing_status = DB::table('medical_billings')
+        		->where('medical_billings.medical_appointment_id', '=', $request->medical_appointment_id)
+        		->first();
+
+    $medical_receipt = DB::table('medical_appointments')
+    				->join('patient_info', 'medical_appointments.patient_id', '=', 'patient_info.patient_id')
+    				->join('medical_schedules', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
+    				->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')
+        		->where('medical_appointments.id', '=', $request->medical_appointment_id)
+        		->first();
+
+
+    if($medical_billing_status->status == "paid"){
+    	$payment_status = "paid";
+    }
+
 		if (count($prescription) == 1)
 		{
 			return response()->json(['success' => '1',
 				'prescription' => $prescription->prescription,
-				'date' => date_format(date_create($prescription->created_at), 'F j, Y')]);
+				'date' => date_format(date_create($prescription->created_at), 'F j, Y'),
+				'display_medical_billing' => $display_medical_billing, 
+				'payment_status' => $payment_status, 
+				'medical_receipt' => $medical_receipt,
+				]);
 		}
 		else
 		{
-			return response()->json(['success' => '0']);
+			return response()->json(['success' => '0', 
+				'display_medical_billing' => $display_medical_billing,
+				'payment_status' => $payment_status,
+				'medical_receipt' => $medical_receipt, 
+				]);
 		}
-
 	}
 
 	public function profile()

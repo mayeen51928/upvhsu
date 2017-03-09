@@ -104,7 +104,7 @@ class AdminController extends Controller
 		$medicalservices = $request->medical_services;
 		$patient_type_id = $request->patient_type_id;
 
-		$checker_if_exists = MedicalService::where('patient_type_id', $patient_type_id)->delete();
+		DB::table('medical_services')->where('patient_type_id', '=', $request->patient_type_id)->delete();
 
 		for($i=0; $i < sizeof($medicalservices); $i++){
 			if($medicalservices[$i]!=''){
@@ -114,7 +114,7 @@ class AdminController extends Controller
 				$service_type = $explode_medical_services[2];
 
 				$medical_service = new MedicalService();
-				$medical_service->patient_type_id = '1';
+				$medical_service->patient_type_id = $request->patient_type_id;
 				$medical_service->service_description = $service_description;
 				$medical_service->service_rate = $service_rate;
 				$medical_service->service_type = $service_type;

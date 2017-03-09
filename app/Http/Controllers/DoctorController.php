@@ -893,6 +893,15 @@ class DoctorController extends Controller
 					->get();
 		}
 
+		if($patient_info->patient_type_id == 5){
+			$display_medical_services = DB::table('medical_services')
+					->where([
+							['patient_type_id', '=', 5],
+							['service_type', '=', 'medical'],
+						])
+					->get();
+		}
+
 		return response()->json(['patient_info' => $patient_info, 
 						'display_medical_services' => $display_medical_services, 
 						'checker' => $checker

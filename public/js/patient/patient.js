@@ -153,6 +153,7 @@ $('.dental_appointments_prescription').click(function(){
 		}
 	});
 });
+
 $('.medical_appointments_prescription').click(function(){
 	$('#remarkModal').html('');
 	$('#remarkModalFooter').html('');
@@ -163,11 +164,57 @@ $('.medical_appointments_prescription').click(function(){
 			$('#remarkModal').html(data['prescription']);
 			$('#remarkModalFooter').html('Added on: ' + data['date']);
 		}
-		$('#prescriptionModal').modal();
-	});
-	
 
+		if(data['payment_status']=="unpaid")
+		{
+			$('#print_medical_receipt').html('<button class="btn btn-info print_medical_receipt_button" disabled>Print Receipt</button>');
+		}
+		else{
+			$('#print_medical_receipt').html('<button class="btn btn-info print_medical_receipt_button" id=print_medical_receipt_"'+medical_appointment_id+'">Print Receipt</button>');
+		}
+
+		total = 0;
+		output = '';
+    output += "<tr><th>Service Description</th><th>Service Rate</td><th>Type</th><th>Status</th></tr>"
+    for(var i=0; i < data['display_medical_billing'].length; i++)
+    {
+      output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].service_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td><td>"+data['display_medical_billing'][i].status+"</td></tr>";
+    	total += parseFloat(data['display_medical_billing'][i].service_rate);
+    }
+    $('#total_medical_billing').val(total);
+    $('#medical_billing_record_dashboard').html(output);
+    $('#medical_billing_record_dashboard_table').show();
+		$('#prescriptionModal').modal();
+
+		$('.print_medical_receipt_button').click(function(){
+			var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+			mywindow.document.write('')
+	    mywindow.document.write('<html><head><title>University of the Philippines Visayas Health Service Unit</title></head>');
+	    mywindow.document.write('<h1 style="text-align:center;">PATIENT BILL</h1>');
+	    mywindow.document.write('<br/>');
+	    mywindow.document.write('<h2 style="text-align:center;">'+data['medical_receipt']['patient_first_name']+'&nbsp;'+data['medical_receipt']['patient_last_name']+'</h2><h4 style="text-align:center;">Patient</h4>');
+	    mywindow.document.write('<h3><i>Date:&nbsp;&nbsp;&nbsp;&nbsp;</i><b>'+data['medical_receipt']['schedule_day']+'</b></h3>');
+	    mywindow.document.write('<h3><i>Doctor:&nbsp;&nbsp;&nbsp;&nbsp;</i><b>'+data['medical_receipt']['staff_first_name']+'&nbsp;'+data['medical_receipt']['staff_last_name']+'</b></h3>');
+
+	    mywindow.document.write('<table border="1" width="800" class="table">');
+	    mywindow.document.write('<tbody>');
+	    mywindow.document.write(output);
+	    mywindow.document.write('</tbody>');
+	    mywindow.document.write('</table>');
+	    mywindow.document.write('<h4 style="text-align:right;">TOTAL:&nbsp;&nbsp;&nbsp;&nbsp;<b>'+total+'</b></h4>');
+	    mywindow.document.write('<br/>');
+	    mywindow.document.write('<br/>');
+	    mywindow.document.close(); 
+	    mywindow.focus(); 
+	    mywindow.print();
+	    mywindow.close();
+	    return true;
+		});
+	});
 });
+
+
+
 // ------------------PROFILE---------------
 // ------------------VISITS HISTORY---------------
 // ------------------BILLING RECORDS---------------

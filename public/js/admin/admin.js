@@ -74,7 +74,7 @@ $(document).ready( function(){
                       url: updateMedicalServices,
                       type: 'POST',
                       dataType: 'json',
-                      data: {medical_services:medicalservices, patiend_id:patientTypeId,  _token: token},
+                      data: {medical_services:medicalservices, patient_type_id:patientTypeId,  _token: token},
                       success: function(data) {
                         $("#typeOfPatientMedical").val($("#typeOfPatientMedical option:first").val());
                         $('#displayMedicalServices').html('<div class="alert alert-success alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Successful!</div>');

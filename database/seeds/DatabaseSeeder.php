@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         DB::table('patient_types')->insert([
             'patient_type_description' => 'OPD',
             ]);
-
+    
         DB::table('staff_types')->insert([
             'staff_type_description' => 'Dentist',
             ]);
