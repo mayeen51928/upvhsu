@@ -65,17 +65,16 @@ class PatientController extends Controller
         		->where('medical_billings.medical_appointment_id', '=', $request->medical_appointment_id)
         		->first();
 
+    if($medical_billing_status->status=="paid"){
+    	$payment_status = "paid";
+    }
+
     $medical_receipt = DB::table('medical_appointments')
     				->join('patient_info', 'medical_appointments.patient_id', '=', 'patient_info.patient_id')
     				->join('medical_schedules', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
     				->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')
         		->where('medical_appointments.id', '=', $request->medical_appointment_id)
         		->first();
-
-
-    if($medical_billing_status->status == "paid"){
-    	$payment_status = "paid";
-    }
 
 		if (count($prescription) == 1)
 		{

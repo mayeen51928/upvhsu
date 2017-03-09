@@ -35,36 +35,40 @@ $('.addBillingToXray').click(function(){
 	  data: {appointment_id:  appointmentId, _token: token},
 	  success: function(data)
 	  {
-	  	if(data['patient_type_id'] == 5){
+	  	var dob = new Date(data['patient_info']['birthday']);
+	  	var today = new Date();
+	    var dayDiff = Math.ceil(today - dob) / (1000 * 60 * 60 * 24 * 365);
+	    var age = parseInt(dayDiff);
+	  	if(data['patient_type_id'] == 5 && age>59){
+	  		console.log("Patient is an OPD");
+	  		$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
 	  		$('.medical_senior_checker_xray').show();
 	  		$('input[type=radio][name=xray_radio_button_medical]').change(function() {
 	  			output="";
-					$('.displayServices').html(output);
-	        if (this.value == '5') {
-            console.log("five");
-            output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
-						for (var i = 0; i < data['display_xray_services'].length; i++){
-							output += "<tr><td><input type='checkbox' class='checkboxXrayService' id="+data['display_xray_services'][i].service_rate+" value="+data['display_xray_services'][i].id+"></td><td class='xrayService'>"+data['display_xray_services'][i].service_description+"</td><td class='xrayServiceRate'>"+data['display_xray_services'][i].service_rate+"</td></tr>";
+	  			$('.displayServices').html(output);
+	  			if (this.value == '5') {
+	  				output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
+	  				for (var i = 0; i < data['display_xray_services'].length; i++){
+	  					output += "<tr><td><input type='checkbox' class='checkboxXrayService' id="+data['display_xray_services'][i].service_rate+" value="+data['display_xray_services'][i].id+"></td><td class='xrayService'>"+data['display_xray_services'][i].service_description+"</td><td class='xrayServiceRate'>"+data['display_xray_services'][i].service_rate+"</td></tr>";
 						}
 	        }
 	        else if (this.value == '6') {
-            console.log("six");
             output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
-						for (var i = 0; i < data['display_xray_services'].length; i++){
-							output += "<tr><td><input type='checkbox' class='checkboxXrayService' id="+data['display_xray_services'][i].service_rate+" value="+data['display_xray_services'][i].id+"></td><td class='xrayService'>"+data['display_xray_services'][i].service_description+"</td><td class='xrayServiceRate'>"+data['display_xray_services'][i].service_rate+"</td></tr>";
+						for (var i = 0; i < data['display_xray_services_senior'].length; i++){
+							output += "<tr><td><input type='checkbox' class='checkboxXrayService' id="+data['display_xray_services_senior'][i].service_rate+" value="+data['display_xray_services_senior'][i].id+"></td><td class='xrayService'>"+data['display_xray_services_senior'][i].service_description+"</td><td class='xrayServiceRate'>"+data['display_xray_services_senior'][i].service_rate+"</td></tr>";
 						}
-	        }
-	        $('.displayServices').html(output);
-	        if(data['checker'] == '0'){
-				$(".displayServices :input").attr("disabled", true);
-				$('.xray-bill-input').html("").append("<input type='text' class='form-control' id='xray-bill' disabled>");
-				$('.xray-bill-confirm').html("").append("<button type='button' class='btn btn-primary xray-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-			}
-			else{
-				$('.xray-bill-input').html("").append("<input type='text' class='form-control' id='xray-bill' disabled>");
-				$('.xray-bill-confirm').html("").append("<button type='button' class='btn btn-primary xray-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-			}
-	        var fin = 0;
+					}
+					$('.displayServices').html(output);
+					if(data['checker'] == '0'){
+						$(".displayServices :input").attr("disabled", true);
+						$('.xray-bill-input').html("").append("<input type='text' class='form-control' id='xray-bill' disabled>");
+						$('.xray-bill-confirm').html("").append("<button type='button' class='btn btn-primary xray-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+					}
+					else{
+						$('.xray-bill-input').html("").append("<input type='text' class='form-control' id='xray-bill' disabled>");
+						$('.xray-bill-confirm').html("").append("<button type='button' class='btn btn-primary xray-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+					}
+					var fin = 0;
 					$('.checkboxXrayService').click(function(){
 						if ($(this).is(':checked')){
 							var xrayBillRate = parseFloat($(this).attr('id'));
@@ -75,8 +79,10 @@ $('.addBillingToXray').click(function(){
 					});
 		    });
 	  	}
+
 	  	else{
-	  		
+	  		console.log("Patient is a student");
+	  		$('.medical_senior_checker_xray').hide();
 	  		$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
 				output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
 				for (var i = 0; i < data['display_xray_services'].length; i++){
@@ -84,14 +90,14 @@ $('.addBillingToXray').click(function(){
 				}
 				$('.displayServices').html(output);
 				if(data['checker'] == '0'){
-				$(".displayServices :input").attr("disabled", true);
-				$('.xray-bill-input').html("").append("<input type='text' class='form-control' id='xray-bill' disabled>");
-				$('.xray-bill-confirm').html("").append("<button type='button' class='btn btn-primary xray-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-			}
-			else{
-				$('.xray-bill-input').html("").append("<input type='text' class='form-control' id='xray-bill' disabled>");
-				$('.xray-bill-confirm').html("").append("<button type='button' class='btn btn-primary xray-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-			}
+					$(".displayServices :input").attr("disabled", true);
+					$('.xray-bill-input').html("").append("<input type='text' class='form-control' id='xray-bill' disabled>");
+					$('.xray-bill-confirm').html("").append("<button type='button' class='btn btn-primary xray-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+				}
+				else{
+					$('.xray-bill-input').html("").append("<input type='text' class='form-control' id='xray-bill' disabled>");
+					$('.xray-bill-confirm').html("").append("<button type='button' class='btn btn-primary xray-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+				}
 				var fin = 0;
 				$('.checkboxXrayService').click(function(){
 					if ($(this).is(':checked')){
@@ -101,17 +107,7 @@ $('.addBillingToXray').click(function(){
 						console.log(fin);
 					};
 				});
-	  	}
-			
-		
-			// var fin = 0;
-			// $('.checkboxXrayService').click(function(){
-			// 	if ($(this).is(':checked')){
-			// 		var xrayBillRate = parseFloat($(this).attr('id'));
-			// 		fin = parseFloat(fin+xrayBillRate);
-			// 		$("#xray-bill").val(fin);
-			// 	};
-			// });
+			}
 			$('#xrayBillingModal').modal();
 	  }
   });
