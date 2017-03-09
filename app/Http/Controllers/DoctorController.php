@@ -866,6 +866,7 @@ class DoctorController extends Controller
 
 		$patient_info = DB::table('patient_info')
 					->join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')
+					->where('medical_appointments.id', $appointment_id)
 					->first();
 		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
 
@@ -900,12 +901,30 @@ class DoctorController extends Controller
 							['service_type', '=', 'medical'],
 						])
 					->get();
+
+			$display_medical_services_senior = DB::table('medical_services')
+					->where([
+							['patient_type_id', '=', 6],
+							['service_type', '=', 'medical'],
+						])
+					->get();
 		}
 
-		return response()->json(['patient_info' => $patient_info, 
-						'display_medical_services' => $display_medical_services, 
-						'checker' => $checker
-		]);
+		if($patient_info->patient_type_id == 5){
+				return response()->json(['patient_info' => $patient_info, 
+							'display_medical_services' => $display_medical_services,
+							'display_medical_services_senior' => $display_medical_services_senior,  
+							'checker' => $checker,
+							'patient_type_id' => $patient_info->patient_type_id,
+			]);
+		}
+		else{
+			return response()->json(['patient_info' => $patient_info, 
+							'display_medical_services' => $display_medical_services,
+							'checker' => $checker,
+							'patient_type_id' => $patient_info->patient_type_id,
+			]);
+		}
 	}
 
 	public function confirmbillingmedical(Request $request){		

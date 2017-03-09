@@ -408,13 +408,19 @@
   </div>
 </div>
 <div id="medicalBillingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <div class="patient_name"></div>
       </div>
       <div class="modal-body">
+        <div class="medical_senior_checker_medical" style="display:none;">
+          <div class="radio">
+            <label><input type="radio" name="medical_radio_button_medical" id="medical_radio_button_medical_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="medical_radio_button_medical" id="medical_radio_button_medical_billing_senior" value="6">Senior Citizen</label>
+          </div>
+        </div>
         <table class="displayServices"></table>
         <div class="medical-bill-input" id="medical-bill-input-text"></div> 
       </div>

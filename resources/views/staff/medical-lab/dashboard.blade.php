@@ -280,6 +280,12 @@
         <div class="patient_name"></div>
       </div>
       <div class="modal-body">
+        <div class="medical_senior_checker_cbc" style="display:none;">
+          <div class="radio">
+            <label><input type="radio" name="cbc_radio_button_medical" id="cbc_radio_button_cbc_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="cbc_radio_button_medical" id="cbc_radio_button_cbc_billing_senior" value="6">Senior Citizen</label>
+          </div>
+        </div>
         <table class="displayServices"></table>
         <div class="cbc-bill-input" id="cbc-bill-input-text"></div> 
       </div>
@@ -298,6 +304,12 @@
         <div class="patient_name"></div>
       </div>
       <div class="modal-body">
+        <div class="drug_senior_checker_drug" style="display:none;">
+          <div class="radio">
+            <label><input type="radio" name="drug_radio_button_medical" id="drug_radio_button_drug_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="drug_radio_button_medical" id="drug_radio_button_drug_billing_senior" value="6">Senior Citizen</label>
+          </div>
+        </div>
         <table class="displayServices"></table>
         <div class="drug-bill-input" id="drug-bill-input-text"></div> 
       </div>
@@ -315,6 +327,12 @@
         <div class="patient_name"></div>
       </div>
       <div class="modal-body">
+        <div class="medical_senior_checker_fecalysis" style="display:none;">
+          <div class="radio">
+            <label><input type="radio" name="fecalysis_radio_button_medical" id="fecalysis_radio_button_fecalysis_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="fecalysis_radio_button_medical" id="fecalysis_radio_button_fecalysis_billing_senior" value="6">Senior Citizen</label>
+          </div>
+        </div>
         <table class="displayServices"></table>
         <div class="fecalysis-bill-input" id="fecalysis-bill-input-text"></div> 
       </div>
@@ -332,6 +350,12 @@
         <div class="patient_name"></div>
       </div>
       <div class="modal-body">
+        <div class="medical_senior_checker_urinalysis" style="display:none;">
+          <div class="radio">
+            <label><input type="radio" name="urinalysis_radio_button_medical" id="urinalysis_radio_button_urinalysis_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="urinalysis_radio_button_medical" id="urinalysis_radio_button_urinalysis_billing_senior" value="6">Senior Citizen</label>
+          </div>
+        </div>
         <table class="displayServices"></table>
         <div class="urinalysis-bill-input" id="urinalysis-bill-input-text"></div> 
       </div>

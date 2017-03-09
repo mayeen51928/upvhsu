@@ -164,7 +164,8 @@ $('.medical_appointments_prescription').click(function(){
 			$('#remarkModal').html(data['prescription']);
 			$('#remarkModalFooter').html('Added on: ' + data['date']);
 		}
-
+		
+		console.log(data['payment_status']);
 		if(data['payment_status']=="unpaid")
 		{
 			$('#print_medical_receipt').html('<button class="btn btn-info print_medical_receipt_button" disabled>Print Receipt</button>');
