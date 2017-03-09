@@ -51,11 +51,13 @@
 					<label for="selectdentaldate" id="selectdentaldateErrorMsg" >Date:</label>
 					<select class="form-control" required id="selectdentaldate">
 						<option disabled selected> -- select date of appointment -- </option>
-						<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
-						<option>{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}</option>
-						<option>{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}</option>
-						<option>{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}</option>
-						<option>{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}</option>
+						<option value="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}">{{ Carbon\Carbon::tomorrow()->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(2)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(3)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(4)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(5)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(6)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(6)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(7)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(7)->format('F j, Y') }}</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -80,11 +82,13 @@
 					<label for="selectmedicaldate" id="selectmedicaldateErrorMsg">Date:</label>
 					<select class="form-control" required id="selectmedicaldate">
 						<option disabled selected> -- select date of appointment -- </option>
-						<option>{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}</option>
-						<option>{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}</option>
-						<option>{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}</option>
-						<option>{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}</option>
-						<option>{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}</option>
+						<option value="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}">{{ Carbon\Carbon::tomorrow()->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(2)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(3)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(4)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(4)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(5)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(5)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(6)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(6)->format('F j, Y') }}</option>
+						<option value="{{ Carbon\Carbon::now()->addDays(7)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(7)->format('F j, Y') }}</option>
 					</select>
 				</div>
 				<div class="form-group">

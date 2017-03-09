@@ -20,6 +20,7 @@ class CreateChestXrayResultsTable extends Migration
             $table->integer('xray_staff_id')->nullable();
             $table->foreign('xray_staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
             $table->text('xray_result')->nullable();
+            $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
     }

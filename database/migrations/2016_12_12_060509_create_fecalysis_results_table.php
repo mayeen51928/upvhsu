@@ -21,6 +21,7 @@ class CreateFecalysisResultsTable extends Migration
             $table->foreign('lab_staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
             $table->text('macroscopic')->nullable();
             $table->text('microscopic')->nullable();
+            $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
     }
