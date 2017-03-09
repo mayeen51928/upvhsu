@@ -55,6 +55,7 @@ Route::post('/displaypatientrecordsearchdental', 'DentistController@displaypatie
 Route::get('/dentist/viewrecords/{id}', 'DentistController@viewrecords');
 Route::get('/dentist/searchpatient/date', 'DentistController@searchpatientbydate');
 Route::post('/searchpatientbydaterecorddental', 'DentistController@searchpatientbydaterecorddental');
+Route::get('/dentist/viewdentalrecord/{id}', 'DentistController@viewdentalrecord');
 Route::post('/addschedule_dental', 'DentistController@addschedule');
 Route::post('/dentist/updatedentalrecord','DentistController@updatedentalrecord');
 Route::post('/update_dental_record_modal','DentistController@updatedentalrecordmodal');

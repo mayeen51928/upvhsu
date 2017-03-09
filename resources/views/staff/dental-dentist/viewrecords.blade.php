@@ -11,7 +11,7 @@
             <table class="table table-hover viewrecordsfromsearch">
               <tr><thead>Date</thead></tr>
               @foreach($records as $record)
-              <tr><td><a class="dentalrecorddate" id="dentalappointment_{{$record->id}}">{{date_format(date_create($record->schedule_start), 'F j, Y')}}</a></td></tr>
+              <tr><td><a class="dentalrecorddate" href="{{ url('/dentist/viewdentalrecord/') }}/{{$record->id}}" id="dentalappointment_{{$record->id}}">{{date_format(date_create($record->schedule_start), 'F j, Y')}}</a></td></tr>
               @endforeach
             </table>
           </div>

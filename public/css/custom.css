@@ -298,6 +298,7 @@ svg {
 a.medical_appointments_prescription,
 #searchResults td a,
 .see_more_announcement:hover,
+.listofallpatients
 {
 	cursor: pointer;
 }

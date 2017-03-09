@@ -513,7 +513,7 @@ $('#searchbydatebuttondental').click(function() {
 			  		output = '';
 	  				for(var i=0; i < data['searchpatientappointmentidyarray'].length; i++)
 	  				{
-	  					output += "<tr><td>" + data['searchpatientscheduledayarray'][i] + "</td><td>" + data['searchpatientscheduletimearray'][i]+"</td><td><a class='searchQueryResults dentalrecorddate' id='dentalrecorddate_"+data['searchpatientappointmentidyarray'][i]+"'>"+data['searchpatientnamearray'][i]+"</a></td></tr>";
+	  					output += "<tr><td>" + data['searchpatientscheduledayarray'][i] + "</td><td>" + data['searchpatientscheduletimearray'][i]+"</td><td><a class='searchQueryResults' href='/dentist/viewdentalrecord/" + data['searchpatientappointmentidyarray'][i]+ "/' dentalrecorddate' id='dentalrecorddate_"+data['searchpatientappointmentidyarray'][i]+"'>"+data['searchpatientnamearray'][i]+"</a></td></tr>";
 	  				}
 	  				$('#searchlistofallpatients').hide();
 	  				$('#searchloading').hide();
