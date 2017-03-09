@@ -17,7 +17,7 @@ class CreateMedicalServicesTable extends Migration
             $table->increments('id');
             $table->string('service_description');
             $table->integer('service_rate')->nullable();
-            $table->enum('service_type', ['medical', 'xray', 'cbc', 'drugtest', 'feaclysis', 'urinalysis']);
+            $table->enum('service_type', ['medical', 'xray', 'cbc', 'drugtest', 'fecalysis', 'urinalysis']);
             $table->integer('patient_type_id')->nullable();
             $table->timestamps();
         });

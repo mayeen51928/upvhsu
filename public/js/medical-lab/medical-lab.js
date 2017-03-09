@@ -393,7 +393,7 @@ $('.addBillingToFecalysis').click(function(){
         $('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
         output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
         for (var i = 0; i < data['display_fecalysis_services'].length; i++){
-          output += "<tr><td><input type='checkbox' class='checkboxFecalysisService' id="+data['display_fecalysis_services'][i].service_rate+" value="+data['display_drug_services'][i].id+"></td><td class='xrayService'>"+data['display_drug_services'][i].service_description+"</td><td class='drugServiceRate'>"+data['display_drug_services'][i].service_rate+"</td></tr>";
+          output += "<tr><td><input type='checkbox' class='checkboxFecalysisService' id="+data['display_fecalysis_services'][i].service_rate+" value="+data['display_fecalysis_services'][i].id+"></td><td class='drugService'>"+data['display_fecalysis_services'][i].service_description+"</td><td class='drugServiceRate'>"+data['display_fecalysis_services'][i].service_rate+"</td></tr>";
         }
         $('.displayServices').html(output);
         if(data['checker'] == '0'){
@@ -509,7 +509,7 @@ $('.addBillingToUrinalysis').click(function(){
         $('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
         output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
         for (var i = 0; i < data['display_urinalysis_services'].length; i++){
-          output += "<tr><td><input type='checkbox' class='checkboxUrinalysisService' id="+data['display_urinalysis_services'][i].service_rate+" value="+data['display_drug_services'][i].id+"></td><td class='xrayService'>"+data['display_drug_services'][i].service_description+"</td><td class='drugServiceRate'>"+data['display_drug_services'][i].service_rate+"</td></tr>";
+          output += "<tr><td><input type='checkbox' class='checkboxUrinalysisService' id="+data['display_urinalysis_services'][i].service_rate+" value="+data['display_urinalysis_services'][i].id+"></td><td class='xrayService'>"+data['display_urinalysis_services'][i].service_description+"</td><td class='drugServiceRate'>"+data['display_urinalysis_services'][i].service_rate+"</td></tr>";
         }
         $('.displayServices').html(output);
         if(data['checker'] == '0'){
