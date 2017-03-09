@@ -3,6 +3,7 @@
 @section('content')
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
+		@if(count($announcements)>0)
 		<table class="table" id="announcements_table">
 			<thead>
 		    <tr>
@@ -24,7 +25,7 @@
 		      	posted on <span class="announcement_date">{{ Carbon\Carbon::parse($announcement->created_at)->toDayDateTimeString() }}</span><br/><br/>
 		      	<p style="text-align:justify; width:120%; " class="announcement_body" id="announcement_body_{{ $announcement->id }}">{!! nl2br(e($announcement->announcement_body)) !!}</p>
 		      	@if(Auth::check() and $user->user_type_id == '3')
-		      	<form action="/announcement/edit" method="POST">{{ csrf_field() }}<input type="hidden" value="{{ $announcement->id }}" name="announcementId"><input type="submit" class="btn btn-primary btn-sm" id="{{ $announcement->id }}" value="Edit Announcement" style="margin-top:5px; "></form>
+		      	<form action="/announcement/edit" method="POST">{{ csrf_field() }}<input type="hidden" value="{{ $announcement->id }}" name="announcementId"><input type="submit" class="btn btn-primary btn-sm" id="{{ $announcement->id }}" value="Edit" style="margin-top:5px; "></form>
 		      	<form action="/announcement/delete" method="POST">{{ csrf_field() }}<input type="hidden" value="{{ $announcement->id }}" name="announcementId"><input type="submit" class="btn btn-danger btn-sm" id="{{ $announcement->id }}" value="Delete" style="margin-top:5px; "></form>
 		      	@endif
 		      </td>
@@ -36,6 +37,12 @@
 		    @endforeach
 		  </tbody>
 		</table>
+		@else
+		<div class="row">
+		<br/>
+		<p class="center-block">There are no announcements as of the moment.</p>
+		</div>
+		@endif
 	</div>
 </div>
 

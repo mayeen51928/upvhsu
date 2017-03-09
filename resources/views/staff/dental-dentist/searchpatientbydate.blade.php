@@ -69,10 +69,15 @@
         <select class="form-control" name="search_year" id="search_year">
           {{-- <option selected disabled>Select year</option> --}}
           <option value="0000" selected></option>
-          <option value="1996">1996</option>
+          {{-- <option value="1996">1996</option> --}}
           <option value="2017">2017</option>
         </select>
         <br/>
+        {{-- <label>Start Time</label>
+        <input type="time" class="form-control" name="search_starttime" id="search_starttime"/>
+        <label>End Time</label>
+        <input type="time" class="form-control" name="search_endtime" id="search_endtime"/>
+        <br/> --}}
         <button type="button" class="form-control btn btn-info" id="searchbydatebuttondental">Search</button>
 				{{-- <input class="form-control" type="text" name="search_month" id="search_month" placeholder="Month" /> --}}
         

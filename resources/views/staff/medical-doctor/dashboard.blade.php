@@ -249,7 +249,7 @@
             <div class="col-md-5 col-sm-5 col-xs-5">
               <div class="form-group">
                 <label for="hemoglobin">Hemoglobin:</label>
-                <input type="text" class="form-control" id="hemoglobin" disabled>
+                <input type="text" class="form-control" id="hemoglobin" disabled="disabled"/>
               </div>
             </div>
             <div class="col-md-5 col-sm-5 col-xs-5">
@@ -402,7 +402,7 @@
         <span style="float: left; margin-right: 4px"><button type="button" class="btn btn-info" id="backButtonMedicalDiagnosis">Back</button></span>
         <span style="float: left"><button type="button" class="btn btn-info" id="nextButtonMedicalDiagnosis">Next</button></span>
         <span class="medical-button-container"></span>
-        <button type="button" id="closeButtonMedicalDiagnosis" class="btn btn-danger">Cancel</button>
+        <button type="button" id="closeButtonMedicalDiagnosis" class="btn btn-danger">Close</button>
       </div>
     </div>
   </div>

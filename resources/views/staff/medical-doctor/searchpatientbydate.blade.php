@@ -69,7 +69,7 @@
         <select class="form-control" name="search_year" id="search_year">
           {{-- <option selected disabled>Select year</option> --}}
           <option value="0000" selected></option>
-          <option value="1996">1996</option>
+          {{-- <option value="1996">1996</option> --}}
           <option value="2017">2017</option>
         </select>
         <br/>
