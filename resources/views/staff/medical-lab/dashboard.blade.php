@@ -273,7 +273,7 @@
 </div>
 
 <div id="cbcBillingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -286,7 +286,7 @@
             <label><input type="radio" name="cbc_radio_button_medical" id="cbc_radio_button_cbc_billing_senior" value="6">Senior Citizen</label>
           </div>
         </div>
-        <table class="displayServices"></table>
+        <table class="table table-bordered displayServices"></table>
         <div class="cbc-bill-input" id="cbc-bill-input-text"></div> 
       </div>
       <div class="modal-footer">
@@ -297,7 +297,7 @@
 </div>
 
 <div id="drugBillingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -310,7 +310,7 @@
             <label><input type="radio" name="drug_radio_button_medical" id="drug_radio_button_drug_billing_senior" value="6">Senior Citizen</label>
           </div>
         </div>
-        <table class="displayServices"></table>
+        <table class="table table-bordered displayServices"></table>
         <div class="drug-bill-input" id="drug-bill-input-text"></div> 
       </div>
       <div class="modal-footer">
@@ -320,7 +320,7 @@
   </div>
 </div>
 <div id="fecalysisBillingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -333,7 +333,7 @@
             <label><input type="radio" name="fecalysis_radio_button_medical" id="fecalysis_radio_button_fecalysis_billing_senior" value="6">Senior Citizen</label>
           </div>
         </div>
-        <table class="displayServices"></table>
+        <table class="table table-bordered  displayServices"></table>
         <div class="fecalysis-bill-input" id="fecalysis-bill-input-text"></div> 
       </div>
       <div class="modal-footer">
@@ -343,7 +343,7 @@
   </div>
 </div>
 <div id="urinalysisBillingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -356,7 +356,7 @@
             <label><input type="radio" name="urinalysis_radio_button_medical" id="urinalysis_radio_button_urinalysis_billing_senior" value="6">Senior Citizen</label>
           </div>
         </div>
-        <table class="displayServices"></table>
+        <table class="table table-bordered displayServices"></table>
         <div class="urinalysis-bill-input" id="urinalysis-bill-input-text"></div> 
       </div>
       <div class="modal-footer">
