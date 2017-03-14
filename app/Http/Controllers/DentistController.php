@@ -1297,7 +1297,7 @@ class DentistController extends Controller
 				}
 				elseif($dental_chart_results == 4){
 					$dental_chart_results = "#808080";
-				}
+				} 
 				elseif($dental_chart_results == 5){
 					$dental_chart_results = "#194d19";
 				}

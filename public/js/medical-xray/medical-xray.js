@@ -19,6 +19,7 @@ $('.addXrayResult').click(function(){
 	      	} , function(data){
 	      	$('#add-xray-result').modal('hide');
 	      	$('#chest-xray').val('');
+	      	$("#addXrayResult_"+xray_id).prop( "disabled", true );
 	      });
 	   }
 	});

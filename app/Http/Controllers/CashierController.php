@@ -45,8 +45,14 @@ class CashierController extends Controller
             ->get();
       }
 
+      $counter = 0;
+      if(count($unpaid_bills)>0){
+      	$counter++;
+      }
+
     	$params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
+    	$params['counter'] = $counter;
     	return view('staff.cashier.dashboard', $params, compact('unpaid_bills', 'unpaid_bills_info'));
     }
 
