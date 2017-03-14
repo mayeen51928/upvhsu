@@ -163,6 +163,15 @@ class LabController extends Controller
 							])
 						->get();
 			}
+
+			if($patient_info->patient_type_id == 1){
+				$display_cbc_services = DB::table('medical_services')
+						->where([
+								['patient_type_id', '=', 1],
+								['service_type', '=', 'cbc'],
+							])
+						->get();
+			}
 			
 			if($patient_info->patient_type_id == 5){
 					return response()->json(['patient_info' => $patient_info, 
@@ -214,6 +223,16 @@ class LabController extends Controller
 				$display_drug_services_senior = DB::table('medical_services')
 						->where([
 								['patient_type_id', '=', 6],
+								['service_type', '=', 'drugtest'],
+							])
+						->get();
+			}
+
+
+			if($patient_info->patient_type_id == 1){
+				$display_drug_services = DB::table('medical_services')
+						->where([
+								['patient_type_id', '=', 1],
 								['service_type', '=', 'drugtest'],
 							])
 						->get();
@@ -272,6 +291,15 @@ class LabController extends Controller
 							])
 						->get();
 			}
+
+			if($patient_info->patient_type_id == 1){
+				$display_fecalysis_services = DB::table('medical_services')
+						->where([
+								['patient_type_id', '=', 1],
+								['service_type', '=', 'fecalysis'],
+							])
+						->get();
+			}
 			
 			if($patient_info->patient_type_id == 5){
 					return response()->json(['patient_info' => $patient_info, 
@@ -289,54 +317,6 @@ class LabController extends Controller
 				]);
 			}
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -378,6 +358,16 @@ class LabController extends Controller
 							])
 						->get();
 			}
+
+
+			if($patient_info->patient_type_id == 1){
+				$display_urinalysis_services = DB::table('medical_services')
+						->where([
+								['patient_type_id', '=', 1],
+								['service_type', '=', 'urinalysis'],
+							])
+						->get();
+			}
 			
 			if($patient_info->patient_type_id == 5){
 					return response()->json(['patient_info' => $patient_info, 
@@ -395,50 +385,6 @@ class LabController extends Controller
 				]);
 			}
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 		public function confirmbillingcbc(Request $request){	

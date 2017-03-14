@@ -20,6 +20,7 @@ class CreateDrugTestResultsTable extends Migration
             $table->integer('lab_staff_id')->nullable();
             $table->foreign('lab_staff_id')->references('staff_id')->on('staff_info')->onDelete('cascade');
             $table->enum('drug_test_result', ['negative', 'positive'])->nullable();
+            $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@ class CreateCbcResultsTable extends Migration
             $table->text('hemoglobin')->nullable();
             $table->text('hemasocrit')->nullable();
             $table->text('wbc')->nullable();
+            $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
     }

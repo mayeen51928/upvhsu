@@ -446,7 +446,7 @@ $(document).ready( function(){
             $('#maintenance_medication_history_dental').val()
             )
         {
-          $('#loginmodaldental input, #loginmodaldental select, ').attr('disabled', 'disabled');
+          $('#loginmodaldental input, #loginmodaldental select').attr('disabled', 'disabled');
         	$.post('/signupfromdentalappointment',{
 	    		user_name:$('#user_name_modal_dental').val(),
 	            password:$('#password_modal_dental').val(),
@@ -498,7 +498,7 @@ $(document).ready( function(){
               $('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
               $('#dentalNotes').attr("disabled", "disabled");
               $('#selectdentaldate').attr('disabled', 'disabled');
-              $('#selectdentaldoctor').attr('disabled', 'disabled');
+              $('#selectdentaltime').attr('disabled', 'disabled');
               $('#submitDentalAppointment').addClass("disabled");
               $('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
               $('#navigationBar').load(location.href + " #navigationBar");

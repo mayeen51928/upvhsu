@@ -23,6 +23,7 @@ class CreateUrinalysisResultsTable extends Migration
             $table->text('rbc')->nullable();
             $table->enum('albumin', ['negative', 'positive'])->nullable();
             $table->enum('sugar', ['negative', 'positive'])->nullable();
+            $table->enum('status', ['0', '1']);
             $table->timestamps();
         });
     }

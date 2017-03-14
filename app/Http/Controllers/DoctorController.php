@@ -351,7 +351,7 @@ class DoctorController extends Controller
 			$counter = 0;
 			if($request->search_month!='00' && $request->search_date=='00' && $request->search_year=='00')
 			{
-				$search_by_months = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', '<=', date('d'))->orderBy('schedule_day', 'asc')->get();
+				$search_by_months = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', '<=', date('Y-m-d'))->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_months)>0)
 				{
 					$searchpatientnamearray = array();
@@ -376,7 +376,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month=='00' && $request->search_date!='00' && $request->search_year=='00')
 			{
-				$search_by_dates = MedicalSchedule::whereDay('schedule_day', $request->search_date)->whereDay('schedule_day', '<=', date('d'))->orderBy('schedule_day', 'asc')->get();
+				$search_by_dates = MedicalSchedule::whereDay('schedule_day', $request->search_date)->whereDay('schedule_day', '<=', date('Y-m-d'))->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_dates)>0)
 				{
 					$searchpatientnamearray = array();
@@ -401,7 +401,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month=='00' && $request->search_date=='00' && $request->search_year!='00')
 			{
-				$sarch_by_years = MedicalSchedule::whereYear('schedule_day', $request->search_year)->whereDay('schedule_day', '<=', date('d'))->orderBy('schedule_day', 'asc')->get();
+				$sarch_by_years = MedicalSchedule::whereYear('schedule_day', $request->search_year)->whereDay('schedule_day', '<=', date('Y-m-d'))->orderBy('schedule_day', 'asc')->get();
 				if(count($sarch_by_years)>0)
 				{
 					$searchpatientnamearray = array();
@@ -426,7 +426,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month!='00' && $request->search_date!='00' && $request->search_year=='00')
 			{
-				$search_by_month_dates = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->whereDay('schedule_day', '<=', date('d'))->orderBy('schedule_day', 'asc')->get();
+				$search_by_month_dates = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->whereDay('schedule_day', '<=', date('Y-m-d'))->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_month_dates)>0)
 				{
 					$searchpatientnamearray = array();
@@ -451,7 +451,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month!='00' && $request->search_date!='00' && $request->search_year!='00')
 			{
-				$search_by_month_date_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->whereYear('schedule_day', $request->search_year)->whereDay('schedule_day', '<=', date('d'))->orderBy('schedule_day', 'asc')->get();
+				$search_by_month_date_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereDay('schedule_day', $request->search_date)->whereYear('schedule_day', $request->search_year)->whereDay('schedule_day', '<=', date('Y-m-d'))->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_month_date_years)>0)
 				{
 					$searchpatientnamearray = array();
@@ -476,7 +476,7 @@ class DoctorController extends Controller
 			}
 			if($request->search_month!='00' && $request->search_date=='00' && $request->search_year!='00')
 			{
-				$search_by_month_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereYear('schedule_day', $request->search_year)->whereDay('schedule_day', '<=', date('d'))->orderBy('schedule_day', 'asc')->get();
+				$search_by_month_years = MedicalSchedule::whereMonth('schedule_day', $request->search_month)->whereYear('schedule_day', $request->search_year)->whereDay('schedule_day', '<=', date('Y-m-d'))->orderBy('schedule_day', 'asc')->get();
 				if(count($search_by_month_years)>0)
 				{
 					$searchpatientnamearray = array();
