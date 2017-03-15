@@ -20,6 +20,7 @@ use DB;
 use App\Staff;
 use App\Town;
 use App\Province;
+use App\DentalBilling;
 use Log;
 use Illuminate\Support\Facades\Input;
 
@@ -45,17 +46,11 @@ class DentistController extends Controller
 		public function dashboard()
 		{
 			$user = Auth::user();
-			$dental_appointments_fin = DB::table('dental_schedules')
-					->join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')
-					->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
-					->where('dental_schedules.staff_id', '=', $user->user_id)
-					->where('dental_appointments.status', '=', '0')
-					// ->where('dental_appointments.created_at', '=', date('Y-m-d'))
-					->get();
-
+			$dental_appointments_today = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('schedule_start','>', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->get();
+			$dental_appointments_future = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('schedule_start','=', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->get();
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'dashboard';
-			return view('staff.dental-dentist.dashboard', $params, compact('dental_appointments_fin'));
+			return view('staff.dental-dentist.dashboard', $params, compact('dental_appointments_today', 'dental_appointments_future'));
 		}
 
 		public function updatedentalrecord(Request $request)
@@ -1714,4 +1709,62 @@ class DentistController extends Controller
 					
 			return view('staff.dental-dentist.viewdentalrecord', $params, compact('patient_info', 'stacks_condition', 'stacks_operation', 'stacks_condition2', 'stacks_operation2', 'stacks_condition3', 'stacks_operation3', 'stacks_condition4', 'stacks_operation4', 'stacks_condition5', 'stacks_operation5', 'stacks_condition6', 'stacks_operation6', 'stacks_condition7', 'stacks_operation7', 'stacks_condition8', 'stacks_operation8', 'counter', 'additional_dental_records'));
 		}
+
+
+	public function addbillingdental(Request $request){
+		$appointment_id = $request->appointment_id;
+
+		$patient_info = DB::table('patient_info')
+					->join('dental_appointments', 'patient_info.patient_id', 'dental_appointments.patient_id')
+					->where('dental_appointments.id', $appointment_id)
+					->first();
+		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
+
+		$checker = 1;
+
+		if($patient_info->patient_type_id == 1){
+			$display_dental_services = DB::table('dental_services')->where('patient_type_id', '=', 1)->get();
+		}
+
+		if($patient_info->patient_type_id == 5){
+			$display_dental_services = DB::table('dental_services')->where('patient_type_id', '=', 5)->get();
+			$display_dental_services_senior = DB::table('dental_services')->where('patient_type_id', '=', 6)->get();
+		}
+
+		if($patient_info->patient_type_id == 5){
+				return response()->json(['patient_info' => $patient_info, 
+							'display_dental_services' => $display_dental_services,
+							'display_dental_services_senior' => $display_dental_services_senior,  
+							'checker' => $checker,
+							'patient_type_id' => $patient_info->patient_type_id,
+			]);
+		}
+		else{
+			return response()->json(['patient_info' => $patient_info, 
+							'display_dental_services' => $display_dental_services,
+							'checker' => $checker,
+							'patient_type_id' => $patient_info->patient_type_id,
+			]);
+		}
+	}
+
+	public function confirmbillingdental(Request $request){		
+		$appointment_id = $request->appointment_id;
+		$ps = $request->checked_services_array_id;
+		$ls = $request->checked_services_array_rate;
+		for($i=0; $i < sizeof($ps); $i++){
+		    $billing = new DentalBilling;
+				$billing->dental_service_id = $ps[$i];
+        $billing->appointment_id = $appointment_id;
+        $billing->status = 'unpaid';
+        $billing->amount = $ls[$i];
+        $billing->save();
+		}
+
+		DB::table('dental_appointments')
+		      ->where('id', $appointment_id)
+		      ->update(['status' => '1']);
+
+		return response()->json(['success' => 'success']); 
+	}
 }

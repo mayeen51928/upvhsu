@@ -574,11 +574,11 @@ $('.addBillingToMedical').click(function(){
 						if(data['checker'] == '0'){
 							$(".displayServices :input").attr("disabled", true);
 							$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled>");
-							$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+							$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm-button' id='medicalBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
 						}
 						else{
 							$('.medical-bill-input').html("").append("<input type='text' class='form-control' id='medical-bill' disabled>");
-							$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+							$('.medical-bill-confirm').html("").append("<button type='button' class='btn btn-primary medical-bill-confirm-button' id='medicalBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
 						}
 						var fin = 0;
 						$('.checkboxMedicalService').click(function(){

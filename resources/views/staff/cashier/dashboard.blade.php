@@ -33,20 +33,19 @@
             </tr>
           </thead>
            <tbody>
-            @for ($i = 0; $i < 1; $i++)
+            @foreach($unpaid_bills as $unpaid_bill)
             <tr>
               @if ($counter>0)
-                <td>{{ $unpaid_bills_info[$i]->patient_first_name }} {{ $unpaid_bills_info[$i]->patient_last_name }}</td>
-                <td>{{ $unpaid_bills_info[$i]->staff_first_name }} {{ $unpaid_bills_info[$i]->staff_first_name }}</td>
-                <td>{{ $unpaid_bills[$i]->amount }}</td>
-                <td>{{ $unpaid_bills_info[$i]->schedule_day }}</td>
-                <td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{ $unpaid_bills[$i]->medical_appointment_id }}_{{ $unpaid_bills[$i]->amount }}">Pay Bill</button></td>
+                <td>{{ $unpaid_bill->patient_first_name }} {{ $unpaid_bill->patient_last_name }}</td>
+                <td>{{ $unpaid_bill->staff_first_name }} {{ $unpaid_bill->staff_first_name }}</td>
+                <td>{{ $unpaid_bill->amount }}</td>
+                <td>{{ $unpaid_bill->schedule_day }}</td>
+                <td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{ $unpaid_bill->medical_appointment_id }}_{{ $unpaid_bill->amount }}">Pay Bill</button></td>
               @else
                 <td>No billing record at this moment.</td>
               @endif
-              
             </tr>
-            @endfor
+            @endforeach
           </tbody>
         </table>
       </div>
