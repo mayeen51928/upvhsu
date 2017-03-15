@@ -65,7 +65,7 @@ class PatientController extends Controller
         		->where('medical_billings.medical_appointment_id', '=', $request->medical_appointment_id)
         		->first();
 
-    if($medical_billing_status->status=="paid"){
+    if(count($medical_billing_status) == 1 && $medical_billing_status->status=="paid"){
     	$payment_status = "paid";
     }
 

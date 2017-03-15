@@ -88,10 +88,12 @@ Route::post('/confirm_billing_medical','DoctorController@confirmbillingmedical')
 
 /* ROUTES FOR LABORATORY ACCOUNT */
 Route::get('/lab','LabController@dashboard');
-Route::post('/addcbcresult','LabController@addcbcresult');
-Route::post('/adddrugtestresult', 'LabController@adddrugtestresult');
-Route::post('/addfecalysisresult', 'LabController@addfecalysisresult');
-Route::post('/addurinalysisresult', 'LabController@addurinalysisresult');
+// Route::post('/addcbcresult','LabController@addcbcresult');
+// Route::post('/adddrugtestresult', 'LabController@adddrugtestresult');
+// Route::post('/addfecalysisresult', 'LabController@addfecalysisresult');
+// Route::post('/addurinalysisresult', 'LabController@addurinalysisresult');
+Route::post('/viewlabdiagnosis', 'LabController@viewlabdiagnosis');
+Route::post('/updatelabdiagnosis', 'LabController@updatelabdiagnosis');
 Route::get('/lab/profile','LabController@profile');
 Route::get('/lab/profile/edit','LabController@editprofile');
 Route::post('/lab/profile/update','LabController@updateprofile');

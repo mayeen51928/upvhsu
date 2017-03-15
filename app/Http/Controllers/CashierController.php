@@ -31,11 +31,12 @@ class CashierController extends Controller
     public function dashboard()
     {
       $unpaid_bills = DB::table('medical_billings')
-  			->select(DB::raw('medical_billings.medical_appointment_id, sum(medical_billings.amount) as amount'))
+      ->join('medical_appointments', 'medical_appointments.id', '=', 'medical_billings.medical_appointment_id')->join('medical_schedules', 'medical_schedules.id', 'medical_appointments.medical_schedule_id')->join('staff_info', 'staff_info.staff_id', '=', 'medical_schedules.staff_id')
+  			->select(DB::raw('medical_billings.medical_appointment_id, sum(medical_billings.amount) as amount, staff_info.staff_first_name'))
             ->groupBy(DB::raw("medical_billings.medical_appointment_id"))
             ->where('medical_billings.status', '=', 'unpaid')
             ->get();
-
+        dd($unpaid_bills);
       foreach ($unpaid_bills as $unpaid_bill) {
       	$unpaid_bills_info = DB::table('medical_schedules')
   					->join('medical_appointments', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')

@@ -33,7 +33,7 @@
             </tr>
           </thead>
            <tbody>
-            @for ($i = 0; $i < 1; $i++)
+            @for ($i = 0; $i < sizeof($unpaid_bills_info); $i++)
             <tr>
               @if ($counter>0)
                 <td>{{ $unpaid_bills_info[$i]->patient_first_name }} {{ $unpaid_bills_info[$i]->patient_last_name }}</td>
