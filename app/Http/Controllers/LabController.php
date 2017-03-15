@@ -35,98 +35,107 @@ class LabController extends Controller
     }
     public function dashboard()
     {
-        $params['cbc_requests'] = DB::table('cbc_results')
-        ->join('medical_appointments', 'cbc_results.medical_appointment_id', 'medical_appointments.id')
+
+        $params['lab_requests'] = DB::table('medical_appointments')
+        ->where('status', '0')
+        ->leftjoin('cbc_results', 'medical_appointments.id', 'cbc_results.medical_appointment_id')
+        ->leftjoin('drug_test_results', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')
+        ->leftjoin('fecalysis_results', 'medical_appointments.id', 'fecalysis_results.medical_appointment_id')
+        ->leftjoin('urinalysis_results', 'medical_appointments.id', 'urinalysis_results.medical_appointment_id')
         ->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
         ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
         ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
-        ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'cbc_results.*')
-        ->where('status', '0')
-        ->where('hemoglobin', null)
-        ->where('hemasocrit', null)
-        ->where('wbc', null)
+        ->select('medical_appointments.id','patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day')
+        
         ->get();
-
-        $params['drug_test_requests'] = DB::table('drug_test_results')
-        ->join('medical_appointments', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')
-        ->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
-        ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
-        ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
-        ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'drug_test_results.*')
-        ->where('status', '0')
-        ->where('drug_test_result', null)
-        ->get();
-
-        $params['fecalysis_requests'] = DB::table('fecalysis_results')
-        ->join('medical_appointments', 'fecalysis_results.medical_appointment_id', 'medical_appointments.id')
-        ->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
-        ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
-        ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
-        ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'fecalysis_results.*')
-        ->where('status', '0')
-        ->where('macroscopic', null)
-        ->where('microscopic', null)
-        ->get();
-
-        $params['urinalysis_requests'] = DB::table('urinalysis_results')
-        ->join('medical_appointments', 'urinalysis_results.medical_appointment_id', 'medical_appointments.id')
-        ->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
-        ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
-        ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
-        ->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'urinalysis_results.*')
-        ->where('status', '0')
-        ->where('pus_cells', null)
-        ->where('rbc', null)
-        ->where('albumin', null)
-        ->where('sugar', null)
-        ->get();
-
-        // dd($params['cbc_requests']);
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
     	return view('staff.medical-lab.dashboard', $params);
     }
+   	public function viewlabdiagnosis(Request $request)
+   	{
+   		$appointment_id = $request->medical_appointment_id;
+		$cbc_result = CbcResult::where('medical_appointment_id', $appointment_id)->first();
+		$drug_test_result = DrugTestResult::where('medical_appointment_id', $appointment_id)->first();
+		$fecalysis_result = FecalysisResult::where('medical_appointment_id', $appointment_id)->first();
+		$urinalysis_result = UrinalysisResult::where('medical_appointment_id', $appointment_id)->first();
+		return response()->json([
+			'cbc_result' => $cbc_result,
+			'drug_test_result' => $drug_test_result,
+			'fecalysis_result' => $fecalysis_result,
+			'urinalysis_result' => $urinalysis_result,
+		]);
+   	}
 
-    public function addcbcresult(Request $request)
-    {
-        $cbc = CbcResult::find($request->cbc_id);
-        $cbc->lab_staff_id = Auth::user()->user_id;
-        $cbc->hemoglobin = $request->hemoglobin;
-        $cbc->hemasocrit = $request->hemasocrit;
-        $cbc->wbc = $request->wbc;
-        $cbc->update();
-    }
+   	public function updatelabdiagnosis(Request $request)
+   	{
+   		$cbc = CbcResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
+   		if(count($cbc)==1 && ($request->hemoglobin!='' || $request->hemasocrit!='' || $request->wbc!='' ))
+   		{
+   			$cbc->lab_staff_id = Auth::user()->user_id;
+   			if($request->hemoglobin!='')
+   			{
+   				$cbc->hemoglobin = $request->hemoglobin;
+   			}
+   			if($request->hemasocrit!='')
+   			{
+   				$cbc->hemasocrit = $request->hemasocrit;	
+   			}
+   			if($request->wbc!='')
+   			{
+   				$cbc->wbc = $request->wbc;	
+   			}
+   			$cbc->update();
+   		}
+		$drug_test = DrugTestResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
+		if(count($drug_test)==1 && ($request->drug_test !=''))
+   		{
+   			$drug_test->lab_staff_id = Auth::user()->user_id;
+   			if($request->drug_test!='')
+   			{
+   				$drug_test->drug_test_result = $request->drug_test;
+   			}
+   			$drug_test->update();
+   		}
+		$fecalysis = FecalysisResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
+		if(count($fecalysis)==1 && ($request->macroscopic !='' || $request->microscopic !=''))
+   		{
+   			$fecalysis->lab_staff_id = Auth::user()->user_id;
+   			if($request->macroscopic!='')
+   			{
+	   			$fecalysis->macroscopic = $request->macroscopic;
+	   		}
+	   		if($request->microscopic!='')
+   			{
+	   			$fecalysis->microscopic = $request->microscopic;
+	   		}
+   			
+   			$fecalysis->update();
+   		}
+		$urinalysis = UrinalysisResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
+		if(count($urinalysis)==1 && ($request->pus_cells !='' || $request->rbc !='' || $request->albumin !='' || $request->sugar !=''))
+   		{
+   			if($request->pus_cells!='')
+   			{
+   				$urinalysis->pus_cells = $request->pus_cells;
+   			}
+   			if($request->rbc!='')
+   			{
+	        	$urinalysis->rbc = $request->rbc;
+	        }
+	        if($request->albumin!='')
+   			{
+	        	$urinalysis->albumin = $request->albumin;
+	        }
+	        if($request->sugar!='')
+   			{
+	        	$urinalysis->sugar = $request->sugar;
+	        }
+	        $urinalysis->update();
+   		}
+   	}
 
-    public function adddrugtestresult(Request $request)
-    {
-        $drug_test = DrugTestResult::find($request->drug_test_id);
-        $drug_test->lab_staff_id = Auth::user()->user_id;
-        $drug_test->drug_test_result = $request->drug_test_result;
-        $drug_test->update();
-    }
-
-    public function addfecalysisresult(Request $request)
-    {
-        $fecalysis = FecalysisResult::find($request->fecalysis_id);
-        $fecalysis->lab_staff_id = Auth::user()->user_id;
-        $fecalysis->macroscopic = $request->macroscopic;
-        $fecalysis->microscopic = $request->microscopic;
-        $fecalysis->update();
-    }
-
-    public function addurinalysisresult(Request $request)
-    {
-        $urinalysis = UrinalysisResult::find($request->urinalysis_id);
-        $urinalysis->lab_staff_id = Auth::user()->user_id;
-        $urinalysis->pus_cells = $request->pus_cells;
-        $urinalysis->rbc = $request->rbc;
-        $urinalysis->albumin = $request->albumin;
-        $urinalysis->sugar = $request->sugar;
-        $urinalysis->update();
-    }
-
-
-		public function addbillingcbc(Request $request){
+   	public function addbillingcbc(Request $request){
 				$appointment_id = $request->appointment_id;
 
 				$patient_info = DB::table('patient_info')

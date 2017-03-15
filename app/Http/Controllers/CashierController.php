@@ -28,6 +28,7 @@ class CashierController extends Controller
 			}
 		});
 	}
+	
 	public function dashboard()
 	{
 	  $unpaid_bills = DB::table('medical_billings')
@@ -39,6 +40,7 @@ class CashierController extends Controller
 			->groupBy(DB::raw('medical_billings.medical_appointment_id, patient_info.patient_first_name, patient_info.patient_last_name, staff_info.staff_first_name, staff_info.staff_last_name, medical_schedules.schedule_day'))
 			->where('medical_billings.status', '=', 'unpaid')
 			->get();
+
 
 	  $counter = 0;
 	  if(count($unpaid_bills)>0){

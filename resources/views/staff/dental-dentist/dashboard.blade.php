@@ -12,9 +12,9 @@
       @endif
       Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
       <h3 class="sub-header">Appointments</h3>
-      <ul class="nav nav-pills nav-justified">
-        <li class="active"><a data-toggle="pill" href="#todayappointment">Today</a></li>
-        <li><a data-toggle="pill" href="#futureappointment">Future</a></li>
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#todayappointment">Today</a></li>
+        <li><a data-toggle="tab" href="#futureappointment">Future</a></li>
       </ul>
 			<div class="tab-content">
         <div class="table-responsive tab-pane fade in active" id="todayappointment">

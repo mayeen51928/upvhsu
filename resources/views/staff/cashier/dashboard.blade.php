@@ -33,7 +33,11 @@
             </tr>
           </thead>
            <tbody>
+<<<<<<< HEAD
             @foreach($unpaid_bills as $unpaid_bill)
+=======
+            @for ($i = 0; $i < sizeof($unpaid_bills_info); $i++)
+>>>>>>> 9af02ce91d97d2ca0f30360fef392068609b900f
             <tr>
               @if ($counter>0)
                 <td>{{ $unpaid_bill->patient_first_name }} {{ $unpaid_bill->patient_last_name }}</td>
