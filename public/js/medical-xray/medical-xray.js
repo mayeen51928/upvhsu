@@ -6,23 +6,40 @@ $(document).ready(function(){
 // ------------------DASHBOARD---------------
 
 $('.addXrayResult').click(function(){
-	var xray_id = $(this).attr('id').split("_")[1];
+	var medical_appointment_id = $(this).attr('id').split("_")[1];
+	$('#add-xray-result-footer').html('');
+	$.post('/viewxraydiagnosis', {medical_appointment_id: medical_appointment_id}, function(data, textStatus, xhr) {
+    if(data['xray_result'])
+    {
+    	$('#chest-xray').val(data['xray_result']['xray_result']);
+    	if(data['xray_result']['xray_result'])
+    	{
+    		$('#chest-xray').attr('disabled', 'disabled');
+    	}
+    	else
+    	{
+    		$('#chest-xray').removeAttr('disabled');
+    	}
+    }
+    $('#add-xray-result-footer').append('<button type="button" class="btn btn-success addXrayResultButton" id="addXrayResultButton_'+medical_appointment_id+'">Save</button><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>');
 	$('#add-xray-result').modal();
-	$('#addXrayResultButton').click(function(){
+	$('.addXrayResultButton').click(function(){
 		if($('#chest-xray').val())
 		{
 			var chest_xray = $('#chest-xray').val();
 			$.post('/addxrayresult',
 			{
-		      	xray_id: xray_id,
+		      	medical_appointment_id: medical_appointment_id,
 		      	chest_xray: chest_xray,
 	      	} , function(data){
 	      	$('#add-xray-result').modal('hide');
 	      	$('#chest-xray').val('');
-	      	$("#addXrayResult_"+xray_id).prop( "disabled", true );
+	      	// $("#addXrayResult_"+xray_id).prop( "disabled", true );
 	      });
 	   }
 	});
+    });
+	
 });
 
 $('.addBillingToXray').click(function(){

@@ -112,6 +112,7 @@ Route::post('/confirm_billing_urinalysis','LabController@confirmbillingurinalysi
 /* ROUTES FOR XRAY ACCOUNT */
 Route::get('/xray','XrayController@dashboard');
 Route::post('/addxrayresult', 'XrayController@addxrayresult');
+Route::post('/viewxraydiagnosis', 'XrayController@viewxraydiagnosis');
 Route::get('/xray/profile','XrayController@profile');
 Route::get('/xray/profile/edit','XrayController@editprofile');
 Route::post('/xray/profile/update','XrayController@updateprofile');

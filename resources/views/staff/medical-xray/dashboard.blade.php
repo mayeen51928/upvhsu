@@ -11,10 +11,23 @@
 			<img src="{{asset('images/blankprofpic.png')}}" height="50" width="50" class="img-circle"/> 
 			@endif
 			Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
-			<h3 class="sub-header">Requests for X-Ray Examination</h3>
+			
 			
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-3">
+					<div class="tile-stats">
+			            <div class="icon"><i class="fa fa-id-badge"></i></div>
+			            <div class="count">{{$xray_request_count}}</div>
+			            <h3>Chest X-ray</h3>
+			            @if(isset($xray_latest))
+			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> {{date_format(date_create($xray_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($xray_latest), 'h:i A')}}</p>
+			             @else
+			            <p>&nbsp;</p>
+			            @endif
+			          </div>
+				</div>
+				<div class="col-md-9">
+				<h3 class="sub-header">Requests for X-Ray Examination</h3>
 					@if(count($xray_requests)>0)
 					<p>The requests are sorted by time and date of requests, from the most recent requests.</p>
 					<table class="table table-striped">
@@ -33,7 +46,7 @@
 							<td>{{date_format(date_create($xray_request->created_at), 'F j, Y')}}</td>
 							<td>{{$xray_request->staff_first_name}} {{$xray_request->staff_last_name}}</td>
 							<td><button class="btn btn-info btn-xs addXrayResult" id="addXrayResult_{{$xray_request->id}}">Diagnosis</button></td>
-							<td><button class="btn btn-primary btn-xs addBillingToXray" id="addBillingToXray_{{$xray_request->medical_appointment_id}}">Billing</button></td>
+							<td><button class="btn btn-primary btn-xs addBillingToXray" id="addBillingToXray_{{$xray_request->id}}">Billing</button></td>
 						</tr>
 						@endforeach
 					</tbody>
@@ -41,6 +54,7 @@
 				@else
 				<p>No requests as of the moment.</p>
 				@endif
+				<div class="text-center">{{ $xray_requests->links() }} </div>
 			</div>
 		</div>
 	</div>
@@ -64,9 +78,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-success" id="addXrayResultButton">Save</button>
-				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			<div class="modal-footer" id="add-xray-result-footer">
+				{{-- <button type="button" class="btn btn-success" id="addXrayResultButton">Save</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button> --}}
 			</div>
 		</div>
 	</div>

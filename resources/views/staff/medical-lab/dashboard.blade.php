@@ -13,20 +13,53 @@
       Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
 
       <div class="row">
-        <div class="col-md-4">
-          <p style="background: red">Clock here</p>
+      <div class="col-md-3 col-sm-12 col-xs-12">
+          <div class="tile-stats">
+            <div class="icon"><i class="fa fa-tint"></i></div>
+            <div class="count">{{$cbc_request_count}}</div>
+            <h3>CBC</h3>
+            @if(isset($cbc_latest))
+            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> {{date_format(date_create($cbc_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($cbc_latest), 'h:i A')}}</p>
+            @else
+            <p>&nbsp;</p>
+            @endif
+          </div>
         </div>
-        <div class="col-md-2">
-          <p style="background: yellow">Clock here</p>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+          <div class="tile-stats">
+            <div class="icon"><i class="fa fa-filter"></i></div>
+            <div class="count">{{$drug_test_request_count}}</div>
+            <h3>Drug Test</h3>
+            @if(isset($drug_test_latest))
+            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> {{date_format(date_create($drug_test_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($drug_test_latest), 'h:i A')}}</p>
+             @else
+            <p>&nbsp;</p>
+            @endif
+          </div>
         </div>
-        <div class="col-md-2">
-          <p style="background: blue">Clock here</p>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+          <div class="tile-stats">
+            <div class="icon"><i class="fa fa-medkit"></i></div>
+            <div class="count">{{$fecalysis_request_count}}</div>
+            <h3>Fecalysis</h3>
+            @if(isset($fecalysis_latest))
+            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> {{date_format(date_create($fecalysis_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($fecalysis_latest), 'h:i A')}}</p>
+             @else
+            <p>&nbsp;</p>
+            @endif
+          </div>
         </div>
-        <div class="col-md-2">
-          <p style="background: brown">Clock here</p>
-        </div>
-        <div class="col-md-2">
-          <p style="background: green">Clock here</p>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+          <div class="tile-stats">
+            <div class="icon"><i class="fa fa-flask"></i></div>
+            <div class="count">{{$urinalysis_request_count}}</div>
+            <h3>Urinalysis</h3>
+            @if(isset($urinalysis_latest))
+            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> {{date_format(date_create($urinalysis_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($urinalysis_latest), 'h:i A')}}</p>
+             @else
+            <p>&nbsp;</p>
+            @endif
+          </div>
         </div>
       </div>
 
@@ -64,6 +97,7 @@
               @else
               <p>No requests as of the moment.</p>
               @endif
+              <div class="text-center">{{ $lab_requests->links() }} </div>
             </div>
           </div>
         </div>

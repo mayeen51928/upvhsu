@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Auth;
 use DB;
+use App\MedicalAppointment;
 use App\Staff;
 use App\Town;
 use App\Province;
@@ -36,8 +37,8 @@ class LabController extends Controller
     public function dashboard()
     {
 
-        $params['lab_requests'] = DB::table('medical_appointments')
-        ->where('status', '0')
+        $params['lab_requests'] = MedicalAppointment::
+        where('status', '0')
         ->leftjoin('cbc_results', 'medical_appointments.id', 'cbc_results.medical_appointment_id')
         ->leftjoin('drug_test_results', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')
         ->leftjoin('fecalysis_results', 'medical_appointments.id', 'fecalysis_results.medical_appointment_id')
@@ -47,7 +48,31 @@ class LabController extends Controller
         ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
         ->select('medical_appointments.id','patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day')
         
-        ->get();
+        ->paginate(10);
+        $cbc_requests = CbcResult::join('medical_appointments', 'cbc_results.medical_appointment_id', 'medical_appointments.id')->where('status', '0')->whereNull('hemoglobin')->orWhereNull('hemasocrit')->orWhereNull('wbc')->orderBy('cbc_results.created_at', 'desc');
+        $drug_test_requests = DrugTestResult::join('medical_appointments', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')->where('status', '0')->whereNull('drug_test_result')->orderBy('drug_test_results.created_at', 'desc');
+        $fecalysis_requests = FecalysisResult::join('medical_appointments', 'fecalysis_results.medical_appointment_id', 'medical_appointments.id')->where('status', '0')->whereNull('macroscopic')->orWhereNull('microscopic')->orderBy('fecalysis_results.created_at', 'desc');
+        $urinalysis_requests = UrinalysisResult::join('medical_appointments', 'urinalysis_results.medical_appointment_id', 'medical_appointments.id')->where('status', '0')->whereNull('pus_cells')->orWhereNull('rbc')->orWhereNull('albumin')->orWhereNull('sugar')->orderBy('urinalysis_results.created_at', 'desc');
+        $params['cbc_request_count'] = count($cbc_requests->get());
+        if(count($cbc_requests->get())>0)
+        {
+        	$params['cbc_latest'] = $cbc_requests->first()->created_at;
+        }
+        $params['drug_test_request_count'] = count($drug_test_requests->get());
+        if(count($drug_test_requests->get())>0)
+        {
+        	$params['drug_test_latest'] = $drug_test_requests->first()->created_at;
+        }
+        $params['fecalysis_request_count'] = count($fecalysis_requests->get());
+        if(count($fecalysis_requests->get())>0)
+        {
+        	$params['fecalysis_latest'] = $fecalysis_requests->first()->created_at;
+        }
+        $params['urinalysis_request_count'] = count($urinalysis_requests->get());
+        if(count($urinalysis_requests->get())>0)
+        {
+        	$params['urinalysis_latest'] = $urinalysis_requests->first()->created_at;
+        }
         $params['navbar_active'] = 'account';
     	$params['sidebar_active'] = 'dashboard';
     	return view('staff.medical-lab.dashboard', $params);
