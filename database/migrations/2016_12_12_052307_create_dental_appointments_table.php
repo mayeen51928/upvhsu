@@ -20,7 +20,7 @@ class CreateDentalAppointmentsTable extends Migration
             $table->integer('dental_schedule_id')->unsigned()->index();
             $table->foreign('dental_schedule_id')->references('id')->on('dental_schedules')->onDelete('cascade');
             $table->text('reasons');
-            $table->enum('status', ['0', '1']);
+            $table->enum('status', ['0', '1', '2']);
             $table->timestamps();
         });
     }
