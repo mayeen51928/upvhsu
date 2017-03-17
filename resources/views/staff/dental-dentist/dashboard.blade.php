@@ -11,6 +11,20 @@
 			<img src="{{asset('images/blankprofpic.png')}}" height="50" width="50" class="img-circle"/> 
 			@endif
 			Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="tile-stats">
+						<div id="dentistcontainer" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+						<input type="hidden" id="dentistdashboard" value="1"/>
+					</div>
+				</div>
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">Side Notes</div>
+							<div class="panel-body"><textarea placeholder="Enter your notes here..." class="form-control" rows="11"></textarea></div>
+						</div>
+				</div>
+			</div>
 			<h3 class="sub-header">Appointments</h3>
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#todayappointment">Today</a></li>
