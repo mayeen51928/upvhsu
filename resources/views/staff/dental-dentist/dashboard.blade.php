@@ -33,7 +33,7 @@
 								<td>{{ $dental_appointment_today->patient_first_name }} {{ $dental_appointment_today->patient_last_name }}</td>
 								<td>{{date_format(date_create($dental_appointment_today->schedule_start), 'h:i A')}} - {{date_format(date_create($dental_appointment_today->schedule_end), 'h:i A')}}</td>
 								<td>{{ $dental_appointment_today->reasons }}</td>
-								<td><form action="/dentist/updatedentalrecord" method="POST">{{ csrf_field() }}<input type="hidden" value="{{ $dental_appointment_today->id }}" name="addDentalRecord"><input type="hidden" value="{{ $dental_appointment_today->patient_id }}" name="addDentalRecord2"><input type="submit" class="btn btn-primary btn-xs addDentalRecordButton" id="{{ $dental_appointment_today->id }}" value="Update Diagnosis"></form></td>
+								<td><a href="/dentist/updatedentalrecord/{{ $dental_appointment_today->id }}" class="btn btn-info btn-xs addDentalRecordButton" role="button">Diagnosis</a></td>
 								<td><button class="btn btn-primary btn-xs addBillingToDental" id="addBillingToDental_{{$dental_appointment_today->id}}">Billing</button></td>
 							</tr>
 							@endforeach
@@ -86,7 +86,9 @@
 						<label><input type="radio" name="dental_radio_button_medical" id="dental_radio_button_billing_senior" value="6">Senior Citizen</label>
 					</div>
 				</div>
-				<table class="table table-bordered displayServices"></table>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover displayServices"></table>
+				</div>
 				<div class="dental-bill-input" id="dental-bill-input-text"></div> 
 			</div>
 			<div class="modal-footer">

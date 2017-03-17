@@ -418,7 +418,7 @@
 			</div>
 		  </div>
 		  <div class="modal-footer">
-				<button type="button" class="btn btn-info updateDentalRecord" id="updateDentalRecord_{{ $patient_info->id }}">Update</button>
+				<button type="button" class="btn btn-info updateDentalRecord" id="updateDentalRecord_{{ $appointment_id }}">Update</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 		  </div>
 		</div>
@@ -437,7 +437,7 @@
 				<h4>Are you sure you want to save this?</h4>
 		  </div>
 		  <div class="modal-footer">
-				<button type="button" class="btn btn-info confirmAdditionalDentalRecord" id="confirmAdditionalDentalRecord_{{ $patient_info->id }}">Save</button>
+				<button type="button" class="btn btn-info confirmAdditionalDentalRecord" id="confirmAdditionalDentalRecord_{{ $appointment_id }}">Save</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 		  </div>
 		</div>

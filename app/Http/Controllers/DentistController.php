@@ -21,6 +21,8 @@ use App\Staff;
 use App\Town;
 use App\Province;
 use App\DentalBilling;
+use App\DentalService;
+use App\AdditionalDentalService;
 use Log;
 use Illuminate\Support\Facades\Input;
 
@@ -53,11 +55,11 @@ class DentistController extends Controller
 			return view('staff.dental-dentist.dashboard', $params, compact('dental_appointments_today', 'dental_appointments_future'));
 		}
 
-		public function updatedentalrecord(Request $request)
+		public function updatedentalrecord($id)
 		{
-			$appointment_id = $request->addDentalRecord;
-			$patient_id = $request->addDentalRecord2;
-
+			$appointment_id = $id;
+			$patient_id = DentalAppointment::find($id)->patient_id;
+			$params['appointment_id'] = $appointment_id;
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'dashboard';
 
@@ -646,14 +648,14 @@ class DentistController extends Controller
 			// 			->get();
 
 			// if(count($current_dental_record) == 0)
-	      	{
+	      	// {
 		      	$dental_record = new DentalRecord();
-	            $dental_record->teeth_id = $request->teeth_id;
-	            $dental_record->condition_id = $request->condition_id;
-	            $dental_record->operation_id = $request->operation_id;
-	            $dental_record->appointment_id = $request->appointment_id;
-	            $dental_record->save();
-	      	}
+		      	$dental_record->appointment_id = $request->appointment_id;
+            $dental_record->teeth_id = $request->teeth_id;
+            $dental_record->condition_id = $request->condition_id;
+            $dental_record->operation_id = $request->operation_id;
+            $dental_record->save();
+	      	// }
 	      	// else
 	      	// {
 	      	// 	$update = [['condition_id'=>$request->condition_id],['operation_id' => $request->operation_id]];
@@ -1714,21 +1716,19 @@ class DentistController extends Controller
 	public function addbillingdental(Request $request){
 		$appointment_id = $request->appointment_id;
 
-		$patient_info = DB::table('patient_info')
-					->join('dental_appointments', 'patient_info.patient_id', 'dental_appointments.patient_id')
-					->where('dental_appointments.id', $appointment_id)
-					->first();
+		$patient_info = Patient::join('dental_appointments', 'patient_info.patient_id', 'dental_appointments.patient_id')->where('dental_appointments.id', $appointment_id)->first();
 		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
 
 		$checker = 0;
 		$checker_if_exists_dental = DentalRecord::where('appointment_id', $appointment_id)->get();
-		if(count($checker_if_exists_dental)>0){
-			$checker=1;
+		$checker_if_exists_additional_dental = AdditionalDentalRecord::where('appointment_id', $appointment_id)->get();
+		if(count($checker_if_exists_dental)>0 && count($checker_if_exists_additional_dental)>0){
+			$checker = 1;
 		}
 		
-		$display_dental_services = DB::table('dental_services')->where('patient_type_id', '=', $patient_info->patient_type_id)->get();
+		$display_dental_services = DentalService::where('patient_type_id', '=', $patient_info->patient_type_id)->get();
 		if($patient_info->patient_type_id == 5){
-			$display_dental_services_senior = DB::table('dental_services')->where('patient_type_id', '=', 6)->get();
+			$display_dental_services_senior = DentalService::where('patient_type_id', '=', 6)->get();
 		}
 
 		if($patient_info->patient_type_id == 5){

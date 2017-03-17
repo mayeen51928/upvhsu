@@ -13,8 +13,7 @@
 		      		{{ session('status') }}
 		      		<div><a href="/admin"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></div>
 		      	</div>
-		  @endif</th>
-		      
+		  		@endif</th>  
 		    </tr>
 		  </thead> 
 		  <tbody>

@@ -28,6 +28,7 @@ use App\Remark;
 use App\UrinalysisResult;
 use App\FecalysisResult;
 use App\MedicalBilling;
+use App\MedicalService;
 use Illuminate\Support\Facades\Input;
 class DoctorController extends Controller
 {
@@ -879,44 +880,17 @@ class DoctorController extends Controller
 		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
 
 		$checker = 0;
-		$physical_examination_checker = DB::table('physical_examinations')
-					->where('physical_examinations.medical_appointment_id', '=', $appointment_id)
-					->first();
-		$remarks_checker = DB::table('remarks')
-					->where('remarks.medical_appointment_id', '=', $appointment_id)
-					->first();
-		$prescription_checker = DB::table('prescriptions')
-					->where('prescriptions.medical_appointment_id', '=', $appointment_id)
-					->first();
-					
+		$physical_examination_checker = PhysicalExamination::where('medical_appointment_id', $appointment_id)->first();
+		$remarks_checker = Remark::where('medical_appointment_id', $appointment_id)->first();
+		$prescription_checker = Prescription::where('medical_appointment_id', $appointment_id)->first();		
 		if(count($physical_examination_checker)>0 && count($remarks_checker)>0 && count($prescription_checker)>0){
 			$checker = 1;
 		}
 
-
-		if($patient_info->patient_type_id == 1){
-			$display_medical_services = DB::table('medical_services')
-					->where([
-							['patient_type_id', '=', 1],
-							['service_type', '=', 'medical'],
-						])
-					->get();
-		}
+		$display_medical_services = MedicalService::where('patient_type_id', $patient_info->patient_type_id)->where('service_type', 'medical')->get();
 
 		if($patient_info->patient_type_id == 5){
-			$display_medical_services = DB::table('medical_services')
-					->where([
-							['patient_type_id', '=', 5],
-							['service_type', '=', 'medical'],
-						])
-					->get();
-
-			$display_medical_services_senior = DB::table('medical_services')
-					->where([
-							['patient_type_id', '=', 6],
-							['service_type', '=', 'medical'],
-						])
-					->get();
+			$display_medical_services_senior = MedicalService::where('patient_type_id',6)->where('service_type', 'medical')->get();
 		}
 
 		if($patient_info->patient_type_id == 5){

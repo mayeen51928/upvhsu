@@ -206,7 +206,9 @@
             <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_senior" value="6">Senior Citizen</label>
           </div>
         </div>
-        <table class="table table-bordered displayServices"></table>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover displayServices"></table>
+        </div>
         <div class="lab-bill-input" id="lab-bill-input-text"></div> 
       </div>
       <div class="modal-footer">

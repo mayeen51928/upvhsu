@@ -67,7 +67,6 @@ class LabController extends Controller
 				if(count($fecalysis_requests->get())>0)
 				{
 					$params['fecalysis_latest'] = $fecalysis_requests->first()->created_at;
-					// dd($fecalysis_requests->get());
 				}
 				$params['urinalysis_request_count'] = count($urinalysis_requests->get());
 				if(count($urinalysis_requests->get())>0)

@@ -100,7 +100,9 @@
 						<label><input type="radio" name="xray_radio_button_medical" id="xray_radio_button_medical_billing_senior" value="6">Senior Citizen</label>
 					</div>
 				</div>
-				<table class="table table-bordered displayServices"></table>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover displayServices"></table>
+				</div>
 				<div class="xray-bill-input" id="xray-bill-input-text"></div> 
 			</div>
 			<div class="modal-footer">

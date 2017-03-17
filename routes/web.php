@@ -58,7 +58,7 @@ Route::get('/dentist/searchpatient/date', 'DentistController@searchpatientbydate
 Route::post('/searchpatientbydaterecorddental', 'DentistController@searchpatientbydaterecorddental');
 Route::get('/dentist/viewdentalrecord/{id}', 'DentistController@viewdentalrecord');
 Route::post('/addschedule_dental', 'DentistController@addschedule');
-Route::post('/dentist/updatedentalrecord','DentistController@updatedentalrecord');
+Route::get('/dentist/updatedentalrecord/{id}','DentistController@updatedentalrecord');
 Route::post('/update_dental_record_modal','DentistController@updatedentalrecordmodal');
 Route::post('/insert_dental_record_modal','DentistController@insertdentalrecordmodal');
 Route::post('/update_dental_diagnosis','DentistController@updatedentaldiagnosis');
@@ -142,6 +142,6 @@ Route::post('/edit_medical_services', 'AdminController@editmedicalservices');
 Route::post('/update_medical_services', 'AdminController@updatemedicalservices');
 
 //For wrong URLs
-Route::get('/{any}', function($any){
-	return back();
-})->where('any', '.*');
+// Route::get('/{any}', function($any){
+// 	return back();
+// })->where('any', '.*');

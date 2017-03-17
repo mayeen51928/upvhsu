@@ -13,6 +13,7 @@ use App\ChestXrayResult;
 use App\MedicalBilling;
 use App\MedicalAppointment;
 use App\Patient;
+use App\MedicalService;
 class XrayController extends Controller
 {
 	public function __construct()
@@ -41,7 +42,6 @@ class XrayController extends Controller
         ->select('medical_appointments.id','patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day')
 		->where('status', '0')
 		->paginate(10);
-		// dd($params['xray_requests']);
 		$xray_requests = ChestXrayResult::whereNull('xray_result')->orderBy('chest_xray_results.created_at', 'desc');
 		$params['xray_request_count'] = count($xray_requests->get());
 		if(count($xray_requests->get())>0)
@@ -73,46 +73,17 @@ class XrayController extends Controller
 	public function addbillingxray(Request $request){
 		$appointment_id = $request->appointment_id;
 
-		$patient_info = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')
-					->where('medical_appointments.id', $appointment_id)
-					->first();
+		$patient_info = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $appointment_id)->first();
 		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
-
 		$checker = 0;
-		$xray_result_checker = DB::table('chest_xray_results')
-					->where([
-							['medical_appointment_id', '=', $appointment_id],
-							['xray_result', '!=', NULL],
-						])
-					->first();
+		$xray_result_checker = ChestXrayResult::where('medical_appointment_id',$appointment_id)->where('xray_result', '!=', NULL)->first();
 		if(count($xray_result_checker)>0){
 			$checker = 1;
 		}
-
-
-		if($patient_info->patient_type_id == 1){
-			$display_xray_services = DB::table('medical_services')
-					->where([
-							['patient_type_id', '=', 1],
-							['service_type', '=', 'xray'],
-						])
-					->get();
-		}
+		$display_xray_services = MedicalService::where('patient_type_id', $patient_info->patient_type_id)->where('service_type', 'xray')->get();
 
 		if($patient_info->patient_type_id == 5){
-			$display_xray_services = DB::table('medical_services')
-					->where([
-							['patient_type_id', '=', 5],
-							['service_type', '=', 'xray'],
-						])
-					->get();
-
-			$display_xray_services_senior = DB::table('medical_services')
-					->where([
-							['patient_type_id', '=', 6],
-							['service_type', '=', 'xray'],
-						])
-					->get();
+			$display_xray_services = MedicalService::where('patient_type_id', 6)->where('service_type', 'xray');
 		}
 		
 		if($patient_info->patient_type_id == 5){

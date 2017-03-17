@@ -29,10 +29,15 @@ $('.updateDentalRecord').click(function(){
 	if($('.condition').val() || $('.operation').val()){
 		var id = $(this).attr('id').split("_");
 		appointmentId = id[1];
+		console.log(appointmentId);
 		var conditionId = $('.condition').val();
 		var operationId = $('.operation').val();
 		if (operationId == null) { operationId = 0; };
 		if (conditionId == null) { conditionId = 0; };
+		console.log(teethId);
+		console.log(conditionId);
+		console.log(operationId);
+		console.log(appointmentId);
 		$.ajax({
 			  type: "POST",
 			  url: insertDentalRecordModal,
