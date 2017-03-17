@@ -69,6 +69,7 @@ Route::post('/confirm_billing_dental','DentistController@confirmbillingdental');
 
 /* ROUTES FOR MEDICAL DOCTOR ACCOUNT */
 Route::get('/doctor','DoctorController@dashboard');
+Route::post('/totalnumberofpatients', 'DoctorController@totalnumberofpatients');
 Route::get('/doctor/profile','DoctorController@profile');
 Route::get('/doctor/profile/edit','DoctorController@editprofile');
 Route::post('/doctor/profile/update','DoctorController@updateprofile');
@@ -108,6 +109,7 @@ Route::post('/confirm_billing_lab','LabController@confirmbillinglab');
 /* ROUTES FOR XRAY ACCOUNT */
 Route::get('/xray','XrayController@dashboard');
 Route::post('/addxrayresult', 'XrayController@addxrayresult');
+Route::post('/viewxraydiagnosis', 'XrayController@viewxraydiagnosis');
 Route::get('/xray/profile','XrayController@profile');
 Route::get('/xray/profile/edit','XrayController@editprofile');
 Route::post('/xray/profile/update','XrayController@updateprofile');

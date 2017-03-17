@@ -11,6 +11,8 @@ use App\Town;
 use App\Province;
 use App\ChestXrayResult;
 use App\MedicalBilling;
+use App\MedicalAppointment;
+use App\Patient;
 class XrayController extends Controller
 {
 	public function __construct()
@@ -31,15 +33,21 @@ class XrayController extends Controller
 	}
 	public function dashboard()
 	{
-		$params['xray_requests'] = DB::table('chest_xray_results')
-		->join('medical_appointments', 'chest_xray_results.medical_appointment_id', 'medical_appointments.id')
+		$params['xray_requests'] = MedicalAppointment::
+		join('chest_xray_results', 'chest_xray_results.medical_appointment_id', 'medical_appointments.id')
 		->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
-		->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
-		->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
-		->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'chest_xray_results.*')
+        ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
+        ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
+        ->select('medical_appointments.id','patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day')
 		->where('status', '0')
-		->where('xray_result', null)
-		->get();
+		->paginate(10);
+		// dd($params['xray_requests']);
+		$xray_requests = ChestXrayResult::whereNull('xray_result')->orderBy('chest_xray_results.created_at', 'desc');
+		$params['xray_request_count'] = count($xray_requests->get());
+		if(count($xray_requests->get())>0)
+        {
+        	$params['xray_latest'] = $xray_requests->first()->created_at;
+        }
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
 		return view('staff.medical-xray.dashboard', $params);
@@ -47,17 +55,25 @@ class XrayController extends Controller
 
 	public function addxrayresult(Request $request)
 	{
-		$xray = ChestXrayResult::find($request->xray_id);
+		$xray = ChestXrayResult::where('medical_appointment_id',$request->medical_appointment_id)->first();
 		$xray->xray_staff_id = Auth::user()->user_id;
 		$xray->xray_result = $request->chest_xray;
 		$xray->update();
 	}
 
+	public function viewxraydiagnosis(Request $request)
+	{
+		$appointment_id = $request->medical_appointment_id;
+		$xray_result = ChestXrayResult::where('medical_appointment_id', $appointment_id)->first();
+		return response()->json([
+			'xray_result' => $xray_result,
+		]);
+	}
+
 	public function addbillingxray(Request $request){
 		$appointment_id = $request->appointment_id;
 
-		$patient_info = DB::table('patient_info')
-					->join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')
+		$patient_info = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')
 					->where('medical_appointments.id', $appointment_id)
 					->first();
 		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
