@@ -338,7 +338,7 @@ $('.addBillingToLab').click(function(){
           };
         }
         $('.displayServices').html(output);
-        if(data['added_cbc_record'] == '0' || data['added_drug_record'] == '0' || data['added_fecalysis_record'] == '0' || data['added_urinalysis_record'] == '0'){
+        if((data['added_cbc_record'] == 0 && data['has_cbc_request_counter'] > 0) || (data['added_drug_record'] == 0 && data['has_drug_request_counter'] > 0) || (data['added_fecalysis_record'] == 0 && data['has_fecalysis_request_counter'] > 0) || (data['added_urinalysis_record'] == 0 && data['has_urinalysis_request_counter'] > 0)){
           $('.displayServices :input').attr("disabled", true);
           $('.lab-bill-input').html("").append("<input type='text' class='form-control' id='lab-bill' disabled>");
         	$('.lab-bill-confirm').html("").append("<button type='button' class='btn btn-primary lab-bill-confirm-button' id='labBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
@@ -388,7 +388,7 @@ $('.addBillingToLab').click(function(){
 	      }
       };
       $('.displayServices').html(output);
-      if(data['added_cbc_record'] == 0 || data['added_drug_record'] == 0 || data['added_fecalysis_record'] == 0 || data['added_urinalysis_record'] == 0){
+      if((data['added_cbc_record'] == 0 && data['has_cbc_request_counter'] > 0) || (data['added_drug_record'] == 0 && data['has_drug_request_counter'] > 0) || (data['added_fecalysis_record'] == 0 && data['has_fecalysis_request_counter'] > 0) || (data['added_urinalysis_record'] == 0 && data['has_urinalysis_request_counter'] > 0)){
         $('.displayServices :input').attr("disabled", true);
         $('.lab-bill-input').html("").append("<input type='text' class='form-control' id='lab-bill' disabled>");
       	$('.lab-bill-confirm').html("").append("<button type='button' class='btn btn-primary lab-bill-confirm-button' id='labBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");

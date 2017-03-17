@@ -168,6 +168,27 @@ class LabController extends Controller
 			$patient_info = DB::table('patient_info')->join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $appointment_id)->first();
 			$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
 
+			$has_cbc_request = CbcResult::where('medical_appointment_id', $appointment_id)->get();
+			$has_cbc_request_counter = 0;
+			if (count($has_cbc_request)>0) {
+				$has_cbc_request_counter++;
+			}
+			$has_drug_request = DrugTestResult::where('medical_appointment_id', $appointment_id)->get();
+			$has_drug_request_counter = 0;
+			if (count($has_drug_request)>0) {
+				$has_drug_request_counter++;
+			}
+			$has_fecalysis_request = FecalysisResult::where('medical_appointment_id', $appointment_id)->get();
+			$has_fecalysis_request_counter = 0;
+			if (count($has_fecalysis_request)>0) {
+				$has_fecalysis_request_counter++;
+			}
+			$has_urinalysis_request = UrinalysisResult::where('medical_appointment_id', $appointment_id)->get();
+			$has_urinalysis_request_counter = 0;
+			if (count($has_urinalysis_request)>0) {
+				$has_urinalysis_request_counter++;
+			}
+
 			$display_cbc_services = MedicalAppointment::join('cbc_results', 'medical_appointments.id', 'cbc_results.medical_appointment_id')->where('medical_appointments.id', $appointment_id)->get();
 			$check_cbc_if_exists = CbcResult::where('medical_appointment_id', $appointment_id)->where('hemoglobin','!=',NULL)->where('hemasocrit','!=',NULL)->where('wbc','!=',NULL)->get();
 			$added_cbc_record = 0;
@@ -247,6 +268,10 @@ class LabController extends Controller
 																'fecalysis_counter_senior' => $fecalysis_counter_senior, 
 																'urinalysis_counter' => $urinalysis_counter, 
 																'urinalysis_counter_senior' => $urinalysis_counter_senior, 
+																'has_cbc_request_counter' => $has_cbc_request_counter,
+																'has_drug_request_counter' => $has_drug_request_counter,
+																'has_fecalysis_request_counter' => $has_fecalysis_request_counter,
+																'has_urinalysis_request_counter' => $has_urinalysis_request_counter,
 																'patient_type' => $patient_info->patient_type_id, ]);
 			}
 			else{
@@ -262,7 +287,11 @@ class LabController extends Controller
 															'display_urinalysis_services' => $display_urinalysis_services, 
 															'cbc_counter' => $cbc_counter, 'drug_counter' => $drug_counter, 
 															'fecalysis_counter' => $fecalysis_counter, 
-															'urinalysis_counter' => $urinalysis_counter, 
+															'urinalysis_counter' => $urinalysis_counter,
+															'has_cbc_request_counter' => $has_cbc_request_counter,
+															'has_drug_request_counter' => $has_drug_request_counter,
+															'has_fecalysis_request_counter' => $has_fecalysis_request_counter,
+															'has_urinalysis_request_counter' => $has_urinalysis_request_counter, 
 															'patient_type' => $patient_info->patient_type_id, ]);
 			}
 	}
