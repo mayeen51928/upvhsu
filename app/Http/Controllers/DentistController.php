@@ -52,6 +52,25 @@ class DentistController extends Controller
 			$params['sidebar_active'] = 'dashboard';
 			return view('staff.dental-dentist.dashboard', $params, compact('dental_appointments_today', 'dental_appointments_future'));
 		}
+		public function totalnumberofdentalpatients(Request $request)
+		{
+			dd(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDay('schedule_start', '<=', date('Y-m-d'))->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->get());
+			return response()->json([
+			'max' => count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->where('schedule_start','=', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->get()),
+			'actual' =>count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->where('schedule_start','=', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->leftjoin('additional_dental_records', 'dental_appointments.id', 'additional_dental_records.appointment_id')->whereNotNull('dental_caries')->get())
+			]);
+			// $additional_dental_record = new AdditionalDentalRecord;
+			// 	$additional_dental_record->appointment_id = $request->appointment_id;
+			// 	$additional_dental_record->dental_caries = $request->dental_caries;
+			// 	$additional_dental_record->gingivitis = $request->gingivitis;
+			// 	$additional_dental_record->peridontal_pocket = $request->peridontal_pocket;
+			// 	$additional_dental_record->oral_debris = $request->oral_debris;
+			// 	$additional_dental_record->calculus = $request->calculus;
+			// 	$additional_dental_record->neoplasm = $request->neoplasm;
+			// 	$additional_dental_record->dental_facio_anomaly = $request->dental_facio_anomaly;
+			// 	$additional_dental_record->teeth_present = $request->teeth_present;
+			// 	$additional_dental_record->save();
+		}
 
 		public function updatedentalrecord(Request $request)
 		{
