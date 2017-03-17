@@ -38,6 +38,14 @@ class PagesController extends Controller
 		return view('index', $params, compact('announcements'));
 	}
 
+	public function about()
+	{
+		$user = Auth::user();
+
+		$params['navbar_active'] = 'about';
+		return view('about', $params);
+	}
+
 	public function scheduleappointment()
 	{
 		// if(Auth::check() && Auth::user()->user_type_id==1)

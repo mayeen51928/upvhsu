@@ -888,6 +888,7 @@ class DoctorController extends Controller
 		$prescription_checker = DB::table('prescriptions')
 					->where('prescriptions.medical_appointment_id', '=', $appointment_id)
 					->first();
+					
 		if(count($physical_examination_checker)>0 && count($remarks_checker)>0 && count($prescription_checker)>0){
 			$checker = 1;
 		}

@@ -181,12 +181,12 @@ $('.addBillingToDental').click(function(){
 		  data: {appointment_id:  appointmentId, _token: token},
 		  success: function(data)
 		  {
+		  		console.log(data['checker']);
 		  		var dob = new Date(data['patient_info']['birthday']);
 			  	var today = new Date();
 			    var dayDiff = Math.ceil(today - dob) / (1000 * 60 * 60 * 24 * 365);
 			    var age = parseInt(dayDiff);
 			  	if(data['patient_type_id'] == 5 && age>59){
-			  		console.log("Patient is an OPD");
 			  		$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
 			  		$('.dental_senior_checker_medical').show();
 			  		$('input[type=radio][name=dental_radio_button_medical]').change(function() {
@@ -226,7 +226,6 @@ $('.addBillingToDental').click(function(){
 				    });
 			  	}
 			  	else{
-			  		console.log("Patient is a student");
 			  		$('.dental_senior_checker_medical').hide();
 			  		$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
 						output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"

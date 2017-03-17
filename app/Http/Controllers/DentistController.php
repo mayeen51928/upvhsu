@@ -46,8 +46,8 @@ class DentistController extends Controller
 		public function dashboard()
 		{
 			$user = Auth::user();
-			$dental_appointments_today = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('schedule_start','>', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->get();
-			$dental_appointments_future = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('schedule_start','=', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->get();
+			$dental_appointments_today = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('schedule_start','>', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('dental_schedules.schedule_start', 'asc')->get();
+			$dental_appointments_future = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('schedule_start','=', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('dental_schedules.schedule_start', 'asc')->get();
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'dashboard';
 			return view('staff.dental-dentist.dashboard', $params, compact('dental_appointments_today', 'dental_appointments_future'));
@@ -1720,14 +1720,14 @@ class DentistController extends Controller
 					->first();
 		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
 
-		$checker = 1;
-
-		if($patient_info->patient_type_id == 1){
-			$display_dental_services = DB::table('dental_services')->where('patient_type_id', '=', 1)->get();
+		$checker = 0;
+		$checker_if_exists_dental = DentalRecord::where('appointment_id', $appointment_id)->get();
+		if(count($checker_if_exists_dental)>0){
+			$checker=1;
 		}
-
+		
+		$display_dental_services = DB::table('dental_services')->where('patient_type_id', '=', $patient_info->patient_type_id)->get();
 		if($patient_info->patient_type_id == 5){
-			$display_dental_services = DB::table('dental_services')->where('patient_type_id', '=', 5)->get();
 			$display_dental_services_senior = DB::table('dental_services')->where('patient_type_id', '=', 6)->get();
 		}
 
