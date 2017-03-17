@@ -26,15 +26,17 @@ $('.addXrayResult').click(function(){
 	$('.addXrayResultButton').click(function(){
 		if($('#chest-xray').val())
 		{
+			var medical_appointment_id = $(this).attr('id').split("_")[1];
 			var chest_xray = $('#chest-xray').val();
 			$.post('/addxrayresult',
 			{
 		      	medical_appointment_id: medical_appointment_id,
 		      	chest_xray: chest_xray,
 	      	} , function(data){
-	      	$('#add-xray-result').modal('hide');
-	      	$('#chest-xray').val('');
-	      	// $("#addXrayResult_"+xray_id).prop( "disabled", true );
+	      		$('#xraycountpanel').load(location.href + " #xraycount");
+		      	$('#add-xray-result').modal('hide');
+		      	$('#chest-xray').val('');
+		      	// $("#addXrayResult_"+xray_id).prop( "disabled", true );
 	      });
 	   }
 	});

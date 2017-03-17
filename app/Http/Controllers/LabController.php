@@ -49,10 +49,10 @@ class LabController extends Controller
         ->select('medical_appointments.id','patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day')
         
         ->paginate(10);
-        $cbc_requests = CbcResult::join('medical_appointments', 'cbc_results.medical_appointment_id', 'medical_appointments.id')->where('status', '0')->whereNull('hemoglobin')->orWhereNull('hemasocrit')->orWhereNull('wbc')->orderBy('cbc_results.created_at', 'desc');
-        $drug_test_requests = DrugTestResult::join('medical_appointments', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')->where('status', '0')->whereNull('drug_test_result')->orderBy('drug_test_results.created_at', 'desc');
-        $fecalysis_requests = FecalysisResult::join('medical_appointments', 'fecalysis_results.medical_appointment_id', 'medical_appointments.id')->where('status', '0')->whereNull('macroscopic')->orWhereNull('microscopic')->orderBy('fecalysis_results.created_at', 'desc');
-        $urinalysis_requests = UrinalysisResult::join('medical_appointments', 'urinalysis_results.medical_appointment_id', 'medical_appointments.id')->where('status', '0')->whereNull('pus_cells')->orWhereNull('rbc')->orWhereNull('albumin')->orWhereNull('sugar')->orderBy('urinalysis_results.created_at', 'desc');
+        $cbc_requests = CbcResult::whereNull('hemoglobin')->orWhereNull('hemasocrit')->orWhereNull('wbc')->orderBy('cbc_results.created_at', 'desc');
+        $drug_test_requests = DrugTestResult::whereNull('drug_test_result')->orderBy('drug_test_results.created_at', 'desc');
+        $fecalysis_requests = FecalysisResult::whereNull('macroscopic')->orWhereNull('microscopic')->orderBy('fecalysis_results.created_at', 'desc');
+        $urinalysis_requests = UrinalysisResult::whereNull('pus_cells')->orWhereNull('rbc')->orWhereNull('albumin')->orWhereNull('sugar')->orderBy('urinalysis_results.created_at', 'desc');
         $params['cbc_request_count'] = count($cbc_requests->get());
         if(count($cbc_requests->get())>0)
         {
@@ -67,6 +67,7 @@ class LabController extends Controller
         if(count($fecalysis_requests->get())>0)
         {
         	$params['fecalysis_latest'] = $fecalysis_requests->first()->created_at;
+        	// dd($fecalysis_requests->get());
         }
         $params['urinalysis_request_count'] = count($urinalysis_requests->get());
         if(count($urinalysis_requests->get())>0)

@@ -159,6 +159,10 @@ $('.addLabResult').click(function(){
 					albumin: $('#albumin-lab').val(),
 					sugar: $('#sugar-lab').val(),
 			}, function(data, textStatus, xhr) {
+        $('#cbccountpanel').load(location.href + " #cbccount");
+        $('#drugtestcountpanel').load(location.href + " #drugtestcount");
+        $('#fecalysiscountpanel').load(location.href + " #fecalysiscount");
+        $('#urinalysiscountpanel').load(location.href + " #urinalysiscount");
 				$('#add-lab-result').modal('hide');
 			});
 	});

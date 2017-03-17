@@ -42,7 +42,7 @@ class XrayController extends Controller
 		->where('status', '0')
 		->paginate(10);
 		// dd($params['xray_requests']);
-		$xray_requests = ChestXrayResult::join('medical_appointments', 'chest_xray_results.medical_appointment_id', 'medical_appointments.id')->where('status', '0')->whereNull('xray_result')->orderBy('chest_xray_results.created_at', 'desc');
+		$xray_requests = ChestXrayResult::whereNull('xray_result')->orderBy('chest_xray_results.created_at', 'desc');
 		$params['xray_request_count'] = count($xray_requests->get());
 		if(count($xray_requests->get())>0)
         {

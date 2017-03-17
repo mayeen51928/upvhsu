@@ -373,3 +373,6 @@ a.medical_appointments_prescription,
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+textarea {
+	resize: none;
+}

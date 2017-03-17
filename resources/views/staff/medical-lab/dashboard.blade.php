@@ -13,8 +13,8 @@
       Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
 
       <div class="row">
-      <div class="col-md-3 col-sm-12 col-xs-12">
-          <div class="tile-stats">
+      <div class="col-md-3 col-sm-12 col-xs-12" id="cbccountpanel">
+          <div class="tile-stats" id="cbccount">
             <div class="icon"><i class="fa fa-tint"></i></div>
             <div class="count">{{$cbc_request_count}}</div>
             <h3>CBC</h3>
@@ -25,8 +25,8 @@
             @endif
           </div>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-          <div class="tile-stats">
+        <div class="col-md-3 col-sm-12 col-xs-12" id="drugtestcountpanel">
+          <div class="tile-stats" id="drugtestcount">
             <div class="icon"><i class="fa fa-filter"></i></div>
             <div class="count">{{$drug_test_request_count}}</div>
             <h3>Drug Test</h3>
@@ -37,8 +37,8 @@
             @endif
           </div>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-          <div class="tile-stats">
+        <div class="col-md-3 col-sm-12 col-xs-12" id="fecalysiscountpanel">
+          <div class="tile-stats" id="fecalysiscount">
             <div class="icon"><i class="fa fa-medkit"></i></div>
             <div class="count">{{$fecalysis_request_count}}</div>
             <h3>Fecalysis</h3>
@@ -49,8 +49,8 @@
             @endif
           </div>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-          <div class="tile-stats">
+        <div class="col-md-3 col-sm-12 col-xs-12" id="urinalysiscountpanel">
+          <div class="tile-stats" id="urinalysiscount">
             <div class="icon"><i class="fa fa-flask"></i></div>
             <div class="count">{{$urinalysis_request_count}}</div>
             <h3>Urinalysis</h3>

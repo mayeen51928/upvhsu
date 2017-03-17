@@ -68,6 +68,7 @@ Route::post('/confirm_billing_dental','DentistController@confirmbillingdental');
 
 /* ROUTES FOR MEDICAL DOCTOR ACCOUNT */
 Route::get('/doctor','DoctorController@dashboard');
+Route::post('/totalnumberofpatients', 'DoctorController@totalnumberofpatients');
 Route::get('/doctor/profile','DoctorController@profile');
 Route::get('/doctor/profile/edit','DoctorController@editprofile');
 Route::post('/doctor/profile/update','DoctorController@updateprofile');

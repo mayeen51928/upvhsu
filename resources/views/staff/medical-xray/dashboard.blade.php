@@ -14,8 +14,8 @@
 			
 			
 			<div class="row">
-				<div class="col-md-3">
-					<div class="tile-stats">
+				<div class="col-md-3" id="xraycountpanel">
+					<div class="tile-stats" id="xraycount">
 			            <div class="icon"><i class="fa fa-id-badge"></i></div>
 			            <div class="count">{{$xray_request_count}}</div>
 			            <h3>Chest X-ray</h3>
