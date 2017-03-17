@@ -31,7 +31,7 @@ class CashierController extends Controller
 	
 	public function dashboard()
 	{
-	  $unpaid_bills = DB::table('medical_billings')
+	  $unpaid_bills_medical = DB::table('medical_billings')
 	  	->join('medical_appointments', 'medical_appointments.id', '=', 'medical_billings.medical_appointment_id')
 	  	->join('medical_schedules', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
 	  	->join('staff_info', 'staff_info.staff_id', '=', 'medical_schedules.staff_id')
@@ -39,18 +39,38 @@ class CashierController extends Controller
 	  	->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day', DB::raw('medical_billings.medical_appointment_id, sum(medical_billings.amount) as amount'))
 			->groupBy(DB::raw('medical_billings.medical_appointment_id, patient_info.patient_first_name, patient_info.patient_last_name, staff_info.staff_first_name, staff_info.staff_last_name, medical_schedules.schedule_day'))
 			->where('medical_billings.status', '=', 'unpaid')
+			->where('medical_schedules.schedule_day', '<', date('Y-m-d'))
 			->get();
-
-
-	  $counter = 0;
-	  if(count($unpaid_bills)>0){
-			$counter++;
+		$receivable_medical = MedicalBilling::selectRaw('sum(amount) as amount')->where('status','unpaid')->first();
+	  $counter_medical = 0;
+	  if(count($unpaid_bills_medical)>0){
+			$counter_medical++;
 	  }
 
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
-		$params['counter'] = $counter;
-		return view('staff.cashier.dashboard', $params, compact('unpaid_bills'));
+		$params['counter_medical'] = $counter_medical;
+		$params['receivable_medical'] = $receivable_medical;
+		return view('staff.cashier.dashboard', $params, compact('unpaid_bills_medical'));
+	}
+
+	public function billingtoday()
+	{
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'dashboard';
+
+		$unpaid_bills_medical_today = DB::table('medical_billings')
+	  	->join('medical_appointments', 'medical_appointments.id', '=', 'medical_billings.medical_appointment_id')
+	  	->join('medical_schedules', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
+	  	->join('staff_info', 'staff_info.staff_id', '=', 'medical_schedules.staff_id')
+			->join('patient_info', 'patient_info.patient_id', '=', 'medical_appointments.patient_id')
+	  	->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day', DB::raw('medical_billings.medical_appointment_id, sum(medical_billings.amount) as amount'))
+			->groupBy(DB::raw('medical_billings.medical_appointment_id, patient_info.patient_first_name, patient_info.patient_last_name, staff_info.staff_first_name, staff_info.staff_last_name, medical_schedules.schedule_day'))
+			->where('medical_billings.status', '=', 'unpaid')
+			->where('medical_schedules.schedule_day', '=', date('Y-m-d'))
+			->get();
+
+		return view('staff.cashier.billingtoday', $params, compact('unpaid_bills_medical_today'));
 	}
 
 	public function profile()

@@ -29,14 +29,10 @@
           <p style="background: green">Clock here</p>
         </div>
       </div>
-
-
-
       <h3 class="sub-header">Requests for Laboratory Examination</h3>
       <p>The requests are sorted by time and date of requests, from the most recent requests.</p>
       <div class="row">
         <div class="col-md-12">
-
           <div>
             <div class="table-responsive" id="lab_requests">
               @if(count($lab_requests)>0)
@@ -162,7 +158,7 @@
   </div>
 </div>
 
-{{-- <div id="cbcBillingModal" class="modal fade" role="dialog">
+<div id="labBillingModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -170,103 +166,20 @@
         <div class="patient_name"></div>
       </div>
       <div class="modal-body">
-        <div class="medical_senior_checker_cbc">
+        <div class="medical_senior_checker_lab">
           <div class="radio">
-            <label><input type="radio" name="cbc_radio_button_medical" id="cbc_radio_button_cbc_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="cbc_radio_button_medical" id="cbc_radio_button_cbc_billing_senior" value="6">Senior Citizen</label>
+            <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_senior" value="6">Senior Citizen</label>
           </div>
         </div>
         <table class="table table-bordered displayServices"></table>
-        <div class="cbc-bill-input" id="cbc-bill-input-text"></div> 
+        <div class="lab-bill-input" id="lab-bill-input-text"></div> 
       </div>
       <div class="modal-footer">
-        <div class="cbc-bill-confirm" id="cbc-bill-confirm-button" style="text-align:center; "></div>
+        <div class="lab-bill-confirm" id="lab-bill-confirm-button" style="text-align:center; "></div>
       </div>
     </div>
   </div>
 </div>
-
-<div id="drugBillingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="patient_name"></div>
-      </div>
-      <div class="modal-body">
-        <div class="drug_senior_checker_drug">
-          <div class="radio">
-            <label><input type="radio" name="drug_radio_button_medical" id="drug_radio_button_drug_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="drug_radio_button_medical" id="drug_radio_button_drug_billing_senior" value="6">Senior Citizen</label>
-          </div>
-        </div>
-        <table class="table table-bordered displayServices"></table>
-        <div class="drug-bill-input" id="drug-bill-input-text"></div> 
-      </div>
-      <div class="modal-footer">
-        <div class="drug-bill-confirm" id="drug-bill-confirm-button" style="text-align:center; "></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="fecalysisBillingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="patient_name"></div>
-      </div>
-      <div class="modal-body">
-        <div class="medical_senior_checker_fecalysis">
-          <div class="radio">
-            <label><input type="radio" name="fecalysis_radio_button_medical" id="fecalysis_radio_button_fecalysis_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="fecalysis_radio_button_medical" id="fecalysis_radio_button_fecalysis_billing_senior" value="6">Senior Citizen</label>
-          </div>
-        </div>
-        <table class="table table-bordered  displayServices"></table>
-        <div class="fecalysis-bill-input" id="fecalysis-bill-input-text"></div> 
-      </div>
-      <div class="modal-footer">
-        <div class="fecalysis-bill-confirm" id="fecalysis-bill-confirm-button" style="text-align:center; "></div>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="urinalysisBillingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="patient_name"></div>
-      </div>
-      <div class="modal-body">
-        <div class="medical_senior_checker_urinalysis">
-          <div class="radio">
-            <label><input type="radio" name="urinalysis_radio_button_medical" id="urinalysis_radio_button_urinalysis_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="urinalysis_radio_button_medical" id="urinalysis_radio_button_urinalysis_billing_senior" value="6">Senior Citizen</label>
-          </div>
-        </div>
-        <table class="table table-bordered displayServices"></table>
-        <div class="urinalysis-bill-input" id="urinalysis-bill-input-text"></div> 
-      </div>
-      <div class="modal-footer">
-        <div class="urinalysis-bill-confirm" id="urinalysis-bill-confirm-button" style="text-align:center; "></div>
-      </div>
-    </div>
-  </div>
-</div> --}}
-
-<script>
-  // token and createPostUrl are needed to be passed to AJAX method call
-  var token = '{{csrf_token()}}';
-  var addBillingCbc = '/add_billing_cbc';
-  var confirmBillingCbc = '/confirm_billing_cbc';
-  var addBillingDrug = '/add_billing_drug';
-  var confirmBillingDrug = '/confirm_billing_drug';
-  var addBillingFecalysis = '/add_billing_fecalysis';
-  var confirmBillingFecalysis = '/confirm_billing_fecalysis';
-  var addBillingUrinalysis = '/add_billing_urinalysis';
-  var confirmBillingUrinalysis = '/confirm_billing_urinalysis';
-</script>
 
 @endsection
