@@ -25,10 +25,8 @@
 	<script src="{{asset('js/custom.js')}}"></script>
 	<script src="{{asset('js/scheduleappointment.js')}}"></script>
 	<script src="{{asset('js/seemoreannouncements.js')}}"></script>
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
-
-	
+	<script src="{{asset('js/highcharts.js')}}"></script>
+	<script src="{{asset('js/exporting.js')}}"></script>	
 </head>
 <body>
 @include('layouts.navbar')

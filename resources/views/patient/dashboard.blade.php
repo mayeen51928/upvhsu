@@ -12,8 +12,8 @@
 			<img src="{{asset('images/blankprofpic.png')}}" height="50" width="50" class="img-circle"/> 
 			@endif
 			Welcome <i>{{ Auth::user()->patient->patient_first_name }} {{ Auth::user()->patient->patient_last_name }}</i>!</h4>
-			<div class="row placeholders">
-			</div>
+			{{-- <div class="row placeholders">
+			</div> --}}
 			<div class="col-md-6">
 				<h3 class="sub-header h3Title">Medical Appointments</h3>
 				<div class="table-responsive">

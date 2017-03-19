@@ -376,3 +376,9 @@ a.medical_appointments_prescription,
 textarea {
 	resize: none;
 }
+#admingraph{
+	min-width: 310px;
+	max-width: 800px;
+	height: 400px;
+	margin: 0 auto
+}
