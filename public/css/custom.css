@@ -376,6 +376,33 @@ a.medical_appointments_prescription,
 textarea {
 	resize: none;
 }
+
+.borderless td, .borderless th {
+    border: none !important;
+}
+
+.hover_medical {
+    background-color: #A8A8A8 !important;
+}
+
+.hover_dental {
+    background-color: #A8A8A8 !important;
+}
+
+.hover_lab {
+    background-color: #A8A8A8 !important;
+}
+
+.hover_xray {
+    background-color: #A8A8A8 !important;
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
 #admingraph{
 	min-width: 310px;
 	max-width: 800px;

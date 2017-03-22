@@ -1,64 +1,315 @@
 @extends('layouts.layout')
-@section('title', 'Announcements | UP Visayas Health Services Unit')
+@section('title', 'About | UP Visayas Health Services Unit')
 @section('content')
 <div class="container">
 <br>
-<div class="row">
-	<div class="col-md-7">
-		<div>
-			<img src="images/infirmary_about.jpg" class="img-responsive" alt="Cinque Terre">
-		</div>
-		<br>
-		<div class="panel panel-info">
-      <div class="panel-heading"><h2>About us</h2></div>
-      <div class="panel-body">
-      	University Of The Philippines Visayas Health Services Unit in Iloilo is a training center located in Iloilo, Philippines. 
-      	You can contact them on directly on phone-(033) 315 9632 or you can visit them at their physical address in Iloilo which is University Of The Philippines Visayas, Quezon Street, Miagao, 5023, Iloilo.
-      </div>
-    </div>
-    <div class="panel panel-info">
-      <div class="panel-heading"><h3>Our mission</h3></div>
-      <div class="panel-body">
-      	Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
-      </div>
-    </div>
+<div class="row row-eq-height">
+	<div class="col-md-9 col-sm-12 col-xs-12">
+		<img src="images/infirmary_about.jpg" class="img-responsive" alt="Cinque Terre">
 	</div>
-	<div class="col-md-5">
-		<div class="panel panel-info">
-      <div class="panel-heading"><h4>Services we offer</h4></div>
-      <div class="panel-body">
-      	<div class="row" style="background-color:#F8F8F8 ">
-      		<div class="col-md-10 col-md-offset-1">
-      			<br>
-      			<img src="images/medical.jpg" class="img-responsive" alt="Cinque Terre">
-      		</div>
-      		<h4 style="text-align:center">Medical Services</h4>
-      	</div>
-      	<div class="row">
-      		<div class="col-md-10 col-md-offset-1">
-      			<br>
-      			<img src="images/dental.jpg" class="img-responsive" alt="Cinque Terre">
-      		</div>
-      		<h4 style="text-align:center">Dental Services</h4>
-      	</div>
-      	<div class="row"  style="background-color:#F8F8F8 ">
-      		<div class="col-md-10 col-md-offset-1">
-      			<br>
-      			<img src="images/lab.jpg" class="img-responsive" alt="Cinque Terre">
-      		</div>
-      		<h4 style="text-align:center">Laboratory Services</h4>
-      	</div>
-      	<div class="row">
-      		<div class="col-md-10 col-md-offset-1">
-      			<br>
-      			<img src="images/xray.jpg" class="img-responsive" alt="Cinque Terre">
-      		</div>
-      		<h4 style="text-align:center">Chest Xray Services</h4>
-      	</div>
-      </div>
-    </div>
-	</div>
+	<div class="col-md-3 col-sm-12 col-xs-12" style="background-color:#d9edf7;">
+    <div>
+	    <h2>About us</h2>
+	    University Of The Philippines Visayas Health Services Unit in Iloilo is a training center located in Iloilo, Philippines. 
+	  	You can contact them on directly on phone-(033) 315 9632 or you can visit them at their physical address in Iloilo which is University Of The Philippines Visayas, Quezon Street, Miagao, 5023, Iloilo.
+  	</div>
+  </div>
 </div>
+<br>
+<div class="row">
+	<div class="panel panel-info">
+    <div class="panel-heading"><h4>Services we offer</h4></div>
+    <div class="panel-body">
+			<div class="col-md-3 col-sm-6 col-xs-6" id="about_medical">
+				<br>
+				<center><i class="fa fa-medkit fa-5x fa-border fa-align-center" aria-hidden="true"></i>
+      	<h4>Medical Services</h4></center>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-6" id="about_dental">
+      	<br>
+      	<center><i class="fa fa-asterisk fa-5x fa-border fa-align-center" aria-hidden="true" ></i>
+      	<h4>Dental Services</h4></center>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-6" id="about_lab">
+      	<br>
+      	<center><i class="fa fa-flask fa-5x fa-border fa-align-center" aria-hidden="true"></i>
+      	<h4>Lab Services</h4></center>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-6" id="about_xray">
+      	<br>
+      	<center><i class="fa fa-id-badge fa-5x fa-border fa-align-center" aria-hidden="true"></i>
+      	<h4>Xray Services</h4></center>
+      </div>
+    </div>
+  </div>
 </div>
 
+<div id="medicalServicesModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Medical Services</h4>
+      </div>
+      <div class="modal-body">
+      	<ul class="nav nav-tabs">
+	        <li class="active"><a data-toggle="tab" href="#studentmedicalservice">Student</a></li>
+	        <li><a data-toggle="tab" href="#facultymedicalservice">Faculty</a></li>
+	        <li><a data-toggle="tab" href="#staffmedicalservice">Staff</a></li>
+	        <li><a data-toggle="tab" href="#dependentmedicalservice">UPV Dependent</a></li>
+	        <li><a data-toggle="tab" href="#opdmedicalservice">OPD</a></li>
+	        <li><a data-toggle="tab" href="#seniormedicalservice">Senior Citizen</a></li>
+	      </ul>
+	      <div class="tab-content">
+	      	<div class="table-responsive tab-pane fade in active" id="studentmedicalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($studentdisplaymedicalservices as $studentdisplaymedicalservice)
+					      <tr>
+					        <td>{{ $studentdisplaymedicalservice->service_description }}</td>
+					        <td>{{ $studentdisplaymedicalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="facultymedicalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($facultydisplaymedicalservices as $facultydisplaymedicalservice)
+					      <tr>
+					        <td>{{ $facultydisplaymedicalservice->service_description }}</td>
+					        <td>{{ $facultydisplaymedicalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="staffmedicalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($staffdisplaymedicalservices as $staffdisplaymedicalservice)
+					      <tr>
+					        <td>{{ $staffdisplaymedicalservice->service_description }}</td>
+					        <td>{{ $staffdisplaymedicalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="dependentmedicalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($dependentdisplaymedicalservices as $dependentdisplaymedicalservice)
+					      <tr>
+					        <td>{{ $dependentdisplaymedicalservice->service_description }}</td>
+					        <td>{{ $dependentdisplaymedicalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="opdmedicalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($opddisplaymedicalservices as $opddisplaymedicalservice)
+					      <tr>
+					        <td>{{ $opddisplaymedicalservice->service_description }}</td>
+					        <td>{{ $opddisplaymedicalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="seniormedicalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($seniordisplaymedicalservices as $seniordisplaymedicalservice)
+					      <tr>
+					        <td>{{ $seniordisplaymedicalservice->service_description }}</td>
+					        <td>{{ $seniordisplaymedicalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="dentalServicesModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Dental Services</h4>
+      </div>
+      <div class="modal-body">
+      	<ul class="nav nav-tabs">
+	        <li class="active"><a data-toggle="tab" href="#studentdentalservice">Student</a></li>
+	        <li><a data-toggle="tab" href="#facultydentalservice">Faculty</a></li>
+	        <li><a data-toggle="tab" href="#staffdentalservice">Staff</a></li>
+	        <li><a data-toggle="tab" href="#dependentdentalservice">UPV Dependent</a></li>
+	        <li><a data-toggle="tab" href="#opddentalservice">OPD</a></li>
+	        <li><a data-toggle="tab" href="#seniordentalservice">Senior Citizen</a></li>
+	      </ul>
+	      <div class="tab-content">
+	      	<div class="table-responsive tab-pane fade in active" id="studentdentalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($studentdisplaydentalservices as $studentdisplaydentalservice)
+					      <tr>
+					        <td>{{ $studentdisplaydentalservice->service_description }}</td>
+					        <td>{{ $studentdisplaydentalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="facultydentalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($facultydisplaydentalservices as $facultydisplaydentalservice)
+					      <tr>
+					        <td>{{ $facultydisplaydentalservice->service_description }}</td>
+					        <td>{{ $facultydisplaydentalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="staffdentalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($staffdisplaydentalservices as $staffdisplaydentalservice)
+					      <tr>
+					        <td>{{ $staffdisplaydentalservice->service_description }}</td>
+					        <td>{{ $staffdisplaydentalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="dependentdentalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($dependentdisplaydentalservices as $dependentdisplaydentalservice)
+					      <tr>
+					        <td>{{ $dependentdisplaydentalservice->service_description }}</td>
+					        <td>{{ $dependentdisplaydentalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="opddentalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($opddisplaydentalservices as $opddisplaydentalservice)
+					      <tr>
+					        <td>{{ $opddisplaydentalservice->service_description }}</td>
+					        <td>{{ $opddisplaydentalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+	        <div class="table-responsive tab-pane" id="seniordentalservice">
+	        	<table class="table table-striped">
+					    <thead>
+					      <tr>
+					        <th>Service Name</th>
+					        <th>Rate</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					    	@foreach($seniordisplaydentalservices as $seniordisplaydentalservice)
+					      <tr>
+					        <td>{{ $seniordisplaydentalservice->service_description }}</td>
+					        <td>{{ $seniordisplaydentalservice->service_rate }}</td>
+					      </tr>
+					      @endforeach
+					    </tbody>
+					  </table>
+	        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
