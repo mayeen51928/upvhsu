@@ -47,6 +47,7 @@ Route::post('/print_medical_receipt','PatientController@printmedicalreceipt');
 /* ROUTES FOR DENTIST ACCOUNT */
 Route::get('/dentist','DentistController@dashboard');
 Route::post('/totalnumberofdentalpatients', 'DentistController@totalnumberofdentalpatients');
+Route::post('/dentist/updatestaffnotes', 'DentistController@updatestaffnotes');
 Route::get('/dentist/profile','DentistController@profile');
 Route::get('/dentist/profile/edit','DentistController@editprofile');
 Route::post('/dentist/profile/update','DentistController@updateprofile');
@@ -71,6 +72,7 @@ Route::post('/confirm_billing_dental','DentistController@confirmbillingdental');
 /* ROUTES FOR MEDICAL DOCTOR ACCOUNT */
 Route::get('/doctor','DoctorController@dashboard');
 Route::post('/totalnumberofpatients', 'DoctorController@totalnumberofpatients');
+Route::post('/doctor/updatestaffnotes', 'DoctorController@updatestaffnotes');
 Route::get('/doctor/profile','DoctorController@profile');
 Route::get('/doctor/profile/edit','DoctorController@editprofile');
 Route::post('/doctor/profile/update','DoctorController@updateprofile');

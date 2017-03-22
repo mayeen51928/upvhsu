@@ -29,6 +29,7 @@ use App\UrinalysisResult;
 use App\FecalysisResult;
 use App\MedicalBilling;
 use App\MedicalService;
+use App\StaffNote;
 use Illuminate\Support\Facades\Input;
 class DoctorController extends Controller
 {
@@ -54,6 +55,7 @@ class DoctorController extends Controller
 		$params['medical_appointments_past'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','<', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
 		$params['medical_appointments_future'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','>', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get();
 		// dd($params['medical_appointments']);
+		$params['staff_notes'] = StaffNote::where('staff_id', Auth::user()->user_id)->first()->notes;
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
 		return view('staff.medical-doctor.dashboard', $params);
@@ -65,6 +67,13 @@ class DoctorController extends Controller
 			'max' => count(DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get()),
 			'actual' =>count(MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','=', date('Y-m-d'))->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->leftjoin('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')->where('status', '1')->orWhere('status', '2')->get())
 			]);
+	}
+
+	public function updatestaffnotes(Request $request)
+	{
+		$staff_note = StaffNote::where('staff_id', Auth::user()->user_id)->first();
+		$staff_note->notes = $request->note;
+		$staff_note->update();
 	}
 
 	public function profile()

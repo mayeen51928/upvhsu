@@ -24,6 +24,7 @@ use App\DentalBilling;
 use App\DentalService;
 use App\AdditionalDentalService;
 use Log;
+use App\StaffNote;
 use Illuminate\Support\Facades\Input;
 
 
@@ -50,6 +51,7 @@ class DentistController extends Controller
 			$user = Auth::user();
 			$dental_appointments_today = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('schedule_start','>', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('dental_schedules.schedule_start', 'asc')->get();
 			$dental_appointments_future = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('schedule_start','=', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('dental_schedules.schedule_start', 'asc')->get();
+			$params['staff_notes'] = $staff_note = StaffNote::where('staff_id', Auth::user()->user_id)->first()->notes;
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'dashboard';
 			return view('staff.dental-dentist.dashboard', $params, compact('dental_appointments_today', 'dental_appointments_future'));
@@ -60,6 +62,13 @@ class DentistController extends Controller
 			'max' => count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('dental_schedules.staff_id', Auth::user()->user_id)->get()),
 			'actual' =>count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('dental_schedules.staff_id', Auth::user()->user_id)->where('status', '0')->get())
 			]);
+		}
+
+		public function updatestaffnotes(Request $request)
+		{
+			$staff_note = StaffNote::where('staff_id', Auth::user()->user_id)->first();
+			$staff_note->notes = $request->note;
+			$staff_note->update();
 		}
 
 		public function updatedentalrecord($id)
