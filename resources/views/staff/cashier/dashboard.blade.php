@@ -27,7 +27,43 @@
     <br>
 		<div class="tab-content">
 			<div class="tab-pane fade in active" id="todayappointment">
-				<form action="/cashier/billingtoday" method="POST">{{ csrf_field() }}<input type="submit" class="btn btn-primary" value="View Today's Patient"></form>
+				<div class="row">
+					<div class="col-md-6">
+					<!-- Chart goes here -->
+					</div>
+					<div class="col-md-6">
+						<div class="panel panel-default">
+						  <div class="panel-body">
+						  	<table class="table">
+						  		<tbody>
+							      <tr class="active">
+							        <td>Total Patients Today</td>
+							        <td>20</td>
+							      </tr> 
+							      <tr class="danger">
+							        <td>Total Patients Unbilled</td>
+							        <td>10</td>
+							      </tr>  
+							      <tr class="success">
+							        <td>Total Patients Billed</td>
+							        <td>10</td>
+							      </tr> 
+							      <tr class="info">
+							        <td>Total Patients Paid</td>
+							        <td>5</td>
+							      </tr> 
+							      <tr class="warning">
+							        <td>Total Patients Unpaid</td>
+							        <td>5</td>
+							      </tr> 
+							    </tbody>  
+						  	</table>
+						  	<form action="/cashier/billingtoday" method="POST">{{ csrf_field() }}<input type="submit" class="btn btn-primary btn-block" value="View Today's Patient"></form>
+						  </div>
+						</div>
+					</div>
+				</div>
+				
 			</div>
 			<div class="tab-pane" id="pastappointment">
 				<div class="row">
@@ -63,6 +99,30 @@
 				    </div>
 					</div>
 					<div class="col-md-6">
+						<div class="panel panel-success">
+							<div class="panel-heading">Dental Billing</div>
+				      <div class="panel-body">
+				      	<h4>Receivable Amount:	<b></b></h4>
+				      	<hr>
+				      	<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>Patient</th>
+											<th>Consultation Date</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>No billing record at this moment.</td>
+											<!-- <td></td>
+											<td><button class="btn btn-primary btn-xs addMedicalBilling">Pay Bill</button></td>
+ -->										</tr>
+									</tbody>
+								</table>
+				      </div>
+						</div>
+				    </div>
 					</div>
 				</div>
 			</div>
