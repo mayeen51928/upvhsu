@@ -376,7 +376,6 @@ a.medical_appointments_prescription,
 textarea {
 	resize: none;
 }
-
 .borderless td, .borderless th {
     border: none !important;
 }

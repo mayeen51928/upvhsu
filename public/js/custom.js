@@ -84,6 +84,53 @@ $(document).ready( function(){
       }
       $('#staffinfomodal').modal();
     });
-    
+  });
+
+    $("#about_medical").click(function(){
+    $('#medicalServicesModal').modal();
+  });
+
+  $("#about_dental").click(function(){
+    $('#dentalServicesModal').modal();
+  });
+
+  $("#about_lab").click(function(){
+    $('#labServicesModal').modal();
+  });
+
+  $("#about_xray").click(function(){
+    $('#xrayServicesModal').modal();
+  });
+
+  $(function() {
+      $('#about_medical').hover(function() {
+          $(this).addClass('hover_medical');
+      }, function() {
+          $(this).removeClass('hover_medical');
+      });
+  });
+
+  $(function() {
+      $('#about_dental').hover(function() {
+          $(this).addClass('hover_dental');
+      }, function() {
+          $(this).removeClass('hover_dental');
+      });
+  });
+
+  $(function() {
+      $('#about_lab').hover(function() {
+          $(this).addClass('hover_lab');
+      }, function() {
+          $(this).removeClass('hover_lab');
+      });
+  });
+
+  $(function() {
+      $('#about_xray').hover(function() {
+          $(this).addClass('hover_xray');
+      }, function() {
+          $(this).removeClass('hover_xray');
+      });
   });
 });
