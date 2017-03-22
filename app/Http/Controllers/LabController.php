@@ -400,7 +400,7 @@ class LabController extends Controller
 										$distance=$json['rows'][0]['elements'][0]['distance']['value'];
 										$town->distance_to_miagao = $distance/1000;
 								}
-								$town-save();
+								$town->save();
 								$lab->town_id = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first()->id;
 						}
 				}
