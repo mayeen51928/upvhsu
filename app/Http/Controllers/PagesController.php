@@ -23,6 +23,8 @@ use App\Guardian;
 use App\HasGuardian;
 use App\MedicalHistory;
 use App\StudentNumber;
+use App\MedicalService;
+use App\DentalService;
 use DB;
 
 class PagesController extends Controller
@@ -41,9 +43,44 @@ class PagesController extends Controller
 	public function about()
 	{
 		$user = Auth::user();
-
 		$params['navbar_active'] = 'about';
-		return view('about', $params);
+
+		$studentdisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '1')->get();
+		$facultydisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '2')->get();
+		$staffdisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '3')->get();
+		$dependentdisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '4')->get();
+		$opddisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '5')->get();
+		$seniordisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '6')->get();
+
+		$studentdisplaydentalservices = DentalService::where('patient_type_id', '1')->get();
+		$facultydisplaydentalservices = DentalService::where('patient_type_id', '2')->get();
+		$staffdisplaydentalservices = DentalService::where('patient_type_id', '3')->get();
+		$dependentdisplaydentalservices = DentalService::where('patient_type_id', '4')->get();
+		$opddisplaydentalservices = DentalService::where('patient_type_id', '5')->get();
+		$seniordisplaydentalservices = DentalService::where('patient_type_id', '6')->get();
+
+		$displaycbcservices = MedicalService::where('service_type', 'cbc')->get();
+		$displaydrugservices = MedicalService::where('service_type', 'drugtest')->get();
+		$displayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->get();
+		$displayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->get();
+		$displayxrayservices = MedicalService::where('service_type', 'xray')->get();
+		return view('about', $params, compact('studentdisplaymedicalservices', 
+																					'facultydisplaymedicalservices',
+																					'staffdisplaymedicalservices',
+																					'dependentdisplaymedicalservices',
+																					'opddisplaymedicalservices',
+																					'seniordisplaymedicalservices',
+																					'studentdisplaydentalservices', 
+																					'facultydisplaydentalservices',
+																					'staffdisplaydentalservices',
+																					'dependentdisplaydentalservices',
+																					'opddisplaydentalservices',  
+																					'seniordisplaydentalservices',   
+																					'displaycbcservices', 
+																					'displaydrugservices', 
+																					'displayfecalysisservices', 
+																					'displayurinalysisservices', 
+																					'displayxrayservices'));
 	}
 
 	public function scheduleappointment()
