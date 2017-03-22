@@ -39,7 +39,7 @@ class LabController extends Controller
 		public function dashboard()
 		{
 			$params['lab_requests'] = MedicalAppointment::
-				where('status', '0')
+				where('medical_appointments.status', '0')
 				->leftjoin('cbc_results', 'medical_appointments.id', 'cbc_results.medical_appointment_id')
 				->leftjoin('drug_test_results', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')
 				->leftjoin('fecalysis_results', 'medical_appointments.id', 'fecalysis_results.medical_appointment_id')
@@ -400,7 +400,7 @@ class LabController extends Controller
 										$distance=$json['rows'][0]['elements'][0]['distance']['value'];
 										$town->distance_to_miagao = $distance/1000;
 								}
-								$town-save();
+								$town->save();
 								$lab->town_id = Town::where('town_name', $request->input('town'))->where('province_id', $province->id)->first()->id;
 						}
 				}
