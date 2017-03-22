@@ -8,15 +8,25 @@
       <h1 class="page-header">Admin</h1>
       <div class="row">
         <div class="col-md-4">
-          <div class="tile-stats" id="cbccount">
+        <div class="tile-stats">
+            <div class="icon"><i class="fa fa-dashboard "></i></div>
+            <div class="count">TODAY</div>
+            
+          </div>
+          <div class="tile-stats">
             <div class="icon"><i class="fa fa-money"></i></div>
-            <div class="count">1000.00</div>
+            <div class="count">{{$paid}}</div>
             <h3>Received Payments</h3>
           </div>
-          <div class="tile-stats" id="cbccount">
+          <div class="tile-stats">
             <div class="icon"><i class="fa fa-rub"></i></div>
-            <div class="count">500.00</div>
+            <div class="count">{{$unpaid}}</div>
             <h3>Accounts Receivable</h3>
+          </div>
+          <div class="tile-stats">
+            <div class="icon"><i class="fa fa-bank"></i></div>
+            <div class="count">{{$unpaid+$paid}}</div>
+            <h3>Total</h3>
           </div>
         </div>
         <input type="hidden" id="admingraphtrigger" value="1"/>

@@ -39,7 +39,7 @@ class LabController extends Controller
 		public function dashboard()
 		{
 			$params['lab_requests'] = MedicalAppointment::
-				where('status', '0')
+				where('medical_appointments.status', '0')
 				->leftjoin('cbc_results', 'medical_appointments.id', 'cbc_results.medical_appointment_id')
 				->leftjoin('drug_test_results', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')
 				->leftjoin('fecalysis_results', 'medical_appointments.id', 'fecalysis_results.medical_appointment_id')

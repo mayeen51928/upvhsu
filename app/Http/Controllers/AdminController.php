@@ -17,6 +17,8 @@ use App\DrugTestResult;
 use App\UrinalysisResult;
 use App\ChestXrayResult;
 use App\StaffNote;
+use App\MedicalBilling;
+use App\DentalBilling;
 class AdminController extends Controller
 {
 	public function __construct()
@@ -37,7 +39,8 @@ class AdminController extends Controller
 	}
 	public function dashboard()
 	{
-
+		$params['unpaid'] = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('medical_billings.status', 'unpaid')->sum('amount') + DentalBilling::join('dental_appointments', 'dental_billings.appointment_id', 'dental_appointments.id')->join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->where('dental_billings.status', 'unpaid')->sum('amount');
+		$params['paid'] = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('medical_billings.status', 'paid')->sum('amount') + DentalBilling::join('dental_appointments', 'dental_billings.appointment_id', 'dental_appointments.id')->join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->where('dental_billings.status', 'paid')->sum('amount');
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
 		return view('admin.dashboard', $params);
