@@ -56,9 +56,10 @@ if($('#dentistdashboard').val() == 1)
 $('#staffnotesdentist').keyup(function() {
 	// if($('#staffnotesdoctor').val())
 	// {
+	$('#savingstatus').html('Saving...');
 		$.post('/dentist/updatestaffnotes',
 			{note: $('#staffnotesdentist').val()}, function(data, textStatus, xhr) {
-			
+			$('#savingstatus').html('&nbsp;');
 		});
 	// }
 });

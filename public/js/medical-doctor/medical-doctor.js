@@ -62,9 +62,11 @@ if($('#doctordashboard').val() == 1)
 $('#staffnotesdoctor').keyup(function() {
 	// if($('#staffnotesdoctor').val())
 	// {
+		$('#savingstatus').html('Saving...');
 		$.post('/doctor/updatestaffnotes',
 			{note: $('#staffnotesdoctor').val()}, function(data, textStatus, xhr) {
-			
+				// console.log(xhr);
+				$('#savingstatus').html('&nbsp;');
 		});
 	// }
 });
