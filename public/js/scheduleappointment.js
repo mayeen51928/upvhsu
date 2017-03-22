@@ -179,11 +179,11 @@ $(document).ready( function(){
   				{
   					$('#dentalAppointment').removeClass("panel panel-default").addClass("panel panel-success");
   					$('#dentalNotes').attr("disabled", "disabled");
-  					$('#selDentalDate').attr("disabled", "disabled");
-  					$('#selDentalTime').attr("disabled", "disabled");
+  					// $('#selDentalDate').attr("disabled", "disabled");
+  					$('#selectdentaltime').attr("disabled", "disabled");
   					$('#submitDentalAppointment').addClass("disabled");
             $('#selectdentaldate').attr('disabled', 'disabled');
-            $('#selectdentaldoctor').attr('disabled', 'disabled');
+            // $('#selectdentaldoctor').attr('disabled', 'disabled');
   					$('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
   					$('#submitdentalappointment').attr("disabled", "disabled");
   				}

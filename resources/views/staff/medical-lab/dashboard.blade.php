@@ -63,12 +63,13 @@
         </div>
       </div>
       <h3 class="sub-header">Requests for Laboratory Examination</h3>
-      <p>The requests are sorted by time and date of requests, from the most recent requests.</p>
+      
       <div class="row">
         <div class="col-md-12">
           <div>
             <div class="table-responsive" id="lab_requests">
               @if(count($lab_requests)>0)
+              <p>The requests are sorted by time and date of requests, from the most recent requests.</p>
               <table class="table table-striped">
                 <thead>
                   <tr>

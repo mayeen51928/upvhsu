@@ -62,8 +62,8 @@ class DoctorController extends Controller
 	public function totalnumberofpatients(Request $request)
 	{
 		return response()->json([
-			'max' => count(DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get()),
-			'actual' =>count(MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->leftjoin('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')->whereNotNull('prescription')->get())
+			'max' => count(DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get()),
+			'actual' =>count(MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','=', date('Y-m-d'))->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->leftjoin('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')->where('status', '1')->orWhere('status', '2')->get())
 			]);
 	}
 
@@ -243,6 +243,7 @@ class DoctorController extends Controller
 		$urinalysis_result = UrinalysisResult::where('medical_appointment_id', $appointment_id)->first();
 		$prescription = Prescription::where('medical_appointment_id', $appointment_id)->first();
 		$remark = Remark::where('medical_appointment_id', $appointment_id)->first();
+		$lab_xray_request_counter = 0;
 		if(count($physical_examination) == 1)
 		{
 			$counter++;
@@ -250,22 +251,27 @@ class DoctorController extends Controller
 		if(count($cbc_result) == 1)
 		{
 			$counter++;
+			$lab_xray_request_counter++;
 		}
 		if(count($chest_xray_result) == 1)
 		{
 			$counter++;
+			$lab_xray_request_counter++;
 		}
 		if(count($drug_test_result) == 1)
 		{
 			$counter++;
+			$lab_xray_request_counter++;
 		}
 		if(count($fecalysis_result) == 1)
 		{
 			$counter++;
+			$lab_xray_request_counter++;
 		}
 		if(count($urinalysis_result) == 1)
 		{
 			$counter++;
+			$lab_xray_request_counter++;
 		}
 		if(count($remark) == 1)
 		{
@@ -288,6 +294,7 @@ class DoctorController extends Controller
 				'drug_test_result' => $drug_test_result,
 				'fecalysis_result' => $fecalysis_result,
 				'urinalysis_result' => $urinalysis_result,
+				'lab_xray_request_counter' => $lab_xray_request_counter,
 				'remark' => $remark,
 				'prescription' => $prescription,
 			]);

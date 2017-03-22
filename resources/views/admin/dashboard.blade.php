@@ -6,21 +6,23 @@
     @include('layouts.sidebar')
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="adminDashboard">
       <h1 class="page-header">Admin</h1>
-      <div class="col-md-9 col-md-offset-1">
-        <div class="panel panel-info">
-          <div class="panel-heading">Add Announcment</div>
-          <div class="panel-body">
-            <form method="POST" action="{{ url('/admin/postannouncement') }}">
-              {{ csrf_field() }}
-            <div class="form-group">
-            <input type="text" class="form-control" name="announcement_title" id="announcement_title" placeholder="Title" required autofocus/>
-            </div>
-            <div class="form-group">
-              <textarea class="form-control" rows="10" name="announcement_body" id="announcement_body" placeholder="Body" required></textarea>
-            </div>
-            <input type="submit" class="btn btn-success" name="createannouncment" value="Post Announcment" />
-            </form>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="tile-stats" id="cbccount">
+            <div class="icon"><i class="fa fa-money"></i></div>
+            <div class="count">1000.00</div>
+            <h3>Received Payments</h3>
           </div>
+          <div class="tile-stats" id="cbccount">
+            <div class="icon"><i class="fa fa-rub"></i></div>
+            <div class="count">500.00</div>
+            <h3>Accounts Receivable</h3>
+          </div>
+        </div>
+        <input type="hidden" id="admingraphtrigger" value="1"/>
+        <div class="col-md-8 tile-stats">
+
+          <div id="admingraph"></div>
         </div>
       </div>
     </div>

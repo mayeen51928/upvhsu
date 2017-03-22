@@ -66,6 +66,7 @@
   		{{-- If Admin --}}
   		<ul class="nav nav-sidebar">
   			<li id="dashboardNav" @if($sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/admin') }}">Dashboard <span class="sr-only">(current)</span></a></li>
+  			<li id="postAnnouncement" @if($sidebar_active == 'postannouncement')class="active" @endif><a href="{{ url('/admin/announcement') }}">Post Announcement</a></li>
   			<li id="addAccount" @if($sidebar_active == 'addstaffaccount')class="active" @endif><a href="{{ url('/admin/addaccount') }}">Add Staff Account</a></li>
   			<li id="addStudentNumber" @if($sidebar_active == 'addstudentnumber')class="active" @endif><a href="{{ url('/admin/addstudent') }}">Add Student Number to Database</a></li>
   			<li id="editServices" @if($sidebar_active == 'editservices')class="active" @endif><a href="{{ url('/admin/editservices') }}">Edit Services' Rates</a></li>

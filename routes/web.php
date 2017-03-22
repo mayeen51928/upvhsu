@@ -130,6 +130,8 @@ Route::post('/cashier/billingtoday','CashierController@billingtoday');
 
 /* ROUTES FOR ADMIN ACCOUNT */
 Route::get('/admin', 'AdminController@dashboard');
+Route::post('/admingraphdata', 'AdminController@admingraphdata');
+Route::get('/admin/announcement', 'AdminController@announcement');
 Route::get('/admin/addaccount', 'AdminController@addaccount');
 Route::post('/admin/createstaffaccount', 'AdminController@createstaffaccount');
 Route::post('/admin/postannouncement', 'AdminController@postannouncement');
