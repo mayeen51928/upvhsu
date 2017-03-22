@@ -16,6 +16,7 @@ use App\FecalysisResult;
 use App\DrugTestResult;
 use App\UrinalysisResult;
 use App\ChestXrayResult;
+use App\StaffNote;
 class AdminController extends Controller
 {
 	public function __construct()
@@ -183,6 +184,12 @@ class AdminController extends Controller
 		$staff_info->staff_middle_name = $request->staff_middle_name;
 		$staff_info->staff_last_name = $request->staff_last_name;
 		$staff_info->save();
+		if($request->staff_type_id == 1 || $request->staff_type_id == 2)
+		{
+			$staff_note = new StaffNote;
+			$staff_note->staff_id = $request->staff_id;
+			$staff_note->save();
+		}
 		return redirect('admin/addaccount')->with('status', 'Staff account added!');
 	}
 

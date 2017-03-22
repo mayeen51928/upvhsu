@@ -53,6 +53,15 @@ if($('#dentistdashboard').val() == 1)
 {
 	highchartsdentalfunc();
 }
+$('#staffnotesdentist').keyup(function() {
+	// if($('#staffnotesdoctor').val())
+	// {
+		$.post('/dentist/updatestaffnotes',
+			{note: $('#staffnotesdentist').val()}, function(data, textStatus, xhr) {
+			
+		});
+	// }
+});
 $('.dental_chart').click(function(){
 	var id = $(this).attr('id').split("_");
 	teethId = id[1];

@@ -21,7 +21,7 @@
   <div class="col-md-6">
   	<div class="panel panel-default">
   		<div class="panel-heading">Side Notes</div>
-  		<div class="panel-body"><textarea placeholder="Enter your notes here..." class="form-control" rows="11"></textarea></div>
+  		<div class="panel-body"><textarea id="staffnotesdoctor" placeholder="Enter your notes here..." class="form-control" rows="11">{{$staff_notes}}</textarea></div>
   	</div>
   </div>
 </div>

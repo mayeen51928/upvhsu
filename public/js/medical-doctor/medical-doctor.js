@@ -59,6 +59,15 @@ if($('#doctordashboard').val() == 1)
 {
 	highchartsfunc();
 }
+$('#staffnotesdoctor').keyup(function() {
+	// if($('#staffnotesdoctor').val())
+	// {
+		$.post('/doctor/updatestaffnotes',
+			{note: $('#staffnotesdoctor').val()}, function(data, textStatus, xhr) {
+			
+		});
+	// }
+});
 
 numOfClicksMedical_Diagnosis = 0;
 percentageMedical_Diagnosis = 20;
