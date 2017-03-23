@@ -32,7 +32,7 @@ $(document).ready( function(){
 					data: {appointment_id:  appointmentIdMedical, _token: token},
 					success: function(data)
 					{
-						$('#'+buttonIdMedical).closest("tr").remove();
+						$("#add_medical_billing_tr_"+appointmentIdMedical).remove();
 						medicalVal = $('#receivable_medical').val() - amountMedical;
 						$('#receivable_medical').val(medicalVal.toFixed(2));
 						$('#confirm_medical_billing').modal('hide');	
@@ -71,6 +71,7 @@ $(document).ready( function(){
 					data: {appointment_id:  appointmentIdDental, _token: token},
 					success: function(data)
 					{
+						$("#add_dental_billing_tr_"+appointmentIdDental).remove();
 						dentalVal = $('#receivable_dental').val() - amountDental;
 						$('#receivable_dental').val(dentalVal.toFixed(2));
 						$('#confirm_dental_billing').modal('hide');	

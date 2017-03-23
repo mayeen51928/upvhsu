@@ -114,8 +114,8 @@
 									</thead>
 									<tbody>
 										@foreach($unpaid_bills_medical as $unpaid_bill_medical)
-										<tr>
-											@if ($counter_medical>0)
+										<tr id="add_medical_billing_tr_{{$unpaid_bill_medical->medical_appointment_id}}">
+											@if($counter_medical>0)
 												<td>{{ $unpaid_bill_medical->patient_first_name }} {{ $unpaid_bill_medical->patient_last_name }}</td>
 												<td>{{ $unpaid_bill_medical->schedule_day }}</td>
 												<td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{$unpaid_bill_medical->medical_appointment_id}}_{{$unpaid_bill_medical->amount}}">Pay Bill</button></td>
@@ -146,7 +146,7 @@
 									</thead>
 									<tbody>
 										@foreach($unpaid_bills_dental as $unpaid_bill_dental)
-										<tr>
+										<tr id="add_dental_billing_tr_{{$unpaid_bill_dental->appointment_id}}">
 											@if ($counter_dental>0)
 												<td>{{ $unpaid_bill_dental->patient_first_name }} {{ $unpaid_bill_dental->patient_last_name }}</td>
 												<td>{{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_start)->format('g:i:s a') }} - {{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_end)->format('g:i:s a') }}</td>

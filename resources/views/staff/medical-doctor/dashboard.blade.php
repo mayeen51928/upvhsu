@@ -12,21 +12,21 @@
 			@endif
 			Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
 			<div class="row">
-	<div class="col-md-6">
-		<div class="tile-stats">
-			<div id="container" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
-			<input type="hidden" id="doctordashboard" value="1"/>
-		</div>
-	</div>
-	<div class="col-md-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">Side Notes</div>
-			<div class="panel-body"><textarea id="staffnotesdoctor" placeholder="Enter your notes here..." class="form-control" rows="9">{{$staff_notes}}</textarea>
+				<div class="col-md-6">
+					<div class="tile-stats">
+						<div id="container" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+						<input type="hidden" id="doctordashboard" value="1"/>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">Side Notes</div>
+						<div class="panel-body"><textarea id="staffnotesdoctor" placeholder="Enter your notes here..." class="form-control" rows="9">{{$staff_notes}}</textarea>
+						</div>
+						<div class="panel-footer" id="savingstatus">&nbsp;</div>
+					</div>
+				</div>
 			</div>
-			<div class="panel-footer" id="savingstatus">&nbsp;</div>
-		</div>
-	</div>
-</div>
 			<h3 class="sub-header">Appointments</h3>
 			<ul class="nav nav-tabs">
 				<li><a data-toggle="tab" href="#pastappointment">Past</a></li>
