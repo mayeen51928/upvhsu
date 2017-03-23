@@ -41,13 +41,13 @@ function highchartsfunc(){
             colorByPoint: true,
             data: [{
                 name: 'Finished',
-                y: data['actual'],
+                y: data['finished'],
                 sliced: false,
                 selected: true
             },
             {
                 name: 'Unfinished',
-                y: data['max']-data['actual']
+                y: data['unfinished']
             }]
         }]
     }); 

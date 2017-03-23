@@ -59,8 +59,8 @@ class DentistController extends Controller
 		public function totalnumberofdentalpatients(Request $request)
 		{
 			return response()->json([
-			'max' => count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('dental_schedules.staff_id', Auth::user()->user_id)->get()),
-			'actual' =>count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('dental_schedules.staff_id', Auth::user()->user_id)->where('status', '0')->get())
+			'finished' => count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('dental_schedules.staff_id', Auth::user()->user_id)->where('status', '1')->get()),
+			'unfinished' =>count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('dental_schedules.staff_id', Auth::user()->user_id)->where('status', '0')->get())
 			]);
 		}
 

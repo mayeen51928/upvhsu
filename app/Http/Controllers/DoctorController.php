@@ -64,8 +64,8 @@ class DoctorController extends Controller
 	public function totalnumberofpatients(Request $request)
 	{
 		return response()->json([
-			'max' => count(DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get()),
-			'actual' =>count(MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','=', date('Y-m-d'))->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->leftjoin('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')->where('status', '1')->orWhere('status', '2')->get())
+			'unfinished' => count(MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get()),
+			'finished' =>count(MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','=', date('Y-m-d'))->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->leftjoin('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')->where('status', '1')->get())
 			]);
 	}
 

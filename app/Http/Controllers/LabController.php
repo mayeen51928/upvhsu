@@ -49,6 +49,7 @@ class LabController extends Controller
 				->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
 				->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')
 				->select('medical_appointments.id','patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day')
+				->orderBy('schedule_day', 'asc')
 				->paginate(10);
 				$cbc_requests = CbcResult::whereNull('hemoglobin')->orWhereNull('hemasocrit')->orWhereNull('wbc')->orderBy('cbc_results.created_at', 'desc');
 				$drug_test_requests = DrugTestResult::whereNull('drug_test_result')->orderBy('drug_test_results.created_at', 'desc');

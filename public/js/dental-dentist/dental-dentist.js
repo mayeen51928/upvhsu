@@ -35,13 +35,13 @@ function highchartsdentalfunc(){
             colorByPoint: true,
             data: [{
                 name: 'Finished',
-                y: data['max']-data['actual'],
+                y: data['finished'],
                 sliced: false,
                 selected: true
             },
             {
                 name: 'Unfinished',
-                y: data['actual']
+                y: data['unfinished']
             }]
         }]
     }); 
