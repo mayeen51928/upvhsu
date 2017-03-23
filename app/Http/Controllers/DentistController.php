@@ -49,7 +49,7 @@ class DentistController extends Controller
 		public function dashboard()
 		{
 			$user = Auth::user();
-			$dental_appointments_today = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('dental_schedules.schedule_start', 'asc')->get();
+			$dental_appointments_today = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('dental_schedules.schedule_start', 'asc')->paginate(15);
 			$dental_appointments_future = DB::table('dental_schedules')->join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->join('patient_info', 'dental_appointments.patient_id', 'patient_info.patient_id')->whereDate('schedule_start', '>', date('Y-m-d'))->where('status', '0')->where('dental_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('dental_schedules.schedule_start', 'asc')->get();
 			$params['staff_notes'] = $staff_note = StaffNote::where('staff_id', Auth::user()->user_id)->first()->notes;
 			$params['navbar_active'] = 'account';

@@ -54,7 +54,7 @@
 			</table>
 			@else
 			<div class="row">
-			<br/>
+			<br/><br/><br/><br/>
 			<p class="center-block">There are no announcements as of the moment.</p>
 			</div>
 			@endif

@@ -351,6 +351,7 @@ $(document).on('click', '.dental-bill-confirm-button', function(){
 		  data: {appointment_id:  appointmentId, checked_services_array_id:  checked_services_array_id, checked_services_array_rate:  checked_services_array_rate, _token: token},
 		  success: function(data)
 		  {
+		  	highchartsdentalfunc();
 		  	$('#dentalBillingModal').modal("hide");
 		  	$('#addBillingToDental_'+appointmentId).closest("tr").remove();
 		  }
