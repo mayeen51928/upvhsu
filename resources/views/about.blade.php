@@ -1,46 +1,59 @@
 @extends('layouts.layout')
 @section('title', 'About | UP Visayas Health Services Unit')
 @section('content')
-<div class="container">
-<br>
-<div class="row row-eq-height">
-	<div class="col-md-9 col-sm-12 col-xs-12">
+<div class="container-fluid" style="background-color:#F0F0F0;">
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
 		<img src="images/infirmary_about.jpg" class="img-responsive" alt="Cinque Terre">
 	</div>
-	<div class="col-md-3 col-sm-12 col-xs-12" style="background-color:#d9edf7;">
-		<div>
-			<h2>About us</h2>
-			University Of The Philippines Visayas Health Services Unit in Iloilo is a training center located in Iloilo, Philippines. 
-			You can contact them on directly on phone-(033) 315 9632 or you can visit them at their physical address in Iloilo which is University Of The Philippines Visayas, Quezon Street, Miagao, 5023, Iloilo.
+</div>
+<br>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2" style="background-color:white;">
+		<center>
+			<br>
+			<i class="fa fa-users fa-3x" aria-hidden="true"></i>
+			<h2>About Us</h2>
+			<p style="font-size: 20px;">University Of The Philippines Visayas Health Services Unit in Iloilo is a training center located in Iloilo, Philippines. 
+			You can contact them on directly on phone-(033) 315 9632 or you can visit them at their physical address in Iloilo which is 
+			University Of The Philippines Visayas, Quezon Street, Miagao, 5023, Iloilo.</p>
+		</center>
+		<br><br>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2" style="background-color:white;">
+		<div class="col-md-3 col-sm-6 col-xs-6" id="about_medical">
+			<br>
+			<center><i class="fa fa-medkit fa-5x fa-border fa-align-center" aria-hidden="true"></i>
+			<h4>Medical Services</h4></center>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-6" id="about_dental">
+			<br>
+			<center><i class="fa fa-asterisk fa-5x fa-border fa-align-center" aria-hidden="true" ></i>
+			<h4>Dental Services</h4></center>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-6" id="about_lab">
+			<br>
+			<center><i class="fa fa-flask fa-5x fa-border fa-align-center" aria-hidden="true"></i>
+			<h4>Lab Services</h4></center>
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-6" id="about_xray">
+			<br>
+			<center><i class="fa fa-id-badge fa-5x fa-border fa-align-center" aria-hidden="true"></i>
+			<h4>Xray Services</h4></center>
 		</div>
 	</div>
 </div>
 <br>
 <div class="row">
-	<div class="panel panel-info">
-		<div class="panel-heading"><h4>Services we offer</h4></div>
-		<div class="panel-body">
-			<div class="col-md-3 col-sm-6 col-xs-6" id="about_medical">
-				<br>
-				<center><i class="fa fa-medkit fa-5x fa-border fa-align-center" aria-hidden="true"></i>
-				<h4>Medical Services</h4></center>
-			</div>
-			<div class="col-md-3 col-sm-6 col-xs-6" id="about_dental">
-				<br>
-				<center><i class="fa fa-asterisk fa-5x fa-border fa-align-center" aria-hidden="true" ></i>
-				<h4>Dental Services</h4></center>
-			</div>
-			<div class="col-md-3 col-sm-6 col-xs-6" id="about_lab">
-				<br>
-				<center><i class="fa fa-flask fa-5x fa-border fa-align-center" aria-hidden="true"></i>
-				<h4>Lab Services</h4></center>
-			</div>
-			<div class="col-md-3 col-sm-6 col-xs-6" id="about_xray">
-				<br>
-				<center><i class="fa fa-id-badge fa-5x fa-border fa-align-center" aria-hidden="true"></i>
-				<h4>Xray Services</h4></center>
-			</div>
-		</div>
+	<div class="col-md-8 col-md-offset-2" style="background-color:white;">
+		<center>
+			<br>
+			<i class="fa fa-phone fa-3x" aria-hidden="true"></i>
+			<h3>Contact us</h3>
+		</center>
 	</div>
 </div>
 
@@ -345,6 +358,204 @@
 									<td>{{ $studentdisplaycbcservice->service_rate }}</td>
 								</tr>
 								@endforeach
+								@foreach($studentdisplaydrugservices as $studentdisplaydrugservice)
+								<tr>
+									<td>{{ $studentdisplaydrugservice->service_description }}</td>
+									<td>{{ $studentdisplaydrugservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($studentdisplayurinalysisservices as $studentdisplayurinalysisservice)
+								<tr>
+									<td>{{ $studentdisplayurinalysisservice->service_description }}</td>
+									<td>{{ $studentdisplayurinalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($studentdisplayfecalysisservices as $studentdisplayfecalysisservice)
+								<tr>
+									<td>{{ $studentdisplayfecalysisservice->service_description }}</td>
+									<td>{{ $studentdisplayfecalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+					<div class="table-responsive tab-pane" id="facultylabservice">
+						<table class="table table-stripedtable-hover">
+							<thead>
+								<tr>
+									<th>Service Name</th>
+									<th>Rate</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($facultydisplaycbcservices as $facultydisplaycbcservice)
+								<tr>
+									<td>{{ $facultydisplaycbcservice->service_description }}</td>
+									<td>{{ $facultydisplaycbcservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($facultydisplaydrugservices as $facultydisplaydrugservice)
+								<tr>
+									<td>{{ $facultydisplaydrugservice->service_description }}</td>
+									<td>{{ $facultydisplaydrugservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($facultydisplayurinalysisservices as $facultydisplayurinalysisservice)
+								<tr>
+									<td>{{ $facultydisplayurinalysisservice->service_description }}</td>
+									<td>{{ $facultydisplayurinalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($facultydisplayfecalysisservices as $facultydisplayfecalysisservice)
+								<tr>
+									<td>{{ $facultydisplayfecalysisservice->service_description }}</td>
+									<td>{{ $facultydisplayfecalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+					<div class="table-responsive tab-pane fade in active" id="stafflabservice">
+						<table class="table table-stripedtable-hover">
+							<thead>
+								<tr>
+									<th>Service Name</th>
+									<th>Rate</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($staffdisplaycbcservices as $staffdisplaycbcservice)
+								<tr>
+									<td>{{ $staffdisplaycbcservice->service_description }}</td>
+									<td>{{ $staffdisplaycbcservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($staffdisplaydrugservices as $staffdisplaydrugservice)
+								<tr>
+									<td>{{ $staffdisplaydrugservice->service_description }}</td>
+									<td>{{ $staffdisplaydrugservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($staffdisplayurinalysisservices as $staffdisplayurinalysisservice)
+								<tr>
+									<td>{{ $staffdisplayurinalysisservice->service_description }}</td>
+									<td>{{ $staffdisplayurinalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($staffdisplayfecalysisservices as $staffdisplayfecalysisservice)
+								<tr>
+									<td>{{ $staffdisplayfecalysisservice->service_description }}</td>
+									<td>{{ $staffdisplayfecalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+					<div class="table-responsive tab-pane fade in active" id="dependentlabservice">
+						<table class="table table-stripedtable-hover">
+							<thead>
+								<tr>
+									<th>Service Name</th>
+									<th>Rate</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($dependentdisplaycbcservices as $dependentdisplaycbcservice)
+								<tr>
+									<td>{{ $dependentdisplaycbcservice->service_description }}</td>
+									<td>{{ $dependentdisplaycbcservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($dependentdisplaydrugservices as $dependentdisplaydrugservice)
+								<tr>
+									<td>{{ $dependentdisplaydrugservice->service_description }}</td>
+									<td>{{ $dependentdisplaydrugservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($dependentdisplayurinalysisservices as $dependentdisplayurinalysisservice)
+								<tr>
+									<td>{{ $dependentdisplayurinalysisservice->service_description }}</td>
+									<td>{{ $dependentdisplayurinalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($dependentdisplayfecalysisservices as $dependentdisplayfecalysisservice)
+								<tr>
+									<td>{{ $dependentdisplayfecalysisservice->service_description }}</td>
+									<td>{{ $dependentdisplayfecalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+					<div class="table-responsive tab-pane fade in active" id="opdlabservice">
+						<table class="table table-stripedtable-hover">
+							<thead>
+								<tr>
+									<th>Service Name</th>
+									<th>Rate</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($opddisplaycbcservices as $opddisplaycbcservice)
+								<tr>
+									<td>{{ $opddisplaycbcservice->service_description }}</td>
+									<td>{{ $opddisplaycbcservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($opddisplaydrugservices as $opddisplaydrugservice)
+								<tr>
+									<td>{{ $opddisplaydrugservice->service_description }}</td>
+									<td>{{ $opddisplaydrugservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($opddisplayurinalysisservices as $opddisplayurinalysisservice)
+								<tr>
+									<td>{{ $opddisplayurinalysisservice->service_description }}</td>
+									<td>{{ $opddisplayurinalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($opddisplayfecalysisservices as $opddisplayfecalysisservice)
+								<tr>
+									<td>{{ $opddisplayfecalysisservice->service_description }}</td>
+									<td>{{ $opddisplayfecalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+					<div class="table-responsive tab-pane fade in active" id="seniorlabservice">
+						<table class="table table-stripedtable-hover">
+							<thead>
+								<tr>
+									<th>Service Name</th>
+									<th>Rate</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($seniordisplaycbcservices as $seniordisplaycbcservice)
+								<tr>
+									<td>{{ $seniordisplaycbcservice->service_description }}</td>
+									<td>{{ $seniordisplaycbcservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($seniordisplaydrugservices as $seniordisplaydrugservice)
+								<tr>
+									<td>{{ $seniordisplaydrugservice->service_description }}</td>
+									<td>{{ $seniordisplaydrugservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($seniordisplayurinalysisservices as $seniordisplayurinalysisservice)
+								<tr>
+									<td>{{ $seniordisplayurinalysisservice->service_description }}</td>
+									<td>{{ $seniordisplayurinalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
+								@foreach($seniordisplayfecalysisservices as $seniordisplayfecalysisservice)
+								<tr>
+									<td>{{ $seniordisplayfecalysisservice->service_description }}</td>
+									<td>{{ $seniordisplayfecalysisservice->service_rate }}</td>
+								</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
@@ -411,6 +622,7 @@
 						</table>
 					</div>
 					<div class="table-responsive tab-pane" id="staffxrayservice">
+							<tbody>
 						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
@@ -418,7 +630,6 @@
 									<th>Rate</th>
 								</tr>
 							</thead>
-							<tbody>
 								@foreach($staffdisplayxrayservices as $staffdisplayxrayservice)
 								<tr>
 									<td>{{ $staffdisplayxrayservice->service_description }}</td>

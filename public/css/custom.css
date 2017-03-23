@@ -408,3 +408,8 @@ textarea {
 	height: 400px;
 	margin: 0 auto
 }
+
+.form-announcement {
+    display: inline-block; //Or display: inline; 
+   
+}
