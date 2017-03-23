@@ -1,20 +1,29 @@
 @extends('layouts.layout')
 @section('title', 'Announcements | UP Visayas Health Services Unit')
 @section('content')
-<div class="container">
+<div class="container-fluid" id="announcementScreen" style="background-color:#F0F0F0;height:100%;">
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-6 col-md-offset-3">
 			@if(count($announcements)>0)
 			<table class="table borderless" id="announcements_table">
 				<thead>
 			    <tr class="borderless">
-			      <th><h1>Announcements</h1>@if (session('status'))
-			      	<div class="alert alert-success alert-dismissable">
-			      		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-			      		{{ session('status') }}
-			      		<div><a href="/admin"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></div>
-			      	</div>
-			  		@endif</th>  
+			      <th>
+			      	<br>
+			      	<center>
+			      		<h1>Announcements</h1>
+			      		<h4>Today is {{  Carbon\Carbon::now()->formatLocalized('%A %B %d, %Y') }}</h4>
+			      		<i class="fa fa-bullhorn fa-4x"></i>
+			      		
+			      	</center>
+				      @if (session('status'))
+				      	<div class="alert alert-success alert-dismissable">
+				      		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				      		{{ session('status') }}
+				      		<div><a href="/admin"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></div>
+				      	</div>
+				  		@endif
+			  		</th>  
 			    </tr>
 			  </thead> 
 			  <tbody>
@@ -24,8 +33,8 @@
 			    		<div class="panel panel-default">
 							  <div class="panel-body">
 							  	<div style="float:right;">
-					      		<a class="see_more_announcement btn btn-info" id="see_more_announcement_{{ $announcement->id }}"><i class="fa fa-caret-down fa-2x"></i></a>
-					      		<a class="hide_announcement btn btn-info" id="hide_announcement_{{ $announcement->id }}" style="display:none; "><i class="fa fa-caret-up fa-2x"></i></a>
+					      		<a class="see_more_announcement btn btn-info" id="see_more_announcement_{{ $announcement->id }}" style="background-color:#990000;border-color:#800000;"><i class="fa fa-caret-down fa-2x"></i></a>
+					      		<a class="hide_announcement btn btn-info" id="hide_announcement_{{ $announcement->id }}" style="display:none;background-color:#990000;border-color:#800000;"><i class="fa fa-caret-up fa-2x"></i></a>
 					      	</div>
 					      	<h3>{{ $announcement->announcement_title }}</h3><br/>
 					      	posted on <span class="announcement_date">{{ Carbon\Carbon::parse($announcement->created_at)->toDayDateTimeString() }}</span><br/><br/>

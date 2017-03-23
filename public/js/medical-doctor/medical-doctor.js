@@ -649,13 +649,17 @@ $('.addBillingToMedical').click(function(){
 							}
 							var fin = 0;
 							$('.checkboxMedicalService').click(function(){
-								if ($(this).is(':checked')){
-									var medicalBillRate = parseFloat($(this).attr('id'));
-									fin = parseFloat(fin+medicalBillRate);
-									$("#medical-bill").val(fin);
-									console.log(fin);
-								};
-							});
+				        if ($(this).is(':checked')){
+				          var medicalBillRate = parseFloat($(this).attr('id'));
+				          fin = parseFloat(fin+medicalBillRate);
+				          $("#medical-bill").val(fin);
+				        }
+				        else{
+				          var medicalBillRate = parseFloat($(this).attr('id'));
+				          fin = parseFloat(fin-medicalBillRate);
+				          $("#medical-bill").val(fin);
+				        }
+				      });
 				    });
 			  	}
 			  	else{
@@ -678,13 +682,17 @@ $('.addBillingToMedical').click(function(){
 						}
 						var fin = 0;
 						$('.checkboxMedicalService').click(function(){
-							if ($(this).is(':checked')){
-								var medicalBillRate = parseFloat($(this).attr('id'));
-								fin = parseFloat(fin+medicalBillRate);
-								$("#medical-bill").val(fin);
-								console.log(fin);
-							};
-						});
+			        if ($(this).is(':checked')){
+			          var medicalBillRate = parseFloat($(this).attr('id'));
+			          fin = parseFloat(fin+medicalBillRate);
+			          $("#medical-bill").val(fin);
+			        }
+			        else{
+			          var medicalBillRate = parseFloat($(this).attr('id'));
+			          fin = parseFloat(fin-medicalBillRate);
+			          $("#medical-bill").val(fin);
+			        }
+			      });
 					}
 					$('#medicalBillingModal').modal();
 		  }
@@ -695,11 +703,12 @@ $(document).on('click', '.medical-bill-confirm-button', function(){
 	var appointmentId = $(this).attr('id').split('_')[1];
 	checked_services_array_id=[];
 	checked_services_array_rate=[];
-	$("input:checkbox").each(function(){
-	    var $this = $(this);
-	    if($this.is(":checked")){
-	        checked_services_array_id.push($this.attr("value"));
-	        checked_services_array_rate.push($this.attr("id"));
+	$("input:checkbox .checkedMedicalServices").each(function(){
+	    var checkedMedicalServices = $(this);
+	    console.log(checkedMedicalServices);
+	    if(checkedMedicalServices.is(":checked")){
+        checked_services_array_id.push(checkedMedicalServices.attr("value"));
+        checked_services_array_rate.push(checkedMedicalServices.attr("id"));
 	    }
 	});
 	$.ajax({

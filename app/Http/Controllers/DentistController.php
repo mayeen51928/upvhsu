@@ -1766,17 +1766,16 @@ class DentistController extends Controller
 
 	public function confirmbillingdental(Request $request){		
 		$appointment_id = $request->appointment_id;
-		$ps = $request->checked_services_array_id;
-		$ls = $request->checked_services_array_rate;
-		for($i=0; $i < sizeof($ps); $i++){
+		$checked_services_array_id = $request->checked_services_array_id;
+		$checked_services_array_rate = $request->checked_services_array_rate;
+		for($i=0; $i < sizeof($checked_services_array_id); $i++){
 		    $billing = new DentalBilling;
-				$billing->dental_service_id = $ps[$i];
+				$billing->dental_service_id = $checked_services_array_id[$i];
         $billing->appointment_id = $appointment_id;
         $billing->status = 'unpaid';
-        $billing->amount = $ls[$i];
+        $billing->amount = $checked_services_array_rate[$i];
         $billing->save();
 		}
-
 		DB::table('dental_appointments')
 		      ->where('id', $appointment_id)
 		      ->update(['status' => '1']);

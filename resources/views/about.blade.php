@@ -52,7 +52,15 @@
 		<center>
 			<br>
 			<i class="fa fa-phone fa-3x" aria-hidden="true"></i>
-			<h3>Contact us</h3>
+			<h3>Contact Us</h3>
+			Tel : <b>+32(0) 1636 009</b><br>
+			Fax : <b>+32(0) 1636 009</b><br>
+			<div class="col-md-4 col-md-offset-4">
+				<i class="fa fa-facebook-square fa-2x" aria-hidden="true"></i>
+				<i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+				<i class="fa fa-google-plus-square fa-2x" aria-hidden="true"></i>
+				<i class="fa fa-youtube-square fa-2x" aria-hidden="true"></i>
+			</div>
 		</center>
 	</div>
 </div>
@@ -86,7 +94,7 @@
 								@foreach($studentdisplaymedicalservices as $studentdisplaymedicalservice)
 								<tr>
 									<td>{{ $studentdisplaymedicalservice->service_description }}</td>
-									<td>{{ $studentdisplaymedicalservice->service_rate }}</td>
+									<td>Php {{ $studentdisplaymedicalservice->service_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -104,7 +112,7 @@
 								@foreach($facultydisplaymedicalservices as $facultydisplaymedicalservice)
 								<tr>
 									<td>{{ $facultydisplaymedicalservice->service_description }}</td>
-									<td>{{ $facultydisplaymedicalservice->service_rate }}</td>
+									<td>Php {{ $facultydisplaymedicalservice->service_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -122,7 +130,7 @@
 								@foreach($staffdisplaymedicalservices as $staffdisplaymedicalservice)
 								<tr>
 									<td>{{ $staffdisplaymedicalservice->service_description }}</td>
-									<td>{{ $staffdisplaymedicalservice->service_rate }}</td>
+									<td>Php {{ $staffdisplaymedicalservice->service_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -282,7 +290,7 @@
 						</table>
 					</div>
 					<div class="table-responsive tab-pane" id="opddentalservice">
-						<table class="table table-stripedtable-hover">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Service Name</th>
@@ -300,7 +308,7 @@
 						</table>
 					</div>
 					<div class="table-responsive tab-pane" id="seniordentalservice">
-						<table class="table table-stripedtable-hover">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Service Name</th>
@@ -344,7 +352,7 @@
 				</ul>
 				<div class="tab-content">
 					<div class="table-responsive tab-pane fade in active" id="studentlabservice">
-						<table class="table table-stripedtable-hover">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Service Name</th>
@@ -380,7 +388,7 @@
 						</table>
 					</div>
 					<div class="table-responsive tab-pane" id="facultylabservice">
-						<table class="table table-stripedtable-hover">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Service Name</th>
@@ -416,7 +424,7 @@
 						</table>
 					</div>
 					<div class="table-responsive tab-pane fade in active" id="stafflabservice">
-						<table class="table table-stripedtable-hover">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Service Name</th>
@@ -452,7 +460,7 @@
 						</table>
 					</div>
 					<div class="table-responsive tab-pane fade in active" id="dependentlabservice">
-						<table class="table table-stripedtable-hover">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Service Name</th>
@@ -488,7 +496,7 @@
 						</table>
 					</div>
 					<div class="table-responsive tab-pane fade in active" id="opdlabservice">
-						<table class="table table-stripedtable-hover">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Service Name</th>
@@ -524,7 +532,7 @@
 						</table>
 					</div>
 					<div class="table-responsive tab-pane fade in active" id="seniorlabservice">
-						<table class="table table-stripedtable-hover">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Service Name</th>

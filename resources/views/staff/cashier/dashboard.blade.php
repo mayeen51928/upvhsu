@@ -113,17 +113,18 @@
 										</tr>
 									</thead>
 									<tbody>
-										@foreach($unpaid_bills_medical as $unpaid_bill_medical)
-										<tr id="add_medical_billing_tr_{{$unpaid_bill_medical->medical_appointment_id}}">
-											@if($counter_medical>0)
-												<td>{{ $unpaid_bill_medical->patient_first_name }} {{ $unpaid_bill_medical->patient_last_name }}</td>
-												<td>{{ $unpaid_bill_medical->schedule_day }}</td>
-												<td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{$unpaid_bill_medical->medical_appointment_id}}_{{$unpaid_bill_medical->amount}}">Pay Bill</button></td>
-											@else
-												<td>No billing record at this moment.</td>
-											@endif
-										</tr>
-										@endforeach
+										@if(count($unpaid_bills_medical) > 0)
+											@foreach($unpaid_bills_medical as $unpaid_bill_medical)
+											<tr id="add_medical_billing_tr_{{$unpaid_bill_medical->medical_appointment_id}}"><td>{{ $unpaid_bill_medical->patient_first_name }} {{ $unpaid_bill_medical->patient_last_name }}</td>
+													<td>{{ $unpaid_bill_medical->schedule_day }}</td>
+													<td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{$unpaid_bill_medical->medical_appointment_id}}_{{$unpaid_bill_medical->amount}}">Pay Bill</button></td>
+											</tr>
+											@endforeach
+										@else
+											<tr>
+												<td colspan="3">No billing record at the moment.</td>
+											</tr>
+										@endif
 									</tbody>
 								</table>
 				      </div>
@@ -145,17 +146,19 @@
 										</tr>
 									</thead>
 									<tbody>
+										@if ($counter_dental>0)
 										@foreach($unpaid_bills_dental as $unpaid_bill_dental)
-										<tr id="add_dental_billing_tr_{{$unpaid_bill_dental->appointment_id}}">
-											@if ($counter_dental>0)
-												<td>{{ $unpaid_bill_dental->patient_first_name }} {{ $unpaid_bill_dental->patient_last_name }}</td>
-												<td>{{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_start)->format('g:i:s a') }} - {{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_end)->format('g:i:s a') }}</td>
-												<td><button class="btn btn-primary btn-xs addDentalBilling" id="add_dental_billing_{{$unpaid_bill_dental->appointment_id}}_{{$unpaid_bill_dental->amount}}">Pay Bill</button></td>
-											@else
-												<td>No billing record at this moment.</td>
-											@endif
-										</tr>
+											<tr id="add_dental_billing_tr_{{$unpaid_bill_dental->appointment_id}}">
+													<td>{{ $unpaid_bill_dental->patient_first_name }} {{ $unpaid_bill_dental->patient_last_name }}</td>
+													<td>{{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_start)->format('g:i:s a') }} - {{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_end)->format('g:i:s a') }}</td>
+													<td><button class="btn btn-primary btn-xs addDentalBilling" id="add_dental_billing_{{$unpaid_bill_dental->appointment_id}}_{{$unpaid_bill_dental->amount}}">Pay Bill</button></td>
+											</tr>
 										@endforeach
+										@else
+										<tr>
+											<td colspan="3">No billing record at this moment.</td>
+										</tr>
+										@endif
 									</tbody>
 								</table>
 				      </div>

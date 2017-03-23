@@ -91,13 +91,17 @@ $('.addBillingToXray').click(function(){
 					}
 					var fin = 0;
 					$('.checkboxXrayService').click(function(){
-						if ($(this).is(':checked')){
-							var xrayBillRate = parseFloat($(this).attr('id'));
-							fin = parseFloat(fin+xrayBillRate);
-							$("#xray-bill").val(fin);
-							console.log(fin);
-						};
-					});
+		        if ($(this).is(':checked')){
+		          var xrayBillRate = parseFloat($(this).attr('id'));
+		          fin = parseFloat(fin+xrayBillRate);
+		          $("#xray-bill").val(fin);
+		        }
+		        else{
+		          var xrayBillRate = parseFloat($(this).attr('id'));
+		          fin = parseFloat(fin-xrayBillRate);
+		          $("#xray-bill").val(fin);
+		        }
+		      });
 		    });
 	  	}
 
@@ -121,13 +125,17 @@ $('.addBillingToXray').click(function(){
 				}
 				var fin = 0;
 				$('.checkboxXrayService').click(function(){
-					if ($(this).is(':checked')){
-						var xrayBillRate = parseFloat($(this).attr('id'));
-						fin = parseFloat(fin+xrayBillRate);
-						$("#xray-bill").val(fin);
-						console.log(fin);
-					};
-				});
+	        if ($(this).is(':checked')){
+	          var xrayBillRate = parseFloat($(this).attr('id'));
+	          fin = parseFloat(fin+xrayBillRate);
+	          $("#xray-bill").val(fin);
+	        }
+	        else{
+	          var xrayBillRate = parseFloat($(this).attr('id'));
+	          fin = parseFloat(fin-xrayBillRate);
+	          $("#xray-bill").val(fin);
+	        }
+	      });
 			}
 			$('#xrayBillingModal').modal();
 	  }
@@ -138,11 +146,11 @@ $(document).on('click', '.xray-bill-confirm-button', function(){
 	var appointmentId = $(this).attr('id').split('_')[1];
 	checked_services_array_id=[];
 	checked_services_array_rate=[];
-	$("input:checkbox").each(function(){
-	    var $this = $(this);
-	    if($this.is(":checked")){
-	        checked_services_array_id.push($this.attr("value"));
-	        checked_services_array_rate.push($this.attr("id"));
+	$("input:checkbox.checkboxXrayService").each(function(){
+	    var dentalServiceCheckbox = $(this);
+	    if(dentalServiceCheckbox.is(":checked")){
+	        checked_services_array_id.push(dentalServiceCheckbox.attr("value"));
+	        checked_services_array_rate.push(dentalServiceCheckbox.attr("id"));
 	    }
 	});
 	$.ajax({
