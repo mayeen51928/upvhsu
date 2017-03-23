@@ -424,10 +424,10 @@ $(document).on('click', '.lab-bill-confirm-button', function(){
 	checked_services_array_id=[];
 	checked_services_array_rate=[];
 	$("input:checkbox.checkboxLabService").each(function(){
-			var dentalServiceCheckbox = $(this);
-			if(dentalServiceCheckbox.is(":checked")){
-					checked_services_array_id.push(dentalServiceCheckbox.attr("value"));
-					checked_services_array_rate.push(dentalServiceCheckbox.attr("id"));
+			var labServiceCheckbox = $(this);
+			if(labServiceCheckbox.is(":checked")){
+					checked_services_array_id.push(labServiceCheckbox.attr("value"));
+					checked_services_array_rate.push(labServiceCheckbox.attr("id"));
 			}
 	});
 	$.post('/confirm_billing_lab',
