@@ -122,6 +122,7 @@ Route::post('/confirm_billing_xray','XrayController@confirmbillingxray');
 
 /* ROUTES FOR CASHIER ACCOUNT */
 Route::get('/cashier','CashierController@dashboard');
+Route::post('/appointmentstatus', 'CashierController@appointmentstatus');
 Route::get('/cashier/profile','CashierController@profile');
 Route::get('/cashier/profile/edit','CashierController@editprofile');
 Route::post('/cashier/profile/update','CashierController@updateprofile');
