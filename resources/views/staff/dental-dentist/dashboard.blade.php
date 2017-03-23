@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="tile-stats">
-						<div id="dentistcontainer" style="min-width: 310px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+						<div id="dentistcontainer" style="min-width: 310px; height: 350px; max-width: 600px; margin: 0 auto"></div>
 						<input type="hidden" id="dentistdashboard" value="1"/>
 					</div>
 				</div>
@@ -57,6 +57,7 @@
 					 @else
 					<p>There are no online appointments as of the moment.</p>
 				@endif
+				<div class="text-center">{{ $dental_appointments_today->links() }} </div>
 				</div>
 				<div class="table-responsive tab-pane fade" id="futureappointment">
 				@if(count($dental_appointments_future) > 0)
