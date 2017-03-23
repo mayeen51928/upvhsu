@@ -695,11 +695,11 @@ $(document).on('click', '.medical-bill-confirm-button', function(){
 	var appointmentId = $(this).attr('id').split('_')[1];
 	checked_services_array_id=[];
 	checked_services_array_rate=[];
-	$("input:checkbox").each(function(){
-	    var $this = $(this);
-	    if($this.is(":checked")){
-	        checked_services_array_id.push($this.attr("value"));
-	        checked_services_array_rate.push($this.attr("id"));
+	$(".checkboxMedicalService input:checkbox").each(function(){
+	    var checkedTextbox = $(this);
+	    if(checkedTextbox.is(":checked")){
+	        checked_services_array_id.push(checkedTextbox.attr("value"));
+	        checked_services_array_rate.push(checkedTextbox.attr("id"));
 	    }
 	});
 	$.ajax({

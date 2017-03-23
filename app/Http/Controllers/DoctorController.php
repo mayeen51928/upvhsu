@@ -938,15 +938,16 @@ class DoctorController extends Controller
 
 	public function confirmbillingmedical(Request $request){		
 		$appointment_id = $request->appointment_id;
-		$ps = $request->checked_services_array_id;
-		$ls = $request->checked_services_array_rate;
-		for($i=0; $i < sizeof($ps); $i++){
+		$service_id = $request->checked_services_array_id;
+		$service_rate = $request->checked_services_array_rate;
+		// dd(sizeof($service_id));
+		for($i=0; $i < sizeof($service_id); $i++){
 		    $billing = new MedicalBilling;
-				$billing->medical_service_id = $ps[$i];
-        $billing->medical_appointment_id = $appointment_id;
-        $billing->status = 'unpaid';
-        $billing->amount = $ls[$i];
-        $billing->save();
+		    $billing->medical_service_id = $service_id[$i];
+		    $billing->medical_appointment_id = $appointment_id;
+		    $billing->status = 'unpaid';
+		    $billing->amount = $service_rate[$i];
+		    $billing->save();
 		}
 		MedicalAppointment::where('id', $appointment_id)->update(['status' => '1']);
 		return response()->json(['success' => 'success']); 

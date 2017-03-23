@@ -11,15 +11,6 @@
 		<img src="{{asset('images/blankprofpic.png')}}" height="50" width="50" class="img-circle"/> 
 		@endif
 		Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
-		{{-- <div class="row placeholders">
-			<div class="col-xs-3 col-sm-3 col-md-3 placeholder">
-				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-			</div>
-			<div class="col-xs-9 col-sm-9 col-md-9 placeholder">
-				Info here
-			</div>
-		</div>
-		<h2 class="sub-header">Billings</h2> --}}
 		<ul class="nav nav-tabs">
       <li><a data-toggle="tab" href="#pastappointment">Past</a></li>
       <li class="active"><a data-toggle="tab" href="#todayappointment">Today</a></li>
@@ -29,8 +20,10 @@
 			<div class="tab-pane fade in active" id="todayappointment">
 				<div class="row">
 					<div class="col-md-6">
-					<!-- Chart goes here -->
-					</div>
+					<div class="tile-stats">
+					<input type="hidden" id="cashiergraphtrigger" value="1"/>
+					<div id="cashierdashboard" style="height: 500px"></div>
+					</div></div>
 					<div class="col-md-6" style="font-size: 10px">
 						<div class="panel panel-default">
 							<div class="panel-heading">Medical Billing</div>
@@ -53,10 +46,10 @@
 							        <td>Total Patients Paid</td>
 							        <td>{{ $medical_paid_count }}</td>
 							      </tr> 
-							      <tr class="warning">
+							      {{-- <tr class="warning">
 							        <td>Total Patients Unpaid</td>
 							        <td>{{ $medical_unpaid_count }}</td>
-							      </tr> 
+							      </tr>  --}}
 							    </tbody>  
 						  	</table>
 						  </div>
@@ -82,10 +75,10 @@
 							        <td>Total Patients Paid</td>
 							        <td>{{ $dental_paid_count }}</td>
 							      </tr> 
-							      <tr class="warning">
+							      {{-- <tr class="warning">
 							        <td>Total Patients Unpaid</td>
 							        <td>{{ $dental_unpaid_count }}</td>
-							      </tr> 
+							      </tr>  --}}
 							    </tbody>  
 						  	</table>
 						  </div>
@@ -102,8 +95,10 @@
 				      <div class="panel-heading">Medical Billing</div>
 				      <div class="panel-body">
 				      	<h5>Receivable Amount:</h5>
-				      	<input type="text" class="form-control" id="receivable_medical" value="{{ $receivable_medical->amount }}" disabled>
+				      	<div class="well"><p id="receivable_medical">{{ $receivable_medical->amount }}&nbsp;</p></div>
+				      	{{-- <input type="text" class="form-control" id="receivable_medical" value="" disabled> --}}
 				      	<hr>
+				      	@if(count($unpaid_bills_medical)>0)
 				      	<table class="table table-striped">
 									<thead>
 										<tr>
@@ -117,7 +112,7 @@
 										<tr id="add_medical_billing_tr_{{$unpaid_bill_medical->medical_appointment_id}}">
 											@if($counter_medical>0)
 												<td>{{ $unpaid_bill_medical->patient_first_name }} {{ $unpaid_bill_medical->patient_last_name }}</td>
-												<td>{{ $unpaid_bill_medical->schedule_day }}</td>
+												<td>{{date_format(date_create($unpaid_bill_medical->schedule_day), 'F j, Y')}}</td>
 												<td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{$unpaid_bill_medical->medical_appointment_id}}_{{$unpaid_bill_medical->amount}}">Pay Bill</button></td>
 											@else
 												<td>No billing record at this moment.</td>
@@ -126,6 +121,7 @@
 										@endforeach
 									</tbody>
 								</table>
+								@endif
 				      </div>
 				    </div>
 					</div>
@@ -134,8 +130,10 @@
 							<div class="panel-heading">Dental Billing</div>
 				      <div class="panel-body">
 				      	<h5>Receivable Amount:</h5>
-				      	<input type="text" class="form-control" id="receivable_dental" value="{{ $receivable_dental->amount }}" disabled>
+				      	<div class="well"><p id="receivable_dental">{{ $receivable_dental->amount }}&nbsp;</p></div>
+				      	{{-- <input type="text" class="form-control" id="receivable_dental" value="{{ $receivable_dental->amount }}" disabled> --}}
 				      	<hr>
+				      	@if(count($unpaid_bills_dental)>0)
 				      	<table class="table table-striped">
 									<thead>
 										<tr>
@@ -149,7 +147,7 @@
 										<tr id="add_dental_billing_tr_{{$unpaid_bill_dental->appointment_id}}">
 											@if ($counter_dental>0)
 												<td>{{ $unpaid_bill_dental->patient_first_name }} {{ $unpaid_bill_dental->patient_last_name }}</td>
-												<td>{{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_start)->format('g:i:s a') }} - {{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_end)->format('g:i:s a') }}</td>
+												<td>{{ date_format(date_create($unpaid_bill_dental->schedule_start),'h:i A') }} - {{ date_format(date_create($unpaid_bill_dental->schedule_end),'h:i A') }}</td>
 												<td><button class="btn btn-primary btn-xs addDentalBilling" id="add_dental_billing_{{$unpaid_bill_dental->appointment_id}}_{{$unpaid_bill_dental->amount}}">Pay Bill</button></td>
 											@else
 												<td>No billing record at this moment.</td>
@@ -158,6 +156,7 @@
 										@endforeach
 									</tbody>
 								</table>
+								@endif
 				      </div>
 						</div>
 				    </div>

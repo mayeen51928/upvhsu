@@ -1,5 +1,48 @@
 $(document).ready( function(){
 // ------------------DASHBOARD---------------
+function cashierhighcharts(){
+// 	Highcharts.setOptions({
+//     colors: ['#058DC7', '#50B432', '#800000']
+// });
+	$.post('/appointmentstatus', {}, function(data, textStatus, xhr) {
+		Highcharts.chart('cashierdashboard', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+
+    title: {
+        text: 'Status of Today\'s Appointments'
+    },
+    // subtitle: {
+    //     text: '3D donut in Highcharts'
+    // },
+    plotOptions: {
+        pie: {
+            innerSize: 80,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Number of Appointments',
+        data: [
+            ['Billed/Unpaid', data['unpaid']],
+            ['Unbilled', data['unbilled']],
+            ['Paid', data['paid']]
+        ]
+    }]
+});
+	});
+	
+
+}
+if($('#cashiergraphtrigger').val()==1)
+{
+	cashierhighcharts();
+}
 	$('.addMedicalBilling').click(function(){
 		buttonIdMedical = $(this).attr('id');
 		var id = ($(this).attr('id').split('_'));
@@ -33,8 +76,8 @@ $(document).ready( function(){
 					success: function(data)
 					{
 						$("#add_medical_billing_tr_"+appointmentIdMedical).remove();
-						medicalVal = $('#receivable_medical').val() - amountMedical;
-						$('#receivable_medical').val(medicalVal.toFixed(2));
+						medicalVal = $('#receivable_medical').html() - amountMedical;
+						$('#receivable_medical').html(medicalVal.toFixed(2));
 						$('#confirm_medical_billing').modal('hide');	
 					}
 		});
@@ -72,8 +115,8 @@ $(document).ready( function(){
 					success: function(data)
 					{
 						$("#add_dental_billing_tr_"+appointmentIdDental).remove();
-						dentalVal = $('#receivable_dental').val() - amountDental;
-						$('#receivable_dental').val(dentalVal.toFixed(2));
+						dentalVal = $('#receivable_dental').html() - amountDental;
+						$('#receivable_dental').html(dentalVal.toFixed(2));
 						$('#confirm_dental_billing').modal('hide');	
 					}
 		});
