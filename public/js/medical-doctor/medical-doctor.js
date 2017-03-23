@@ -556,7 +556,7 @@ $('.addMedicalRecordButton').click(function() {
 								$('#create-medical-record-modal').modal("hide");
 							}
 						);
-					highchartsfunc();
+					
 				});
 			}
 			$('#create-medical-record-modal').modal().delay(500);
@@ -710,6 +710,7 @@ $(document).on('click', '.medical-bill-confirm-button', function(){
 		  {
 		  	$('#medicalBillingModal').modal("hide");
 		  	$('#addBillingToMedical_'+appointmentId).closest("tr").remove();
+		  	highchartsfunc();
 		  }
   	});
 	return false;

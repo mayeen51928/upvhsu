@@ -11,7 +11,7 @@
 		<img src="{{asset('images/blankprofpic.png')}}" height="50" width="50" class="img-circle"/> 
 		@endif
 		Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
-		<div class="row placeholders">
+		{{-- <div class="row placeholders">
 			<div class="col-xs-3 col-sm-3 col-md-3 placeholder">
 				<img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
 			</div>
@@ -19,7 +19,7 @@
 				Info here
 			</div>
 		</div>
-		<h2 class="sub-header">Billings</h2>
+		<h2 class="sub-header">Billings</h2> --}}
 		<ul class="nav nav-tabs">
       <li><a data-toggle="tab" href="#pastappointment">Past</a></li>
       <li class="active"><a data-toggle="tab" href="#todayappointment">Today</a></li>
@@ -31,7 +31,7 @@
 					<div class="col-md-6">
 					<!-- Chart goes here -->
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6" style="font-size: 10px">
 						<div class="panel panel-default">
 							<div class="panel-heading">Medical Billing</div>
 						  <div class="panel-body">
@@ -68,29 +68,29 @@
 						  		<tbody>
 							      <tr class="active">
 							        <td>Total Patients Today</td>
-							        <td>{{ $medical_patient_count }}</td>
+							        <td>{{ $dental_patient_count }}</td>
 							      </tr> 
 							      <tr class="danger">
 							        <td>Total Patients Unbilled</td>
-							        <td>{{ $medical_unbilled_count }}</td>
+							        <td>{{ $dental_unbilled_count }}</td>
 							      </tr>  
 							      <tr class="success">
 							        <td>Total Patients Billed</td>
-							        <td>{{ $medical_billed_count }}</td>
+							        <td>{{ $dental_billed_count }}</td>
 							      </tr> 
 							      <tr class="info">
 							        <td>Total Patients Paid</td>
-							        <td>{{ $medical_paid_count }}</td>
+							        <td>{{ $dental_paid_count }}</td>
 							      </tr> 
 							      <tr class="warning">
 							        <td>Total Patients Unpaid</td>
-							        <td>{{ $medical_unpaid_count }}</td>
+							        <td>{{ $dental_unpaid_count }}</td>
 							      </tr> 
 							    </tbody>  
 						  	</table>
 						  </div>
 						</div>
-						<form action="/cashier/billingtoday" method="POST">{{ csrf_field() }}<input type="submit" class="btn btn-primary btn-block" value="View Today's Patient"></form>
+						<form action="/cashier/billingtoday" method="POST">{{ csrf_field() }}<input type="submit" class="btn btn-primary btn-block" value="View Today's Patients"></form>
 					</div>
 				</div>
 				
