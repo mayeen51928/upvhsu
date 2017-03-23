@@ -9,7 +9,10 @@ use App\Staff;
 use App\Town;
 use App\Province;
 use App\MedicalBilling;
+use App\DentalBilling;
 use App\MedicalSchedule;
+use App\MedicalAppointment;
+use App\DentalAppointment;
 use DB;
 class CashierController extends Controller
 {
@@ -48,11 +51,52 @@ class CashierController extends Controller
 			$counter_medical++;
 	  }
 
+	  $unpaid_bills_dental = DB::table('dental_billings')
+	  	->join('dental_appointments', 'dental_appointments.id', '=', 'dental_billings.appointment_id')
+	  	->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')
+	  	->join('staff_info', 'staff_info.staff_id', '=', 'dental_schedules.staff_id')
+			->join('patient_info', 'patient_info.patient_id', '=', 'dental_appointments.patient_id')
+	  	->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'dental_schedules.schedule_start', 'dental_schedules.schedule_end', DB::raw('dental_billings.appointment_id, sum(dental_billings.amount) as amount'))
+			->groupBy(DB::raw('dental_billings.appointment_id, patient_info.patient_first_name, patient_info.patient_last_name, staff_info.staff_first_name, staff_info.staff_last_name, dental_schedules.schedule_start, dental_schedules.schedule_end'))
+			->where('dental_billings.status', '=', 'unpaid')
+			->whereDate('dental_schedules.schedule_start', '<', date('Y-m-d'))
+			->get();
+
+		$receivable_dental = DentalBilling::selectRaw('sum(amount) as amount')->where('status','unpaid')->first();
+	  $counter_dental = 0;
+	  if(count($unpaid_bills_dental)>0){
+			$counter_dental++;
+	  }
+
+	  $medical_patient_count = MedicalAppointment::join('medical_schedules','medical_appointments.medical_schedule_id','medical_schedules.id')->where('schedule_day', date('Y-m-d'))->get()->count();
+	  $medical_billed_count = MedicalAppointment::join('medical_schedules','medical_appointments.medical_schedule_id','medical_schedules.id')->where('schedule_day', date('Y-m-d'))->where('status', '1')->get()->count();
+	  $medical_unbilled_count = MedicalAppointment::join('medical_schedules','medical_appointments.medical_schedule_id','medical_schedules.id')->where('schedule_day', date('Y-m-d'))->where('status', '0')->get()->count();
+	  $medical_paid_count = MedicalAppointment::join('medical_schedules','medical_appointments.medical_schedule_id','medical_schedules.id')->where('schedule_day', date('Y-m-d'))->where('status', '2')->get()->count();
+	  $medical_unpaid_count = $medical_billed_count - $medical_paid_count;
+
+	  $dental_patient_count = DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDay('dental_schedules.schedule_start', date('Y-m-d'))->get()->count();
+	  $dental_billed_count = DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDay('dental_schedules.schedule_start', date('Y-m-d'))->where('status', '1')->get()->count();
+ 		$dental_unbilled_count = DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDay('dental_schedules.schedule_start', date('Y-m-d'))->where('status', '0')->get()->count();
+ 		$dental_paid_count = DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDay('dental_schedules.schedule_start', date('Y-m-d'))->where('status', '2')->get()->count();
+		$dental_unpaid_count = $dental_billed_count - $dental_paid_count;
+
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
 		$params['counter_medical'] = $counter_medical;
 		$params['receivable_medical'] = $receivable_medical;
-		return view('staff.cashier.dashboard', $params, compact('unpaid_bills_medical'));
+		$params['counter_dental'] = $counter_dental;
+		$params['receivable_dental'] = $receivable_dental;
+		$params['medical_patient_count'] = $medical_patient_count;
+		$params['dental_patient_count'] = $dental_patient_count;
+		$params['medical_billed_count'] = $medical_billed_count;
+		$params['dental_billed_count'] = $dental_billed_count;
+		$params['medical_unbilled_count'] = $medical_unbilled_count;
+		$params['dental_unbilled_count'] = $dental_unbilled_count;
+		$params['medical_paid_count'] = $medical_paid_count;
+		$params['dental_paid_count'] = $dental_paid_count;
+		$params['medical_unpaid_count'] = $medical_unpaid_count;
+		$params['dental_unpaid_count'] = $dental_unpaid_count;
+		return view('staff.cashier.dashboard', $params, compact('unpaid_bills_medical', 'unpaid_bills_dental'));
 	}
 
 	public function billingtoday()
@@ -71,7 +115,18 @@ class CashierController extends Controller
 			->where('medical_schedules.schedule_day', '=', date('Y-m-d'))
 			->get();
 
-		return view('staff.cashier.billingtoday', $params, compact('unpaid_bills_medical_today'));
+		$unpaid_bills_dental_today = DB::table('dental_billings')
+	  	->join('dental_appointments', 'dental_appointments.id', '=', 'dental_billings.appointment_id')
+	  	->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')
+	  	->join('staff_info', 'staff_info.staff_id', '=', 'dental_schedules.staff_id')
+			->join('patient_info', 'patient_info.patient_id', '=', 'dental_appointments.patient_id')
+	  	->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'dental_schedules.schedule_start', 'dental_schedules.schedule_end', DB::raw('dental_billings.appointment_id, sum(dental_billings.amount) as amount'))
+			->groupBy(DB::raw('dental_billings.appointment_id, patient_info.patient_first_name, patient_info.patient_last_name, staff_info.staff_first_name, staff_info.staff_last_name, dental_schedules.schedule_start, dental_schedules.schedule_end'))
+			->where('dental_billings.status', '=', 'unpaid')
+			->whereDate('dental_schedules.schedule_start', '=', date('Y-m-d'))
+			->get();
+
+		return view('staff.cashier.billingtoday', $params, compact('unpaid_bills_medical_today', 'unpaid_bills_dental_today'));
 	}
 
 	public function profile()
@@ -208,11 +263,27 @@ class CashierController extends Controller
 		return response()->json(['display_medical_billing' => $display_medical_billing ]);
 	}
 
+	public function displaydentalbilling(Request $request)
+	{
+		$display_dental_billing = DB::table('dental_billings')
+				->join('dental_services', 'dental_services.id', '=', 'dental_billings.dental_service_id')
+				->where('dental_billings.appointment_id', '=', $request->appointment_id)
+				->get();    
+		return response()->json(['display_dental_billing' => $display_dental_billing ]);
+	}
+
+
 	public function confirmmedicalbilling(Request $request)
 	{
-		DB::table('medical_billings')
-			->where('medical_appointment_id', $request->appointment_id)
-			->update(['status' => 'paid']);
+		// MedicalBilling::where('medical_appointment_id', $request->appointment_id)->update(['status' => 'paid']);
+		// MedicalAppointment::where('id', $request->appointment_id)->update(['status' => '2']);
+		return response()->json(['success' => 'success']); 
+	}
+
+	public function confirmdentalbilling(Request $request)
+	{
+		// MedicalBilling::where('medical_appointment_id', $request->appointment_id)->update(['status' => 'paid']);
+		// MedicalAppointment::where('id', $request->appointment_id)->update(['status' => '2']);
 		return response()->json(['success' => 'success']); 
 	}
 }

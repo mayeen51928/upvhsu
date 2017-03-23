@@ -154,20 +154,20 @@ $('.updateDentalRecord').click(function(){
 	
 });
 
-$('.dental_chart').mouseover(function(){
-    var id = $(this).attr('id').split("_");
-    var teethId = id[1];
-    var type = id[0];
-    $.ajax({
-    	type: "POST",
-    	url: hoverDentalChart,
-    	data: {teeth_id:  teethId, type:  type, _token: token},
-    	success: function(data)
-    	{
-    		$('#'+data['type']+'_'+data['id']).effect( "pulsate", {times:1}, 1000 );
-    	}
-    });
-});
+// $('.dental_chart').mouseover(function(){
+//     var id = $(this).attr('id').split("_");
+//     var teethId = id[1];
+//     var type = id[0];
+//     $.ajax({
+//     	type: "POST",
+//     	url: hoverDentalChart,
+//     	data: {teeth_id:  teethId, type:  type, _token: token},
+//     	success: function(data)
+//     	{
+//     		$('#'+data['type']+'_'+data['id']).effect( "pulsate", {times:1}, 1000 );
+//     	}
+//     });
+// });
 
 
 

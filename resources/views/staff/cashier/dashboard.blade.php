@@ -33,34 +33,64 @@
 					</div>
 					<div class="col-md-6">
 						<div class="panel panel-default">
+							<div class="panel-heading">Medical Billing</div>
 						  <div class="panel-body">
-						  	<table class="table">
+						  	<table class="table table">
 						  		<tbody>
 							      <tr class="active">
 							        <td>Total Patients Today</td>
-							        <td>20</td>
+							        <td>{{ $medical_patient_count }}</td>
 							      </tr> 
 							      <tr class="danger">
 							        <td>Total Patients Unbilled</td>
-							        <td>10</td>
+							        <td>{{ $medical_unbilled_count }}</td>
 							      </tr>  
 							      <tr class="success">
 							        <td>Total Patients Billed</td>
-							        <td>10</td>
+							        <td>{{ $medical_billed_count }}</td>
 							      </tr> 
 							      <tr class="info">
 							        <td>Total Patients Paid</td>
-							        <td>5</td>
+							        <td>{{ $medical_paid_count }}</td>
 							      </tr> 
 							      <tr class="warning">
 							        <td>Total Patients Unpaid</td>
-							        <td>5</td>
+							        <td>{{ $medical_unpaid_count }}</td>
 							      </tr> 
 							    </tbody>  
 						  	</table>
-						  	<form action="/cashier/billingtoday" method="POST">{{ csrf_field() }}<input type="submit" class="btn btn-primary btn-block" value="View Today's Patient"></form>
 						  </div>
 						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">Dental Billing</div>
+						  <div class="panel-body">
+						  	<table class="table table">
+						  		<tbody>
+							      <tr class="active">
+							        <td>Total Patients Today</td>
+							        <td>{{ $medical_patient_count }}</td>
+							      </tr> 
+							      <tr class="danger">
+							        <td>Total Patients Unbilled</td>
+							        <td>{{ $medical_unbilled_count }}</td>
+							      </tr>  
+							      <tr class="success">
+							        <td>Total Patients Billed</td>
+							        <td>{{ $medical_billed_count }}</td>
+							      </tr> 
+							      <tr class="info">
+							        <td>Total Patients Paid</td>
+							        <td>{{ $medical_paid_count }}</td>
+							      </tr> 
+							      <tr class="warning">
+							        <td>Total Patients Unpaid</td>
+							        <td>{{ $medical_unpaid_count }}</td>
+							      </tr> 
+							    </tbody>  
+						  	</table>
+						  </div>
+						</div>
+						<form action="/cashier/billingtoday" method="POST">{{ csrf_field() }}<input type="submit" class="btn btn-primary btn-block" value="View Today's Patient"></form>
 					</div>
 				</div>
 				
@@ -71,7 +101,8 @@
 						<div class="panel panel-success">
 				      <div class="panel-heading">Medical Billing</div>
 				      <div class="panel-body">
-				      	<h4>Receivable Amount:	<b>{{ $receivable_medical->amount }}</b></h4>
+				      	<h5>Receivable Amount:</h5>
+				      	<input type="text" class="form-control" id="receivable_medical" value="{{ $receivable_medical->amount }}" disabled>
 				      	<hr>
 				      	<table class="table table-striped">
 									<thead>
@@ -87,7 +118,7 @@
 											@if ($counter_medical>0)
 												<td>{{ $unpaid_bill_medical->patient_first_name }} {{ $unpaid_bill_medical->patient_last_name }}</td>
 												<td>{{ $unpaid_bill_medical->schedule_day }}</td>
-												<td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{ $unpaid_bill_medical->medical_appointment_id }}_{{ $unpaid_bill_medical->amount }}">Pay Bill</button></td>
+												<td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{$unpaid_bill_medical->medical_appointment_id}}_{{$unpaid_bill_medical->amount}}">Pay Bill</button></td>
 											@else
 												<td>No billing record at this moment.</td>
 											@endif
@@ -102,7 +133,8 @@
 						<div class="panel panel-success">
 							<div class="panel-heading">Dental Billing</div>
 				      <div class="panel-body">
-				      	<h4>Receivable Amount:	<b></b></h4>
+				      	<h5>Receivable Amount:</h5>
+				      	<input type="text" class="form-control" id="receivable_dental" value="{{ $receivable_dental->amount }}" disabled>
 				      	<hr>
 				      	<table class="table table-striped">
 									<thead>
@@ -113,11 +145,17 @@
 										</tr>
 									</thead>
 									<tbody>
+										@foreach($unpaid_bills_dental as $unpaid_bill_dental)
 										<tr>
-											<td>No billing record at this moment.</td>
-											<!-- <td></td>
-											<td><button class="btn btn-primary btn-xs addMedicalBilling">Pay Bill</button></td>
- -->										</tr>
+											@if ($counter_dental>0)
+												<td>{{ $unpaid_bill_dental->patient_first_name }} {{ $unpaid_bill_dental->patient_last_name }}</td>
+												<td>{{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_start)->format('g:i:s a') }} - {{ Carbon\Carbon::parse($unpaid_bill_dental->schedule_end)->format('g:i:s a') }}</td>
+												<td><button class="btn btn-primary btn-xs addDentalBilling" id="add_dental_billing_{{$unpaid_bill_dental->appointment_id}}_{{$unpaid_bill_dental->amount}}">Pay Bill</button></td>
+											@else
+												<td>No billing record at this moment.</td>
+											@endif
+										</tr>
+										@endforeach
 									</tbody>
 								</table>
 				      </div>
@@ -132,35 +170,64 @@
 
 <!-- MODALS -->
 <div class="modal fade" id="confirm_medical_billing" role="dialog">
-<div class="modal-dialog">
-	<!-- Modal content-->
-	<div class="modal-content">
-		<div class="modal-header">
-			<h4 class="modal-title">Confirm Payment?</h4>
-		</div>
-		<div class="modal-body">
-			<table id="displayMedicalBillingTableModal" class="table" style="display: none">
-				<tbody id="displayMedicalBillingModal">
-				</tbody>
-			</table>
-		<div class="row">
-			<div class="col-md-6 col-md-offset-6">
-				<label>Total</label>
-				<input type="text" id="display_amount_modal" class="form-control" disabled>
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Confirm Payment?</h4>
 			</div>
-		</div>
-		</div>
-		<div class="modal-footer text-center">
-			<button type="button" class="btn btn-primary" id="addMedicalBillingButton">Confirm</button>
-			<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			<div class="modal-body">
+				<table id="displayMedicalBillingTableModal" class="table" style="display: none">
+					<tbody id="displayMedicalBillingModal">
+					</tbody>
+				</table>
+			<div class="row">
+				<div class="col-md-6 col-md-offset-6">
+					<label>Total</label>
+					<input type="text" id="display_amount_modal_medical" class="form-control" disabled>
+				</div>
+			</div>
+			</div>
+			<div class="modal-footer text-center">
+				<button type="button" class="btn btn-primary" id="addMedicalBillingButton">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			</div>
 		</div>
 	</div>
 </div>
 
+<div class="modal fade" id="confirm_dental_billing" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Confirm Payment?</h4>
+			</div>
+			<div class="modal-body">
+				<table id="displayDentalBillingTableModal" class="table" style="display: none">
+					<tbody id="displayDentalBillingModal">
+					</tbody>
+				</table>
+			<div class="row">
+				<div class="col-md-6 col-md-offset-6">
+					<label>Total</label>
+					<input type="text" id="display_amount_modal_dental" class="form-control" disabled>
+				</div>
+			</div>
+			</div>
+			<div class="modal-footer text-center">
+				<button type="button" class="btn btn-primary" id="addDentalBillingButton">Confirm</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
 <script>
 	// token and createPostUrl are needed to be passed to AJAX method call
 	var token = '{{csrf_token()}}';
 	var confirmMedicalBilling = '/confirm_medical_billing';
 	var displayMedicalBilling = '/display_medical_billing';
+	var confirmDentalBilling = '/confirm_dental_billing';
+	var displayDentalBilling = '/display_dental_billing';
 </script>
 @endsection

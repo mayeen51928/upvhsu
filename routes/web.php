@@ -128,6 +128,8 @@ Route::post('/cashier/profile/update','CashierController@updateprofile');
 Route::get('/cashier/searchpatient','CashierController@searchpatient');
 Route::post('/confirm_medical_billing','CashierController@confirmmedicalbilling');
 Route::post('/display_medical_billing','CashierController@displaymedicalbilling');
+Route::post('/confirm_dental_billing','CashierController@confirmdentalbilling');
+Route::post('/display_dental_billing','CashierController@displaydentalbilling');
 Route::post('/cashier/billingtoday','CashierController@billingtoday');
 
 /* ROUTES FOR ADMIN ACCOUNT */

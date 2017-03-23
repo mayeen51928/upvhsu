@@ -1095,7 +1095,7 @@ class DatabaseSeeder extends Seeder
 		DB::table('dental_services')->insert([
 			'service_description' => 'Tooth Extraction',
 			'service_rate' => '0',
-			'patient_type_id' => '1',
+			'patient_type_id' => '5',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Temporary Tooth',
@@ -1130,57 +1130,57 @@ class DatabaseSeeder extends Seeder
 		DB::table('dental_services')->insert([
 			'service_description' => 'Consultation',
 			'service_rate' => '160',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Oral Prophylaxis',
 			'service_rate' => '0',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Slight to Moderate Calcular Deposits',
 			'service_rate' => '200',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Heavy Calcular Deposits',
 			'service_rate' => '240',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Tooth Extraction',
 			'service_rate' => '0',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Temporary Tooth',
 			'service_rate' => '160',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Permanent Tooth',
 			'service_rate' => '240',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Filling',
 			'service_rate' => '0',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Temporary Filling',
 			'service_rate' => '120',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Permanent Filling',
 			'service_rate' => '140',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('dental_services')->insert([
 			'service_description' => 'Cementation',
 			'service_rate' => '120',
-			'patient_type_id' => '1',
+			'patient_type_id' => '6',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Platelet Count',

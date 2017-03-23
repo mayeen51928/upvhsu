@@ -938,11 +938,7 @@ class DoctorController extends Controller
         $billing->amount = $ls[$i];
         $billing->save();
 		}
-
-		DB::table('medical_appointments')
-		      ->where('id', $appointment_id)
-		      ->update(['status' => '1']);
-
+		MedicalAppointment::where('id', $appointment_id)->update(['status' => '1']);
 		return response()->json(['success' => 'success']); 
 	}
 }

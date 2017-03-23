@@ -307,7 +307,11 @@ class LabController extends Controller
 				$billing->amount = $ls[$i];
 				$billing->save();
 		}
-		MedicalAppointment::where('id', $appointment_id)->update(['status' => '1']);
+		CbcResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
+		FecalysisResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
+		UrinalysisResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
+		DrugTestResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
+
 		return response()->json(['success' => 'success']); 
 	}
 

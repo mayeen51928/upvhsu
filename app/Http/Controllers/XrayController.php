@@ -116,6 +116,7 @@ class XrayController extends Controller
 	        $billing->amount = $ls[$i];
 	        $billing->save();
 		}
+		ChestXrayResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
 		return response()->json(['success' => 'success']); 
 	}
 
