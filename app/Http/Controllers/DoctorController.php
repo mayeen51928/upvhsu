@@ -701,6 +701,10 @@ class DoctorController extends Controller
 		$medical_appointment->patient_id = $request->patient_id;
 		$medical_appointment->medical_schedule_id = $medical_schedule_id;
 		$medical_appointment->reasons = 'Walk-in patient';
+		if($request->requestCBC == 'on' || $request->requestUrinalysis == 'on' || $request->requestFecalysis == 'on' || $request->requestDrugTest == 'on' || $request->requestXray == 'on')
+        {
+        	$medical_appointment->has_lab_or_xray_request = '1';
+        }
 		$medical_appointment->save();
 
 		$medical_appointment_id = MedicalAppointment::where('medical_schedule_id', $medical_schedule_id)->where('patient_id', $request->patient_id)->first()->id;
@@ -781,6 +785,12 @@ class DoctorController extends Controller
         $physical_examination->skin = $request->skin;
         $physical_examination->extremities = $request->extremities;
         $physical_examination->save();
+        if($request->request_cbc == 'yes' || $request->request_urinalysis == 'yes' || $request->request_fecalysis == 'yes' || $request->request_drug_test == 'yes' || $request->request_xray == 'yes')
+        {
+        	$medical_appointment = MedicalAppointment::find($request->appointment_id);
+        	$medical_appointment->has_lab_or_xray_request = '1';
+        	$medical_appointment->update();
+        }
         if($request->request_cbc == 'yes')
         {
             $cbc = new CbcResult;

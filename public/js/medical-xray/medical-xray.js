@@ -60,6 +60,7 @@ $('.addBillingToXray').click(function(){
 	    var dayDiff = Math.ceil(today - dob) / (1000 * 60 * 60 * 24 * 365);
 	    var age = parseInt(dayDiff);
 	  	if(data['patient_type_id'] == 5 && age>59){
+	  		console.log(data['display_xray_services_senior']);
 	  		console.log("Patient is an OPD");
 	  		$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
 	  		$('.medical_senior_checker_xray').show();
