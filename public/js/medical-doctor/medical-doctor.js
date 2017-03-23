@@ -703,20 +703,12 @@ $(document).on('click', '.medical-bill-confirm-button', function(){
 	var appointmentId = $(this).attr('id').split('_')[1];
 	checked_services_array_id=[];
 	checked_services_array_rate=[];
-<<<<<<< HEAD
-	$("input:checkbox .checkedMedicalServices").each(function(){
-	    var checkedMedicalServices = $(this);
-	    console.log(checkedMedicalServices);
-	    if(checkedMedicalServices.is(":checked")){
-        checked_services_array_id.push(checkedMedicalServices.attr("value"));
-        checked_services_array_rate.push(checkedMedicalServices.attr("id"));
-=======
-	$(".checkboxMedicalService input:checkbox").each(function(){
-	    var checkedTextbox = $(this);
-	    if(checkedTextbox.is(":checked")){
-	        checked_services_array_id.push(checkedTextbox.attr("value"));
-	        checked_services_array_rate.push(checkedTextbox.attr("id"));
->>>>>>> 3d5f2c450f93f2ac73cd434c02ee51287c028bef
+	$("input:checkbox.checkboxMedicalService").each(function(){
+	    var medicalServiceCheckbox = $(this);
+	    console.log(medicalServiceCheckbox);
+	    if(medicalServiceCheckbox.is(":checked")){
+        checked_services_array_id.push(medicalServiceCheckbox.attr("value"));
+        checked_services_array_rate.push(medicalServiceCheckbox.attr("id"));
 	    }
 	});
 	$.ajax({
