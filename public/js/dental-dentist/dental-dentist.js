@@ -63,6 +63,7 @@ $('#staffnotesdentist').keyup(function() {
 		});
 	// }
 });
+
 $('.dental_chart').click(function(){
 	var id = $(this).attr('id').split("_");
 	teethId = id[1];
@@ -72,14 +73,21 @@ $('.dental_chart').click(function(){
 		  data: {teeth_id:  teethId, _token: token},
 		  success: function(data)
 		  {
-				if (data['status'] == 1) {
-					$('.condition').val(data['condition_id']);
-					$('.operation').val(data['operation_id']);
-				}
-				else{
-					$('.condition').val(0);
-					$('.operation').val(0);
-				}
+		  	console.log(data['condition_id']);
+		  	console.log(data['operation_id']);
+		  	if (data['condition_id'] != null) {
+		  		$('.condition').val(data['condition_id']);
+		  	}
+		  	else{
+		  		$('.condition').val(0);
+		  	}
+		  	if(data['operation_id'] != null){
+		  		$('.operation').val(data['operation_id']);
+		  	}
+		  	else{
+		  		$('.operation').val(0);
+		  	}
+				
 		  }
 	  });
 		window.setTimeout(function(){
@@ -97,10 +105,10 @@ $('.updateDentalRecord').click(function(){
 		var operationId = $('.operation').val();
 		if (operationId == null) { operationId = 0; };
 		if (conditionId == null) { conditionId = 0; };
-		console.log(teethId);
-		console.log(conditionId);
-		console.log(operationId);
-		console.log(appointmentId);
+		// console.log(teethId);
+		// console.log(conditionId);
+		// console.log(operationId);
+		// console.log(appointmentId);
 		$.ajax({
 			  type: "POST",
 			  url: insertDentalRecordModal,

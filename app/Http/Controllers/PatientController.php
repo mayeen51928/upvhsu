@@ -19,6 +19,8 @@ use App\HasGuardian;
 use App\MedicalAppointment;
 use App\MedicalSchedule;
 use App\Prescription;
+use App\DentalRecord;
+use App\AdditionalDentalRecord;
 use Illuminate\Support\Facades\Input;
 class PatientController extends Controller
 {
@@ -388,544 +390,168 @@ class PatientController extends Controller
 		$stacks_operation = array();
 		for ($x = 55; $x >= 51; $x--)
 		{
-		$dental_chart_results = DB::table('dental_records')
-				->orderBy('created_at', 'desc')
-					->where('teeth_id', '=', $x)
-					->pluck('condition_id')
-					->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#ff4000";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ffff00";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#00ff00";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#00ffff";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#0000ff";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_condition, $dental_chart_results);
-
-
-			$dental_chart_results = DB::table('dental_records')
-			->orderBy('created_at', 'desc')
-				->where('teeth_id', '=', $x)
-				->pluck('operation_id')
-				->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#bf00ff";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ff0080";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#ff0000";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#808080";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#194d19";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_operation, $dental_chart_results);
-		}
-
-		$stacks_condition2 = array();
-		$stacks_operation2 = array();
+	    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+	  	if(count($dental_chart_results) == 0){
+	  		$condition_id = 6;
+	  		$operation_id = 6;
+	  	}
+	  	else{
+	  		$condition_id = $dental_chart_results->condition_id;
+	  		$operation_id = $dental_chart_results->operation_id;
+	  	}
+	  	array_push($stacks_condition, $condition_id);
+	  	array_push($stacks_operation, $operation_id);
+	  }
 		for ($x = 61; $x <= 65; $x++)
 		{
-	    $dental_chart_results = DB::table('dental_records')
-	    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-			    ->orderBy('dental_records.created_at', 'desc')
-					->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-					->pluck('condition_id')
-					->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#ff4000";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ffff00";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#00ff00";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#00ffff";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#0000ff";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_condition2, $dental_chart_results);
-
-
-			$dental_chart_results = DB::table('dental_records')
-			->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-		    ->orderBy('dental_records.created_at', 'desc')
-				->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-				->pluck('operation_id')
-				->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#bf00ff";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ff0080";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#ff0000";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#808080";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#194d19";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_operation2, $dental_chart_results);
-		}
-
-		$stacks_condition3 = array();
-		$stacks_operation3 = array();
+			$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+	  	if(count($dental_chart_results) == 0){
+	  		$condition_id = 6;
+	  		$operation_id = 6;
+	  	}
+	  	else{
+	  		$condition_id = $dental_chart_results->condition_id;
+	  		$operation_id = $dental_chart_results->operation_id;
+	  	}
+	  	array_push($stacks_condition, $condition_id);
+	  	array_push($stacks_operation, $operation_id);
+	  }
 		for ($x = 18; $x >= 11; $x--)
 		{
-	    $dental_chart_results = DB::table('dental_records')
-	    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-			    ->orderBy('dental_records.created_at', 'desc')
-					->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-					->pluck('condition_id')
-					->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#ff4000";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ffff00";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#00ff00";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#00ffff";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#0000ff";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_condition3, $dental_chart_results);
-
-
-			$dental_chart_results = DB::table('dental_records')
-			->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-		    ->orderBy('dental_records.created_at', 'desc')
-				->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-				->pluck('operation_id')
-				->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#bf00ff";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ff0080";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#ff0000";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#808080";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#194d19";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_operation3, $dental_chart_results);
-		}
-
-		$stacks_condition4 = array();
-		$stacks_operation4 = array();
+			$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+	  	if(count($dental_chart_results) == 0){
+	  		$condition_id = 6;
+	  		$operation_id = 6;
+	  	}
+	  	else{
+	  		$condition_id = $dental_chart_results->condition_id;
+	  		$operation_id = $dental_chart_results->operation_id;
+	  	}
+	  	array_push($stacks_condition, $condition_id);
+	  	array_push($stacks_operation, $operation_id);
+	  }
 		for ($x = 21; $x <= 28; $x++)
 		{
-	    $dental_chart_results = DB::table('dental_records')
-	    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-			    ->orderBy('dental_records.created_at', 'desc')
-					->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-					->pluck('condition_id')
-					->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#ff4000";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ffff00";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#00ff00";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#00ffff";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#0000ff";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_condition4, $dental_chart_results);
-
-
-			$dental_chart_results = DB::table('dental_records')
-			->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-		    ->orderBy('dental_records.created_at', 'desc')
-				->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-				->pluck('operation_id')
-				->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#bf00ff";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ff0080";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#ff0000";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#808080";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#194d19";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_operation4, $dental_chart_results);
+	    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+	    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+	  	if(count($dental_chart_results) == 0){
+	  		$condition_id = 6;
+	  		$operation_id = 6;
+	  	}
+	  	else{
+	  		$condition_id = $dental_chart_results->condition_id;
+	  		$operation_id = $dental_chart_results->operation_id;
+	  	}
+	  	array_push($stacks_condition, $condition_id);
+	  	array_push($stacks_operation, $operation_id);
 		}
-
-		$stacks_condition5 = array();
-		$stacks_operation5 = array();
 		for ($x = 48; $x >= 41; $x--)
 		{
-	    $dental_chart_results = DB::table('dental_records')
-	    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-			    ->orderBy('dental_records.created_at', 'desc')
-					->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-					->pluck('condition_id')
-					->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#ff4000";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ffff00";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#00ff00";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#00ffff";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#0000ff";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_condition5, $dental_chart_results);
-
-
-			$dental_chart_results = DB::table('dental_records')
-			->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-		    ->orderBy('dental_records.created_at', 'desc')
-				->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-				->pluck('operation_id')
-				->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#bf00ff";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ff0080";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#ff0000";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#808080";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#194d19";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_operation5, $dental_chart_results);
+	    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+			$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+	  	if(count($dental_chart_results) == 0){
+	  		$condition_id = 6;
+	  		$operation_id = 6;
+	  	}
+	  	else{
+	  		$condition_id = $dental_chart_results->condition_id;
+	  		$operation_id = $dental_chart_results->operation_id;
+	  	}
+	  	array_push($stacks_condition, $condition_id);
+	  	array_push($stacks_operation, $operation_id);
 		}
-
-		$stacks_condition6 = array();
-		$stacks_operation6 = array();
 		for ($x = 31; $x <= 38; $x++)
 		{
-	    $dental_chart_results = DB::table('dental_records')
-	    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-			    ->orderBy('dental_records.created_at', 'desc')
-					->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-					->pluck('condition_id')
-					->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#ff4000";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ffff00";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#00ff00";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#00ffff";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#0000ff";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_condition6, $dental_chart_results);
-
-
-			$dental_chart_results = DB::table('dental_records')
-			->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-		    ->orderBy('dental_records.created_at', 'desc')
-				->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-				->pluck('operation_id')
-				->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#bf00ff";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ff0080";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#ff0000";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#808080";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#194d19";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_operation6, $dental_chart_results);
+	  	$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+			$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+	  	if(count($dental_chart_results) == 0){
+	  		$condition_id = 6;
+	  		$operation_id = 6;
+	  	}
+	  	else{
+	  		$condition_id = $dental_chart_results->condition_id;
+	  		$operation_id = $dental_chart_results->operation_id;
+	  	}
+	  	array_push($stacks_condition, $condition_id);
+	  	array_push($stacks_operation, $operation_id);
 		}
-
-		$stacks_condition7 = array();
-		$stacks_operation7 = array();
 		for ($x = 85; $x >= 81; $x--)
 		{
-	    $dental_chart_results = DB::table('dental_records')
-	    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-			    ->orderBy('dental_records.created_at', 'desc')
-					->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-					->pluck('condition_id')
-					->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#ff4000";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ffff00";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#00ff00";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#00ffff";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "0000ff";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_condition7, $dental_chart_results);
-
-
-			$dental_chart_results = DB::table('dental_records')
-			->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-		    ->orderBy('dental_records.created_at', 'desc')
-				->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-				->pluck('operation_id')
-				->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#bf00ff";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ff0080";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#ff0000";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#808080";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#194d19";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_operation7, $dental_chart_results);
+	  	$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+			$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+	  	if(count($dental_chart_results) == 0){
+	  		$condition_id = 6;
+	  		$operation_id = 6;
+	  	}
+	  	else{
+	  		$condition_id = $dental_chart_results->condition_id;
+	  		$operation_id = $dental_chart_results->operation_id;
+	  	}
+	  	array_push($stacks_condition, $condition_id);
+	  	array_push($stacks_operation, $operation_id);
 		}
-
-		$stacks_condition8 = array();
-		$stacks_operation8 = array();
 		for ($x = 71; $x <= 75; $x++)
 		{
-	    $dental_chart_results = DB::table('dental_records')
-	    		->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-			    ->orderBy('dental_records.created_at', 'desc')
-					->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-					->pluck('condition_id')
-					->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#ff4000";
+			$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+			$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+	  	if(count($dental_chart_results) == 0){
+	  		$condition_id = 6;
+	  		$operation_id = 6;
+	  	}
+	  	else{
+	  		$condition_id = $dental_chart_results->condition_id;
+	  		$operation_id = $dental_chart_results->operation_id;
+	  	}
+	  	array_push($stacks_condition, $condition_id);
+	  	array_push($stacks_operation, $operation_id);
+		}
+		$stacks_condition_color = array();
+		$stacks_operation_color = array();
+		foreach ($stacks_condition as $stack_condition) {
+			if($stack_condition == 1){
+				array_push($stacks_condition_color, "#ff4000");
 			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ffff00";
+			elseif($stack_condition == 2){
+				array_push($stacks_condition_color, "#ffff00");
 			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#00ff00";
+			elseif($stack_condition == 3){
+				array_push($stacks_condition_color, "#00ff00");
 			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#00ffff";
+			elseif($stack_condition == 4){
+				array_push($stacks_condition_color, "#00ffff");	
 			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#0000ff";
-			}
-			else{
-				$dental_chart_results = "white";
-			}
-			array_push($stacks_condition8, $dental_chart_results);
-
-
-			$dental_chart_results = DB::table('dental_records')
-			->join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')
-		    ->orderBy('dental_records.created_at', 'desc')
-				->where([
-						['teeth_id', '=', $x],
-						['patient_id', '=', $patient_id],
-					])
-				->pluck('operation_id')
-				->first();
-
-			if($dental_chart_results == 1){
-				$dental_chart_results = "#bf00ff";
-			}
-			elseif($dental_chart_results == 2){
-				$dental_chart_results = "#ff0080";
-			}
-			elseif($dental_chart_results == 3){
-				$dental_chart_results = "#ff0000";
-			}
-			elseif($dental_chart_results == 4){
-				$dental_chart_results = "#808080";
-			}
-			elseif($dental_chart_results == 5){
-				$dental_chart_results = "#194d19";
+			elseif($stack_condition == 5){
+				array_push($stacks_condition_color, "#0000ff");
 			}
 			else{
-				$dental_chart_results = "white";
+				array_push($stacks_condition_color, "white");
 			}
-			array_push($stacks_operation8, $dental_chart_results);
 		}
 
-		$additional_dental_records = DB::table('additional_dental_records')
-				->where('appointment_id', '=', $appointment_id)
-				->first();
-
-		return response()->json([
-			'stacks_condition' => $stacks_condition, 
-			'stacks_operation' => $stacks_operation,
-			'stacks_condition2' => $stacks_condition2, 
-			'stacks_operation2' => $stacks_operation2,
-			'stacks_condition3' => $stacks_condition3, 
-			'stacks_operation3' => $stacks_operation3,
-			'stacks_condition4' => $stacks_condition4, 
-			'stacks_operation4' => $stacks_operation4,
-			'stacks_condition5' => $stacks_condition5, 
-			'stacks_operation5' => $stacks_operation5,
-			'stacks_condition6' => $stacks_condition6, 
-			'stacks_operation6' => $stacks_operation6,
-			'stacks_condition7' => $stacks_condition7, 
-			'stacks_operation7' => $stacks_operation7,
-			'stacks_condition8' => $stacks_condition8, 
-			'stacks_operation8' => $stacks_operation8,
-			'additional_dental_records' => $additional_dental_records,
-			]); 
+		foreach ($stacks_operation as $stack_operation) {
+			if($stack_operation == 1){
+				array_push($stacks_operation_color, "#bf00ff");
+			}
+			elseif($stack_operation == 2){
+				array_push($stacks_operation_color, "#ff0080");
+			}
+			elseif($stack_operation == 3){
+				array_push($stacks_operation_color, "#ff0000");
+			}
+			elseif($stack_operation == 4){
+				array_push($stacks_operation_color, "#808080");	
+			}
+			elseif($stack_operation == 5){
+				array_push($stacks_operation_color, "#194d19");
+			}
+			else{
+				array_push($stacks_operation_color, "white");
+			}
+		}
+		$additional_dental_records = AdditionalDentalRecord::where('appointment_id', '=', $appointment_id)->first();
+		if(count($additional_dental_records) == 0){
+			$additional_dental_records = "no_additional_record";
+ 		}
+		return response()->json(['stacks_condition_color' => $stacks_condition_color, 'stacks_operation_color' => $stacks_operation_color,'additional_dental_records' => $additional_dental_records]); 
 	}
 }

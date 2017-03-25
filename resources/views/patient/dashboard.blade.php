@@ -215,7 +215,7 @@
       			</div>
       		</div>
 
-      		<div class="table-responsive tab-pane fade in active" id="dental_billing_dashboard">
+      		<div class="table-responsive tab-pane" id="dental_billing_dashboard">
       			<div class="panel-group">
 					    <div class="panel panel-success">
 					      <div class="panel-heading">

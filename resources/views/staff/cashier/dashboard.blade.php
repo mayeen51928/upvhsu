@@ -109,11 +109,11 @@
 									</thead>
 									<tbody>
 									@foreach($unpaid_bills_medical as $unpaid_bill_medical)
-											<tr id="add_medical_billing_tr_{{$unpaid_bill_medical->medical_appointment_id}}"><td>{{ $unpaid_bill_medical->patient_first_name }} {{ $unpaid_bill_medical->patient_last_name }}</td>
-													<td>{{ date_format(date_create($unpaid_bill_medical->schedule_day), 'F j, Y')}}</td>
-													<td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{$unpaid_bill_medical->medical_appointment_id}}_{{$unpaid_bill_medical->amount}}">Pay Bill</button></td>
-											</tr>
-											@endforeach
+										<tr id="add_medical_billing_tr_{{$unpaid_bill_medical->medical_appointment_id}}"><td>{{ $unpaid_bill_medical->patient_first_name }} {{ $unpaid_bill_medical->patient_last_name }}</td>
+												<td>{{ date_format(date_create($unpaid_bill_medical->schedule_day), 'F j, Y')}}</td>
+												<td><button class="btn btn-primary btn-xs addMedicalBilling" id="add_medical_billing_{{$unpaid_bill_medical->medical_appointment_id}}_{{$unpaid_bill_medical->amount}}">Pay Bill</button></td>
+										</tr>
+									@endforeach
 									</tbody>
 								</table>
 								@endif

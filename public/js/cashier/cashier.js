@@ -77,7 +77,12 @@ if($('#cashiergraphtrigger').val()==1)
 					{
 						$("#add_medical_billing_tr_"+appointmentIdMedical).remove();
 						medicalVal = $('#receivable_medical').html() - amountMedical;
-						$('#receivable_medical').html(medicalVal.toFixed(2));
+						if(medicalVal == 0){
+							$('#receivable_medical').html('');
+						}
+						else{
+							$('#receivable_medical').html(medicalVal.toFixed(2));
+						}
 						$('#confirm_medical_billing').modal('hide');	
 					}
 		});
