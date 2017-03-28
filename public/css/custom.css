@@ -182,7 +182,7 @@
 	#homeJumbotron{
 		background-image: url(../images/infirm1.jpg);
 		background-size: cover;
-		height: 650px;
+		height: 690px;
 	}
 }
 
@@ -191,7 +191,7 @@
 	#homeJumbotron{
 		background-image: url(../images/infirm1.jpg);
 		background-size: cover;
-		height: 600px;
+		height: 660px;
 	}
 	.accountOption a{
 		margin-bottom: 8%;
