@@ -132,7 +132,7 @@
 		<div class="panel-content">
 			<ul>
 				@foreach($announcements as $announcement)
-				<li><a href="">{{ $announcement->announcement_title }}</a> (posted on {{ Carbon\Carbon::parse($announcement->created_at)->toDayDateTimeString() }})</li>
+				<li><a class="announcement_title" id="{{$announcement->id}}">{{ $announcement->announcement_title }}</a> (posted on {{ Carbon\Carbon::parse($announcement->created_at)->toDayDateTimeString() }})</li>
 				@endforeach
 				<a href="{{ url('/announcements') }}">View more...</a>
 			</ul>
@@ -189,6 +189,22 @@
 		<a class="text-muted">UP System</a> | 
 		<a class="text-muted">UP Visayas</a> | 
 		<a class="text-muted">UPCAT</a>
+	</div>
+</div>
+<div id="announcement_modal" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" id="announcementTitleModal"></h4>
+			</div>
+			<div class="modal-body" id="announcementBodyModal">
+				<p>Some text in the modal.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
 	</div>
 </div>
 @endsection

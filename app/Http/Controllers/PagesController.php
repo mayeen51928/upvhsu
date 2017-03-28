@@ -36,6 +36,12 @@ class PagesController extends Controller
 		$params['announcements'] = Announcement::take(6)->orderBy('created_at', 'desc')->get();
 		return view('index', $params);
 	}
+	public function announcementmodal(Request $request)
+	{
+		$announcement = Announcement::find($request->announcement_id);
+		return response()->json(['announcement' => $announcement]);
+
+	}
 
 	public function about()
 	{

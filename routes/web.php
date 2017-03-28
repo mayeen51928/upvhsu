@@ -15,6 +15,7 @@ Route::get('/', 'PagesController@index');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index');
+Route::post('/announcementmodal', 'PagesController@announcementmodal');
 Route::get('/about', 'PagesController@about');
 Route::get('/scheduleappointment', 'PagesController@scheduleappointment');
 Route::get('/announcements', 'PagesController@announcements');

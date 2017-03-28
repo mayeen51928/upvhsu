@@ -62,6 +62,15 @@ $(document).ready( function(){
       $('#password').attr('disabled', 'disabled');
   }
   });
+  $('.announcement_title').click(function(event) {
+    var announcementId = $(this).attr('id');
+    $.post('/announcementmodal', {announcement_id: announcementId}, function(data, textStatus, xhr) {
+      $('#announcementTitleModal').html(data['announcement']['announcement_title']);
+      $('#announcementBodyModal').html(data['announcement']['announcement_body']);
+      $('#announcement_modal').modal();
+    });
+    
+  });
 
   // --------------------- Staff Page -----------------------
   $('.medicalStaff .clickToShowSchedule').click(function() {
