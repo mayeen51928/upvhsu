@@ -6,7 +6,7 @@
 		<div class="col-md-6 col-md-offset-6">
 			<div class="col-md-12 homeForm">
 				<div class="panel-heading">
-					<img class="img-responsive" src="{{asset('images/upvweb_logo.png')}}"/>
+					<img class="img-responsive" src="{{asset('images/upvweb_logo1.png')}}"/>
 				</div>
 				<div class="panel-content homeFormBtn">
 					<p>Miagao Campus, Iloilo 5023</p>
@@ -17,7 +17,15 @@
 			</div>
 			<div class="col-md-12 homeForm">
 				<div class="panel-heading">
-					<img class="img-responsive" src="{{asset('images/upvweb_logo.png')}}"/>
+					{{-- <div class="row">
+						<div class="col-md-6">
+							<img class="img-responsive" src="{{asset('images/upvweb_logo2.png')}}"/>
+						</div> --}}
+						{{-- <div class="center-block"> --}}
+							<img class="img-responsive center-block" src="{{asset('images/upvweb_logo2.png')}}"/>
+						{{-- </div> --}}
+					{{-- </div> --}}
+					{{-- <h2><i class="fa fa-lock"></i> Login Panel</h2> --}}
 				</div>
 				@if(!Auth::check())
 				<div class="panel-content homeFormBtn">
