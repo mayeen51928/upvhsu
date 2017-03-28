@@ -189,7 +189,7 @@ class DoctorController extends Controller
         }
         
         if (Input::file('picture') != NULL) { 
-            $path = '..\public\images';
+            $path = 'images';
 			$file_name = Input::file('picture')->getClientOriginalName(); 
 			$file_name_fin = $doctor->staff_id.'_'.$file_name;
 			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);

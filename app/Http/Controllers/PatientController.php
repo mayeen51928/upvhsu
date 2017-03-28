@@ -238,7 +238,7 @@ class PatientController extends Controller
 		}
 
 		if (Input::file('picture') != NULL) { 
-			$path = '..\public\images';
+			$path = 'images';
 			$file_name = Input::file('picture')->getClientOriginalName(); 
 			Input::file('picture')->move($path, $file_name);
 			$patient->picture = $file_name;

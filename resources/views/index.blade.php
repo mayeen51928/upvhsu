@@ -128,7 +128,7 @@
 </div>
 <div class="container">
 	<div class="col-md-6 fadeShow">
-		<h1 class="h1Title" id="h1Title1"><span class="glyphicon glyphicon-bullhorn h3Icon"></span> Announcements</h1>
+		<h3 class="h1Title" id="h1Title1"><span class="glyphicon glyphicon-bullhorn h3Icon"></span> Announcements</h3>
 		<div class="panel-content">
 			<ul>
 				@foreach($announcements as $announcement)
@@ -138,8 +138,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="col-md-6">
-		<div class="col-md-6 fadeShow">
+	<div class="col-md-6 fadeShow">
 			<h3 class="h1Title" id="h1Title2"><span class="glyphicon glyphicon-plus-sign h3Icon"></span> Services</h3>
 			<div class="panel-content">
 				<ul>
@@ -163,9 +162,13 @@
 				</ul>
 			</div>
 		</div>
-		<div class="col-md-12 fadeShow">
+	<div class="col-md-6 fadeShow">
+		
+		<div class="col-md-12">
 			<h3 class="h1Title" id="h1Title4"><span class="glyphicon glyphicon-map-marker h3Icon"></span> Location</h3>
-			<iframe id="map" class="col-md-12" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7842.285803765714!2d122.2301799153447!3d10.646004606670068!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc19cd3690ea64d5f!2sUPV+Infirmary!5e0!3m2!1sen!2sph!4v1476282280584" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+			<div class=" google-maps">
+			<iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7842.285803765714!2d122.2301799153447!3d10.646004606670068!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc19cd3690ea64d5f!2sUPV+Infirmary!5e0!3m2!1sen!2sph!4v1476282280584" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+			</div>
 		</div>
 	</div>
 </div>

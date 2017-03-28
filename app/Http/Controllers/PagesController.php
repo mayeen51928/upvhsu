@@ -33,11 +33,8 @@ class PagesController extends Controller
 	public function index()
 	{
 		$params['navbar_active'] = 'home';
-		$announcements = DB::table('announcements')
-		->skip(0)
-		->take(3)
-		->get();
-		return view('index', $params, compact('announcements'));
+		$params['announcements'] = Announcement::take(6)->orderBy('created_at', 'desc')->get();
+		return view('index', $params);
 	}
 
 	public function about()

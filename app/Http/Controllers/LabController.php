@@ -431,7 +431,7 @@ class LabController extends Controller
 				}
 				$lab->personal_contact_number = $request->input('personal_contact_number');
 				if (Input::file('picture') != NULL) { 
-					$path = '..\public\images';
+					$path = 'images';
 					$file_name = Input::file('picture')->getClientOriginalName(); 
 					$file_name_fin = $lab->staff_id.'_'.$file_name;
 					$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);

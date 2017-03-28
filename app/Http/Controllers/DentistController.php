@@ -409,7 +409,7 @@ class DentistController extends Controller
 	        }
 
 	        if (Input::file('picture') != NULL) { 
-            $path = '..\public\images';
+            $path = 'images';
 						$file_name = Input::file('picture')->getClientOriginalName(); 
 						$file_name_fin = $dentist->staff_id.'_'.$file_name;
 						$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
