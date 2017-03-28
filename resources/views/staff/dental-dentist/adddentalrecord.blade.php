@@ -21,12 +21,71 @@
 					</div>
 				</div>
 			</div>  
-			<ul class="nav nav-pills nav-justified">
-				<li class="active"><a data-toggle="pill" href="#dentalchart">Dental Chart</a></li>
-				<li><a data-toggle="pill" href="#additionalrecord">Additional Dental Record</a></li>
+			<ul class="nav nav-tabs nav-justified">
+				<li class="active"><a data-toggle="tab" href="#servicesperformed">Tests Performed</a></li>
+				<li><a data-toggle="tab" href="#dentalchart">Dental Chart</a></li>
+				<li><a data-toggle="tab" href="#additionalrecord">Additional Dental Record</a></li>
 			</ul>
+			
 			<div class="tab-content">
-				<div class="row table-responsive tab-pane fade in active" id="dentalchart">
+				<div class="table-responsive tab-pane fade in active" id="servicesperformed">
+					<div class="col-md-5 col-md-offset-3">
+						<br/>
+						<table class="table table-bordered table-hover displayServices">
+							<tbody>
+								<tr>
+									<th></th>
+									<th>Service Description</th>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="1" disabled="disabled"></td>
+									<td class="dentalService">Consultation</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="2" disabled="disabled"></td>
+									<td class="dentalService">Oral Prophylaxis</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="3" disabled="disabled"></td>
+									<td class="dentalService">Slight to Moderate Calcular Deposits</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="4" disabled="disabled"></td>
+									<td class="dentalService">Heavy Calcular Deposits</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="5" disabled="disabled"></td>
+									<td class="dentalService">Tooth Extraction</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="6" disabled="disabled"></td>
+									<td class="dentalService">Temporary Tooth</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="7" disabled="disabled"></td>
+									<td class="dentalService">Permanent Tooth</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="8" disabled="disabled"></td>
+									<td class="dentalService">Filling</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="9" disabled="disabled"></td>
+									<td class="dentalService">Temporary Filling</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="10" disabled="disabled"></td>
+									<td class="dentalService">Permanent Filling</td>
+								</tr>
+								<tr>
+									<td><input type="checkbox" class="checkboxDentalService" id="0" value="11" disabled="disabled"></td>
+									<td class="dentalService">Cementation</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="row table-responsive tab-pane fade" id="dentalchart">
 					<div class="col-md-9 col-sm-12 col-xs-12">
 						<svg id="frame_svg" viewBox="0 0 867 545" >
 							<polygon class="dental_chart" id="operation_55" points="234,78,244,74,256,75,262,76,267,79,269,84,271,92,271,102,271,108,266,113,260,113,256,112,253,110,246,112,237,111,233,105,230,97,230,89,232,82,233,79" style="fill:{{ $stacks_operation_color[0] }};stroke:black;stroke-width:3" />

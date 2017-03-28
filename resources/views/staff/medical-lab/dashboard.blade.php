@@ -85,8 +85,8 @@
                     <td id="patient_name">{{$lab_request->patient_first_name}} {{$lab_request->patient_last_name}}</p></td>
                     <td>{{date_format(date_create($lab_request->schedule_day), 'F j, Y')}}</td>
                     <td>{{$lab_request->staff_first_name}} {{$lab_request->staff_last_name}}</td>
-                    <td><button class="btn btn-info btn-xs addLabResult" id="addLabResult_{{$lab_request->id}}">Diagnosis</button></td>
-                    <td><button class="btn btn-primary btn-xs addBillingToLab" id="addBillingToLab_{{$lab_request->id}}">Billing</button></td>
+                    <td><button class="btn btn-info btn-xs addLabResult" id="addLabResult_{{$lab_request->id}}">Details</button></td>
+                    {{-- <td><button class="btn btn-primary btn-xs addBillingToLab" id="addBillingToLab_{{$lab_request->id}}">Billing</button></td> --}}
                   </tr>
                   @endforeach
                 </tbody>
@@ -112,78 +112,113 @@
         <h4 class="modal-title">Lab Requests</h4>
       </div>
       <div class="modal-body">
-        <div class="laboratory-result-lab" id="laboratoryresult-lab"  style="padding:5px;">
-          <div class="row well" id="cbc_div">
-          <div class="col-md-2">COMPLETE BLOOD COUNT</div>
-          <div class="col-md-10">
-          <div class="form-group">
-            <label for="hemoglobin-lab">Hemoglobin:</label>
-            <textarea class="form-control" rows="2" name="hemoglobin-lab" id="hemoglobin-lab" required></textarea>
+        <div class="panel-group" id="labaccordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#labbillingaccordion">Tests Conducted</a>
+              </h4>
+            </div>
+            <div id="labbillingaccordion" class="panel-collapse collapse in">
+              <div class="panel-body">
+
+
+
+              {{-- PUT BILLING HERE --}}
+
+
+
+
+
+
+
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="hemasocrit-lab">Hemasocrit:</label>
-            <textarea class="form-control" rows="2" name="hemasocrit-lab" id="hemasocrit-lab" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="wbc-lab">WBC:</label>
-            <textarea class="form-control" rows="2" name="wbc-lab" id="wbc-lab" required></textarea>
-          </div>
-          </div>
-          </div>
-          <div class="row well" id="drug_test_div">
-          <div class="col-md-2">DRUG TEST</div>
-          <div class="col-md-10">
-          <div class="form-group">
-            <label for="drug-test-lab">Drug Test:</label>
-            <select class="form-control" required name="drug-test-lab" id="drug-test-lab">
-              <option disabled selected>Select Drug Test Result</option>
-              <option value="negative">Negative</option>
-              <option value="positive">Positive</option>
-            </select>
-          </div>
-          </div>
-          </div>
-          <div class="row well" id="fecalysis_div">
-          <div class="col-md-2">FECALYSIS</div>
-          <div class="col-md-10">
-          <div class="form-group">
-            <label for="macroscopic-lab">Macroscopic:</label>
-            <textarea class="form-control" rows="2" name="macroscopic-lab" id="macroscopic-lab" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="microscopic-lab">Microscopic (Parasites):</label>
-            <textarea class="form-control" rows="2" name="microscopic-lab" id="microscopic-lab" required></textarea>
-          </div>
-          </div>
-          </div>
-          <div class="row well" id="urinalysis_div">
-          <div class="col-md-2">URINALYSIS</div>
-          <div class="col-md-10">
-          <div class="form-group">
-            <label for="pus-cells-lab">Pus Cells:</label>
-            <textarea class="form-control" rows="2" name="pus-cells-lab" id="pus-cells-lab" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="rbc-lab">RBC:</label>
-            <textarea class="form-control" rows="2" name="rbc-lab" id="rbc-lab" required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="albumin-lab">Albumin:</label>
-            <select class="form-control" required  name="albumin-lab" id="albumin-lab">
-              <option disabled selected>Select Albumin Result</option>
-              <option value="negative">Negative</option>
-              <option value="positive">Positive</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="sugar-lab">Sugar:</label>
-            <select class="form-control" required  name="sugar-lab" id="sugar-lab">
-              <option disabled selected>Select Sugar Result</option>
-              <option value="negative">Negative</option>
-              <option value="positive">Positive</option>
-            </select>
-          </div>
-          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#labdiagnosisaccordion">Diagnosis</a>
+              </h4>
+            </div>
+            <div id="labdiagnosisaccordion" class="panel-collapse collapse">
+              <div class="panel-body">
+                <div class="laboratory-result-lab" id="laboratoryresult-lab"  style="padding:5px;">
+                  <div class="row well" id="cbc_div">
+                  <div class="col-md-2">COMPLETE BLOOD COUNT</div>
+                  <div class="col-md-10">
+                  <div class="form-group">
+                    <label for="hemoglobin-lab">Hemoglobin:</label>
+                    <textarea class="form-control" rows="2" name="hemoglobin-lab" id="hemoglobin-lab" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="hemasocrit-lab">Hemasocrit:</label>
+                    <textarea class="form-control" rows="2" name="hemasocrit-lab" id="hemasocrit-lab" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="wbc-lab">WBC:</label>
+                    <textarea class="form-control" rows="2" name="wbc-lab" id="wbc-lab" required></textarea>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="row well" id="drug_test_div">
+                  <div class="col-md-2">DRUG TEST</div>
+                  <div class="col-md-10">
+                  <div class="form-group">
+                    <label for="drug-test-lab">Drug Test:</label>
+                    <select class="form-control" required name="drug-test-lab" id="drug-test-lab">
+                      <option disabled selected>Select Drug Test Result</option>
+                      <option value="negative">Negative</option>
+                      <option value="positive">Positive</option>
+                    </select>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="row well" id="fecalysis_div">
+                  <div class="col-md-2">FECALYSIS</div>
+                  <div class="col-md-10">
+                  <div class="form-group">
+                    <label for="macroscopic-lab">Macroscopic:</label>
+                    <textarea class="form-control" rows="2" name="macroscopic-lab" id="macroscopic-lab" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="microscopic-lab">Microscopic (Parasites):</label>
+                    <textarea class="form-control" rows="2" name="microscopic-lab" id="microscopic-lab" required></textarea>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="row well" id="urinalysis_div">
+                  <div class="col-md-2">URINALYSIS</div>
+                  <div class="col-md-10">
+                  <div class="form-group">
+                    <label for="pus-cells-lab">Pus Cells:</label>
+                    <textarea class="form-control" rows="2" name="pus-cells-lab" id="pus-cells-lab" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="rbc-lab">RBC:</label>
+                    <textarea class="form-control" rows="2" name="rbc-lab" id="rbc-lab" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="albumin-lab">Albumin:</label>
+                    <select class="form-control" required  name="albumin-lab" id="albumin-lab">
+                      <option disabled selected>Select Albumin Result</option>
+                      <option value="negative">Negative</option>
+                      <option value="positive">Positive</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="sugar-lab">Sugar:</label>
+                    <select class="form-control" required  name="sugar-lab" id="sugar-lab">
+                      <option disabled selected>Select Sugar Result</option>
+                      <option value="negative">Negative</option>
+                      <option value="positive">Positive</option>
+                    </select>
+                  </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

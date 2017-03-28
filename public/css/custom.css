@@ -405,7 +405,7 @@ textarea {
 #admingraph{
 	min-width: 310px;
 	max-width: 800px;
-	height: 400px;
+	height: 388px;
 	margin: 0 auto
 }
 
@@ -444,3 +444,9 @@ textarea {
         width: 100% !important;
         height: 100% !important;
     }
+#labaccordion .panel-heading,
+#xrayaccordion .panel-heading,
+#medicalaccordion .panel-heading{
+  background-color: rgba(144, 31, 31, 0.98);
+  color: #fff;
+}

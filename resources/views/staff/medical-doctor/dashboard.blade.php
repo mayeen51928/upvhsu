@@ -28,7 +28,7 @@
 				</div>
 			</div>
 			<h3 class="sub-header">Appointments</h3>
-			<ul class="nav nav-tabs">
+			<ul class="nav nav-tabs nav-justified">
 				<li><a data-toggle="tab" href="#pastappointment">Past</a></li>
 				<li class="active"><a data-toggle="tab" href="#todayappointment">Today</a></li>
 				<li><a data-toggle="tab" href="#futureappointment">Future</a></li>
@@ -48,8 +48,8 @@
 							<tr>
 								<td>{{$medical_appointment_today->patient_first_name}} {{$medical_appointment_today->patient_last_name}}</td>
 								<td>{{$medical_appointment_today->reasons}}</td>
-								<td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment_today->id}}">Diagnosis</button></td>
-								<td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment_today->id}}">Billing</button></td>
+								<td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment_today->id}}">Details</button></td>
+								{{-- <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment_today->id}}">Billing</button></td> --}}
 							</tr>
 							@endforeach
 						</tbody>
@@ -74,8 +74,8 @@
 								<td>{{$medical_appointment_past->patient_first_name}} {{$medical_appointment_past->patient_last_name}}</td>
 								<td>{{date_format(date_create($medical_appointment_past->schedule_day), 'F j, Y')}}</td>
 								<td>{{$medical_appointment_past->reasons}}</td>
-								<td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment_past->id}}">Diagnosis</button></td>
-								<td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment_past->id}}">Billing</button></td>
+								<td><button class="btn btn-info btn-xs addMedicalRecordButton" id="addMedicalRecordButton_{{$medical_appointment_past->id}}">Details</button></td>
+								{{-- <td><button class="btn btn-primary btn-xs addBillingToMedical" id="addBillingToMedical_{{$medical_appointment_past->id}}">Billing</button></td> --}}
 							</tr>
 							@endforeach
 						</tbody>
@@ -136,11 +136,36 @@
 						</div>
 					</div>
 				</div>
+				
 				{{-- PHYSICAL EXAMINATION --}}
-				<div class="physical-examination" id="physicalexamination" style="background-color:#f8f8f8; padding:5px;">
-					<h4>Physical Examination</h4>
-					<div class="row">
-						<div class="col-md-3 col-sm-6 col-xs-6">
+				<div class="physical-examination" id="physicalexamination"{{--  style="background-color:#f8f8f8; padding:5px;" --}}>
+					<div class="panel-group" id="medicalaccordion">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#medicalbillingaccordion">Tests Conducted</a>
+								</h4>
+							</div>
+							<div id="medicalbillingaccordion" class="panel-collapse collapse in">
+								<div class="panel-body">
+									{{-- FOR BILLING --}}
+									<div id="doctorbilling">
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#physicalexamaccordion">Diagnosis</a>
+								</h4>
+							</div>
+					<div id="physicalexamaccordion" class="panel-collapse collapse">
+						<div class="panel-body">
+							<h4>Physical Examination</h4>
+							<div class="row">
+							<div class="col-md-3 col-sm-6 col-xs-6">
 							<div class="form-group">
 								<label for="height">Height:</label>
 								<input type="text" class="form-control" id="height" autofocus/>
@@ -252,6 +277,10 @@
 							</div>
 						</div>
 					</div> 
+				</div>
+				</div>
+				</div>
+				</div>
 				</div>
 				{{-- LABORATORY RESULT --}}
 				<div class="laboratory-result" id="laboratoryresult"  style="padding:5px;">

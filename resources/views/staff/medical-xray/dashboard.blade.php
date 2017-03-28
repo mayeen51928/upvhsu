@@ -45,8 +45,8 @@
 							<td id="patient_name">{{$xray_request->patient_first_name}} {{$xray_request->patient_last_name}}</p></td>
 							<td>{{date_format(date_create($xray_request->created_at), 'F j, Y')}}</td>
 							<td>{{$xray_request->staff_first_name}} {{$xray_request->staff_last_name}}</td>
-							<td><button class="btn btn-info btn-xs addXrayResult" id="addXrayResult_{{$xray_request->id}}">Diagnosis</button></td>
-							<td><button class="btn btn-primary btn-xs addBillingToXray" id="addBillingToXray_{{$xray_request->id}}">Billing</button></td>
+							<td><button class="btn btn-info btn-xs addXrayResult" id="addXrayResult_{{$xray_request->id}}">Details</button></td>
+							{{-- <td><button class="btn btn-primary btn-xs addBillingToXray" id="addBillingToXray_{{$xray_request->id}}">Billing</button></td> --}}
 						</tr>
 						@endforeach
 					</tbody>
@@ -69,14 +69,142 @@
 				<h4 class="modal-title">Chest Xray</h4>
 			</div>
 			<div class="modal-body">
-				<div class="laboratory-result-lab" id="laboratoryresult-lab"  style="padding:5px;">
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label for="chest-xray">Chest Xray:</label>
-							<textarea class="form-control" rows="7" name="chest-xray" id="chest-xray" required></textarea>
+				<div class="panel-group" id="xrayaccordion">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#xraybillingaccordion">Tests Conducted</a>
+							</h4>
+						</div>
+						<div id="xraybillingaccordion" class="panel-collapse collapse in">
+							<div class="panel-body">
+								<div class="xraybilling">
+									<div class="table-responsive col-md-5 col-md-offset-4">
+										<table class="table table-bordered table-hover displayServices">
+											<tbody>
+												<tr>
+													<th></th>
+													<th>Service Description</th>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="285" value="229"></td>
+													<td class="xrayService">Lumbo Sacral Apl</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="240" value="230"></td>
+													<td class="xrayService">Skull Apl/View</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="114" value="231"></td><td class="xrayService">Critical/View</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="114" value="232"></td>
+													<td class="xrayService">Pelvis</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="114" value="233"></td>
+													<td class="xrayService">Hip</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="156" value="234"></td>
+													<td class="xrayService">Foot Apl</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="156" value="235"></td>
+													<td class="xrayService">Leg</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="156" value="236"></td>
+													<td class="xrayService">Knee Apl</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="156" value="237"></td>
+													<td class="xrayService">Thigh Apl</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="156" value="238"></td>
+													<td class="xrayService">Ankle</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="105" value="239"></td>
+													<td class="xrayService">Chest Pa-ap</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="105" value="240"></td>
+													<td class="xrayService">Chest Lateral</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="105" value="241"></td>
+													<td class="xrayService">Apico-Lordotic</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="114" value="242"></td>
+													<td class="xrayService">Chest Bucky</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="105" value="243"></td><td class="xrayService">Lateral Dicubitus</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="156" value="244"></td>
+													<td class="xrayService">Hand</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="144" value="245"></td>
+													<td class="xrayService">Wrist</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="156" value="246"></td>
+													<td class="xrayService">Forearm Apl</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="144" value="247"></td>
+													<td class="xrayService">Elbow Apl</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="144" value="248"></td>
+													<td class="xrayService">Upper Arm</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="120" value="249"></td>
+													<td class="xrayService">Shoulder</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="120" value="250"></td>
+													<td class="xrayService">Clavicle</td>
+												</tr>
+												<tr>
+													<td><input type="checkbox" class="checkboxXrayService" id="120" value="251"></td>
+													<td class="xrayService">Scapula</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#diagnosisaccordion">Diagnosis</a>
+							</h4>
+						</div>
+						<div id="diagnosisaccordion" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="laboratory-result-lab" id="laboratoryresult-lab"  style="padding:5px;">
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="chest-xray">Chest Xray:</label>
+											<textarea class="form-control" rows="7" name="chest-xray" id="chest-xray" required></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+				
+				
 			</div>
 			<div class="modal-footer" id="add-xray-result-footer">
 				{{-- <button type="button" class="btn btn-success" id="addXrayResultButton">Save</button>
