@@ -65,9 +65,26 @@ class XrayController extends Controller
 	{
 		$appointment_id = $request->medical_appointment_id;
 		$xray_result = ChestXrayResult::where('medical_appointment_id', $appointment_id)->first();
-		return response()->json([
-			'xray_result' => $xray_result,
-		]);
+
+		$patient_info = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $appointment_id)->first();
+		$display_xray_services = MedicalService::where('patient_type_id', $patient_info->patient_type_id)->where('service_type', 'xray')->get();
+		if($patient_info->patient_type_id == 5){
+			$display_xray_services_senior = MedicalService::where('patient_type_id', 6)->where('service_type', 'xray')->get();
+		}
+
+		if($patient_info->patient_type_id == 5){
+				return response()->json(['xray_result' => $xray_result, 
+							'display_xray_services' => $display_xray_services,
+							'display_xray_services_senior' => $display_xray_services_senior,
+							'patient_info' => $patient_info,  
+			]);
+		}
+		else{
+			return response()->json(['xray_result' => $xray_result, 
+							'display_xray_services' => $display_xray_services,
+							'patient_info' => $patient_info,
+			]);
+		}
 	}
 
 	public function addbillingxray(Request $request){
@@ -109,12 +126,12 @@ class XrayController extends Controller
 		$ps = $request->checked_services_array_id;
 		$ls = $request->checked_services_array_rate;
 		for($i=0; $i < sizeof($ps); $i++){
-		    $billing = new MedicalBilling;
+		  $billing = new MedicalBilling;
 			$billing->medical_service_id = $ps[$i];
-	        $billing->medical_appointment_id = $appointment_id;
-	        $billing->status = 'unpaid';
-	        $billing->amount = $ls[$i];
-	        $billing->save();
+      $billing->medical_appointment_id = $appointment_id;
+      $billing->status = 'unpaid';
+      $billing->amount = $ls[$i];
+      $billing->save();
 		}
 		ChestXrayResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
 		return response()->json(['success' => 'success']); 

@@ -126,43 +126,43 @@
                   <table class="table displayServices">
                     <tbody>
                     	<tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="30" value="105"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="17"></td>
                        	<td>Platelet Count</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="23" value="106"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="18"></td>
                        	<td>CT-BT</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="20" value="107"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="19"></td>
                        	<td>HCT</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="75" value="108"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="20"></td>
                        	<td>Widal's Test</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="75" value="109"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="21"></td>
                        	<td>Pregnancy Test</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="20" value="110"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="22"></td>
                        	<td>Blood Typing</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="50" value="111"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="23"></td>
                        	<td>FBS</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="70" value="112"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="24"></td>
                        	<td>Cholesterol</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="100" value="113"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="25"></td>
                        	<td>Triglycerides</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="35" value="114"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="26"></td>
                        	<td>CBC</td>
                        </tr>
                       </tbody>
@@ -172,39 +172,39 @@
                   <table class="table displayServices">
                     <tbody>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="285" value="115"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="27"></td>
                        	<td>Lipid Profile</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="65" value="116"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="28"></td>
                        	<td>HDL</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="65" value="117"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="29"></td>
                        	<td>Uric Acid</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="60" value="118"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="30"></td>
                        	<td>Creatinine</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="60" value="119"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="31"></td>
                        	<td>Bun</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="100" value="120"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="32"></td>
                        	<td>ECG</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="15" value="121"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="33"></td>
                        	<td>Hemoglobin</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="170" value="122"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="34"></td>
                        	<td>Papsmear</td>
                        </tr>
                        <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="117" value="123"></td>
+                       	<td><input type="checkbox" class="checkboxLabService" id="35"></td>
                        	<td>SGPT</td>
                        </tr>
                       </tbody>

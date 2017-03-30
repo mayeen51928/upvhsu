@@ -230,2541 +230,569 @@ class DatabaseSeeder extends Seeder
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Consultation Fee',
-			'service_rate' => '0',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '200',
+			'senior_rate' => '160',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Emergency Room Fee',
-			'service_rate' => '0',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '100',
+			'senior_rate' => '100',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'IV Insertion',
-			'service_rate' => '20',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '50',
+			'senior_rate' => '40',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Injection Fee',
-			'service_rate' => '0',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '10',
+			'opd_rate' => '50',
+			'senior_rate' => '40',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Skin Test',
-			'service_rate' => '0',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '8',
+			'opd_rate' => '50',
+			'senior_rate' => '40',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Oxygen Inhalation Fee',
-			'service_rate' => '0',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '40',
+			'opd_rate' => '50',
+			'senior_rate' => '50',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'BP Taking',
-			'service_rate' => '0',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '20',
+			'senior_rate' => '16',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Small)',
-			'service_rate' => '0',
+			'service_description' => 'Wounddressing (Small)',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '12.5',
+			'opd_rate' => '50',
+			'senior_rate' => '40',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Large)',
-			'service_rate' => '0',
+			'service_description' => 'Woundressing (Large)',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '25',
+			'opd_rate' => '100',
+			'senior_rate' => '80',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Suturing (Minor)',
-			'service_rate' => '0',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '50',
+			'opd_rate' => '200',
+			'senior_rate' => '160',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
-		]);		
-		DB::table('medical_services')->insert([
-			'service_description' => 'Incision & Drainage',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '1',
-		]);		
-		DB::table('medical_services')->insert([
-			'service_description' => 'Inhalation',
-			'service_rate' => '10',
-			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'ECG',
-			'service_rate' => '100',
+			'service_description' => 'Incision & Drainage',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '50',
+			'opd_rate' => '200',
+			'senior_rate' => '160',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
+		]);
+		DB::table('medical_services')->insert([
+			'service_description' => 'Inhalation',
+			'student_rate' => '10',
+			'faculty_staff_dependent_rate' => '20',
+			'opd_rate' => '230',
+			'senior_rate' => '184',
+			'service_type' => 'medical',
+		]);
+		DB::table('medical_services')->insert([
+			'service_description' => 'EGC',
+			'student_rate' => '100',
+			'faculty_staff_dependent_rate' => '150',
+			'opd_rate' => '230',
+			'senior_rate' => '184',
+			'service_type' => 'medical',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'ECG Reading',
-			'service_rate' => '0',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '70',
+			'senior_rate' => '56',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
-		]);	
+		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Room Rate (Private)',
-			'service_rate' => '0',
+			'student_rate' => '50',
+			'faculty_staff_dependent_rate' => '80',
+			'opd_rate' => '130',
+			'senior_rate' => '100',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Room Rate (Ward)',
-			'service_rate' => '0',
+			'student_rate' => '20',
+			'faculty_staff_dependent_rate' => '40',
+			'opd_rate' => '100',
+			'senior_rate' => '60',
 			'service_type' => 'medical',
-			'patient_type_id' => '1',
-		]);			
-		DB::table('medical_services')->insert([
-			'service_description' => 'Consultation Fee',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Emergency Room Fee',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'IV Insertion',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Injection Fee',
-			'service_rate' => '10',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Skin Test',
-			'service_rate' => '8',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Oxygen Inhalation Fee',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'BP Taking',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Small)',
-			'service_rate' => '12.5',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Large)',
-			'service_rate' => '25',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Suturing (Minor)',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);		
-		DB::table('medical_services')->insert([
-			'service_description' => 'Incision & Drainage',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);		
-		DB::table('medical_services')->insert([
-			'service_description' => 'Inhalation',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG',
-			'service_rate' => '150',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG Reading',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);	
-		DB::table('medical_services')->insert([
-			'service_description' => 'Room Rate (Private)',
-			'service_rate' => '80',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Room Rate (Ward)',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Consultation Fee',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Emergency Room Fee',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'IV Insertion',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Injection Fee',
-			'service_rate' => '10',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Skin Test',
-			'service_rate' => '8',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Oxygen Inhalation Fee',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'BP Taking',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Small)',
-			'service_rate' => '12.5',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Large)',
-			'service_rate' => '25',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Suturing (Minor)',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);		
-		DB::table('medical_services')->insert([
-			'service_description' => 'Incision & Drainage',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);		
-		DB::table('medical_services')->insert([
-			'service_description' => 'Inhalation',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG',
-			'service_rate' => '150',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG Reading',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);	
-		DB::table('medical_services')->insert([
-			'service_description' => 'Room Rate (Private)',
-			'service_rate' => '80',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Room Rate (Ward)',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Consultation Fee',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Emergency Room Fee',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'IV Insertion',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Injection Fee',
-			'service_rate' => '10',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Skin Test',
-			'service_rate' => '8',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Oxygen Inhalation Fee',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'BP Taking',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Small)',
-			'service_rate' => '12.5',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Large)',
-			'service_rate' => '25',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Suturing (Minor)',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);		
-		DB::table('medical_services')->insert([
-			'service_description' => 'Incision & Drainage',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);		
-		DB::table('medical_services')->insert([
-			'service_description' => 'Inhalation',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG',
-			'service_rate' => '150',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG Reading',
-			'service_rate' => '0',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);	
-		DB::table('medical_services')->insert([
-			'service_description' => 'Room Rate (Private)',
-			'service_rate' => '80',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Room Rate (Ward)',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '4',
-		]);		
-		DB::table('medical_services')->insert([
-			'service_description' => 'Consultation Fee',
-			'service_rate' => '200',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Follow Up Consultation',
-			'service_rate' => '100',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Small)',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Large)',
-			'service_rate' => '100',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Suturing (Minor)',
-			'service_rate' => '200',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Removal of Sutures',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Incision & Drainage',
-			'service_rate' => '200',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Medical Certificate',
-			'service_rate' => '150',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG (Without Reading)',
-			'service_rate' => '230',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG (Reading Only)',
-			'service_rate' => '70',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG (With Reading)',
-			'service_rate' => '300',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pap Smear',
-			'service_rate' => '300',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Emergency Room Fee',
-			'service_rate' => '100',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Oxygen Inhalation Fee',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pulmonade Inhalation Fee',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'IV Insertion Fee',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Injection Fee',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Skin Test',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Catherer Insertion',
-			'service_rate' => '100',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'BP Taking',
-			'service_rate' => '20',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Consultation Fee',
-			'service_rate' => '160',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Follow Up Consultation',
-			'service_rate' => '80',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Small)',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wound Dressing (Large)',
-			'service_rate' => '80',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Suturing (Minor)',
-			'service_rate' => '160',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Removal of Sutures',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Incision & Drainage',
-			'service_rate' => '160',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Medical Certificate',
-			'service_rate' => '120',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG (Without Reading)',
-			'service_rate' => '184',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG (Reading Only)',
-			'service_rate' => '56',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG (With Reading)',
-			'service_rate' => '200',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pap Smear',
-			'service_rate' => '300',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Emergency Room Fee',
-			'service_rate' => '100',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Oxygen Inhalation Fee',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pulmonade Inhalation Fee',
-			'service_rate' => '50',
-			'service_type' => 'medical',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'IV Insertion Fee',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Injection Fee',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Skin Test',
-			'service_rate' => '40',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Catherer Insertion',
-			'service_rate' => '80',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'BP Taking',
-			'service_rate' => '16',
-			'service_type' => 'medical',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Consultation',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Oral Prophylaxis',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Slight to Moderate Calcular Deposits',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Heavy Calcular Deposits',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Tooth Extraction',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Tooth',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Tooth',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Cementation',
-			'service_rate' => '0',
-			'patient_type_id' => '1',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Consultation',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Oral Prophylaxis',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Slight to Moderate Calcular Deposits',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Heavy Calcular Deposits',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Tooth Extraction',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Tooth',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Tooth',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Cementation',
-			'service_rate' => '0',
-			'patient_type_id' => '2',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Consultation',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Oral Prophylaxis',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Slight to Moderate Calcular Deposits',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Heavy Calcular Deposits',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Tooth Extraction',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Tooth',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Tooth',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Cementation',
-			'service_rate' => '0',
-			'patient_type_id' => '3',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Consultation',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Oral Prophylaxis',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Slight to Moderate Calcular Deposits',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Heavy Calcular Deposits',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Tooth Extraction',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Tooth',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Tooth',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Cementation',
-			'service_rate' => '0',
-			'patient_type_id' => '4',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Consultation',
-			'service_rate' => '200',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Oral Prophylaxis',
-			'service_rate' => '0',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Slight to Moderate Calcular Deposits',
-			'service_rate' => '250',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Heavy Calcular Deposits',
-			'service_rate' => '300',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Tooth Extraction',
-			'service_rate' => '0',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Tooth',
-			'service_rate' => '200',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Tooth',
-			'service_rate' => '300',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Filling',
-			'service_rate' => '150',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Filling',
-			'service_rate' => '300',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Cementation',
-			'service_rate' => '150',
-			'patient_type_id' => '5',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Consultation',
-			'service_rate' => '160',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Oral Prophylaxis',
-			'service_rate' => '0',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Slight to Moderate Calcular Deposits',
-			'service_rate' => '200',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Heavy Calcular Deposits',
-			'service_rate' => '240',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Tooth Extraction',
-			'service_rate' => '0',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Tooth',
-			'service_rate' => '160',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Tooth',
-			'service_rate' => '240',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Filling',
-			'service_rate' => '0',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Temporary Filling',
-			'service_rate' => '120',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Permanent Filling',
-			'service_rate' => '140',
-			'patient_type_id' => '6',
-		]);
-		DB::table('dental_services')->insert([
-			'service_description' => 'Cementation',
-			'service_rate' => '120',
-			'patient_type_id' => '6',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'Platelet Count',
-			'service_rate' => '30',
+			'service_description' => 'Platelet COunt',
+			'student_rate' => '30',
+			'faculty_staff_dependent_rate' => '40',
+			'opd_rate' => '70',
+			'senior_rate' => '56',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'CT-BT',
-			'service_rate' => '22.5',
+			'service_description' => 'CT - BT',
+			'student_rate' => '22.5',
+			'faculty_staff_dependent_rate' => '30',
+			'opd_rate' => '60',
+			'senior_rate' => '48',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'HCT',
-			'service_rate' => '20',
+			'student_rate' => '20',
+			'faculty_staff_dependent_rate' => '25',
+			'opd_rate' => '50',
+			'senior_rate' => '40',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => "Widal's Test",
-			'service_rate' => '75',
+			'student_rate' => '75',
+			'faculty_staff_dependent_rate' => '200',
+			'opd_rate' => '300',
+			'senior_rate' => '250',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Pregnancy Test',
-			'service_rate' => '75',
+			'student_rate' => '90',
+			'faculty_staff_dependent_rate' => '120',
+			'opd_rate' => '150',
+			'senior_rate' => '0',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Blood Typing',
-			'service_rate' => '20',
+			'student_rate' => '20',
+			'faculty_staff_dependent_rate' => '25',
+			'opd_rate' => '80',
+			'senior_rate' => '64',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'FBS',
-			'service_rate' => '50',
+			'student_rate' => '40',
+			'faculty_staff_dependent_rate' => '50',
+			'opd_rate' => '120',
+			'senior_rate' => '96',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Cholesterol',
-			'service_rate' => '70',
+			'student_rate' => '70',
+			'faculty_staff_dependent_rate' => '40',
+			'opd_rate' => '145',
+			'senior_rate' => '116',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'Triglycerides',
-			'service_rate' => '100',
+			'service_description' => 'Tiglycerides',
+			'student_rate' => '100',
+			'faculty_staff_dependent_rate' => '125',
+			'opd_rate' => '155',
+			'senior_rate' => '124',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'CBC',
-			'service_rate' => '35',
+			'student_rate' => '35',
+			'faculty_staff_dependent_rate' => '45',
+			'opd_rate' => '100',
+			'senior_rate' => '80',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Lipid Profile',
-			'service_rate' => '285',
+			'student_rate' => '285',
+			'faculty_staff_dependent_rate' => '380',
+			'opd_rate' => '600',
+			'senior_rate' => '480',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'HDL',
-			'service_rate' => '65',
+			'student_rate' => '65',
+			'faculty_staff_dependent_rate' => '85',
+			'opd_rate' => '155',
+			'senior_rate' => '124',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Uric Acid',
-			'service_rate' => '65',
+			'student_rate' => '65',
+			'faculty_staff_dependent_rate' => '85',
+			'opd_rate' => '150',
+			'senior_rate' => '120',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Creatinine',
-			'service_rate' => '60',
+			'student_rate' => '60',
+			'faculty_staff_dependent_rate' => '75',
+			'opd_rate' => '130',
+			'senior_rate' => '104',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Bun',
-			'service_rate' => '60',
+			'student_rate' => '60',
+			'faculty_staff_dependent_rate' => '75',
+			'opd_rate' => '120',
+			'senior_rate' => '96',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'ECG',
-			'service_rate' => '100',
+			'student_rate' => '100',
+			'faculty_staff_dependent_rate' => '150',
+			'opd_rate' => '200',
+			'senior_rate' => '150',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Hemoglobin',
-			'service_rate' => '15',
+			'student_rate' => '15',
+			'faculty_staff_dependent_rate' => '20',
+			'opd_rate' => '50',
+			'senior_rate' => '40',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Papsmear',
-			'service_rate' => '170',
+			'student_rate' => '170',
+			'faculty_staff_dependent_rate' => '225',
+			'opd_rate' => '250',
+			'senior_rate' => '200',
 			'service_type' => 'cbc',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'SGPT',
-			'service_rate' => '117',
-			'service_type' => 'cbc',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Platelet Count',
-			'service_rate' => '40',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CT-BT',
-			'service_rate' => '30',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HCT',
-			'service_rate' => '25',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => "Widal's Test",
-			'service_rate' => '200',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pregnancy Test',
-			'service_rate' => '120',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Blood Typing',
-			'service_rate' => '25',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'FBS',
-			'service_rate' => '50',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Cholesterol',
-			'service_rate' => '90',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Triglycerides',
-			'service_rate' => '125',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CBC',
-			'service_rate' => '45',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lipid Profile',
-			'service_rate' => '380',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HDL',
-			'service_rate' => '85',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Uric Acid',
-			'service_rate' => '85',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Creatinine',
-			'service_rate' => '75',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Bun',
-			'service_rate' => '75',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG',
-			'service_rate' => '150',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hemoglobin',
-			'service_rate' => '20',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Papsmear',
-			'service_rate' => '225',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'SGPT',
-			'service_rate' => '156',
-			'service_type' => 'cbc',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Platelet Count',
-			'service_rate' => '40',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CT-BT',
-			'service_rate' => '30',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HCT',
-			'service_rate' => '25',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => "Widal's Test",
-			'service_rate' => '200',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pregnancy Test',
-			'service_rate' => '120',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Blood Typing',
-			'service_rate' => '25',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'FBS',
-			'service_rate' => '50',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Cholesterol',
-			'service_rate' => '90',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Triglycerides',
-			'service_rate' => '125',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CBC',
-			'service_rate' => '45',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lipid Profile',
-			'service_rate' => '380',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HDL',
-			'service_rate' => '85',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Uric Acid',
-			'service_rate' => '85',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Creatinine',
-			'service_rate' => '75',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Bun',
-			'service_rate' => '75',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG',
-			'service_rate' => '150',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hemoglobin',
-			'service_rate' => '20',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Papsmear',
-			'service_rate' => '225',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'SGPT',
-			'service_rate' => '156',
-			'service_type' => 'cbc',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Platelet Count',
-			'service_rate' => '40',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CT-BT',
-			'service_rate' => '30',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HCT',
-			'service_rate' => '25',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => "Widal's Test",
-			'service_rate' => '200',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pregnancy Test',
-			'service_rate' => '120',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Blood Typing',
-			'service_rate' => '25',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'FBS',
-			'service_rate' => '50',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Cholesterol',
-			'service_rate' => '90',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Triglycerides',
-			'service_rate' => '125',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CBC',
-			'service_rate' => '45',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lipid Profile',
-			'service_rate' => '380',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HDL',
-			'service_rate' => '85',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Uric Acid',
-			'service_rate' => '85',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Creatinine',
-			'service_rate' => '75',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Bun',
-			'service_rate' => '75',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'ECG',
-			'service_rate' => '150',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hemoglobin',
-			'service_rate' => '20',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Papsmear',
-			'service_rate' => '225',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'SGPT',
-			'service_rate' => '156',
-			'service_type' => 'cbc',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Platelet Count',
-			'service_rate' => '70',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CT-BT',
-			'service_rate' => '60',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HCT',
-			'service_rate' => '50',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Blood Typing',
-			'service_rate' => '80',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'FBS',
-			'service_rate' => '120',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Cholesterol',
-			'service_rate' => '145',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Triglycerides',
-			'service_rate' => '155',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CBC',
-			'service_rate' => '100',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lipid Profile',
-			'service_rate' => '600',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HDL',
-			'service_rate' => '155',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Uric Acid',
-			'service_rate' => '150',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Creatinine',
-			'service_rate' => '130',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Bun',
-			'service_rate' => '120',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hemoglobin',
-			'service_rate' => '50',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'SGPT',
-			'service_rate' => '220',
-			'service_type' => 'cbc',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Platelet Count',
-			'service_rate' => '56',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CT-BT',
-			'service_rate' => '48',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HCT',
-			'service_rate' => '40',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Blood Typing',
-			'service_rate' => '64',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'FBS',
-			'service_rate' => '96',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Cholesterol',
-			'service_rate' => '116',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Triglycerides',
-			'service_rate' => '124',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'CBC',
-			'service_rate' => '80',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lipid Profile',
-			'service_rate' => '480',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'HDL',
-			'service_rate' => '124',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Uric Acid',
-			'service_rate' => '120',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Creatinine',
-			'service_rate' => '104',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Bun',
-			'service_rate' => '96',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hemoglobin',
-			'service_rate' => '40',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'SGPT',
-			'service_rate' => '176',
-			'service_type' => 'cbc',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Fecalysis',
-			'service_rate' => '15',
-			'service_type' => 'fecalysis',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Fecalysis',
-			'service_rate' => '20',
-			'service_type' => 'fecalysis',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Fecalysis',
-			'service_rate' => '20',
-			'service_type' => 'fecalysis',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Fecalysis',
-			'service_rate' => '20',
-			'service_type' => 'fecalysis',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Fecalysis',
-			'service_rate' => '50',
-			'service_type' => 'fecalysis',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Fecalysis',
-			'service_rate' => '40',
-			'service_type' => 'fecalysis',
-			'patient_type_id' => '6',
+			'student_rate' => '117',
+			'faculty_staff_dependent_rate' => '156',
+			'opd_rate' => '220',
+			'senior_rate' => '176',
+			'service_type' => 'cbc',
+		]);
+		DB::table('medical_services')->insert([
+			'service_description' => 'Drug Test',
+			'student_rate' => '20',
+			'faculty_staff_dependent_rate' => '30',
+			'opd_rate' => '50',
+			'senior_rate' => '40',
+			'service_type' => 'drugtest',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Urinalysis',
-			'service_rate' => '22.5',
+			'student_rate' => '22.5',
+			'faculty_staff_dependent_rate' => '30',
+			'opd_rate' => '50',
+			'senior_rate' => '40',
 			'service_type' => 'urinalysis',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'Urinalysis',
-			'service_rate' => '30',
-			'service_type' => 'urinalysis',
-			'patient_type_id' => '2',
+			'service_description' => 'fecalysis',
+			'student_rate' => '15',
+			'faculty_staff_dependent_rate' => '20',
+			'opd_rate' => '50',
+			'senior_rate' => '40',
+			'service_type' => 'fecalysis',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'Urinalysis',
-			'service_rate' => '30',
-			'service_type' => 'urinalysis',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Urinalysis',
-			'service_rate' => '30',
-			'service_type' => 'urinalysis',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Urinalysis',
-			'service_rate' => '50',
-			'service_type' => 'urinalysis',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Urinalysis',
-			'service_rate' => '40',
-			'service_type' => 'urinalysis',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Drug-test',
-			'service_rate' => '22.5',
-			'service_type' => 'drugtest',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Drug-test',
-			'service_rate' => '30',
-			'service_type' => 'drugtest',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Drug-test',
-			'service_rate' => '30',
-			'service_type' => 'drugtest',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Drug-test',
-			'service_rate' => '30',
-			'service_type' => 'drugtest',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Drug-test',
-			'service_rate' => '50',
-			'service_type' => 'drugtest',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Drug-test',
-			'service_rate' => '40',
-			'service_type' => 'drugtest',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lumbo Sacral Apl',
-			'service_rate' => '285',
+			'service_description' => 'Lumbo Sacral/Apl',
+			'student_rate' => '285',
+			'faculty_staff_dependent_rate' => '380',
+			'opd_rate' => '550',
+			'senior_rate' => '462',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Skull Apl/View',
-			'service_rate' => '240',
+			'student_rate' => '240',
+			'faculty_staff_dependent_rate' => '320',
+			'opd_rate' => '270',
+			'senior_rate' => '226.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Critical/View',
-			'service_rate' => '114',
+			'student_rate' => '114',
+			'faculty_staff_dependent_rate' => '152',
+			'opd_rate' => '270',
+			'senior_rate' => '226.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Pelvis',
-			'service_rate' => '114',
+			'student_rate' => '114',
+			'faculty_staff_dependent_rate' => '152',
+			'opd_rate' => '270',
+			'senior_rate' => '226.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Hip',
-			'service_rate' => '114',
+			'student_rate' => '114',
+			'faculty_staff_dependent_rate' => '152',
+			'opd_rate' => '270',
+			'senior_rate' => '226.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Foot Apl',
-			'service_rate' => '156',
+			'student_rate' => '156',
+			'faculty_staff_dependent_rate' => '208',
+			'opd_rate' => '370',
+			'senior_rate' => '310.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Leg',
-			'service_rate' => '156',
+			'student_rate' => '156',
+			'faculty_staff_dependent_rate' => '208',
+			'opd_rate' => '370',
+			'senior_rate' => '310.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Knee Apl',
-			'service_rate' => '156',
+			'student_rate' => '156',
+			'faculty_staff_dependent_rate' => '208',
+			'opd_rate' => '370',
+			'senior_rate' => '310.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Thigh Apl',
-			'service_rate' => '156',
+			'student_rate' => '156',
+			'faculty_staff_dependent_rate' => '208',
+			'opd_rate' => '370',
+			'senior_rate' => '310.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Ankle',
-			'service_rate' => '156',
+			'student_rate' => '156',
+			'faculty_staff_dependent_rate' => '208',
+			'opd_rate' => '370',
+			'senior_rate' => '310.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Chest Pa-ap',
-			'service_rate' => '105',
+			'student_rate' => '105',
+			'faculty_staff_dependent_rate' => '140',
+			'opd_rate' => '250',
+			'senior_rate' => '216',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Chest Lateral',
-			'service_rate' => '105',
+			'student_rate' => '105',
+			'faculty_staff_dependent_rate' => '140',
+			'opd_rate' => '250',
+			'senior_rate' => '216',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'Apico-Lordotic',
-			'service_rate' => '105',
+			'service_description' => 'Apico Lordotic',
+			'student_rate' => '105',
+			'faculty_staff_dependent_rate' => '140',
+			'opd_rate' => '250',
+			'senior_rate' => '216',
 			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Bucky',
-			'service_rate' => '114',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lateral Dicubitus',
-			'service_rate' => '105',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hand',
-			'service_rate' => '156',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wrist',
-			'service_rate' => '144',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Forearm Apl',
-			'service_rate' => '156',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Elbow Apl',
-			'service_rate' => '144',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Upper Arm',
-			'service_rate' => '144',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Shoulder',
-			'service_rate' => '120',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Clavicle',
-			'service_rate' => '120',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Scapula',
-			'service_rate' => '120',
-			'service_type' => 'xray',
-			'patient_type_id' => '1',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lumbo Sacral Apl',
-			'service_rate' => '380',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Skull Apl/View',
-			'service_rate' => '320',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Critical/View',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pelvis',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hip',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Foot Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Leg',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Knee Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Thigh Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Ankle',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Pa-ap',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Lateral',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Apico-Lordotic',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Chest Bucky',
-			'service_rate' => '152',
+			'student_rate' => '152',
+			'faculty_staff_dependent_rate' => '152',
+			'opd_rate' => '270',
+			'senior_rate' => '226.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '2',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Lateral Dicubitus',
-			'service_rate' => '140',
+			'student_rate' => '105',
+			'faculty_staff_dependent_rate' => '140',
+			'opd_rate' => '250',
+			'senior_rate' => '210',
 			'service_type' => 'xray',
-			'patient_type_id' => '2',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Hand',
-			'service_rate' => '208',
+			'student_rate' => '156',
+			'faculty_staff_dependent_rate' => '208',
+			'opd_rate' => '370',
+			'senior_rate' => '310.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '2',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Wrist',
-			'service_rate' => '192',
+			'student_rate' => '144',
+			'faculty_staff_dependent_rate' => '192',
+			'opd_rate' => '370',
+			'senior_rate' => '310.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '2',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Forearm Apl',
-			'service_rate' => '208',
+			'student_rate' => '156',
+			'faculty_staff_dependent_rate' => '208',
+			'opd_rate' => '370',
+			'senior_rate' => '310.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '2',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Elbow Apl',
-			'service_rate' => '192',
+			'student_rate' => '144',
+			'faculty_staff_dependent_rate' => '192',
+			'opd_rate' => '370',
+			'senior_rate' => '310.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '2',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Upper Arm',
-			'service_rate' => '192',
+			'student_rate' => '144',
+			'faculty_staff_dependent_rate' => '192',
+			'opd_rate' => '270',
+			'senior_rate' => '226.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '2',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Shoulder',
-			'service_rate' => '160',
+			'student_rate' => '120',
+			'faculty_staff_dependent_rate' => '160',
+			'opd_rate' => '270',
+			'senior_rate' => '226.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '2',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'Clavicle',
-			'service_rate' => '160',
+			'service_description' => 'Clavice',
+			'student_rate' => '120',
+			'faculty_staff_dependent_rate' => '160',
+			'opd_rate' => '270',
+			'senior_rate' => '226.8',
 			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Scapula',
-			'service_rate' => '160',
-			'service_type' => 'xray',
-			'patient_type_id' => '2',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lumbo Sacral Apl',
-			'service_rate' => '380',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Skull Apl/View',
-			'service_rate' => '320',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Critical/View',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pelvis',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hip',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Foot Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Leg',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Knee Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Thigh Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Ankle',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Pa-ap',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Lateral',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Apico-Lordotic',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Bucky',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lateral Dicubitus',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hand',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wrist',
-			'service_rate' => '192',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Forearm Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Elbow Apl',
-			'service_rate' => '192',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Upper Arm',
-			'service_rate' => '192',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Shoulder',
-			'service_rate' => '160',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Clavicle',
-			'service_rate' => '160',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
 		]);
 		DB::table('medical_services')->insert([
 			'service_description' => 'Scapula',
-			'service_rate' => '160',
-			'service_type' => 'xray',
-			'patient_type_id' => '3',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lumbo Sacral Apl',
-			'service_rate' => '380',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Skull Apl/View',
-			'service_rate' => '320',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Critical/View',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pelvis',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hip',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Foot Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Leg',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Knee Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Thigh Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Ankle',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Pa-ap',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Lateral',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Apico-Lordotic',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Bucky',
-			'service_rate' => '152',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lateral Dicubitus',
-			'service_rate' => '140',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hand',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wrist',
-			'service_rate' => '192',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Forearm Apl',
-			'service_rate' => '208',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Elbow Apl',
-			'service_rate' => '192',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Upper Arm',
-			'service_rate' => '192',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Shoulder',
-			'service_rate' => '160',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Clavicle',
-			'service_rate' => '160',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Scapula',
-			'service_rate' => '160',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lumbo Sacral Apl',
-			'service_rate' => '550',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Critical/View',
-			'service_rate' => '270',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pelvis',
-			'service_rate' => '270',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hip',
-			'service_rate' => '270',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Foot Apl',
-			'service_rate' => '370',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Leg',
-			'service_rate' => '370',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Knee Apl',
-			'service_rate' => '370',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Thigh Apl',
-			'service_rate' => '370',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Ankle',
-			'service_rate' => '370',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Pa-ap',
-			'service_rate' => '250',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Lateral',
-			'service_rate' => '250',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Apico-Lordotic',
-			'service_rate' => '250',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Bucky',
-			'service_rate' => '270',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lateral Dicubitus',
-			'service_rate' => '250',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hand',
-			'service_rate' => '370',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wrist',
-			'service_rate' => '370',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Forearm Apl',
-			'service_rate' => '370',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Elbow Apl',
-			'service_rate' => '370',
-			'service_type' => 'xray',
-			'patient_type_id' => '4',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Upper Arm',
-			'service_rate' => '270',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Shoulder',
-			'service_rate' => '270',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Clavicle',
-			'service_rate' => '270',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Abdomen',
-			'service_rate' => '300',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Scapula',
-			'service_rate' => '270',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-			DB::table('medical_services')->insert([
-			'service_description' => 'Skull Apl',
-			'service_rate' => '500',
-			'service_type' => 'xray',
-			'patient_type_id' => '5',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lumbo Sacral Apl',
-			'service_rate' => '462',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Critical/View',
-			'service_rate' => '226.8',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Pelvis',
-			'service_rate' => '226.80',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hip',
-			'service_rate' => '226.80',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Foot Apl',
-			'service_rate' => '310',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Leg',
-			'service_rate' => '310.8',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Knee Apl',
-			'service_rate' => '310.8',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Thigh Apl',
-			'service_rate' => '310.8',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Ankle',
-			'service_rate' => '310.8',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Pa-ap',
-			'service_rate' => '210',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Lateral',
-			'service_rate' => '210',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Apico-Lordotic',
-			'service_rate' => '210',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Chest Bucky',
-			'service_rate' => '226.80',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Lateral Dicubitus',
-			'service_rate' => '210',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Hand',
-			'service_rate' => '310',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Wrist',
-			'service_rate' => '310',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Forearm Apl',
-			'service_rate' => '310',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Elbow Apl',
-			'service_rate' => '310',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Upper Arm',
-			'service_rate' => '226.8',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Shoulder',
-			'service_rate' => '226.8',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Clavicle',
-			'service_rate' => '226.8',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Abdomen',
-			'service_rate' => '252',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-		DB::table('medical_services')->insert([
-			'service_description' => 'Scapula',
-			'service_rate' => '226.8',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
-			DB::table('medical_services')->insert([
-			'service_description' => 'Skull Apl',
-			'service_rate' => '420',
-			'service_type' => 'xray',
-			'patient_type_id' => '6',
-		]);
+			'student_rate' => '120',
+			'faculty_staff_dependent_rate' => '160',
+			'opd_rate' => '270',
+			'senior_rate' => '226.8',
+			'service_type' => 'xray',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Consutation',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '200',
+			'senior_rate' => '160',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Oral Prophylaxis',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '0',
+			'senior_rate' => '0',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Slight to Moderate Calcular Deposits',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '250',
+			'senior_rate' => '200',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Heavy Calcular Deposits',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '300',
+			'senior_rate' => '240',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Tooth Extraction',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '0',
+			'senior_rate' => '0',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Temporary Tooth',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '200',
+			'senior_rate' => '160',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Permanent Tooth',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '300',
+			'senior_rate' => '240',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Filling',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '0',
+			'senior_rate' => '0',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Temporary Filling',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '150',
+			'senior_rate' => '120',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Permanent Filling',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '300',
+			'senior_rate' => '240',
+		]);
+		DB::table('dental_services')->insert([
+			'service_description' => 'Cementation',
+			'student_rate' => '0',
+			'faculty_staff_dependent_rate' => '0',
+			'opd_rate' => '150',
+			'senior_rate' => '120',
+		]);
+
 	}
 }

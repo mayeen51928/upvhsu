@@ -16,9 +16,11 @@ class CreateMedicalServicesTable extends Migration
         Schema::create('medical_services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('service_description');
-            $table->integer('service_rate')->nullable();
+            $table->decimal('student_rate')->nullable();
+            $table->decimal('faculty_staff_dependent_rate')->nullable();
+            $table->decimal('opd_rate')->nullable();
+            $table->decimal('senior_rate')->nullable();
             $table->enum('service_type', ['medical', 'xray', 'cbc', 'drugtest', 'fecalysis', 'urinalysis']);
-            $table->integer('patient_type_id')->nullable();
             $table->timestamps();
         });
     }

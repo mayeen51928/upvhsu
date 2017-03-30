@@ -34,47 +34,47 @@
 						<table class="table displayServices">
 							<tbody>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="1" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="1"></td>
 									<td class="dentalService">Consultation</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="2" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="2"></td>
 									<td class="dentalService">Oral Prophylaxis</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="3" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="3"></td>
 									<td class="dentalService">Slight to Moderate Calcular Deposits</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="4" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="4"></td>
 									<td class="dentalService">Heavy Calcular Deposits</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="5" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="5"></td>
 									<td class="dentalService">Tooth Extraction</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="6" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="6"></td>
 									<td class="dentalService">Temporary Tooth</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="7" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="7"></td>
 									<td class="dentalService">Permanent Tooth</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="8" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="8"></td>
 									<td class="dentalService">Filling</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="9" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="9"></td>
 									<td class="dentalService">Temporary Filling</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="10" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="10"></td>
 									<td class="dentalService">Permanent Filling</td>
 								</tr>
 								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="0" value="11" disabled="disabled"></td>
+									<td><input type="checkbox" class="checkboxDentalService" id="11"></td>
 									<td class="dentalService">Cementation</td>
 								</tr>
 							</tbody>

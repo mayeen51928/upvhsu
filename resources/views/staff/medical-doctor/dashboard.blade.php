@@ -154,39 +154,35 @@
 											<table class="table displayServices">
 												<tbody>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="1" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="1" disabled="disabled"></td>
 														<td class="medicalService">Consultation Fee</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="2" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="2" disabled="disabled"></td>
 														<td class="medicalService">Emergency Room Fee</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="20" value="3" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="3" disabled="disabled"></td>
 														<td class="medicalService">IV Insertion</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="4" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="4" disabled="disabled"></td>
 														<td class="medicalService">Injection Fee</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="5" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="5" disabled="disabled"></td>
 														<td class="medicalService">Skin Test</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="6" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="6" disabled="disabled"></td>
 														<td class="medicalService">Oxygen Inhalation Fee</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="7" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="7" disabled="disabled"></td>
 														<td class="medicalService">BP Taking</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="8" disabled="disabled"></td>
-														<td class="medicalService">Wound Dressing (Small)</td>
-													</tr>
-													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="8" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="8" disabled="disabled"></td>
 														<td class="medicalService">Wound Dressing (Small)</td>
 													</tr>
 												</tbody>
@@ -197,35 +193,35 @@
 												<tbody>
 													
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="9" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="9" disabled="disabled"></td>
 														<td class="medicalService">Wound Dressing (Large)</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="10" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="10" disabled="disabled"></td>
 														<td class="medicalService">Suturing (Minor)</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="11" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="11" disabled="disabled"></td>
 														<td class="medicalService">Incision &amp; Drainage</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="10" value="12" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="12" disabled="disabled"></td>
 														<td class="medicalService">Inhalation</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="100" value="13" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="13" disabled="disabled"></td>
 														<td class="medicalService">ECG</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="14" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="14" disabled="disabled"></td>
 														<td class="medicalService">ECG Reading</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="15" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="15" disabled="disabled"></td>
 														<td class="medicalService">Room Rate (Private)</td>
 													</tr>
 													<tr>
-														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="16" disabled="disabled"></td>
+														<td><input type="checkbox" class="checkboxMedicalService" id="16" disabled="disabled"></td>
 														<td class="medicalService">Room Rate (Ward)</td>
 													</tr>
 												</tbody>

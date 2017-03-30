@@ -16,8 +16,10 @@ class CreateDentalServicesTable extends Migration
         Schema::create('dental_services', function (Blueprint $table) {
             $table->increments('id');
             $table->string('service_description');
-            $table->integer('service_rate')->nullable();
-            $table->integer('patient_type_id')->nullable();
+            $table->decimal('student_rate');
+            $table->decimal('faculty_staff_dependent_rate');
+            $table->decimal('opd_rate');
+            $table->decimal('senior_rate');
             $table->timestamps();
         });
     }
