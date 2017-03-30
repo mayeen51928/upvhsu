@@ -19,6 +19,7 @@ use App\ChestXrayResult;
 use App\StaffNote;
 use App\MedicalBilling;
 use App\DentalBilling;
+use Carbon\Carbon;
 class AdminController extends Controller
 {
 	public function __construct()
@@ -55,16 +56,18 @@ class AdminController extends Controller
 		$drug_test_requests = array();
 		$urinalysis_requests = array();
 		$xray_requests = array();
+		$dt = Carbon::create($request->year, $request->month, $request->date);
 		for($i=0; $i<7; $i++)
 		{
-			$date = ($request->date)+$i;
-			$dental_appointments[$i] = count(DentaLAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', date_format(date_create($request->year.'-'.$request->month.'-'.$date), 'Y-m-d'))->get());
-			$medical_appointments[$i] = count(MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', date_format(date_create($request->year.'-'.$request->month.'-'.$date), 'Y-m-d'))->get());
-			$cbc_requests[$i] = count(CbcResult::join('medical_appointments', 'cbc_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', date_format(date_create($request->year.'-'.$request->month.'-'.$date), 'Y-m-d'))->get());
-			$fecalysis_requests[$i] = count(FecalysisResult::join('medical_appointments', 'fecalysis_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', date_format(date_create($request->year.'-'.$request->month.'-'.$date), 'Y-m-d'))->get());
-			$drug_test_requests[$i] = count(DrugTestResult::join('medical_appointments', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', date_format(date_create($request->year.'-'.$request->month.'-'.$date), 'Y-m-d'))->get());
-			$urinalysis_requests[$i] = count(UrinalysisResult::join('medical_appointments', 'urinalysis_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', date_format(date_create($request->year.'-'.$request->month.'-'.$date), 'Y-m-d'))->get());
-			$xray_requests[$i] = count(ChestXrayResult::join('medical_appointments', 'chest_xray_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', date_format(date_create($request->year.'-'.$request->month.'-'.$date), 'Y-m-d'))->get());
+			$date = $dt->format('Y-m-d');
+			$dental_appointments[$i] = count(DentaLAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', $date)->get());
+			$medical_appointments[$i] = count(MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
+			$cbc_requests[$i] = count(CbcResult::join('medical_appointments', 'cbc_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
+			$fecalysis_requests[$i] = count(FecalysisResult::join('medical_appointments', 'fecalysis_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
+			$drug_test_requests[$i] = count(DrugTestResult::join('medical_appointments', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
+			$urinalysis_requests[$i] = count(UrinalysisResult::join('medical_appointments', 'urinalysis_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
+			$xray_requests[$i] = count(ChestXrayResult::join('medical_appointments', 'chest_xray_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
+			$date = $dt->addDay()->format('Y-m-d');
 		}
 		return response()->json([
 			'dental_appointment_count' => $dental_appointments,
