@@ -31,12 +31,8 @@
 				<div class="table-responsive tab-pane fade in active" id="servicesperformed">
 					<div class="col-md-5 col-md-offset-3">
 						<br/>
-						<table class="table table-bordered table-hover displayServices">
+						<table class="table displayServices">
 							<tbody>
-								<tr>
-									<th></th>
-									<th>Service Description</th>
-								</tr>
 								<tr>
 									<td><input type="checkbox" class="checkboxDentalService" id="0" value="1" disabled="disabled"></td>
 									<td class="dentalService">Consultation</td>

@@ -78,14 +78,10 @@
 						</div>
 						<div id="xraybillingaccordion" class="panel-collapse collapse in">
 							<div class="panel-body">
-								<div class="xraybilling">
-									<div class="table-responsive col-md-5 col-md-offset-4">
-										<table class="table table-bordered table-hover displayServices">
+								<div class="xraybilling row">
+								<div class="table-responsive col-md-6">
+										<table class="table displayServices">
 											<tbody>
-												<tr>
-													<th></th>
-													<th>Service Description</th>
-												</tr>
 												<tr>
 													<td><input type="checkbox" class="checkboxXrayService" id="285" value="229"></td>
 													<td class="xrayService">Lumbo Sacral Apl</td>
@@ -133,6 +129,12 @@
 													<td><input type="checkbox" class="checkboxXrayService" id="105" value="240"></td>
 													<td class="xrayService">Chest Lateral</td>
 												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="table-responsive col-md-6">
+										<table class="table displayServices">
+											<tbody>
 												<tr>
 													<td><input type="checkbox" class="checkboxXrayService" id="105" value="241"></td>
 													<td class="xrayService">Apico-Lordotic</td>

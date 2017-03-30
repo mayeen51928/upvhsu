@@ -149,16 +149,96 @@
 							<div id="medicalbillingaccordion" class="panel-collapse collapse in">
 								<div class="panel-body">
 									{{-- FOR BILLING --}}
-									<div id="doctorbilling">
-
+									<div id="doctorbilling" class="row">
+										<div class="table-responsive col-md-6">
+											<table class="table displayServices">
+												<tbody>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="1" disabled="disabled"></td>
+														<td class="medicalService">Consultation Fee</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="2" disabled="disabled"></td>
+														<td class="medicalService">Emergency Room Fee</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="20" value="3" disabled="disabled"></td>
+														<td class="medicalService">IV Insertion</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="4" disabled="disabled"></td>
+														<td class="medicalService">Injection Fee</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="5" disabled="disabled"></td>
+														<td class="medicalService">Skin Test</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="6" disabled="disabled"></td>
+														<td class="medicalService">Oxygen Inhalation Fee</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="7" disabled="disabled"></td>
+														<td class="medicalService">BP Taking</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="8" disabled="disabled"></td>
+														<td class="medicalService">Wound Dressing (Small)</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="8" disabled="disabled"></td>
+														<td class="medicalService">Wound Dressing (Small)</td>
+													</tr>
+												</tbody>
+											</table>
+											</div>
+											<div class="table-responsive col-md-6">
+											<table class="table displayServices">
+												<tbody>
+													
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="9" disabled="disabled"></td>
+														<td class="medicalService">Wound Dressing (Large)</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="10" disabled="disabled"></td>
+														<td class="medicalService">Suturing (Minor)</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="11" disabled="disabled"></td>
+														<td class="medicalService">Incision &amp; Drainage</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="10" value="12" disabled="disabled"></td>
+														<td class="medicalService">Inhalation</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="100" value="13" disabled="disabled"></td>
+														<td class="medicalService">ECG</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="14" disabled="disabled"></td>
+														<td class="medicalService">ECG Reading</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="15" disabled="disabled"></td>
+														<td class="medicalService">Room Rate (Private)</td>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="checkboxMedicalService" id="0" value="16" disabled="disabled"></td>
+														<td class="medicalService">Room Rate (Ward)</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#physicalexamaccordion">Diagnosis</a>
+									<a data-toggle="collapse" data-parent="#accordion" href="#physicalexamaccordion">Physical Exam</a>
 								</h4>
 							</div>
 					<div id="physicalexamaccordion" class="panel-collapse collapse">
