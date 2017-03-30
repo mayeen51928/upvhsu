@@ -57,9 +57,9 @@ class AdminController extends Controller
 		$urinalysis_requests = array();
 		$xray_requests = array();
 		$dt = Carbon::create($request->year, $request->month, $request->date);
+		$date = $dt->format('Y-m-d');
 		for($i=0; $i<7; $i++)
 		{
-			$date = $dt->format('Y-m-d');
 			$dental_appointments[$i] = count(DentaLAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', $date)->get());
 			$medical_appointments[$i] = count(MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
 			$cbc_requests[$i] = count(CbcResult::join('medical_appointments', 'cbc_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
