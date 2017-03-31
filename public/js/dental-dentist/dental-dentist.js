@@ -600,11 +600,7 @@ $('.listofallpatientsdental').click(function()
 			$('#searchPatientRecordInfoImg').attr('src', '/images/blankprofpic.png');
 		}
 		$('#searchPatientRecordInfoDental').modal();
-
-		$('#addnewrecordfromsearch').click(function() {
-			$('#searchPatientRecordInfoDental').modal('hide');
-		});
-		$('#viewrecordsfromsearch').click(function() {
+		$('#viewrecordsfromsearchdental').click(function() {
 			$('#searchPatientRecordInfoDental').modal('hide');
 		});
 	});

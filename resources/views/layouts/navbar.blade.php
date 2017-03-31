@@ -44,19 +44,19 @@
 					  	@if(Auth::user()->staff->staff_type_id == 3 )
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/lab') }}">Dashboard</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/lab/profile') }}">Profile</a></li>
-								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/lab/searchpatient') }}">Patient Records</a></li>
+								{{-- <li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/lab/searchpatient') }}">Patient Records</a></li> --}}
 							@endif
 							{{-- If Xray --}}
 					  	@if(Auth::user()->staff->staff_type_id == 4 )
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/xray') }}">Dashboard</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/xray/profile') }}">Profile</a></li>
-								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/xray/searchpatient') }}">Patient Records</a></li>
+								{{-- <li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/xray/searchpatient') }}">Patient Records</a></li> --}}
 							@endif
 							{{-- If Cashier --}}
 					  	@if(Auth::user()->staff->staff_type_id == 5 )
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/cashier') }}">Dashboard</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/cashier/profile') }}">Profile</a></li>
-								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Patient Records</a></li>
+								{{-- <li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Patient Records</a></li> --}}
 							@endif
 						@elseif(Auth::user()->user_type_id == 3)
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/admin') }}">Dashboard</a></li>

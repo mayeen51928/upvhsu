@@ -22,6 +22,7 @@ use App\Prescription;
 use App\DentalRecord;
 use App\AdditionalDentalRecord;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 class PatientController extends Controller
 {
 	public function __construct()
@@ -101,7 +102,9 @@ class PatientController extends Controller
 	public function profile()
 	{
 		$patient = Patient::find(Auth::user()->user_id);
-		$params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
+		$birthday = explode("-",$patient->birthday);
+		$params['age'] = Carbon::createFromDate($birthday[0], $birthday[1], $birthday[2])->age;
+		// $params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
 		$params['sex'] = $patient->sex;
 		if(Auth::user()->patient->patient_type_id ==1 )
 		{
