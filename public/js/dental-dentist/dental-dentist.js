@@ -464,8 +464,8 @@ $("#search_patientdental").keyup(function(){
   							patient_id: patientId
   						}, function(data) {
   							output = '';
-  							var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
-  							$('#ageTd').html(age);
+  							// var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
+  							$('#ageTd').html(data['patient_info']['age']);
   							if(data['patient_info']['sex'] == 'F')
   							{
   								$('#sexTd').html('Female');
@@ -500,6 +500,11 @@ $("#search_patientdental").keyup(function(){
 							$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
 							$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
 							$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
+							$('#illnessesTd').html(data['patient_info']['illness']);
+							$('#operationTd').html(data['patient_info']['operation']);
+							$('#allergiesTd').html(data['patient_info']['allergies']);
+							$('#famhistoryTd').html(data['patient_info']['family']);
+							$('#maintenanceTd').html(data['patient_info']['maintenance_medication']);
 							$('#patientInfoModalFooter').html('<a href="/dentist/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearchdental>View Records</a>');
 							if(data['patient_info']['picture'])
 							{
@@ -544,8 +549,8 @@ $('.listofallpatientsdental').click(function()
 		patient_id: patientId
 	}, function(data) {
 		output = '';
-		var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
-		$('#ageTd').html(age);
+		// var age = Math.floor((new Date() - new Date(data['patient_info']['birthday'])) / (365.25 * 24 * 60 * 60 * 1000));
+		$('#ageTd').html(data['patient_info']['age']);
 		if(data['patient_info']['sex'] == 'F')
 		{
 			$('#sexTd').html('Female');
@@ -580,6 +585,11 @@ $('.listofallpatientsdental').click(function()
 		$('#guardianrelationshipTd').html(data['patient_info']['relationship']);
 		$('#guardiantelTd').html(data['patient_info']['guardian_tel_number']);
 		$('#guardiancpTd').html(data['patient_info']['guardian_cellphone']);
+		$('#illnessesTd').html(data['patient_info']['illness']);
+		$('#operationTd').html(data['patient_info']['operation']);
+		$('#allergiesTd').html(data['patient_info']['allergies']);
+		$('#famhistoryTd').html(data['patient_info']['family']);
+		$('#maintenanceTd').html(data['patient_info']['maintenance_medication']);			
 		$('#patientInfoModalFooter').html('<a href="/dentist/viewrecords/'+ patientId +'" class="btn btn-info" role="button" id=viewrecordsfromsearchdental>View Records</a>');
 		if(data['patient_info']['picture'])
 		{

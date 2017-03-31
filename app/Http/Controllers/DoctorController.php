@@ -30,7 +30,9 @@ use App\FecalysisResult;
 use App\MedicalBilling;
 use App\MedicalService;
 use App\StaffNote;
+use App\MedicalHistory;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 class DoctorController extends Controller
 {
 	public function __construct()
@@ -53,7 +55,7 @@ class DoctorController extends Controller
 	{
 		$params['medical_appointments_today'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
 		$params['medical_appointments_past'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','<', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
-		$params['medical_appointments_future'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','>', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
+		$params['medical_appointments_future'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','>', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->orderBy('medical_appointments.created_at', 'asc')->get();
 		$params['staff_notes'] = StaffNote::where('staff_id', Auth::user()->user_id)->first()->notes;
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
@@ -322,6 +324,7 @@ class DoctorController extends Controller
 		$params['patients'] = MedicalAppointment::select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
+		
 		return view('staff.medical-doctor.searchpatient', $params);
 	}
 
@@ -533,7 +536,9 @@ class DoctorController extends Controller
 
 	public function displaypatientrecordsearch(Request $request){
 		$patient = Patient::find($request->patient_id);
-		$params['age'] = (date('Y') - date('Y',strtotime($patient->birthday)));
+		$birthday = explode("-",$patient->birthday);
+		$params['age'] = Carbon::createFromDate($birthday[0], $birthday[1], $birthday[2])->age;
+
 		$params['sex'] = $patient->sex;
 		$params['picture'] = $patient->picture;
         if($patient->patient_type_id == 1)
@@ -553,16 +558,17 @@ class DoctorController extends Controller
         $parents = HasParent::where('patient_id', $request->patient_id)->get();
         foreach($parents as $parent)
         {
-            if (ParentModel::find($parent->parent_id)->sex == 'M')
+        	$parent_id = $parent->parent_id;
+            if (ParentModel::find($parent_id)->sex == 'M')
             {
-            	$params['father_first_name'] = ParentModel::find($parent->parent_id)->parent_first_name;
-                $params['father_middle_name'] = ParentModel::find($parent->parent_id)->parent_middle_name;
-                $params['father_last_name'] = ParentModel::find($parent->parent_id)->parent_last_name;
+            	$params['father_first_name'] = ParentModel::find($parent_id)->parent_first_name;
+                $params['father_middle_name'] = ParentModel::find($parent_id)->parent_middle_name;
+                $params['father_last_name'] = ParentModel::find($parent_id)->parent_last_name;
             }
             else{
-                $params['mother_first_name'] = ParentModel::find($parent->parent_id)->parent_first_name;
-                $params['mother_middle_name'] = ParentModel::find($parent->parent_id)->parent_middle_name;
-                $params['mother_last_name'] = ParentModel::find($parent->parent_id)->parent_last_name;
+                $params['mother_first_name'] = ParentModel::find($parent_id)->parent_first_name;
+                $params['mother_middle_name'] = ParentModel::find($parent_id)->parent_middle_name;
+                $params['mother_last_name'] = ParentModel::find($parent_id)->parent_last_name;
             }
         }
         $params['street'] = $patient->street;
@@ -572,15 +578,22 @@ class DoctorController extends Controller
         $params['personal_contact_number'] = $patient->personal_contact_number;
         $params['residence_contact_number'] = $patient->residence_contact_number;
         $guardian = HasGuardian::where('patient_id', $request->patient_id)->first();
-        $params['guardian_first_name'] = Guardian::find($guardian->guardian_id)->guardian_first_name;
-        $params['guardian_middle_name'] = Guardian::find($guardian->guardian_id)->guardian_middle_name;
-        $params['guardian_last_name'] = Guardian::find($guardian->guardian_id)->guardian_last_name;
-        $params['guardian_street'] = Guardian::find($guardian->guardian_id)->street;
-        $params['guardian_town'] = Town::find(Guardian::find($guardian->guardian_id)->town_id)->town_name;
-        $params['guardian_province'] = Province::find(Town::find(Guardian::find($guardian->guardian_id)->town_id)->province_id)->province_name;
+        $guardian_info = Guardian::find($guardian->guardian_id);
+        $params['guardian_first_name'] = $guardian_info->guardian_first_name;
+        $params['guardian_middle_name'] = $guardian_info->guardian_middle_name;
+        $params['guardian_last_name'] = $guardian_info->guardian_last_name;
+        $params['guardian_street'] = $guardian_info->street;
+        $params['guardian_town'] = Town::find($guardian_info->town_id)->town_name;
+        $params['guardian_province'] = Province::find(Town::find($guardian_info->town_id)->province_id)->province_name;
         $params['relationship'] = $guardian->relationship;
-        $params['guardian_tel_number'] = Guardian::find($guardian->guardian_id)->guardian_telephone_number;
-        $params['guardian_cellphone'] = Guardian::find($guardian->guardian_id)->guardian_contact_number;
+        $params['guardian_tel_number'] = $guardian_info->guardian_telephone_number;
+        $params['guardian_cellphone'] = $guardian_info->guardian_contact_number;
+        $medical_history = MedicalHistory::where('patient_id', $request->patient_id)->first();
+        $params['illness'] = $medical_history->illness;
+        $params['operation'] = $medical_history->operation;
+        $params['allergies'] = $medical_history->allergies;
+        $params['family'] = $medical_history->family;
+        $params['maintenance_medication'] = $medical_history->maintenance_medication;
 		return response()->json(['patient_info' => $params]);
 	}
 

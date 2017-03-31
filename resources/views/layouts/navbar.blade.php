@@ -31,32 +31,32 @@
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/dentist') }}">Dashboard</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/dentist/profile') }}">Profile</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'manageschedule')class="active" @endif><a href="{{ url('/dentist/manageschedule') }}">Manage Schedule</a></li>
-								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/dentist/searchpatient') }}">Search Patient</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/dentist/searchpatient') }}">Patient Records</a></li>
 							@endif
 							{{-- If Doctor --}}
 					  	@if(Auth::user()->staff->staff_type_id == 2 )
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/doctor') }}">Dashboard</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/doctor/profile') }}">Profile</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'manageschedule')class="active" @endif><a href="{{ url('/doctor/manageschedule') }}">Manage Schedule</a></li>
-								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/doctor/searchpatient') }}">Search Patient</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/doctor/searchpatient') }}">Patient Records</a></li>
 							@endif
 							{{-- If Laboratory --}}
 					  	@if(Auth::user()->staff->staff_type_id == 3 )
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/lab') }}">Dashboard</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/lab/profile') }}">Profile</a></li>
-								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/lab/searchpatient') }}">Search Patient</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/lab/searchpatient') }}">Patient Records</a></li>
 							@endif
 							{{-- If Xray --}}
 					  	@if(Auth::user()->staff->staff_type_id == 4 )
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/xray') }}">Dashboard</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/xray/profile') }}">Profile</a></li>
-								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/xray/searchpatient') }}">Search Patient</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/xray/searchpatient') }}">Patient Records</a></li>
 							@endif
 							{{-- If Cashier --}}
 					  	@if(Auth::user()->staff->staff_type_id == 5 )
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/cashier') }}">Dashboard</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'profile')class="active" @endif><a href="{{ url('/cashier/profile') }}">Profile</a></li>
-								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Search Patient</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Patient Records</a></li>
 							@endif
 						@elseif(Auth::user()->user_type_id == 3)
 								<li @if(isset($sidebar_active) and $sidebar_active == 'dashboard')class="active" @endif><a href="{{ url('/admin') }}">Dashboard</a></li>

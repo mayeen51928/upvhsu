@@ -17,7 +17,7 @@
 		  		<li id="manageSched" @if($sidebar_active == 'manageschedule')class="active" @endif><a href="{{ url('/dentist/manageschedule') }}">Manage Schedule</a></li>
 		  	</ul>
 		  	<ul class="nav nav-sidebar">
-		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/dentist/searchpatient') }}">Search Patient</a></li>
+		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/dentist/searchpatient') }}">Patient Records</a></li>
 		  	</ul>
 	  	@endif
 	  	{{-- If Doctor --}}
@@ -28,7 +28,7 @@
 		  		<li id="manageSched" @if($sidebar_active == 'manageschedule')class="active" @endif><a href="{{ url('/doctor/manageschedule') }}">Manage Schedule</a></li>
 		  	</ul>
 		  	<ul class="nav nav-sidebar">
-		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/doctor/searchpatient') }}">Search Patient</a></li>
+		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/doctor/searchpatient') }}">Patient Records</a></li>
 		  	</ul>
 	  	@endif
 	  	{{-- If Laboratory --}}
@@ -38,7 +38,7 @@
 		  		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/lab/profile') }}">Profile</a></li>
 		  	</ul>
 		  	{{-- <ul class="nav nav-sidebar">
-		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/lab/searchpatient') }}">Search Patient</a></li>
+		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/lab/searchpatient') }}">Patient Records</a></li>
 		  	</ul> --}}
 	  	@endif
 	  	{{-- If Xray --}}
@@ -48,7 +48,7 @@
 		  		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/xray/profile') }}">Profile</a></li>
 		  	</ul>
 		  	{{-- <ul class="nav nav-sidebar">
-		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/xray/searchpatient') }}">Search Patient</a></li>
+		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/xray/searchpatient') }}">Patient Records</a></li>
 		  	</ul> --}}
 	  	@endif
 	  	{{-- If Cashier --}}
@@ -58,7 +58,7 @@
 		  		<li id="profileNav" @if($sidebar_active == 'profile')class="active" @endif><a href="{{ url('/cashier/profile') }}">Profile</a></li>
 		  	</ul>
 		  	{{-- <ul class="nav nav-sidebar">
-		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Search Patient</a></li>
+		  		<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/cashier/searchpatient') }}">Patient Records</a></li>
 		  	</ul> --}}
 	  	@endif
   	
@@ -73,7 +73,7 @@
   			<li id="generateSched" @if($sidebar_active == 'generateschedule')class="active" @endif><a href="{{ url('/admin/generateschedule') }}">Generate Upperclassmen Physical Examination Schedule</a></li>
   		</ul>
   		{{-- <ul class="nav nav-sidebar">
-  			<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/admin/searchpatient') }}">Search Patient</a></li>
+  			<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/admin/searchpatient') }}">Patient Records</a></li>
   		</ul> --}}
 	  	@endif
 </div>
