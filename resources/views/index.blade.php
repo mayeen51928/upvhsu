@@ -163,9 +163,9 @@
 			<h3 class="h1Title" id="h1Title3"><span class="glyphicon glyphicon-user h3Icon"></span> HSU Staff</h3>
 			<div class="panel-content">
 				<ul>
-					<li>Rolly Manalo, DMD</li>
-					<li>Mayenne Catuiran, MD</li>
-					<li>Eiman Mission, RN</li>
+					@foreach($staffs as $staff)
+					<li>{{$staff->staff_last_name}}, {{$staff->staff_first_name}}</li>
+					@endforeach
 					<a href="{{ url('/medicalstaff') }}">View more...</a>
 				</ul>
 			</div>
