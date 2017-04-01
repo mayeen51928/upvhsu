@@ -73,7 +73,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion" href="#xraybillingaccordion">Tests Conducted</a>
+								<a data-toggle="collapse" data-parent="#accordion" href="#xraybillingaccordion"><span class="glyphicon glyphicon-chevron-down"></span> Tests Conducted</a>
 							</h4>
 						</div>
 						<div id="xraybillingaccordion" class="panel-collapse collapse in">
@@ -189,7 +189,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordion" href="#diagnosisaccordion">Diagnosis</a>
+								<a data-toggle="collapse" data-parent="#accordion" href="#diagnosisaccordion"><span class="glyphicon glyphicon-chevron-right"></span> Diagnosis</a>
 							</h4>
 						</div>
 						<div id="diagnosisaccordion" class="panel-collapse collapse">

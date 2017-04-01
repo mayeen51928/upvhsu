@@ -155,6 +155,15 @@ $('#backButtonMedicalDiagnosis').click(function() {
 		$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('1 of 5');
 	}
 });
+$("a[data-toggle='collapse']").click(function(){
+	if($(this).find('span').hasClass('glyphicon glyphicon-chevron-right')){
+		$(this).find('span').removeClass('glyphicon glyphicon-chevron-right').addClass('glyphicon glyphicon-chevron-down');
+	}
+	else
+	{
+		$(this).find('span').removeClass('glyphicon glyphicon-chevron-down').addClass('glyphicon glyphicon-chevron-right');
+	}
+});
 $('.addMedicalRecordButton').click(function() {
 	// $('#confirmModal').modal();
 	// $('#requestsFromDoctor').load(location.href + " #requestsFromDoctor");
@@ -1222,6 +1231,7 @@ $('.medicalrecorddate').click(function() {
 				}
 				else
 				{
+					$('#cbc_results').hide();
 					$('#hemoglobinTd').html('');
 					$('#hemasocritTd').html('');
 					$('#wbcTd').html('');
@@ -1235,6 +1245,7 @@ $('.medicalrecorddate').click(function() {
 				}
 				else
 				{
+					$('#urinalysis_results').hide();
 					$('#puscellsTd').html('');
 					$('#rbcTd').html('');
 					$('#albuminTd').html('');
@@ -1247,6 +1258,7 @@ $('.medicalrecorddate').click(function() {
 				}
 				else
 				{
+					$('#fecalysis_results').hide();
 					$('#macroscopicTd').html('');
 					$('#microscopicTd').html('');
 				}
@@ -1256,6 +1268,7 @@ $('.medicalrecorddate').click(function() {
 				}
 				else
 				{
+					$('#drug_test_results').hide();
 					$('#drugtestTd').html('');
 				}
 				if(data['chest_xray_result'])
@@ -1264,6 +1277,7 @@ $('.medicalrecorddate').click(function() {
 				}
 				else
 				{
+					$('#xray_results').hide();
 					$('#cchestxrayTd').html('');
 				}
 				if(data['remark'])

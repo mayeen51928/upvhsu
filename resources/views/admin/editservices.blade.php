@@ -12,7 +12,7 @@
 					<div class="panel-body">
 						<div>
 							<select class="form-control" id="typeOfPatientMedical">
-								<option selected disabled>--- select type of patient ---</option>
+								<option selected disabled>Select type of patient</option>
 								<option value="1">Student</option>
 								<option value="2">Faculty</option>
 								<option value="3">Staff</option>
@@ -35,7 +35,7 @@
 					<div class="panel-body">
 						<div>
 							<select class="form-control" id="typeOfPatientDental">
-								<option selected disabled>--- select type of patient ---</option>
+								<option selected disabled>Select type of patient</option>
 								<option value="1">Student</option>
 								<option value="2">Faculty</option>
 								<option value="3">Staff</option>

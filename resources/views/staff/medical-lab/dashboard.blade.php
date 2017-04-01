@@ -116,7 +116,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#labbillingaccordion">Tests Conducted</a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#labbillingaccordion"><span class="glyphicon glyphicon-chevron-down"></span> Tests Conducted</a>
               </h4>
             </div>
             <div id="labbillingaccordion" class="panel-collapse collapse in">
@@ -139,7 +139,7 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#labdiagnosisaccordion">Diagnosis</a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#labdiagnosisaccordion"><span class="glyphicon glyphicon-chevron-right"></span> Diagnosis</a>
               </h4>
             </div>
             <div id="labdiagnosisaccordion" class="panel-collapse collapse">

@@ -21,46 +21,41 @@
 </div>
 
 <div class="modal fade" id="viewMedicalRecordBasedOnDateModal" role="dialog" data-backdrop="static" data-keyboard="false">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h3 id="viewMedicalRecordBasedOnDateModalTitle">Detailed Patient Record</h3>
 			</div>
 			<div class="modal-body">
-				<div class="row" id="remarkModal">
-					<!-- <div class="col-xs-3 col-sm-3 col-md-3">
-					<img src="images/mayenne.jpg" width="220" height="220" class="img-responsive" alt="Generic placeholder thumbnail">
-					</div> -->
-					<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">Physical Examination</div>
 							<div class="panel-body">
-							<table class="table" style="margin-bottom: 0px;">
-								<tbody>
-									<tr><td>Height</td><td id="heightTd"></td></tr>
-									<tr><td>Weight</td><td id="weightTd"></td></tr>
-									<tr><td>Blood Pressure</td><td id="bpTd"></td></tr>
-									<tr><td>Pulse Rate</td><td id="prTd"></td></tr>
-									<tr><td>Right Eye</td><td id="righteyeTd"></td></tr>
-									<tr><td>Left Eye</td><td id="lefteyeTd"></td></tr>
-									<tr><td>Head</td><td id="headTd"></td></tr>
-									<tr><td>EENT</td><td id="eentTd"></td></tr>
-									<tr><td>Neck</td><td id="neckTd"></td></tr>
-									<tr><td>Chest</td><td id="chestTd"></td></tr>
-									<tr><td>Heart</td><td id="heartTd"></td></tr>
-									<tr><td>Lungs</td><td id="lungsTd"></td></tr>
-									<tr><td>Abdomen</td><td id="abdomenTd"></td></tr>
-									<tr><td>Back</td><td id="backTd"></td></tr>
-									<tr><td>Skin</td><td id="skinTd"></td></tr>
-									<tr><td>Extremeties</td><td id="extremitiesTd"></td></tr>
-								</tbody>
-							</table>
+								<table class="table" style="margin-bottom: 0px;">
+									<tbody>
+										<tr><td>Height</td><td id="heightTd"></td></tr>
+										<tr><td>Weight</td><td id="weightTd"></td></tr>
+										<tr><td>Blood Pressure</td><td id="bpTd"></td></tr>
+										<tr><td>Pulse Rate</td><td id="prTd"></td></tr>
+										<tr><td>Right Eye</td><td id="righteyeTd"></td></tr>
+										<tr><td>Left Eye</td><td id="lefteyeTd"></td></tr>
+										<tr><td>Head</td><td id="headTd"></td></tr>
+										<tr><td>EENT</td><td id="eentTd"></td></tr>
+										<tr><td>Neck</td><td id="neckTd"></td></tr>
+										<tr><td>Chest</td><td id="chestTd"></td></tr>
+										<tr><td>Heart</td><td id="heartTd"></td></tr>
+										<tr><td>Lungs</td><td id="lungsTd"></td></tr>
+										<tr><td>Abdomen</td><td id="abdomenTd"></td></tr>
+										<tr><td>Back</td><td id="backTd"></td></tr>
+										<tr><td>Skin</td><td id="skinTd"></td></tr>
+										<tr><td>Extremeties</td><td id="extremitiesTd"></td></tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-primary">
+						<div class="panel panel-primary" id="cbc_results">
 							<div class="panel-heading">CBC Results</div>
 							<div class="panel-body">
 								<table class="table" style="margin-bottom: 0px;">
@@ -72,9 +67,7 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-primary">
+						<div class="panel panel-primary" id="urinalysis_results">
 							<div class="panel-heading">Urinalysis Results</div>
 							<div class="panel-body">
 								<table class="table" style="margin-bottom: 0px;">
@@ -87,9 +80,7 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-primary">
+						<div class="panel panel-primary" id="fecalysis_results">
 							<div class="panel-heading">Fecalysis Results</div>
 							<div class="panel-body">
 								<table class="table" style="margin-bottom: 0px;">
@@ -100,11 +91,7 @@
 								</table>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-primary">
+						<div class="panel panel-primary" id="drug_test_results">
 							<div class="panel-heading">Drug Test</div>
 							<div class="panel-body">
 								<table class="table" style="margin-bottom: 0px;">
@@ -114,9 +101,7 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-primary">
+						<div class="panel panel-primary" id="xray_results">
 							<div class="panel-heading">Chest X-Ray</div>
 							<div class="panel-body">
 								<table class="table" style="margin-bottom: 0px;">
@@ -126,8 +111,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6">
 						<div class="panel panel-primary">
 							<div class="panel-heading">Remarks</div>
 							<div class="panel-body">
@@ -138,8 +121,6 @@
 								</table>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6">
 						<div class="panel panel-primary">
 						<div class="panel-heading">Prescription</div>
 						<div class="panel-body">
