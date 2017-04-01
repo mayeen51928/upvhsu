@@ -23,6 +23,9 @@ $('.addLabResult').click(function(){
 		if(data['patient_type_id'] == 5){
 			$('#patient_type_radio_lab').css("display","block");
 		}
+		else{
+			$('#patient_type_radio_lab').css("display","none");
+		}
 		if(data['cbc_result'])
 		{
 			$('#hemoglobin-lab').val(data['cbc_result']['hemoglobin']);
@@ -188,6 +191,8 @@ $('.addLabResult').click(function(){
 
 					cbc_services_id: cbc_services_id,
 					drug_service_id: data['drug_billing_services'].id,
+					fecalysis_service_id: data['fecalysis_billing_services'].id,
+					urinalysis_service_id: data['urinalysis_billing_services'].id,
 
 			}, function(data, textStatus, xhr) {
 				$('#cbccountpanel').load(location.href + " #cbccount");

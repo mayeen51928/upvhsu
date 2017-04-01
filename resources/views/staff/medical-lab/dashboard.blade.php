@@ -122,7 +122,7 @@
             <div id="labbillingaccordion" class="panel-collapse collapse in">
               <div class="panel-body">
               	<div class="row">
-                  <div id="patient_type_radio_lab" class="radio" style="margin-left:20px; display:none;">
+                  <div id="patient_type_radio_lab" class="radio" style="margin-left:20px;display:none;">
                     <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
                     <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_senior" value="6">Senior Citizen</label>
                   </div>
