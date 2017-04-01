@@ -6,7 +6,7 @@
   		<li id="visitHistory" @if($sidebar_active == 'visits')class="active" @endif><a href="{{ url('/account/visits') }}"><i class="fa fa-history"></i> Visits History</a></li>
   	</ul>
   	<ul class="nav nav-sidebar">
-  		<li><a href="{{url('/scheduleappointment')}}"><i class="fa fa-calendar-plus-o"></i> Schedule Appointment</a></li>
+  		<li @if($sidebar_active == 'scheduleappointment')class="active" @endif><a href="{{url('/scheduleappointment')}}"><i class="fa fa-calendar-plus-o"></i> Schedule Appointment</a></li>
   	</ul>
   	@elseif(Auth::user()->user_type_id == 2)
   		{{-- If Dentist --}}

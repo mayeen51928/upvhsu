@@ -2,7 +2,16 @@
 @section('title', 'Schedule Appointment | UP Visayas Health Services Unit')
 @section('content')
 <div class="container">
-	<div class="col-md-4 col-md-offset-4">
+@if(isset($sidebar_active))
+	@include('layouts.sidebar')
+@endif
+	<div 
+		@if(Auth::check() && Auth::user()->user_type_id == 1)
+			class="col-md-4 col-md-offset-5"
+		@else
+			class="col-md-4 col-md-offset-4"
+		@endif
+	>
 		<div class="panel panel-default" style="margin-top: 20px;">
 			<div class="panel-heading">Select Type of Appointment</div>
 			<div class="panel-body">
@@ -39,6 +48,9 @@
 	</div>
 </div>
 <div class="container">
+	@if(Auth::check() && Auth::user()->user_type_id == 1)
+	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+	@endif
 	<div class="col-md-6" id="dentalAppointment0">
 		<div class="panel panel-default" id="dentalAppointment">
 			<div class="panel-heading">Schedule Dental Appointment</div>
@@ -102,6 +114,9 @@
 			</div>
 		</div>	
 	</div>
+	@if(Auth::check() && Auth::user()->user_type_id == 1)
+	</div>
+	@endif
 </div>
 
 {{-- ///////////////////////////////////////////////////////////////////////////////////////// --}}
