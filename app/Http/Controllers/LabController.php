@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Auth;
 use DB;
 use App\MedicalAppointment;
+use App\Patient;
 use App\Staff;
 use App\Town;
 use App\Province;
@@ -81,21 +82,69 @@ class LabController extends Controller
 		}
 		public function viewlabdiagnosis(Request $request)
 		{
-		$appointment_id = $request->medical_appointment_id;
-		$cbc_result = CbcResult::where('medical_appointment_id', $appointment_id)->first();
-		$drug_test_result = DrugTestResult::where('medical_appointment_id', $appointment_id)->first();
-		$fecalysis_result = FecalysisResult::where('medical_appointment_id', $appointment_id)->first();
-		$urinalysis_result = UrinalysisResult::where('medical_appointment_id', $appointment_id)->first();
-		return response()->json([
-			'cbc_result' => $cbc_result,
-			'drug_test_result' => $drug_test_result,
-			'fecalysis_result' => $fecalysis_result,
-			'urinalysis_result' => $urinalysis_result,
-			]);
+			$appointment_id = $request->medical_appointment_id;
+			$patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $appointment_id)->pluck('patient_type_id')->first();
+			$cbc_result = CbcResult::where('medical_appointment_id', $appointment_id)->first();
+			$drug_test_result = DrugTestResult::where('medical_appointment_id', $appointment_id)->first();
+			$fecalysis_result = FecalysisResult::where('medical_appointment_id', $appointment_id)->first();
+			$urinalysis_result = UrinalysisResult::where('medical_appointment_id', $appointment_id)->first();
+			$cbc_billing_services = MedicalService::where('service_type', 'cbc')->get();
+			$drug_billing_services = MedicalService::where('service_type', 'drugtest')->first();
+			$fecalysis_billing_services = MedicalService::where('service_type', 'fecalysis')->first();
+			$urinalysis_billing_services = MedicalService::where('service_type', 'urinalysis')->first();
+			$cbc_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->where('medical_billings.medical_appointment_id', $appointment_id)->get();
+			return response()->json([
+				'patient_type_id' => $patient_type_id,
+				'cbc_result' => $cbc_result,
+				'drug_test_result' => $drug_test_result,
+				'fecalysis_result' => $fecalysis_result,
+				'urinalysis_result' => $urinalysis_result,
+				'cbc_billing_services' => $cbc_billing_services,
+				'drug_billing_services' => $drug_billing_services,
+				'fecalysis_billing_services' => $fecalysis_billing_services,
+				'urinalysis_billing_services' => $urinalysis_billing_services,
+				'cbc_billing_status' => $cbc_billing_status,
+				]);
 		}
 
 		public function updatelabdiagnosis(Request $request)
 		{
+			$patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->pluck('patient_type_id')->first();
+			$cbc_billing = MedicalBilling::where('medical_appointment_id',  $request->medical_appointment_id)->get();
+			if(count($cbc_billing) == 0){
+				for($i = 0; $i < sizeof($request->cbc_services_id); $i++){
+					$billing = new MedicalBilling;
+					$billing->medical_service_id = $request->cbc_services_id[$i];
+					$billing->medical_appointment_id = $request->medical_appointment_id;
+					$billing->status = 'unpaid';
+					if($patient_type_id == 1){
+						$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('student_rate')->first();
+					}
+					elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+						$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('staff_faculty_dependent_rate')->first();
+					}
+					else{
+						$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('opd_rate')->first();
+					}
+					$billing->save();
+				}
+			}
+
+			$billing = new MedicalBilling;
+			$billing->medical_service_id = $request->drug_service_id;
+			$billing->medical_appointment_id = $request->medical_appointment_id;
+			$billing->status = 'unpaid';
+			if($patient_type_id == 1){
+				$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('student_rate')->first();
+			}
+			elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+				$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('staff_faculty_dependent_rate')->first();
+			}
+			else{
+				$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('opd_rate')->first();
+			}
+			$billing->save();
+
 			$cbc = CbcResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
 			if(count($cbc)==1 && ($request->hemoglobin!='' || $request->hemasocrit!='' || $request->wbc!='' ))
 			{

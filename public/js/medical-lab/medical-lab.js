@@ -18,6 +18,11 @@ $('.addLabResult').click(function(){
 	});
 	$('#add-lab-result-footer').html('');
 	$.post('/viewlabdiagnosis', {medical_appointment_id: medical_appointment_id}, function(data, textStatus, xhr) {
+		output = '';
+		output2 = '';
+		if(data['patient_type_id'] == 5){
+			$('#patient_type_radio_lab').css("display","block");
+		}
 		if(data['cbc_result'])
 		{
 			$('#hemoglobin-lab').val(data['cbc_result']['hemoglobin']);
@@ -51,6 +56,22 @@ $('.addLabResult').click(function(){
 			}
 
 			$('#laboratoryresult-lab #cbc_div').show();
+
+			for (var i = 0; i < Math.round(data['cbc_billing_services'].length/2); i++){
+				output += "<tr><td><input type='checkbox' class='checkboxLabService' id='"+data['cbc_billing_services'][i].id+"'></td><td>"+data['cbc_billing_services'][i].service_description+"</td></tr>";
+			}
+			$('.displayServices').html(output);
+			for (var i = Math.floor(data['cbc_billing_services'].length/2+1); i < data['cbc_billing_services'].length; i++){
+				output2 += "<tr><td><input type='checkbox' class='checkboxLabService' id='"+data['cbc_billing_services'][i].id+"'></td><td>"+data['cbc_billing_services'][i].service_description+"</td></tr>";
+			}
+			$('.displayServices2').html(output2);
+			if(data['cbc_billing_status']){
+				for (var i = 0; i < data['cbc_billing_status'].length; i++){
+					$('#'+data['cbc_billing_status'][i].medical_service_id+'.checkboxLabService').prop('checked', true);
+					$('.checkboxLabService').prop('disabled', true);
+					$('#patient_type_radio_lab').prop('disabled', true);
+				}
+			}
 		}
 		if(data['drug_test_result'])
 		{
@@ -142,6 +163,12 @@ $('.addLabResult').click(function(){
 		$('#add-lab-result-footer').append('<button type="button" class="btn btn-success addLabResultButton" id="addLabResultButton_'+medical_appointment_id+'">Save</button><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>')
 		$('.addLabResultButton').click(function(){
 			var medical_appointment_id = $(this).attr('id').split("_")[1];
+			cbc_services_id=[];
+			$("input:checkbox.checkboxLabService").each(function(){
+					if($(this).is(":checked")){
+							cbc_services_id.push($(this).attr("id"));
+					}
+			});
 			$.post('/updatelabdiagnosis',
 				{
 					medical_appointment_id: medical_appointment_id,
@@ -158,6 +185,10 @@ $('.addLabResult').click(function(){
 					rbc: $('#rbc-lab').val(),
 					albumin: $('#albumin-lab').val(),
 					sugar: $('#sugar-lab').val(),
+
+					cbc_services_id: cbc_services_id,
+					drug_service_id: data['drug_billing_services'].id,
+
 			}, function(data, textStatus, xhr) {
 				$('#cbccountpanel').load(location.href + " #cbccount");
 				$('#drugtestcountpanel').load(location.href + " #drugtestcount");

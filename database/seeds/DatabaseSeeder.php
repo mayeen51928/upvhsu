@@ -357,7 +357,7 @@ class DatabaseSeeder extends Seeder
 			'service_type' => 'medical',
 		]);
 		DB::table('medical_services')->insert([
-			'service_description' => 'Platelet COunt',
+			'service_description' => 'Platelet Count',
 			'student_rate' => '30',
 			'faculty_staff_dependent_rate' => '40',
 			'opd_rate' => '70',

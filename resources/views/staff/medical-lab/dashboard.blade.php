@@ -122,94 +122,16 @@
             <div id="labbillingaccordion" class="panel-collapse collapse in">
               <div class="panel-body">
               	<div class="row">
+                  <div id="patient_type_radio_lab" class="radio" style="margin-left:20px; display:none;">
+                    <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_senior" value="6">Senior Citizen</label>
+                  </div>
               		<div class="table-responsive col-md-6">
-                  <table class="table displayServices">
-                    <tbody>
-                    	<tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="17"></td>
-                       	<td>Platelet Count</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="18"></td>
-                       	<td>CT-BT</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="19"></td>
-                       	<td>HCT</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="20"></td>
-                       	<td>Widal's Test</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="21"></td>
-                       	<td>Pregnancy Test</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="22"></td>
-                       	<td>Blood Typing</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="23"></td>
-                       	<td>FBS</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="24"></td>
-                       	<td>Cholesterol</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="25"></td>
-                       	<td>Triglycerides</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="26"></td>
-                       	<td>CBC</td>
-                       </tr>
-                      </tbody>
-                     </table>
-                    </div>
-                    <div class="table-responsive col-md-6">
-                  <table class="table displayServices">
-                    <tbody>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="27"></td>
-                       	<td>Lipid Profile</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="28"></td>
-                       	<td>HDL</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="29"></td>
-                       	<td>Uric Acid</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="30"></td>
-                       	<td>Creatinine</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="31"></td>
-                       	<td>Bun</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="32"></td>
-                       	<td>ECG</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="33"></td>
-                       	<td>Hemoglobin</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="34"></td>
-                       	<td>Papsmear</td>
-                       </tr>
-                       <tr>
-                       	<td><input type="checkbox" class="checkboxLabService" id="35"></td>
-                       	<td>SGPT</td>
-                       </tr>
-                      </tbody>
-                     </table>
-                    </div>
+                    <table class="table table-hover displayServices"></table>
+                  </div>
+                  <div class="table-responsive col-md-6">
+                    <table class="table table-hover displayServices2"></table>
+                  </div>
               	</div>
               </div>
             </div>
