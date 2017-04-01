@@ -50,7 +50,7 @@
 				<div class="form-group">
 					<label for="selectdentaldate" id="selectdentaldateErrorMsg" >Date:</label>
 					<select class="form-control" required id="selectdentaldate">
-						<option disabled selected> -- select date of appointment -- </option>
+						<option disabled selected>Select date of appointment</option>
 						<option value="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}">{{ Carbon\Carbon::tomorrow()->format('F j, Y') }}</option>
 						<option value="{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(2)->format('F j, Y') }}</option>
 						<option value="{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(3)->format('F j, Y') }}</option>
@@ -63,7 +63,7 @@
 				<div class="form-group">
 					<label id="selectdentaltimeErrorMsg">Doctor and Time:</label>
 					<select disabled class="form-control" required id="selectdentaltime">
-						<option disabled selected> -- select doctor and time -- </option>
+						<option disabled selected>Select doctor and time</option>
 					</select>
 				</div>
 				<button class="btn btn-success" name="submitdentalappointment" id="submitdentalappointment">Set Appointment</button>
@@ -81,7 +81,7 @@
 				<div class="form-group">
 					<label for="selectmedicaldate" id="selectmedicaldateErrorMsg">Date:</label>
 					<select class="form-control" required id="selectmedicaldate">
-						<option disabled selected> -- select date of appointment -- </option>
+						<option disabled selected>Select date of appointment</option>
 						<option value="{{ Carbon\Carbon::tomorrow()->format('Y-m-d') }}">{{ Carbon\Carbon::tomorrow()->format('F j, Y') }}</option>
 						<option value="{{ Carbon\Carbon::now()->addDays(2)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(2)->format('F j, Y') }}</option>
 						<option value="{{ Carbon\Carbon::now()->addDays(3)->format('Y-m-d') }}">{{ Carbon\Carbon::now()->addDays(3)->format('F j, Y') }}</option>
@@ -94,7 +94,7 @@
 				<div class="form-group">
 					<label id="selectmedicaldoctorErrorMsg">Doctor:</label>
 					<select disabled class="form-control" required id="selectmedicaldoctor">
-						<option disabled selected> -- select doctor -- </option>
+						<option disabled selected>Select doctor</option>
 					</select>
 				</div>
 				<p id="medicalFormNote"><i>Note: Medical appointment done online is for note-taking purposes of the doctor.  On-site visit will still be accommodated first.</i></p>

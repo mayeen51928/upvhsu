@@ -104,7 +104,7 @@ $(document).ready( function(){
   				console.log(data["start"]);
   				console.log(data["end"]);
   				console.log(data["staff"]);
-  				$('#selectdentaltime').html("").append("<option disabled selected> -- select doctor and time -- </option>");
+  				$('#selectdentaltime').html("").append("<option disabled selected>Select doctor and time</option>");
   				for(var i=0; i < data['start'].length; i++)
   				{
   					$('#selectdentaltime').append("<option id="+data['id'][i]+">"+data['staff'][i]+" "+data['start'][i]+" - "+data['end'][i]+"</option>");
@@ -123,7 +123,7 @@ $(document).ready( function(){
   			{
   				$('#selectmedicaldoctor').removeAttr('disabled');
   				console.log(data["staff"]);
-  				$('#selectmedicaldoctor').html("").append("<option disabled selected> -- select doctor -- </option>");
+  				$('#selectmedicaldoctor').html("").append("<option disabled selected>Select doctor</option>");
   				for(var i=0; i < data['staff'].length; i++)
   				{
   					$('#selectmedicaldoctor').append("<option id="+data['id'][i]+">"+data['staff'][i]+"</option>");

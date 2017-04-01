@@ -21,7 +21,7 @@
               <tbody>
                 <tr><td>Sex</td><td>{{$sex}}</td></tr>
                 <tr><td>Position</td><td>{{$position}}</td></tr>
-                <tr><td>Birthday</td><td>{{$birthday}}</td></tr>
+                <tr><td>Birthday</td><td>{{date_format(date_create($birthday), 'F j, Y')}}</td></tr>
                 <tr><td>Civil Status</td><td>{{$civil_status}}</td></tr>
                 <tr><td>Address</td><td>{{$street}}, {{$town}}, {{$province}}</td></tr>
                 <tr><td>Contact Number</td><td>{{$personal_contact_number}}</td></tr>

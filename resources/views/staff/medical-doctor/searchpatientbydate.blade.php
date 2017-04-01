@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Search Patient | UP Visayas Health Services Unit')
+@section('title', 'Patient Records | UP Visayas Health Services Unit')
 @section('content')
 <div class="container-fluid">
 	<div class="row">
@@ -70,7 +70,9 @@
           {{-- <option selected disabled>Select year</option> --}}
           <option value="0000" selected></option>
           {{-- <option value="1996">1996</option> --}}
-          <option value="2017">2017</option>
+          @foreach($years as $year)
+          <option value="{{$year->year}}">{{$year->year}}</option>
+          @endforeach
         </select>
         <br/>
         <button type="button" class="form-control btn btn-info" id="searchbydatebutton">Search</button>
@@ -140,6 +142,20 @@
                     <tr><td>Relationship</td><td id="guardianrelationshipTd"></td></tr>
                     <tr><td>Residence Telephone Number</td><td id="guardiantelTd"></td></tr>
                     <tr><td>Cellphone Number</td><td id="guardiancpTd"></td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="panel panel-info">
+              <div class="panel-heading">Past Medical History</div>
+              <div class="panel-body">
+                <table class="table" style="margin-bottom: 0px;">
+                  <tbody>
+                    <tr><td>Past Illnesses Since Birth</td><td id="illnessesTd"></td></tr>
+                    <tr><td>Operation Undergone Since Birth</td><td id="operationTd"></td></tr>
+                    <tr><td>Allergies to Either Food or Drugs</td><td id="allergiesTd"></td></tr>
+                    <tr><td>Family History of Diseases</td><td id="famhistoryTd"></td></tr>
+                    <tr><td>Maintenance Medication</td><td id="maintenanceTd"></td></tr>
                   </tbody>
                 </table>
               </div>

@@ -178,4 +178,4 @@ $(document).ready( function(){
 			}
 		});
 	});
-})
+});

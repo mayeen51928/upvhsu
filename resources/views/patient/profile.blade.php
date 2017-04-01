@@ -40,7 +40,7 @@
               <div class="panel-body">
               <table class="table" style="margin-bottom: 0px;">
                 <tbody>
-                  <tr><td>Date of Birth</td><td>{{$birthday}}</td></tr>
+                  <tr><td>Date of Birth</td><td>{{date_format(date_create($birthday), 'F j, Y')}}</td></tr>
                   <tr><td>Religion</td><td>{{$religion}}</td></tr>
                   <tr><td>Nationality</td><td>{{$nationality}}</td></tr>
                   <tr><td>Father</td><td>{{$father}}</td></tr>
