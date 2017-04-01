@@ -34,6 +34,7 @@ class PagesController extends Controller
 	{
 		$params['navbar_active'] = 'home';
 		$params['announcements'] = Announcement::take(6)->orderBy('created_at', 'desc')->get();
+		$params['staffs'] = Staff::take(15)->orderBy('staff_last_name', 'asc')->get();
 		return view('index', $params);
 	}
 	public function announcementmodal(Request $request)

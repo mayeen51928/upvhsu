@@ -10,6 +10,7 @@
 	background-image: url(../images/infirm1.jpg);
 	background-size: cover;
 	height: 550px;
+  padding-top: 1%;
 }
 /* .loginPanelPadding{
 	padding: 10px;
@@ -182,7 +183,7 @@
 	#homeJumbotron{
 		background-image: url(../images/infirm1.jpg);
 		background-size: cover;
-		height: 690px;
+		height: 640px;
 	}
 }
 
@@ -191,7 +192,7 @@
 	#homeJumbotron{
 		background-image: url(../images/infirm1.jpg);
 		background-size: cover;
-		height: 660px;
+		height: 600px;
 	}
 	.accountOption a{
 		margin-bottom: 8%;
