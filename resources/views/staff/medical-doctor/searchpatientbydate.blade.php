@@ -70,7 +70,9 @@
           {{-- <option selected disabled>Select year</option> --}}
           <option value="0000" selected></option>
           {{-- <option value="1996">1996</option> --}}
-          <option value="2017">2017</option>
+          @foreach($years as $year)
+          <option value="{{$year->year}}">{{$year->year}}</option>
+          @endforeach
         </select>
         <br/>
         <button type="button" class="form-control btn btn-info" id="searchbydatebutton">Search</button>
