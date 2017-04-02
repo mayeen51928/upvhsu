@@ -80,14 +80,22 @@
 							<div class="panel-body">
 								<div class="row">
                   <div id="patient_type_radio_xray" class="radio" style="margin-left:20px;display:none;">
-                    <label><input type="radio" name="xray_radio_button_medical" id="xray_radio_button_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
-                    <label><input type="radio" name="xray_radio_button_medical" id="xray_radio_button_billing_senior" value="6">Senior Citizen</label>
+                    <label><input type="radio" id="xray_radio_button_billing_opd" value="5">OPD</label>&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" id="xray_radio_button_billing_senior" value="6">Senior Citizen</label>
                   </div>
               		<div class="table-responsive col-md-6">
-                    <table class="table table-hover displayServices"></table>
+                    <table class="table table-hover">
+                    @for ($i = 0; $i < ceil(count($xray_billing_services)/2); $i++)
+										  <tr><td><input type='checkbox' class='checkboxMedicalService' id='{{$xray_billing_services[$i]->id}}'></td><td>{{$xray_billing_services[$i]->service_description}}</td></tr>
+										@endfor
+                    </table>
                   </div>
                   <div class="table-responsive col-md-6">
-                    <table class="table table-hover displayServices2"></table>
+                    <table class="table table-hover">
+                    @for ($i = floor(count($xray_billing_services)/2)+1; $i < count($xray_billing_services); $i++)
+										  <tr><td><input type='checkbox' class='checkboxMedicalService' id='{{$xray_billing_services[$i]->id}}'></td><td>{{$xray_billing_services[$i]->service_description}}</td></tr>
+										@endfor
+                    </table>
                   </div>
               	</div>
 							</div>

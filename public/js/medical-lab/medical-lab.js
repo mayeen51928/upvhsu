@@ -60,14 +60,14 @@ $('.addLabResult').click(function(){
 
 			$('#laboratoryresult-lab #cbc_div').show();
 
-			for (var i = 0; i < Math.round(data['cbc_billing_services'].length/2); i++){
-				output += "<tr><td><input type='checkbox' class='checkboxLabService' id='"+data['cbc_billing_services'][i].id+"'></td><td>"+data['cbc_billing_services'][i].service_description+"</td></tr>";
-			}
-			$('.displayServices').html(output);
-			for (var i = Math.floor(data['cbc_billing_services'].length/2+1); i < data['cbc_billing_services'].length; i++){
-				output2 += "<tr><td><input type='checkbox' class='checkboxLabService' id='"+data['cbc_billing_services'][i].id+"'></td><td>"+data['cbc_billing_services'][i].service_description+"</td></tr>";
-			}
-			$('.displayServices2').html(output2);
+			// for (var i = 0; i < Math.round(data['cbc_billing_services'].length/2); i++){
+			// 	output += "<tr><td><input type='checkbox' class='checkboxLabService' id='"+data['cbc_billing_services'][i].id+"'></td><td>"+data['cbc_billing_services'][i].service_description+"</td></tr>";
+			// }
+			// $('.displayServices').html(output);
+			// for (var i = Math.floor(data['cbc_billing_services'].length/2+1); i < data['cbc_billing_services'].length; i++){
+			// 	output2 += "<tr><td><input type='checkbox' class='checkboxLabService' id='"+data['cbc_billing_services'][i].id+"'></td><td>"+data['cbc_billing_services'][i].service_description+"</td></tr>";
+			// }
+			// $('.displayServices2').html(output2);
 			if(data['cbc_billing_status']){
 				for (var i = 0; i < data['cbc_billing_status'].length; i++){
 					$('#'+data['cbc_billing_status'][i].medical_service_id+'.checkboxLabService').prop('checked', true);

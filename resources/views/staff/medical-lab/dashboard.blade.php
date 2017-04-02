@@ -121,18 +121,26 @@
             </div>
             <div id="labbillingaccordion" class="panel-collapse collapse in">
               <div class="panel-body">
-              	<div class="row">
-                  <div id="patient_type_radio_lab" class="radio" style="margin-left:20px;display:none;">
-                    <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
-                    <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_senior" value="6">Senior Citizen</label>
-                  </div>
-              		<div class="table-responsive col-md-6">
-                    <table class="table table-hover displayServices"></table>
+                <div class="row">
+                  <div id="patient_type_radio_medical" class="radio" style="margin-left:20px;display:none;">
+                    <label><input type="radio" id="medical_radio_button_billing_opd" value="5">OPD</label>&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" id="medical_radio_button_billing_senior" value="6">Senior Citizen</label>
                   </div>
                   <div class="table-responsive col-md-6">
-                    <table class="table table-hover displayServices2"></table>
+                    <table class="table table-hover">
+                    @for ($i = 0; $i < ceil(count($cbc_billing_services)/2); $i++)
+                      <tr><td><input type='checkbox' class='checkboxMedicalService' id='{{$cbc_billing_services[$i]->id}}' disabled="false"></td><td>{{$cbc_billing_services[$i]->service_description}}</td></tr>
+                    @endfor
+                    </table>
                   </div>
-              	</div>
+                  <div class="table-responsive col-md-6">
+                    <table class="table table-hover">
+                    @for ($i = floor(count($cbc_billing_services)/2)+1; $i < count($cbc_billing_services); $i++)
+                      <tr><td><input type='checkbox' class='checkboxMedicalService' id='{{$cbc_billing_services[$i]->id}}' disabled="false"></td><td>{{$cbc_billing_services[$i]->service_description}}</td></tr>
+                    @endfor
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

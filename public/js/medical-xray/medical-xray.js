@@ -64,24 +64,12 @@ $('.addXrayResult').click(function(){
 	      	medical_appointment_id: medical_appointment_id,
 	      	chest_xray: chest_xray,
 	      	xray_services_id: xray_services_id,
-					xray_status: 1,
       	} , function(data){
 	      		$('#xraycountpanel').load(location.href + " #xraycount");
 		      	$('#add-xray-result').modal('hide');
 		      	$('#chest-xray').val('');
 		      	$('#addXrayResult_'+medical_appointment_id).closest("tr").remove();
 		      	// $("#addXrayResult_"+xray_id).prop( "disabled", true );
-	      });
-		  }
-		  else{
-		  	var medical_appointment_id = $(this).attr('id').split("_")[1];
-		  	$.post('/addxrayresult',
-				{
-	      	medical_appointment_id: medical_appointment_id,
-	      	xray_services_id: xray_services_id,
-					xray_status: 0,
-      	} , function(data){
-		      	$('#add-xray-result').modal('hide');
 	      });
 		  }
 		});
