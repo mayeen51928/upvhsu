@@ -90,83 +90,11 @@ class LabController extends Controller
 			$fecalysis_result = FecalysisResult::where('medical_appointment_id', $appointment_id)->first();
 			$urinalysis_result = UrinalysisResult::where('medical_appointment_id', $appointment_id)->first();
 			$cbc_billing_services = MedicalService::where('service_type', 'cbc')->get();
-			$drug_billing_services = MedicalService::where('service_type', 'drugtest')->first();
-			$fecalysis_billing_services = MedicalService::where('service_type', 'fecalysis')->first();
-			$urinalysis_billing_services = MedicalService::where('service_type', 'urinalysis')->first();
+			$drug_billing_service = MedicalService::where('service_type', 'drugtest')->first();
+			$fecalysis_billing_service = MedicalService::where('service_type', 'fecalysis')->first();
+			$urinalysis_billing_service = MedicalService::where('service_type', 'urinalysis')->first();
 			$cbc_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'cbc')->orWhere('medical_services.service_type', 'drugtest')->orWhere('medical_services.service_type', 'fecalysis')->orWhere('medical_services.service_type', 'urinalysis')->get();
-			
-			$patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
-			$lab_billing = MedicalBilling::join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_appointment_id',  $request->medical_appointment_id)->where('medical_services.service_type', 'cbc')->orWhere('medical_services.service_type', 'drugtest')->orWhere('medical_services.service_type', 'fecalysis')->orWhere('medical_services.service_type', 'urinalysis')->get();
-			// if($request->lab_status == 1){
-			// 	CbcResult::where('medical_appointment_id', $request->medical_appointment_id)->update(array('status' => '1'));
-			// 	DrugTestResult::where('medical_appointment_id', $request->medical_appointment_id)->update(array('status' => '1'));
-			// 	UrinalysisResult::where('medical_appointment_id', $request->medical_appointment_id)->update(array('status' => '1'));
-			// 	FecalysisResult::where('medical_appointment_id', $request->medical_appointment_id)->update(array('status' => '1'));
-			// }
-			// if(count($lab_billing) == 0){
-			// 	for($i = 0; $i < sizeof($request->cbc_services_id); $i++){
-			// 		$billing = new MedicalBilling;
-			// 		$billing->medical_service_id = $request->cbc_services_id[$i];
-			// 		$billing->medical_appointment_id = $request->medical_appointment_id;
-			// 		$billing->status = 'unpaid';
-			// 		if($patient_type_id == 1){
-			// 			$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('student_rate')->first();
-			// 		}
-			// 		elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
-			// 			$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
-			// 		}
-			// 		else{
-			// 			$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('opd_rate')->first();
-			// 		}
-			// 		$billing->save();
-			// 	}
 
-			// 	$billing = new MedicalBilling;
-			// 	$billing->medical_service_id = $request->drug_service_id;
-			// 	$billing->medical_appointment_id = $request->medical_appointment_id;
-			// 	$billing->status = 'unpaid';
-			// 	if($patient_type_id == 1){
-			// 		$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('student_rate')->first();
-			// 	}
-			// 	elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
-			// 		$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('faculty_staff_dependent_rate')->first();
-			// 	}
-			// 	else{
-			// 		$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('opd_rate')->first();
-			// 	}
-			// 	$billing->save();
-
-			// 	$billing = new MedicalBilling;
-			// 	$billing->medical_service_id = $request->fecalysis_service_id;
-			// 	$billing->medical_appointment_id = $request->medical_appointment_id;
-			// 	$billing->status = 'unpaid';
-			// 	if($patient_type_id == 1){
-			// 		$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('student_rate')->first();
-			// 	}
-			// 	elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
-			// 		$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('faculty_staff_dependent_rate')->first();
-			// 	}
-			// 	else{
-			// 		$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('opd_rate')->first();
-			// 	}
-			// 	$billing->save();
-
-			// 	$billing = new MedicalBilling;
-			// 	$billing->medical_service_id = $request->urinalysis_service_id;
-			// 	$billing->medical_appointment_id = $request->medical_appointment_id;
-			// 	$billing->status = 'unpaid';
-			// 	if($patient_type_id == 1){
-			// 		$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('student_rate')->first();
-			// 	}
-			// 	elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
-			// 		$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('faculty_staff_dependent_rate')->first();
-			// 	}
-			// 	else{
-			// 		$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('opd_rate')->first();
-			// 	}
-			// 	$billing->save();
-			// }
-			
 			return response()->json([
 				'patient_type_id' => $patient_type_id,
 				'cbc_result' => $cbc_result,
@@ -174,16 +102,18 @@ class LabController extends Controller
 				'fecalysis_result' => $fecalysis_result,
 				'urinalysis_result' => $urinalysis_result,
 				'cbc_billing_services' => $cbc_billing_services,
-				'drug_billing_services' => $drug_billing_services,
-				'fecalysis_billing_services' => $fecalysis_billing_services,
-				'urinalysis_billing_services' => $urinalysis_billing_services,
+				'drug_billing_service' => $drug_billing_service,
+				'fecalysis_billing_service' => $fecalysis_billing_service,
+				'urinalysis_billing_service' => $urinalysis_billing_service,
 				'cbc_billing_status' => $cbc_billing_status,
 				]);
 		}
 
 		public function updatelabdiagnosis(Request $request)
 		{
+			$patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
 			$cbc = CbcResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
+			$counter = 0;
 			if(count($cbc)==1 && ($request->hemoglobin!='' || $request->hemasocrit!='' || $request->wbc!='' ))
 			{
 				$cbc->lab_staff_id = Auth::user()->user_id;
@@ -199,7 +129,32 @@ class LabController extends Controller
 				{
 					$cbc->wbc = $request->wbc;	
 				}
+
+				if($cbc->status == '0')
+				{
+					for($i = 0; $i < sizeof($request->cbc_services_id); $i++){
+						$billing = new MedicalBilling;
+						$billing->medical_service_id = $request->cbc_services_id[$i];
+						$billing->medical_appointment_id = $request->medical_appointment_id;
+						$billing->status = 'unpaid';
+						if($patient_type_id == 1){
+							$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('student_rate')->first();
+						}
+						elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+							$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
+						}
+						else{
+							$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('opd_rate')->first();
+						}
+						$billing->save();
+					}
+					$cbc->status = '1';
+				}
 				$cbc->update();
+
+				if($request->hemoglobin!='' && $request->hemasocrit!='' && $request->wbc!=''){
+					$counter++;
+				}
 			}
 		$drug_test = DrugTestResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
 		if(count($drug_test)==1 && ($request->drug_test !=''))
@@ -209,7 +164,26 @@ class LabController extends Controller
 				{
 					$drug_test->drug_test_result = $request->drug_test;
 				}
+				if($drug_test->status == '0')
+				{
+					$billing = new MedicalBilling;
+					$billing->medical_service_id = 36;
+					$billing->medical_appointment_id = $request->medical_appointment_id;
+					$billing->status = 'unpaid';
+					if($patient_type_id == 1){
+						$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('student_rate')->first();
+					}
+					elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+						$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('faculty_staff_dependent_rate')->first();
+					}
+					else{
+						$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('opd_rate')->first();
+					}
+					$billing->save();
+					$drug_test->status = '1';
+				}
 				$drug_test->update();
+				$counter++;
 			}
 		$fecalysis = FecalysisResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
 		if(count($fecalysis)==1 && ($request->macroscopic !='' || $request->microscopic !=''))
@@ -223,8 +197,30 @@ class LabController extends Controller
 				{
 					$fecalysis->microscopic = $request->microscopic;
 				}
-				
+
+				if($fecalysis->status == '0')
+				{
+					$billing = new MedicalBilling;
+					$billing->medical_service_id = $request->fecalysis_service_id;
+					$billing->medical_appointment_id = $request->medical_appointment_id;
+					$billing->status = 'unpaid';
+					if($patient_type_id == 1){
+						$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('student_rate')->first();
+					}
+					elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+						$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('faculty_staff_dependent_rate')->first();
+					}
+					else{
+						$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('opd_rate')->first();
+					}
+					$billing->save();
+					$fecalysis->status = '1';
+				}
 				$fecalysis->update();
+
+				if($request->macroscopic !='' && $request->microscopic !=''){
+					$counter++;
+				}
 			}
 		$urinalysis = UrinalysisResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
 		if(count($urinalysis)==1 && ($request->pus_cells !='' || $request->rbc !='' || $request->albumin !='' || $request->sugar !=''))
@@ -235,202 +231,51 @@ class LabController extends Controller
 				}
 				if($request->rbc!='')
 				{
-						$urinalysis->rbc = $request->rbc;
-					}
-					if($request->albumin!='')
+					$urinalysis->rbc = $request->rbc;
+				}
+				if($request->albumin!='')
 				{
-						$urinalysis->albumin = $request->albumin;
-					}
-					if($request->sugar!='')
+					$urinalysis->albumin = $request->albumin;
+				}
+				if($request->sugar!='')
 				{
-						$urinalysis->sugar = $request->sugar;
+					$urinalysis->sugar = $request->sugar;
+				}
+
+				if($urinalysis->status == '0'){
+					$billing = new MedicalBilling;
+					$billing->medical_service_id = $request->urinalysis_service_id;
+					$billing->medical_appointment_id = $request->medical_appointment_id;
+					$billing->status = 'unpaid';
+					if($patient_type_id == 1){
+						$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('student_rate')->first();
 					}
-					$urinalysis->update();
+					elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+						$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('faculty_staff_dependent_rate')->first();
+					}
+					else{
+						$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('opd_rate')->first();
+					}
+					$billing->save();
+					$urinalysis->status = '1';
+				}
+				$urinalysis->update();
+
+				if($request->pus_cells !='' && $request->rbc !='' && $request->albumin !='' && $request->sugar !=''){
+					$counter++;
+				}
+			}
+
+			$medical_appointment = MedicalAppointment::find($request->medical_appointment_id);
+
+			$sum = count($cbc)+count($drug_test)+count($fecalysis)+count($urinalysis);
+			if($sum == $counter){
+				$medical_appointment->has_lab_or_xray_request = '2';
+				$medical_appointment->update();
+				return response()->json([ "delete" => "yes", ]);
 			}
 		}
 
-		public function addbillinglab(Request $request)
-		{
-			$appointment_id = $request->appointment_id;
-
-			$patient_info = DB::table('patient_info')->join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $appointment_id)->first();
-			$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
-
-			$has_cbc_request = CbcResult::where('medical_appointment_id', $appointment_id)->get();
-			$has_cbc_request_counter = 0;
-			if (count($has_cbc_request)>0) {
-				$has_cbc_request_counter++;
-			}
-			$has_drug_request = DrugTestResult::where('medical_appointment_id', $appointment_id)->get();
-			$has_drug_request_counter = 0;
-			if (count($has_drug_request)>0) {
-				$has_drug_request_counter++;
-			}
-			$has_fecalysis_request = FecalysisResult::where('medical_appointment_id', $appointment_id)->get();
-			$has_fecalysis_request_counter = 0;
-			if (count($has_fecalysis_request)>0) {
-				$has_fecalysis_request_counter++;
-			}
-			$has_urinalysis_request = UrinalysisResult::where('medical_appointment_id', $appointment_id)->get();
-			$has_urinalysis_request_counter = 0;
-			if (count($has_urinalysis_request)>0) {
-				$has_urinalysis_request_counter++;
-			}
-
-			$display_cbc_services = MedicalAppointment::join('cbc_results', 'medical_appointments.id', 'cbc_results.medical_appointment_id')->where('medical_appointments.id', $appointment_id)->get();
-			$check_cbc_if_exists = CbcResult::where('medical_appointment_id', $appointment_id)->where('hemoglobin','!=',NULL)->where('hemasocrit','!=',NULL)->where('wbc','!=',NULL)->get();
-			$added_cbc_record = 0;
-			if (count($check_cbc_if_exists)>0) {
-				$added_cbc_record++;
-			}
-			$cbc_counter = 0;
-			$cbc_counter_senior = 0;
-			if(count($display_cbc_services)>0){
-				$cbc_counter=MedicalService::where('patient_type_id', $patient_info->patient_type_id)->where('service_type', 'cbc')->get();
-				if($patient_info->patient_type_id == '5'){
-					$cbc_counter_senior=MedicalService::where('patient_type_id', '6')->where('service_type', 'cbc')->get();
-				}
-			}
-
-			$display_drug_services = MedicalAppointment::join('drug_test_results', 'medical_appointments.id', 'drug_test_results.medical_appointment_id')->where('medical_appointments.id', $appointment_id)->get();
-			$check_drug_if_exists = DrugTestResult::where('medical_appointment_id', $appointment_id)->where('drug_test_result','!=',NULL)->get();
-			$added_drug_record = 0;
-			if (count($check_drug_if_exists)>0) {
-				$added_drug_record++;
-			}
-			$drug_counter = 0;
-			$drug_counter_senior = 0;
-			if(count($display_drug_services)>0){
-				$drug_counter = MedicalService::where('patient_type_id', $patient_info->patient_type_id)->where('service_type', 'drugtest')->get();
-				if($patient_info->patient_type_id == '5'){
-					$drug_counter_senior=MedicalService::where('patient_type_id', '6')->where('service_type', 'drugtest')->get();
-				}
-			}
-
-			$display_fecalysis_services = MedicalAppointment::join('fecalysis_results', 'medical_appointments.id', 'fecalysis_results.medical_appointment_id')->where('medical_appointments.id', $appointment_id)->get();
-			$check_fecalysis_if_exists = FecalysisResult::where('medical_appointment_id', $appointment_id)->where('macroscopic','!=',NULL)->where('microscopic','!=',NULL)->get();
-			$added_fecalysis_record = 0;
-			if (count($check_fecalysis_if_exists)>0) {
-				$added_fecalysis_record++;
-			}
-			$fecalysis_counter = 0;
-			$fecalysis_counter_senior = 0;
-			if(count($display_fecalysis_services)>0){
-				$fecalysis_counter=MedicalService::where('patient_type_id', $patient_info->patient_type_id)->where('service_type', 'fecalysis')->get();
-				if($patient_info->patient_type_id == 5){
-					$fecalysis_counter_senior=MedicalService::where('patient_type_id', '6')->where('service_type', 'fecalysis')->get();
-				}
-			}
-
-			$display_urinalysis_services = MedicalAppointment::join('urinalysis_results', 'medical_appointments.id', 'urinalysis_results.medical_appointment_id')->where('medical_appointments.id', $appointment_id)->get();
-			$check_urinalysis_if_exists = UrinalysisResult::where('medical_appointment_id', $appointment_id)->where('pus_cells','!=',NULL)->where('rbc','!=',NULL)->where('albumin','!=',NULL)->where('sugar','!=',NULL)->get();
-			$added_urinalysis_record = 0;
-			if (count($check_urinalysis_if_exists)>0) {
-				$added_urinalysis_record++;
-			}
-			$urinalysis_counter = 0;
-			$urinalysis_counter_senior = 0;
-			if(count($display_urinalysis_services)>0){
-				$urinalysis_counter=MedicalService::where('patient_type_id', $patient_info->patient_type_id)->where('service_type', 'urinalysis')->get();
-				if($patient_info->patient_type_id == 5){
-					$urinalysis_counter_senior=MedicalService::where('patient_type_id', '6')->where('service_type', 'urinalysis')->get();
-				}
-			}
-
-			if($patient_info->patient_type_id == 5){
-				return response()->json(['patient_info' => $patient_info, 
-																'patient_type_id' => $patient_info->patient_type_id, 
-																'added_cbc_record'=>$added_cbc_record,
-																'added_drug_record'=>$added_drug_record,  
-																'added_fecalysis_record'=>$added_fecalysis_record, 
-																'added_urinalysis_record'=>$added_urinalysis_record, 
-																'display_cbc_services' => $display_cbc_services, 
-																'display_drug_services' => $display_drug_services, 
-																'display_fecalysis_services' => $display_fecalysis_services, 
-																'display_urinalysis_services' => $display_urinalysis_services, 
-																'cbc_counter' => $cbc_counter, 
-																'cbc_counter_senior' => $cbc_counter_senior, 
-																'drug_counter' => $drug_counter, 
-																'drug_counter_senior' => $drug_counter_senior, 
-																'fecalysis_counter' => $fecalysis_counter, 
-																'fecalysis_counter_senior' => $fecalysis_counter_senior, 
-																'urinalysis_counter' => $urinalysis_counter, 
-																'urinalysis_counter_senior' => $urinalysis_counter_senior, 
-																'has_cbc_request_counter' => $has_cbc_request_counter,
-																'has_drug_request_counter' => $has_drug_request_counter,
-																'has_fecalysis_request_counter' => $has_fecalysis_request_counter,
-																'has_urinalysis_request_counter' => $has_urinalysis_request_counter,
-																'patient_type' => $patient_info->patient_type_id, ]);
-			}
-			else{
-				return response()->json(['patient_info' => $patient_info, 
-															'patient_type_id' => $patient_info->patient_type_id, 
-															'added_cbc_record'=>$added_cbc_record,
-															'added_drug_record'=>$added_drug_record,  
-															'added_fecalysis_record'=>$added_fecalysis_record, 
-															'added_urinalysis_record'=>$added_urinalysis_record,  
-															'display_cbc_services' => $display_cbc_services, 
-															'display_drug_services' => $display_drug_services, 
-															'display_fecalysis_services' => $display_fecalysis_services, 
-															'display_urinalysis_services' => $display_urinalysis_services, 
-															'cbc_counter' => $cbc_counter, 'drug_counter' => $drug_counter, 
-															'fecalysis_counter' => $fecalysis_counter, 
-															'urinalysis_counter' => $urinalysis_counter,
-															'has_cbc_request_counter' => $has_cbc_request_counter,
-															'has_drug_request_counter' => $has_drug_request_counter,
-															'has_fecalysis_request_counter' => $has_fecalysis_request_counter,
-															'has_urinalysis_request_counter' => $has_urinalysis_request_counter, 
-															'patient_type' => $patient_info->patient_type_id, ]);
-			}
-	}
-
-	public function confirmbillinglab(Request $request){	
-		$appointment_id = $request->appointment_id;
-		$checked_services_array_id = $request->checked_services_array_id;
-		$checked_services_array_rate = $request->checked_services_array_rate;
-		for($i=0; $i < sizeof($checked_services_array_id); $i++){
-				$billing = new MedicalBilling;
-				$billing->medical_service_id = $checked_services_array_id[$i];
-				$billing->medical_appointment_id = $appointment_id;
-				$billing->status = 'unpaid';
-				$billing->amount = $checked_services_array_rate[$i];
-				$billing->save();
-		}
-		CbcResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
-		FecalysisResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
-		UrinalysisResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
-		DrugTestResult::where('medical_appointment_id', $appointment_id)->update(['status' => '1']);
-
-		return response()->json(['success' => 'success']); 
-	}
-
-
-		public function profile()
-		{
-				$lab = Staff::find(Auth::user()->user_id);
-				$params['sex'] = $lab->sex;
-				$params['position'] = $lab->position;
-				$params['birthday'] = $lab->birthday;
-				$params['civil_status'] = $lab->civil_status;
-				$params['personal_contact_number'] = $lab->personal_contact_number;
-				$params['street'] = $lab->street;
-				$params['picture'] = $lab->picture;
-				if(!is_null($lab->town_id))
-						{
-								$params['town'] = Town::find($lab->town_id)->town_name;
-								$params['province'] = Province::find(Town::find($lab->town_id)->province_id)->province_name;
-						}
-						else
-						{
-								$params['town'] = '';
-								$params['province'] = '';
-						}
-				$params['navbar_active'] = 'account';
-				$params['sidebar_active'] = 'profile';
-				$params['navbar_active'] = 'account';
-				$params['sidebar_active'] = 'profile';
-				return view('staff.medical-lab.profile', $params);
-		}
 		public function editprofile()
 		{
 				$lab = Staff::find(Auth::user()->user_id);
