@@ -177,7 +177,6 @@ $('.addLabResult').click(function(){
 							cbc_services_id.push($(this).attr("id"));
 					}
 			});
-			console.log(lab_status);
 			$.post('/updatelabdiagnosis',
 				{
 					medical_appointment_id: medical_appointment_id,

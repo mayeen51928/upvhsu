@@ -59,13 +59,12 @@ $('.addXrayResult').click(function(){
 			{
 				var medical_appointment_id = $(this).attr('id').split("_")[1];
 				var chest_xray = $('#chest-xray').val();
-				var xray_status = 1;
 				$.post('/addxrayresult',
 				{
 	      	medical_appointment_id: medical_appointment_id,
 	      	chest_xray: chest_xray,
 	      	xray_services_id: xray_services_id,
-					xray_status: xray_status,
+					xray_status: 1,
       	} , function(data){
 	      		$('#xraycountpanel').load(location.href + " #xraycount");
 		      	$('#add-xray-result').modal('hide');
@@ -76,12 +75,11 @@ $('.addXrayResult').click(function(){
 		  }
 		  else{
 		  	var medical_appointment_id = $(this).attr('id').split("_")[1];
-		  	var xray_status = 0;
 		  	$.post('/addxrayresult',
 				{
 	      	medical_appointment_id: medical_appointment_id,
 	      	xray_services_id: xray_services_id,
-					xray_status: xray_status,
+					xray_status: 0,
       	} , function(data){
 		      	$('#add-xray-result').modal('hide');
 	      });

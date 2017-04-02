@@ -28,58 +28,25 @@
 			</ul>
 			
 			<div class="tab-content">
-				<div class="table-responsive tab-pane fade in active" id="servicesperformed">
-					<div class="col-md-5 col-md-offset-3">
-						<br/>
-						<table class="table displayServices">
-							<tbody>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="1"></td>
-									<td class="dentalService">Consultation</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="2"></td>
-									<td class="dentalService">Oral Prophylaxis</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="3"></td>
-									<td class="dentalService">Slight to Moderate Calcular Deposits</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="4"></td>
-									<td class="dentalService">Heavy Calcular Deposits</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="5"></td>
-									<td class="dentalService">Tooth Extraction</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="6"></td>
-									<td class="dentalService">Temporary Tooth</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="7"></td>
-									<td class="dentalService">Permanent Tooth</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="8"></td>
-									<td class="dentalService">Filling</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="9"></td>
-									<td class="dentalService">Temporary Filling</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="10"></td>
-									<td class="dentalService">Permanent Filling</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox" class="checkboxDentalService" id="11"></td>
-									<td class="dentalService">Cementation</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+				<div class="table-responsive tab-pane fade in active" id="servicesperformed" style="margin-top:5px;">
+					<div id="patient_type_radio_dental" class="radio" style="margin-left:20px; display:none;">
+            <label><input type="radio" id="dental_radio_button_billing_opd" value="5">OPD</label>&nbsp;&nbsp;&nbsp;
+            <label><input type="radio" id="dental_radio_button_billing_senior" value="6">Senior Citizen</label>
+          </div>
+      		<div class="table-responsive col-md-6">
+            <table class="table table-hover">
+            @for ($i = 0; $i < ceil(count($dental_billing_services)/2); $i++)
+						  <tr><td><input type='checkbox' class='checkboxDentalService' id='{{$dental_billing_services[$i]->id}}'></td><td>{{$dental_billing_services[$i]->service_description}}</td></tr>
+						@endfor
+            </table>
+          </div>
+          <div class="table-responsive col-md-6">
+            <table class="table table-hover">
+            @for ($i = floor(count($dental_billing_services)/2)+1; $i < count($dental_billing_services); $i++)
+						  <tr><td><input type='checkbox' class='checkboxDentalService' id='{{$dental_billing_services[$i]->id}}'></td><td>{{$dental_billing_services[$i]->service_description}}</td></tr>
+						@endfor
+            </table>
+          </div>
 				</div>
 				<div class="row table-responsive tab-pane fade" id="dentalchart">
 					<div class="col-md-9 col-sm-12 col-xs-12">
@@ -438,6 +405,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>

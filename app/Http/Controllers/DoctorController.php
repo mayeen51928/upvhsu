@@ -57,6 +57,7 @@ class DoctorController extends Controller
 		$params['medical_appointments_past'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','<', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
 		$params['medical_appointments_future'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','>', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->orderBy('medical_appointments.created_at', 'asc')->get();
 		$params['staff_notes'] = StaffNote::where('staff_id', Auth::user()->user_id)->first()->notes;
+		$params['medical_billing_services'] = MedicalService::where('service_type', 'medical')->get();
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
 		return view('staff.medical-doctor.dashboard', $params);
@@ -88,15 +89,15 @@ class DoctorController extends Controller
 		$params['street'] = $doctor->street;
 		$params['picture'] = $doctor->picture;
 		if(!is_null($doctor->town_id))
-			{
-				$params['town'] = Town::find($doctor->town_id)->town_name;
-				$params['province'] = Province::find(Town::find($doctor->town_id)->province_id)->province_name;
-			}
-			else
-			{
-				$params['town'] = '';
-				$params['province'] = '';
-			}
+		{
+			$params['town'] = Town::find($doctor->town_id)->town_name;
+			$params['province'] = Province::find(Town::find($doctor->town_id)->province_id)->province_name;
+		}
+		else
+		{
+			$params['town'] = '';
+			$params['province'] = '';
+		}
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'profile';
 		$params['navbar_active'] = 'account';

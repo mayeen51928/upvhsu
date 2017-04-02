@@ -346,6 +346,7 @@ $('.addMedicalRecordButton').click(function() {
 					$('#skin').val(data['physical_examination']['skin']);
 					$('#extremities').val(data['physical_examination']['extremities']);
 					$('#physicalexamination input').attr('disabled', 'disabled');
+					$('.checkboxMedicalService').removeAttr('disabled');
 				}
 				else
 				{

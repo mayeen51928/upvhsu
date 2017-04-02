@@ -45,6 +45,7 @@
 						<tbody>
 								@foreach ($dental_appointments_today as $dental_appointment_today)
 							<tr>
+
 								<td>{{ $dental_appointment_today->patient_first_name }} {{ $dental_appointment_today->patient_last_name }}</td>
 								<td>{{date_format(date_create($dental_appointment_today->schedule_start), 'h:i A')}} - {{date_format(date_create($dental_appointment_today->schedule_end), 'h:i A')}}</td>
 								<td>{{ $dental_appointment_today->reasons }}</td>

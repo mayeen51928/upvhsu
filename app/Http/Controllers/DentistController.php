@@ -76,6 +76,7 @@ class DentistController extends Controller
 			$appointment_id = $id;
 			$patient_id = DentalAppointment::find($id)->patient_id;
 			$params['appointment_id'] = $appointment_id;
+			$params['dental_billing_services'] = DentalService::get();
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'dashboard';
 

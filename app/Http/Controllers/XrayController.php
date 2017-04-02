@@ -45,9 +45,9 @@ class XrayController extends Controller
 		$xray_requests = ChestXrayResult::whereNull('xray_result')->orderBy('chest_xray_results.created_at', 'desc');
 		$params['xray_request_count'] = count($xray_requests->get());
 		if(count($xray_requests->get())>0)
-        {
-        	$params['xray_latest'] = $xray_requests->first()->created_at;
-        }
+    {
+    	$params['xray_latest'] = $xray_requests->first()->created_at;
+    }
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
 		return view('staff.medical-xray.dashboard', $params);
