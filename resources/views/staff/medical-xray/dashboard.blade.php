@@ -86,14 +86,14 @@
               		<div class="table-responsive col-md-6">
                     <table class="table table-hover">
                     @for ($i = 0; $i < ceil(count($xray_billing_services)/2); $i++)
-										  <tr><td><input type='checkbox' class='checkboxMedicalService' id='{{$xray_billing_services[$i]->id}}'></td><td>{{$xray_billing_services[$i]->service_description}}</td></tr>
+										  <tr><td><input type='checkbox' class='checkboxXrayService' id='{{$xray_billing_services[$i]->id}}'></td><td>{{$xray_billing_services[$i]->service_description}}</td></tr>
 										@endfor
                     </table>
                   </div>
                   <div class="table-responsive col-md-6">
                     <table class="table table-hover">
                     @for ($i = floor(count($xray_billing_services)/2)+1; $i < count($xray_billing_services); $i++)
-										  <tr><td><input type='checkbox' class='checkboxMedicalService' id='{{$xray_billing_services[$i]->id}}'></td><td>{{$xray_billing_services[$i]->service_description}}</td></tr>
+										  <tr><td><input type='checkbox' class='checkboxXrayService' id='{{$xray_billing_services[$i]->id}}'></td><td>{{$xray_billing_services[$i]->service_description}}</td></tr>
 										@endfor
                     </table>
                   </div>

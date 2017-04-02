@@ -21,29 +21,29 @@ $('.addXrayResult').click(function(){
     		$('#chest-xray').removeAttr('disabled');
     	}
     }
-    output = '';
-		output2 = '';
+  //   output = '';
+		// output2 = '';
 		if(data['patient_type_id'] == 5){
 			$('#patient_type_radio_xray').css("display","block");
 		}
 		else{
 			$('#patient_type_radio_xray').css("display","none");
 		}
-		for (var i = 0; i < Math.round(data['xray_billing_services'].length/2); i++){
-			output += "<tr><td><input type='checkbox' class='checkboxXrayService' id='"+data['xray_billing_services'][i].id+"'></td><td>"+data['xray_billing_services'][i].service_description+"</td></tr>";
-		}
-		$('.displayServices').html(output);
-		for (var i = Math.floor(data['xray_billing_services'].length/2+1); i < data['xray_billing_services'].length; i++){
-			output2 += "<tr><td><input type='checkbox' class='checkboxXrayService' id='"+data['xray_billing_services'][i].id+"'></td><td>"+data['xray_billing_services'][i].service_description+"</td></tr>";
-		}
-		$('.displayServices2').html(output2);
-		if(data['xray_billing_status']){
-			for (var i = 0; i < data['xray_billing_status'].length; i++){
-				$('#'+data['xray_billing_status'][i].medical_service_id+'.checkboxXrayService').prop('checked', true);
-				$('.checkboxXrayService').prop('disabled', true);
-				$('#patient_type_radio_xray').prop('disabled', true);
-			}
-		}
+		// for (var i = 0; i < Math.round(data['xray_billing_services'].length/2); i++){
+		// 	output += "<tr><td><input type='checkbox' class='checkboxXrayService' id='"+data['xray_billing_services'][i].id+"'></td><td>"+data['xray_billing_services'][i].service_description+"</td></tr>";
+		// }
+		// $('.displayServices').html(output);
+		// for (var i = Math.floor(data['xray_billing_services'].length/2+1); i < data['xray_billing_services'].length; i++){
+		// 	output2 += "<tr><td><input type='checkbox' class='checkboxXrayService' id='"+data['xray_billing_services'][i].id+"'></td><td>"+data['xray_billing_services'][i].service_description+"</td></tr>";
+		// }
+		// $('.displayServices2').html(output2);
+		// if(data['xray_billing_status']){
+		// 	for (var i = 0; i < data['xray_billing_status'].length; i++){
+		// 		$('#'+data['xray_billing_status'][i].medical_service_id+'.checkboxXrayService').prop('checked', true);
+		// 		$('.checkboxXrayService').prop('disabled', true);
+		// 		$('#patient_type_radio_xray').prop('disabled', true);
+		// 	}
+		// }
     $('#add-xray-result-footer').append('<button type="button" class="btn btn-success addXrayResultButton" id="addXrayResultButton_'+medical_appointment_id+'">Save</button><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>');
 		$('#add-xray-result').modal();
 		$('.addXrayResultButton').click(function(){
@@ -55,6 +55,7 @@ $('.addXrayResult').click(function(){
 							xray_services_id.push($(this).attr("id"));
 					}
 			});
+			console.log(xray_services_id);
 			if($('#chest-xray').val())
 			{
 				var medical_appointment_id = $(this).attr('id').split("_")[1];
