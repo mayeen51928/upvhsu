@@ -31,31 +31,127 @@
   				</div>
   				<br/>
   				{{-- PHYSICAL EXAMINATION --}}
-  				<div class="physical-examination" id="physicalexamination" style="background-color:#f8f8f8; padding:5px;">
-  					<h4>Physical Examination</h4>
+  				<div class="physical-examination" id="physicalexamination">
+  					<div class="panel-group" id="medicalaccordion">
+  						<div class="panel panel-default">
+  							<div class="panel-heading">
+  								<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#medicalbillingaccordion"><span class="glyphicon glyphicon-chevron-down"></span> Tests Conducted</a></h4>
+  							</div>
+  							<div id="medicalbillingaccordion" class="panel-collapse collapse in">
+  								<div class="panel-body">
+  									<div id="doctorbilling" class="row">
+  										<div class="table-responsive col-md-6">
+  											<table class="table displayServices">
+  												<tbody>
+  													<tr>
+  														<td><input type="checkbox" class="checkboxMedicalService" id="1"/></td>
+  														<td class="medicalService">Consultation Fee</td>
+  													</tr>
+  													<tr>
+	  													<td><input type="checkbox" class="checkboxMedicalService" id="2"/></td>
+	  													<td class="medicalService">Emergency Room Fee</td>
+  													</tr>
+  													<tr>
+	  													<td><input type="checkbox" class="checkboxMedicalService" id="3"/></td>
+	  													<td class="medicalService">IV Insertion</td>
+  													</tr>
+  													<tr>
+  														<td><input type="checkbox" class="checkboxMedicalService" id="4"/></td>
+  														<td class="medicalService">Injection Fee</td>
+  													</tr>
+  													<tr>
+  														<td><input type="checkbox" class="checkboxMedicalService" id="5"/></td>
+  														<td class="medicalService">Skin Test</td>
+  													</tr>
+  													<tr>
+  														<td><input type="checkbox" class="checkboxMedicalService" id="6"/></td>
+  														<td class="medicalService">Oxygen Inhalation Fee</td>
+  													</tr>
+  													<tr>
+  														<td><input type="checkbox" class="checkboxMedicalService" id="7"/></td>
+  														<td class="medicalService">BP Taking</td>
+  													</tr>
+  													<tr>
+  														<td><input type="checkbox" class="checkboxMedicalService" id="8"/></td>
+  														<td class="medicalService">Wound Dressing (Small)</td>
+  													</tr>
+  												</tbody>
+  											</table>
+  										</div>
+  										<div class="table-responsive col-md-6">
+  											<table class="table displayServices">
+  												<tbody>
+  													<tr>
+	  													<td><input type="checkbox" class="checkboxMedicalService" id="9"/></td>
+	  													<td class="medicalService">Wound Dressing (Large)</td>
+  													</tr>
+  													<tr>
+	  													<td><input type="checkbox" class="checkboxMedicalService" id="10"/></td>
+	  													<td class="medicalService">Suturing (Minor)</td>
+  													</tr>
+  													<tr>
+	  													<td><input type="checkbox" class="checkboxMedicalService" id="11"/></td>
+	  													<td class="medicalService">Incision &amp; Drainage</td>
+  													</tr>
+  													<tr>
+	  													<td><input type="checkbox" class="checkboxMedicalService" id="12"/></td>
+	  													<td class="medicalService">Inhalation</td>
+  													</tr>
+  													<tr>
+	  													<td><input type="checkbox" class="checkboxMedicalService" id="13"/></td>
+	  													<td class="medicalService">ECG</td>
+  													</tr>
+  													<tr>
+	  													<td><input type="checkbox" class="checkboxMedicalService" id="14"/></td>
+	                            <td class="medicalService">ECG Reading</td>
+                            </tr>
+                            <tr>
+	                            <td><input type="checkbox" class="checkboxMedicalService" id="15"/></td>
+	                            <td class="medicalService">Room Rate (Private)</td>
+	                          </tr>
+	                        <tr>
+	                           <td><input type="checkbox" class="checkboxMedicalService" id="16"/></td>
+                            <td class="medicalService">Room Rate (Ward)</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+                <div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#physicalexamaccordion"><span class="glyphicon glyphicon-chevron-right"></span> Physical Exam</a>
+								</h4>
+							</div>
+					<div id="physicalexamaccordion" class="panel-collapse collapse">
+						<div class="panel-body" style="background-color:#f8f8f8; padding:5px;">
+						<h4>Physical Examination</h4>
   					<div class="row">
   						<div class="col-md-3 col-sm-6 col-xs-6">
                 <div class="form-group">
                 	<label for="height">Height:</label>
-                  <input type="text" class="form-control" id="height" name="height"/>
+                  <input type="text" class="form-control" disabled required id="height" name="height"/>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6 col-xs-6">
                 <div class="form-group">
                   <label for="weight">Weight:</label>
-                  <input type="text" class="form-control" id="weight" name="weight"/>
+                  <input type="text" class="form-control" disabled required id="weight" name="weight"/>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6 col-xs-6">
                 <div class="form-group">
                   <label for="blood-pressure">Blood Pressure:</label>
-                  <input type="text" class="form-control" id="bloodpressure" name="bloodpressure"/>
+                  <input type="text" class="form-control" disabled required id="bloodpressure" name="bloodpressure"/>
                 </div>
               </div>
               <div class="col-md-3 col-sm-6 col-xs-6">
                 <div class="form-group">
                   <label for="pulse-rate">Pulse Rate:</label>
-                  <input type="text" class="form-control" id="pulserate" name="pulserate"/>
+                  <input type="text" class="form-control" disabled required id="pulserate" name="pulserate"/>
                 </div>
               </div>
             </div>
@@ -68,13 +164,13 @@
               <div class="col-md-5 col-sm-5 col-xs-5">
                 <div class="form-group">
                   <label for="right-eye">Right Eye:</label>
-                  <input type="text" class="form-control" id="righteye" name="righteye"/>
+                  <input type="text" class="form-control" disabled required id="righteye" name="righteye"/>
                 </div>
               </div>
               <div class="col-md-5 col-sm-5 col-xs-5">
                 <div class="form-group">
                   <label for="left-eye">Left Eye:</label>
-                  <input type="text" class="form-control" id="lefteye" name="lefteye"/>
+                  <input type="text" class="form-control" disabled required id="lefteye" name="lefteye"/>
                 </div>
               </div>
             </div>
@@ -82,13 +178,13 @@
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="form-group">
                   <label for="head">Head:</label>
-                  <input type="text" class="form-control" id="head" name="head"/>
+                  <input type="text" class="form-control" disabled required id="head" name="head"/>
                 </div>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="form-group">
                   <label for="eent">EENT:</label>
-                  <input type="text" class="form-control" id="eent" name="eent"/>
+                  <input type="text" class="form-control" disabled required id="eent" name="eent"/>
                 </div>
               </div>
             </div> 
@@ -96,19 +192,19 @@
               <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="form-group">
                   <label for="neck">Neck:</label>
-                  <input type="text" class="form-control" id="neck" name="neck"/>
+                  <input type="text" class="form-control" disabled required id="neck" name="neck"/>
                 </div>
               </div>
               <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="form-group">
                   <label for="chest">Chest:</label>
-                  <input type="text" class="form-control" id="chest" name="chest"/>
+                  <input type="text" class="form-control" disabled required id="chest" name="chest"/>
                 </div>
               </div>
               <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="form-group">
                   <label for="heart">Heart:</label>
-                  <input type="text" class="form-control" id="heart" name="heart"/>
+                  <input type="text" class="form-control" disabled required id="heart" name="heart"/>
                 </div>
               </div>
             </div> 
@@ -116,13 +212,13 @@
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="form-group">
                   <label for="lungs">Lungs:</label>
-                  <input type="text" class="form-control" id="lungs" name="lungs"/>
+                  <input type="text" class="form-control" disabled required id="lungs" name="lungs"/>
                 </div>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="form-group">
                   <label for="abdomen">Abdomen:</label>
-                  <input type="text" class="form-control" id="abdomen"  name="abdomen"/>
+                  <input type="text" class="form-control" disabled required id="abdomen"  name="abdomen"/>
                 </div>
               </div>
             </div>
@@ -130,165 +226,29 @@
               <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="form-group">
                   <label for="back">Back:</label>
-                  <input type="text" class="form-control" id="back" name="back"/>
+                  <input type="text" class="form-control" disabled required id="back" name="back"/>
                 </div>
               </div>
               <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="form-group">
                   <label for="skin">Skin:</label>
-                  <input type="text" class="form-control" id="skin" name="skin"/>
+                  <input type="text" class="form-control" disabled required id="skin" name="skin"/>
                 </div>
               </div>
               <div class="col-md-4 col-sm-4 col-xs-4">
                 <div class="form-group">
                   <label for="extremities">Extremities:</label>
-                  <input type="text" class="form-control" id="extremities" name="extremities"/>
+                  <input type="text" class="form-control" disabled required id="extremities" name="extremities"/>
                 </div>
               </div>
             </div> 
+						</div></div>
+						</div>
+  					
           </div>
-          {{-- LABORATORY RESULT --}}
-          {{-- <div class="laboratory-result" id="laboratoryresult1"  style="padding:5px;">
-            <h4>Laboratory Result</h4>
-            <div class="row">
-              <div class="col-md-2 col-sm-2 col-xs-2">
-                <div class="form-group">
-                  <label>CBC:</label>
-                </div>
-              </div>
-              <div class="col-md-5 col-sm-5 col-xs-5">
-                <div class="form-group">
-                  <label for="hemoglobin">Hemoglobin:</label>
-                  <input type="text" class="form-control" id="hemoglobin">
-                </div>
-              </div>
-              <div class="col-md-5 col-sm-5 col-xs-5">
-                <div class="form-group">
-                  <label for="hemasocrit">Hemasocrit:</label>
-                  <input type="text" class="form-control" id="hemasocrit">
-                </div>
-              </div>
-              <div class="col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-2">
-                <div class="form-group">
-                  <label for="wbc">WBC:</label>
-                  <input type="text" class="form-control" id="wbc">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2 col-sm-2 col-xs-2">
-                <div class="form-group">
-                  <label>Urinalysis:</label>
-                </div>
-              </div>
-              <div class="col-md-5 col-sm-5 col-xs-5">
-                <div class="form-group">
-                  <label for="pus-cells">Pus Cells:</label>
-                  <input type="text" class="form-control" id="pus-cells">
-                </div>
-              </div>
-              <div class="col-md-5 col-sm-5 col-xs-5">
-                <div class="form-group">
-                  <label for="rbc">RBC:</label>
-                  <input type="text" class="form-control" id="rbc">
-                </div>
-              </div>
-              <div class="col-md-5 col-md-offset-2 col-sm-5 col-sm-offset-2 col-xs-5 col-xs-offset-2">
-                <div class="form-group">
-                  <label for="albumin">Albumin:</label>
-                  <input type="text" class="form-control" id="albumin">
-                </div>
-              </div>
-              <div class="col-md-5 col-sm-5 col-xs-5">
-                <div class="form-group">
-                  <label for="sugar">Sugar:</label>
-                  <input type="text" class="form-control" id="sugar">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2 col-sm-2 col-xs-2">
-                <div class="form-group">
-                  <label>Fecalysis:</label>
-                </div>
-              </div>
-              <div class="col-md-10 col-sm-10 col-xs-10">
-                <div class="form-group">
-                  <label for="macroscopic">Macroscopic:</label>
-                  <input type="text" class="form-control" id="macroscopic">
-                </div>
-              </div>
-              <div class="col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-2">
-                <div class="form-group">
-                  <label for="microscopic">Microscopic (Parasites):</label>
-                  <input type="text" class="form-control" id="microscopic">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2 col-sm-2 col-xs-2">
-                <div class="form-group">
-                  <label>Drug Test:</label>
-                </div>
-              </div>
-              <div class="col-md-10 col-sm-10 col-xs-10">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="drug-test">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2 col-sm-2 col-xs-2">
-                <div class="form-group">
-                  <label>Chest X-Ray:</label>
-                </div>
-              </div>
-              <div class="col-md-10 col-sm-10 col-xs-10">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="chest-xray">
-                </div>
-              </div>
-            </div>
-          </div> --}}
-
-
-
-
-          {{-- REMARKS --}}
-          {{-- <div class="remarks" id="remarksDiv1" style="background-color:#f8f8f8; padding:5px;">
-            <h4>Remarks</h4>
-            <div class="row">
-              <div class="col-md-2 col-sm-2 col-xs-2">
-                <div class="form-group">
-                  <label>Remarks:</label>
-                </div>
-              </div>
-              <div class="col-md-10 col-sm-10 col-xs-10">
-                <div class="form-group">
-                  <textarea class="form-control" rows="10" id="remarks"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-          PRESCRIPTION
-          <div class="prescription" id="prescriptionDiv1" style="padding:5px;">
-            <h4>Prescription</h4>
-            <div class="row">
-              <div class="col-md-2 col-sm-2 col-xs-2">
-                <div class="form-group">
-                  <label>Prescription:</label>
-                </div>
-              </div>
-              <div class="col-md-10 col-sm-10 col-xs-10">
-                <div class="form-group">
-                  <textarea class="form-control" rows="10" id="prescription"></textarea>
-                </div>
-              </div>
-            </div>
-          </div> --}}
         </div>
         <br/>
-        <span style="float: right"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#proceedToAddNewMedicalRecord">Add Record</button></span>
+        <span  id="addNewMedicalRecordWConfirmRequests" style="float: right; display: none;"><button type="button" class="btn btn-success" data-toggle="modal"data-target="#proceedToAddNewMedicalRecord">Add Record</button></span>
 
         <div id="proceedToAddNewMedicalRecord" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
 	        <div class="modal-dialog">

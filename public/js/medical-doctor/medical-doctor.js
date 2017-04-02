@@ -1090,22 +1090,31 @@ $("#search_patient").keyup(function(){
   					$('#searchResults').html("<tr><td>No results found.</td></tr>");
   				}
   			});
-	// }
-	// else if($('#search_patient').val()==''){
-	// 	$('#searchloading').hide();
-	// 	$('#searchTable').hide();
-	// 	$('#searchResults').html("");
-	// 	$('#searchlistofallpatients').show();
-	// }
-	// else
-	// {
-	// 	$('#searchloading').hide();
-	// 	$('#searchTable').hide();
-	// 	$('#searchResults').html("");
-	// 	$('#searchlistofallpatients').show();
-	// }
+	
 });
+var checkboxMedicalServiceCounter = 0;
+$('.checkboxMedicalService').click(function(){
 
+	if($(this).is(':checked'))
+	{
+		checkboxMedicalServiceCounter++;
+	}
+	else
+	{
+		checkboxMedicalServiceCounter--;
+	}
+	if(checkboxMedicalServiceCounter>0)
+	{
+		$('#addNewMedicalRecordWConfirmRequests').show();
+		$('input[type="text"]').removeAttr('disabled');
+	}
+	else
+	{
+		$('#addNewMedicalRecordWConfirmRequests').hide();
+		$('input[type="text"]').val('');
+		$('input[type="text"]').attr('disabled', 'disabled');
+	}
+});
 $('.listofallpatients').click(function()
 {
 	var patientId = $(this).attr('id').split('_')[1];
