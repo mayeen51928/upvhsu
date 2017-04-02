@@ -34,8 +34,7 @@ class XrayController extends Controller
 	}
 	public function dashboard()
 	{
-		$params['xray_requests'] = MedicalAppointment::where('medical_appointments.has_lab_or_xray_request', '1')
-		->join('chest_xray_results', 'chest_xray_results.medical_appointment_id', 'medical_appointments.id')
+		$params['xray_requests'] = MedicalAppointment::join('chest_xray_results', 'chest_xray_results.medical_appointment_id', 'medical_appointments.id')
 		->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')
         ->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')
         ->join('staff_info', 'medical_schedules.staff_id', 'staff_info.staff_id')

@@ -46,7 +46,6 @@
 							<td>{{date_format(date_create($xray_request->created_at), 'F j, Y')}}</td>
 							<td>{{$xray_request->staff_first_name}} {{$xray_request->staff_last_name}}</td>
 							<td><button class="btn btn-info btn-xs addXrayResult" id="addXrayResult_{{$xray_request->id}}">Details</button></td>
-							{{-- <td><button class="btn btn-primary btn-xs addBillingToXray" id="addBillingToXray_{{$xray_request->id}}">Billing</button></td> --}}
 						</tr>
 						@endforeach
 					</tbody>
@@ -113,7 +112,7 @@
 									<div class="row">
 										<div class="form-group col-md-12">
 											<label for="chest-xray">Chest Xray:</label>
-											<textarea class="form-control" rows="7" name="chest-xray" id="chest-xray" required></textarea>
+											<textarea class="form-control" rows="7" name="chest-xray" id="chest-xray" required disabled></textarea>
 										</div>
 									</div>
 								</div>
