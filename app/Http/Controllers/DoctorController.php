@@ -241,8 +241,8 @@ class DoctorController extends Controller
 
     public function viewmedicaldiagnosis(Request $request)
     {
-        $counter = 0;
-        $appointment_id = $request->appointment_id;
+    $counter = 0;
+    $appointment_id = $request->appointment_id;
 
 		$medical_appointment = MedicalAppointment::find($appointment_id);
 		$patient_info = Patient::where('patient_id', $medical_appointment->patient_id)->first();
@@ -292,7 +292,7 @@ class DoctorController extends Controller
 		{
 			$counter++;
 		}
-		// dd($counter);
+		$medical_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'medical')->get();
 		if($counter > 0)
 		{
 			return response()->json([
@@ -308,6 +308,7 @@ class DoctorController extends Controller
 				'lab_xray_request_counter' => $lab_xray_request_counter,
 				'remark' => $remark,
 				'prescription' => $prescription,
+				'medical_billing_status' => $medical_billing_status,
 			]);
 		}
 		else
@@ -316,6 +317,7 @@ class DoctorController extends Controller
 				'patient_name' =>$patient_info->patient_first_name.' '.$patient_info->patient_last_name,
 				'reasons' => $medical_appointment->reasons,
 				'hasRecord' => 'no',
+				'medical_billing_status' => $medical_billing_status,
 				]);
 		}
 		
@@ -697,8 +699,6 @@ class DoctorController extends Controller
 			$params['has_existing_appointment'] = 2; //Doctor did not add a schedule for today. Therefore, he is not allowed to add records today.
 		}
 		
-		// dd(count($medical_schedule));
-		// dd($params['has_existing_appointment']);
 		$params['patient_info'] = Patient::find($id);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
@@ -707,15 +707,12 @@ class DoctorController extends Controller
 
 	public function addrecord(Request $request)
 	{
-		// dd($request->requestCBC); //returns "on"
-		// Add medical appointment
 		$medical_schedule_id = MedicalSchedule::where('schedule_day', date('Y-m-d'))->where('staff_id', Auth::user()->user_id)->first()->id;
-		// dd($medical_schedule_id);
 		$medical_appointment = new MedicalAppointment;
 		$medical_appointment->patient_id = $request->patient_id;
 		$medical_appointment->medical_schedule_id = $medical_schedule_id;
 		$medical_appointment->reasons = 'Walk-in patient';
-		if($request->requestCBC == 'on' || $request->requestUrinalysis == 'on' || $request->requestFecalysis == 'on' || $request->requestDrugTest == 'on' || $request->requestXray == 'on')
+		if($request->requestCBC == 'on' || $request->requestUrinalysis == 'on' || $request->requestFecalysis == 'on' || $request->requestDrugTest == 'on')
         {
         	$medical_appointment->has_lab_or_xray_request = '1';
         }
@@ -799,7 +796,7 @@ class DoctorController extends Controller
         $physical_examination->skin = $request->skin;
         $physical_examination->extremities = $request->extremities;
         $physical_examination->save();
-        if($request->request_cbc == 'yes' || $request->request_urinalysis == 'yes' || $request->request_fecalysis == 'yes' || $request->request_drug_test == 'yes' || $request->request_xray == 'yes')
+        if($request->request_cbc == 'yes' || $request->request_urinalysis == 'yes' || $request->request_fecalysis == 'yes' || $request->request_drug_test == 'yes')
         {
         	$medical_appointment = MedicalAppointment::find($request->appointment_id);
         	$medical_appointment->has_lab_or_xray_request = '1';
@@ -835,6 +832,24 @@ class DoctorController extends Controller
             $request_xray->medical_appointment_id = $request->appointment_id;
             $request_xray->save();
         }
+        dd($request->medical_services_id);
+        $patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
+        for($i = 0; $i < sizeof($request->medical_services_id); $i++){
+					$billing = new MedicalBilling;
+					$billing->medical_service_id = $request->medical_services_id[$i];
+					$billing->medical_appointment_id = $request->appointment_id;
+					$billing->status = 'unpaid';
+					if($patient_type_id == 1){
+						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('student_rate')->first();
+					}
+					elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
+					}
+					else{
+						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('opd_rate')->first();
+					}
+					$billing->save();
+				}
     }
 
     public function updatemedicaldiagnosis(Request $request)
@@ -910,59 +925,4 @@ class DoctorController extends Controller
         }
     }
 
-	public function addbillingmedical(Request $request){
-		$appointment_id = $request->appointment_id;
-
-		$patient_info = DB::table('patient_info')
-					->join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')
-					->where('medical_appointments.id', $appointment_id)
-					->first();
-		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
-
-		$checker = 0;
-		$physical_examination_checker = PhysicalExamination::where('medical_appointment_id', $appointment_id)->first();
-		$remarks_checker = Remark::where('medical_appointment_id', $appointment_id)->first();
-		$prescription_checker = Prescription::where('medical_appointment_id', $appointment_id)->first();		
-		if(count($physical_examination_checker)>0 && count($remarks_checker)>0 && count($prescription_checker)>0){
-			$checker = 1;
-		}
-
-		$display_medical_services = MedicalService::where('patient_type_id', $patient_info->patient_type_id)->where('service_type', 'medical')->get();
-
-		if($patient_info->patient_type_id == 5){
-			$display_medical_services_senior = MedicalService::where('patient_type_id',6)->where('service_type', 'medical')->get();
-		}
-
-		if($patient_info->patient_type_id == 5){
-				return response()->json(['patient_info' => $patient_info, 
-							'display_medical_services' => $display_medical_services,
-							'display_medical_services_senior' => $display_medical_services_senior,  
-							'checker' => $checker,
-							'patient_type_id' => $patient_info->patient_type_id,
-			]);
-		}
-		else{
-			return response()->json(['patient_info' => $patient_info, 
-							'display_medical_services' => $display_medical_services,
-							'checker' => $checker,
-							'patient_type_id' => $patient_info->patient_type_id,
-			]);
-		}
-	}
-
-	public function confirmbillingmedical(Request $request){		
-		$appointment_id = $request->appointment_id;
-		$checked_services_array_id = $request->checked_services_array_id;
-		$checked_services_array_rate = $request->checked_services_array_rate;
-		for($i=0; $i < sizeof($checked_services_array_id); $i++){
-	    $billing = new MedicalBilling;
-			$billing->medical_service_id = $checked_services_array_id[$i];
-      $billing->medical_appointment_id = $appointment_id;
-      $billing->status = 'unpaid';
-      $billing->amount = $checked_services_array_rate[$i];
-      $billing->save();
-		}
-		MedicalAppointment::where('id', $appointment_id)->update(['status' => '1']);
-		return response()->json(['success' => 'success']); 
-	}
 }
