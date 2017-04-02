@@ -71,7 +71,6 @@ $('.addXrayResult').click(function(){
 		      	$('#add-xray-result').modal('hide');
 		      	$('#chest-xray').val('');
 		      	$('#addXrayResult_'+medical_appointment_id).closest("tr").remove();
-		      	console.log(xray_status);
 		      	// $("#addXrayResult_"+xray_id).prop( "disabled", true );
 	      });
 		  }
@@ -85,7 +84,6 @@ $('.addXrayResult').click(function(){
 					xray_status: xray_status,
       	} , function(data){
 		      	$('#add-xray-result').modal('hide');
-		      	console.log(xray_status);
 	      });
 		  }
 		});

@@ -72,7 +72,7 @@ class XrayController extends Controller
 	{
 		$patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
 		$xray_billing = MedicalBilling::join('medical_services', 'medical_services.id', 'medical_billings.medical_service_id')->where('medical_appointment_id',  $request->medical_appointment_id)->where('medical_services.service_type', 'xray')->get();
-		if($request->lab_status == 1){
+		if($request->xray_status == 1){
 			ChestXrayResult::where('medical_appointment_id', $request->medical_appointment_id)->update(array('status' => '1'));
 		}
 		if(count($xray_billing) == 0){
