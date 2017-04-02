@@ -166,12 +166,18 @@ $('.addLabResult').click(function(){
 		$('#add-lab-result-footer').append('<button type="button" class="btn btn-success addLabResultButton" id="addLabResultButton_'+medical_appointment_id+'">Save</button><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>')
 		$('.addLabResultButton').click(function(){
 			var medical_appointment_id = $(this).attr('id').split("_")[1];
+			lab_status = 0;
+			if($.trim($('#hemoglobin-lab').val()).length != 0 && $.trim($('#hemasocrit-lab').val()).length != 0 && $.trim($('#wbc-lab').val()).length != 0 && $.trim($('#drug-test-lab').val()).length != 0 && $.trim($('#macroscopic-lab').val()).length != 0 && $.trim($('#microscopic-lab').val()).length != 0 && $.trim($('#pus-cells-lab').val()).length != 0 && $.trim($('#rbc-lab').val()).length != 0 && $.trim($('#albumin-lab').val()).length != 0 && $.trim($('#sugar-lab').val()).length != 0){
+			  $('#addLabResult_'+medical_appointment_id).closest("tr").remove();
+			  lab_status = 1;
+			}
 			cbc_services_id=[];
 			$("input:checkbox.checkboxLabService").each(function(){
 					if($(this).is(":checked")){
 							cbc_services_id.push($(this).attr("id"));
 					}
 			});
+			console.log(lab_status);
 			$.post('/updatelabdiagnosis',
 				{
 					medical_appointment_id: medical_appointment_id,
@@ -193,6 +199,7 @@ $('.addLabResult').click(function(){
 					drug_service_id: data['drug_billing_services'].id,
 					fecalysis_service_id: data['fecalysis_billing_services'].id,
 					urinalysis_service_id: data['urinalysis_billing_services'].id,
+					lab_status: lab_status,
 
 			}, function(data, textStatus, xhr) {
 				$('#cbccountpanel').load(location.href + " #cbccount");

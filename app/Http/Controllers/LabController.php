@@ -92,7 +92,7 @@ class LabController extends Controller
 			$drug_billing_services = MedicalService::where('service_type', 'drugtest')->first();
 			$fecalysis_billing_services = MedicalService::where('service_type', 'fecalysis')->first();
 			$urinalysis_billing_services = MedicalService::where('service_type', 'urinalysis')->first();
-			$cbc_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->where('medical_billings.medical_appointment_id', $appointment_id)->get();
+			$cbc_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'cbc')->orWhere('medical_services.service_type', 'drugtest')->orWhere('medical_services.service_type', 'fecalysis')->orWhere('medical_services.service_type', 'urinalysis')->get();
 			return response()->json([
 				'patient_type_id' => $patient_type_id,
 				'cbc_result' => $cbc_result,
@@ -110,7 +110,13 @@ class LabController extends Controller
 		public function updatelabdiagnosis(Request $request)
 		{
 			$patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
-			$lab_billing = MedicalBilling::where('medical_appointment_id',  $request->medical_appointment_id)->get();
+			$lab_billing = MedicalBilling::join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_appointment_id',  $request->medical_appointment_id)->where('medical_services.service_type', 'cbc')->orWhere('medical_services.service_type', 'drugtest')->orWhere('medical_services.service_type', 'fecalysis')->orWhere('medical_services.service_type', 'urinalysis')->get();
+			if($request->lab_status == 1){
+				CbcResult::where('medical_appointment_id', $request->medical_appointment_id)->update(array('status' => '1'));
+				DrugTestResult::where('medical_appointment_id', $request->medical_appointment_id)->update(array('status' => '1'));
+				UrinalysisResult::where('medical_appointment_id', $request->medical_appointment_id)->update(array('status' => '1'));
+				FecalysisResult::where('medical_appointment_id', $request->medical_appointment_id)->update(array('status' => '1'));
+			}
 			if(count($lab_billing) == 0){
 				for($i = 0; $i < sizeof($request->cbc_services_id); $i++){
 					$billing = new MedicalBilling;

@@ -78,111 +78,18 @@
 						</div>
 						<div id="xraybillingaccordion" class="panel-collapse collapse in">
 							<div class="panel-body">
-								<div class="xraybilling row">
-								<div class="table-responsive col-md-6">
-										<table class="table displayServices">
-											<tbody>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="39"></td>
-													<td class="xrayService">Lumbo Sacral Apl</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="40"></td>
-													<td class="xrayService">Skull Apl/View</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="41"></td>
-													<td class="xrayService">Critical/View</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="42"></td>
-													<td class="xrayService">Pelvis</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="43"></td>
-													<td class="xrayService">Hip</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="44"></td>
-													<td class="xrayService">Foot Apl</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="45"></td>
-													<td class="xrayService">Leg</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="46"></td>
-													<td class="xrayService">Knee Apl</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="47"></td>
-													<td class="xrayService">Thigh Apl</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="48"></td>
-													<td class="xrayService">Ankle</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="49"></td>
-													<td class="xrayService">Chest Pa-ap</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="50"></td>
-													<td class="xrayService">Chest Lateral</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-									<div class="table-responsive col-md-6">
-										<table class="table displayServices">
-											<tbody>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="51"></td>
-													<td class="xrayService">Apico-Lordotic</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="52"></td>
-													<td class="xrayService">Chest Bucky</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="53"></td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="54"></td>
-													<td class="xrayService">Hand</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="55"></td>
-													<td class="xrayService">Wrist</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="56"></td>
-													<td class="xrayService">Forearm Apl</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="57"></td>
-													<td class="xrayService">Elbow Apl</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="58"></td>
-													<td class="xrayService">Upper Arm</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="59"></td>
-													<td class="xrayService">Shoulder</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="60"></td>
-													<td class="xrayService">Clavicle</td>
-												</tr>
-												<tr>
-													<td><input type="checkbox" class="checkboxXrayService" id="61"></td>
-													<td class="xrayService">Scapula</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
+								<div class="row">
+                  <div id="patient_type_radio_xray" class="radio" style="margin-left:20px;display:none;">
+                    <label><input type="radio" name="xray_radio_button_medical" id="xray_radio_button_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
+                    <label><input type="radio" name="xray_radio_button_medical" id="xray_radio_button_billing_senior" value="6">Senior Citizen</label>
+                  </div>
+              		<div class="table-responsive col-md-6">
+                    <table class="table table-hover displayServices"></table>
+                  </div>
+                  <div class="table-responsive col-md-6">
+                    <table class="table table-hover displayServices2"></table>
+                  </div>
+              	</div>
 							</div>
 						</div>
 					</div>
