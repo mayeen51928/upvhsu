@@ -143,7 +143,7 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#medicalbillingaccordion">Tests Conducted</a>
+									<a data-toggle="collapse" data-parent="#accordion" href="#medicalbillingaccordion"><span class="glyphicon glyphicon-chevron-down"></span> Tests Conducted</a>
 								</h4>
 							</div>
 							<div id="medicalbillingaccordion" class="panel-collapse collapse in">
@@ -234,7 +234,7 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordion" href="#physicalexamaccordion">Physical Exam</a>
+									<a data-toggle="collapse" data-parent="#accordion" href="#physicalexamaccordion"><span class="glyphicon glyphicon-chevron-right"></span> Physical Exam</a>
 								</h4>
 							</div>
 					<div id="physicalexamaccordion" class="panel-collapse collapse">

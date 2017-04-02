@@ -93,22 +93,7 @@ class LabController extends Controller
 			$fecalysis_billing_services = MedicalService::where('service_type', 'fecalysis')->first();
 			$urinalysis_billing_services = MedicalService::where('service_type', 'urinalysis')->first();
 			$cbc_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'cbc')->orWhere('medical_services.service_type', 'drugtest')->orWhere('medical_services.service_type', 'fecalysis')->orWhere('medical_services.service_type', 'urinalysis')->get();
-			return response()->json([
-				'patient_type_id' => $patient_type_id,
-				'cbc_result' => $cbc_result,
-				'drug_test_result' => $drug_test_result,
-				'fecalysis_result' => $fecalysis_result,
-				'urinalysis_result' => $urinalysis_result,
-				'cbc_billing_services' => $cbc_billing_services,
-				'drug_billing_services' => $drug_billing_services,
-				'fecalysis_billing_services' => $fecalysis_billing_services,
-				'urinalysis_billing_services' => $urinalysis_billing_services,
-				'cbc_billing_status' => $cbc_billing_status,
-				]);
-		}
-
-		public function updatelabdiagnosis(Request $request)
-		{
+			
 			$patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
 			$lab_billing = MedicalBilling::join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_appointment_id',  $request->medical_appointment_id)->where('medical_services.service_type', 'cbc')->orWhere('medical_services.service_type', 'drugtest')->orWhere('medical_services.service_type', 'fecalysis')->orWhere('medical_services.service_type', 'urinalysis')->get();
 			if($request->lab_status == 1){
@@ -180,6 +165,23 @@ class LabController extends Controller
 				}
 				$billing->save();
 			}
+			
+			return response()->json([
+				'patient_type_id' => $patient_type_id,
+				'cbc_result' => $cbc_result,
+				'drug_test_result' => $drug_test_result,
+				'fecalysis_result' => $fecalysis_result,
+				'urinalysis_result' => $urinalysis_result,
+				'cbc_billing_services' => $cbc_billing_services,
+				'drug_billing_services' => $drug_billing_services,
+				'fecalysis_billing_services' => $fecalysis_billing_services,
+				'urinalysis_billing_services' => $urinalysis_billing_services,
+				'cbc_billing_status' => $cbc_billing_status,
+				]);
+		}
+
+		public function updatelabdiagnosis(Request $request)
+		{
 			$cbc = CbcResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
 			if(count($cbc)==1 && ($request->hemoglobin!='' || $request->hemasocrit!='' || $request->wbc!='' ))
 			{
