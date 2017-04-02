@@ -4,6 +4,29 @@ $(document).ready(function(){
 });
 
 // ------------------DASHBOARD---------------
+var checkboxXrayServiceCounter = 0;
+$('.checkboxXrayService').click(function(){
+
+	if($(this).is(':checked'))
+	{
+		checkboxXrayServiceCounter++;
+	}
+	else
+	{
+		checkboxXrayServiceCounter--;
+	}
+	if(checkboxXrayServiceCounter>0)
+	{
+		$('#chest-xray').removeAttr('disabled');
+		$('.addXrayResultButton').fadeIn();
+	}
+	else
+	{
+		$('.addXrayResultButton').fadeOut();
+		$('#chest-xray').val('');
+		$('#chest-xray').attr('disabled', 'disabled');
+	}
+});
 
 $('.addXrayResult').click(function(){
 	var medical_appointment_id = $(this).attr('id').split("_")[1];
@@ -16,10 +39,10 @@ $('.addXrayResult').click(function(){
     	{
     		$('#chest-xray').attr('disabled', 'disabled');
     	}
-    	else
-    	{
-    		$('#chest-xray').removeAttr('disabled');
-    	}
+    	// else
+    	// {
+    	// 	$('#chest-xray').removeAttr('disabled');
+    	// }
     }
 		if(data['patient_type_id'] == 5){
 			$('#patient_type_radio_xray').css("display","block");
@@ -27,7 +50,7 @@ $('.addXrayResult').click(function(){
 		else{
 			$('#patient_type_radio_xray').css("display","none");
 		}
-    $('#add-xray-result-footer').append('<button type="button" class="btn btn-success addXrayResultButton" id="addXrayResultButton_'+medical_appointment_id+'">Save</button><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>');
+    $('#add-xray-result-footer').append('<button type="button" style="display: none;" class="btn btn-success addXrayResultButton" id="addXrayResultButton_'+medical_appointment_id+'">Save</button><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>');
 		$('#add-xray-result').modal();
 		$('.addXrayResultButton').click(function(){
 			var medical_appointment_id = $(this).attr('id').split("_")[1];
@@ -57,7 +80,6 @@ $('.addXrayResult').click(function(){
 		});
   });
 });
-
 
 // ------------------PROFILE---------------
 // ------------------SEARCH PATIENT---------------

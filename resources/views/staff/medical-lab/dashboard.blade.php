@@ -113,14 +113,14 @@
       </div>
       <div class="modal-body">
         <div class="panel-group" id="labaccordion">
-          <div class="panel panel-default">
+          <div class="panel panel-default" id="cbcaccordion">
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#labbillingaccordion"><span class="glyphicon glyphicon-chevron-down"></span> Tests Conducted</a>
               </h4>
             </div>
             <div id="labbillingaccordion" class="panel-collapse collapse in">
-              <div class="panel-body">
+              <div class="panel-body" id="labbillingaccordionbody">
                 <div class="row">
                   <div id="patient_type_radio_medical" class="radio" style="margin-left:20px;display:none;">
                     <label><input type="radio" id="medical_radio_button_billing_opd" value="5">OPD</label>&nbsp;&nbsp;&nbsp;
@@ -158,15 +158,15 @@
                   <div class="col-md-10">
                   <div class="form-group">
                     <label for="hemoglobin-lab">Hemoglobin:</label>
-                    <textarea class="form-control" rows="2" name="hemoglobin-lab" id="hemoglobin-lab" required></textarea>
+                    <textarea class="form-control" rows="2" name="hemoglobin-lab" id="hemoglobin-lab" required disabled></textarea>
                   </div>
                   <div class="form-group">
                     <label for="hemasocrit-lab">Hemasocrit:</label>
-                    <textarea class="form-control" rows="2" name="hemasocrit-lab" id="hemasocrit-lab" required></textarea>
+                    <textarea class="form-control" rows="2" name="hemasocrit-lab" id="hemasocrit-lab" required disabled></textarea>
                   </div>
                   <div class="form-group">
                     <label for="wbc-lab">WBC:</label>
-                    <textarea class="form-control" rows="2" name="wbc-lab" id="wbc-lab" required></textarea>
+                    <textarea class="form-control" rows="2" name="wbc-lab" id="wbc-lab" required disabled></textarea>
                   </div>
                   </div>
                   </div>
@@ -232,32 +232,6 @@
         </div>
       </div>
       <div class="modal-footer" id="add-lab-result-footer">
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="labBillingModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="patient_name"></div>
-      </div>
-      <div class="modal-body">
-        <div class="medical_senior_checker_lab">
-          <div class="radio">
-            <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="lab_radio_button_medical" id="lab_radio_button_billing_senior" value="6">Senior Citizen</label>
-          </div>
-        </div>
-        <div class="table-responsive">
-          <table class="table table-bordered table-hover displayServices"></table>
-        </div>
-        <div class="lab-bill-input" id="lab-bill-input-text"></div> 
-      </div>
-      <div class="modal-footer">
-        <div class="lab-bill-confirm" id="lab-bill-confirm-button" style="text-align:center; "></div>
       </div>
     </div>
   </div>

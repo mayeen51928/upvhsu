@@ -20,7 +20,7 @@ class CreateMedicalAppointmentsTable extends Migration
             $table->integer('medical_schedule_id')->unsigned()->index();
             $table->foreign('medical_schedule_id')->references('id')->on('medical_schedules')->onDelete('cascade');
             $table->text('reasons');
-            $table->enum('has_lab_or_xray_request', ['0', '1']);
+            $table->enum('has_lab_request', ['0', '1', '2']); // 0 -> none 1 -> has lab requests -> finished lab requests
             $table->enum('status', ['0', '1', '2']);
             $table->timestamps();
         });

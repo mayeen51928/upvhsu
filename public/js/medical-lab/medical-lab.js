@@ -4,7 +4,35 @@ $.ajaxSetup({
 });
 // ------------------DASHBOARD---------------
 // 
+var checkboxLabServiceCounter = 0;
+$('.checkboxLabService').click(function(){
+
+	if($(this).is(':checked'))
+	{
+		checkboxLabServiceCounter++;
+	}
+	else
+	{
+		checkboxLabServiceCounter--;
+	}
+	if(checkboxLabServiceCounter>0)
+	{
+		$('#hemoglobin-lab').removeAttr('disabled');
+		$('#hemasocrit-lab').removeAttr('disabled');
+		$('#wbc-lab').removeAttr('disabled');
+	}
+	else
+	{
+		$('#hemoglobin-lab').val('');
+		$('#hemasocrit-lab').val('');
+		$('#wbc-lab').val('');
+		$('#hemoglobin-lab').attr('disabled', 'disabled');
+		$('#hemasocrit-lab').attr('disabled', 'disabled');
+		$('#wbc-lab').attr('disabled', 'disabled');
+	}
+});
 $('.addLabResult').click(function(){
+	$('#labbillingaccordion').load(location.href + " #labbillingaccordionbody");
 	var medical_appointment_id = $(this).attr('id').split("_")[1];
 	$('#laboratoryresult-lab #cbc_div, #laboratoryresult-lab #drug_test_div, #laboratoryresult-lab #fecalysis_div, #laboratoryresult-lab #urinalysis_div').hide();
 	$('#hemoglobin-lab, #hemasocrit-lab, #wbc-lab, #macroscopic-lab, #microscopic-lab, #rbc-lab, #pus-cells-lab').val('');
@@ -16,6 +44,7 @@ $('.addLabResult').click(function(){
 	{
 		return this.defaultSelected;
 	});
+	$('#cbcaccordion').hide();
 	$('#add-lab-result-footer').html('');
 	$.post('/viewlabdiagnosis', {medical_appointment_id: medical_appointment_id}, function(data, textStatus, xhr) {
 		if(data['patient_type_id'] == 5){
@@ -26,35 +55,36 @@ $('.addLabResult').click(function(){
 		}
 		if(data['cbc_result'])
 		{
+			$('#cbcaccordion').show();
 			$('#hemoglobin-lab').val(data['cbc_result']['hemoglobin']);
 			if(data['cbc_result']['hemoglobin'])
 			{
 				$('#hemoglobin-lab').attr('disabled', 'disabled');
 			}
-			else
-			{
-				$('#hemoglobin-lab').removeAttr('disabled');
-			}
+			// else
+			// {
+			// 	$('#hemoglobin-lab').removeAttr('disabled');
+			// }
 
 			$('#hemasocrit-lab').val(data['cbc_result']['hemasocrit']);
 			if(data['cbc_result']['hemasocrit'])
 			{
 				$('#hemasocrit-lab').attr('disabled', 'disabled');
 			}
-			else
-			{
-				$('#hemasocrit-lab').removeAttr('disabled');
-			}
+			// else
+			// {
+			// 	$('#hemasocrit-lab').removeAttr('disabled');
+			// }
 
 			$('#wbc-lab').val(data['cbc_result']['wbc']);
 			if(data['cbc_result']['wbc'])
 			{
 				$('#wbc-lab').attr('disabled', 'disabled');
 			}
-			else
-			{
-				$('#wbc-lab').removeAttr('disabled');
-			}
+			// else
+			// {
+			// 	$('#wbc-lab').removeAttr('disabled');
+			// }
 
 			$('#laboratoryresult-lab #cbc_div').show();
 			if(data['cbc_billing_status']){
