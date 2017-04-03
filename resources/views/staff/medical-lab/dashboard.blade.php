@@ -116,7 +116,7 @@
           <div class="panel panel-default" id="cbcaccordion">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#labbillingaccordion"><span class="glyphicon glyphicon-chevron-down"></span> Tests Conducted</a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#labbillingaccordion"><span class="glyphicon glyphicon-chevron-down"></span> Tests Conducted (for CBC only)</a>
               </h4>
             </div>
             <div id="labbillingaccordion" class="panel-collapse collapse in">
