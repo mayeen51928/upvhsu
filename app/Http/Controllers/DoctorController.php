@@ -717,7 +717,7 @@ class DoctorController extends Controller
 		$medical_appointment->reasons = 'Walk-in patient';
 		if($request->requestCBC == 'on' || $request->requestUrinalysis == 'on' || $request->requestFecalysis == 'on' || $request->requestDrugTest == 'on')
         {
-        	$medical_appointment->has_lab_or_xray_request = '1';
+        	$medical_appointment->has_lab_request = '1';
         }
 		$medical_appointment->save();
 
@@ -822,7 +822,7 @@ class DoctorController extends Controller
         if($request->request_cbc == 'yes' || $request->request_urinalysis == 'yes' || $request->request_fecalysis == 'yes' || $request->request_drug_test == 'yes')
         {
         	$medical_appointment = MedicalAppointment::find($request->appointment_id);
-        	$medical_appointment->has_lab_or_xray_request = '1';
+        	$medical_appointment->has_lab_request = '1';
         	$medical_appointment->update();
         }
         if($request->request_cbc == 'yes')
