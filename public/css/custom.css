@@ -451,3 +451,6 @@ textarea {
   background-color: rgba(144, 31, 31, 0.98);
   color: #fff;
 }
+.btn{
+  border-radius: 0px;
+}
