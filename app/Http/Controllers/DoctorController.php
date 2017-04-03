@@ -225,7 +225,7 @@ class DoctorController extends Controller
 	{
 		$schedules = $request->schedules;
 		for($i=0; $i < sizeof($schedules); $i++){
-			if($schedules[$i]!=''){
+			if($schedules[$i]!='' && $schedules[$i]>Carbon::now()->format('Y-m-d')){
 				$checker_if_exists = MedicalSchedule::where('staff_id', Auth::user()->user_id)->where('schedule_day', $schedules[$i])->first();
 				if(count($checker_if_exists) == 0){
 					$schedule = new MedicalSchedule();
