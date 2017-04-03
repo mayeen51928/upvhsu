@@ -698,6 +698,8 @@ class DoctorController extends Controller
 		{
 			$params['has_existing_appointment'] = 2; //Doctor did not add a schedule for today. Therefore, he is not allowed to add records today.
 		}
+
+		$params['medical_billing_services'] = MedicalService::where('service_type', 'medical')->get();
 		
 		$params['patient_info'] = Patient::find($id);
 		$params['navbar_active'] = 'account';
@@ -769,6 +771,26 @@ class DoctorController extends Controller
             $request_xray->medical_appointment_id = $medical_appointment_id;
             $request_xray->save();
         }
+
+        dd($request->medical_services_id);
+
+        $patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
+        for($i = 0; $i < sizeof($request->medical_services_id); $i++){
+					$billing = new MedicalBilling;
+					$billing->medical_service_id = $request->medical_services_id[$i];
+					$billing->medical_appointment_id = $medical_appointment_id;
+					$billing->status = 'unpaid';
+					if($patient_type_id == 1){
+						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('student_rate')->first();
+					}
+					elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
+					}
+					else{
+						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('opd_rate')->first();
+					}
+					$billing->save();
+				}
 		$params['patient_info'] = Patient::find($request->patient_id);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
@@ -832,7 +854,6 @@ class DoctorController extends Controller
             $request_xray->medical_appointment_id = $request->appointment_id;
             $request_xray->save();
         }
-        dd($request->medical_services_id);
         $patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
         for($i = 0; $i < sizeof($request->medical_services_id); $i++){
 					$billing = new MedicalBilling;
