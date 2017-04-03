@@ -225,6 +225,7 @@ class LabController extends Controller
 		$urinalysis = UrinalysisResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
 		if(count($urinalysis)==1 && ($request->pus_cells !='' || $request->rbc !='' || $request->albumin !='' || $request->sugar !=''))
 			{
+				$urinalysis->lab_staff_id = Auth::user()->user_id;
 				if($request->pus_cells!='')
 				{
 					$urinalysis->pus_cells = $request->pus_cells;

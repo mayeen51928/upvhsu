@@ -325,7 +325,7 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatient(){
-		$params['patients'] = MedicalAppointment::select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->paginate(20);
+		$params['patients'] = MedicalAppointment::where('status', 2)->select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->paginate(20);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		
@@ -604,7 +604,7 @@ class DoctorController extends Controller
 
 	public function viewrecords($id)
 	{
-		$params['records'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->orderBy('schedule_day', 'desc')->get();
+		$params['records'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->where('status', '2')->orderBy('schedule_day', 'desc')->get();
 		// dd($params['records']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';

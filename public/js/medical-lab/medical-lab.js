@@ -6,7 +6,7 @@ $.ajaxSetup({
 // 
 var checkboxLabServiceCounter = 0;
 $('.checkboxLabService').click(function(){
-
+	console.log('hello');
 	if($(this).is(':checked'))
 	{
 		checkboxLabServiceCounter++;
@@ -32,7 +32,8 @@ $('.checkboxLabService').click(function(){
 	}
 });
 $('.addLabResult').click(function(){
-	$('#labbillingaccordion').load(location.href + " #labbillingaccordionbody");
+	$('.checkboxLabService').removeAttr('disabled').removeAttr('checked');
+	// $('#labbillingaccordion').load(location.href + " #labbillingaccordionbody");
 	var medical_appointment_id = $(this).attr('id').split("_")[1];
 	$('#laboratoryresult-lab #cbc_div, #laboratoryresult-lab #drug_test_div, #laboratoryresult-lab #fecalysis_div, #laboratoryresult-lab #urinalysis_div').hide();
 	$('#hemoglobin-lab, #hemasocrit-lab, #wbc-lab, #macroscopic-lab, #microscopic-lab, #rbc-lab, #pus-cells-lab').val('');
