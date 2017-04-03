@@ -293,6 +293,7 @@ class DoctorController extends Controller
 			$counter++;
 		}
 		$medical_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'medical')->get();
+		
 		if($counter > 0)
 		{
 			return response()->json([
@@ -772,9 +773,9 @@ class DoctorController extends Controller
             $request_xray->save();
         }
 
-        dd($request->medical_services_id);
 
-        $patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
+        $patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $medical_appointment_id)->pluck('patient_type_id')->first();
+ 
         for($i = 0; $i < sizeof($request->medical_services_id); $i++){
 					$billing = new MedicalBilling;
 					$billing->medical_service_id = $request->medical_services_id[$i];

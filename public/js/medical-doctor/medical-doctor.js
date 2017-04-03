@@ -172,7 +172,7 @@ $('.addMedicalRecordButton').click(function() {
 	$('#create-medical-record-modal #hemoglobin, #create-medical-record-modal #hemasocrit, #create-medical-record-modal #wbc, #create-medical-record-modal #pus-cells, #create-medical-record-modal #rbc, #create-medical-record-modal #albumin, #create-medical-record-modal #sugar, #create-medical-record-modal #macroscopic, #create-medical-record-modal #microscopic, #create-medical-record-modal #drug-test, #create-medical-record-modal #chest-xray').attr('disabled', 'disabled');
 	$('#create-medical-record-modal #height').focus();
 	$('.medical-button-container').html("");
-	
+	$('.checkboxMedicalService').removeAttr('checked').removeAttr('disabled');
 	if($(this).attr('id')){
 		var appointment_id = $(this).attr('id').split("_")[1];
 		$.post('/viewmedicaldiagnosis',
@@ -217,7 +217,7 @@ $('.addMedicalRecordButton').click(function() {
 				$('.medical-button-container .add-medical-record-button').click(function(){
 					medical_services_id=[];
 					$("input:checkbox.checkboxMedicalService").each(function(){
-							if($(this).is(":checked")){
+							if($(this).is(":checked") && !$(this).attr("disabled")){
 									medical_services_id.push($(this).attr("id"));
 							}
 					});
@@ -353,6 +353,12 @@ $('.addMedicalRecordButton').click(function() {
 					$('#extremities').val(data['physical_examination']['extremities']);
 					$('#physicalexamination input').attr('disabled', 'disabled');
 					$('.checkboxMedicalService').removeAttr('disabled');
+
+					for (var i = 0; i < data['medical_billing_status'].length; i++){
+						$('#'+data['medical_billing_status'][i].medical_service_id+'.checkboxMedicalService').prop('checked', true);
+						$('.checkboxMedicalService').prop('disabled', true);
+						$('#patient_type_radio_lab').prop('disabled', true);
+					}
 				}
 				else
 				{
