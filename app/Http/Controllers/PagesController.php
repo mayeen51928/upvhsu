@@ -49,54 +49,54 @@ class PagesController extends Controller
 		$user = Auth::user();
 		$params['navbar_active'] = 'about';
 
-		$studentdisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '1')->get();
-		$facultydisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '2')->get();
-		$staffdisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '3')->get();
-		$dependentdisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '4')->get();
-		$opddisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '5')->get();
-		$seniordisplaymedicalservices = MedicalService::where('service_type', 'medical')->where('patient_type_id', '6')->get();
+		$studentdisplaymedicalservices = MedicalService::where('service_type', 'medical')->select('service_description', 'student_rate')->get();
+		$facultydisplaymedicalservices = MedicalService::where('service_type', 'medical')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$staffdisplaymedicalservices = MedicalService::where('service_type', 'medical')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$dependentdisplaymedicalservices = MedicalService::where('service_type', 'medical')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$opddisplaymedicalservices = MedicalService::where('service_type', 'medical')->select('service_description', 'opd_rate')->get();
+		$seniordisplaymedicalservices = MedicalService::where('service_type', 'medical')->select('service_description', 'senior_rate')->get();
 
-		$studentdisplaydentalservices = DentalService::where('patient_type_id', '1')->get();
-		$facultydisplaydentalservices = DentalService::where('patient_type_id', '2')->get();
-		$staffdisplaydentalservices = DentalService::where('patient_type_id', '3')->get();
-		$dependentdisplaydentalservices = DentalService::where('patient_type_id', '4')->get();
-		$opddisplaydentalservices = DentalService::where('patient_type_id', '5')->get();
-		$seniordisplaydentalservices = DentalService::where('patient_type_id', '6')->get();
+		$studentdisplaydentalservices = DentalService::select('service_description', 'student_rate')->get();
+		$facultydisplaydentalservices = DentalService::select('service_description', 'faculty_staff_dependent_rate')->get();
+		$staffdisplaydentalservices = DentalService::select('service_description', 'faculty_staff_dependent_rate')->get();
+		$dependentdisplaydentalservices = DentalService::select('service_description', 'faculty_staff_dependent_rate')->get();
+		$opddisplaydentalservices = DentalService::select('service_description', 'opd_rate')->get();
+		$seniordisplaydentalservices = DentalService::select('service_description', 'senior_rate')->get();
 
-		$studentdisplaycbcservices = MedicalService::where('service_type', 'cbc')->where('patient_type_id', '1')->get();
-		$facultydisplaycbcservices = MedicalService::where('service_type', 'cbc')->where('patient_type_id', '2')->get();
-		$staffdisplaycbcservices = MedicalService::where('service_type', 'cbc')->where('patient_type_id', '3')->get();
-		$dependentdisplaycbcservices = MedicalService::where('service_type', 'cbc')->where('patient_type_id', '4')->get();
-		$opddisplaycbcservices = MedicalService::where('service_type', 'cbc')->where('patient_type_id', '5')->get();
-		$seniordisplaycbcservices = MedicalService::where('service_type', 'cbc')->where('patient_type_id', '6')->get();
+		$studentdisplaycbcservices = MedicalService::where('service_type', 'cbc')->select('service_description', 'student_rate')->get();
+		$facultydisplaycbcservices = MedicalService::where('service_type', 'cbc')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$staffdisplaycbcservices = MedicalService::where('service_type', 'cbc')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$dependentdisplaycbcservices = MedicalService::where('service_type', 'cbc')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$opddisplaycbcservices = MedicalService::where('service_type', 'cbc')->select('service_description', 'opd_rate')->get();
+		$seniordisplaycbcservices = MedicalService::where('service_type', 'cbc')->select('service_description', 'senior_rate')->get();
 
-		$studentdisplaydrugservices = MedicalService::where('service_type', 'drugtest')->where('patient_type_id', '1')->get();
-		$facultydisplaydrugservices = MedicalService::where('service_type', 'drugtest')->where('patient_type_id', '2')->get();
-		$staffdisplaydrugservices = MedicalService::where('service_type', 'drugtest')->where('patient_type_id', '3')->get();
-		$dependentdisplaydrugservices = MedicalService::where('service_type', 'drugtest')->where('patient_type_id', '4')->get();
-		$opddisplaydrugservices = MedicalService::where('service_type', 'drugtest')->where('patient_type_id', '5')->get();
-		$seniordisplaydrugservices = MedicalService::where('service_type', 'drugtest')->where('patient_type_id', '6')->get();
+		$studentdisplaydrugservices = MedicalService::where('service_type', 'drugtest')->select('service_description', 'student_rate')->get();
+		$facultydisplaydrugservices = MedicalService::where('service_type', 'drugtest')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$staffdisplaydrugservices = MedicalService::where('service_type', 'drugtest')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$dependentdisplaydrugservices = MedicalService::where('service_type', 'drugtest')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$opddisplaydrugservices = MedicalService::where('service_type', 'drugtest')->select('service_description', 'opd_rate')->get();
+		$seniordisplaydrugservices = MedicalService::where('service_type', 'drugtest')->select('service_description', 'senior_rate')->get();
 
-		$studentdisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->where('patient_type_id', '1')->get();
-		$facultydisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->where('patient_type_id', '2')->get();
-		$staffdisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->where('patient_type_id', '3')->get();
-		$dependentdisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->where('patient_type_id', '4')->get();
-		$opddisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->where('patient_type_id', '5')->get();
-		$seniordisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->where('patient_type_id', '6')->get();
+		$studentdisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->select('service_description', 'student_rate')->get();
+		$facultydisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$staffdisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$dependentdisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$opddisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->select('service_description', 'opd_rate')->get();
+		$seniordisplayfecalysisservices = MedicalService::where('service_type', 'fecalysis')->select('service_description', 'senior_rate')->get();
 
-		$studentdisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->where('patient_type_id', '1')->get();
-		$facultydisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->where('patient_type_id', '2')->get();
-		$staffdisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->where('patient_type_id', '3')->get();
-		$dependentdisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->where('patient_type_id', '4')->get();
-		$opddisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->where('patient_type_id', '5')->get();
-		$seniordisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->where('patient_type_id', '6')->get();
+		$studentdisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->select('service_description', 'student_rate')->get();
+		$facultydisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$staffdisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$dependentdisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$opddisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->select('service_description', 'opd_rate')->get();
+		$seniordisplayurinalysisservices = MedicalService::where('service_type', 'urinalysis')->select('service_description', 'senior_rate')->get();
 
-		$studentdisplayxrayservices = MedicalService::where('service_type', 'xray')->where('patient_type_id', '1')->get();
-		$facultydisplayxrayservices = MedicalService::where('service_type', 'xray')->where('patient_type_id', '2')->get();
-		$staffdisplayxrayservices = MedicalService::where('service_type', 'xray')->where('patient_type_id', '3')->get();
-		$dependentdisplayxrayservices = MedicalService::where('service_type', 'xray')->where('patient_type_id', '4')->get();
-		$opddisplayxrayservices = MedicalService::where('service_type', 'xray')->where('patient_type_id', '5')->get();
-		$seniordisplayxrayservices = MedicalService::where('service_type', 'xray')->where('patient_type_id', '6')->get();
+		$studentdisplayxrayservices = MedicalService::where('service_type', 'xray')->select('service_description', 'student_rate')->get();
+		$facultydisplayxrayservices = MedicalService::where('service_type', 'xray')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$staffdisplayxrayservices = MedicalService::where('service_type', 'xray')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$dependentdisplayxrayservices = MedicalService::where('service_type', 'xray')->select('service_description', 'faculty_staff_dependent_rate')->get();
+		$opddisplayxrayservices = MedicalService::where('service_type', 'xray')->select('service_description', 'opd_rate')->get();
+		$seniordisplayxrayservices = MedicalService::where('service_type', 'xray')->select('service_description', 'senior_rate')->get();
 
 		return view('about', $params, compact('studentdisplaymedicalservices', 'facultydisplaymedicalservices', 'staffdisplaymedicalservices', 'dependentdisplaymedicalservices', 'opddisplaymedicalservices', 'seniordisplaymedicalservices',
 																					'studentdisplaydentalservices', 'facultydisplaydentalservices', 'staffdisplaydentalservices', 'dependentdisplaydentalservices', 'opddisplaydentalservices', 'seniordisplaydentalservices',   

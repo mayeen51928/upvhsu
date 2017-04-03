@@ -94,7 +94,7 @@
 								@foreach($studentdisplaymedicalservices as $studentdisplaymedicalservice)
 								<tr>
 									<td>{{ $studentdisplaymedicalservice->service_description }}</td>
-									<td>Php {{ $studentdisplaymedicalservice->service_rate }}</td>
+									<td>Php {{ $studentdisplaymedicalservice->student_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -112,7 +112,7 @@
 								@foreach($facultydisplaymedicalservices as $facultydisplaymedicalservice)
 								<tr>
 									<td>{{ $facultydisplaymedicalservice->service_description }}</td>
-									<td>Php {{ $facultydisplaymedicalservice->service_rate }}</td>
+									<td>Php {{ $facultydisplaymedicalservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -130,7 +130,7 @@
 								@foreach($staffdisplaymedicalservices as $staffdisplaymedicalservice)
 								<tr>
 									<td>{{ $staffdisplaymedicalservice->service_description }}</td>
-									<td>Php {{ $staffdisplaymedicalservice->service_rate }}</td>
+									<td>Php {{ $staffdisplaymedicalservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -148,7 +148,7 @@
 								@foreach($dependentdisplaymedicalservices as $dependentdisplaymedicalservice)
 								<tr>
 									<td>{{ $dependentdisplaymedicalservice->service_description }}</td>
-									<td>{{ $dependentdisplaymedicalservice->service_rate }}</td>
+									<td>Php {{ $dependentdisplaymedicalservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -166,7 +166,7 @@
 								@foreach($opddisplaymedicalservices as $opddisplaymedicalservice)
 								<tr>
 									<td>{{ $opddisplaymedicalservice->service_description }}</td>
-									<td>{{ $opddisplaymedicalservice->service_rate }}</td>
+									<td>Php {{ $opddisplaymedicalservice->opd_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -184,7 +184,7 @@
 								@foreach($seniordisplaymedicalservices as $seniordisplaymedicalservice)
 								<tr>
 									<td>{{ $seniordisplaymedicalservice->service_description }}</td>
-									<td>{{ $seniordisplaymedicalservice->service_rate }}</td>
+									<td>Php {{ $seniordisplaymedicalservice->senior_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -229,7 +229,7 @@
 								@foreach($studentdisplaydentalservices as $studentdisplaydentalservice)
 								<tr>
 									<td>{{ $studentdisplaydentalservice->service_description }}</td>
-									<td>{{ $studentdisplaydentalservice->service_rate }}</td>
+									<td>{{ $studentdisplaydentalservice->student_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -247,7 +247,7 @@
 								@foreach($facultydisplaydentalservices as $facultydisplaydentalservice)
 								<tr>
 									<td>{{ $facultydisplaydentalservice->service_description }}</td>
-									<td>{{ $facultydisplaydentalservice->service_rate }}</td>
+									<td>{{ $facultydisplaydentalservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -265,7 +265,7 @@
 								@foreach($staffdisplaydentalservices as $staffdisplaydentalservice)
 								<tr>
 									<td>{{ $staffdisplaydentalservice->service_description }}</td>
-									<td>{{ $staffdisplaydentalservice->service_rate }}</td>
+									<td>{{ $staffdisplaydentalservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -283,7 +283,7 @@
 								@foreach($dependentdisplaydentalservices as $dependentdisplaydentalservice)
 								<tr>
 									<td>{{ $dependentdisplaydentalservice->service_description }}</td>
-									<td>{{ $dependentdisplaydentalservice->service_rate }}</td>
+									<td>{{ $dependentdisplaydentalservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -301,7 +301,7 @@
 								@foreach($opddisplaydentalservices as $opddisplaydentalservice)
 								<tr>
 									<td>{{ $opddisplaydentalservice->service_description }}</td>
-									<td>{{ $opddisplaydentalservice->service_rate }}</td>
+									<td>{{ $opddisplaydentalservice->opd_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -319,7 +319,7 @@
 								@foreach($seniordisplaydentalservices as $seniordisplaydentalservice)
 								<tr>
 									<td>{{ $seniordisplaydentalservice->service_description }}</td>
-									<td>{{ $seniordisplaydentalservice->service_rate }}</td>
+									<td>{{ $seniordisplaydentalservice->senior_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -363,25 +363,25 @@
 								@foreach($studentdisplaycbcservices as $studentdisplaycbcservice)
 								<tr>
 									<td>{{ $studentdisplaycbcservice->service_description }}</td>
-									<td>{{ $studentdisplaycbcservice->service_rate }}</td>
+									<td>{{ $studentdisplaycbcservice->student_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($studentdisplaydrugservices as $studentdisplaydrugservice)
 								<tr>
 									<td>{{ $studentdisplaydrugservice->service_description }}</td>
-									<td>{{ $studentdisplaydrugservice->service_rate }}</td>
+									<td>{{ $studentdisplaydrugservice->student_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($studentdisplayurinalysisservices as $studentdisplayurinalysisservice)
 								<tr>
 									<td>{{ $studentdisplayurinalysisservice->service_description }}</td>
-									<td>{{ $studentdisplayurinalysisservice->service_rate }}</td>
+									<td>{{ $studentdisplayurinalysisservice->student_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($studentdisplayfecalysisservices as $studentdisplayfecalysisservice)
 								<tr>
 									<td>{{ $studentdisplayfecalysisservice->service_description }}</td>
-									<td>{{ $studentdisplayfecalysisservice->service_rate }}</td>
+									<td>{{ $studentdisplayfecalysisservice->student_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -399,25 +399,25 @@
 								@foreach($facultydisplaycbcservices as $facultydisplaycbcservice)
 								<tr>
 									<td>{{ $facultydisplaycbcservice->service_description }}</td>
-									<td>{{ $facultydisplaycbcservice->service_rate }}</td>
+									<td>{{ $facultydisplaycbcservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($facultydisplaydrugservices as $facultydisplaydrugservice)
 								<tr>
 									<td>{{ $facultydisplaydrugservice->service_description }}</td>
-									<td>{{ $facultydisplaydrugservice->service_rate }}</td>
+									<td>{{ $facultydisplaydrugservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($facultydisplayurinalysisservices as $facultydisplayurinalysisservice)
 								<tr>
 									<td>{{ $facultydisplayurinalysisservice->service_description }}</td>
-									<td>{{ $facultydisplayurinalysisservice->service_rate }}</td>
+									<td>{{ $facultydisplayurinalysisservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($facultydisplayfecalysisservices as $facultydisplayfecalysisservice)
 								<tr>
 									<td>{{ $facultydisplayfecalysisservice->service_description }}</td>
-									<td>{{ $facultydisplayfecalysisservice->service_rate }}</td>
+									<td>{{ $facultydisplayfecalysisservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -435,25 +435,25 @@
 								@foreach($staffdisplaycbcservices as $staffdisplaycbcservice)
 								<tr>
 									<td>{{ $staffdisplaycbcservice->service_description }}</td>
-									<td>{{ $staffdisplaycbcservice->service_rate }}</td>
+									<td>{{ $staffdisplaycbcservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($staffdisplaydrugservices as $staffdisplaydrugservice)
 								<tr>
 									<td>{{ $staffdisplaydrugservice->service_description }}</td>
-									<td>{{ $staffdisplaydrugservice->service_rate }}</td>
+									<td>{{ $staffdisplaydrugservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($staffdisplayurinalysisservices as $staffdisplayurinalysisservice)
 								<tr>
 									<td>{{ $staffdisplayurinalysisservice->service_description }}</td>
-									<td>{{ $staffdisplayurinalysisservice->service_rate }}</td>
+									<td>{{ $staffdisplayurinalysisservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($staffdisplayfecalysisservices as $staffdisplayfecalysisservice)
 								<tr>
 									<td>{{ $staffdisplayfecalysisservice->service_description }}</td>
-									<td>{{ $staffdisplayfecalysisservice->service_rate }}</td>
+									<td>{{ $staffdisplayfecalysisservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -471,25 +471,25 @@
 								@foreach($dependentdisplaycbcservices as $dependentdisplaycbcservice)
 								<tr>
 									<td>{{ $dependentdisplaycbcservice->service_description }}</td>
-									<td>{{ $dependentdisplaycbcservice->service_rate }}</td>
+									<td>{{ $dependentdisplaycbcservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($dependentdisplaydrugservices as $dependentdisplaydrugservice)
 								<tr>
 									<td>{{ $dependentdisplaydrugservice->service_description }}</td>
-									<td>{{ $dependentdisplaydrugservice->service_rate }}</td>
+									<td>{{ $dependentdisplaydrugservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($dependentdisplayurinalysisservices as $dependentdisplayurinalysisservice)
 								<tr>
 									<td>{{ $dependentdisplayurinalysisservice->service_description }}</td>
-									<td>{{ $dependentdisplayurinalysisservice->service_rate }}</td>
+									<td>{{ $dependentdisplayurinalysisservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($dependentdisplayfecalysisservices as $dependentdisplayfecalysisservice)
 								<tr>
 									<td>{{ $dependentdisplayfecalysisservice->service_description }}</td>
-									<td>{{ $dependentdisplayfecalysisservice->service_rate }}</td>
+									<td>{{ $dependentdisplayfecalysisservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -507,25 +507,25 @@
 								@foreach($opddisplaycbcservices as $opddisplaycbcservice)
 								<tr>
 									<td>{{ $opddisplaycbcservice->service_description }}</td>
-									<td>{{ $opddisplaycbcservice->service_rate }}</td>
+									<td>{{ $opddisplaycbcservice->opd_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($opddisplaydrugservices as $opddisplaydrugservice)
 								<tr>
 									<td>{{ $opddisplaydrugservice->service_description }}</td>
-									<td>{{ $opddisplaydrugservice->service_rate }}</td>
+									<td>{{ $opddisplaydrugservice->opd_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($opddisplayurinalysisservices as $opddisplayurinalysisservice)
 								<tr>
 									<td>{{ $opddisplayurinalysisservice->service_description }}</td>
-									<td>{{ $opddisplayurinalysisservice->service_rate }}</td>
+									<td>{{ $opddisplayurinalysisservice->opd_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($opddisplayfecalysisservices as $opddisplayfecalysisservice)
 								<tr>
 									<td>{{ $opddisplayfecalysisservice->service_description }}</td>
-									<td>{{ $opddisplayfecalysisservice->service_rate }}</td>
+									<td>{{ $opddisplayfecalysisservice->opd_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -543,25 +543,25 @@
 								@foreach($seniordisplaycbcservices as $seniordisplaycbcservice)
 								<tr>
 									<td>{{ $seniordisplaycbcservice->service_description }}</td>
-									<td>{{ $seniordisplaycbcservice->service_rate }}</td>
+									<td>{{ $seniordisplaycbcservice->senior_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($seniordisplaydrugservices as $seniordisplaydrugservice)
 								<tr>
 									<td>{{ $seniordisplaydrugservice->service_description }}</td>
-									<td>{{ $seniordisplaydrugservice->service_rate }}</td>
+									<td>{{ $seniordisplaydrugservice->senior_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($seniordisplayurinalysisservices as $seniordisplayurinalysisservice)
 								<tr>
 									<td>{{ $seniordisplayurinalysisservice->service_description }}</td>
-									<td>{{ $seniordisplayurinalysisservice->service_rate }}</td>
+									<td>{{ $seniordisplayurinalysisservice->senior_rate }}</td>
 								</tr>
 								@endforeach
 								@foreach($seniordisplayfecalysisservices as $seniordisplayfecalysisservice)
 								<tr>
 									<td>{{ $seniordisplayfecalysisservice->service_description }}</td>
-									<td>{{ $seniordisplayfecalysisservice->service_rate }}</td>
+									<td>{{ $seniordisplayfecalysisservice->senior_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -605,7 +605,7 @@
 								@foreach($studentdisplayxrayservices as $studentdisplayxrayservice)
 								<tr>
 									<td>{{ $studentdisplayxrayservice->service_description }}</td>
-									<td>{{ $studentdisplayxrayservice->service_rate }}</td>
+									<td>{{ $studentdisplayxrayservice->student_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -623,7 +623,7 @@
 								@foreach($facultydisplayxrayservices as $facultydisplayxrayservice)
 								<tr>
 									<td>{{ $facultydisplayxrayservice->service_description }}</td>
-									<td>{{ $facultydisplayxrayservice->service_rate }}</td>
+									<td>{{ $facultydisplayxrayservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -641,7 +641,7 @@
 								@foreach($staffdisplayxrayservices as $staffdisplayxrayservice)
 								<tr>
 									<td>{{ $staffdisplayxrayservice->service_description }}</td>
-									<td>{{ $staffdisplayxrayservice->service_rate }}</td>
+									<td>{{ $staffdisplayxrayservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -659,7 +659,7 @@
 								@foreach($dependentdisplayxrayservices as $dependentdisplayxrayservice)
 								<tr>
 									<td>{{ $dependentdisplayxrayservice->service_description }}</td>
-									<td>{{ $dependentdisplayxrayservice->service_rate }}</td>
+									<td>{{ $dependentdisplayxrayservice->faculty_staff_dependent_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -677,7 +677,7 @@
 								@foreach($opddisplayxrayservices as $opddisplayxrayservice)
 								<tr>
 									<td>{{ $opddisplayxrayservice->service_description }}</td>
-									<td>{{ $opddisplayxrayservice->service_rate }}</td>
+									<td>{{ $opddisplayxrayservice->opd_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
@@ -695,7 +695,7 @@
 								@foreach($seniordisplayxrayservices as $seniordisplayxrayservice)
 								<tr>
 									<td>{{ $seniordisplayxrayservice->service_description }}</td>
-									<td>{{ $seniordisplayxrayservice->service_rate }}</td>
+									<td>{{ $seniordisplayxrayservice->senior_rate }}</td>
 								</tr>
 								@endforeach
 							</tbody>
