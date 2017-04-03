@@ -59,7 +59,7 @@ class DentistController extends Controller
 		public function totalnumberofdentalpatients(Request $request)
 		{
 			return response()->json([
-			'finished' => count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('dental_schedules.staff_id', Auth::user()->user_id)->where('status', '1')->get()),
+			'finished' => count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('dental_schedules.staff_id', Auth::user()->user_id)->where('status', '!=', '0')->get()),
 			'unfinished' =>count(DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', '=', date('Y-m-d'))->where('dental_schedules.staff_id', Auth::user()->user_id)->where('status', '0')->get())
 			]);
 		}
@@ -435,7 +435,7 @@ class DentistController extends Controller
 
 		public function searchpatient()
 		{
-			$params['patients'] = DentalAppointment::where('status', 2)->select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
+			$params['patients'] = DentalAppointment::where('status', '!=', '0')->select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'searchpatient';
 			return view('staff.dental-dentist.searchpatient', $params);
@@ -548,7 +548,7 @@ class DentistController extends Controller
 			return view('staff.dental-dentist.viewrecords', $params);
 		}
 		public function searchpatientbydate(){
-			$params['patients'] = DentalAppointment::where('status', 2)->select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
+			$params['patients'] = DentalAppointment::where('status', '!=', '0')->select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
 			$params['years'] = DentalSchedule::select(DB::raw("YEAR(schedule_start) as year"))->groupBy(DB::raw("YEAR(schedule_start)"))->get();
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'searchpatient';

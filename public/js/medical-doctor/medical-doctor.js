@@ -573,6 +573,7 @@ $('.addMedicalRecordButton').click(function() {
 							function(data){
 								if(data['status'] && data['status'] == 'done')
 								{
+									highchartsfunc();
 									$('#addMedicalRecordButton_'+appointment_id).closest("tr").remove();
 								}
 								$('#create-medical-record-modal').modal("hide");
