@@ -111,18 +111,13 @@ class AdminController extends Controller
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'editservices';
 
-		$patient_type_id = $request->patient_type_id;
+		$service_type = $request->service_type;
 
 		$display_medical_services = DB::table('medical_services')
-					->where('patient_type_id', '=', $patient_type_id)
+					->where('service_type', '=', $service_type)
 					->get();
 
-		$counter = 0;
-		if(count($display_medical_services)>0){
-			$counter++;
-		}
-
-		return response()->json(['display_medical_services' => $display_medical_services, 'counter' => $counter]); 
+		return response()->json(['display_medical_services' => $display_medical_services]); 
 	}
 
 	public function viewservicesdental(Request $request)
@@ -137,39 +132,35 @@ class AdminController extends Controller
 
 	public function editmedicalservices(Request $request)
 	{
-		$patient_type_id = $request->patient_type_id;
+		$service_type = $request->service_type;
 
 		$display_medical_services = DB::table('medical_services')
-					->where('patient_type_id', '=', $patient_type_id)
+					->where('service_type', '=', $service_type)
 					->get();
 
-		$counter = 0;
-		if(count($display_medical_services)>0){
-			$counter++;
-		}
-
-		return response()->json(['display_medical_services' => $display_medical_services, 'counter' => $counter]); 
+		return response()->json(['display_medical_services' => $display_medical_services]); 
 	}
 
 	public function updatemedicalservices(Request $request)
 	{
 		$medicalservices = $request->medical_services;
-		$patient_type_id = $request->patient_type_id;
-
-		DB::table('medical_services')->where('patient_type_id', '=', $request->patient_type_id)->delete();
-
-		for($i=0; $i < sizeof($medicalservices); $i++){
+		DB::table('medical_services')->where('service_type', '=', $request->service_type)->delete();
+		for($i = 0; $i < sizeof($medicalservices); $i++){
 			if($medicalservices[$i]!=''){
 				$explode_medical_services = explode("(:::)", $medicalservices[$i]);
 				$service_description = $explode_medical_services[0];
-				$service_rate = $explode_medical_services[1];
-				$service_type = $explode_medical_services[2];
+				$student_rate = $explode_medical_services[1];
+				$faculty_staff_dependent_rate = $explode_medical_services[2];
+				$opd_rate = $explode_medical_services[3];
+				$senior_rate = $explode_medical_services[4];
 
 				$medical_service = new MedicalService();
-				$medical_service->patient_type_id = $request->patient_type_id;
 				$medical_service->service_description = $service_description;
-				$medical_service->service_rate = $service_rate;
-				$medical_service->service_type = $service_type;
+				$medical_service->student_rate = $student_rate;
+				$medical_service->faculty_staff_dependent_rate = $faculty_staff_dependent_rate;
+				$medical_service->opd_rate = $opd_rate;
+				$medical_service->senior_rate = $senior_rate;
+				$medical_service->service_type = $request->service_type;
 				$medical_service->save();
 			}
 		}

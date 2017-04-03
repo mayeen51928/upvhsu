@@ -11,14 +11,14 @@
 					<div class="panel-heading">Edit Medical Services Rate</div>
 					<div class="panel-body">
 						<div>
-							<select class="form-control" id="typeOfPatientMedical">
-								<option selected disabled>Select type of patient</option>
-								<option value="1">Student</option>
-								<option value="2">Faculty</option>
-								<option value="3">Staff</option>
-								<option value="4">Dependent</option>
-								<option value="5">OPD</option>
-								<option value="6">Senior Citizen</option>
+							<select class="form-control" id="typeOfMedicalService">
+								<option selected disabled>Select type of Services</option>
+								<option value="medical">Medical</option>
+								<option value="cbc">Cbc</option>
+								<option value="drugtest">Drugtest</option>
+								<option value="fecalysis">Fecalysis</option>
+								<option value="urinalysis">Urinalysis</option>
+								<option value="xray">X-ray</option>
 							</select>
 						</div>
 						<br/>
@@ -55,17 +55,17 @@
 </div>
 
 <div id="editMedicalServices" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Edit Medical Services</h4>
 			</div>
 			<div class="modal-body">
-				<div class="dental_manage">
-					<button type="button" class="btn btn-success btn-xs addmoremedicalservices">Add more services</button>
+				<div class="add-more-medical">
+					<button type="button" class="btn btn-success btn-xs addmoremedicalservices" style="display:none">Add more services</button>
 					<br/><br/>
-					<table id="displayMedicalServicesTableModal" class="table" style="display: none">
+					<table id="displayMedicalServicesTableModal" class="table table-responsive" style="display: none">
 						<tbody id="displayMedicalServicesModal">
 						</tbody>
 					</table>
