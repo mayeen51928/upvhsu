@@ -18,9 +18,11 @@ use App\Guardian;
 use App\HasGuardian;
 use App\MedicalAppointment;
 use App\MedicalSchedule;
+use App\DentalSchedule;
 use App\Prescription;
 use App\DentalRecord;
 use App\AdditionalDentalRecord;
+use App\PhysicalExamination;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
 class PatientController extends Controller
@@ -46,9 +48,10 @@ class PatientController extends Controller
 	public function dashboard()
 	{
         //haha
-		$params['medical_appointments'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->get();
-		$params['dental_appointments'] = DB::table('dental_schedules')->join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->get();
-        // dd($params['dental_appointments']);
+		$params['medical_appointments'] = MedicalSchedule::join('medical_appointments', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->get();
+		$params['dental_appointments'] = DentalSchedule::join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->get();
+        $params['current_physical_status'] = PhysicalExamination::join('medical_appointments', 'medical_appointments.id', 'physical_examinations.medical_appointment_id')->where('patient_id', Auth::user()->user_id)->latest('physical_examinations.created_at')->first();
+        // dd($params['current_physical_status']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
 		return view('patient.dashboard', $params);

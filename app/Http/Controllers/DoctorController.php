@@ -67,7 +67,7 @@ class DoctorController extends Controller
 	{
 		return response()->json([
 			'unfinished' => count(MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->get()),
-			'finished' =>count(MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','=', date('Y-m-d'))->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->leftjoin('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')->where('status', '1')->get())
+			'finished' =>count(MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','=', date('Y-m-d'))->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->leftjoin('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')->where('status', '!=', '0')->get())
 			]);
 	}
 
@@ -330,7 +330,7 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatient(){
-		$params['patients'] = MedicalAppointment::where('status', 2)->select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->paginate(20);
+		$params['patients'] = MedicalAppointment::where('status', '!=', '0')->select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->paginate(20);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
 		
@@ -338,7 +338,7 @@ class DoctorController extends Controller
 	}
 
 	public function searchpatientbydate(){
-		$params['patients'] = MedicalAppointment::where('status', 2)->select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
+		$params['patients'] = MedicalAppointment::where('status',  '!=', '0')->select('medical_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'medical_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
 		$params['years'] = MedicalSchedule::select(DB::raw("YEAR(schedule_day) as year"))->groupBy(DB::raw("YEAR(schedule_day)"))->get();
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';
