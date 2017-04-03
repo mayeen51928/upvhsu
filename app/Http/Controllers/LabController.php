@@ -40,7 +40,7 @@ class LabController extends Controller
 		public function dashboard()
 		{
 			$params['lab_requests'] = MedicalAppointment::
-				where('medical_appointments.has_lab_or_xray_request', '1')
+				where('medical_appointments.has_lab_request', '1')
 				->where('medical_appointments.status', '0')
 				->leftjoin('cbc_results', 'medical_appointments.id', 'cbc_results.medical_appointment_id')
 				->leftjoin('drug_test_results', 'drug_test_results.medical_appointment_id', 'medical_appointments.id')
@@ -270,7 +270,7 @@ class LabController extends Controller
 
 			$sum = count($cbc)+count($drug_test)+count($fecalysis)+count($urinalysis);
 			if($sum == $counter){
-				$medical_appointment->has_lab_or_xray_request = '2';
+				$medical_appointment->has_lab_request = '2';
 				$medical_appointment->update();
 				return response()->json([ "delete" => "yes", ]);
 			}
