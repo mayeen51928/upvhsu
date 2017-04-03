@@ -276,6 +276,32 @@ class LabController extends Controller
 				return response()->json([ "delete" => "yes", ]);
 			}
 		}
+		public function profile()
+	{
+		$xray = Staff::find(Auth::user()->user_id);
+		$params['sex'] = $xray->sex;
+		$params['position'] = $xray->position;
+		$params['birthday'] = $xray->birthday;
+		$params['civil_status'] = $xray->civil_status;
+		$params['personal_contact_number'] = $xray->personal_contact_number;
+		$params['street'] = $xray->street;
+		$params['picture'] = $xray->picture;
+		if(!is_null($xray->town_id))
+			{
+				$params['town'] = Town::find($xray->town_id)->town_name;
+				$params['province'] = Province::find(Town::find($xray->town_id)->province_id)->province_name;
+			}
+			else
+			{
+				$params['town'] = '';
+				$params['province'] = '';
+			}
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'profile';
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'profile';
+		return view('staff.medical-lab.profile', $params);
+	}
 
 		public function editprofile()
 		{
