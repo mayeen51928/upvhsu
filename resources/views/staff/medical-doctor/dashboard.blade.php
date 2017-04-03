@@ -150,9 +150,10 @@
 								<div class="panel-body">
 									<div class="row">
 	                  <div id="patient_type_radio_medical" class="radio" style="margin-left:20px;display:none;">
-	                    <label><input type="radio" id="medical_radio_button_billing_opd" value="5">OPD</label>&nbsp;&nbsp;&nbsp;
-	                    <label><input type="radio" id="medical_radio_button_billing_senior" value="6">Senior Citizen</label>
-	                  </div>
+	                    <label><input type="radio" name="patient_type_radio" id="medical_radio_button_billing_opd" value="5" checked="checked">OPD</label>&nbsp;&nbsp;&nbsp;
+	                    <label><input type="radio" name="patient_type_radio" id="medical_radio_button_billing_senior" value="6">Senior Citizen</label>
+	                  	<input type="text" placeholder="Senior Citizen ID" class="form-control" id="senior_id" class="senior_id" style="width:50%;display:inline-block;margin-left:10px;">
+	                  </div> 
 	              		<div class="table-responsive col-md-6">
 	                    <table class="table table-hover">
 	                    @for ($i = 0; $i < ceil(count($medical_billing_services)/2); $i++)
