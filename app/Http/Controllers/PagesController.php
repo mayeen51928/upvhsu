@@ -370,11 +370,11 @@ class PagesController extends Controller
 		{
 			$check_student_database = StudentNumber::where('student_number', $request->user_name)->first();
 			// dd($check_student_database);
-			if(($request->patient_type_id == 1 && count($check_student_database) == 1) || $request->patient_type_id != 1)
+			if(($request->patient_type_id == '1' && count($check_student_database) == 1) || $request->patient_type_id != '1')
 			{
 				$user = new User;
 				$user->user_id = $request->user_name;
-				$user->user_type_id = 1;
+				$user->user_type_id = '1';
 				$user->password = bcrypt($request->password);
 				$user->save();
 				$patient = new Patient;
@@ -383,9 +383,9 @@ class PagesController extends Controller
 				$patient->patient_first_name = $request->first_name;
 				$patient->patient_middle_name = $request->middle_name;
 				$patient->patient_last_name = $request->last_name;
-				if($request->patient_type_id != 1)
+				if($request->patient_type_id != '1')
 				{
-					$patient->year_level = 0;
+					$patient->year_level = '0';
 				}
 				else
 				{
@@ -612,7 +612,7 @@ class PagesController extends Controller
 			{
 				$user = new User;
 				$user->user_id = $request->user_name;
-				$user->user_type_id = 1;
+				$user->user_type_id = '1';
 				$user->password = bcrypt($request->password);
 				$user->save();
 				$patient = new Patient;
@@ -621,9 +621,9 @@ class PagesController extends Controller
 				$patient->patient_first_name = $request->first_name;
 				$patient->patient_middle_name = $request->middle_name;
 				$patient->patient_last_name = $request->last_name;
-				if($request->patient_type_id != 1)
+				if($request->patient_type_id != '1')
 				{
-					$patient->year_level = 0;
+					$patient->year_level = '0';
 				}
 				else
 				{

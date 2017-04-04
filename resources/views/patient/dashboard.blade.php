@@ -12,6 +12,7 @@
 			<img src="{{asset('images/blankprofpic.png')}}" height="50" width="50" class="img-circle"/> 
 			@endif
 			Welcome <i>{{ Auth::user()->patient->patient_first_name }} {{ Auth::user()->patient->patient_last_name }}</i>!</h4>
+			@if(!(is_null($current_physical_status)))
 			<div class="row">
 				<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
 					<div class="tile-stats" id="cbccount">
@@ -62,6 +63,7 @@
 			        </div>
         		</div>
 			</div>
+			@endif
 			<div class="col-md-6">
 				<h3 class="sub-header h3Title">Medical Appointments</h3>
 				<div class="table-responsive">

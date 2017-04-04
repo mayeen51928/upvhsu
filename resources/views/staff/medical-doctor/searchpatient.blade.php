@@ -6,8 +6,11 @@
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
 			<div class="col-md-4 col-md-offset-4" style="text-align: center;">
-				<h4>Search Patient Record</h4>
-        <p><i>You can also search by <a href="{{ url('/doctor/searchpatient/date') }}">date</a>.</i></p>
+				<h4>Patient Records</h4>
+        <div class="accountOption">
+        <a role="button" class="btn btn-success" href="{{ url('/doctor/searchpatient/date') }}">Click here to search by date</a>
+        </div>
+        <p>Search by name</p>
 				<input class="form-control" type="text" name="search_patient" id="search_patient" placeholder="Enter patient's name here" />
         <br/>
         <img class="img-responsive center-block" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
