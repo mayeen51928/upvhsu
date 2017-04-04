@@ -12,12 +12,12 @@
 			<img src="{{asset('images/blankprofpic.png')}}" height="50" width="50" class="img-circle"/> 
 			@endif
 			Welcome <i>{{ Auth::user()->patient->patient_first_name }} {{ Auth::user()->patient->patient_last_name }}</i>!</h4>
-			@if(!(is_null($current_physical_status)))
+			{{-- @if(!(is_null($current_physical_status))) --}}
 			<div class="row">
 				<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
 					<div class="tile-stats" id="cbccount">
 						<div class="icon"><i class="fa fa-user-o"></i></div>
-						<div class="count">{{$current_physical_status->height.' cm'}}</div>
+						<div class="count">@if(!(is_null($current_physical_status))) {{$current_physical_status->height.' cm'}} @else no record @endif</div>
 			            <h3>Height</h3>
 			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
 			        </div>
@@ -25,7 +25,7 @@
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
 					<div class="tile-stats" id="cbccount">
 						<div class="icon"><i class="fa fa-balance-scale"></i></div>
-						<div class="count">{{$current_physical_status->weight.' kg'}}</div>
+						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->weight.' kg'}} @else no record @endif</div>
 			            <h3>Weight</h3>
 			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
 			        </div>
@@ -33,7 +33,7 @@
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
 					<div class="tile-stats" id="cbccount">
 						<div class="icon"><i class="fa fa-stethoscope"></i></div>
-						<div class="count">{{$current_physical_status->blood_pressure.' mmHg'}}</div>
+						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->blood_pressure.' mmHg'}} @else no record @endif</div>
 			            <h3>BP</h3>
 			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
 			        </div>
@@ -41,7 +41,7 @@
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
 					<div class="tile-stats" id="cbccount">
 						<div class="icon"><i class="fa fa-heartbeat"></i></div>
-						<div class="count">{{$current_physical_status->pulse_rate.' bpm'}}</div>
+						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->pulse_rate.' bpm'}} @else no record @endif</div>
 			            <h3>Pulse Rate</h3>
 			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
 			        </div>
@@ -49,7 +49,7 @@
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
 					<div class="tile-stats" id="cbccount">
 						<div class="icon"><i class="fa fa-eye"></i></div>
-						<div class="count">{{$current_physical_status->left_eye}}</div>
+						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->left_eye}} @else no record @endif</div>
 			            <h3>Left Eye</h3>
 			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
 			        </div>
@@ -57,13 +57,13 @@
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
 					<div class="tile-stats" id="cbccount">
 						<div class="icon"><i class="fa fa-eye"></i></div>
-						<div class="count">{{$current_physical_status->right_eye}}</div>
+						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->right_eye}} @else no record @endif</div>
 			            <h3>Right Eye</h3>
 			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
 			        </div>
         		</div>
 			</div>
-			@endif
+			{{-- @endif --}}
 			<div class="col-md-6">
 				<h3 class="sub-header h3Title">Medical Appointments</h3>
 				<div class="table-responsive">
