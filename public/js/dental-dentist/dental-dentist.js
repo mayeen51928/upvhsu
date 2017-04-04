@@ -212,9 +212,10 @@ $('.confirmAdditionalDentalRecord').click(function(){
   var neoplasm = $("#selNeoplasm").find(':selected')[0].value;
   var dentalFacioAnomaly = $("#selDentalFacioAnomaly").find(':selected')[0].value;
   var teethPresent = $("#teethPresent").val();
-	$.ajax({
+  if(dentalCaries && gingivitis && peridontalPocket && oralDebris && calculus && neoplasm && dentalFacioAnomaly && teethPresent){
+  	$.ajax({
 		  type: "POST",
-		  url: additionalDentalRecord,
+		  url: additionalDentalRecord, 
 		  data: {	appointment_id:appointmentId,
 		  				dental_caries:dentalCaries, 
 		  				gingivitis:gingivitis, 
@@ -240,8 +241,14 @@ $('.confirmAdditionalDentalRecord').click(function(){
 		  	$('#additionalDentalRecordInput').attr("disabled", "disabled");
 				$('.addedDentalRecord').attr("disabled", "disabled");
 				$('#additionalDentalRecordPanelBody').css('background-color', '#d6e9c6');
+				window.location.href = 'http://localhost:8000/dentist';
+    		return false;
 		  }
 	 });
+  }
+  else{
+  	$('#confirm_additional_dental_record').modal('hide');
+  }
 });
 
 

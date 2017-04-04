@@ -293,7 +293,7 @@ class DoctorController extends Controller
 		{
 			$counter++;
 		}
-		$patient_type_checker = Patient::join('medical_appointments', 'patient_info.patient_id','medical_appointments.patient_id')->first();
+		// $patient_type_checker = Patient::join('medical_appointments', 'patient_info.patient_id','medical_appointments.patient_id')->first();
 		$medical_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'medical')->get();
 		
 		if($counter > 0)
@@ -312,7 +312,7 @@ class DoctorController extends Controller
 				'remark' => $remark,
 				'prescription' => $prescription,
 				'medical_billing_status' => $medical_billing_status,
-				'patient_type_checker' => $patient_type_checker,
+				// 'patient_type_checker' => $patient_type_checker,
 
 			]);
 		}
@@ -323,7 +323,7 @@ class DoctorController extends Controller
 				'reasons' => $medical_appointment->reasons,
 				'hasRecord' => 'no',
 				'medical_billing_status' => $medical_billing_status,
-				'patient_type_checker' => $patient_type_checker,
+				// 'patient_type_checker' => $patient_type_checker,
 				]);
 		}
 		
@@ -879,7 +879,7 @@ class DoctorController extends Controller
 						}
 						else{
 							$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('senior_rate')->first();
-							$billing->senior_citizen_id = $request->senior_id;
+							// $billing->senior_citizen_id = $request->senior_id;
 						}
 					}
 					$billing->save();

@@ -223,8 +223,8 @@ $('.addMedicalRecordButton').click(function() {
 									medical_services_id.push($(this).attr("id"));
 							}
 					});
-					patient_type_id_radio = $('input[name=patient_type_radio]:checked').val()
-					senior_id = $('#senior_id').val();
+					// patient_type_id_radio = $('input[name=patient_type_radio]:checked').val()
+					// senior_id = $('#senior_id').val();
 			
 					if ($('#height').val() ||
 						$('#weight').val() ||
@@ -325,8 +325,8 @@ $('.addMedicalRecordButton').click(function() {
 								request_drug_test: request_drug_test,
 								request_xray: request_xray,
 								medical_services_id: medical_services_id,
-								patient_type_id_radio: patient_type_id_radio,
-								senior_id: senior_id,
+								// patient_type_id_radio: patient_type_id_radio,
+								// senior_id: senior_id,
 							} ,
 							function(data){
 								// console.log(data['appointment_id']);
@@ -366,17 +366,17 @@ $('.addMedicalRecordButton').click(function() {
 						$('.checkboxMedicalService').prop('disabled', true);
 						$('#patient_type_radio_lab').prop('disabled', true);
 					}
-					if(data['patient_type_checker']['patient_type_id'] == 5){
-						$('#patient_type_radio_medical').css('display', 'block');
-						if(data['medical_billing_status'][1].senior_citizen_id != null){
-							$(":radio[value=6]").attr('checked',true); 
-							$("#senior_id").val(data['medical_billing_status'][1].senior_citizen_id).css("disabled","disabled");
-						}
-						else{
-							$(":radio[value=5]").attr('checked',true); 
-							$("#senior_id").css("disabled","disabled").removeAttr('placeholder');
-						}
-					}
+					// if(data['patient_type_checker']['patient_type_id'] == 5){
+					// 	$('#patient_type_radio_medical').css('display', 'block');
+					// 	if(data['medical_billing_status'][1].senior_citizen_id != null){
+					// 		$(":radio[value=6]").attr('checked',true); 
+					// 		$("#senior_id").val(data['medical_billing_status'][1].senior_citizen_id).css("disabled","disabled");
+					// 	}
+					// 	else{
+					// 		$(":radio[value=5]").attr('checked',true); 
+					// 		$("#senior_id").css("disabled","disabled").removeAttr('placeholder');
+					// 	}
+					// }
 				}
 				else
 				{

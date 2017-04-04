@@ -772,17 +772,21 @@ class DentistController extends Controller
 
 		public function additionaldentalrecord(Request $request)
 		{
-				$additional_dental_record = new AdditionalDentalRecord;
-				$additional_dental_record->appointment_id = $request->appointment_id;
-				$additional_dental_record->dental_caries = $request->dental_caries;
-				$additional_dental_record->gingivitis = $request->gingivitis;
-				$additional_dental_record->peridontal_pocket = $request->peridontal_pocket;
-				$additional_dental_record->oral_debris = $request->oral_debris;
-				$additional_dental_record->calculus = $request->calculus;
-				$additional_dental_record->neoplasm = $request->neoplasm;
-				$additional_dental_record->dental_facio_anomaly = $request->dental_facio_anomaly;
-				$additional_dental_record->teeth_present = $request->teeth_present;
-				$additional_dental_record->save();
+			$change_status = DentalAppointment::where('id', $request->appointment_id)->first();
+			$change_status->status = '1';
+			$change_status->update();
+
+			$additional_dental_record = new AdditionalDentalRecord;
+			$additional_dental_record->appointment_id = $request->appointment_id;
+			$additional_dental_record->dental_caries = $request->dental_caries;
+			$additional_dental_record->gingivitis = $request->gingivitis;
+			$additional_dental_record->peridontal_pocket = $request->peridontal_pocket;
+			$additional_dental_record->oral_debris = $request->oral_debris;
+			$additional_dental_record->calculus = $request->calculus;
+			$additional_dental_record->neoplasm = $request->neoplasm;
+			$additional_dental_record->dental_facio_anomaly = $request->dental_facio_anomaly;
+			$additional_dental_record->teeth_present = $request->teeth_present;
+			$additional_dental_record->save();
 		}
 
 		public function viewdentalrecord($id)
