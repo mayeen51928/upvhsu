@@ -425,6 +425,7 @@ $(document).ready( function(){
       else if($("input[name=patient_type_medical]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_medical').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
+        
         $('#senior_citizen_id_medical').removeAttr('disabled');
       }
 	    else

@@ -115,6 +115,13 @@ class AdminController extends Controller
 		$params['sidebar_active'] = 'addpatientaccount';
 		return view('admin.addpatientaccount', $params);
 	}
+	public function checkifuserexists(Request $request)
+	{
+		if(count(User::where('user_id', $request->user_name)->get()) > 0 )
+		{
+			return response()->json(['already_exists' => 'yes']);
+		}
+	}
 	public function createpatientaccount(Request $request)
 	{
 		// dd($request);
@@ -416,7 +423,7 @@ class AdminController extends Controller
 			$staff_note->staff_id = $request->staff_id;
 			$staff_note->save();
 		}
-		return redirect('admin/addaccount')->with('status', 'Staff account added!');
+		return redirect('admin/addstaffaccount')->with('status', 'Staff account added!');
 	}
 
 	public function createstudent(Request $request)

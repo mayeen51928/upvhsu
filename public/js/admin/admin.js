@@ -177,4 +177,36 @@ $(document).ready( function(){
 			}
 		});
 	});
+	$('#addapatientaccountpanel #user_name').keyup(function(event) {
+		$.post('/admin/checkifuserexists', {user_name: $('#addapatientaccountpanel #user_name').val()}, function(data, textStatus, xhr) {
+			if(data['already_exists'] == 'yes')
+			{
+				$('#addapatientaccountpanel #user_name').attr('data-toggle', 'tooltip');
+				$('#addapatientaccountpanel #user_name').attr('title', 'User already exists!');
+				$('#addapatientaccountpanel #user_name').tooltip('show');
+				$('#addapatientaccountsubmit').attr('disabled', 'disabled');
+			}
+			else
+			{
+				$('#addapatientaccountpanel #user_name').tooltip('destroy');
+				$('#addapatientaccountsubmit').removeAttr('disabled');
+			}
+		});
+	});
+	$('#staff_id').keyup(function(event) {
+		$.post('/admin/checkifuserexists', {user_name: $('#staff_id').val()}, function(data, textStatus, xhr) {
+			if(data['already_exists'] == 'yes')
+			{
+				$('#staff_id').attr('data-toggle', 'tooltip');
+				$('#staff_id').attr('title', 'User already exists!');
+				$('#staff_id').tooltip('show');
+				$('#addstaffaccountsubmit').attr('disabled', 'disabled');
+			}
+			else
+			{
+				$('#staff_id').tooltip('destroy');
+				$('#addstaffaccountsubmit').removeAttr('disabled');
+			}
+		});
+	});
 });
