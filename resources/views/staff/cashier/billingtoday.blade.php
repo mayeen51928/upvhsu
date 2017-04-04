@@ -60,7 +60,7 @@
 									<td>{{ $unpaid_bill_dental_today->patient_first_name }} {{ $unpaid_bill_dental_today->patient_last_name }}</td>
 									<td>{{ $unpaid_bill_dental_today->staff_first_name }} {{ $unpaid_bill_dental_today->staff_last_name }}</td>
 									<td>{{ $unpaid_bill_dental_today->amount }}</td>
-									<td>{{date_format(date_create($unpaid_bill_dental_today->schedule_start), 'F j, Y')}} {{date_format(date_create($unpaid_bill_dental_today->schedule_start), 'H:i A')}} - {{date_format(date_create($unpaid_bill_dental_today->end), 'H:i A')}} </td>
+									<td>{{date_format(date_create($unpaid_bill_dental_today->schedule_start), 'F j, Y')}} {{date_format(date_create($unpaid_bill_dental_today->schedule_start), 'H:i A')}} - {{date_format(date_create($unpaid_bill_dental_today->schedule_end), 'H:i A')}} </td>
 									<td><button class="btn btn-primary btn-xs addDentalBilling" id="add_dental_billing_{{$unpaid_bill_dental_today->appointment_id}}_{{$unpaid_bill_dental_today->amount}}">Pay Bill</button></td>
 								@else
 									<td>No billing record at this moment.</td>
