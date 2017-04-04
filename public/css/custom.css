@@ -397,12 +397,6 @@ textarea {
     background-color: #A8A8A8 !important;
 }
 
-.row-eq-height {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
 #admingraph{
 	min-width: 310px;
 	max-width: 800px;
@@ -505,9 +499,7 @@ a.btn-danger {
     background-color: #fafafa;
     font-size: 12px
 }
-<<<<<<< HEAD
-=======
+
 #addapatientaccountpanel{
     background-color: rgb(240, 250, 255);
 }
->>>>>>> 833c8a1472ef6283e487293b2ab766a306fea861
