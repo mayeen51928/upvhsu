@@ -87,7 +87,7 @@ class AdminController extends Controller
 		return view('admin.postannouncement', $params);
 	}
 
-	public function addaccount()
+	public function addstaffaccount()
 	{
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'addstaffaccount';
@@ -98,6 +98,12 @@ class AdminController extends Controller
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'addstudentnumber';
 		return view('admin.addstudent', $params);
+	}
+
+	public function addpatientaccount()
+	{
+		$params['sidebar_active'] = 'addpatientaccount';
+		return view('admin.addpatientaccount', $params);
 	}
 	public function modifyservices()
 	{
