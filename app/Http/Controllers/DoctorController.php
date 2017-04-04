@@ -551,7 +551,7 @@ class DoctorController extends Controller
 
 		$params['sex'] = $patient->sex;
 		$params['picture'] = $patient->picture;
-        if($patient->patient_type_id == 1)
+        if($patient->patient_type_id == '1')
         {
         	$params['display_course_and_year_level'] = 1;
         	$params['degree_program_description'] = DegreeProgram::find($patient->degree_program_id)->degree_program_description;
@@ -786,10 +786,10 @@ class DoctorController extends Controller
 					$billing->medical_service_id = $request->medical_services_id[$i];
 					$billing->medical_appointment_id = $medical_appointment_id;
 					$billing->status = 'unpaid';
-					if($patient_type_id == 1){
+					if($patient_type_id == '1'){
 						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('student_rate')->first();
 					}
-					elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+					elseif($patient_type_id == '2' || $patient_type_id == '3' || $patient_type_id == '4'){
 						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
 					}
 					else{
@@ -873,10 +873,10 @@ class DoctorController extends Controller
 					$billing->medical_service_id = $request->medical_services_id[$i];
 					$billing->medical_appointment_id = $request->appointment_id;
 					$billing->status = 'unpaid';
-					if($patient_type_id == 1){
+					if($patient_type_id == '1'){
 						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('student_rate')->first();
 					}
-					elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+					elseif($patient_type_id == '2' || $patient_type_id == '3' || $patient_type_id == '4'){
 						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
 					}
 					else{
