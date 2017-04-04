@@ -418,8 +418,8 @@ $(document).ready( function(){
     $("input[name=patient_type_medical]").click(function(){
     	if($("input[name=patient_type_medical]:checked").val() == 1)
     	{
-	    	$("#degree_program_medical").removeAttr('disabled');
-	    	$('#yearlevel_medical').removeAttr('disabled');
+	    	$("#degree_program_medical").removeAttr('disabled').attr('required', 'required');
+	    	$('#yearlevel_medical').removeAttr('disabled').attr('required', 'required');
         $('#senior_citizen_id_medical').attr('disabled', 'disabled');
 	    }
       else if($("input[name=patient_type_medical]:checked").val() == 5

@@ -32,7 +32,7 @@
 					<form  method="POST" action="{{ url('/login') }}">
 						{{ csrf_field() }}
 						<div class="form-group">
-							<input id="user_id" type="user_id" class="form-control" name="user_id" value="{{ old('email') }}" required autofocus placeholder="Username" />
+							<input id="user_id" type="user_id" class="form-control" name="user_id" value="{{ old('email') }}" required autofocus placeholder="Username" maxlength="9" />
 						</div>
 						<div class="form-group">
 							<input id="password" type="password" class="form-control" name="password" required placeholder="Password"/>

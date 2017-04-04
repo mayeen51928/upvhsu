@@ -390,8 +390,8 @@ class PagesController extends Controller
 				$patient->graduated = '0';
 				$patient->sex = $request->sex;
 				$patient->birthday = $request->birthdate;
-				$patient->civil_status = 'Single';
-				$religion = Religion::where('religion_description', $request->input)->first();
+				$patient->civil_status = $request->civil_status;
+				$religion = Religion::where('religion_description', $request->religion)->first();
 
 				if(count($religion)>0)
 				{
@@ -635,8 +635,8 @@ class PagesController extends Controller
 				$patient->graduated = '0';
 				$patient->sex = $request->sex;
 				$patient->birthday = $request->birthdate;
-				$patient->civil_status = 'Single';
-				$religion = Religion::where('religion_description', $request->input)->first();
+				$patient->civil_status = $request->civil_status;
+				$religion = Religion::where('religion_description', $request->religion)->first();
         // dd($religion->id);
 				if(count($religion)>0)
 				{
