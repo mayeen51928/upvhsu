@@ -145,6 +145,7 @@ Route::get('/admin/addstudent', 'AdminController@addstudent');
 Route::post('/admin/createstudent', 'AdminController@createstudent');
 Route::get('/admin/addpatientaccount', 'AdminController@addpatientaccount');
 Route::post('/admin/createpatientaccount', 'AdminController@createpatientaccount');
+Route::post('/admin/checkifuserexists', 'AdminController@checkifuserexists');
 Route::get('/admin/editservices', 'AdminController@modifyservices');
 Route::get('/admin/generateschedule', 'AdminController@generateschedule');
 Route::post('/display_medical_services', 'AdminController@viewservicesmedical');

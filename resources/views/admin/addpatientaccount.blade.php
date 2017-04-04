@@ -19,7 +19,7 @@
             <form role="form" method="POST" action="{{ url('/admin/createpatientaccount') }}">
               {{ csrf_field() }}
 			        <div class="form-group">
-			          <input required type="text" class="form-control" name="user_name" id="user_name" autofocus placeholder="User ID (201312345)" maxlength="9"/>
+			          <input required type="text" class="form-control" name="user_name" id="user_name" autofocus placeholder="User ID (201312345)" maxlength="9" data-toggle="tooltip" title="User already exists"/>
 			        </div>
 			        <div class="form-group">
 			          <input required type="password" class="form-control" name="password" id="password" placeholder="Password"/>
@@ -214,7 +214,7 @@
 			            <input required type="text" class="form-control" name="maintenance_medication_history" placeholder="Enter maintenance medication" id="maintenance_medication_history"/>
 			          </div>
 			        </div>
-			        <button type="submit" class="btn btn-primary">Add Patient</button>
+			        <button id="addapatientaccountsubmit" type="submit" class="btn btn-primary">Add Patient</button>
             </form>
           </div>
         </div>
