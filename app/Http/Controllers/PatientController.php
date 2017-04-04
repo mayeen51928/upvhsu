@@ -22,6 +22,7 @@ use App\DentalSchedule;
 use App\Prescription;
 use App\DentalRecord;
 use App\AdditionalDentalRecord;
+use App\DentalBilling;
 use App\PhysicalExamination;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
@@ -61,11 +62,19 @@ class PatientController extends Controller
 	{
 		$prescription = Prescription::where('medical_appointment_id', $request->medical_appointment_id)->first();
 
+		$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->get();
+		if(count($patient_senior_checker) == 0){
+			$patient_type_checker = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
+		}
+		else{
+			$patient_type_checker = $patient_senior_checker;
+		}
+
 		$display_medical_billing = DB::table('medical_billings')
         		->join('medical_services', 'medical_services.id', '=', 'medical_billings.medical_service_id')
         		->where('medical_billings.medical_appointment_id', '=', $request->medical_appointment_id)
         		->get();
-
+ 
     $payment_status = "unpaid";
     $medical_billing_status = DB::table('medical_billings')
         		->where('medical_billings.medical_appointment_id', '=', $request->medical_appointment_id)
@@ -74,7 +83,6 @@ class PatientController extends Controller
     if(count($medical_billing_status) == 1 && $medical_billing_status->status=="paid"){
     	$payment_status = "paid";
     }
-
     $medical_receipt = DB::table('medical_appointments')
     				->join('patient_info', 'medical_appointments.patient_id', '=', 'patient_info.patient_id')
     				->join('medical_schedules', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
@@ -90,6 +98,7 @@ class PatientController extends Controller
 				'display_medical_billing' => $display_medical_billing, 
 				'payment_status' => $payment_status, 
 				'medical_receipt' => $medical_receipt,
+				'patient_type_checker' => $patient_type_checker,
 				]);
 		}
 		else
@@ -98,6 +107,7 @@ class PatientController extends Controller
 				'display_medical_billing' => $display_medical_billing,
 				'payment_status' => $payment_status,
 				'medical_receipt' => $medical_receipt, 
+				'patient_type_checker' => $patient_type_checker,
 				]);
 		}
 	}
@@ -558,6 +568,41 @@ class PatientController extends Controller
 		if(count($additional_dental_records) == 0){
 			$additional_dental_records = "no_additional_record";
  		}
-		return response()->json(['stacks_condition_color' => $stacks_condition_color, 'stacks_operation_color' => $stacks_operation_color,'additional_dental_records' => $additional_dental_records]); 
+
+ 		$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('dental_appointments', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('dental_appointments.id', $appointment_id)->get();
+		if(count($patient_senior_checker) == 0){
+			$patient_type_checker = Patient::join('dental_appointments', 'patient_info.patient_id', 'dental_appointments.patient_id')->where('dental_appointments.id', $appointment_id)->pluck('patient_type_id')->first();
+		}
+		else{
+			$patient_type_checker = $patient_senior_checker;
+		}
+
+		$display_dental_billing = DentalBilling::join('dental_services', 'dental_services.id', '=', 'dental_billings.dental_service_id')
+        		->where('dental_billings.appointment_id', '=', $appointment_id)
+        		->get();
+
+    $payment_status = "unpaid";
+    $dental_billing_status = DB::table('dental_billings')
+        		->where('dental_billings.appointment_id', '=', $appointment_id)
+        		->first();
+
+    if(count($dental_billing_status) == 1 && $dental_billing_status->status=="paid"){
+    	$payment_status = "paid";
+    }
+    $dental_receipt = DB::table('dental_appointments')
+    				->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
+    				->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')
+    				->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')
+        		->where('dental_appointments.id', '=', $appointment_id)
+        		->first();
+
+		return response()->json(['stacks_condition_color' => $stacks_condition_color, 
+														'stacks_operation_color' => $stacks_operation_color,
+														'additional_dental_records' => $additional_dental_records,
+														'display_dental_billing' => $display_dental_billing,
+														'payment_status' => $payment_status,
+														'dental_receipt' => $dental_receipt, 
+														'patient_type_checker' => $patient_type_checker,
+														]); 
 	}
 }

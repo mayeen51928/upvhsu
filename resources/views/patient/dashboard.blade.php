@@ -264,30 +264,29 @@
 						  </div>
       			</div>
       		</div>
-
-      		<div class="table-responsive tab-pane" id="dental_billing_dashboard">
-      			<div class="panel-group">
+					<div class="table-responsive tab-pane" id="dental_billing_dashboard">
+	      		<div class="panel-group">
 					    <div class="panel panel-success">
 					      <div class="panel-heading">
-					      	<h5 class="text-center">Dental Billing Record</h5>
+					      	<h5 class="text-center">Medical Billing Record</h5>
 					      </div>
 					      <div class="panel-body">
-					      	<table class="table" id="dental_billing_record_dashboard">
-								    <thead>
-								      <tr>
-								        <th>Date</th>
-								        <th>Doctor</th>
-								        <th>Status</th>
-								        <th>Print Receipt</th>
-								      </tr>
-								    </thead>
-								    <tbody>    
+					      	<table class="table" id="dental_billing_record_dashboard_table"  style="display: none">
+								    <tbody id="dental_billing_record_dashboard">    
 								    </tbody>
 								  </table>
+								  <div class="row">
+								  	<div class="col-md-6 col-md-offset-6">
+								  		<label>Total</label>
+								  		<input type="text" id="total_dental_billing" class="form-control" disabled>
+								  	</div>
+								  </div>
+					      </div>
+					      <div class="panel-footer" id="print_dental_receipt">
 					      </div>
 					    </div>
 					  </div>
-      		</div>
+	      	</div>
       	</div>
       </div>
     </div>

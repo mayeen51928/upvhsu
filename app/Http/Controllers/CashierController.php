@@ -13,6 +13,7 @@ use App\DentalBilling;
 use App\MedicalSchedule;
 use App\MedicalAppointment;
 use App\DentalAppointment;
+use App\Patient;
 use DB;
 class CashierController extends Controller
 {
@@ -286,8 +287,17 @@ class CashierController extends Controller
 		$display_medical_billing = DB::table('medical_billings')
 				->join('medical_services', 'medical_services.id', '=', 'medical_billings.medical_service_id')
 				->where('medical_billings.medical_appointment_id', '=', $request->appointment_id)
-				->get();    
-		return response()->json(['display_medical_billing' => $display_medical_billing ]);
+				->get();   
+
+		$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->appointment_id)->get();
+		if(count($patient_senior_checker) == 0){
+			$patient_type_checker = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->appointment_id)->pluck('patient_type_id')->first();
+		}
+		else{
+			$patient_type_checker = $patient_senior_checker;
+		}
+		return response()->json(['display_medical_billing' => $display_medical_billing, 'patient_type_checker' => $patient_type_checker]);
+		
 	}
 
 	public function displaydentalbilling(Request $request)
@@ -295,8 +305,17 @@ class CashierController extends Controller
 		$display_dental_billing = DB::table('dental_billings')
 				->join('dental_services', 'dental_services.id', '=', 'dental_billings.dental_service_id')
 				->where('dental_billings.appointment_id', '=', $request->appointment_id)
-				->get();    
-		return response()->json(['display_dental_billing' => $display_dental_billing ]);
+				->get(); 
+
+		$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->appointment_id)->get();
+		if(count($patient_senior_checker) == 0){
+			$patient_type_checker = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->appointment_id)->pluck('patient_type_id')->first();
+		}
+		else{
+			$patient_type_checker = $patient_senior_checker;
+		}  
+
+		return response()->json(['display_dental_billing' => $display_dental_billing, 'patient_type_checker' => $patient_type_checker]);
 	}
 
 

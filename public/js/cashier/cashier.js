@@ -57,9 +57,25 @@ if($('#cashiergraphtrigger').val()==1)
 					$('#display_amount_modal_medical').val(amountMedical);
 					output = '';
 					output += "<tr><th>Service Description</th><th>Service Rate</td><th>Type</th><th></th></tr>"
-					for(var i=0; i < data['display_medical_billing'].length; i++)
-					{
-						output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].service_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td></tr>";
+					if(data['patient_senior_checker'] == 1 || data['patient_senior_checker'] == 2 || data['patient_senior_checker'] == 3 || data['patient_senior_checker'] == 4 || data['patient_senior_checker'] == 5){
+						for(var i=0; i < data['display_medical_billing'].length; i++)
+						{
+							if(data['patient_type_checker'] == 1){
+								output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].student_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td></tr>";
+							}
+							if(data['patient_type_checker'] == 5){
+								output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].opd_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td></tr>";
+							}
+							else{
+								output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].faculty_staff_dependent_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td></tr>";
+							}
+						}
+					}
+					else{
+						for(var i=0; i < data['display_medical_billing'].length; i++)
+						{
+							output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].senior_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td></tr>";
+						}
 					}
 					$('#displayMedicalBillingModal').html(output);
 					$('#displayMedicalBillingTableModal').show();
@@ -86,7 +102,8 @@ if($('#cashiergraphtrigger').val()==1)
 						$('#confirm_medical_billing').modal('hide');	
 					}
 		});
-	});   
+	});  
+
 	$('.addDentalBilling').click(function(){
 		buttonIdDental = $(this).attr('id');
 		var id = ($(this).attr('id').split('_'));
@@ -101,9 +118,25 @@ if($('#cashiergraphtrigger').val()==1)
 					$('#display_amount_modal_dental').val(amountDental);
 					output = '';
 					output += "<tr><th>Service Description</th><th>Service Rate</td><th></th></tr>"
-					for(var i=0; i < data['display_dental_billing'].length; i++)
-					{
-						output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].service_rate+"</td></tr>";
+					if(data['patient_type_checker'] == 1 || data['patient_type_checker'] == 2 || data['patient_type_checker'] == 3 || data['patient_type_checker'] == 4 || data['patient_type_checker'] == 5){
+						for(var i=0; i < data['display_dental_billing'].length; i++)
+						{
+							if(data['patient_type_checker'] == 1){
+								output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].student_rate+"</td></tr>";
+							}
+							if(data['patient_type_checker'] == 5){
+								output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].opd_rate+"</td></tr>";
+							}
+							else{
+								output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].faculty_staff_dependent_rate+"</td></tr>";
+							}
+						}
+					}
+					else{
+						for(var i=0; i < data['display_dental_billing'].length; i++)
+						{
+							output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].senior_rate+"</td></tr>";
+						}
 					}
 					$('#displayDentalBillingModal').html(output);
 					$('#displayDentalBillingTableModal').show();

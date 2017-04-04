@@ -146,27 +146,134 @@ $('.dental_appointments_prescription').click(function(){
 		  output += '<button type="button" class="btn btn-info btn-block legend-button" id="operation_5">Cement filling</button>';
 		  output += '</div>';
 		  $('#view-dental-record-modal-body').html(output);
-		  console.log(data['additional_dental_records']);
 		  if(data['additional_dental_records'] != 'no_additional_record') {
 				$('#selDentalCaries').html('<option selected>'+data['additional_dental_records']['dental_caries']+'</option>');	
 				$('#selGingivitis').html('<option selected>'+data['additional_dental_records']['gingivitis']+'</option>');
-				$('#selPeridontalPocket').html('<option selected>'+data['additional_dental_records']['perindontal_pocket']+'</option>');				
+				$('#selPeridontalPocket').html('<option selected>'+data['additional_dental_records']['peridontal_pocket']+'</option>');				
 				$('#selOralDebris').html('<option selected>'+data['additional_dental_records']['oral_debris']+'</option>');		
 				$('#selCalculus').html('<option selected>'+data['additional_dental_records']['calculus']+'</option>');		
 				$('#selNeoplasm').html('<option selected>'+data['additional_dental_records']['neoplasm']+'</option>');		
 				$('#selDentalFacioAnomaly').html('<option selected>'+data['additional_dental_records']['dental_facio_anomaly']+'</option>');		
 				$('#teethPresent').html('<input type="text" class="form-control" value="'+data['additional_dental_records']['teeth_present']+'"/>');	
 		  }
+
+		  console.log(data['payment_status']);
+			if(data['payment_status']=="unpaid")
+			{
+				$('#print_dental_receipt').html('<button class="btn btn-info print_dental_receipt_button" disabled>Print Receipt</button>');
+			}
+			else{
+				$('#print_dental_receipt').html('<button class="btn btn-info print_dental_receipt_button" id=print_dental_receipt_"'+appointmentId+'">Print Receipt</button>');
+			}
+			console.log(data['patient_type_checker']);
+			total = 0;
+			output = '';
+	    output += "<tr><th>Service Description</th><th>Service Rate</td><th>Status</th></tr>"
+	    if(data['patient_type_checker'] == 1 || data['patient_type_checker'] == 2 || data['patient_type_checker'] == 3 || data['patient_type_checker'] == 4 || data['patient_type_checker'] == 5){
+				for(var i=0; i < data['display_dental_billing'].length; i++)
+				{
+					if(data['patient_type_checker'] == 1){
+						output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].student_rate+"</td><td>"+data['display_dental_billing'][i].status+"</td></tr>";
+						total += parseFloat(data['display_dental_billing'][i].student_rate);
+					}
+					if(data['patient_type_checker'] == 5){
+						output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].opd_rate+"</td><td>"+data['display_dental_billing'][i].status+"</td></tr>";
+						total += parseFloat(data['display_dental_billing'][i].opd_rate);
+					}
+					else{
+						output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].faculty_staff_dependent_rate+"</td><td>"+data['display_dental_billing'][i].status+"</td></tr>";
+						total += parseFloat(data['display_dental_billing'][i].faculty_staff_dependent_rate);
+					}
+				}
+			}
+			else{
+				for(var i=0; i < data['display_dental_billing'].length; i++)
+				{
+					output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].senior_rate+"</td><td>"+data['display_dental_billing'][i].status+"</td></tr>";
+					total += parseFloat(data['display_dental_billing'][i].senior_rate);
+				}
+			}
+
+	    $('#total_dental_billing').val(total);
+	    $('#dental_billing_record_dashboard').html(output);
+	    $('#dental_billing_record_dashboard_table').show();
 			$('#view-dental-record-modal').modal("show");
+
+			$('.print_dental_receipt_button').click(function(){
+				var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+				mywindow.document.write('')
+		    mywindow.document.write('<html><head><title>University of the Philippines Visayas Health Service Unit</title></head>');
+		    mywindow.document.write('<h1 style="text-align:center;">PATIENT BILL</h1>');
+		    mywindow.document.write('<br/>');
+		    mywindow.document.write('<h2 style="text-align:center;">'+data['dental_receipt']['patient_first_name']+'&nbsp;'+data['dental_receipt']['patient_last_name']+'</h2><h4 style="text-align:center;">Patient</h4>');
+		    mywindow.document.write('<h3><i>Date:&nbsp;&nbsp;&nbsp;&nbsp;</i><b>'+data['dental_receipt']['schedule_start']+' - '+data['dental_receipt']['schedule_end']+'</b></h3>');
+		    mywindow.document.write('<h3><i>Doctor:&nbsp;&nbsp;&nbsp;&nbsp;</i><b>'+data['dental_receipt']['staff_first_name']+'&nbsp;'+data['dental_receipt']['staff_last_name']+'</b></h3>');
+
+		    mywindow.document.write('<table border="1" width="800" class="table">');
+		    mywindow.document.write('<tbody>');
+		    mywindow.document.write(output);
+		    mywindow.document.write('</tbody>');
+		    mywindow.document.write('</table>');
+		    mywindow.document.write('<h4 style="text-align:right;">TOTAL:&nbsp;&nbsp;&nbsp;&nbsp;<b>'+total+'</b></h4>');
+		    mywindow.document.write('<br/>');
+		    mywindow.document.write('<br/>');
+		    mywindow.document.close(); 
+		    mywindow.focus(); 
+		    mywindow.print();
+		    mywindow.close();
+		    return true;
+			});
 		}
 	});
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $('.medical_appointments_prescription').click(function(){
 	$('#remarkModal').html('');
 	$('#remarkModalFooter').html('');
 	var medical_appointment_id = $(this).attr('id').split("_")[1];
 	$.post('/getremarkspatientdashboard', {medical_appointment_id: medical_appointment_id}, function(data, textStatus, xhr) {
+		console.log(data['display_medical_billing']);
 		if(data['success']==1)
 		{
 			$('#remarkModal').html(data['prescription']);
@@ -185,11 +292,31 @@ $('.medical_appointments_prescription').click(function(){
 		total = 0;
 		output = '';
     output += "<tr><th>Service Description</th><th>Service Rate</td><th>Type</th><th>Status</th></tr>"
-    for(var i=0; i < data['display_medical_billing'].length; i++)
-    {
-      output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].service_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td><td>"+data['display_medical_billing'][i].status+"</td></tr>";
-    	total += parseFloat(data['display_medical_billing'][i].service_rate);
-    }
+    if(data['patient_type_checker'] == 1 || data['patient_type_checker'] == 2 || data['patient_type_checker'] == 3 || data['patient_type_checker'] == 4 || data['patient_type_checker'] == 5){
+			for(var i=0; i < data['display_medical_billing'].length; i++)
+			{
+				if(data['patient_type_checker'] == 1){
+					output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].student_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td><td>"+data['display_medical_billing'][i].status+"</td></tr>";
+					total += parseFloat(data['display_medical_billing'][i].student_rate);
+				}
+				if(data['patient_type_checker'] == 5){
+					output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].opd_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td><td>"+data['display_medical_billing'][i].status+"</td></tr>";
+					total += parseFloat(data['display_medical_billing'][i].opd_rate);
+				}
+				else{
+					output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].faculty_staff_dependent_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td><td>"+data['display_medical_billing'][i].status+"</td></tr>";
+					total += parseFloat(data['display_medical_billing'][i].faculty_staff_dependent_rate);
+				}
+			}
+		}
+		else{
+			for(var i=0; i < data['display_medical_billing'].length; i++)
+			{
+				output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].senior_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td><td>"+data['display_medical_billing'][i].status+"</td></tr>";
+				total += parseFloat(data['display_medical_billing'][i].senior_rate);
+			}
+		}
+
     $('#total_medical_billing').val(total);
     $('#medical_billing_record_dashboard').html(output);
     $('#medical_billing_record_dashboard_table').show();
