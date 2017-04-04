@@ -10,8 +10,7 @@
         <div class="accountOption">
         <a role="button" class="btn btn-success" href="{{ url('/doctor/searchpatient/date') }}">Click here to search by date</a>
         </div>
-        <p>Search by name</p>
-				<input class="form-control" type="text" name="search_patient" id="search_patient" placeholder="Enter patient's name here" />
+        <input class="form-control" type="text" name="search_patient" id="search_patient" placeholder="Enter patient's name here" />
         <br/>
         <img class="img-responsive center-block" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
 				<table id="searchTable" class="table" style="display: none">

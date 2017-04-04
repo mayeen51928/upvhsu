@@ -25,6 +25,7 @@ use App\MedicalHistory;
 use App\StudentNumber;
 use App\MedicalService;
 use App\DentalService;
+use App\SeniorCitizenId;
 use DB;
 
 class PagesController extends Controller
@@ -98,13 +99,7 @@ class PagesController extends Controller
 		$opddisplayxrayservices = MedicalService::where('service_type', 'xray')->select('service_description', 'opd_rate')->get();
 		$seniordisplayxrayservices = MedicalService::where('service_type', 'xray')->select('service_description', 'senior_rate')->get();
 
-		return view('about', $params, compact('studentdisplaymedicalservices', 'facultydisplaymedicalservices', 'staffdisplaymedicalservices', 'dependentdisplaymedicalservices', 'opddisplaymedicalservices', 'seniordisplaymedicalservices',
-																					'studentdisplaydentalservices', 'facultydisplaydentalservices', 'staffdisplaydentalservices', 'dependentdisplaydentalservices', 'opddisplaydentalservices', 'seniordisplaydentalservices',   
-																					'studentdisplaycbcservices', 'facultydisplaycbcservices', 'staffdisplaycbcservices', 'dependentdisplaycbcservices', 'opddisplaycbcservices', 'seniordisplaycbcservices', 
-																					'studentdisplaydrugservices', 'facultydisplaydrugservices', 'staffdisplaydrugservices', 'dependentdisplaydrugservices', 'opddisplaydrugservices', 'seniordisplaydrugservices',
-																					'studentdisplayfecalysisservices', 'facultydisplayfecalysisservices', 'staffdisplayfecalysisservices', 'dependentdisplayfecalysisservices', 'opddisplayfecalysisservices', 'seniordisplayfecalysisservices', 
-																					'studentdisplayurinalysisservices', 'facultydisplayurinalysisservices', 'staffdisplayurinalysisservices', 'dependentdisplayurinalysisservices', 'opddisplayurinalysisservices', 'seniordisplayurinalysisservices', 
-																					'studentdisplayxrayservices', 'facultydisplayxrayservices', 'staffdisplayxrayservices', 'dependentdisplayxrayservices', 'opddisplayxrayservices', 'seniordisplayxrayservices'));
+		return view('about', $params, compact('studentdisplaymedicalservices', 'facultydisplaymedicalservices', 'staffdisplaymedicalservices', 'dependentdisplaymedicalservices', 'opddisplaymedicalservices', 'seniordisplaymedicalservices','studentdisplaydentalservices', 'facultydisplaydentalservices', 'staffdisplaydentalservices', 'dependentdisplaydentalservices', 'opddisplaydentalservices', 'seniordisplaydentalservices','studentdisplaycbcservices', 'facultydisplaycbcservices', 'staffdisplaycbcservices', 'dependentdisplaycbcservices', 'opddisplaycbcservices', 'seniordisplaycbcservices','studentdisplaydrugservices', 'facultydisplaydrugservices', 'staffdisplaydrugservices', 'dependentdisplaydrugservices', 'opddisplaydrugservices', 'seniordisplaydrugservices','studentdisplayfecalysisservices', 'facultydisplayfecalysisservices', 'staffdisplayfecalysisservices', 'dependentdisplayfecalysisservices', 'opddisplayfecalysisservices', 'seniordisplayfecalysisservices','studentdisplayurinalysisservices', 'facultydisplayurinalysisservices', 'staffdisplayurinalysisservices', 'dependentdisplayurinalysisservices', 'opddisplayurinalysisservices', 'seniordisplayurinalysisservices','studentdisplayxrayservices', 'facultydisplayxrayservices', 'staffdisplayxrayservices', 'dependentdisplayxrayservices', 'opddisplayxrayservices', 'seniordisplayxrayservices'));
 	}
 
 	public function scheduleappointment()
@@ -472,6 +467,13 @@ class PagesController extends Controller
 				$patient->personal_contact_number = $request->personalcontactnumber;
 				$patient->residence_contact_number = $request->residencecellphone;
 				$patient->save();
+				if($request->senior_citizen_id != '')
+				{
+					$senior_citizen_id = new SeniorCitizenId;
+					$senior_citizen_id->patient_id = $request->user_name;
+					$senior_citizen_id->senior_citizen_id = $request->senior_citizen_id;
+					$senior_citizen_id->save();
+				}
 				$check_if_father_exists = ParentModel::where('parent_first_name', $request->father_first_name)->where('parent_middle_name', $request->father_middle_name)->where('parent_last_name', $request->father_last_name)->first();
 				if(count($check_if_father_exists) == 0)
 				{
@@ -710,6 +712,13 @@ class PagesController extends Controller
 				$patient->personal_contact_number = $request->personalcontactnumber;
 				$patient->residence_contact_number = $request->residencecellphone;
 				$patient->save();
+				if($request->senior_citizen_id != '')
+				{
+					$senior_citizen_id = new SeniorCitizenId;
+					$senior_citizen_id->patient_id = $request->user_name;
+					$senior_citizen_id->senior_citizen_id = $request->senior_citizen_id;
+					$senior_citizen_id->save();
+				}
 				$check_if_father_exists = ParentModel::where('parent_first_name', $request->father_first_name)->where('parent_middle_name', $request->father_middle_name)->where('parent_last_name', $request->father_last_name)->first();
 				if(count($check_if_father_exists) == 0)
 				{

@@ -226,6 +226,10 @@
 							<label>Date of Birth:</label>
 							<input type="date" class="form-control" name="birthdate_dental" id="birthdate_dental"/>
 						</div>
+						<div class="form-group signup" id="senior_citizen_dental">
+							<label>Senior Citizen ID # (For out-patients only):</label>
+							<input type="text" class="form-control" name="senior_citizen_id_dental" id="senior_citizen_id_dental" placeholder="Enter senior citizen ID number" disabled/>
+						</div>
 						<div class="form-group signup">
 							<label>Civil Status:</label>
 							<select class="form-control" name="civil_status_dental" id="civil_status_dental" required>
@@ -445,6 +449,10 @@
 						<div class="form-group signup">
 							<label>Date of Birth:</label>
 							<input type="date" class="form-control" name="birthdate_medical" id="birthdate_medical"/>
+						</div>
+						<div class="form-group signup" id="senior_citizen_medical">
+							<label>Senior Citizen ID # (For out-patients only):</label>
+							<input type="text" class="form-control" name="senior_citizen_id_medical" id="senior_citizen_id_medical" placeholder="Enter senior citizen ID number" disabled/>
 						</div>
 						<div class="form-group signup">
 							<label>Civil Status:</label>
