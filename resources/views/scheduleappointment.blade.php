@@ -133,7 +133,7 @@
 					<div class="progress-bar progress-bar-striped active" role="progressbar" id="changeProgressDental" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:0%">0%</div>
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control signup0_dental" name="user_name_modal_dental" id="user_name_modal_dental" autofocus placeholder="User ID"/>
+					<input type="text" class="form-control signup0_dental" name="user_name_modal_dental" id="user_name_modal_dental" autofocus placeholder="User ID (201312345)"/>
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control signup0_dental" name="password_modal_dental" id="password_modal_dental" placeholder="Password"/>
@@ -353,7 +353,7 @@
 						<div class="progress-bar progress-bar-striped active" role="progressbar" id="changeProgress" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:0%">0%</div>
 					</div>
 					<div class="form-group signup0_medical">
-						<input type="text" class="form-control" name="user_name_modal_medical" id="user_name_modal_medical" autofocus placeholder="User ID">
+						<input type="text" class="form-control" name="user_name_modal_medical" id="user_name_modal_medical" autofocus placeholder="User ID (201312345)">
 					</div>
 					<div class="form-group signup0_medical">
 						<input type="password" class="form-control" name="password_modal_medical" id="password_modal_medical" placeholder="Password">

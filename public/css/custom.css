@@ -451,12 +451,12 @@ textarea {
   background-color: rgba(144, 31, 31, 0.98);
   color: #fff;
 }
-.btn{
+./* btn{
   border-radius: 0px;
-}
-/* .btn {
-    border-radius: 3px
 } */
+.btn {
+    border-radius: 3px
+}
 a.btn-success,
 a.btn-primary,
 a.btn-warning,
