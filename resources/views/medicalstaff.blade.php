@@ -17,7 +17,7 @@
 				</div>
 				<dl class="medicalStaffInfo">
 					<dt>{{$staff->staff_last_name}}, {{$staff->staff_first_name}}</dt>
-					<dd>{{$staff->position}}</dd>
+					<dd>@if(!is_null($staff->position)) {{$staff->position}} @else &nbsp; @endif</dd>
 				</dl>
 			</div>
 		</div>
