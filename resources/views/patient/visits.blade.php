@@ -5,7 +5,7 @@
   <div class="row">
     @include('layouts.sidebar')
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
-      <div class="col-md-5">
+      <div class="col-md-5 col-md-offset-1">
         <div class="panel panel-info">
           <div class="panel-heading">Medical</div>
           <div class="panel-body">

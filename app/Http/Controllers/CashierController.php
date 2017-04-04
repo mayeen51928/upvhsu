@@ -116,6 +116,7 @@ class CashierController extends Controller
 			->groupBy(DB::raw('medical_billings.medical_appointment_id, patient_info.patient_first_name, patient_info.patient_last_name, staff_info.staff_first_name, staff_info.staff_last_name, medical_schedules.schedule_day'))
 			->where('medical_billings.status', '=', 'unpaid')
 			->where('medical_schedules.schedule_day', '=', date('Y-m-d'))
+			->orderBy('schedule_day', 'asc')
 			->get();
 
 		$counter_medical_today = 0;
@@ -132,6 +133,7 @@ class CashierController extends Controller
 			->groupBy(DB::raw('dental_billings.appointment_id, patient_info.patient_first_name, patient_info.patient_last_name, staff_info.staff_first_name, staff_info.staff_last_name, dental_schedules.schedule_start, dental_schedules.schedule_end'))
 			->where('dental_billings.status', '=', 'unpaid')
 			->whereDate('dental_schedules.schedule_start', '=', date('Y-m-d'))
+			->orderBy('schedule_start', 'asc')
 			->get();
 
 	  $counter_dental_today = 0;

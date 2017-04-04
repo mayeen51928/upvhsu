@@ -225,6 +225,7 @@ $('.dental_appointments_prescription').click(function(){
 			});
 		}
 	});
+
 });
 
 
@@ -348,9 +349,16 @@ $('.medical_appointments_prescription').click(function(){
 		});
 	});
 });
-
-
-
+// $("#dental_appointments_dashboard_patient").height(252);
+// console.log($("#dental_appointments_dashboard_patient").height());
+// console.log($("#medical_appointments_dashboard_patient").height());
+if($("#dental_appointments_dashboard_patient .panel").height() < $("#medical_appointments_dashboard_patient .panel").height()){
+	$("#dental_appointments_dashboard_patient .panel").height($("#medical_appointments_dashboard_patient .panel").height());
+}
+else
+{
+	$("#medical_appointments_dashboard_patient .panel").height($("#dental_appointments_dashboard_patient .panel").height());
+}
 // ------------------PROFILE---------------
 // ------------------VISITS HISTORY---------------
 // ------------------BILLING RECORDS---------------

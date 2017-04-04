@@ -9,7 +9,7 @@ $(document).ready( function(){
 	numOfClicksDental = 0;
 	percentageDental = 0;
 	percentageMedical = 0
-
+  
 	if($('#typeDental').is(':checked'))
 	{
 		$('#dentalAppointment0').fadeIn();
