@@ -772,9 +772,35 @@ class DentistController extends Controller
 
 		public function additionaldentalrecord(Request $request)
 		{
+			$dental_appointment_id = $request->appointment_id;
 			$change_status = DentalAppointment::where('id', $request->appointment_id)->first();
 			$change_status->status = '1';
 			$change_status->update();
+
+			$patient_type_id = Patient::join('dental_appointments', 'patient_info.patient_id', 'dental_appointments.patient_id')->where('dental_appointments.id', $dental_appointment_id)->pluck('patient_type_id')->first();
+
+      for($i = 0; $i < sizeof($request->dental_services_id); $i++){
+				$billing = new DentalBilling;
+				$billing->dental_service_id = $request->dental_services_id[$i];
+				$billing->appointment_id = $dental_appointment_id;
+				$billing->status = 'unpaid';
+				if($patient_type_id == 1){
+					$billing->amount = DentalService::where('id', $request->dental_services_id[$i])->pluck('student_rate')->first();
+				}
+				elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+					$billing->amount = DentalService::where('id', $request->dental_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
+				}
+				else{
+					$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('dental_appointments', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('dental_appointments.id', $dental_appointment_id)->get();
+					if(count($patient_senior_checker) > 0){
+						$billing->amount = DentalService::where('id', $request->dental_services_id[$i])->pluck('senior_rate')->first();
+					}
+					else{
+						$billing->amount = DentalService::where('id', $request->dental_services_id[$i])->pluck('opd_rate')->first();
+					}
+				}
+				$billing->save();
+			}
 
 			$additional_dental_record = new AdditionalDentalRecord;
 			$additional_dental_record->appointment_id = $request->appointment_id;
@@ -970,57 +996,57 @@ class DentistController extends Controller
 
 
 
-	public function addbillingdental(Request $request){
-		$appointment_id = $request->appointment_id;
+	// public function addbillingdental(Request $request){
+	// 	$appointment_id = $request->appointment_id;
 
-		$patient_info = Patient::join('dental_appointments', 'patient_info.patient_id', 'dental_appointments.patient_id')->where('dental_appointments.id', $appointment_id)->first();
-		$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
+	// 	$patient_info = Patient::join('dental_appointments', 'patient_info.patient_id', 'dental_appointments.patient_id')->where('dental_appointments.id', $appointment_id)->first();
+	// 	$patient_name = $patient_info->patient_first_name . ' ' . $patient_info->patient_last_name;
 
-		$checker = 0;
-		$checker_if_exists_dental = DentalRecord::where('appointment_id', $appointment_id)->get();
-		$checker_if_exists_additional_dental = AdditionalDentalRecord::where('appointment_id', $appointment_id)->get();
-		if(count($checker_if_exists_dental)>0 && count($checker_if_exists_additional_dental)>0){
-			$checker = 1;
-		}
+	// 	$checker = 0;
+	// 	$checker_if_exists_dental = DentalRecord::where('appointment_id', $appointment_id)->get();
+	// 	$checker_if_exists_additional_dental = AdditionalDentalRecord::where('appointment_id', $appointment_id)->get();
+	// 	if(count($checker_if_exists_dental)>0 && count($checker_if_exists_additional_dental)>0){
+	// 		$checker = 1;
+	// 	}
 		
-		$display_dental_services = DentalService::where('patient_type_id', '=', $patient_info->patient_type_id)->get();
-		if($patient_info->patient_type_id == 5){
-			$display_dental_services_senior = DentalService::where('patient_type_id', '=', 6)->get();
-		}
+	// 	$display_dental_services = DentalService::where('patient_type_id', '=', $patient_info->patient_type_id)->get();
+	// 	if($patient_info->patient_type_id == 5){
+	// 		$display_dental_services_senior = DentalService::where('patient_type_id', '=', 6)->get();
+	// 	}
 
-		if($patient_info->patient_type_id == 5){
-				return response()->json(['patient_info' => $patient_info, 
-							'display_dental_services' => $display_dental_services,
-							'display_dental_services_senior' => $display_dental_services_senior,  
-							'checker' => $checker,
-							'patient_type_id' => $patient_info->patient_type_id,
-			]);
-		}
-		else{
-			return response()->json(['patient_info' => $patient_info, 
-							'display_dental_services' => $display_dental_services,
-							'checker' => $checker,
-							'patient_type_id' => $patient_info->patient_type_id,
-			]);
-		}
-	}
+	// 	if($patient_info->patient_type_id == 5){
+	// 			return response()->json(['patient_info' => $patient_info, 
+	// 						'display_dental_services' => $display_dental_services,
+	// 						'display_dental_services_senior' => $display_dental_services_senior,  
+	// 						'checker' => $checker,
+	// 						'patient_type_id' => $patient_info->patient_type_id,
+	// 		]);
+	// 	}
+	// 	else{
+	// 		return response()->json(['patient_info' => $patient_info, 
+	// 						'display_dental_services' => $display_dental_services,
+	// 						'checker' => $checker,
+	// 						'patient_type_id' => $patient_info->patient_type_id,
+	// 		]);
+	// 	}
+	// }
 
-	public function confirmbillingdental(Request $request){		
-		$appointment_id = $request->appointment_id;
-		$checked_services_array_id = $request->checked_services_array_id;
-		$checked_services_array_rate = $request->checked_services_array_rate;
-		for($i=0; $i < sizeof($checked_services_array_id); $i++){
-		    $billing = new DentalBilling;
-				$billing->dental_service_id = $checked_services_array_id[$i];
-        $billing->appointment_id = $appointment_id;
-        $billing->status = 'unpaid';
-        $billing->amount = $checked_services_array_rate[$i];
-        $billing->save();
-		}
-		DB::table('dental_appointments')
-		      ->where('id', $appointment_id)
-		      ->update(['status' => '1']);
+	// public function confirmbillingdental(Request $request){		
+	// 	$appointment_id = $request->appointment_id;
+	// 	$checked_services_array_id = $request->checked_services_array_id;
+	// 	$checked_services_array_rate = $request->checked_services_array_rate;
+	// 	for($i=0; $i < sizeof($checked_services_array_id); $i++){
+	// 	    $billing = new DentalBilling;
+	// 			$billing->dental_service_id = $checked_services_array_id[$i];
+ //        $billing->appointment_id = $appointment_id;
+ //        $billing->status = 'unpaid';
+ //        $billing->amount = $checked_services_array_rate[$i];
+ //        $billing->save();
+	// 	}
+	// 	DB::table('dental_appointments')
+	// 	      ->where('id', $appointment_id)
+	// 	      ->update(['status' => '1']);
 
-		return response()->json(['success' => 'success']); 
-	}
+	// 	return response()->json(['success' => 'success']); 
+	// }
 }

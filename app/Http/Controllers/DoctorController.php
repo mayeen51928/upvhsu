@@ -793,7 +793,13 @@ class DoctorController extends Controller
 						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
 					}
 					else{
-						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('opd_rate')->first();
+						$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $medical_appointment_id)->get();
+						if(count($patient_senior_checker) > 0){
+							$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('senior_rate')->first();
+						}
+						else{
+							$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('opd_rate')->first();
+						}
 					}
 					$billing->save();
 				}
@@ -874,20 +880,13 @@ class DoctorController extends Controller
 						$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
 					}
 					else{
-						if($request->patient_type_id_radio == '5'){
-							$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('opd_rate')->first();
+						$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->appointment_id)->get();
+						if(count($patient_senior_checker) > 0){
+							$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('senior_rate')->first();
 						}
 						else{
-							$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('senior_rate')->first();
-							// $billing->senior_citizen_id = $request->senior_id;
+							$billing->amount = MedicalService::where('id', $request->medical_services_id[$i])->pluck('opd_rate')->first();
 						}
-
-
-
-						// Query from senior_citizen_ids table
-						// if may record, get from senior rate
-						// else
-						// opd rate
 					}
 					$billing->save();
 				}

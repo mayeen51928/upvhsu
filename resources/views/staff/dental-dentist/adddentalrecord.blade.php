@@ -309,7 +309,7 @@
 			  							<h4>Presence of dental caries</h4>
 			  						</div>
 			  						<div class="col-md-5 col-sm-5 col-xs-12">
-			  							<select class="form-control" id="selDentalCaries" required>
+			  							<select class="form-control additionaldentalrecordforms" id="selDentalCaries" required disabled>
 			  								<option disabled selected>--- option ---</option>
 			  								<option value="yes">Yes</option>
 			  								<option value="no">No</option>
@@ -321,7 +321,7 @@
 			  							<h4>Presence of gingivitis</h4>
 			  						</div>
 			  						<div class="col-md-5 col-sm-5 col-xs-12">
-			  							<select class="form-control" id="selGingivitis" required>
+			  							<select class="form-control additionaldentalrecordforms" id="selGingivitis" required disabled>
 			  								<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -333,7 +333,7 @@
 											<h4>Presence of peridontal pocket</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selPeridontalPocket" required>
+											<select class="form-control additionaldentalrecordforms" id="selPeridontalPocket" required disabled>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -345,7 +345,7 @@
 											<h4>Presence of oral debris</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selOralDebris" required>
+											<select class="form-control additionaldentalrecordforms" id="selOralDebris" required disabled>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -357,7 +357,7 @@
 											<h4>Presence of calculus</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selCalculus" required>
+											<select class="form-control additionaldentalrecordforms" id="selCalculus" required disabled>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -369,7 +369,7 @@
 											<h4>Presence of neoplasm</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selNeoplasm" required>
+											<select class="form-control additionaldentalrecordforms" id="selNeoplasm" required disabled>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -381,7 +381,7 @@
 											<h4>Presence of dental-facio anomaly</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<select class="form-control" id="selDentalFacioAnomaly" required>
+											<select class="form-control additionaldentalrecordforms" id="selDentalFacioAnomaly" required disabled>
 												<option disabled selected>--- option ---</option>
 												<option value="yes">Yes</option>
 												<option value="no">No</option>
@@ -393,7 +393,7 @@
 											<h4>Number of teeth present</h4>
 										</div>
 										<div class="col-md-5 col-sm-5 col-xs-12">
-											<input type="text" class="form-control" id="teethPresent" required>
+											<input type="text" class="form-control additionaldentalrecordforms" id="teethPresent" required disabled>
 										</div>
 									</div>
 			  				</div>
