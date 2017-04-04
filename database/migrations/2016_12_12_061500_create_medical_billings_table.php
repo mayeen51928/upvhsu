@@ -21,7 +21,6 @@ class CreateMedicalBillingsTable extends Migration
             $table->foreign('medical_appointment_id')->references('id')->on('medical_appointments')->onDelete('cascade');
             $table->enum('status', ['paid', 'unpaid']);
             $table->decimal('amount');
-            $table->string('senior_citizen_id')->nullable();
             $table->timestamps();
         });
     }

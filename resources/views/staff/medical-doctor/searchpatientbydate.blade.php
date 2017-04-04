@@ -9,7 +9,9 @@
     <div class="row">
       <div class="col-md-12" style="text-align: center;">
       <h4>Search Patient Record</h4>
-        <p><i>You can also search by <a href="{{ url('/doctor/searchpatient') }}">name</a>.</i></p>
+        <div class="col-md-4 col-md-offset-4 accountOption">
+        <a role="button" class="btn btn-success" href="{{ url('/doctor/searchpatient') }}">Click here to search by name</a>
+        </div>
       </div>
     </div>
     <div class="row">

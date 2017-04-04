@@ -7,7 +7,9 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
       <div class="col-md-4 col-md-offset-4" style="text-align: center;">
         <h4>Search Patient Record</h4>
-        <p><i>You can also search by <a href="{{ url('/dentist/searchpatient/date') }}">date</a>.</i></p>
+        <div class="accountOption">
+        <a role="button" class="btn btn-success" href="{{ url('/dentist/searchpatient/date') }}">Click here to search by date</a>
+        </div>
         <input class="form-control" type="text" name="search_patientdental" id="search_patientdental" placeholder="Enter patient's name here" />
         <br/>
         <img class="img-responsive center-block" src="{{asset('images/loading.gif')}}" id="searchloadingdental" style="display: none;"/>

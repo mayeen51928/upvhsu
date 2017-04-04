@@ -22,13 +22,13 @@ class CreatePatientInfoTable extends Migration
             $table->string('patient_first_name');
             $table->string('patient_middle_name')->nullable();
             $table->string('patient_last_name');
-            $table->integer('year_level');
+            $table->integer('year_level')->nullable();
             $table->integer('degree_program_id')->unsigned()->index()->nullable();
             $table->foreign('degree_program_id')->references('id')->on('degree_programs')->onDelete('cascade');
-            $table->enum('graduated', ['0', '1']);
+            $table->enum('graduated', ['0', '1'])->nullable();
             $table->enum('sex', ['M', 'F']);
             $table->date('birthday');
-            $table->enum('civil_status', ['Single', 'Married', 'Separated', 'Divorced', 'Widowed']);
+            $table->enum('civil_status', ['Single', 'Married', 'Separated', 'Divorced', 'Widowed'])->nullable();
             $table->integer('religion_id')->unsigned()->index()->nullable();
             $table->foreign('religion_id')->references('id')->on('religions')->onDelete('cascade');
             $table->integer('nationality_id')->unsigned()->index()->nullable();

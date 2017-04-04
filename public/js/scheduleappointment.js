@@ -367,7 +367,30 @@ $(document).ready( function(){
     });
 
     
-
+    $('#birthdate_dental').keyup(function() {
+      console.log($('#birthdate_dental').val());
+      if($("input[name=patient_type_dental]:checked").val() == 5
+        && (Math.floor((new Date() - new Date($('#birthdate_dental').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
+      {
+        $('#senior_citizen_id_dental').removeAttr('disabled');
+      }
+      else
+      {
+        $('#senior_citizen_id_dental').attr('disabled', 'disabled');
+      }
+    });
+    $('#birthdate_medical').keyup(function() {
+      console.log($('#birthdate_medical').val());
+      if($("input[name=patient_type_medical]:checked").val() == 5
+        && (Math.floor((new Date() - new Date($('#birthdate_medical').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
+      {
+        $('#senior_citizen_id_medical').removeAttr('disabled');
+      }
+      else
+      {
+        $('#senior_citizen_id_medical').attr('disabled', 'disabled');
+      }
+    });
     $('#selMedicalDoctor').closest('div').css({marginBottom: '0px'});
 
     $("input[name=patient_type_dental]").click(function(){
@@ -375,9 +398,16 @@ $(document).ready( function(){
     	{
 	    	$("#degree_program_dental").removeAttr('disabled');
 	    	$('#yearlevel_dental').removeAttr('disabled');
+        $('#senior_citizen_id_dental').attr('disabled', 'disabled');
 	    }
+      else if($("input[name=patient_type_dental]:checked").val() == 5
+        && (Math.floor((new Date() - new Date($('#birthdate_dental').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
+      {
+        $('#senior_citizen_id_dental').removeAttr('disabled');
+      }
 	    else
 	    {
+        $('#senior_citizen_id_dental').attr('disabled', 'disabled');
         $("#degree_program_dental option[value=default]").prop('selected', true);
         $('#yearlevel_dental').val('');
 	    	$("#degree_program_dental").attr('disabled', 'disabled');
@@ -390,9 +420,16 @@ $(document).ready( function(){
     	{
 	    	$("#degree_program_medical").removeAttr('disabled');
 	    	$('#yearlevel_medical').removeAttr('disabled');
+        $('#senior_citizen_id_medical').attr('disabled', 'disabled');
 	    }
+      else if($("input[name=patient_type_medical]:checked").val() == 5
+        && (Math.floor((new Date() - new Date($('#birthdate_medical').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
+      {
+        $('#senior_citizen_id_medical').removeAttr('disabled');
+      }
 	    else
 	    {
+        $('#senior_citizen_id_medical').attr('disabled', 'disabled');
         $("#degree_program_medical option[value=default]").prop('selected', true);
         $('#yearlevel_medical').val('');
 	    	$("#degree_program_medical").attr('disabled', 'disabled');
@@ -454,42 +491,43 @@ $(document).ready( function(){
 	            schedule_id: scheduleID,
 	            reasons:$('#dentalNotes').val(),
 	            first_name:$('#first_name_dental').val(),
-                middle_name:$('#middle_name_dental').val(),
-                last_name: $('#last_name_dental').val(),
-                patient_type_id: $("input[name='patient_type_dental']:checked").val(),
-                sex:$("input[name='sex_dental']:checked").val(),
-                year_level: $('#yearlevel_dental').val(),
-                degree_program_id: $("#degree_program_dental").val(),
-                birthdate: $('#birthdate_dental').val(),
-                civil_status: $('#civil_status_dental').val(),
-                religion: $('#religion_dental').val(),
-                nationality: $('#nationality_dental').val(),
-                father_first_name:$('#father_first_dental').val(),
-                father_middle_name:$('#father_middle_dental').val(),
-                father_last_name:$('#father_last_dental').val(),
-                mother_first_name:$('#mother_first_dental').val(),
-                mother_middle_name:$('#mother_middle_dental').val(),
-                mother_last_name:$('#mother_last_dental').val(),
-                street:$('#street_dental').val(),
-                town:$('#town_dental').val(),
-                province:$('#province_dental').val(),
-                residencetelephone:$('#residencetelephone_dental').val(),
-                personalcontactnumber:$('#personalcontactnumber_dental').val(),
-                residencecellphone:$('#residencecellphone_dental').val(),
-                guardian_first_name: $('#guardian_first_dental').val(),
-                guardian_middle_name: $('#guardian_middle_dental').val(),
-                guardian_last_name: $('#guardian_last_dental').val(),
-                guardian_relationship:$('#guardian_relationship_dental').val(),
-                guardian_street:$('#guardian_street_dental').val(),
-                guardian_town:$('#guardian_town_dental').val(),
-                guardian_province:$('#guardian_province_dental').val(),
-                guardianresidencetelephone:$('#guardianresidencetelephone_dental').val(),
-                guardianresidencecellphone:$('#guardianresidencecellphone_dental').val(),
-                illness_history:$('#illness_history_dental').val(),
-                operation_history:$('#operation_history_dental').val(),
-                allergies_history:$('#allergies_history_dental').val(),
-                family_history:$('#family_history_dental').val(),
-                maintenance_medication_history:$('#maintenance_medication_history_dental').val(),
+              middle_name:$('#middle_name_dental').val(),
+              last_name: $('#last_name_dental').val(),
+              patient_type_id: $("input[name='patient_type_dental']:checked").val(),
+              sex:$("input[name='sex_dental']:checked").val(),
+              year_level: $('#yearlevel_dental').val(),
+              degree_program_id: $("#degree_program_dental").val(),
+              birthdate: $('#birthdate_dental').val(),
+              senior_citizen_id: $('#senior_citizen_id_dental').val(),
+              civil_status: $('#civil_status_dental').val(),
+              religion: $('#religion_dental').val(),
+              nationality: $('#nationality_dental').val(),
+              father_first_name:$('#father_first_dental').val(),
+              father_middle_name:$('#father_middle_dental').val(),
+              father_last_name:$('#father_last_dental').val(),
+              mother_first_name:$('#mother_first_dental').val(),
+              mother_middle_name:$('#mother_middle_dental').val(),
+              mother_last_name:$('#mother_last_dental').val(),
+              street:$('#street_dental').val(),
+              town:$('#town_dental').val(),
+              province:$('#province_dental').val(),
+              residencetelephone:$('#residencetelephone_dental').val(),
+              personalcontactnumber:$('#personalcontactnumber_dental').val(),
+              residencecellphone:$('#residencecellphone_dental').val(),
+              guardian_first_name: $('#guardian_first_dental').val(),
+              guardian_middle_name: $('#guardian_middle_dental').val(),
+              guardian_last_name: $('#guardian_last_dental').val(),
+              guardian_relationship:$('#guardian_relationship_dental').val(),
+              guardian_street:$('#guardian_street_dental').val(),
+              guardian_town:$('#guardian_town_dental').val(),
+              guardian_province:$('#guardian_province_dental').val(),
+              guardianresidencetelephone:$('#guardianresidencetelephone_dental').val(),
+              guardianresidencecellphone:$('#guardianresidencecellphone_dental').val(),
+              illness_history:$('#illness_history_dental').val(),
+              operation_history:$('#operation_history_dental').val(),
+              allergies_history:$('#allergies_history_dental').val(),
+              family_history:$('#family_history_dental').val(),
+              maintenance_medication_history:$('#maintenance_medication_history_dental').val(),
 	        } ,
 	        function(data){
             if(data['message'] == 'Success')
@@ -703,6 +741,7 @@ $(document).ready( function(){
                 year_level: $('#yearlevel_medical').val(),
                 degree_program_id: $("#degree_program_medical").val(),
                 birthdate: $('#birthdate_medical').val(),
+                senior_citizen_id: $('#senior_citizen_id_medical').val(),
                 civil_status: $('#civil_status_medical').val(),
                 religion: $('#religion_medical').val(),
                 nationality: $('#nationality_medical').val(),
