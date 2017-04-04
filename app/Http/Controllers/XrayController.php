@@ -57,12 +57,13 @@ class XrayController extends Controller
 	{
 		$appointment_id = $request->medical_appointment_id;
 		$xray_result = ChestXrayResult::where('medical_appointment_id', $appointment_id)->first();
-		$patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $appointment_id)->pluck('patient_type_id')->first();
 		$xray_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'xray')->get();
+		$patient_type_checker = Patient::join('medical_appointments', 'patient_info.patient_id','medical_appointments.patient_id')->first();
 		return response()->json([
 			'patient_type_id' => $patient_type_id,
 			'xray_result' => $xray_result, 
 			'xray_billing_status' => $xray_billing_status,
+			'patient_type_checker' => $patient_type_checker,
 		]);
 	}
 

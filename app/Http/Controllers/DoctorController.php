@@ -254,7 +254,6 @@ class DoctorController extends Controller
 		$urinalysis_result = UrinalysisResult::where('medical_appointment_id', $appointment_id)->first();
 		$prescription = Prescription::where('medical_appointment_id', $appointment_id)->first();
 		$remark = Remark::where('medical_appointment_id', $appointment_id)->first();
-		$patient_type_checker = Patient::join('medical_appointments', 'patient_info.patient_id','medical_appointments.patient_id')->first();
 
 		$lab_xray_request_counter = 0;
 		if(count($physical_examination) == 1)
@@ -294,6 +293,7 @@ class DoctorController extends Controller
 		{
 			$counter++;
 		}
+		$patient_type_checker = Patient::join('medical_appointments', 'patient_info.patient_id','medical_appointments.patient_id')->first();
 		$medical_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'medical')->get();
 		
 		if($counter > 0)

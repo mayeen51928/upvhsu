@@ -44,11 +44,8 @@ $('.addXrayResult').click(function(){
     	// 	$('#chest-xray').removeAttr('disabled');
     	// }
     }
-		if(data['patient_type_id'] == 5){
-			$('#patient_type_radio_xray').css("display","block");
-		}
-		else{
-			$('#patient_type_radio_xray').css("display","none");
+    if(data['patient_type_checker']['patient_type_id'] == 5){
+			$('#patient_type_radio_xray').css('display', 'block');
 		}
     $('#add-xray-result-footer').append('<button type="button" style="display: none;" class="btn btn-success addXrayResultButton" id="addXrayResultButton_'+medical_appointment_id+'">Save</button><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>');
 		$('#add-xray-result').modal();

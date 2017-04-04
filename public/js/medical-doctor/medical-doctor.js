@@ -223,14 +223,9 @@ $('.addMedicalRecordButton').click(function() {
 									medical_services_id.push($(this).attr("id"));
 							}
 					});
-					if($('input[name=patient_type_radio]:checked').val() == 5){
-						patient_type_id_radio = $('input[name=patient_type_radio]:checked').val();
-						senior_id = null;
-					}
-					else{
-						patient_type_id_radio = $('input[name=patient_type_radio]:checked').val()
-						senior_id = $('#senior_id').val();
-					}
+					patient_type_id_radio = $('input[name=patient_type_radio]:checked').val()
+					senior_id = $('#senior_id').val();
+			
 					if ($('#height').val() ||
 						$('#weight').val() ||
 						$('#blood-pressure').val() ||
@@ -370,6 +365,17 @@ $('.addMedicalRecordButton').click(function() {
 						$('#'+data['medical_billing_status'][i].medical_service_id+'.checkboxMedicalService').prop('checked', true);
 						$('.checkboxMedicalService').prop('disabled', true);
 						$('#patient_type_radio_lab').prop('disabled', true);
+					}
+					if(data['patient_type_checker']['patient_type_id'] == 5){
+						$('#patient_type_radio_medical').css('display', 'block');
+						if(data['medical_billing_status'][1].senior_citizen_id != null){
+							$(":radio[value=6]").attr('checked',true); 
+							$("#senior_id").val(data['medical_billing_status'][1].senior_citizen_id).css("disabled","disabled");
+						}
+						else{
+							$(":radio[value=5]").attr('checked',true); 
+							$("#senior_id").css("disabled","disabled").removeAttr('placeholder');
+						}
 					}
 				}
 				else
