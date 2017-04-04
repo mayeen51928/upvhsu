@@ -212,6 +212,12 @@ $('.confirmAdditionalDentalRecord').click(function(){
   var neoplasm = $("#selNeoplasm").find(':selected')[0].value;
   var dentalFacioAnomaly = $("#selDentalFacioAnomaly").find(':selected')[0].value;
   var teethPresent = $("#teethPresent").val();
+  dental_services_id=[];
+  $("input:checkbox.checkboxDentalService").each(function(){
+			if($(this).is(":checked")){
+					dental_services_id.push($(this).attr("id"));
+			}
+	});
   if(dentalCaries && gingivitis && peridontalPocket && oralDebris && calculus && neoplasm && dentalFacioAnomaly && teethPresent){
   	$.ajax({
 		  type: "POST",
@@ -225,6 +231,7 @@ $('.confirmAdditionalDentalRecord').click(function(){
 		  				neoplasm:neoplasm,
 		  				dental_facio_anomaly:dentalFacioAnomaly,
 		  				teeth_present:teethPresent,
+		  				dental_services_id:dental_services_id,
 		  				_token: token
 		  			},
 		  success: function(data)
@@ -251,128 +258,150 @@ $('.confirmAdditionalDentalRecord').click(function(){
   }
 });
 
+var checkboxDentalServiceCounter = 0;
+$('.checkboxDentalService').click(function(){
+
+	if($(this).is(':checked'))
+	{
+		checkboxDentalServiceCounter++;
+	}
+	else
+	{
+		checkboxDentalServiceCounter--;
+	}
+	if(checkboxDentalServiceCounter>0)
+	{
+		$('.additionaldentalrecordforms').removeAttr('disabled')
+	}
+	else
+	{
+		$('.additionaldentalrecordforms').attr('disabled', 'disabled');
+		$(".additionaldentalrecordforms").val($(".additionaldentalrecordforms option:first").val());
+		$('#teethPresent').val('');
+	}
+});
 
 // ------------------BILLING---------------
-$('.addBillingToDental').click(function(){
-	var id = $(this).attr('id').split("_");
-	appointmentId = id[1];
-	output = '';
-	$('.displayServices').html(output);
-	$.ajax({
-		  type: "POST",
-		  url: addBillingDental,
-		  data: {appointment_id:  appointmentId, _token: token},
-		  success: function(data)
-		  {
-		  		console.log(data['checker']);
-		  		var dob = new Date(data['patient_info']['birthday']);
-			  	var today = new Date();
-			    var dayDiff = Math.ceil(today - dob) / (1000 * 60 * 60 * 24 * 365);
-			    var age = parseInt(dayDiff);
-			  	if(data['patient_type_id'] == 5 && age>59){
-			  		$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
-			  		$('.dental_senior_checker_medical').show();
-			  		$('input[type=radio][name=dental_radio_button_medical]').change(function() {
-			  			output="";
-			  			$('.displayServices').html(output);
-			  			if (this.value == '5') {
-			  				output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
-			  				for (var i = 0; i < data['display_dental_services'].length; i++){
-			  					output += "<tr><td><input type='checkbox' class='checkboxDentalService' id="+data['display_dental_services'][i].service_rate+" value="+data['display_dental_services'][i].id+"></td><td class='dentalService'>"+data['display_dental_services'][i].service_description+"</td><td class='dentalServiceRate'>"+data['display_dental_services'][i].service_rate+"</td></tr>";
-								}
-			        }
-			        else if (this.value == '6') {
-		            output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
-								for (var i = 0; i < data['display_dental_services_senior'].length; i++){
-									output += "<tr><td><input type='checkbox' class='checkboxDentalService' id="+data['display_dental_services_senior'][i].service_rate+" value="+data['display_dental_services_senior'][i].id+"></td><td class='dentalService'>"+data['display_dental_services_senior'][i].service_description+"</td><td class='dentalServiceRate'>"+data['display_dental_services_senior'][i].service_rate+"</td></tr>";
-								}
-							}
-							$('.displayServices').html(output);
-							if(data['checker'] == '0'){
-								$(".displayServices :input").attr("disabled", true);
-								$('.dental-bill-input').html("").append("<input type='text' class='form-control' id='dental-bill' disabled>");
-								$('.dental-bill-confirm').html("").append("<button type='button' class='btn btn-primary dental-bill-confirm-button' id='dentalBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-							}
-							else{
-								$('.dental-bill-input').html("").append("<input type='text' class='form-control' id='dental-bill' disabled>");
-								$('.dental-bill-confirm').html("").append("<button type='button' class='btn btn-primary dental-bill-confirm-button' id='dentalBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-							}
-							var fin = 0;
-							$('.checkboxDentalService').click(function(){
-				        if ($(this).is(':checked')){
-				          var dentalBillRate = parseFloat($(this).attr('id'));
-				          fin = parseFloat(fin+dentalBillRate);
-				          $("#dental-bill").val(fin);
-				        }
-				        else{
-				          var dentalBillRate = parseFloat($(this).attr('id'));
-				          fin = parseFloat(fin-dentalBillRate);
-				          $("#dental-bill").val(fin);
-				        }
-				      });
-				    });
-			  	}
-			  	else{
-			  		$('.dental_senior_checker_medical').hide();
-			  		$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
-						output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
-						for (var i = 0; i < data['display_dental_services'].length; i++){
-							output += "<tr><td><input type='checkbox' class='checkboxDentalService' id="+data['display_dental_services'][i].service_rate+" value="+data['display_dental_services'][i].id+"></td><td class='dentalService'>"+data['display_dental_services'][i].service_description+"</td><td class='dentalServiceRate'>"+data['display_dental_services'][i].service_rate+"</td></tr>";
-						}
-						$('.displayServices').html(output);
-						if(data['checker'] == '0'){
-							$(".displayServices :input").attr("disabled", true);
-							$('.dental-bill-input').html("").append("<input type='text' class='form-control' id='dental-bill' disabled>");
-							$('.dental-bill-confirm').html("").append("<button type='button' class='btn btn-primary dental-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-						}
-						else{
-							$('.dental-bill-input').html("").append("<input type='text' class='form-control' id='dental-bill' disabled>");
-							$('.dental-bill-confirm').html("").append("<button type='button' class='btn btn-primary dental-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
-						}
-						var fin = 0;
-						$('.checkboxDentalService').click(function(){
-			        if ($(this).is(':checked')){
-			          var dentalBillRate = parseFloat($(this).attr('id'));
-			          fin = parseFloat(fin+dentalBillRate);
-			          $("#dental-bill").val(fin);
-			        }
-			        else{
-			          var dentalBillRate = parseFloat($(this).attr('id'));
-			          fin = parseFloat(fin-dentalBillRate);
-			          $("#dental-bill").val(fin);
-			        }
-			      });
-					}
-					$('#dentalBillingModal').modal();
-		  }
-	  });
-});
+// $('.addBillingToDental').click(function(){
+// 	var id = $(this).attr('id').split("_");
+// 	appointmentId = id[1];
+// 	output = '';
+// 	$('.displayServices').html(output);
+// 	$.ajax({
+// 		  type: "POST",
+// 		  url: addBillingDental,
+// 		  data: {appointment_id:  appointmentId, _token: token},
+// 		  success: function(data)
+// 		  {
+// 		  		console.log(data['checker']);
+// 		  		var dob = new Date(data['patient_info']['birthday']);
+// 			  	var today = new Date();
+// 			    var dayDiff = Math.ceil(today - dob) / (1000 * 60 * 60 * 24 * 365);
+// 			    var age = parseInt(dayDiff);
+// 			  	if(data['patient_type_id'] == 5 && age>59){
+// 			  		$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
+// 			  		$('.dental_senior_checker_medical').show();
+// 			  		$('input[type=radio][name=dental_radio_button_medical]').change(function() {
+// 			  			output="";
+// 			  			$('.displayServices').html(output);
+// 			  			if (this.value == '5') {
+// 			  				output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
+// 			  				for (var i = 0; i < data['display_dental_services'].length; i++){
+// 			  					output += "<tr><td><input type='checkbox' class='checkboxDentalService' id="+data['display_dental_services'][i].service_rate+" value="+data['display_dental_services'][i].id+"></td><td class='dentalService'>"+data['display_dental_services'][i].service_description+"</td><td class='dentalServiceRate'>"+data['display_dental_services'][i].service_rate+"</td></tr>";
+// 								}
+// 			        }
+// 			        else if (this.value == '6') {
+// 		            output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
+// 								for (var i = 0; i < data['display_dental_services_senior'].length; i++){
+// 									output += "<tr><td><input type='checkbox' class='checkboxDentalService' id="+data['display_dental_services_senior'][i].service_rate+" value="+data['display_dental_services_senior'][i].id+"></td><td class='dentalService'>"+data['display_dental_services_senior'][i].service_description+"</td><td class='dentalServiceRate'>"+data['display_dental_services_senior'][i].service_rate+"</td></tr>";
+// 								}
+// 							}
+// 							$('.displayServices').html(output);
+// 							if(data['checker'] == '0'){
+// 								$(".displayServices :input").attr("disabled", true);
+// 								$('.dental-bill-input').html("").append("<input type='text' class='form-control' id='dental-bill' disabled>");
+// 								$('.dental-bill-confirm').html("").append("<button type='button' class='btn btn-primary dental-bill-confirm-button' id='dentalBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+// 							}
+// 							else{
+// 								$('.dental-bill-input').html("").append("<input type='text' class='form-control' id='dental-bill' disabled>");
+// 								$('.dental-bill-confirm').html("").append("<button type='button' class='btn btn-primary dental-bill-confirm-button' id='dentalBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+// 							}
+// 							var fin = 0;
+// 							$('.checkboxDentalService').click(function(){
+// 				        if ($(this).is(':checked')){
+// 				          var dentalBillRate = parseFloat($(this).attr('id'));
+// 				          fin = parseFloat(fin+dentalBillRate);
+// 				          $("#dental-bill").val(fin);
+// 				        }
+// 				        else{
+// 				          var dentalBillRate = parseFloat($(this).attr('id'));
+// 				          fin = parseFloat(fin-dentalBillRate);
+// 				          $("#dental-bill").val(fin);
+// 				        }
+// 				      });
+// 				    });
+// 			  	}
+// 			  	else{
+// 			  		$('.dental_senior_checker_medical').hide();
+// 			  		$('.patient_name').html('<h4>'+data['patient_info']['patient_first_name']+' '+data['patient_info']['patient_last_name']+'</h4>');
+// 						output += "<tr><th></th><th>Service Description</th><th>Service Rate</th></tr>"
+// 						for (var i = 0; i < data['display_dental_services'].length; i++){
+// 							output += "<tr><td><input type='checkbox' class='checkboxDentalService' id="+data['display_dental_services'][i].service_rate+" value="+data['display_dental_services'][i].id+"></td><td class='dentalService'>"+data['display_dental_services'][i].service_description+"</td><td class='dentalServiceRate'>"+data['display_dental_services'][i].service_rate+"</td></tr>";
+// 						}
+// 						$('.displayServices').html(output);
+// 						if(data['checker'] == '0'){
+// 							$(".displayServices :input").attr("disabled", true);
+// 							$('.dental-bill-input').html("").append("<input type='text' class='form-control' id='dental-bill' disabled>");
+// 							$('.dental-bill-confirm').html("").append("<button type='button' class='btn btn-primary dental-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"' disabled>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+// 						}
+// 						else{
+// 							$('.dental-bill-input').html("").append("<input type='text' class='form-control' id='dental-bill' disabled>");
+// 							$('.dental-bill-confirm').html("").append("<button type='button' class='btn btn-primary dental-bill-confirm-button' id='xrayBilliConfirmButton_"+appointmentId+"'>Confirm</button><button type='button' class='btn btn-danger' data-dismiss='modal'>Cancel</button>");
+// 						}
+// 						var fin = 0;
+// 						$('.checkboxDentalService').click(function(){
+// 			        if ($(this).is(':checked')){
+// 			          var dentalBillRate = parseFloat($(this).attr('id'));
+// 			          fin = parseFloat(fin+dentalBillRate);
+// 			          $("#dental-bill").val(fin);
+// 			        }
+// 			        else{
+// 			          var dentalBillRate = parseFloat($(this).attr('id'));
+// 			          fin = parseFloat(fin-dentalBillRate);
+// 			          $("#dental-bill").val(fin);
+// 			        }
+// 			      });
+// 					}
+// 					$('#dentalBillingModal').modal();
+// 		  }
+// 	  });
+// });
 
 
-$(document).on('click', '.dental-bill-confirm-button', function(){
-	var appointmentId = $(this).attr('id').split('_')[1];
-	checked_services_array_id=[];
-	checked_services_array_rate=[];
-	$("input:checkbox.checkboxDentalService").each(function(){
-	    var dentalServiceCheckbox = $(this);
-	    if(dentalServiceCheckbox.is(":checked")){
-        checked_services_array_id.push(dentalServiceCheckbox.attr("value"));
-        checked_services_array_rate.push(dentalServiceCheckbox.attr("id"));
-	    }
-	});
-	$.ajax({
-		  type: "POST",
-		  url: confirmBillingDental,
-		  data: {appointment_id:  appointmentId, checked_services_array_id:  checked_services_array_id, checked_services_array_rate:  checked_services_array_rate, _token: token},
-		  success: function(data)
-		  {
-		  	highchartsdentalfunc();
-		  	$('#dentalBillingModal').modal("hide");
-		  	$('#addBillingToDental_'+appointmentId).closest("tr").remove();
-		  }
-  	});
-	return false;
-});
+// $(document).on('click', '.dental-bill-confirm-button', function(){
+// 	var appointmentId = $(this).attr('id').split('_')[1];
+// 	checked_services_array_id=[];
+// 	checked_services_array_rate=[];
+// 	$("input:checkbox.checkboxDentalService").each(function(){
+// 	    var dentalServiceCheckbox = $(this);
+// 	    if(dentalServiceCheckbox.is(":checked")){
+//         checked_services_array_id.push(dentalServiceCheckbox.attr("value"));
+//         checked_services_array_rate.push(dentalServiceCheckbox.attr("id"));
+// 	    }
+// 	});
+// 	$.ajax({
+// 		  type: "POST",
+// 		  url: confirmBillingDental,
+// 		  data: {appointment_id:  appointmentId, checked_services_array_id:  checked_services_array_id, checked_services_array_rate:  checked_services_array_rate, _token: token},
+// 		  success: function(data)
+// 		  {
+// 		  	highchartsdentalfunc();
+// 		  	$('#dentalBillingModal').modal("hide");
+// 		  	$('#addBillingToDental_'+appointmentId).closest("tr").remove();
+// 		  }
+//   	});
+// 	return false;
+// });
 
 // ----------------------------- End of Dashboard ----------------------
 

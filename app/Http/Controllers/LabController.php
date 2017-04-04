@@ -93,7 +93,7 @@ class LabController extends Controller
 			$drug_billing_service = MedicalService::where('service_type', 'drugtest')->first();
 			$fecalysis_billing_service = MedicalService::where('service_type', 'fecalysis')->first();
 			$urinalysis_billing_service = MedicalService::where('service_type', 'urinalysis')->first();
-			$cbc_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'cbc')->orWhere('medical_services.service_type', 'drugtest')->orWhere('medical_services.service_type', 'fecalysis')->orWhere('medical_services.service_type', 'urinalysis')->get();
+			$cbc_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'cbc')->get();
 
 			return response()->json([
 				'patient_type_id' => $patient_type_id,
@@ -144,7 +144,13 @@ class LabController extends Controller
 							$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
 						}
 						else{
-							$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('opd_rate')->first();
+							$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->get();
+							if(count($patient_senior_checker) > 0){
+								$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('senior_rate')->first();
+							}
+							else{
+								$billing->amount = MedicalService::where('id', $request->cbc_services_id[$i])->pluck('opd_rate')->first();
+							}
 						}
 						$billing->save();
 					}
@@ -177,7 +183,13 @@ class LabController extends Controller
 						$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('faculty_staff_dependent_rate')->first();
 					}
 					else{
-						$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('opd_rate')->first();
+						$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->get();
+						if(count($patient_senior_checker) > 0){
+							$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('senior_rate')->first();
+						}
+						else{
+							$billing->amount = MedicalService::where('id', $request->drug_service_id)->pluck('opd_rate')->first();
+						}
 					}
 					$billing->save();
 					$drug_test->status = '1';
@@ -211,7 +223,13 @@ class LabController extends Controller
 						$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('faculty_staff_dependent_rate')->first();
 					}
 					else{
-						$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('opd_rate')->first();
+						$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->get();
+						if(count($patient_senior_checker) > 0){
+							$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('senior_rate')->first();
+						}
+						else{
+							$billing->amount = MedicalService::where('id', $request->fecalysis_service_id)->pluck('opd_rate')->first();
+						}
 					}
 					$billing->save();
 					$fecalysis->status = '1';
@@ -255,7 +273,13 @@ class LabController extends Controller
 						$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('faculty_staff_dependent_rate')->first();
 					}
 					else{
-						$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('opd_rate')->first();
+						$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->get();
+						if(count($patient_senior_checker) > 0){
+							$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('senior_rate')->first();
+						}
+						else{
+							$billing->amount = MedicalService::where('id', $request->urinalysis_service_id)->pluck('opd_rate')->first();
+						}
 					}
 					$billing->save();
 					$urinalysis->status = '1';

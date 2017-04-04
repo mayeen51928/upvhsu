@@ -213,9 +213,7 @@ $('.addMedicalRecordButton').click(function() {
 				$('#remarks').val('');
 				$('#prescription').val('');
 				$('.medical-button-container').html("").append("<button type='button' class='btn btn-success add-medical-record-button' id='add-medical-record-button_"+appointment_id+"'>Add</button>");
-				if(data['patient_type_checker']['patient_type_id'] == 5){
-					$('#patient_type_radio_medical').css('display', 'block');
-				}
+				
 				$('.medical-button-container .add-medical-record-button').click(function(){
 					medical_services_id=[];
 					$("input:checkbox.checkboxMedicalService").each(function(){

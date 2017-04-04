@@ -6,7 +6,6 @@ $.ajaxSetup({
 // 
 var checkboxLabServiceCounter = 0;
 $('.checkboxLabService').click(function(){
-	console.log('hello');
 	if($(this).is(':checked'))
 	{
 		checkboxLabServiceCounter++;
@@ -48,12 +47,6 @@ $('.addLabResult').click(function(){
 	$('#cbcaccordion').hide();
 	$('#add-lab-result-footer').html('');
 	$.post('/viewlabdiagnosis', {medical_appointment_id: medical_appointment_id}, function(data, textStatus, xhr) {
-		if(data['patient_type_id'] == 5){
-			$('#patient_type_radio_lab').css("display","block");
-		}
-		else{
-			$('#patient_type_radio_lab').css("display","none");
-		}
 		if(data['cbc_result'])
 		{
 			$('#cbcaccordion').show();
@@ -88,6 +81,7 @@ $('.addLabResult').click(function(){
 			// }
 
 			$('#laboratoryresult-lab #cbc_div').show();
+			console.log(data['cbc_billing_status']);
 			if(data['cbc_billing_status']){
 				for (var i = 0; i < data['cbc_billing_status'].length; i++){
 					$('#'+data['cbc_billing_status'][i].medical_service_id+'.checkboxLabService').prop('checked', true);
