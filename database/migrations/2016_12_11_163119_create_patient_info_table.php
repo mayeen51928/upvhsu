@@ -39,7 +39,7 @@ class CreatePatientInfoTable extends Migration
             $table->string('residence_telephone_number')->nullable();
             $table->string('personal_contact_number')->nullable();
             $table->string('residence_contact_number')->nullable();
-            $table->date('first_visit')->nullable();
+            // $table->date('first_visit')->nullable();
             $table->string('picture')->nullable();
             $table->timestamps();
         });
