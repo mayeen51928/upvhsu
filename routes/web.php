@@ -144,6 +144,7 @@ Route::post('/admin/postannouncement', 'AdminController@postannouncement');
 Route::get('/admin/addstudent', 'AdminController@addstudent');
 Route::post('/admin/createstudent', 'AdminController@createstudent');
 Route::get('/admin/addpatientaccount', 'AdminController@addpatientaccount');
+Route::post('/admin/createpatientaccount', 'AdminController@createpatientaccount');
 Route::get('/admin/editservices', 'AdminController@modifyservices');
 Route::get('/admin/generateschedule', 'AdminController@generateschedule');
 Route::post('/display_medical_services', 'AdminController@viewservicesmedical');

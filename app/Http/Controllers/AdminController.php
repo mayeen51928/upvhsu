@@ -19,6 +19,16 @@ use App\ChestXrayResult;
 use App\StaffNote;
 use App\MedicalBilling;
 use App\DentalBilling;
+use App\Patient;
+use App\Province;
+Use App\Town;
+Use App\Religion;
+use App\Guardian;
+use App\ParentModel;
+use App\HasParent;
+use App\HasGuardian;
+use App\Nationality;
+use App\MedicalHistory;
 use Carbon\Carbon;
 class AdminController extends Controller
 {
@@ -104,6 +114,219 @@ class AdminController extends Controller
 	{
 		$params['sidebar_active'] = 'addpatientaccount';
 		return view('admin.addpatientaccount', $params);
+	}
+	public function createpatientaccount(Request $request)
+	{
+		// dd($request);
+		
+				$user = new User;
+				$user->user_id = $request->user_name;
+				$user->user_type_id = '1';
+				$user->password = bcrypt($request->password);
+				$user->save();
+				$patient = new Patient;
+				$patient->patient_id = $request->user_name;
+				$patient->patient_type_id = $request->patient_type_medical;
+				$patient->patient_first_name = $request->first_name;
+				$patient->patient_middle_name = $request->middle_name;
+				$patient->patient_last_name = $request->last_name;
+				if($request->patient_type_medical != '1')
+				{
+					$patient->year_level = '0';
+				}
+				else
+				{
+					$patient->year_level = $request->yearlevel_medical;
+					$patient->degree_program_id = $request->degree_program_medical;
+				}
+				$patient->graduated = '0';
+				$patient->sex = $request->sex;
+				$patient->birthday = $request->birthdate_medical;
+				$patient->civil_status = $request->civil_status;
+				$religion = Religion::where('religion_description', $request->religion)->first();
+        // dd($religion->id);
+				if(count($religion)>0)
+				{
+					$patient->religion_id = $religion->id;
+				}
+				else
+				{
+					$religion = new Religion;
+					$religion->religion_description = $request->religion;
+					$religion->save();
+					$patient->religion_id = Religion::where('religion_description', $request->religion)->first()->id;
+				}
+				$nationality = Nationality::where('nationality_description', $request->nationality)->first();
+        // dd($religion->id);
+				if(count($nationality)>0)
+				{
+					$patient->nationality_id = $nationality->id;
+				}
+				else
+				{
+					$nationality = new Nationality;
+					$nationality->nationality_description = $request->nationality;
+					$nationality->save();
+					$patient->nationality_id = Nationality::where('nationality_description', $request->nationality)->first()->id;
+				}
+				$patient->street = $request->street;
+				$province = Province::where('province_name', $request->province)->first();
+				if(count($province)>0)
+				{
+					$town = Town::where('town_name', $request->town)->where('province_id', $province->id)->first();
+					if(count($town)>0)
+					{
+						$patient->town_id = $town->id;
+					}
+					else
+					{
+						$town = new Town;
+						$town->town_name = $request->town;
+						$town->province_id = $province->id;
+            	//insert the distance from miagao using Google Distance Matrix API
+            			$location = preg_replace("/\s+/", "+",$request->town." ".$request->province);
+						$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+						$json = json_decode(file_get_contents($url), true);
+						if($json['rows'][0]['elements'][0]['status'] == 'OK')
+						{
+							$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+							$town->distance_to_miagao = $distance/1000;
+						}
+						$town->save();
+						$patient->town_id = Town::where('town_name', $request->town)->where('province_id', $province->id)->first()->id;
+					}
+				}
+				else
+				{
+					$province = new Province;
+					$province->province_name = $request->province;
+					$province->save();
+					$town = new Town;
+					$town->town_name = $request->town;
+					$town->province_id = Province::where('province_name', $request->province)->first()->id;
+					$location = preg_replace("/\s+/", "+",$request->town." ".$request->province);
+					$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+					$json = json_decode(file_get_contents($url), true);
+					if($json['rows'][0]['elements'][0]['status'] == 'OK')
+					{
+						$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+						$town->distance_to_miagao = $distance/1000;
+					}
+					$town->save();
+					$patient->town_id = Town::where('town_name', $request->town)->where('province_id', Province::where('province_name', $request->province)->first()->id)->first()->id;
+				}
+				$patient->residence_telephone_number = $request->residencetelephone;
+				$patient->personal_contact_number = $request->personalcontactnumber;
+				$patient->residence_contact_number = $request->residencecellphone;
+				$patient->save();
+				if($request->senior_citizen_id != '')
+				{
+					$senior_citizen_id = new SeniorCitizenId;
+					$senior_citizen_id->patient_id = $request->user_name;
+					$senior_citizen_id->senior_citizen_id = $request->senior_citizen_id;
+					$senior_citizen_id->save();
+				}
+				$check_if_father_exists = ParentModel::where('parent_first_name', $request->father_first)->where('parent_middle_name', $request->father_middle)->where('parent_last_name', $request->father_last)->first();
+				if(count($check_if_father_exists) == 0)
+				{
+					$father = new ParentModel;
+					$father->parent_first_name = $request->father_first;
+					$father->parent_middle_name = $request->father_middle;
+					$father->parent_last_name = $request->father_last;
+					$father->sex = 'M';
+					$father->save();
+				}
+				$check_if_mother_exists = ParentModel::where('parent_first_name', $request->mother_first)->where('parent_middle_name', $request->mother_middle)->where('parent_last_name', $request->mother_last)->first();
+				if(count($check_if_mother_exists) == 0)
+				{
+					$mother = new ParentModel;
+					$mother->parent_first_name = $request->mother_first;
+					$mother->parent_middle_name = $request->mother_middle;
+					$mother->parent_last_name = $request->mother_last;
+					$mother->sex = 'F';
+					$mother->save();
+				}
+
+				$has_father = new HasParent;
+				$has_father->patient_id = $request->user_name;
+				$has_father->parent_id = ParentModel::where('parent_first_name', $request->father_first)->where('parent_middle_name', $request->father_middle)->where('parent_last_name', $request->father_last)->first()->id;
+				$has_father->save();
+				$has_mother = new HasParent;
+				$has_mother->patient_id = $request->user_name;
+				$has_mother->parent_id = ParentModel::where('parent_first_name', $request->mother_first)->where('parent_middle_name', $request->mother_middle)->where('parent_last_name', $request->mother_last)->first()->id;
+				$has_mother->save();
+				$check_if_guardian_exists = Guardian::where('guardian_first_name', $request->guardian_first)->where('guardian_middle_name', $request->guardian_middle)->where('guardian_last_name', $request->guardian_last)->first();
+				if(count($check_if_guardian_exists) == 0)
+				{
+					$guardian = new Guardian;
+					$guardian->guardian_first_name = $request->guardian_first;
+					$guardian->guardian_middle_name = $request->guardian_middle;
+					$guardian->guardian_last_name = $request->guardian_last;
+					$guardian->guardian_contact_number = $request->guardianresidencecellphone;
+					$guardian->guardian_telephone_number = $request->guardianresidencetelephone;
+					$guardian->street = $request->guardian_street;
+					$guardian_province = Province::where('province_name', $request->guardian_province)->first();
+					if(count($guardian_province)>0)
+					{
+						$guardian_town = Town::where('town_name', $request->guardian_town)->where('province_id', $guardian_province->id)->first();
+						if(count($guardian_town)>0)
+						{
+							$guardian->town_id = $guardian_town->id;
+						}
+						else
+						{
+							$guardian_town = new Town;
+							$guardian_town->town_name = $request->guardian_town;
+							$guardian_town->province_id = $guardian_province->id;
+	         		//insert the distance from miagao using Google Distance Matrix API
+	         				$location = preg_replace("/\s+/", "+",$request->guardian_town." ".$request->guardian_province);
+							$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+							$json = json_decode(file_get_contents($url), true);
+							if($json['rows'][0]['elements'][0]['status'] == 'OK')
+							{
+								$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+								$guardian_town->distance_to_miagao = $distance/1000;
+							}
+							$guardian_town->save();
+							$guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', $guardian_province->id)->first()->id;
+						}
+					}
+					else
+					{
+						$guardian_province = new Province;
+						$guardian_province->province_name = $request->guardian_province;
+						$guardian_province->save();
+						$guardian_town = new Town;
+						$guardian_town->town_name = $request->guardian_town;
+						$guardian_town->province_id = Province::where('province_name', $request->guardian_province)->first()->id;
+						$location = preg_replace("/\s+/", "+",$request->guardian_town." ".$request->guardian_province);
+						$url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='. $location . '&destinations=UPV+Infirmary,+Up+Visayas,+Miagao,+5023+Iloilo&key=AIzaSyAa72KwU64zzaPldwLWFMpTeVLsxw2oWpc';
+						$json = json_decode(file_get_contents($url), true);
+						if($json['rows'][0]['elements'][0]['status'] == 'OK')
+						{
+							$distance=$json['rows'][0]['elements'][0]['distance']['value'];
+							$guardian_town->distance_to_miagao = $distance/1000;
+						}
+						$guardian_town->save();
+						$guardian->town_id = Town::where('town_name', $request->guardian_town)->where('province_id', Province::where('province_name', $request->guardian_province)->first()->id)->first()->id;
+					}
+					$guardian->save();
+				}
+				$has_guardian = new HasGuardian;
+				$has_guardian->patient_id = $request->user_name;
+				$has_guardian->guardian_id = Guardian::where('guardian_first_name', $request->guardian_first)->where('guardian_middle_name', $request->guardian_middle)->where('guardian_last_name', $request->guardian_last)->first()->id;
+				$has_guardian->relationship = $request->guardian_relationship;
+				$has_guardian->save();
+				$medical_history = new MedicalHistory;
+				$medical_history->patient_id = $request->user_name;
+				$medical_history->illness = $request->illness_history;
+				$medical_history->operation = $request->operation_history;
+				$medical_history->allergies = $request->allergies_history;
+				$medical_history->family = $request->family_history;
+				$medical_history->maintenance_medication = $request->maintenance_medication_history;
+				$medical_history->save();
+			
+		return redirect('admin/addpatientaccount')->with('status', 'Patient account added!');
 	}
 	public function modifyservices()
 	{

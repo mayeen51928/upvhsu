@@ -19,7 +19,7 @@
             <form role="form" method="POST" action="{{ url('/admin/createpatientaccount') }}">
               {{ csrf_field() }}
 			        <div class="form-group">
-			          <input required type="text" class="form-control" name="user_name" id="user_name" autofocus placeholder="User ID (201312345)"/>
+			          <input required type="text" class="form-control" name="user_name" id="user_name" autofocus placeholder="User ID (201312345)" maxlength="9"/>
 			        </div>
 			        <div class="form-group">
 			          <input required type="password" class="form-control" name="password" id="password" placeholder="Password"/>
@@ -156,7 +156,7 @@
 			            </div>
 			            <div class="form-inline">
 			              <label>Residence Telephone Number:</label>
-			              <input required type="text" class="form-control" name="residencetelephonedentcal" id="residencetelephone"/>
+			              <input required type="text" class="form-control" name="residencetelephone" id="residencetelephone"/>
 			              <label>Residence Cellphone Number:</label>
 			              <input required type="text" class="form-control" name="residencecellphone" id="residencecellphone"/>
 			              <label>Personal Contact Number:</label>
