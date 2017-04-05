@@ -75,7 +75,7 @@ class CashierController extends Controller
 	  $medical_paid_count = MedicalAppointment::join('medical_schedules','medical_appointments.medical_schedule_id','medical_schedules.id')->where('schedule_day', date('Y-m-d'))->where('status', '2')->get()->count();
 	  $medical_unpaid_count = $medical_billed_count - $medical_paid_count;
 
-	  $dental_patient_count = DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDay('dental_schedules.schedule_start', date('Y-m-d'))->get()->count();
+	  $dental_patient_count = DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('dental_schedules.schedule_start', date('Y-m-d'))->get()->count();
 	  $dental_billed_count = DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->where('status', '1')->whereDate('dental_schedules.schedule_start', date('Y-m-d'))->get()->count();
  		$dental_unbilled_count = DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('dental_schedules.schedule_start', date('Y-m-d'))->where('status', '0')->get()->count();
  		$dental_paid_count = DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('dental_schedules.schedule_start', date('Y-m-d'))->where('status', '2')->get()->count();
@@ -289,6 +289,7 @@ class CashierController extends Controller
 		$display_medical_billing = DB::table('medical_billings')
 				->join('medical_services', 'medical_services.id', '=', 'medical_billings.medical_service_id')
 				->where('medical_billings.medical_appointment_id', '=', $request->appointment_id)
+				->where('medical_billings.status', 'unpaid')
 				->get();   
 
 		$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->appointment_id)->get();

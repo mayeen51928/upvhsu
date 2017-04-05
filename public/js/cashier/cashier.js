@@ -57,7 +57,7 @@ if($('#cashiergraphtrigger').val()==1)
 					$('#display_amount_modal_medical').val(amountMedical);
 					output = '';
 					output += "<tr><th>Service Description</th><th>Service Rate</td><th>Type</th><th></th></tr>"
-					if(data['patient_senior_checker'] == 1 || data['patient_senior_checker'] == 2 || data['patient_senior_checker'] == 3 || data['patient_senior_checker'] == 4 || data['patient_senior_checker'] == 5){
+					if(data['patient_type_checker'] == 1 || data['patient_type_checker'] == 2 || data['patient_type_checker'] == 3 || data['patient_type_checker'] == 4 || data['patient_type_checker'] == 5){
 						for(var i=0; i < data['display_medical_billing'].length; i++)
 						{
 							if(data['patient_type_checker'] == 1){
