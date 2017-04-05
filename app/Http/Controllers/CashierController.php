@@ -266,7 +266,7 @@ class CashierController extends Controller
 		}
 
 		if (Input::file('picture') != NULL) { 
-			$path = '..\public\images';
+			$path = 'images';
 			$file_name = Input::file('picture')->getClientOriginalName(); 
 			Input::file('picture')->move($path, $file_name);
 			$cashier->picture = $file_name;
@@ -308,6 +308,7 @@ class CashierController extends Controller
 		$display_dental_billing = DB::table('dental_billings')
 				->join('dental_services', 'dental_services.id', '=', 'dental_billings.dental_service_id')
 				->where('dental_billings.appointment_id', '=', $request->appointment_id)
+				->where('medical_billings.status', 'unpaid')
 				->get(); 
 
 		$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->appointment_id)->get();
