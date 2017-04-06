@@ -96,7 +96,10 @@
 			</div>
 			</div>
 			<div class="modal-footer text-center">
-				<button type="button" class="btn btn-primary" id="addMedicalBillingButton">Confirm</button>
+				<div class="pull-left">
+					<button type="button" class="btn btn-primary" id="printMedicalReceiptButton">Print Receipt</button>
+				</div>
+				<button type="button" class="btn btn-success" id="addMedicalBillingButton">Confirm</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			</div>
 		</div>
@@ -123,7 +126,10 @@
 			</div>
 			</div>
 			<div class="modal-footer text-center">
-				<button type="button" class="btn btn-primary" id="addDentalBillingButton">Confirm</button>
+				<div class="pull-left">
+					<button type="button" class="btn btn-primary" id="printDentalReceiptButton">Print Receipt</button>
+				</div>
+				<button type="button" class="btn btn-success" id="addDentalBillingButton">Confirm</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			</div>
 		</div>
