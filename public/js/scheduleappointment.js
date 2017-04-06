@@ -272,6 +272,53 @@ $(document).ready( function(){
   		}
   	});
 
+    // NEW APRIL 7 ------------------------------------------------------------------------------------------------------------------------------------------------------------
+    $('#signupMedical_modal').click(function(event) {
+      $('#user_name_modal_medical, #password_modal_medical, #first_name_medical, #last_name_medical').keyup(function() {
+        if($('#password_modal_medical').val()!='' && $('#first_name_medical').val()!='' && $('#last_name_medical').val()!='' && $('#user_name_modal_medical').val().length == 9){
+          $.post('/checkifuserexists', {user_name: $('#user_name_modal_medical').val()}, function(data, textStatus, xhr) {
+            if(data['already_exists'] == 'yes')
+            {
+              $('#user_name_modal_medical').attr('data-toggle', 'tooltip');
+              $('#user_name_modal_medical').attr('title', 'User already exists!');
+              $('#user_name_modal_medical').tooltip('show');
+              $('#signupnextMedical_modal').attr('disabled', 'disabled');
+            }
+            else
+            {
+              if($('#password_modal_medical').val()!='' && $('#first_name_medical').val()!='' && $('#last_name_medical').val()!=''){
+              $('#user_name_modal_medical').tooltip('destroy');
+              $('#signupnextMedical_modal').removeAttr('disabled');
+            }}
+          });
+        }
+        else{
+          $('#user_name_modal_medical').tooltip('destroy');
+          $('#signupnextMedical_modal').attr('disabled', 'disabled');
+        }
+      });
+      $('.signup2_medical input').keyup(function(event) {
+        var complete = false;
+        var fields = $('.signup2_medical input');
+        for (var i=0; i<fields.length; i++){
+          if($(fields[i]).val() != ''){
+            complete = true;
+          }
+          else{
+            complete = false;
+          }
+        }
+        if(complete==true){
+          $('#signupnextMedical_modal').removeAttr('disabled');
+        }
+        else{
+          $('#signupnextMedical_modal').attr('disabled', 'disabled');
+        }
+      });
+    });
+    
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     $('#signupDental_modal').click(function(){
     	$('#login_dental_error').html('');
     	numOfClicksDental = 0;
@@ -619,8 +666,25 @@ $(document).ready( function(){
         }
     });
     $('#signupnextMedical_modal').click(function() {
+      $(this).attr('disabled', 'disabled');
         numOfClicksMedical ++;
         if(numOfClicksMedical == 1){
+          var complete = false;
+          var fields = $('.signup2_medical input');
+          for (var i=0; i<fields.length; i++){
+            if($(fields[i]).val() != ''){
+              complete = true;
+            }
+            else{
+              complete = false;
+            }
+          }
+          if(complete==true){
+            $('#signupnextMedical_modal').removeAttr('disabled');
+          }
+          else{
+            $('#signupnextMedical_modal').attr('disabled', 'disabled');
+          }
             $('.signup0_medical').hide();
             $('.signup1_medical').hide();
             $('.signup2_medical').show();
@@ -646,6 +710,9 @@ $(document).ready( function(){
     $('#signupbackMedical_modal').click(function() {
         numOfClicksMedical --;
         if(numOfClicksMedical == 2){
+            if($('.signup3_medical input').val()){
+              $('#signupnextMedical_modal').removeAttr('disabled');
+            }
             $('.signup3_medical').show();
             $('.signup4_medical').hide();
             $('#signupnextMedical_modal').show();
@@ -654,12 +721,19 @@ $(document).ready( function(){
             $('#changeProgress').attr('aria-valuenow', percentageMedical).css('width', percentageMedical+'%').html('3 of 4');
         }
         if(numOfClicksMedical == 1){
+            if($('.signup2_medical input').val()){
+              $('#signupnextMedical_modal').removeAttr('disabled');
+            }
             $('.signup2_medical').show();
             $('.signup3_medical').hide();
             percentageMedical -= 25;
             $('#changeProgress').attr('aria-valuenow', percentageMedical).css('width', percentageMedical+'%').html('2 of 4');
         }
         if(numOfClicksMedical == 0){
+          // console.log('hello');
+            if($('.signup0_medical input').val() && $('.signup1_medical input').val()){
+              $('#signupnextMedical_modal').removeAttr('disabled');
+            }
             $('.signup0_medical').show();
             $('.signup1_medical').show();
             $('.signup2_medical').hide();
@@ -667,6 +741,7 @@ $(document).ready( function(){
             $('#changeProgress').attr('aria-valuenow', percentageMedical).css('width', percentageMedical+'%').html('1 of 4');
         }
         if(numOfClicksMedical < 0){
+
             $('.signup0_medical').show();
             $('.signup1_medical').hide();
             numOfClicksMedical = 0;

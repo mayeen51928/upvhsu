@@ -354,6 +354,14 @@ class PagesController extends Controller
 		}
 	}
 
+	public function checkifuserexists(Request $request)
+	{
+		if(count(User::where('user_id', $request->user_name)->get()) > 0 )
+		{
+			return response()->json(['already_exists' => 'yes']);
+		}
+	}
+
 	public function signupfromdentalappointment(Request $request)
 	{
 		$check_if_already_exists = User::where('user_id', $request->user_name)->first();

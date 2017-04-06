@@ -562,7 +562,7 @@
 					<input type="submit" class="btn btn-success" name="login_modal_medical" id="login_modal_medical" value="Login">
 					<input type="submit" class="btn btn-info form-inline" name="signupMedical_modal" id="signupMedical_modal" value="Create Patient Account"/>
 					<input type="submit" class="btn btn-default" name="signupbackMedical_modal" id="signupbackMedical_modal" value="Back"/>
-					<input type="submit" class="btn btn-info" name="signupnextMedical_modal" id="signupnextMedical_modal" value="Next"/>
+					<input type="submit" class="btn btn-info" name="signupnextMedical_modal" id="signupnextMedical_modal" value="Next" disabled/>
 					<input type="submit" class="btn btn-info" name="signupconfirmMedical_modal" id="signupconfirmMedical_modal" value="Confirm Sign Up"/>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				</div>

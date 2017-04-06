@@ -30,6 +30,7 @@ Route::post('/createappointment_dental', 'PagesController@createappointmentdenta
 Route::post('/createappointment_medical', 'PagesController@createappointmentmedical');
 Route::post('/loginfromdentalappointment', 'PagesController@loginfromdentalappointment');
 Route::post('/loginfrommedicalappointment', 'PagesController@loginfrommedicalappointment');
+Route::post('/checkifuserexists', 'PagesController@checkifuserexists');
 Route::post('/signupfromdentalappointment', 'PagesController@signupfromdentalappointment');
 Route::post('/signupfrommedicalappointment', 'PagesController@signupfrommedicalappointment');
 
