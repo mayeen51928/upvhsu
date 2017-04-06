@@ -200,73 +200,23 @@ $('.dental_appointments_prescription').click(function(){
 			$('#view-dental-record-modal').modal("show");
 
 			$('.print_dental_receipt_button').click(function(){
-				var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-				mywindow.document.write('')
-		    mywindow.document.write('<html><head><title>University of the Philippines Visayas Health Service Unit</title></head>');
-		    mywindow.document.write('<h1 style="text-align:center;">PATIENT BILL</h1>');
-		    mywindow.document.write('<br/>');
-		    mywindow.document.write('<h2 style="text-align:center;">'+data['dental_receipt']['patient_first_name']+'&nbsp;'+data['dental_receipt']['patient_last_name']+'</h2><h4 style="text-align:center;">Patient</h4>');
-		    mywindow.document.write('<h3><i>Date:&nbsp;&nbsp;&nbsp;&nbsp;</i><b>'+data['dental_receipt']['schedule_start']+' - '+data['dental_receipt']['schedule_end']+'</b></h3>');
-		    mywindow.document.write('<h3><i>Doctor:&nbsp;&nbsp;&nbsp;&nbsp;</i><b>'+data['dental_receipt']['staff_first_name']+'&nbsp;'+data['dental_receipt']['staff_last_name']+'</b></h3>');
-
-		    mywindow.document.write('<table border="1" width="800" class="table">');
-		    mywindow.document.write('<tbody>');
-		    mywindow.document.write(output);
-		    mywindow.document.write('</tbody>');
-		    mywindow.document.write('</table>');
-		    mywindow.document.write('<h4 style="text-align:right;">TOTAL:&nbsp;&nbsp;&nbsp;&nbsp;<b>'+total+'</b></h4>');
-		    mywindow.document.write('<br/>');
-		    mywindow.document.write('<br/>');
-		    mywindow.document.close(); 
-		    mywindow.focus(); 
-		    mywindow.print();
-		    mywindow.close();
-		    return true;
+				var x = window.open();
+				x.document.open;
+				x.document.write('');
+		    x.document.write('<html><head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">></script><script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script></head>');
+		   	x.document.write('<center><img src="/images/upvweb_logo.png"  alt="Infirmary Logo"/>');
+		  	x.document.write('<b><h4>University of the Phillipines Visayas</h4></b><h5>Miagao, Iloilo 5023</h5><h5>Telephone Number : 236-789</h5><br><h1>PATIENT BILL</h1><br></center>');
+		    x.document.write('<h4>Patient: <b>'+data['dental_receipt']['patient_first_name']+'&nbsp;'+data['dental_receipt']['patient_last_name']+'</b></h4>');
+		    x.document.write('<h4>Doctor: <b>'+data['dental_receipt']['staff_first_name']+'&nbsp;'+data['dental_receipt']['staff_last_name']+'</b></h4>');
+		    x.document.write('<h5>Date of Consultation <b>'+data['dental_receipt']['schedule_start']+' - '+data['dental_receipt']['schedule_end']+'</b></h5><br>')
+		    x.document.write('<div class="container"><table class="table table-bordered"><tbody>'+output+'</tbody></table></div><br><br>');
+		  	x.document.write('<h4 style="text-align:right;">Total Amount: <b>Php '+total+'</b></h4>');
+		    x.document.write('<script>setTimeout(function(){window.print();},500);</script></body></html>');
 			});
 		}
 	});
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 $('.medical_appointments_prescription').click(function(){
@@ -324,28 +274,19 @@ $('.medical_appointments_prescription').click(function(){
 		$('#prescriptionModal').modal();
 
 		$('.print_medical_receipt_button').click(function(){
-			var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-			mywindow.document.write('')
-	    mywindow.document.write('<html><head><title>University of the Philippines Visayas Health Service Unit</title></head>');
-	    mywindow.document.write('<h1 style="text-align:center;">PATIENT BILL</h1>');
-	    mywindow.document.write('<br/>');
-	    mywindow.document.write('<h2 style="text-align:center;">'+data['medical_receipt']['patient_first_name']+'&nbsp;'+data['medical_receipt']['patient_last_name']+'</h2><h4 style="text-align:center;">Patient</h4>');
-	    mywindow.document.write('<h3><i>Date:&nbsp;&nbsp;&nbsp;&nbsp;</i><b>'+data['medical_receipt']['schedule_day']+'</b></h3>');
-	    mywindow.document.write('<h3><i>Doctor:&nbsp;&nbsp;&nbsp;&nbsp;</i><b>'+data['medical_receipt']['staff_first_name']+'&nbsp;'+data['medical_receipt']['staff_last_name']+'</b></h3>');
+			var x = window.open();
+			x.document.open;
+			x.document.write('');
+	    x.document.write('<html><head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">></script><script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script></head>');
+	   	x.document.write('<center><img src="/images/upvweb_logo.png"  alt="Infirmary Logo"/>');
+	  	x.document.write('<b><h4>University of the Phillipines Visayas</h4></b><h5>Miagao, Iloilo 5023</h5><h5>Telephone Number : 236-789</h5><br><h1>PATIENT BILL</h1><br></center>');
+	    x.document.write('<h4>Patient: <b>'+data['medical_receipt']['patient_first_name']+'&nbsp;'+data['medical_receipt']['patient_last_name']+'</b></h4>');
+	    x.document.write('<h4>Doctor: <b>'+data['medical_receipt']['staff_first_name']+'&nbsp;'+data['medical_receipt']['staff_last_name']+'</b></h4>');
+	    x.document.write('<h5>Date of Consultation <b>'+data['medical_receipt']['schedule_day']+'</b></h5>')
+	    x.document.write('<div class="container"><table class="table table-bordered"><tbody>'+output+'</tbody></table></div><br><br>');
+	  	x.document.write('<h4 style="text-align:right;">Total Amount: <b>Php '+total+'</b></h4>');
+	    x.document.write('<script>setTimeout(function(){window.print();},500);</script></body></html>');
 
-	    mywindow.document.write('<table border="1" width="800" class="table">');
-	    mywindow.document.write('<tbody>');
-	    mywindow.document.write(output);
-	    mywindow.document.write('</tbody>');
-	    mywindow.document.write('</table>');
-	    mywindow.document.write('<h4 style="text-align:right;">TOTAL:&nbsp;&nbsp;&nbsp;&nbsp;<b>'+total+'</b></h4>');
-	    mywindow.document.write('<br/>');
-	    mywindow.document.write('<br/>');
-	    mywindow.document.close(); 
-	    mywindow.focus(); 
-	    mywindow.print();
-	    mywindow.close();
-	    return true;
 		});
 	});
 });

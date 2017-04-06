@@ -299,7 +299,15 @@ class CashierController extends Controller
 		else{
 			$patient_type_checker = $patient_senior_checker;
 		}
-		return response()->json(['display_medical_billing' => $display_medical_billing, 'patient_type_checker' => $patient_type_checker]);
+
+		$medical_receipt = DB::table('medical_appointments')
+    				->join('patient_info', 'medical_appointments.patient_id', '=', 'patient_info.patient_id')
+    				->join('medical_schedules', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
+    				->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')
+        		->where('medical_appointments.id', '=', $request->appointment_id)
+        		->first();
+
+		return response()->json(['display_medical_billing' => $display_medical_billing, 'patient_type_checker' => $patient_type_checker, 'medical_receipt' => $medical_receipt]);
 		
 	}
 
@@ -308,7 +316,7 @@ class CashierController extends Controller
 		$display_dental_billing = DB::table('dental_billings')
 				->join('dental_services', 'dental_services.id', '=', 'dental_billings.dental_service_id')
 				->where('dental_billings.appointment_id', '=', $request->appointment_id)
-				->where('medical_billings.status', 'unpaid')
+				->where('dental_billings.status', 'unpaid')
 				->get(); 
 
 		$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->appointment_id)->get();
@@ -319,7 +327,14 @@ class CashierController extends Controller
 			$patient_type_checker = $patient_senior_checker;
 		}  
 
-		return response()->json(['display_dental_billing' => $display_dental_billing, 'patient_type_checker' => $patient_type_checker]);
+		$dental_receipt = DB::table('dental_appointments')
+    				->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
+    				->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')
+    				->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')
+        		->where('dental_appointments.id', '=', $request->appointment_id)
+        		->first();
+
+		return response()->json(['display_dental_billing' => $display_dental_billing, 'patient_type_checker' => $patient_type_checker, 'dental_receipt' => $dental_receipt]);
 	}
 
 
