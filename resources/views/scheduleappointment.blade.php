@@ -15,6 +15,10 @@
 		<div class="panel panel-default" style="margin-top: 20px;">
 			<div class="panel-heading">Select Type of Appointment</div>
 			<div class="panel-body">
+				<div>
+					<i>All appointments are made at least one day before the actual schedule.</i>
+				</div>
+				<br/>
 				<form class="form-inline">
 					<div class="checkbox col-md-6 @if(Auth::check())
 							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)

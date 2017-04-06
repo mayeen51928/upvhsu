@@ -17,15 +17,7 @@
 			</div>
 			<div class="col-md-12 homeForm">
 				<div class="panel-heading">
-					{{-- <div class="row">
-						<div class="col-md-6">
-							<img class="img-responsive" src="{{asset('images/upvweb_logo2.png')}}"/>
-						</div> --}}
-						{{-- <div class="center-block"> --}}
-							<img class="img-responsive center-block" src="{{asset('images/upvweb_logo2.png')}}"/>
-						{{-- </div> --}}
-					{{-- </div> --}}
-					{{-- <h2><i class="fa fa-lock"></i> Login Panel</h2> --}}
+					<img class="img-responsive center-block" src="{{asset('images/upvweb_logo2.png')}}"/>
 				</div>
 				@if(!Auth::check())
 				<div class="panel-content homeFormBtn">
@@ -171,13 +163,10 @@
 			</div>
 		</div>
 	<div class="col-md-6 fadeShow">
-		
-		<div class="col-md-12">
-			<h3 class="h1Title" id="h1Title4"><span class="glyphicon glyphicon-map-marker h3Icon"></span> Location</h3>
+		<h3 class="h1Title" id="h1Title4"><span class="glyphicon glyphicon-map-marker h3Icon"></span> Location</h3>
 			<div class=" google-maps">
 			<iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7842.285803765714!2d122.2301799153447!3d10.646004606670068!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc19cd3690ea64d5f!2sUPV+Infirmary!5e0!3m2!1sen!2sph!4v1476282280584" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
 			</div>
-		</div>
 	</div>
 </div>
 <div class="container" id="pageFooter">
