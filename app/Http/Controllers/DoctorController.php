@@ -53,9 +53,33 @@ class DoctorController extends Controller
 	}
 	public function dashboard()
 	{
-		$params['medical_appointments_today'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
-		$params['medical_appointments_past'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','<', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
-		$params['medical_appointments_future'] = DB::table('medical_schedules')->join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','>', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->orderBy('medical_appointments.created_at', 'asc')->get();
+		$crons = MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','<', date('Y-m-d'))
+		->leftjoin('physical_examinations', 'physical_examinations.medical_appointment_id', 'medical_appointments.id')
+		->where('height', NULL)
+		->where('weight', NULL)
+		->where('blood_pressure', NULL)
+		->where('height', NULL)
+		->where('pulse_rate', NULL)
+		->where('right_eye', NULL)
+		->where('left_eye', NULL)
+		->where('head', NULL)
+		->where('eent', NULL)
+		->where('neck', NULL)
+		->where('chest', NULL)
+		->where('height', NULL)
+		->where('heart', NULL)
+		->where('lungs', NULL)
+		->where('abdomen', NULL)
+		->where('back', NULL)
+		->where('skin', NULL)
+		->where('extremities', NULL)
+		->get();
+		foreach($crons as $cron){
+			MedicalAppointment::where('priority_number', $cron->priority_number)->where('patient_id', $cron->patient_id)->where('medical_schedule_id', $cron->medical_schedule_id)->first()->delete();
+		}
+		$params['medical_appointments_today'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
+		$params['medical_appointments_past'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','<', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
+		$params['medical_appointments_future'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','>', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->orderBy('medical_appointments.created_at', 'asc')->get();
 		$params['staff_notes'] = StaffNote::where('staff_id', Auth::user()->user_id)->first()->notes;
 		$params['medical_billing_services'] = MedicalService::where('service_type', 'medical')->get();
 		$params['navbar_active'] = 'account';
@@ -609,7 +633,7 @@ class DoctorController extends Controller
 
 	public function viewrecords($id)
 	{
-		$params['records'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->orderBy('schedule_day', 'desc')->get();
+		$params['records'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('patient_id', $id)->orderBy('schedule_day', 'desc')->where('schedule_day','<=', date('Y-m-d'))->get();
 		// dd($params['records']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'searchpatient';

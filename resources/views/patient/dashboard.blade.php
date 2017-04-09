@@ -77,6 +77,7 @@
 							<tr>
 								<th>Date</th>
 								<th>Doctor</th>
+								<th>Priority #</th>
 							</tr>
             </thead>
 						<tbody>
@@ -84,6 +85,7 @@
 							<tr>
 								<td><a class="medical_appointments_prescription" id="medicalappointmentid_{{$medical_appointment->id}}">{{date_format(date_create($medical_appointment->schedule_day), 'F j, Y')}}</a></td>
 								<td>{{$medical_appointment->staff_first_name}} {{$medical_appointment->staff_last_name}}</td>
+								<td>{{$medical_appointment->priority_number}}</td>
 							</tr>
 							@endforeach
 						</tbody>
