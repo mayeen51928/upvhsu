@@ -15,10 +15,6 @@
 		<div class="panel panel-default" style="margin-top: 20px;">
 			<div class="panel-heading">Select Type of Appointment</div>
 			<div class="panel-body">
-				<div>
-					<i>All appointments are made at least one day before the actual schedule.</i>
-				</div>
-				<br/>
 				<form class="form-inline">
 					<div class="checkbox col-md-6 @if(Auth::check())
 							@if(Auth::user()->user_type_id == 2 or Auth::user()->user_type_id == 3)
@@ -113,7 +109,7 @@
 						<option disabled selected>Select doctor</option>
 					</select>
 				</div>
-				<p id="medicalFormNote"><i>Note: Medical appointment done online is for note-taking purposes of the doctor.  On-site visit will still be accommodated first.</i></p>
+				{{-- <p id="medicalFormNote"><i>Note: Medical appointment done online is for note-taking purposes of the doctor.  On-site visit will still be accommodated first.</i></p> --}}
 				<button class="btn btn-success" name="submitmedicalappointment" id="submitmedicalappointment">Set Appointment</button>
 			</div>
 		</div>	
@@ -339,7 +335,7 @@
 				<input type="submit" class="btn btn-info form-inline" name="signupDental_modal" id="signupDental_modal" value="Create Patient Account"/>
 				<input type="submit" class="btn btn-default" name="signupbackDental_modal" id="signupbackDental_modal" value="Back"/>
 				<input type="submit" class="btn btn-info" name="signupnextDental_modal" id="signupnextDental_modal" value="Next" disabled/>
-				<input type="submit" class="btn btn-info" name="signupconfirmDental_modal" id="signupconfirmDental_modal" value="Confirm Sign Up"/>
+				<input type="submit" class="btn btn-info" name="signupconfirmDental_modal" id="signupconfirmDental_modal" value="Confirm Sign Up" disabled />
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			</div>
 		</div>
