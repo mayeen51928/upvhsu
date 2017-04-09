@@ -39,7 +39,7 @@
 							<strong>{{ $errors->first('password') }}</strong>
 						</span>
 						@endif
-						<small>To register, please schedule an appointment first.</small>
+						<small>To register, please <a href="{{ url('/scheduleappointment') }}">schedule an appointment</a> first.</small>
 						<br/><br/>
 						<div class="form-group">
 							<button type="submit" id="loginbutton" class="btn btn-success">Login</button>
