@@ -15,6 +15,7 @@ class CreateMedicalAppointmentsTable extends Migration
     {
         Schema::create('medical_appointments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('priority_number');
             $table->integer('patient_id');
             $table->foreign('patient_id')->references('patient_id')->on('patient_info')->onDelete('cascade');
             $table->integer('medical_schedule_id')->unsigned()->index();

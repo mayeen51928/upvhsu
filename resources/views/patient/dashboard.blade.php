@@ -19,7 +19,7 @@
 						<div class="icon"><i class="fa fa-user-o"></i></div>
 						<div class="count">@if(!(is_null($current_physical_status))) {{$current_physical_status->height.' cm'}} @else no record @endif</div>
 			            <h3>Height</h3>
-			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
+			            <p title="Latest request">@if(!(is_null($current_physical_status)))<span><i class="fa fa-calendar"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'h:i A')}} @else &nbsp; @endif</p>
 			        </div>
         		</div>
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
@@ -27,7 +27,7 @@
 						<div class="icon"><i class="fa fa-balance-scale"></i></div>
 						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->weight.' kg'}} @else no record @endif</div>
 			            <h3>Weight</h3>
-			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
+			            <p title="Latest request">@if(!(is_null($current_physical_status)))<span><i class="fa fa-calendar"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'h:i A')}} @else &nbsp; @endif</p>
 			        </div>
         		</div>
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
@@ -35,7 +35,7 @@
 						<div class="icon"><i class="fa fa-stethoscope"></i></div>
 						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->blood_pressure.' mmHg'}} @else no record @endif</div>
 			            <h3>BP</h3>
-			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
+			            <p title="Latest request">@if(!(is_null($current_physical_status)))<span><i class="fa fa-calendar"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'h:i A')}} @else &nbsp; @endif</p>
 			        </div>
         		</div>
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
@@ -43,7 +43,7 @@
 						<div class="icon"><i class="fa fa-heartbeat"></i></div>
 						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->pulse_rate.' bpm'}} @else no record @endif</div>
 			            <h3>Pulse Rate</h3>
-			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
+			            <p title="Latest request">@if(!(is_null($current_physical_status)))<span><i class="fa fa-calendar"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'h:i A')}} @else &nbsp; @endif</p>
 			        </div>
         		</div>
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
@@ -51,7 +51,7 @@
 						<div class="icon"><i class="fa fa-eye"></i></div>
 						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->left_eye}} @else no record @endif</div>
 			            <h3>Left Eye</h3>
-			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
+			            <p title="Latest request">@if(!(is_null($current_physical_status)))<span><i class="fa fa-calendar"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'h:i A')}} @else &nbsp; @endif</p>
 			        </div>
         		</div>
         		<div class="col-md-4 col-sm-12 col-xs-12" id="cbccountpanel">
@@ -59,7 +59,7 @@
 						<div class="icon"><i class="fa fa-eye"></i></div>
 						<div class="count">@if(!(is_null($current_physical_status))){{$current_physical_status->right_eye}} @else no record @endif</div>
 			            <h3>Right Eye</h3>
-			            <p title="Latest request"><span><i class="fa fa-calendar"></i></span> Date <span><i class="fa fa-clock-o"></i></span> Time</p>
+			            <p title="Latest request">@if(!(is_null($current_physical_status)))<span><i class="fa fa-calendar"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'F j, Y')}} <span><i class="fa fa-clock-o"></i></span> {{date_format(date_create($current_physical_status->date_latest), 'h:i A')}} @else &nbsp; @endif</p>
 			        </div>
         		</div>
 			</div>

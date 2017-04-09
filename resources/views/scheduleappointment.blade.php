@@ -338,7 +338,7 @@
 				<input type="submit" class="btn btn-success form-inline" name="login_modal_dental" id="login_modal_dental" value="Login"/>
 				<input type="submit" class="btn btn-info form-inline" name="signupDental_modal" id="signupDental_modal" value="Create Patient Account"/>
 				<input type="submit" class="btn btn-default" name="signupbackDental_modal" id="signupbackDental_modal" value="Back"/>
-				<input type="submit" class="btn btn-info" name="signupnextDental_modal" id="signupnextDental_modal" value="Next"/>
+				<input type="submit" class="btn btn-info" name="signupnextDental_modal" id="signupnextDental_modal" value="Next" disabled/>
 				<input type="submit" class="btn btn-info" name="signupconfirmDental_modal" id="signupconfirmDental_modal" value="Confirm Sign Up"/>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			</div>
@@ -563,7 +563,7 @@
 					<input type="submit" class="btn btn-info form-inline" name="signupMedical_modal" id="signupMedical_modal" value="Create Patient Account"/>
 					<input type="submit" class="btn btn-default" name="signupbackMedical_modal" id="signupbackMedical_modal" value="Back"/>
 					<input type="submit" class="btn btn-info" name="signupnextMedical_modal" id="signupnextMedical_modal" value="Next" disabled/>
-					<input type="submit" class="btn btn-info" name="signupconfirmMedical_modal" id="signupconfirmMedical_modal" value="Confirm Sign Up"/>
+					<input type="submit" class="btn btn-info" name="signupconfirmMedical_modal" id="signupconfirmMedical_modal" value="Confirm Sign Up" disabled />
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>

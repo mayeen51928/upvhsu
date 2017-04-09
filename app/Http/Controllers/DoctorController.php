@@ -716,7 +716,9 @@ class DoctorController extends Controller
 	public function addrecord(Request $request)
 	{
 		$medical_schedule_id = MedicalSchedule::where('schedule_day', date('Y-m-d'))->where('staff_id', Auth::user()->user_id)->first()->id;
+		$priority_number = count(MedicalAppointment::where('medical_schedule_id', $request->medical_schedule_id)->get());
 		$medical_appointment = new MedicalAppointment;
+		$medical_appointment->priority_number = $priority_number + 1;
 		$medical_appointment->patient_id = $request->patient_id;
 		$medical_appointment->medical_schedule_id = $medical_schedule_id;
 		$medical_appointment->reasons = 'Walk-in patient';

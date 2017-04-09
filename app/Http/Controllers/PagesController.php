@@ -26,6 +26,7 @@ use App\StudentNumber;
 use App\MedicalService;
 use App\DentalService;
 use App\SeniorCitizenId;
+use App\PhysicalExamination;
 use DB;
 
 class PagesController extends Controller
@@ -34,6 +35,11 @@ class PagesController extends Controller
 	public function index()
 	{
 		$params['navbar_active'] = 'home';
+		$params['now_serving'] = PhysicalExamination::join('medical_appointments', 'medical_appointments.id', 'physical_examinations.medical_appointment_id')
+		->join('medical_schedules', 'medical_schedules.id', 'medical_appointments.medical_schedule_id')
+		->where('schedule_day','=', date('Y-m-d'))
+		->orderBy('priority_number', 'desc')
+		->first();
 		$params['announcements'] = Announcement::take(6)->orderBy('created_at', 'desc')->get();
 		$params['staffs'] = Staff::take(15)->orderBy('staff_last_name', 'asc')->get();
 		return view('index', $params);
@@ -280,7 +286,9 @@ class PagesController extends Controller
 				// dd(count(MedicalAppointment::where('medical_schedule_id', $request->medical_schedule_id)->where('patient_id', Auth::user()->user_id)->first()));
 				if(count(MedicalAppointment::where('medical_schedule_id', $request->medical_schedule_id)->where('patient_id', Auth::user()->user_id)->first())==0)
 				{
+					$priority_number = count(MedicalAppointment::where('medical_schedule_id', $request->medical_schedule_id)->get());
 					$medical_appointment = new MedicalAppointment;
+					$medical_appointment->priority_number = $priority_number + 1;
 					$medical_appointment->patient_id = Auth::user()->user_id;
 					$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
 					$medical_appointment->reasons = $request->reasons;
@@ -334,7 +342,9 @@ class PagesController extends Controller
 			Auth::loginUsingId($request->user_name_modal_medical, true);
 			if(count(MedicalAppointment::where('medical_schedule_id', $request->medical_schedule_id)->where('patient_id', Auth::user()->user_id)->first())==0)
 			{
+				$priority_number = count(MedicalAppointment::where('medical_schedule_id', $request->medical_schedule_id)->get());
 				$medical_appointment = new MedicalAppointment;
+				$medical_appointment->priority_number = $priority_number + 1;
 				$medical_appointment->patient_id = Auth::user()->user_id;
 				$medical_appointment->medical_schedule_id = $request->medical_schedule_id;
 				$medical_appointment->reasons = $request->reasons;
@@ -827,7 +837,9 @@ class PagesController extends Controller
 				$medical_history->maintenance_medication = $request->maintenance_medication_history;
 				$medical_history->save();
 
+				$priority_number = count(MedicalAppointment::where('medical_schedule_id', $request->schedule_id)->get());
 				$medical_appointment = new MedicalAppointment;
+				$medical_appointment->priority_number = $priority_number + 1;
 				$medical_appointment->patient_id = $request->user_name;
 				$medical_appointment->medical_schedule_id = $request->schedule_id;
 				$medical_appointment->reasons = $request->reasons;

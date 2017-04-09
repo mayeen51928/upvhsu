@@ -275,7 +275,25 @@ $(document).ready( function(){
     // NEW APRIL 7 ------------------------------------------------------------------------------------------------------------------------------------------------------------
     $('#signupMedical_modal').click(function(event) {
       $('#user_name_modal_medical, #password_modal_medical, #first_name_medical, #last_name_medical').keyup(function() {
-        if($('#password_modal_medical').val()!='' && $('#first_name_medical').val()!='' && $('#last_name_medical').val()!='' && $('#user_name_modal_medical').val().length == 9){
+        checkIfComplete1();
+      });
+      $('.signup2_medical input').keyup(function(event) {
+      	checkIfComplete2();
+      });
+      $('.signup3_medical input').keyup(function(event) {
+      	checkIfComplete3();
+      });
+      $('.signup4_medical input').keyup(function(event) {
+      	checkIfComplete4();
+      });
+    });
+    function checkIfComplete1(){
+    	if($('#password_modal_medical').val()
+          && $('#first_name_medical').val()
+          && $('#last_name_medical').val()
+          && $('#user_name_modal_medical').val().length == 9
+          && $.isNumeric($('#user_name_modal_medical').val()) 
+          ){
           $.post('/checkifuserexists', {user_name: $('#user_name_modal_medical').val()}, function(data, textStatus, xhr) {
             if(data['already_exists'] == 'yes')
             {
@@ -286,37 +304,163 @@ $(document).ready( function(){
             }
             else
             {
-              if($('#password_modal_medical').val()!='' && $('#first_name_medical').val()!='' && $('#last_name_medical').val()!=''){
               $('#user_name_modal_medical').tooltip('destroy');
               $('#signupnextMedical_modal').removeAttr('disabled');
-            }}
+            }
           });
         }
         else{
           $('#user_name_modal_medical').tooltip('destroy');
           $('#signupnextMedical_modal').attr('disabled', 'disabled');
         }
-      });
-      $('.signup2_medical input').keyup(function(event) {
-        var complete = false;
-        var fields = $('.signup2_medical input');
-        for (var i=0; i<fields.length; i++){
-          if($(fields[i]).val() != ''){
-            complete = true;
-          }
-          else{
-            complete = false;
-          }
-        }
-        if(complete==true){
+    }
+    function checkIfComplete2(){
+    	if($("input[name='patient_type_medical']:checked").val() &&
+    		$("input[name='sex_medical']:checked").val() &&
+        $('#birthdate_medical').val() &&
+        $('#civil_status_medical').val() &&
+        $('#religion_medical').val() &&
+        $('#nationality_medical').val() &&
+        $('#father_first_medical').val() &&
+        $('#father_last_medical').val() &&
+        $('#mother_first_medical').val() &&
+        $('#mother_last_medical').val() &&
+        $('#street_medical').val() &&
+        $('#town_medical').val() &&
+        $('#province_medical').val() &&
+        // $('#residencetelephone_medical').val() &&
+        $('#personalcontactnumber_medical').val()
+        // $('#residencecellphone_medical').val()
+        ){
           $('#signupnextMedical_modal').removeAttr('disabled');
+          if(!$('#yearlevel_medical').is(':disabled') && (!$('#yearlevel_medical').val() || !$('#degree_program_medical').val())){
+            $('#signupnextMedical_modal').attr('disabled', 'disabled');
+          }
         }
-        else{
-          $('#signupnextMedical_modal').attr('disabled', 'disabled');
-        }
+      else{
+        $('#signupnextMedical_modal').attr('disabled', 'disabled');
+      }
+    }
+    function checkIfComplete3(){
+    	if($('#guardian_first_medical').val() &&
+    		$('#guardian_last_medical').val() &&
+    		$('#guardian_relationship_medical').val() &&
+    		$('#guardian_town_medical').val() &&
+    		$('#guardian_province_medical').val() &&
+    		$('#guardianresidencecellphone_medical').val()){
+    		$('#signupnextMedical_modal').removeAttr('disabled');
+    	}
+    	else{
+    		$('#signupnextMedical_modal').attr('disabled', 'disabled');
+    	}
+
+    }
+    function checkIfComplete4(){
+    	if($('#illness_history_medical').val() &&
+        	$('#operation_history_medical').val() &&
+        	$('#allergies_history_medical').val() &&
+        	$('#family_history_medical').val() &&
+            $('#maintenance_medication_history_medical').val()){
+    		$('#signupconfirmMedical_modal').removeAttr('disabled');
+    	}
+    	else{
+    		$('#signupconfirmMedical_modal').attr('disabled', 'disabled');
+    	}
+    }
+    $('#signupDental_modal').click(function(event) {
+      $('#user_name_modal_dental, #password_modal_dental, #first_name_dental, #last_name_dental').keyup(function() {
+        checkIfCompleteDental1();
+      });
+      $('.signup2_dental input').keyup(function(event) {
+      	checkIfCompleteDental2();
+      });
+      $('.signup3_dental input').keyup(function(event) {
+      	checkIfCompleteDental3();
+      });
+      $('.signup4_dental input').keyup(function(event) {
+      	checkIfCompleteDental4();
       });
     });
-    
+    function checkIfCompleteDental1(){
+    	// console.log($('#user_name_modal_dental').val().length);
+        if($('#password_modal_dental').val()
+          && $('#first_name_dental').val()
+          && $('#last_name_dental').val()
+          && $('#user_name_modal_dental').val().length == 9
+          && $.isNumeric($('#user_name_modal_dental').val()) 
+          ){
+          $.post('/checkifuserexists', {user_name: $('#user_name_modal_dental').val()}, function(data, textStatus, xhr) {
+            if(data['already_exists'] == 'yes')
+            {
+              $('#user_name_modal_dental').attr('data-toggle', 'tooltip');
+              $('#user_name_modal_dental').attr('title', 'User already exists!');
+              $('#user_name_modal_dental').tooltip('show');
+              $('#signupnextDental_modal').attr('disabled', 'disabled');
+            }
+            else
+            {
+              $('#user_name_modal_dental').tooltip('destroy');
+              $('#signupnextDental_modal').removeAttr('disabled');
+            }
+          });
+        }
+        else{
+          $('#user_name_modal_dental').tooltip('destroy');
+          $('#signupnextDental_modal').attr('disabled', 'disabled');
+        }
+    }
+    function checkIfCompleteDental2(){
+    	if($("input[name='patient_type_dental']:checked").val() &&
+    		$("input[name='sex_dental']:checked").val() &&
+        $('#birthdate_dental').val() &&
+        $('#civil_status_dental').val() &&
+        $('#religion_dental').val() &&
+        $('#nationality_dental').val() &&
+        $('#father_first_dental').val() &&
+        $('#father_last_dental').val() &&
+        $('#mother_first_dental').val() &&
+        $('#mother_last_dental').val() &&
+        $('#street_dental').val() &&
+        $('#town_dental').val() &&
+        $('#province_dental').val() &&
+        $('#residencetelephone_dental').val() &&
+        $('#personalcontactnumber_dental').val() &&
+        $('#residencecellphone_dental').val()){
+          $('#signupnextDental_modal').removeAttr('disabled');
+          if(!$('#yearlevel_dental').is(':disabled') && (!$('#yearlevel_dental').val() || !$('#degree_program_dental').val())){
+            $('#signupnextDental_modal').attr('disabled', 'disabled');
+          }
+        }
+      else{
+        $('#signupnextDental_modal').attr('disabled', 'disabled');
+      }
+    }
+    function checkIfCompleteDental3(){
+        if($('#guardian_first_dental').val() &&
+            $('#guardian_last_dental').val() &&
+            $('#guardian_relationship_dental').val() &&
+            $('#guardian_town_dental').val() &&
+            $('#guardian_province_dental').val() &&
+            $('#guardianresidencecellphone_dental').val()){
+            $('#signupnextDental_modal').removeAttr('disabled');
+        }
+        else{
+            $('#signupnextDental_modal').attr('disabled', 'disabled');
+        }
+
+    }
+    function checkIfCompleteDental4(){
+        if($('#illness_history_dental').val() &&
+            $('#operation_history_dental').val() &&
+            $('#allergies_history_dental').val() &&
+            $('#family_history_dental').val() &&
+            $('#maintenance_medication_history_dental').val()){
+            $('#signupconfirmDental_modal').removeAttr('disabled');
+        }
+        else{
+            $('#signupconfirmDental_modal').attr('disabled', 'disabled');
+        }
+    }
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     $('#signupDental_modal').click(function(){
@@ -427,7 +571,7 @@ $(document).ready( function(){
       }
     });
     $('#birthdate_medical').keyup(function() {
-      console.log($('#birthdate_medical').val());
+      // console.log($('#birthdate_medical').val());
       if($("input[name=patient_type_medical]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_medical').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
@@ -450,6 +594,10 @@ $(document).ready( function(){
       else if($("input[name=patient_type_dental]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_dental').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
+      	$("#degree_program_dental option[value=default]").prop('selected', true);
+        $('#yearlevel_dental').val('');
+        $("#degree_program_dental").attr('disabled', 'disabled');
+        $('#yearlevel_dental').attr('disabled', 'disabled');
         $('#senior_citizen_id_dental').removeAttr('disabled');
       }
 	    else
@@ -460,11 +608,13 @@ $(document).ready( function(){
 	    	$("#degree_program_dental").attr('disabled', 'disabled');
 	    	$('#yearlevel_dental').attr('disabled', 'disabled');
 	    }
+	    checkIfCompleteDental2();
     });
 
     $("input[name=patient_type_medical]").click(function(){
     	if($("input[name=patient_type_medical]:checked").val() == 1)
     	{
+        $('#senior_citizen_id_medical').val('');
 	    	$("#degree_program_medical").removeAttr('disabled').attr('required', 'required');
 	    	$('#yearlevel_medical').removeAttr('disabled').attr('required', 'required');
         $('#senior_citizen_id_medical').attr('disabled', 'disabled');
@@ -472,17 +622,23 @@ $(document).ready( function(){
       else if($("input[name=patient_type_medical]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_medical').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
-        
+        $("#degree_program_medical option[value=default]").prop('selected', true);
+        $('#yearlevel_medical').val('');
+        $("#degree_program_medical").attr('disabled', 'disabled');
+        $('#yearlevel_medical').attr('disabled', 'disabled');
         $('#senior_citizen_id_medical').removeAttr('disabled');
       }
 	    else
 	    {
+        $('#senior_citizen_id_medical').val('');
         $('#senior_citizen_id_medical').attr('disabled', 'disabled');
         $("#degree_program_medical option[value=default]").prop('selected', true);
         $('#yearlevel_medical').val('');
 	    	$("#degree_program_medical").attr('disabled', 'disabled');
 	    	$('#yearlevel_medical').attr('disabled', 'disabled');
 	    }
+      // var fields = $('.signup2_medical input:not(:disabled), .signup2_medical select:not(:disabled) option:selected');
+      checkIfComplete2();
     });
     
     $('#signupconfirmDental_modal').click(function(){
@@ -495,7 +651,7 @@ $(document).ready( function(){
         	scheduleID &&
         	$('#dentalNotes').val() &&
         	$('#first_name_dental').val() &&
-        	$('#middle_name_dental').val() &&
+        	// $('#middle_name_dental').val() &&
         	$('#last_name_dental').val() &&
         	$("input[name='patient_type_dental']:checked").val() &&
         	$("input[name='sex_dental']:checked").val() &&
@@ -504,25 +660,25 @@ $(document).ready( function(){
         	$('#religion_dental').val() &&
         	$('#nationality_dental').val() &&
         	$('#father_first_dental').val() &&
-        	$('#father_middle_dental').val() &&
+        	// $('#father_middle_dental').val() &&
         	$('#father_last_dental').val() &&
         	$('#mother_first_dental').val() &&
-        	$('#mother_middle_dental').val() &&
+        	// $('#mother_middle_dental').val() &&
         	$('#mother_last_dental').val() &&
         	$('#street_dental').val() &&
         	$('#town_dental').val() &&
         	$('#province_dental').val() &&
-        	$('#residencetelephone_dental').val() &&
+        	// $('#residencetelephone_dental').val() &&
         	$('#personalcontactnumber_dental').val() &&
-        	$('#residencecellphone_dental').val() &&
+        	// $('#residencecellphone_dental').val() &&
         	$('#guardian_first_dental').val() &&
-        	$('#guardian_middle_dental').val() &&
+        	// $('#guardian_middle_dental').val() &&
         	$('#guardian_last_dental').val() &&
         	$('#guardian_relationship_dental').val() &&
-        	$('#guardian_street_dental').val() &&
+        	// $('#guardian_street_dental').val() &&
         	$('#guardian_town_dental').val() &&
         	$('#guardian_province_dental').val() &&
-        	$('#guardianresidencetelephone_dental').val() &&
+        	// $('#guardianresidencetelephone_dental').val() &&
         	$('#guardianresidencecellphone_dental').val() &&
         	$('#illness_history_dental').val() &&
         	$('#operation_history_dental').val() &&
@@ -605,8 +761,10 @@ $(document).ready( function(){
     });
     
     $('#signupnextDental_modal').click(function() {
+    	$(this).attr('disabled', 'disabled');
         numOfClicksDental ++;
         if(numOfClicksDental == 1){
+        	checkIfCompleteDental2();
             $('.signup0_dental').hide();
             $('.signup1_dental').hide();
             $('.signup2_dental').show();
@@ -615,12 +773,14 @@ $(document).ready( function(){
 
         }
         if(numOfClicksDental == 2){
+        	checkIfCompleteDental3();
             $('.signup2_dental').hide();
             $('.signup3_dental').show();
             percentageDental += 25;
             $('#changeProgressDental').attr('aria-valuenow', percentageDental).css('width', percentageDental+'%').html('3 of 4');
         }
         if(numOfClicksDental == 3){
+        	checkIfCompleteDental4();
             $('.signup3_dental').hide();
             $('.signup4_dental').show();
             $('#signupnextDental_modal').hide();
@@ -633,6 +793,7 @@ $(document).ready( function(){
     $('#signupbackDental_modal').click(function() {
         numOfClicksDental --;
         if(numOfClicksDental == 2){
+        	checkIfCompleteDental3();
             $('.signup3_dental').show();
             $('.signup4_dental').hide();
             $('#signupnextDental_modal').show();
@@ -641,12 +802,14 @@ $(document).ready( function(){
             $('#changeProgressDental').attr('aria-valuenow', percentageDental).css('width', percentageDental+'%').html('3 of 4');
         }
         if(numOfClicksDental == 1){
+        	checkIfCompleteDental2();
             $('.signup2_dental').show();
             $('.signup3_dental').hide();
             percentageDental -= 25;
             $('#changeProgressDental').attr('aria-valuenow', percentageDental).css('width', percentageDental+'%').html('2 of 4');
         }
         if(numOfClicksDental == 0){
+        		checkIfCompleteDental1();
             $('.signup0_dental').show();
             $('.signup1_dental').show();
             $('.signup2_dental').hide();
@@ -669,22 +832,7 @@ $(document).ready( function(){
       $(this).attr('disabled', 'disabled');
         numOfClicksMedical ++;
         if(numOfClicksMedical == 1){
-          var complete = false;
-          var fields = $('.signup2_medical input');
-          for (var i=0; i<fields.length; i++){
-            if($(fields[i]).val() != ''){
-              complete = true;
-            }
-            else{
-              complete = false;
-            }
-          }
-          if(complete==true){
-            $('#signupnextMedical_modal').removeAttr('disabled');
-          }
-          else{
-            $('#signupnextMedical_modal').attr('disabled', 'disabled');
-          }
+        	checkIfComplete2();
             $('.signup0_medical').hide();
             $('.signup1_medical').hide();
             $('.signup2_medical').show();
@@ -692,12 +840,14 @@ $(document).ready( function(){
             $('#changeProgress').attr('aria-valuenow', percentageMedical).css('width', percentageMedical+'%').html('2 of 4');
         }
         if(numOfClicksMedical == 2){
+        	checkIfComplete3();
             $('.signup2_medical').hide();
             $('.signup3_medical').show();
             percentageMedical += 25;
             $('#changeProgress').attr('aria-valuenow', percentageMedical).css('width', percentageMedical+'%').html('3 of 4');
         }
         if(numOfClicksMedical == 3){
+        	checkIfComplete4();
             $('.signup3_medical').hide();
             $('.signup4_medical').show();
             $('#signupnextMedical_modal').hide();
@@ -710,9 +860,7 @@ $(document).ready( function(){
     $('#signupbackMedical_modal').click(function() {
         numOfClicksMedical --;
         if(numOfClicksMedical == 2){
-            if($('.signup3_medical input').val()){
-              $('#signupnextMedical_modal').removeAttr('disabled');
-            }
+            checkIfComplete3();
             $('.signup3_medical').show();
             $('.signup4_medical').hide();
             $('#signupnextMedical_modal').show();
@@ -721,19 +869,14 @@ $(document).ready( function(){
             $('#changeProgress').attr('aria-valuenow', percentageMedical).css('width', percentageMedical+'%').html('3 of 4');
         }
         if(numOfClicksMedical == 1){
-            if($('.signup2_medical input').val()){
-              $('#signupnextMedical_modal').removeAttr('disabled');
-            }
+            checkIfComplete2();
             $('.signup2_medical').show();
             $('.signup3_medical').hide();
             percentageMedical -= 25;
             $('#changeProgress').attr('aria-valuenow', percentageMedical).css('width', percentageMedical+'%').html('2 of 4');
         }
         if(numOfClicksMedical == 0){
-          // console.log('hello');
-            if($('.signup0_medical input').val() && $('.signup1_medical input').val()){
-              $('#signupnextMedical_modal').removeAttr('disabled');
-            }
+        		checkIfComplete1();
             $('.signup0_medical').show();
             $('.signup1_medical').show();
             $('.signup2_medical').hide();
@@ -766,7 +909,7 @@ $(document).ready( function(){
         	scheduleID &&
         	$('#medicalNotes').val() &&
         	$('#first_name_medical').val() &&
-        	$('#middle_name_medical').val() &&
+        	// $('#middle_name_medical').val() &&
         	$('#last_name_medical').val() &&
         	$("input[name='patient_type_medical']:checked").val() &&
         	$("input[name='sex_medical']:checked").val() &&
@@ -775,25 +918,25 @@ $(document).ready( function(){
         	$('#religion_medical').val() &&
         	$('#nationality_medical').val() &&
         	$('#father_first_medical').val() &&
-        	$('#father_middle_medical').val() &&
+        	// $('#father_middle_medical').val() &&
         	$('#father_last_medical').val() &&
         	$('#mother_first_medical').val() &&
-        	$('#mother_middle_medical').val() &&
+        	// $('#mother_middle_medical').val() &&
         	$('#mother_last_medical').val() &&
         	$('#street_medical').val() &&
         	$('#town_medical').val() &&
         	$('#province_medical').val() &&
-        	$('#residencetelephone_medical').val() &&
+        	// $('#residencetelephone_medical').val() &&
         	$('#personalcontactnumber_medical').val() &&
-        	$('#residencecellphone_medical').val() &&
+        	// $('#residencecellphone_medical').val() &&
         	$('#guardian_first_medical').val() &&
-        	$('#guardian_middle_medical').val() &&
+        	// $('#guardian_middle_medical').val() &&
         	$('#guardian_last_medical').val() &&
         	$('#guardian_relationship_medical').val() &&
         	$('#guardian_street_medical').val() &&
         	$('#guardian_town_medical').val() &&
         	$('#guardian_province_medical').val() &&
-        	$('#guardianresidencetelephone_medical').val() &&
+        	// $('#guardianresidencetelephone_medical').val() &&
         	$('#guardianresidencecellphone_medical').val() &&
         	$('#illness_history_medical').val() &&
         	$('#operation_history_medical').val() &&

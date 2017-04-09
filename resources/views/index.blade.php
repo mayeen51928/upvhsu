@@ -7,9 +7,9 @@
 			<div class="col-md-12 homeForm">
 				<div class="panel-heading">
 					<img class="img-responsive" src="{{asset('images/upvweb_logo1.png')}}"/>
+					@if(isset($now_serving)) <h2 class="text-center">Now Serving <span class="label label-success">Medical Patient #{{$now_serving->priority_number}}</span></h2> @else <p class="text-center">Miagao Campus, Iloilo 5023</p> @endif
 				</div>
 				<div class="panel-content homeFormBtn">
-					<p>Miagao Campus, Iloilo 5023</p>
 					<a href="{{ url('/scheduleappointment') }}" id="setAppointmentBtn">
 						<button class="form-control btn-primary" id="setAppointment">Schedule an Appointment</button>
 					</a>

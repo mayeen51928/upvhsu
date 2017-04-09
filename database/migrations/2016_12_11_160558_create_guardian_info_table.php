@@ -20,7 +20,7 @@ class CreateGuardianInfoTable extends Migration
             $table->string('guardian_last_name');
             $table->string('guardian_contact_number')->nullable();
             $table->string('guardian_telephone_number')->nullable();
-            $table->string('street');
+            $table->string('street')->nullable();
             $table->integer('town_id')->unsigned()->index();
             $table->foreign('town_id')->references('id')->on('towns')->onDelete('cascade');
             $table->timestamps();
