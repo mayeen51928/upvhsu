@@ -4,6 +4,27 @@ $.ajaxSetup({
 });
 // ------------------DASHBOARD---------------
 // 
+
+$('input:radio[name="cbc_radio"]').change(function(){
+	if ($(this).val() == 'outside') {
+		console.log("outside");
+		$('.checkboxLabService').attr('disabled', 'disabled');
+		$('#hemoglobin-lab').removeAttr('disabled');
+		$('#hemasocrit-lab').removeAttr('disabled');
+		$('#wbc-lab').removeAttr('disabled');
+	}
+	else{
+		console.log("inside");
+		$('.checkboxLabService').removeAttr('disabled');
+		$('#hemoglobin-lab').val('');
+		$('#hemasocrit-lab').val('');
+		$('#wbc-lab').val('');
+		$('#hemoglobin-lab').attr('disabled', 'disabled');
+		$('#hemasocrit-lab').attr('disabled', 'disabled');
+		$('#wbc-lab').attr('disabled', 'disabled');
+	}
+});
+
 var checkboxLabServiceCounter = 0;
 $('.checkboxLabService').click(function(){
 	if($(this).is(':checked'))
@@ -19,6 +40,7 @@ $('.checkboxLabService').click(function(){
 		$('#hemoglobin-lab').removeAttr('disabled');
 		$('#hemasocrit-lab').removeAttr('disabled');
 		$('#wbc-lab').removeAttr('disabled');
+		// $('.cbc_radio').removeAttr('disabled');
 	}
 	else
 	{
@@ -28,9 +50,16 @@ $('.checkboxLabService').click(function(){
 		$('#hemoglobin-lab').attr('disabled', 'disabled');
 		$('#hemasocrit-lab').attr('disabled', 'disabled');
 		$('#wbc-lab').attr('disabled', 'disabled');
+		// $('.cbc_radio').attr('disabled', 'disabled');
 	}
 });
 $('.addLabResult').click(function(){
+	$('#labdiagnosisaccordion textarea, #labdiagnosisaccordion select').removeAttr('disabled');
+	$('input[value="inside"]').prop("checked",true)
+	$('.cbc_radio').removeAttr('disabled');
+	$('.drug_radio').removeAttr('disabled');
+	$('.fecalysis_radio').removeAttr('disabled');
+	$('.urinalysis_radio').removeAttr('disabled');
 	$('.checkboxLabService').removeAttr('disabled').removeAttr('checked');
 	// $('#labbillingaccordion').load(location.href + " #labbillingaccordionbody");
 	var medical_appointment_id = $(this).attr('id').split("_")[1];
@@ -80,8 +109,11 @@ $('.addLabResult').click(function(){
 			// 	$('#wbc-lab').removeAttr('disabled');
 			// }
 
+			if(data['cbc_result']['hemoglobin'] || data['cbc_result']['hemasocrit'] || data['cbc_result']['wbc']){
+				$('.checkboxLabService').prop('disabled', true);
+				$('.cbc_radio').prop('disabled', true);
+			}
 			$('#laboratoryresult-lab #cbc_div').show();
-			console.log(data['cbc_billing_status']);
 			if(data['cbc_billing_status']){
 				for (var i = 0; i < data['cbc_billing_status'].length; i++){
 					$('#'+data['cbc_billing_status'][i].medical_service_id+'.checkboxLabService').prop('checked', true);
@@ -90,12 +122,15 @@ $('.addLabResult').click(function(){
 				}
 			}
 		}
+
 		if(data['drug_test_result'])
 		{
 			$('#drug-test-lab').val(data['drug_test_result']['drug_test_result']);
 			if(data['drug_test_result']['drug_test_result'])
 			{
 				$('#drug-test-lab').attr('disabled', 'disabled');
+				$('.checkboxLabService').prop('disabled', true);
+				$('.drug_radio').prop('disabled', true);
 			}
 			else
 			{
@@ -107,6 +142,7 @@ $('.addLabResult').click(function(){
 			}
 			$('#laboratoryresult-lab #drug_test_div').show();
 		}
+
 		if(data['fecalysis_result'])
 		{
 			$('#macroscopic-lab').val(data['fecalysis_result']['macroscopic']);
@@ -128,6 +164,10 @@ $('.addLabResult').click(function(){
 				$('#microscopic-lab').removeAttr('disabled');
 			}
 			$('#laboratoryresult-lab #fecalysis_div').show();
+			if(data['fecalysis_result']['macroscopic'] || data['fecalysis_result']['microscopic']){
+				$('.checkboxLabService').prop('disabled', true);
+				$('.fecalysis_radio').prop('disabled', true);
+			}
 		}
 		if(data['urinalysis_result'])
 		{
@@ -176,6 +216,10 @@ $('.addLabResult').click(function(){
 				});
 			}
 			$('#laboratoryresult-lab #urinalysis_div').show();
+			if(data['urinalysis_result']['pus_cells'] || data['urinalysis_result']['rbc'] || data['urinalysis_result']['albumin'] || data['urinalysis_result']['sugar']){
+				$('.checkboxLabService').prop('disabled', true);
+				$('.urinalysis_radio').prop('disabled', true);
+			}
 		}
 		$('#add-lab-result-footer').append('<button type="button" class="btn btn-success addLabResultButton" id="addLabResultButton_'+medical_appointment_id+'">Save</button><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>')
 		$('.addLabResultButton').click(function(){
@@ -192,16 +236,20 @@ $('.addLabResult').click(function(){
 					hemoglobin: $('#hemoglobin-lab').val(),
 					hemasocrit: $('#hemasocrit-lab').val(),
 					wbc: $('#wbc-lab').val(),
+					cbc_radio: $("input[name='cbc_radio']:checked").val(),
 
 					drug_test: $('#drug-test-lab').val(),
+					drug_radio: $("input[name='drug_radio']:checked").val(),
 
 					macroscopic: $('#macroscopic-lab').val(),
 					microscopic: $('#microscopic-lab').val(),
+					fecalysis_radio: $("input[name='fecalysis_radio']:checked").val(),
 
 					pus_cells: $('#pus-cells-lab').val(),
 					rbc: $('#rbc-lab').val(),
 					albumin: $('#albumin-lab').val(),
 					sugar: $('#sugar-lab').val(),
+					urinalysis_radio: $("input[name='urinalysis_radio']:checked").val(),
 
 					cbc_services_id: cbc_services_id,
 					drug_service_id: data['drug_billing_service'].id,

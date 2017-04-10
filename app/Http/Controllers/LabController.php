@@ -130,7 +130,7 @@ class LabController extends Controller
 					$cbc->wbc = $request->wbc;	
 				}
 
-				if($cbc->status == '0')
+				if($cbc->status == '0' && $request->cbc_radio == 'inside')
 				{
 					for($i = 0; $i < sizeof($request->cbc_services_id); $i++){
 						$billing = new MedicalBilling;
@@ -156,12 +156,14 @@ class LabController extends Controller
 					}
 					$cbc->status = '1';
 				}
+
 				$cbc->update();
 
 				if($request->hemoglobin!='' && $request->hemasocrit!='' && $request->wbc!=''){
 					$counter++;
 				}
 			}
+
 		$drug_test = DrugTestResult::where('medical_appointment_id', $request->medical_appointment_id)->first();
 		if(count($drug_test)==1 && ($request->drug_test !=''))
 			{
@@ -170,7 +172,7 @@ class LabController extends Controller
 				{
 					$drug_test->drug_test_result = $request->drug_test;
 				}
-				if($drug_test->status == '0')
+				if($drug_test->status == '0' && $request->drug_radio == 'inside')
 				{
 					$billing = new MedicalBilling;
 					$billing->medical_service_id = 36;
@@ -210,7 +212,7 @@ class LabController extends Controller
 					$fecalysis->microscopic = $request->microscopic;
 				}
 
-				if($fecalysis->status == '0')
+				if($fecalysis->status == '0' && $request->fecalysis_radio == 'inside')
 				{
 					$billing = new MedicalBilling;
 					$billing->medical_service_id = $request->fecalysis_service_id;
@@ -261,7 +263,7 @@ class LabController extends Controller
 					$urinalysis->sugar = $request->sugar;
 				}
 
-				if($urinalysis->status == '0'){
+				if($urinalysis->status == '0' && $request->urinalysis_radio == 'inside'){
 					$billing = new MedicalBilling;
 					$billing->medical_service_id = $request->urinalysis_service_id;
 					$billing->medical_appointment_id = $request->medical_appointment_id;

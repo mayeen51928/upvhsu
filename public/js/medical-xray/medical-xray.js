@@ -4,9 +4,22 @@ $(document).ready(function(){
 });
 
 // ------------------DASHBOARD---------------
+$('input:radio[name="xray_radio"]').change(function(){
+	if ($(this).val() == 'outside') {
+		$('#chest-xray').removeAttr('disabled');
+		$('.addXrayResultButton').fadeIn();
+		$('.checkboxXrayService').attr('disabled', 'disabled');
+	}
+	else{
+		$('.addXrayResultButton').fadeOut();
+		$('#chest-xray').val('');
+		$('#chest-xray').attr('disabled', 'disabled');
+		$('.checkboxXrayService').removeAttr('disabled');
+	}
+});
+
 var checkboxXrayServiceCounter = 0;
 $('.checkboxXrayService').click(function(){
-
 	if($(this).is(':checked'))
 	{
 		checkboxXrayServiceCounter++;
@@ -29,6 +42,7 @@ $('.checkboxXrayService').click(function(){
 });
 
 $('.addXrayResult').click(function(){
+	$('input[value="inside"]').prop("checked",true)
 	$('.checkboxXrayService').removeAttr('disabled').removeAttr('checked');
 	var medical_appointment_id = $(this).attr('id').split("_")[1];
 	$('#add-xray-result-footer').html('');
@@ -40,10 +54,6 @@ $('.addXrayResult').click(function(){
     	{
     		$('#chest-xray').attr('disabled', 'disabled');
     	}
-    	// else
-    	// {
-    	// 	$('#chest-xray').removeAttr('disabled');
-    	// }
     }
 
     $('#add-xray-result-footer').append('<button type="button" style="display: none;" class="btn btn-success addXrayResultButton" id="addXrayResultButton_'+medical_appointment_id+'">Save</button><button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>');
@@ -66,6 +76,7 @@ $('.addXrayResult').click(function(){
 	      	medical_appointment_id: medical_appointment_id,
 	      	chest_xray: chest_xray,
 	      	xray_services_id: xray_services_id,
+	      	xray_radio: $("input[name='xray_radio']:checked").val(),
       	} , function(data){
 	      		$('#xraycountpanel').load(location.href + " #xraycount");
 		      	$('#add-xray-result').modal('hide');

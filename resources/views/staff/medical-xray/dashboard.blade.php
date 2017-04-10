@@ -12,7 +12,6 @@
 			@endif
 			Welcome <i>{{ Auth::user()->staff->staff_first_name }} {{ Auth::user()->staff->staff_last_name }}</i>!</h4>
 			
-			
 			<div class="row">
 				<div class="col-md-3" id="xraycountpanel">
 					<div class="tile-stats" id="xraycount">
@@ -112,6 +111,12 @@
 									<div class="row">
 										<div class="form-group col-md-12">
 											<label for="chest-xray">Chest Xray:</label>
+											<div class="radio">
+									      <label><input type="radio" class="xray_radio" value="inside" name="xray_radio" checked>Inside</label>
+									    </div>
+									    <div class="radio">
+									      <label><input type="radio" class="xray_radio" value="outside" name="xray_radio">Outside</label>
+									    </div>
 											<textarea class="form-control" rows="7" name="chest-xray" id="chest-xray" required disabled></textarea>
 										</div>
 									</div>

@@ -46,7 +46,8 @@ class CashierController extends Controller
 			->where('medical_billings.status', '=', 'unpaid')
 			->where('medical_schedules.schedule_day', '<', date('Y-m-d'))
 			->get();
-		$receivable_medical = MedicalBilling::selectRaw('sum(amount) as amount')->where('status','unpaid')->first();
+		$receivable_medical = MedicalBilling::join('medical_appointments', 'medical_appointments.id', 'medical_billings.medical_appointment_id')->join('medical_schedules', 'medical_schedules.id', 'medical_appointments.medical_schedule_id')->selectRaw('sum(amount) as amount')->where('medical_billings.status','unpaid')->where('medical_schedules.schedule_day', '<', date('Y-m-d'))->first();
+	 
 	  $counter_medical = 0;
 	  if(count($unpaid_bills_medical)>0){
 			$counter_medical++;
@@ -63,7 +64,7 @@ class CashierController extends Controller
 			->whereDate('dental_schedules.schedule_start', '<', date('Y-m-d'))
 			->get();
 
-		$receivable_dental = DentalBilling::selectRaw('sum(amount) as amount')->where('status','unpaid')->first();
+		$receivable_dental = DentalBilling::join('dental_appointments', 'dental_appointments.id', 'dental_billings.appointment_id')->join('dental_schedules', 'dental_schedules.id', 'dental_appointments.dental_schedule_id')->selectRaw('sum(amount) as amount')->where('dental_billings.status','unpaid')->whereDate('dental_schedules.schedule_start', '<', date('Y-m-d'))->first();
 	  $counter_dental = 0;
 	  if(count($unpaid_bills_dental)>0){
 			$counter_dental++;

@@ -38,11 +38,11 @@
 							        <td>Total Patients Unbilled</td>
 							        <td>{{ $medical_unbilled_count }}</td>
 							      </tr>  
-							      <tr class="success">
+							      <tr class="info">
 							        <td>Total Patients Billed</td>
 							        <td>{{ $medical_billed_count }}</td>
 							      </tr> 
-							      <tr class="info">
+							      <tr class="success">
 							        <td>Total Patients Paid</td>
 							        <td>{{ $medical_paid_count }}</td>
 							      </tr> 
@@ -67,11 +67,11 @@
 							        <td>Total Patients Unbilled</td>
 							        <td>{{ $dental_unbilled_count }}</td>
 							      </tr>  
-							      <tr class="success">
+							      <tr class="info">
 							        <td>Total Patients Billed</td>
 							        <td>{{ $dental_billed_count }}</td>
 							      </tr> 
-							      <tr class="info">
+							      <tr class="success">
 							        <td>Total Patients Paid</td>
 							        <td>{{ $dental_paid_count }}</td>
 							      </tr> 

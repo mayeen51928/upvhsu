@@ -69,27 +69,29 @@ class XrayController extends Controller
 	public function addxrayresult(Request $request)
 	{
 		$patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
-		for($i = 0; $i < sizeof($request->xray_services_id); $i++){
-			$billing = new MedicalBilling;
-			$billing->medical_service_id = $request->xray_services_id[$i];
-			$billing->medical_appointment_id = $request->medical_appointment_id;
-			$billing->status = 'unpaid';
-			if($patient_type_id == 1){
-				$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('student_rate')->first();
-			}
-			elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
-				$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
-			}
-			else{
-				$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->get();
-				if(count($patient_senior_checker) > 0){
-					$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('senior_rate')->first();
+		if($request->xray_radio == 'inside'){
+			for($i = 0; $i < sizeof($request->xray_services_id); $i++){
+				$billing = new MedicalBilling;
+				$billing->medical_service_id = $request->xray_services_id[$i];
+				$billing->medical_appointment_id = $request->medical_appointment_id;
+				$billing->status = 'unpaid';
+				if($patient_type_id == 1){
+					$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('student_rate')->first();
+				}
+				elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
+					$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
 				}
 				else{
-					$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('opd_rate')->first();
+					$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->get();
+					if(count($patient_senior_checker) > 0){
+						$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('senior_rate')->first();
+					}
+					else{
+						$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('opd_rate')->first();
+					}
 				}
+				$billing->save();
 			}
-			$billing->save();
 		}
 		$xray = ChestXrayResult::where('medical_appointment_id',$request->medical_appointment_id)->first();
 		$xray->xray_staff_id = Auth::user()->user_id;

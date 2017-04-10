@@ -503,3 +503,7 @@ a.btn-danger {
 #addapatientaccountpanel{
     background-color: rgb(240, 250, 255);
 }
+
+.xray_radio{
+    display: inline;
+}
