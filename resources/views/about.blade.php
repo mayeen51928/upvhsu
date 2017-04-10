@@ -4,7 +4,7 @@
 <div class="container-fluid" style="background-color:#F0F0F0;">
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
-		<img src="images/infirmary_about.jpg" class="img-responsive" alt="Cinque Terre">
+		<img src="images/infirmary_about.jpg" class="img-responsive center-block" alt="UPV">
 	</div>
 </div>
 <br>
