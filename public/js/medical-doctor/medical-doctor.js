@@ -173,6 +173,7 @@ $('.addMedicalRecordButton').click(function() {
 	$('#create-medical-record-modal #height').focus();
 	$('.medical-button-container').html("");
 	$('.checkboxMedicalService').removeAttr('checked').removeAttr('disabled');
+	$('#physicalexamaccordion input').attr('disabled', 'disabled');
 	if($(this).attr('id')){
 		var appointment_id = $(this).attr('id').split("_")[1];
 		$.post('/viewmedicaldiagnosis',
@@ -224,23 +225,23 @@ $('.addMedicalRecordButton').click(function() {
 					// patient_type_id_radio = $('input[name=patient_type_radio]:checked').val()
 					// senior_id = $('#senior_id').val();
 			
-					if ($('#height').val() ||
-						$('#weight').val() ||
-						$('#blood-pressure').val() ||
-						$('#pulse-rate').val() ||
-						$('#right-eye').val() ||
-						$('#left-eye').val() ||
-						$('#head').val() ||
-						$('#eent').val() ||
-						$('#neck').val() ||
-						$('#neck').val() ||
-						$('#chest').val() ||
-						$('#heart').val() ||
-						$('#heart').val() ||
-						$('#lungs').val() ||
-						$('#abdomen').val() ||
-						$('#back').val() ||
-						$('#skin').val() ||
+					if ($('#height').val() &&
+						$('#weight').val() &&
+						$('#blood-pressure').val() &&
+						$('#pulse-rate').val() &&
+						$('#right-eye').val() &&
+						$('#left-eye').val() &&
+						$('#head').val() &&
+						$('#eent').val() &&
+						$('#neck').val() &&
+						$('#neck').val() &&
+						$('#chest').val() &&
+						$('#heart').val() &&
+						$('#heart').val() &&
+						$('#lungs').val() &&
+						$('#abdomen').val() &&
+						$('#back').val() &&
+						$('#skin').val() &&
 						$('#extremities').val()) {
 							var appointment_id = $(this).attr('id').split("_")[1];
 							var height = $('#height').val();
@@ -600,6 +601,32 @@ $('.addMedicalRecordButton').click(function() {
 			}
 			$('#create-medical-record-modal').modal().delay(500);
 		});
+	}
+});
+
+var requestCheckboxCounter = 0;
+$('.requestCheckbox input').click(function(){
+
+	if($(this).is(':checked'))
+	{
+		requestCheckboxCounter++;
+	}
+	else
+	{
+		requestCheckboxCounter--;
+	}
+	if(requestCheckboxCounter>0)
+	{
+		// $('#addNewMedicalRecordWConfirmRequests').show();
+		$('#remarksDiv textarea').attr('disabled', 'disabled');
+		$('#prescriptionDiv textarea').attr('disabled', 'disabled');
+	}
+	else
+	{
+		$('#remarksDiv textarea').val('');
+		$('#prescriptionDiv textarea').val('');
+		$('#remarksDiv textarea').removeAttr('disabled');
+		$('#prescriptionDiv textarea').removeAttr('disabled');
 	}
 });
 
@@ -1006,13 +1033,13 @@ $('.checkboxMedicalService').click(function(){
 	if(checkboxMedicalServiceCounter>0)
 	{
 		$('#addNewMedicalRecordWConfirmRequests').show();
-		$('input[type="text"]').removeAttr('disabled');
+		$('#physicalexamaccordion input[type="text"]').removeAttr('disabled');
 	}
 	else
 	{
 		$('#addNewMedicalRecordWConfirmRequests').hide();
-		$('input[type="text"]').val('');
-		$('input[type="text"]').attr('disabled', 'disabled');
+		$('#physicalexamaccordion input[type="text"]').val('');
+		$('#physicalexamaccordion input[type="text"]').attr('disabled', 'disabled');
 	}
 });
 $('.listofallpatients').click(function()
