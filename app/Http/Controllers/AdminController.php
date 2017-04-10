@@ -9,7 +9,7 @@ use App\Announcement;
 use App\StudentNumber;
 use App\MedicalService;
 use DB;
-use App\DentaLAppointment;
+use App\DentalAppointment;
 use App\MedicalAppointment;
 use App\CbcResult;
 use App\FecalysisResult;
@@ -70,7 +70,7 @@ class AdminController extends Controller
 		$date = $dt->format('Y-m-d');
 		for($i=0; $i<7; $i++)
 		{
-			$dental_appointments[$i] = count(DentaLAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', $date)->get());
+			$dental_appointments[$i] = count(DentalAppointment::join('dental_schedules', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->whereDate('schedule_start', $date)->get());
 			$medical_appointments[$i] = count(MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
 			$cbc_requests[$i] = count(CbcResult::join('medical_appointments', 'cbc_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());
 			$fecalysis_requests[$i] = count(FecalysisResult::join('medical_appointments', 'fecalysis_results.medical_appointment_id', 'medical_appointments.id')->join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day', $date)->get());

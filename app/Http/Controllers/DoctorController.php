@@ -53,30 +53,30 @@ class DoctorController extends Controller
 	}
 	public function dashboard()
 	{
-		$crons = MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','<', date('Y-m-d'))
-		->leftjoin('physical_examinations', 'physical_examinations.medical_appointment_id', 'medical_appointments.id')
-		->where('height', NULL)
-		->where('weight', NULL)
-		->where('blood_pressure', NULL)
-		->where('height', NULL)
-		->where('pulse_rate', NULL)
-		->where('right_eye', NULL)
-		->where('left_eye', NULL)
-		->where('head', NULL)
-		->where('eent', NULL)
-		->where('neck', NULL)
-		->where('chest', NULL)
-		->where('height', NULL)
-		->where('heart', NULL)
-		->where('lungs', NULL)
-		->where('abdomen', NULL)
-		->where('back', NULL)
-		->where('skin', NULL)
-		->where('extremities', NULL)
-		->get();
-		foreach($crons as $cron){
-			MedicalAppointment::where('priority_number', $cron->priority_number)->where('patient_id', $cron->patient_id)->where('medical_schedule_id', $cron->medical_schedule_id)->first()->delete();
-		}
+		// $crons = MedicalAppointment::join('medical_schedules', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->where('schedule_day','<', date('Y-m-d'))
+		// ->leftjoin('physical_examinations', 'physical_examinations.medical_appointment_id', 'medical_appointments.id')
+		// ->where('height', NULL)
+		// ->where('weight', NULL)
+		// ->where('blood_pressure', NULL)
+		// ->where('height', NULL)
+		// ->where('pulse_rate', NULL)
+		// ->where('right_eye', NULL)
+		// ->where('left_eye', NULL)
+		// ->where('head', NULL)
+		// ->where('eent', NULL)
+		// ->where('neck', NULL)
+		// ->where('chest', NULL)
+		// ->where('height', NULL)
+		// ->where('heart', NULL)
+		// ->where('lungs', NULL)
+		// ->where('abdomen', NULL)
+		// ->where('back', NULL)
+		// ->where('skin', NULL)
+		// ->where('extremities', NULL)
+		// ->get();
+		// foreach($crons as $cron){
+		// 	MedicalAppointment::where('priority_number', $cron->priority_number)->where('patient_id', $cron->patient_id)->where('medical_schedule_id', $cron->medical_schedule_id)->first()->delete();
+		// }
 		$params['medical_appointments_today'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','=', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
 		$params['medical_appointments_past'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','<', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
 		$params['medical_appointments_future'] = MedicalSchedule::join('medical_appointments', 'medical_appointments.medical_schedule_id', 'medical_schedules.id')->join('patient_info', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('schedule_day','>', date('Y-m-d'))->where('status', '0')->where('medical_schedules.staff_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->orderBy('medical_appointments.created_at', 'asc')->get();
