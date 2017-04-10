@@ -1,5 +1,6 @@
 $(document).ready( function(){
 // ------------------DASHBOARD---------------
+
 function cashierhighcharts(){
 // 	Highcharts.setOptions({
 //     colors: ['#058DC7', '#50B432', '#800000']
@@ -44,6 +45,7 @@ if($('#cashiergraphtrigger').val()==1)
 	cashierhighcharts();
 }
 	$('.addMedicalBilling').click(function(){
+		
 		buttonIdMedical = $(this).attr('id');
 		var id = ($(this).attr('id').split('_'));
 		appointmentIdMedical = id[3];
@@ -54,6 +56,7 @@ if($('#cashiergraphtrigger').val()==1)
 				data: {appointment_id:  appointmentIdMedical, _token: token},
 				success: function(data)
 				{
+					var total = 0;
 					$('#display_amount_modal_medical').val(amountMedical);
 					output = '';
 					output += "<tr><th>Service Description</th><th>Service Rate</td><th>Type</th><th></th></tr>"
@@ -123,6 +126,7 @@ if($('#cashiergraphtrigger').val()==1)
 	});  
 
 	$('.addDentalBilling').click(function(){
+		
 		buttonIdDental = $(this).attr('id');
 		var id = ($(this).attr('id').split('_'));
 		appointmentIdDental = id[3];
@@ -133,6 +137,7 @@ if($('#cashiergraphtrigger').val()==1)
 				data: {appointment_id:  appointmentIdDental, _token: token},
 				success: function(data)
 				{
+					var total = 0;
 					$('#display_amount_modal_dental').val(amountDental);
 					output = '';
 					output += "<tr><th>Service Description</th><th>Service Rate</td></tr>"
