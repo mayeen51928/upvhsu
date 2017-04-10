@@ -47,7 +47,7 @@
 							<tr>
 
 								<td>{{ $dental_appointment_today->patient_first_name }} {{ $dental_appointment_today->patient_last_name }}</td>
-								<td>{{date_format(date_create($dental_appointment_today->schedule_start), 'h:i A')}} - {{date_format(date_create($dental_appointment_today->schedule_end), 'h:i A')}}</td>
+								<td>{{date_format(date_create($dental_appointment_future->schedule_start), 'F j, Y')}} {{date_format(date_create($dental_appointment_today->schedule_start), 'h:i A')}} - {{date_format(date_create($dental_appointment_today->schedule_end), 'h:i A')}}</td>
 								<td>{{ $dental_appointment_today->reasons }}</td>
 								<td><a href="/dentist/updatedentalrecord/{{ $dental_appointment_today->id }}" class="btn btn-info btn-xs addDentalRecordButton" role="button">Details</a></td>
 								{{-- <td><button class="btn btn-primary btn-xs addBillingToDental" id="addBillingToDental_{{$dental_appointment_today->id}}">Billing</button></td> --}}
@@ -74,7 +74,7 @@
 								@foreach ($dental_appointments_future as $dental_appointment_future)
 							<tr>
 								<td>{{ $dental_appointment_future->patient_first_name }} {{ $dental_appointment_future->patient_last_name }}</td>
-								<td>{{date_format(date_create($dental_appointment_future->schedule_start), 'h:i A')}} - {{date_format(date_create($dental_appointment_future->schedule_end), 'h:i A')}}</td>
+								<td>{{date_format(date_create($dental_appointment_future->schedule_start), 'F j, Y')}} {{date_format(date_create($dental_appointment_future->schedule_start), 'h:i A')}} - {{date_format(date_create($dental_appointment_future->schedule_end), 'h:i A')}}</td>
 								<td>{{ $dental_appointment_future->reasons }}</td>
 							</tr>
 							@endforeach
