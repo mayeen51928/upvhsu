@@ -65,38 +65,6 @@
 			</div>
 			{{-- @endif --}}
 			<hr/>
-			<div class="col-md-6" id="medical_appointments_dashboard_patient">
-				<div class="panel panel-default">
-				<div class="panel-body">
-				<h3 class="sub-header h3Title">Medical Appointments</h3>
-				@if(count($medical_appointments) > 0)
-				<div class="table-responsive">
-				
-					<table class="table table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>Date</th>
-								<th>Doctor</th>
-								<th>Priority #</th>
-							</tr>
-            </thead>
-						<tbody>
-							@foreach($medical_appointments as $medical_appointment)
-							<tr>
-								<td><a class="medical_appointments_prescription" id="medicalappointmentid_{{$medical_appointment->id}}">{{date_format(date_create($medical_appointment->schedule_day), 'F j, Y')}}</a></td>
-								<td>{{$medical_appointment->staff_first_name}} {{$medical_appointment->staff_last_name}}</td>
-								<td>{{$medical_appointment->priority_number}}</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					@else
-						<p>No appointments yet.</p>
-					@endif
-				</div>
-				</div>
-				</div>
-			</div>
 			<div class="col-md-6" id="dental_appointments_dashboard_patient">
 				
 				<div class="panel panel-default">
@@ -129,6 +97,39 @@
 				</div>
 				</div>
 			</div>
+			<div class="col-md-6" id="medical_appointments_dashboard_patient">
+				<div class="panel panel-default">
+				<div class="panel-body">
+				<h3 class="sub-header h3Title">Medical Appointments</h3>
+				@if(count($medical_appointments) > 0)
+				<div class="table-responsive">
+				
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Doctor</th>
+								<th>Priority #</th>
+							</tr>
+            </thead>
+						<tbody>
+							@foreach($medical_appointments as $medical_appointment)
+							<tr>
+								<td><a class="medical_appointments_prescription" id="medicalappointmentid_{{$medical_appointment->id}}">{{date_format(date_create($medical_appointment->schedule_day), 'F j, Y')}}</a></td>
+								<td>{{$medical_appointment->staff_first_name}} {{$medical_appointment->staff_last_name}}</td>
+								<td>{{$medical_appointment->priority_number}}</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+					@else
+						<p>No appointments yet.</p>
+					@endif
+				</div>
+				</div>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 </div>
