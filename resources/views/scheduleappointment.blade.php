@@ -56,7 +56,7 @@
 			<div class="panel-heading">Schedule Dental Appointment</div>
 			<div class="panel-body" id="dentalAppointmentPanelBody">
 				<div class="form-group">
-					<label id="dentalNotesErrorMsg" for="dentalNotes">Reasons (e.g. molar toothace):</label>
+					<label id="dentalNotesErrorMsg" for="dentalNotes">Reasons (e.g. molar toothache):</label>
 					<textarea class="form-control" rows="5" required name="dentalNotes" id="dentalNotes"></textarea>
 				</div>
 				<div class="form-group">
@@ -75,7 +75,7 @@
 				<div class="form-group">
 					<label id="selectdentaltimeErrorMsg">Doctor and Time:</label>
 					<select disabled class="form-control" required id="selectdentaltime">
-						<option disabled selected>Select doctor and time</option>
+						<option disabled selected>Select dentist and time</option>
 					</select>
 				</div>
 				<button class="btn btn-success" name="submitdentalappointment" id="submitdentalappointment">Set Appointment</button>

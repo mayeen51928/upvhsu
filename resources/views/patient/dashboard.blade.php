@@ -65,38 +65,6 @@
 			</div>
 			{{-- @endif --}}
 			<hr/>
-			<div class="col-md-6" id="dental_appointments_dashboard_patient">
-				
-				<div class="panel panel-default">
-				<div class="panel-body">
-				<h3 class="sub-header h3Title">Dental Appointments</h3>
-				@if(count($dental_appointments) > 0)
-				<div class="table-responsive">
-					<table class="table table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>Date</th>
-								<th>Time</th>
-								<th>Dentist</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($dental_appointments as $dental_appointment)
-							<tr>
-								<td><a class="dental_appointments_prescription" id="dentalappointmentid_{{ $dental_appointment->patient_id }}_{{ $dental_appointment->id }}">{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a></td>
-								<td>{{date_format(date_create($dental_appointment->schedule_start), 'h:i A')}} - {{date_format(date_create($dental_appointment->schedule_end), 'h:i A')}}</td>
-								<td>{{$dental_appointment->staff_first_name}} {{$dental_appointment->staff_last_name}}</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-					@else
-						<p>No appointments yet.</p>
-					@endif
-				</div>
-				</div>
-				</div>
-			</div>
 			<div class="col-md-6" id="medical_appointments_dashboard_patient">
 				<div class="panel panel-default">
 				<div class="panel-body">
@@ -129,6 +97,39 @@
 				</div>
 				</div>
 			</div>
+			<div class="col-md-6" id="dental_appointments_dashboard_patient">
+				
+				<div class="panel panel-default">
+				<div class="panel-body">
+				<h3 class="sub-header h3Title">Dental Appointments</h3>
+				@if(count($dental_appointments) > 0)
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Dentist</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($dental_appointments as $dental_appointment)
+							<tr>
+								<td><a class="dental_appointments_prescription" id="dentalappointmentid_{{ $dental_appointment->patient_id }}_{{ $dental_appointment->id }}">{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a></td>
+								<td>{{date_format(date_create($dental_appointment->schedule_start), 'h:i A')}} - {{date_format(date_create($dental_appointment->schedule_end), 'h:i A')}}</td>
+								<td>{{$dental_appointment->staff_first_name}} {{$dental_appointment->staff_last_name}}</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+					@else
+						<p>No appointments yet.</p>
+					@endif
+				</div>
+				</div>
+				</div>
+			</div>
+			
 			
 		</div>
 	</div>
