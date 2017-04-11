@@ -133,7 +133,7 @@
 					<div class="progress-bar progress-bar-striped active" role="progressbar" id="changeProgressDental" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:0%">0%</div>
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control signup0_dental" name="user_name_modal_dental" id="user_name_modal_dental" autofocus placeholder="User ID (201312345)" maxlength="9"/>
+					<input type="text" class="form-control signup0_dental" name="user_name_modal_dental" id="user_name_modal_dental" autofocus placeholder="User ID (Enter 9-digit ID)" maxlength="9"/>
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control signup0_dental" name="password_modal_dental" id="password_modal_dental" placeholder="Password"/>
@@ -165,7 +165,7 @@
 						</div>
 						<div class="form-group signup">
 							<label>Year Level:</label>
-							<input type="text" class="form-control" name="yearlevel_dental" id="yearlevel_dental" placeholder="Enter year level" disabled/>
+							<input type="number" class="form-control" name="yearlevel_dental" id="yearlevel_dental" placeholder="Enter year level" disabled/>
 						</div>
 						<div class="form-group signup">
 							<label>Degree Program:</label>
@@ -242,11 +242,11 @@
 						</div>
 						<div class="form-group signup">
 							<label>Religion:</label>
-							<input type="text" class="form-control" placeholder="Enter religion" name="religion_dental" id="religion_dental"/>
+							<input type="text" class="form-control" placeholder="Enter religion" name="religion_dental" id="religion_dental" maxlength="30" />
 						</div>
 						<div class="form-group signup">
 							<label>Nationality:</label>
-							<input type="text" class="form-control" name="nationality_dental" placeholder="Enter nationality" id="nationality_dental"/>
+							<input type="text" class="form-control" name="nationality_dental" placeholder="Enter nationality" id="nationality_dental" maxlength="20" />
 						</div>
 						<div class="form-group signup">
 							<label>Father:</label>
@@ -270,7 +270,7 @@
 						</div>
 						<div class="form-inline">
 							<label>Residence Telephone Number:</label>
-							<input type="text" class="form-control" name="residencetelephonedentcal" id="residencetelephone_dental"/>
+							<input type="text" class="form-control" name="residencetelephonedental" id="residencetelephone_dental"/>
 							<label>Residence Cellphone Number:</label>
 							<input type="text" class="form-control" name="residencecellphone_dental" id="residencecellphone_dental"/>
 							<label>Personal Contact Number:</label>
@@ -357,7 +357,7 @@
 						<div class="progress-bar progress-bar-striped active" role="progressbar" id="changeProgress" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100" style="width:0%">0%</div>
 					</div>
 					<div class="form-group signup0_medical">
-						<input type="text" class="form-control" name="user_name_modal_medical" id="user_name_modal_medical" autofocus placeholder="User ID (201312345)" maxlength="9">
+						<input type="text" class="form-control" name="user_name_modal_medical" id="user_name_modal_medical" autofocus placeholder="User ID (Enter 9-digit ID)" maxlength="9">
 					</div>
 					<div class="form-group signup0_medical">
 						<input type="password" class="form-control" name="password_modal_medical" id="password_modal_medical" placeholder="Password">
@@ -389,7 +389,7 @@
 						</div>
 						<div class="form-group signup">
 							<label>Year Level:</label>
-							<input type="text" class="form-control" name="yearlevel_medical" id="yearlevel_medical" placeholder="Enter year level" disabled/>
+							<input type="number" class="form-control" name="yearlevel_medical" id="yearlevel_medical" placeholder="Enter year level" disabled/>
 						</div>
 						<div class="form-group signup">
 							<label>Degree Program:</label>
@@ -466,11 +466,11 @@
 						</div>
 						<div class="form-group signup">
 							<label>Religion:</label>
-							<input type="text" class="form-control" placeholder="Enter religion" name="religion_medical" id="religion_medical"/>
+							<input type="text" class="form-control" placeholder="Enter religion" name="religion_medical" id="religion_medical" maxlength="30" />
 						</div>
 						<div class="form-group signup">
 							<label>Nationality:</label>
-							<input type="text" class="form-control" name="nationality_medical" placeholder="Enter nationality" id="nationality_medical"/>
+							<input type="text" class="form-control" name="nationality_medical" placeholder="Enter nationality" id="nationality_medical" maxlength="20" />
 						</div>
 						<div class="form-group signup">
 							<label>Father:</label>
@@ -494,7 +494,7 @@
 						</div>
 						<div class="form-inline">
 							<label>Residence Telephone Number:</label>
-							<input type="text" class="form-control" name="residencetelephonedentcal" id="residencetelephone_medical"/>
+							<input type="text" class="form-control" name="residencetelephone_medical" id="residencetelephone_medical"/>
 							<label>Residence Cellphone Number:</label>
 							<input type="text" class="form-control" name="residencecellphone_medical" id="residencecellphone_medical"/>
 							<label>Personal Contact Number:</label>

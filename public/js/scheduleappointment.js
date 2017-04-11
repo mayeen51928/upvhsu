@@ -3,7 +3,13 @@ $(document).ready( function(){
 		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
 	});
 
-
+  function captalizeFirstLetter(str){
+    var arr = str.split(' ');
+    var result = "";
+    for (var x=0; x<arr.length; x++)
+        result+=arr[x].substring(0,1).toUpperCase()+arr[x].substring(1)+' ';
+    return result.substring(0, result.length-1);
+  }
 	// -----------------SCEDULE APPOINTMENT (NOT LOGGED IN)---------------------
 	numOfClicksMedical = 0;
 	numOfClicksDental = 0;
@@ -286,11 +292,28 @@ $(document).ready( function(){
   	});
 
     // NEW APRIL 7 ------------------------------------------------------------------------------------------------------------------------------------------------------------
+    $('input[type="text"], textarea').keyup(function(event) {
+      $(this).val($(this).val().charAt(0).toUpperCase() + $(this).val().substr(1));
+    });
+    $('#loginmodaldental input[type="text"], #loginmodalmedical input[type="text"]').keyup(function(event) {
+      $(this).val(captalizeFirstLetter($(this).val()));
+    });
+    $('#residencetelephone_medical, #residencecellphone_medical, #personalcontactnumber_medical, #guardianresidencetelephone_medical, #guardianresidencecellphone_medical, #residencetelephone_dental, #residencecellphone_dental, #personalcontactnumber_dental, #guardianresidencetelephone_dental, #guardianresidencecellphone_dental, #residence_telephone_number, #residence_contact_number, #personal_contact_number, #guardian_tel_number, #guardian_cellphone').keyup(function(event) {
+     if(!$.isNumeric($(this).val().substr($(this).val().length-1))){
+        $(this).val($(this).val().substr(0, $(this).val().length-1));
+      }
+    });
+    $('#town_medical, #province_medical, #guardian_town_medical, #guardian_province_medical, #town_dental, #province_dental, #guardian_town_dental, #guardian_province_dental, #town, #province, #guardian_town, #guardian_province').keyup(function(event) {
+      if($.isNumeric($(this).val().substr($(this).val().length-1))){
+        $(this).val($(this).val().substr(0, $(this).val().length-1));
+      }
+    });
     $('#signupMedical_modal').click(function(event) {
       $('#user_name_modal_medical, #password_modal_medical, #first_name_medical, #last_name_medical').keyup(function() {
         checkIfComplete1();
       });
       $('.signup2_medical input').keyup(function(event) {
+
       	checkIfComplete2();
       });
       $('.signup3_medical input').keyup(function(event) {
@@ -574,7 +597,11 @@ $(document).ready( function(){
 
     
     $('#birthdate_dental').keyup(function() {
-      console.log($('#birthdate_dental').val());
+      // console.log($('#birthdate_dental').val());
+      if(Math.floor((new Date() - new Date($('#birthdate_dental').val()))) <= 0
+      ){
+        $('#birthdate_dental').val('');
+      }
       if($("input[name=patient_type_dental]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_dental').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
@@ -586,7 +613,10 @@ $(document).ready( function(){
       }
     });
     $('#birthdate_medical').keyup(function() {
-      // console.log($('#birthdate_medical').val());
+      if(Math.floor((new Date() - new Date($('#birthdate_medical').val()))) <= 0
+      ){
+        $('#birthdate_medical').val('');
+      }
       if($("input[name=patient_type_medical]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_medical').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
