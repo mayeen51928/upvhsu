@@ -41,12 +41,14 @@ class CashierController extends Controller
 	  	->join('medical_schedules', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
 	  	->join('staff_info', 'staff_info.staff_id', '=', 'medical_schedules.staff_id')
 			->join('patient_info', 'patient_info.patient_id', '=', 'medical_appointments.patient_id')
+			->join('remarks', 'medical_appointments.id', 'remarks.medical_appointment_id')
+			->join('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')
 	  	->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day', DB::raw('medical_billings.medical_appointment_id, sum(medical_billings.amount) as amount'))
 			->groupBy(DB::raw('medical_billings.medical_appointment_id, patient_info.patient_first_name, patient_info.patient_last_name, staff_info.staff_first_name, staff_info.staff_last_name, medical_schedules.schedule_day'))
 			->where('medical_billings.status', '=', 'unpaid')
 			->where('medical_schedules.schedule_day', '<', date('Y-m-d'))
 			->get();
-		$receivable_medical = MedicalBilling::join('medical_appointments', 'medical_appointments.id', 'medical_billings.medical_appointment_id')->join('medical_schedules', 'medical_schedules.id', 'medical_appointments.medical_schedule_id')->selectRaw('sum(amount) as amount')->where('medical_billings.status','unpaid')->where('medical_schedules.schedule_day', '<', date('Y-m-d'))->first();
+		$receivable_medical = MedicalBilling::join('medical_appointments', 'medical_appointments.id', 'medical_billings.medical_appointment_id')->join('medical_schedules', 'medical_schedules.id', 'medical_appointments.medical_schedule_id')->join('remarks', 'medical_appointments.id', 'remarks.medical_appointment_id')->join('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')->selectRaw('sum(amount) as amount')->where('medical_billings.status','unpaid')->where('medical_schedules.schedule_day', '<', date('Y-m-d'))->first();
 	 
 	  $counter_medical = 0;
 	  if(count($unpaid_bills_medical)>0){
@@ -113,6 +115,8 @@ class CashierController extends Controller
 	  	->join('medical_schedules', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
 	  	->join('staff_info', 'staff_info.staff_id', '=', 'medical_schedules.staff_id')
 			->join('patient_info', 'patient_info.patient_id', '=', 'medical_appointments.patient_id')
+			->join('remarks', 'medical_appointments.id', 'remarks.medical_appointment_id')
+			->join('prescriptions', 'medical_appointments.id', 'prescriptions.medical_appointment_id')
 	  	->select('patient_info.patient_first_name', 'patient_info.patient_last_name', 'staff_info.staff_first_name', 'staff_info.staff_last_name', 'medical_schedules.schedule_day', DB::raw('medical_billings.medical_appointment_id, sum(medical_billings.amount) as amount'))
 			->groupBy(DB::raw('medical_billings.medical_appointment_id, patient_info.patient_first_name, patient_info.patient_last_name, staff_info.staff_first_name, staff_info.staff_last_name, medical_schedules.schedule_day'))
 			->where('medical_billings.status', '=', 'unpaid')
