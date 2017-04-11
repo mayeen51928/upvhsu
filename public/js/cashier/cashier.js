@@ -116,6 +116,7 @@ if($('#cashiergraphtrigger').val()==1)
 						medicalVal = $('#receivable_medical').html() - amountMedical;
 						if(medicalVal == 0){
 							$('#receivable_medical').html('');
+							$('#medical_billing_past').hide();
 						}
 						else{
 							$('#receivable_medical').html(medicalVal.toFixed(2));
@@ -196,7 +197,13 @@ if($('#cashiergraphtrigger').val()==1)
 					{
 						$("#add_dental_billing_tr_"+appointmentIdDental).remove();
 						dentalVal = $('#receivable_dental').html() - amountDental;
-						$('#receivable_dental').html(dentalVal.toFixed(2));
+						if(dentalVal == 0){
+							$('#receivable_dental').html('');
+							$('#dental_billing_past').hide();
+						}
+						else{
+							$('#receivable_dental').html(dentalVal.toFixed(2));
+						}
 						$('#confirm_dental_billing').modal('hide');	
 					}
 		});

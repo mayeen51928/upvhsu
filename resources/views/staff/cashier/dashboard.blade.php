@@ -95,11 +95,11 @@
 				      <div class="panel-heading">Medical Billing</div>
 				      <div class="panel-body">
 				      	<h5>Receivable Amount:</h5>
-				      	<div class="well"><p id="receivable_medical">{{ $receivable_medical->amount }}</p></div>
+				      	<div class="well" style="height:50px;"><p id="receivable_medical">{{ $receivable_medical->amount }}</p></div>
 				      	{{-- <input type="text" class="form-control" id="receivable_medical" value="" disabled> --}}
 				      	<hr>
 				      	@if(count($unpaid_bills_medical)>0)
-				      	<table class="table table-striped">
+				      	<table class="table table-striped" id="medical_billing_past">
 									<thead>
 										<tr>
 											<th>Patient</th>
@@ -125,11 +125,11 @@
 							<div class="panel-heading">Dental Billing</div>
 				      <div class="panel-body">
 				      	<h5>Receivable Amount:</h5>
-				      	<div class="well"><p id="receivable_dental">{{ $receivable_dental->amount }}</p></div>
+				      	<div class="well" style="height:50px;"><p id="receivable_dental">{{ $receivable_dental->amount }}</p></div>
 				      	{{-- <input type="text" class="form-control" id="receivable_dental" value="{{ $receivable_dental->amount }}" disabled> --}}
 				      	<hr>
 				      	@if(count($unpaid_bills_dental)>0)
-				      	<table class="table table-striped">
+				      	<table class="table table-striped" id="dental_billing_past">
 									<thead>
 										<tr>
 											<th>Patient</th>
