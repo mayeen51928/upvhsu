@@ -565,7 +565,19 @@
 			</div>
 		</div>
 	</div>
-
+<div class="modal fade" id="appointment_success" role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Success!</h4>
+			</div>
+			<div class="modal-body">
+				<p>Your appointment has been set! <a href="{{ url('/account') }}">Go to account dashboard</a>.</p>
+			</div>
+		</div>
+	</div>
+</div>
 <script>
   // token and createPostUrl are needed to be passed to AJAX method call
   var token = '{{csrf_token()}}';

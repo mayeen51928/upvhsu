@@ -197,6 +197,7 @@ $(document).ready( function(){
             // $('#selectdentaldoctor').attr('disabled', 'disabled');
   					$('#dentalAppointmentPanelBody').css('background-color', '#d6e9c6');
   					$('#submitdentalappointment').attr("disabled", "disabled");
+            $('#appointment_success').modal();
   				}
           else if (data['success']=='alreadyexists')
           {
@@ -267,6 +268,7 @@ $(document).ready( function(){
             $('#selectmedicaldoctor').attr('disabled', 'disabled');
 	  				$('#medicalAppointmentPanelBody').css('background-color', '#d6e9c6');
 	  				$("#submitmedicalappointment").attr('disabled','disabled');
+            $('#appointment_success').modal();
   				}
           else if (data['success']=='alreadyexists')
           {
@@ -525,6 +527,7 @@ $(document).ready( function(){
             $('#submitdentalappointment').attr("disabled", "disabled");
         		$('#navigationBar').load(location.href + " #navigationBar");
         		$('#loginmodaldental').modal("hide");
+            $('#appointment_success').modal();
         	}
         	else
         	{
@@ -556,6 +559,7 @@ $(document).ready( function(){
                     $('#navigationBar').load(location.href + " #navigationBar");
                     $("#submitmedicalappointment").attr('disabled','disabled');
                     $('#loginmodalmedical').modal("hide");
+                    $('#appointment_success').modal();
         	}
           else if(data['passwordmatch'] == 'alreadyexists')
           {
@@ -758,6 +762,7 @@ $(document).ready( function(){
               $( "#loginmodaldental" ).find( "input" ).attr({disabled: 'disabled'});
               $('#submitdentalappointment').attr("disabled", "disabled");
               setTimeout(function() { $('#loginmodaldental').modal("hide"); }, 500);
+              $('#appointment_success').modal();
             }
 	        	else
             {
@@ -1016,6 +1021,7 @@ $(document).ready( function(){
               $( "#loginmodalmedical" ).find( "input" ).attr({disabled: 'disabled'});
               $("#submitmedicalappointment").attr('disabled','disabled');
               setTimeout(function() { $('#loginmodalmedical').modal("hide"); }, 500);
+              $('#appointment_success').modal();
             }
             else
             {
