@@ -155,6 +155,6 @@ Route::post('/edit_medical_services', 'AdminController@editmedicalservices');
 Route::post('/update_medical_services', 'AdminController@updatemedicalservices');
 
 //For wrong URLs
-// Route::get('/{any}', function($any){
-// 	return back();
-// })->where('any', '.*');
+Route::get('/{any}', function($any){
+	return back();
+})->where('any', '.*');
