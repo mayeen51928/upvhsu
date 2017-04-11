@@ -157,7 +157,7 @@ $('.dental_appointments_prescription').click(function(){
 				$('#teethPresent').html('<input type="text" class="form-control" value="'+data['additional_dental_records']['teeth_present']+'"/>');	
 		  }
 
-		  console.log(data['payment_status']);
+		  // console.log(data['payment_status']);
 			if(data['payment_status']=="unpaid")
 			{
 				$('#print_dental_receipt').html('<button class="btn btn-info print_dental_receipt_button" disabled>Print Receipt</button>');
@@ -165,7 +165,7 @@ $('.dental_appointments_prescription').click(function(){
 			else{
 				$('#print_dental_receipt').html('<button class="btn btn-info print_dental_receipt_button" id=print_dental_receipt_"'+appointmentId+'">Print Receipt</button>');
 			}
-			console.log(data['patient_type_checker']);
+			// console.log(data['patient_type_checker']);
 			total = 0;
 			output = '';
 	    output += "<tr><th>Service Description</th><th>Service Rate</td><th>Status</th></tr>"
@@ -224,14 +224,14 @@ $('.medical_appointments_prescription').click(function(){
 	$('#remarkModalFooter').html('');
 	var medical_appointment_id = $(this).attr('id').split("_")[1];
 	$.post('/getremarkspatientdashboard', {medical_appointment_id: medical_appointment_id}, function(data, textStatus, xhr) {
-		console.log(data['display_medical_billing']);
+		// console.log(data['display_medical_billing']);
 		if(data['success']==1)
 		{
 			$('#remarkModal').html(data['prescription']);
 			$('#remarkModalFooter').html('Added on: ' + data['date']);
 		}
 		
-		console.log(data['payment_status']);
+		// console.log(data['payment_status']);
 		if(data['payment_status']=="unpaid")
 		{
 			$('#print_medical_receipt').html('<button class="btn btn-info print_medical_receipt_button" disabled>Print Receipt</button>');

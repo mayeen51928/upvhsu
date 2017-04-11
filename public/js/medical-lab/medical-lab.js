@@ -7,14 +7,14 @@ $.ajaxSetup({
 
 $('input:radio[name="cbc_radio"]').change(function(){
 	if ($(this).val() == 'outside') {
-		console.log("outside");
+		// console.log("outside");
 		$('.checkboxLabService').attr('disabled', 'disabled');
 		$('#hemoglobin-lab').removeAttr('disabled');
 		$('#hemasocrit-lab').removeAttr('disabled');
 		$('#wbc-lab').removeAttr('disabled');
 	}
 	else{
-		console.log("inside");
+		// console.log("inside");
 		$('.checkboxLabService').removeAttr('disabled');
 		$('#hemoglobin-lab').val('');
 		$('#hemasocrit-lab').val('');

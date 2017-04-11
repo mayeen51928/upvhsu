@@ -107,9 +107,9 @@ $(document).ready( function(){
   			success: function(data)
   			{
   				$('#selectdentaltime').removeAttr('disabled');
-  				console.log(data["start"]);
-  				console.log(data["end"]);
-  				console.log(data["staff"]);
+  				// console.log(data["start"]);
+  				// console.log(data["end"]);
+  				// console.log(data["staff"]);
   				
           if(data['start'].length>0){
             $('#selectdentaltime').html("").append("<option disabled selected>Select dentist and time</option>");
@@ -134,7 +134,7 @@ $(document).ready( function(){
   			success: function(data)
   			{
   				$('#selectmedicaldoctor').removeAttr('disabled');
-  				console.log(data["staff"]);
+  				// console.log(data["staff"]);
           if(data['staff'].length > 0){
     				$('#selectmedicaldoctor').html("").append("<option disabled selected>Select doctor</option>");
     				for(var i=0; i < data['staff'].length; i++)
@@ -151,7 +151,7 @@ $(document).ready( function(){
 
   	$("#submitdentalappointment").click(function(){
   		var scheduleID = $('#selectdentaltime').find(':selected')[0].id;
-  		console.log("Schedule ID is " + scheduleID);
+  		// console.log("Schedule ID is " + scheduleID);
   		if(!($('#dentalNotes').val()) && scheduleID)
   		{
   			$('#dentalNotesErrorMsg').css('color', 'red');
@@ -223,7 +223,7 @@ $(document).ready( function(){
 
   	$("#submitmedicalappointment").click(function(){
   		var scheduleID = $('#selectmedicaldoctor').find(':selected')[0].id;
-  		console.log("Schedule ID is " + scheduleID);
+  		// console.log("Schedule ID is " + scheduleID);
   		if(!($('#medicalNotes').val()) && scheduleID)
   		{
   			$('#medicalNotesErrorMsg').css('color', 'red');

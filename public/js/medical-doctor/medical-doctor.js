@@ -648,7 +648,7 @@ $('#addmedicalschedule').click(function(){
     $('.schedule_tr').each(function(){
         if($(this).find('input[type="date"]')){
             schedules.push($(this).find('input[type="date"]').val());
-            console.log(schedules);
+            // console.log(schedules);
         }
     });
     if(schedules.length > 0){
@@ -748,9 +748,9 @@ $("#search_year").change(function(){
 	}
 });
 $('#searchbydatebutton').click(function() {
-	console.log($('#search_month').find(':selected')[0].value);
-	console.log($('#search_date').find(':selected')[0].value);
-	console.log($('#search_year').find(':selected')[0].value);
+	// console.log($('#search_month').find(':selected')[0].value);
+	// console.log($('#search_date').find(':selected')[0].value);
+	// console.log($('#search_year').find(':selected')[0].value);
 	$('#searchlistofallpatients').hide();
 		$('#searchTable').hide();
 		// $('#searchResults').html("");

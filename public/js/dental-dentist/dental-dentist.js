@@ -73,8 +73,8 @@ $('.dental_chart').click(function(){
 		  data: {teeth_id:  teethId, _token: token},
 		  success: function(data)
 		  {
-		  	console.log(data['condition_id']);
-		  	console.log(data['operation_id']);
+		  	// console.log(data['condition_id']);
+		  	// console.log(data['operation_id']);
 		  	if (data['condition_id'] != null) {
 		  		$('.condition').val(data['condition_id']);
 		  	}
@@ -100,7 +100,7 @@ $('.updateDentalRecord').click(function(){
 	if($('.condition').val() || $('.operation').val()){
 		var id = $(this).attr('id').split("_");
 		appointmentId = id[1];
-		console.log(appointmentId);
+		// console.log(appointmentId);
 		var conditionId = $('.condition').val();
 		var operationId = $('.operation').val();
 		if (operationId == null) { operationId = 0; };
@@ -115,8 +115,8 @@ $('.updateDentalRecord').click(function(){
 			  data: {teeth_id:  teethId, condition_id:  conditionId, operation_id:  operationId, appointment_id:  appointmentId,  _token: token},
 			  success: function(data)
 			  {
-			  	console.log("condition id "+conditionId);
-			  	console.log("operation id "+operationId);
+			  	// console.log("condition id "+conditionId);
+			  	// console.log("operation id "+operationId);
 			  	if (conditionId == 1) {
 			  		$('#condition_'+teethId).css({ fill: "#ff4000" });
 			  	}
@@ -182,14 +182,14 @@ $('.updateDentalRecord').click(function(){
 $('.updateDentalDiagnosis').click(function(){
 	var id = $(this).attr('id').split("_");
 	appointmentId = id[1];
-	console.log(appointmentId);
+	// console.log(appointmentId);
 		$.ajax({
 		  type: "POST",
 		  url: updateDentalDiagnosis,
 		  data: {appointment_id:  appointmentId, _token: token},
 		  success: function(data)
 		  {
-		  	console.log(data['success']);
+		  	// console.log(data['success']);
 		  	setTimeout(function() {
 			  window.location.href = "http://localhost:8000/dentist";
 			}, 5000);
@@ -719,9 +719,9 @@ $("#search_year").change(function(){
 	}
 });
 $('#searchbydatebuttondental').click(function() {
-	console.log($('#search_month').find(':selected')[0].value);
-	console.log($('#search_date').find(':selected')[0].value);
-	console.log($('#search_year').find(':selected')[0].value);
+	// console.log($('#search_month').find(':selected')[0].value);
+	// console.log($('#search_date').find(':selected')[0].value);
+	// console.log($('#search_year').find(':selected')[0].value);
 	$('#searchlistofallpatients').hide();
 		$('#searchTable').hide();
 		// $('#searchResults').html("");
