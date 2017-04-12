@@ -26,6 +26,8 @@ use App\DentalBilling;
 use App\PhysicalExamination;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use File;
+
 class PatientController extends Controller
 {
 	public function __construct()
@@ -256,8 +258,13 @@ class PatientController extends Controller
 		if (Input::file('picture') != NULL) { 
 			$path = 'images';
 			$file_name = Input::file('picture')->getClientOriginalName(); 
-			Input::file('picture')->move($path, $file_name);
-			$patient->picture = $file_name;
+			$file_name_fin = $patient->patient_id.'_'.$file_name;
+			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
+			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
+				Input::file('picture')->move($path, $file_name_fin);
+				File::delete('images/'.$patient->picture);
+				$patient->picture = $file_name_fin;
+			}
 		}
 
 		$parents = HasParent::where('patient_id', Auth::user()->user_id)->get();

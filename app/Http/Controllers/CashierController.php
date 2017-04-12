@@ -15,6 +15,8 @@ use App\MedicalAppointment;
 use App\DentalAppointment;
 use App\Patient;
 use DB;
+use File;
+
 class CashierController extends Controller
 {
 	public function __construct()
@@ -123,6 +125,7 @@ class CashierController extends Controller
 			->where('medical_schedules.schedule_day', '=', date('Y-m-d'))
 			->orderBy('schedule_day', 'asc')
 			->get();
+
 
 		$counter_medical_today = 0;
 	  if(count($unpaid_bills_medical_today)>0){
@@ -273,8 +276,13 @@ class CashierController extends Controller
 		if (Input::file('picture') != NULL) { 
 			$path = 'images';
 			$file_name = Input::file('picture')->getClientOriginalName(); 
-			Input::file('picture')->move($path, $file_name);
-			$cashier->picture = $file_name;
+			$file_name_fin = $cashier->patient_id.'_'.$file_name;
+			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
+			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
+				Input::file('picture')->move($path, $file_name_fin);
+				File::delete('images/'.$cashier->picture);
+				$cashier->picture = $file_name_fin;
+			}
 		}
 
 		$cashier->personal_contact_number = $request->input('personal_contact_number');

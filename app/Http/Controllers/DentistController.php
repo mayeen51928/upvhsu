@@ -27,6 +27,7 @@ use Log;
 use App\StaffNote;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use File;
 
 class DentistController extends Controller
 {
@@ -417,6 +418,7 @@ class DentistController extends Controller
 						$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
 						if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
 							Input::file('picture')->move($path, $file_name_fin);
+							File::delete('images/'.$dentist->picture);
 							$dentist->picture = $file_name_fin;
 						}
 	        }

@@ -18,6 +18,7 @@ use App\UrinalysisResult;
 use App\FecalysisResult;
 use App\MedicalBilling;
 use App\MedicalService;
+use File;
 
 class LabController extends Controller
 {
@@ -422,6 +423,7 @@ class LabController extends Controller
 					$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
 					if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
 						Input::file('picture')->move($path, $file_name_fin);
+						File::delete('images/'.$lab->picture);
 						$lab->picture = $file_name_fin;
 					}
 				}

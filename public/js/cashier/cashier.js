@@ -45,7 +45,6 @@ if($('#cashiergraphtrigger').val()==1)
 	cashierhighcharts();
 }
 	$('.addMedicalBilling').click(function(){
-		
 		buttonIdMedical = $(this).attr('id');
 		var id = ($(this).attr('id').split('_'));
 		appointmentIdMedical = id[3];
@@ -56,6 +55,7 @@ if($('#cashiergraphtrigger').val()==1)
 				data: {appointment_id:  appointmentIdMedical, _token: token},
 				success: function(data)
 				{
+					console.log(data['patient_type_checker']);
 					var total = 0;
 					$('#display_amount_modal_medical').val(amountMedical);
 					output = '';
@@ -64,14 +64,17 @@ if($('#cashiergraphtrigger').val()==1)
 						for(var i=0; i < data['display_medical_billing'].length; i++)
 						{
 							if(data['patient_type_checker'] == 1){
+								console.log("student");
 								output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].student_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td></tr>";
 								total += parseFloat(data['display_medical_billing'][i].student_rate);	
 							}
-							if(data['patient_type_checker'] == 5){
+							else if(data['patient_type_checker'] == 5){
+								console.log("opd");
 								output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].opd_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td></tr>";
 								total += parseFloat(data['display_medical_billing'][i].opd_rate);
 							}
 							else{
+								console.log("faculty");
 								output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].faculty_staff_dependent_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td></tr>";
 								total += parseFloat(data['display_medical_billing'][i].faculty_staff_dependent_rate);
 							}
@@ -149,7 +152,7 @@ if($('#cashiergraphtrigger').val()==1)
 								output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].student_rate+"</td></tr>";
 								total += parseFloat(data['display_dental_billing'][i].student_rate);
 							}
-							if(data['patient_type_checker'] == 5){
+							else if(data['patient_type_checker'] == 5){
 								output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].opd_rate+"</td></tr>";
 								total += parseFloat(data['display_dental_billing'][i].opd_rate);
 							}

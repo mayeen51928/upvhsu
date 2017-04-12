@@ -33,6 +33,8 @@ use App\StaffNote;
 use App\MedicalHistory;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use File;
+
 class DoctorController extends Controller
 {
 	public function __construct()
@@ -221,6 +223,7 @@ class DoctorController extends Controller
 			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
 			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
 				Input::file('picture')->move($path, $file_name_fin);
+				File::delete('images/'.$doctor->picture);
 				$doctor->picture = $file_name_fin;
 			}
         }
@@ -892,7 +895,7 @@ class DoctorController extends Controller
             $request_xray->medical_appointment_id = $request->appointment_id;
             $request_xray->save();
         }
-        $patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->pluck('patient_type_id')->first();
+        $patient_type_id = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->appointment_id)->pluck('patient_type_id')->first();
         
         for($i = 0; $i < sizeof($request->medical_services_id); $i++){
 					$billing = new MedicalBilling;

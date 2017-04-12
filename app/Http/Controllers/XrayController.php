@@ -14,6 +14,8 @@ use App\MedicalBilling;
 use App\MedicalAppointment;
 use App\Patient;
 use App\MedicalService;
+use File;
+
 class XrayController extends Controller
 {
 	public function __construct()
@@ -220,6 +222,7 @@ class XrayController extends Controller
 			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
 			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
 				Input::file('picture')->move($path, $file_name_fin);
+				File::delete('images/'.$xray->picture);
 				$xray->picture = $file_name_fin;
 			}
 		}

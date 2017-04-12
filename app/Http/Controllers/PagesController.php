@@ -28,6 +28,7 @@ use App\DentalService;
 use App\SeniorCitizenId;
 use App\PhysicalExamination;
 use DB;
+use File;
 
 class PagesController extends Controller
 {
