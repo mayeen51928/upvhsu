@@ -420,7 +420,7 @@ class LabController extends Controller
 					$file_name = Input::file('picture')->getClientOriginalName(); 
 					$file_name_fin = $lab->staff_id.'_'.$file_name;
 					$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
-					if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
+					if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png' || $image_type == 'JPG' || $image_type == 'JPEG' || $image_type == 'PNG'){
 						Input::file('picture')->move($path, $file_name_fin);
 						$lab->picture = $file_name_fin;
 					}

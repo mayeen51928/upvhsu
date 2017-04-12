@@ -255,9 +255,13 @@ class PatientController extends Controller
 
 		if (Input::file('picture') != NULL) { 
 			$path = 'images';
-			$file_name = Input::file('picture')->getClientOriginalName(); 
-			Input::file('picture')->move($path, $file_name);
-			$patient->picture = $file_name;
+			$file_name = Input::file('picture')->getClientOriginalName();
+			$file_name_fin = $patient->patient_id.'_'.$file_name;
+			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
+			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png' || $image_type == 'JPG' || $image_type == 'JPEG' || $image_type == 'PNG'){ 
+				Input::file('picture')->move($path, $file_name_fin);
+				$patient->picture = $file_name_fin;
+			}
 		}
 
 		$parents = HasParent::where('patient_id', Auth::user()->user_id)->get();
@@ -335,7 +339,7 @@ class PatientController extends Controller
 		$guardian_info->guardian_first_name = $request->input('guardian_first_name');
 		$guardian_info->guardian_middle_name = $request->input('guardian_middle_name');
 		$guardian_info->guardian_last_name = $request->input('guardian_last_name');
-		$guardian_info->street;
+		$guardian_info->street = $request->input('guardian_street');
 		$guardian_province = Province::where('province_name', $request->input('guardian_province'))->first();
 		if(count($guardian_province)>0)
 		{
