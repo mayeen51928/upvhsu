@@ -687,6 +687,7 @@ $(document).ready( function(){
     });
     
     $('#signupconfirmDental_modal').click(function(){
+      $('#signupconfirmDental_modal').val('Please wait...');
       $('#login_dental_error').html('');
     	var scheduleID = $('#selectdentaltime').find(':selected')[0].id;
         if(
@@ -792,16 +793,22 @@ $(document).ready( function(){
               $( "#loginmodaldental" ).find( "input" ).attr({disabled: 'disabled'});
               $('#submitdentalappointment').attr("disabled", "disabled");
               setTimeout(function() { $('#loginmodaldental').modal("hide"); }, 500);
+              $('#signupconfirmDental_modal').val('Registered!');
+              setTimeout(function(){
+                $('#signupconfirmDental_modal').val('Confirm Sign Up');
+              }, 1000);
               $('#appointment_success').modal();
             }
 	        	else
             {
+              $('#signupconfirmDental_modal').val('Confirm Sign Up');
               $('#login_dental_error').css('color', 'red').delay(2000).html(data['message']);
             }
 	        });
         }
         else
         {
+          $('#signupconfirmDental_modal').val('Confirm Sign Up');
           $('#login_dental_error').css('color', 'red').delay(2000).html('Please fill out all fields!');
         }
     });
@@ -945,6 +952,7 @@ $(document).ready( function(){
     });
 
     $('#signupconfirmMedical_modal').click(function(){
+      $('#signupconfirmMedical_modal').val('Please wait...');
       $('#login_medical_error').html('');
     	var scheduleID = $('#selectmedicaldoctor').find(':selected')[0].id;
       $('#loginmodalmedical input, #loginmodalmedical select').attr('disabled', 'disabled');
@@ -1051,10 +1059,15 @@ $(document).ready( function(){
               $( "#loginmodalmedical" ).find( "input" ).attr({disabled: 'disabled'});
               $("#submitmedicalappointment").attr('disabled','disabled');
               setTimeout(function() { $('#loginmodalmedical').modal("hide"); }, 500);
+              $('#signupconfirmMedical_modal').val('Registered!');
+              setTimeout(function(){
+                $('#signupconfirmMedical_modal').val('Confirm Sign Up');
+              }, 1000);
               $('#appointment_success').modal();
             }
             else
             {
+              $('#signupconfirmMedical_modal').val('Confirm Sign Up');
               $('#loginmodalmedical input, #loginmodalmedical select').removeAttr('disabled');
               $('#login_medical_error').css('color', 'red').delay(2000).html(data['message']);
             }
@@ -1063,6 +1076,7 @@ $(document).ready( function(){
         }
         else
         {
+          $('#signupconfirmMedical_modal').val('Confirm Sign Up');
           $('#loginmodalmedical input, #loginmodalmedical select').removeAttr('disabled');
           $('#login_medical_error').css('color', 'red').delay(2000).html('Please fill out all fields!');
         }
