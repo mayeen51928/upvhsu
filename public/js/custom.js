@@ -62,6 +62,7 @@ $(document).ready( function(){
       $('#password').attr('disabled', 'disabled');
   }
   });
+  $('#announcement_modal').modal();
   $('.announcement_title').click(function(event) {
     var announcementId = $(this).attr('id');
     $.post('/announcementmodal', {announcement_id: announcementId}, function(data, textStatus, xhr) {

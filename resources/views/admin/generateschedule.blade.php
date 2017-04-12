@@ -16,12 +16,12 @@
 						$day_accommodate=1; ?>
 						<tr><th colspan="3" class="info" style="text-align: center;">Day {{$day_counter}}</th></tr>
 						@foreach($schedules as $schedule)
-						@if($day_accommodate>2)
+						@if($day_accommodate>15)
 						<?php $day_counter ++; ?>
 							<tr><th colspan="3" class="info" style="text-align: center;">Day {{$day_counter}}</th></tr>
 						<?php  $day_accommodate=1; ?>
 						@endif
-						@if($day_accommodate<=2)
+						@if($day_accommodate<=15)
 						<tr>
 							<td>{{$schedule->patient_last_name}}, {{$schedule->patient_first_name}}</td>
 							<td>{{$schedule->town_name}}, {{$schedule->province_name}}</td>

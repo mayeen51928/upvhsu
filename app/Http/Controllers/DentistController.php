@@ -412,15 +412,15 @@ class DentistController extends Controller
 	        }
 
 	        if (Input::file('picture') != NULL) { 
-            $path = 'images';
-						$file_name = Input::file('picture')->getClientOriginalName(); 
-						$file_name_fin = $dentist->staff_id.'_'.$file_name;
-						$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
-						if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
-							Input::file('picture')->move($path, $file_name_fin);
-							File::delete('images/'.$dentist->picture);
-							$dentist->picture = $file_name_fin;
-						}
+	            $path = 'images';
+				$file_name = Input::file('picture')->getClientOriginalName(); 
+				$file_name_fin = $dentist->staff_id.'_'.$file_name;
+				$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
+				if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
+					Input::file('picture')->move($path, $file_name_fin);
+					File::delete('images/'.$dentist->picture);
+					$dentist->picture = $file_name_fin;
+				}
 	        }
 	        
 	        $dentist->personal_contact_number = $request->input('personal_contact_number');
