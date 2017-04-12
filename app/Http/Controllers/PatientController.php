@@ -257,20 +257,12 @@ class PatientController extends Controller
 
 		if (Input::file('picture') != NULL) { 
 			$path = 'images';
-<<<<<<< HEAD
 			$file_name = Input::file('picture')->getClientOriginalName(); 
 			$file_name_fin = $patient->patient_id.'_'.$file_name;
 			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
 			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'){
 				Input::file('picture')->move($path, $file_name_fin);
 				File::delete('images/'.$patient->picture);
-=======
-			$file_name = Input::file('picture')->getClientOriginalName();
-			$file_name_fin = $patient->patient_id.'_'.$file_name;
-			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
-			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png' || $image_type == 'JPG' || $image_type == 'JPEG' || $image_type == 'PNG'){ 
-				Input::file('picture')->move($path, $file_name_fin);
->>>>>>> 98bbbde64838427ffd8babedc965d66d09b97732
 				$patient->picture = $file_name_fin;
 			}
 		}
