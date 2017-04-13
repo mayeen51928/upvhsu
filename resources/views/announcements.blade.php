@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('title', 'Announcements | UP Visayas Health Services Unit')
 @section('content')
-<div class="container-fluid" id="announcementScreen" style="background-color:#F0F0F0;height:100%;">
+<div class="container" id="announcementScreen" style="background-color:#F0F0F0;height:100%;">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			@if(count($announcements)>0)
