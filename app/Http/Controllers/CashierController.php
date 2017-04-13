@@ -332,9 +332,9 @@ class CashierController extends Controller
 				->where('dental_billings.status', 'unpaid')
 				->get(); 
 
-		$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->appointment_id)->get();
+		$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('dental_appointments', 'dental_appointments.patient_id', 'patient_info.patient_id')->where('dental_appointments.id', $request->appointment_id)->get();
 		if(count($patient_senior_checker) == 0){
-			$patient_type_checker = Patient::join('medical_appointments', 'patient_info.patient_id', 'medical_appointments.patient_id')->where('medical_appointments.id', $request->appointment_id)->pluck('patient_type_id')->first();
+			$patient_type_checker = Patient::join('dental_appointments', 'patient_info.patient_id', 'dental_appointments.patient_id')->where('dental_appointments.id', $request->appointment_id)->pluck('patient_type_id')->first();
 		}
 		else{
 			$patient_type_checker = $patient_senior_checker;

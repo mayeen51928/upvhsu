@@ -176,7 +176,7 @@ $('.dental_appointments_prescription').click(function(){
 						output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].student_rate+"</td><td>"+data['display_dental_billing'][i].status+"</td></tr>";
 						total += parseFloat(data['display_dental_billing'][i].student_rate);
 					}
-					if(data['patient_type_checker'] == 5){
+					else if(data['patient_type_checker'] == 5){
 						output += "<tr><td>"+data['display_dental_billing'][i].service_description+"</td><td>"+data['display_dental_billing'][i].opd_rate+"</td><td>"+data['display_dental_billing'][i].status+"</td></tr>";
 						total += parseFloat(data['display_dental_billing'][i].opd_rate);
 					}
@@ -250,7 +250,7 @@ $('.medical_appointments_prescription').click(function(){
 					output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].student_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td><td>"+data['display_medical_billing'][i].status+"</td></tr>";
 					total += parseFloat(data['display_medical_billing'][i].student_rate);
 				}
-				if(data['patient_type_checker'] == 5){
+				else if(data['patient_type_checker'] == 5){
 					output += "<tr><td>"+data['display_medical_billing'][i].service_description+"</td><td>"+data['display_medical_billing'][i].opd_rate+"</td><td>"+data['display_medical_billing'][i].service_type+"</td><td>"+data['display_medical_billing'][i].status+"</td></tr>";
 					total += parseFloat(data['display_medical_billing'][i].opd_rate);
 				}

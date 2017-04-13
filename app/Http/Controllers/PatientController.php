@@ -53,7 +53,7 @@ class PatientController extends Controller
 
 		$params['medical_appointments'] = MedicalSchedule::join('medical_appointments', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->get();
 		$params['dental_appointments'] = DentalSchedule::join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->orderBy('schedule_start', 'asc')->get();
-        $params['current_physical_status'] = PhysicalExamination::join('medical_appointments', 'medical_appointments.id', 'physical_examinations.medical_appointment_id')->where('patient_id', Auth::user()->user_id)->latest('physical_examinations.created_at')->select('physical_examinations.*', 'medical_appointments.*', 'physical_examinations.created_at as date_latest')->first();
+    $params['current_physical_status'] = PhysicalExamination::join('medical_appointments', 'medical_appointments.id', 'physical_examinations.medical_appointment_id')->where('patient_id', Auth::user()->user_id)->latest('physical_examinations.created_at')->select('physical_examinations.*', 'medical_appointments.*', 'physical_examinations.created_at as date_latest')->first();
         // dd($params['current_physical_status']);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'dashboard';
@@ -392,8 +392,8 @@ class PatientController extends Controller
 	{
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'visits';
-		$params['medical_appointments'] = DB::table('medical_appointments')->join('medical_schedules', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->where('medical_appointments.status', '=', '1')->get();
-		$params['dental_appointments'] = DB::table('dental_appointments')->join('dental_schedules', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->where('dental_appointments.status', '=', '1')->get();
+		$params['medical_appointments'] = MedicalSchedule::join('medical_appointments', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'asc')->where('medical_appointments.status', '=', '2')->get();
+		$params['dental_appointments'] = DentalSchedule::join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->orderBy('schedule_start', 'asc')->where('dental_appointments.status', '=', '2')->get();
 		return view('patient.visits', $params);
 	}
 

@@ -11,13 +11,17 @@
           <div class="panel-body">
             <table class="table" style="margin-bottom: 0px;">
               <tbody>
-                @foreach($medical_appointments as $medical_appointment)
-                <tr>
-                  <td style="text-align: center;">
-                    <a class="view_medical_history" id="view_medical_history_appointmentid">Date here</a>
-                  </td>
-                </tr>
-                @endforeach
+                @if(count($medical_appointments)>0)
+                  @foreach($medical_appointments as $medical_appointment)
+                  <tr>
+                    <td style="text-align:center;">
+                      <a class="medical_appointments_prescription" id="medicalappointmentid_{{$medical_appointment->id}}">{{date_format(date_create($medical_appointment->schedule_day), 'F j, Y')}}</a>
+                    </td>
+                  </tr>
+                  @endforeach
+                @else
+                  <p>No appointments yet.</p>
+                @endif
               </tbody>
             </table>
           </div>
@@ -29,13 +33,17 @@
           <div class="panel-body">
             <table class="table" style="margin-bottom: 0px;">
               <tbody>
-                @foreach($dental_appointments as $dental_appointment)
-                <tr>
-                  <td style="text-align: center;">
-                    <a class="dental_appointments_prescription" id="dentalappointmentid_{{ $dental_appointment->patient_id }}_{{ $dental_appointment->id }}">{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a>
-                  </td>
-                </tr>
-                @endforeach
+                @if(count($dental_appointments)>0)
+                  @foreach($dental_appointments as $dental_appointment)
+                  <tr>
+                    <td style="text-align:center;">
+                      <a class="dental_appointments_prescription" id="dentalappointmentid_{{ $dental_appointment->patient_id }}_{{ $dental_appointment->id }}">{{date_format(date_create($dental_appointment->schedule_start), 'F j, Y')}}</a>
+                    </td>
+                  </tr>
+                  @endforeach
+                @else
+                  <p>No appointments yet.</p>
+                @endif
               </tbody>
             </table>
           </div>
@@ -44,6 +52,54 @@
     </div>
   </div>
 </div>
+
+<div  class="modal fade" id="prescriptionModal" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog  modal-lg">
+    <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h2>Notes and Prescription from the Doctor</h2>
+    </div>
+    <div class="modal-body">
+      <ul class="nav nav-pills nav-justified">
+        <li class="active"><a data-toggle="pill" href="#medicalPrescription">Prescription</a></li>
+        <li><a data-toggle="pill" href="#medical_billing_dashboard">Medical Billing Record</a></li>
+      </ul>
+      <br/>
+        <div class="tab-content">
+          <div class="table-responsive tab-pane fade in active" id="medicalPrescription">
+            <div class="well" id="remarkModal"></div>
+            <p id="remarkModalFooter" style="float: right"></p>
+          </div>
+          <div class="table-responsive tab-pane" id="medical_billing_dashboard">
+            <div class="panel-group">
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h5 class="text-center">Medical Billing Record</h5>
+                </div>
+                <div class="panel-body">
+                  <table class="table" id="medical_billing_record_dashboard_table"  style="display: none">
+                    <tbody id="medical_billing_record_dashboard">    
+                    </tbody>
+                  </table>
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-6">
+                      <label>Total</label>
+                      <input type="text" id="total_medical_billing" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer" id="print_medical_receipt">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  </div>
+</div>
+
 
 <div class="modal fade" id="view-dental-record-modal" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -56,11 +112,14 @@
         <ul class="nav nav-pills nav-justified">
           <li class="active"><a data-toggle="pill" href="#dental_chart_dashboard">Dental Chart</a></li>
           <li><a data-toggle="pill" href="#additional_dental_record_dashboard">Additional Dental Record</a></li>
+          <li><a data-toggle="pill" href="#dental_billing_dashboard">Dental Billing Record</a></li>
         </ul>
         <br/>
         <div class="tab-content">
           <div class="table-responsive tab-pane fade in active" id="dental_chart_dashboard">
             <div id="view-dental-record-modal-body">
+            </div>
+            <div class="row">
             </div>
           </div>
 
@@ -68,7 +127,7 @@
             <div class="panel-group">
               <div class="panel panel-success">
                 <div class="panel-heading">
-                  <h4 style="text-align:center;">Additional Dental Record</h4>
+                  <h5 class="text-center">Additional Dental Record</h5>
                 </div>
                 <div class="panel-body" id="additionalDentalRecordPanelBody" style="background-color:#d6e9c6; ">
                   <div class="row" style="background-color:#f8f8f8; padding:5px">
@@ -146,14 +205,39 @@
               </div>
             </div>
           </div>
+          <div class="table-responsive tab-pane" id="dental_billing_dashboard">
+            <div class="panel-group">
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h5 class="text-center">Medical Billing Record</h5>
+                </div>
+                <div class="panel-body">
+                  <table class="table" id="dental_billing_record_dashboard_table"  style="display: none">
+                    <tbody id="dental_billing_record_dashboard">    
+                    </tbody>
+                  </table>
+                  <div class="row">
+                    <div class="col-md-6 col-md-offset-6">
+                      <label>Total</label>
+                      <input type="text" id="total_dental_billing" class="form-control" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-footer" id="print_dental_receipt">
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <script>
   // token and createPostUrl are needed to be passed to AJAX method call
   var token = '{{csrf_token()}}';
   var viewDentalRecordDashboard = '/view_dental_record_dashboard';
+  var printMedicalReceipt = '/print_medical_receipt';
 </script>
 @endsection

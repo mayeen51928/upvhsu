@@ -55,7 +55,6 @@ if($('#cashiergraphtrigger').val()==1)
 				data: {appointment_id:  appointmentIdMedical, _token: token},
 				success: function(data)
 				{
-					console.log(data['patient_type_checker']);
 					var total = 0;
 					$('#display_amount_modal_medical').val(amountMedical);
 					output = '';
@@ -142,6 +141,7 @@ if($('#cashiergraphtrigger').val()==1)
 				success: function(data)
 				{
 					var total = 0;
+					console.log(data['patient_type_checker']);
 					$('#display_amount_modal_dental').val(amountDental);
 					output = '';
 					output += "<tr><th>Service Description</th><th>Service Rate</td></tr>"
