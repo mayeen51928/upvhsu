@@ -12,6 +12,16 @@
 	<script src="{{asset('js/jquery.min.js')}}"></script>
 	<script src="{{asset('js/jquery-ui.min.js')}}"></script>
 	<script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
+	{{-- <script src="{{asset('js/dental-dentist/dental-dentist.min.js')}}"></script>
+	<script src="{{asset('js/medical-doctor/medical-doctor.min.js')}}"></script>
+	<script src="{{asset('js/medical-lab/medical-lab.min.js')}}"></script>
+	<script src="{{asset('js/medical-xray/medical-xray.min.js')}}"></script>
+	<script src="{{asset('js/cashier/cashier.min.js')}}"></script>
+	<script src="{{asset('js/patient/patient.min.js')}}"></script>
+	<script src="{{asset('js/admin/admin.min.js')}}"></script>
+	<script src="{{asset('js/custom.min.js')}}"></script>
+	<script src="{{asset('js/scheduleappointment.min.js')}}"></script>
+	<script src="{{asset('js/seemoreannouncements.min.js')}}"></script> --}}
 	<script src="{{asset('js/dental-dentist/dental-dentist.js')}}"></script>
 	<script src="{{asset('js/medical-doctor/medical-doctor.js')}}"></script>
 	<script src="{{asset('js/medical-lab/medical-lab.js')}}"></script>
@@ -19,7 +29,6 @@
 	<script src="{{asset('js/cashier/cashier.js')}}"></script>
 	<script src="{{asset('js/patient/patient.js')}}"></script>
 	<script src="{{asset('js/admin/admin.js')}}"></script>
-	{{-- <script src="{{asset('js/custom1.js')}}"></script> --}}
 	<script src="{{asset('js/custom.js')}}"></script>
 	<script src="{{asset('js/scheduleappointment.js')}}"></script>
 	<script src="{{asset('js/seemoreannouncements.js')}}"></script>

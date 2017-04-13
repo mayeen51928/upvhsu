@@ -12,7 +12,7 @@ $(document).ready( function(){
 		}).show().animate({opacity:1})
 		$('#hide_announcement_'+ announcementId).css('display','block');
 		$('#see_more_announcement_'+ announcementId).css('display','none');
-	})
+	});
 
 	$('.hide_announcement').click(function() {
 		id = $(this).attr('id').split("_");
@@ -21,5 +21,5 @@ $(document).ready( function(){
 		$('#announcement_body_'+ announcementId).css('display','none');
 		$('#hide_announcement_'+ announcementId).css('display','none');
 		$('#see_more_announcement_'+ announcementId).css('display','block');
-	})
-})
+	});
+});
