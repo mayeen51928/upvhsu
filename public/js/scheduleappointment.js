@@ -3,7 +3,7 @@ $(document).ready( function(){
 		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
 	});
 
-  function captalizeFirstLetter(str){
+  function capitalizeFirstLetter(str){
     var arr = str.split(' ');
     var result = "";
     for (var x=0; x<arr.length; x++)
@@ -107,10 +107,6 @@ $(document).ready( function(){
   			success: function(data)
   			{
   				$('#selectdentaltime').removeAttr('disabled');
-  				// console.log(data["start"]);
-  				// console.log(data["end"]);
-  				// console.log(data["staff"]);
-  				
           if(data['start'].length>0){
             $('#selectdentaltime').html("").append("<option disabled selected>Select dentist and time</option>");
     				for(var i=0; i < data['start'].length; i++)
@@ -292,11 +288,9 @@ $(document).ready( function(){
   	});
 
     // NEW APRIL 7 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-    $('input[type="text"], textarea').keyup(function(event) {
-      $(this).val($(this).val().charAt(0).toUpperCase() + $(this).val().substr(1));
-    });
+    
     $('#loginmodaldental input[type="text"], #loginmodalmedical input[type="text"]').keyup(function(event) {
-      $(this).val(captalizeFirstLetter($(this).val()));
+      $(this).val(capitalizeFirstLetter($(this).val()));
     });
     $('#residencetelephone_medical, #residencecellphone_medical, #personalcontactnumber_medical, #guardianresidencetelephone_medical, #guardianresidencecellphone_medical, #residencetelephone_dental, #residencecellphone_dental, #personalcontactnumber_dental, #guardianresidencetelephone_dental, #guardianresidencecellphone_dental, #residence_telephone_number, #residence_contact_number, #personal_contact_number, #guardian_tel_number, #guardian_cellphone').keyup(function(event) {
      if(!$.isNumeric($(this).val().substr($(this).val().length-1))){

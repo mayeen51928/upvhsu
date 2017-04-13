@@ -40,15 +40,15 @@
               <div class="panel-body">
               <table class="table" style="margin-bottom: 0px;">
                 <tbody>
-                  <tr><td>Date of Birth</td><td>{{date_format(date_create($birthday), 'F j, Y')}}</td></tr>
-                  <tr><td>Religion</td><td>{{$religion}}</td></tr>
-                  <tr><td>Nationality</td><td>{{$nationality}}</td></tr>
-                  <tr><td>Father</td><td>{{$father}}</td></tr>
-                  <tr><td>Mother</td><td>{{$mother}}</td></tr>
-                  <tr><td>Home Address</td><td>{{$street}}, {{$town}}, {{$province}}</td></tr>
-                  <tr><td>Residence Telephone Number</td><td>{{$residence_telephone_number}}</td></tr>
-                  <tr><td>Residence Contact Number</td><td>{{$residence_contact_number}}</td></tr>
-                  <tr><td>Personal Contact Number</td><td>{{$personal_contact_number}}</td></tr>
+                  <tr><td>Date of Birth</td><td>@if(isset($birthday)) {{date_format(date_create($birthday), 'F j, Y')}} @endif</td></tr>
+                  <tr><td>Religion</td><td>@if(isset($religion)) {{$religion}} @endif</td></tr>
+                  <tr><td>Nationality</td><td>@if(isset($nationality)) {{$nationality}} @endif</td></tr>
+                  <tr><td>Father</td><td>@if(isset($father)) {{$father}} @endif</td></tr>
+                  <tr><td>Mother</td><td>@if(isset($mother)) {{$mother}} @endif </td></tr>
+                  <tr><td>Home Address</td><td>@if(isset($street)) {{$street}} @endif @if(isset($town)) {{$town}} @endif @if(isset($province)) {{$province}} @endif</td></tr>
+                  <tr><td>Residence Telephone Number</td><td>@if(isset($residence_telephone_number)) {{$residence_telephone_number}} @endif</td></tr>
+                  <tr><td>Residence Contact Number</td><td>@if(isset($residence_contact_number)) {{$residence_contact_number}} @endif</td></tr>
+                  <tr><td>Personal Contact Number</td><td>@if(isset($personal_contact_number)) {{$personal_contact_number}} @endif</td></tr>
                 </tbody>
               </table>
               </div>

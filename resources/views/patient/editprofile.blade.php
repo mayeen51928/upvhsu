@@ -5,7 +5,7 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="patientDashboard">
-			<form method="POST" action="/account/profile/update" enctype="multipart/form-data">
+			<form method="POST" action="/account/profile/update" enctype="multipart/form-data" id="patient-edit-profile">
 				{{ csrf_field() }}
 				<div class="col-md-9">
 					<div class="panel panel-info">
@@ -100,53 +100,53 @@
 							<div class="panel-body">
 								<table class="table" style="margin-bottom: 0px;">
 									<tbody>
-										<tr>
+										{{-- <tr>
 											<td>Date of Birth</td>
 											<td><input type="date" class="form-control" value="{{$birthday}}" name="birthdate" id="birthdate" required/></td>
-										</tr>
+										</tr> --}}
 										<tr>
 											<td>Religion</td>
-											<td><input type="text" class="form-control" value="{{$religion}}" placeholder="Religion" name="religion" id="religion" required/></td>
+											<td><input type="text" maxlength="30" class="form-control" value="{{$religion}}" placeholder="Religion" name="religion" id="religion" required/></td>
 										</tr>
 										<tr>
 											<td>Nationality</td>
-											<td><input type="text" class="form-control" value="{{$nationality}}" placeholder="Nationality" name="nationality" id="nationality" required/></td>
+											<td><input type="text" maxlength="30" class="form-control" value="{{$nationality}}" placeholder="Nationality" name="nationality" id="nationality" required/></td>
 										</tr>
 										<tr>
 											<td>Father</td>
 											<td>
-												<input type="text" class="form-control" value="{{$father_first_name}}" placeholder="Father's Given Name" name="father_first_name" id="father_first_name" required/>
-												<input type="text" class="form-control" value="{{$father_middle_name}}" placeholder="Father's Middle Name" name="father_middle_name" id="father_middle_name" required/>
-												<input type="text" class="form-control" value="{{$father_last_name}}" placeholder="Father's Last Name" name="father_last_name" id="father_last_name" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$father_first_name}}" placeholder="Father's Given Name" name="father_first_name" id="father_first_name" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$father_middle_name}}" placeholder="Father's Middle Name" name="father_middle_name" id="father_middle_name" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$father_last_name}}" placeholder="Father's Last Name" name="father_last_name" id="father_last_name" required/>
 											</td>
 										</tr>
 										<tr>
 											<td>Mother</td>
 											<td>
-												<input type="text" class="form-control" value="{{$mother_first_name}}" placeholder="Mother's Given Name" name="mother_first_name" id="mother_first_name" required/>
-												<input type="text" class="form-control" value="{{$mother_middle_name}}" placeholder="Mother's Middle Name" name="mother_middle_name" id="mother_middle_name" required/>
-												<input type="text" class="form-control" value="{{$mother_last_name}}" placeholder="Mother's Last Name" name="mother_last_name" id="mother_last_name" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$mother_first_name}}" placeholder="Mother's Given Name" name="mother_first_name" id="mother_first_name" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$mother_middle_name}}" placeholder="Mother's Middle Name" name="mother_middle_name" id="mother_middle_name" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$mother_last_name}}" placeholder="Mother's Last Name" name="mother_last_name" id="mother_last_name" required/>
 											</td>
 										</tr>
 										<tr>
 											<td>Home Address</td>
 											<td>
-												<input type="text" class="form-control" value="{{$street}}" name="street" id="street" placeholder="House No. / Street" required/>
-												<input type="text" class="form-control" value="{{$town}}" name="town" id="town" placeholder="Town / City" required/>
-												<input type="text" class="form-control" value="{{$province}}" name="province" id="province" placeholder="Province" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$street}}" name="street" id="street" placeholder="House No. / Street" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$town}}" name="town" id="town" placeholder="Town / City" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$province}}" name="province" id="province" placeholder="Province" required/>
 											</td>
 										</tr>
 										<tr>
 											<td>Residence Telephone Number</td>
-											<td><input type="text" class="form-control" value="{{$residence_telephone_number}}" name="residence_telephone_number" id="residence_telephone_number" placeholder="Residence Telephone Number" required/></td>
+											<td><input type="text" maxlength="30" class="form-control" value="{{$residence_telephone_number}}" name="residence_telephone_number" id="residence_telephone_number" placeholder="Residence Telephone Number" required/></td>
 										</tr>
 										<tr>
 											<td>Residence Contact Number</td>
-											<td><input type="text" class="form-control" value="{{$residence_contact_number}}" name="residence_contact_number" id="residence_contact_number" placeholder="Residence Contact Number" required/></td>
+											<td><input type="text" maxlength="30" class="form-control" value="{{$residence_contact_number}}" name="residence_contact_number" id="residence_contact_number" placeholder="Residence Contact Number" required/></td>
 										</tr>
 										<tr>
 											<td>Personal Contact Number</td>
-											<td><input type="text" class="form-control" value="{{$personal_contact_number}}" name="personal_contact_number" id="personal_contact_number" placeholder="Personal Contact Number" required/></td>
+											<td><input type="text" maxlength="30" class="form-control" value="{{$personal_contact_number}}" name="personal_contact_number" id="personal_contact_number" placeholder="Personal Contact Number" required/></td>
 										</tr>
 									</tbody>
 								</table>
@@ -162,30 +162,30 @@
 											<tr>
 												<td>Name</td>
 												<td>
-													<input type="text" class="form-control" value="{{$guardian_first_name}}" placeholder="Guardian's Given Name" name="guardian_first_name" id="guardian_first_name" required/>
-													<input type="text" class="form-control" value="{{$guardian_middle_name}}" placeholder="Guardian's Middle Name" name="guardian_middle_name" id="guardian_middle_name" />
-													<input type="text" class="form-control" value="{{$guardian_last_name}}" placeholder="Guardian's Last Name" name="guardian_last_name" id="guardian_last_name" required/>
+													<input type="text" maxlength="30" class="form-control" value="{{$guardian_first_name}}" placeholder="Guardian's Given Name" name="guardian_first_name" id="guardian_first_name" required/>
+													<input type="text" maxlength="30" class="form-control" value="{{$guardian_middle_name}}" placeholder="Guardian's Middle Name" name="guardian_middle_name" id="guardian_middle_name" />
+													<input type="text" maxlength="30" class="form-control" value="{{$guardian_last_name}}" placeholder="Guardian's Last Name" name="guardian_last_name" id="guardian_last_name" required/>
 												</td>
 											</tr>
 											<tr>
 												<td>Address</td>
 												<td>
-													<input type="text" class="form-control" value="{{$guardian_street}}" name="guardian_street" id="guardian_street" placeholder="House No. / Street" required/>
-													<input type="text" class="form-control" value="{{$guardian_town}}" name="guardian_town" id="guardian_town" placeholder="Town / City" required/>
-													<input type="text" class="form-control" value="{{$guardian_province}}" name="guardian_province" id="guardian_province" placeholder="Province" required/>
+													<input type="text" maxlength="30" class="form-control" value="{{$guardian_street}}" name="guardian_street" id="guardian_street" placeholder="House No. / Street" required/>
+													<input type="text" maxlength="30" class="form-control" value="{{$guardian_town}}" name="guardian_town" id="guardian_town" placeholder="Town / City" required/>
+													<input type="text" maxlength="30" class="form-control" value="{{$guardian_province}}" name="guardian_province" id="guardian_province" placeholder="Province" required/>
 												</td>
 											</tr>
 											<tr>
 												<td>Relationship</td>
-												<td><input type="text" class="form-control" value="{{$relationship}}" name="relationship" id="relationship" placeholder="Relationship" required/></td>
+												<td><input type="text" maxlength="30" class="form-control" value="{{$relationship}}" name="relationship" id="relationship" placeholder="Relationship" required/></td>
 											</tr>
 											<tr>
 												<td>Residence Telephone Number</td>
-												<td><input type="text" class="form-control" value="{{$guardian_tel_number}}" name="guardian_tel_number" id="guardian_tel_number" placeholder="Telephone Number" required/></td>
+												<td><input type="text" maxlength="30" class="form-control" value="{{$guardian_tel_number}}" name="guardian_tel_number" id="guardian_tel_number" placeholder="Telephone Number" required/></td>
 											</tr>
 											<tr>
 												<td>Cellphone Number</td>
-												<td><input type="text" class="form-control" value="{{$guardian_cellphone}}" name="guardian_cellphone" id="guardian_cellphone" placeholder="Cellphone Number" required/></td>
+												<td><input type="text" maxlength="30" class="form-control" value="{{$guardian_cellphone}}" name="guardian_cellphone" id="guardian_cellphone" placeholder="Cellphone Number" required/></td>
 											</tr>
 										</tbody>
 									</table>
