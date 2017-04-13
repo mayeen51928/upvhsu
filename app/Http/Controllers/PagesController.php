@@ -198,7 +198,7 @@ class PagesController extends Controller
 	public function displayscheduledental(Request $request)
 	{
 		$dental_date = $request->dental_date;
-		$display_schedules = DentalSchedule::where('booked', '0')->get();
+		$display_schedules = DentalSchedule::where('booked', '0')->whereDate('schedule_start', $dental_date)->orderBy('schedule_start', 'asc')->get();
 		$startdatesarray = array();
 		$enddatesarray = array();
 		$staffnamearray = array();

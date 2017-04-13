@@ -73,7 +73,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label id="selectdentaltimeErrorMsg">Doctor and Time:</label>
+					<label id="selectdentaltimeErrorMsg">Dentist and Time:</label>
 					<select disabled class="form-control" required id="selectdentaltime">
 						<option disabled selected>Select dentist and time</option>
 					</select>

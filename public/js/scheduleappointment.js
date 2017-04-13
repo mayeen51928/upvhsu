@@ -100,36 +100,39 @@ $(document).ready( function(){
 
   	$("#selectdentaldate").change(function(){
   		var dentalDate = $(this).find(':selected')[0].value;
+      $('#selectdentaltime').attr('disabled', 'disabled');
   		$.ajax({
   			type: "POST",
   			url: displayDentalSchedule,
   			data: {dental_date:  dentalDate, _token: token},
   			success: function(data)
   			{
-  				$('#selectdentaltime').removeAttr('disabled');
           if(data['start'].length>0){
             $('#selectdentaltime').html("").append("<option disabled selected>Select dentist and time</option>");
     				for(var i=0; i < data['start'].length; i++)
     				{
     					$('#selectdentaltime').append("<option id="+data['id'][i]+">"+data['staff'][i]+" "+data['start'][i]+" - "+data['end'][i]+"</option>");
     				}
+            $('#selectdentaltime').removeAttr('disabled');
           }
           else{
             $('#selectdentaltime').html("").append("<option disabled selected>No available dentist in the specified schedule</option>");
           }
+          
   			}
   		});
   	});
 
   	$("#selectmedicaldate").change(function(){
   		var medicalDate = $(this).find(':selected')[0].value;
+      $('#selectmedicaldoctor').attr('disabled', 'disabled');
   		$.ajax({
   			type: "POST",
   			url: displayMedicalSchedule,
   			data: {medical_date:  medicalDate, _token: token},
   			success: function(data)
   			{
-  				$('#selectmedicaldoctor').removeAttr('disabled');
+  				
   				// console.log(data["staff"]);
           if(data['staff'].length > 0){
     				$('#selectmedicaldoctor').html("").append("<option disabled selected>Select doctor</option>");
@@ -137,55 +140,43 @@ $(document).ready( function(){
     				{
     					$('#selectmedicaldoctor').append("<option id="+data['id'][i]+">"+data['staff'][i]+"</option>");
     				}
+            $('#selectmedicaldoctor').removeAttr('disabled');
           }
           else{
             $('#selectmedicaldoctor').html("").append("<option disabled selected>No available doctor in the specified schedule</option>");
-          }
+          } 
   			}
   		});
   	});
 
   	$("#submitdentalappointment").click(function(){
+      var scheduleDate = $('#selectdentaldate').val();
   		var scheduleID = $('#selectdentaltime').find(':selected')[0].id;
-  		// console.log("Schedule ID is " + scheduleID);
-  		if(!($('#dentalNotes').val()) && scheduleID)
-  		{
-  			$('#dentalNotesErrorMsg').css('color', 'red');
-  			$('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace): REQUIRED');
-  			$('#selectdentaldateErrorMsg').css('color', 'black');
-  			$('#selectdentaldateErrorMsg').html('Date:');
-  			$('#selectdentaltimeErrorMsg').css('color', 'black');
-  			$('#selectdentaltimeErrorMsg').html('Doctor and Time:');
-  		}
-  		if($('#dentalNotes').val() && !scheduleID)
-  		{
-  			$('#dentalNotesErrorMsg').css('color', 'black');
-  			$('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace):');
-  			$('#selectdentaldateErrorMsg').css('color', 'red');
-  			$('#selectdentaldateErrorMsg').html('Date: REQUIRED');
-  			$('#selectdentaltimeErrorMsg').css('color', 'red');
-  			$('#selectdentaltimeErrorMsg').html('Doctor and Time: REQUIRED');
-  		}
-  		if($('#dentalNotes').val() && scheduleID)
-  		{
-  			$('#dentalNotesErrorMsg').css('color', 'black');
-  			$('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace):');
-  			$('#selectdentaldateErrorMsg').css('color', 'black');
-  			$('#selectdentaldateErrorMsg').html('Date:');
-  			$('#selectdentaltimeErrorMsg').css('color', 'black');
-  			$('#selectdentaltimeErrorMsg').html('Doctor and Time:');
-  		}
-  		if(!$('#dentalNotes').val() && !scheduleID)
-  		{
-  			$('#dentalNotesErrorMsg').css('color', 'red');
-  			$('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace): REQUIRED');
-  			$('#selectdentaldateErrorMsg').css('color', 'red');
-  			$('#selectdentaldateErrorMsg').html('Date: REQUIRED');
-  			$('#selectdentaltimeErrorMsg').css('color', 'red');
-  			$('#selectdentaltimeErrorMsg').html('Doctor and Time: REQUIRED');
-  		}
-  		// event.preventDefault();
-  		if($('#dentalNotes').val() && scheduleID)
+      if(!$('#dentalNotes').val()){
+        $('#dentalNotesErrorMsg').css('color', 'red');
+        $('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothache): REQUIRED');
+      }
+      else{
+        $('#dentalNotesErrorMsg').css('color', 'black');
+        $('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothache):');
+      }
+      if(!scheduleDate){
+        $('#selectdentaldateErrorMsg').css('color', 'red');
+        $('#selectdentaldateErrorMsg').html('Date: REQUIRED');
+      }
+      else{
+        $('#selectdentaldateErrorMsg').css('color', 'black');
+        $('#selectdentaldateErrorMsg').html('Date:');
+      }
+      if(!scheduleID){
+        $('#selectdentaltimeErrorMsg').css('color', 'red');
+        $('#selectdentaltimeErrorMsg').html('Dentist and Time: REQUIRED');
+      }
+      else{
+        $('#selectdentaltimeErrorMsg').css('color', 'black');
+        $('#selectdentaltimeErrorMsg').html('Dentist and Time:');
+      }
+  		if($('#dentalNotes').val() && scheduleID && scheduleDate)
   		{
   			$.post('/createappointment_dental',{reasons:$('#dentalNotes').val(), dental_schedule_id: scheduleID} , function(data){
   				if(data['success']=='yes')
@@ -219,44 +210,32 @@ $(document).ready( function(){
 
   	$("#submitmedicalappointment").click(function(){
   		var scheduleID = $('#selectmedicaldoctor').find(':selected')[0].id;
-  		// console.log("Schedule ID is " + scheduleID);
-  		if(!($('#medicalNotes').val()) && scheduleID)
-  		{
-  			$('#medicalNotesErrorMsg').css('color', 'red');
-  			$('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt): REQUIRED');
-  			$('#selectmedicaldateErrorMsg').css('color', 'black');
-  			$('#selectmedicaldateErrorMsg').html('Date:');
-  			$('#selectmedicaldoctorErrorMsg').css('color', 'black');
-  			$('#selectmedicaldoctorErrorMsg').html('Doctor:');
-  		}
-  		if($('#medicalNotes').val() && !scheduleID)
-  		{
-  			$('#medicalNotesErrorMsg').css('color', 'black');
-  			$('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt):');
-  			$('#selectmedicaldateErrorMsg').css('color', 'red');
-  			$('#selectmedicaldateErrorMsg').html('Date: REQUIRED');
-  			$('#selectmedicaldoctorErrorMsg').css('color', 'red');
-  			$('#selectmedicaldoctorErrorMsg').html('Doctor: REQUIRED');
-  		}
-  		if($('#medicalNotes').val() && scheduleID)
-  		{
-  			$('#medicalNotesErrorMsg').css('color', 'black');
-  			$('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt):');
-  			$('#selectmedicaldateErrorMsg').css('color', 'black');
-  			$('#selectmedicaldateErrorMsg').html('Date:');
-  			$('#selectmedicaldoctorErrorMsg').css('color', 'black');
-  			$('#selectmedicaldoctorErrorMsg').html('Doctor:');
-  		}
-  		if(!$('#medicalNotes').val() && !scheduleID)
-  		{
-  			$('#medicalNotesErrorMsg').css('color', 'red');
-  			$('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt): REQUIRED');
-  			$('#selectmedicaldateErrorMsg').css('color', 'red');
-  			$('#selectmedicaldateErrorMsg').html('Date: REQUIRED');
-  			$('#selectmedicaldoctorErrorMsg').css('color', 'red');
-  			$('#selectmedicaldoctorErrorMsg').html('Doctor: REQUIRED');
-  		}
-  		if($('#medicalNotes').val() && scheduleID)
+  		var scheduleDate = $('#selectmedicaldate').val();
+  		if(!$('#medicalNotes').val()){
+        $('#medicalNotesErrorMsg').css('color', 'red');
+        $('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt): REQUIRED');
+      }
+      else{
+        $('#medicalNotesErrorMsg').css('color', 'black');
+        $('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt):');
+      }
+      if(!scheduleDate){
+        $('#selectmedicaldateErrorMsg').css('color', 'red');
+        $('#selectmedicaldateErrorMsg').html('Date: REQUIRED');
+      }
+      else{
+        $('#selectmedicaldateErrorMsg').css('color', 'black');
+        $('#selectmedicaldateErrorMsg').html('Date:');
+      }
+      if(!scheduleID){
+        $('#selectmedicaldoctorErrorMsg').css('color', 'red');
+        $('#selectmedicaldoctorErrorMsg').html('Doctor: REQUIRED');
+      }
+      else{
+        $('#selectmedicaldoctorErrorMsg').css('color', 'black');
+        $('#selectmedicaldoctorErrorMsg').html('Doctor:');
+      }
+  		if($('#medicalNotes').val() && scheduleID && scheduleDate)
   		{
   			$.post('/createappointment_medical',{reasons:$('#medicalNotes').val(), medical_schedule_id: scheduleID} , function(data){
   				if(data['success']=='yes')
