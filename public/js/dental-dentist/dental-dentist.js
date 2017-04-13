@@ -247,8 +247,9 @@ $('.confirmAdditionalDentalRecord').click(function(){
 		  	$('#teethPresent').attr("disabled", "disabled");
 		  	$('#additionalDentalRecordInput').attr("disabled", "disabled");
 				$('.addedDentalRecord').attr("disabled", "disabled");
+				$('#confirm_additional_dental_record').modal('hide');
 				$('#additionalDentalRecordPanelBody').css('background-color', '#d6e9c6');
-				window.location.href = 'http://localhost:8000/dentist';
+				window.location.href = 'http://upvhsu.pe.hu/dentist';
     		return false;
 		  }
 	 });
