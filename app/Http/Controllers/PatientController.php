@@ -228,7 +228,7 @@ class PatientController extends Controller
 			$patient->year_level = $request->input('year_level');
 		}
 		
-		$patient->birthday = $request->input('birthdate');
+		// $patient->birthday = $request->input('birthdate');
 		$religion = Religion::where('religion_description', $request->input('religion'))->first();
 		// dd($religion->id);
 		if(count($religion)>0)
