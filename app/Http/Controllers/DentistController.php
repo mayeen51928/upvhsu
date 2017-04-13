@@ -82,6 +82,9 @@ class DentistController extends Controller
 			$params['sidebar_active'] = 'dashboard';
 
 			$patient_info = DentalAppointment::join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')->orderBy('dental_schedules.schedule_start', 'desc')->where('dental_appointments.id', $appointment_id)->first();
+			$date_of_birth = $patient_info->birthday;
+			$today = date("Y-m-d");
+			$patient_age = date_diff(date_create($date_of_birth), date_create($today))->y;
 
 			$stacks_condition = array();
 			$stacks_operation = array();
@@ -204,6 +207,7 @@ class DentistController extends Controller
 		  	array_push($stacks_condition, $condition_id);
 		  	array_push($stacks_operation, $operation_id);
 			}
+
 			$stacks_condition_color = array();
 			$stacks_operation_color = array();
 			foreach ($stacks_condition as $stack_condition) {
@@ -249,7 +253,7 @@ class DentistController extends Controller
 			}
 
 			$additional_dental_records = AdditionalDentalRecord::where('appointment_id', '=', $appointment_id)->first();
-			return view('staff.dental-dentist.adddentalrecord', $params, compact('patient_info', 'stacks_condition_color', 'stacks_operation_color', 'additional_dental_records'));
+			return view('staff.dental-dentist.adddentalrecord', $params, compact('patient_info', 'patient_age', 'stacks_condition_color', 'stacks_operation_color', 'stacks_condition', 'stacks_operation', 'additional_dental_records'));
 		}
 
 		public function updatedentalrecordmodal(Request $request)

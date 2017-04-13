@@ -95,28 +95,40 @@ $('.dental_chart').click(function(){
     }, 5000)
 });
 
+var timer;
+var delay = 1000;
+$('.dental_chart').hover(function() {
+	var action = $(this).attr('id').split("_");
+	var action_id = action[0];
+	var operation_id = $(this).attr('operation_id');
+	var condition_id = $(this).attr('condition_id');
+  timer = setTimeout(function() {
+			if(action_id == "operation"){
+				$('#operation_'+operation_id).effect( "pulsate", {times:1}, 1000 );
+			}
+			else{
+				$('#condition_'+condition_id).effect( "pulsate", {times:1}, 1000 );
+			}
+  }, delay);
+}, function() {
+    clearTimeout(timer);
+});
 
 $('.updateDentalRecord').click(function(){
 	if($('.condition').val() || $('.operation').val()){
 		var id = $(this).attr('id').split("_");
 		appointmentId = id[1];
-		// console.log(appointmentId);
 		var conditionId = $('.condition').val();
 		var operationId = $('.operation').val();
 		if (operationId == null) { operationId = 0; };
 		if (conditionId == null) { conditionId = 0; };
-		// console.log(teethId);
-		// console.log(conditionId);
-		// console.log(operationId);
-		// console.log(appointmentId);
 		$.ajax({
 			  type: "POST",
 			  url: insertDentalRecordModal,
 			  data: {teeth_id:  teethId, condition_id:  conditionId, operation_id:  operationId, appointment_id:  appointmentId,  _token: token},
 			  success: function(data)
 			  {
-			  	// console.log("condition id "+conditionId);
-			  	// console.log("operation id "+operationId);
+			  	$('#condition_'+teethId).attr('condition_id', conditionId);
 			  	if (conditionId == 1) {
 			  		$('#condition_'+teethId).css({ fill: "#ff4000" });
 			  	}
@@ -136,6 +148,7 @@ $('.updateDentalRecord').click(function(){
 			  		$('#condition_'+teethId).css({ fill: "white" });
 			  	}
 			  	
+			  	$('#operation_'+teethId).attr('operation_id', operationId);
 			  	if (operationId == 1) {
 			  		$('#operation_'+teethId).css({ fill: "#bf00ff" });
 			  	}
@@ -154,7 +167,8 @@ $('.updateDentalRecord').click(function(){
 			  	else {
 			  		$('#operation_'+teethId).css({ fill: "white" });
 			  	};
-				$('#update-dental-record-modal').modal("hide");
+
+					$('#update-dental-record-modal').modal("hide");
 			  }
 		  });
 	}
@@ -200,6 +214,94 @@ $('.updateDentalDiagnosis').click(function(){
 $('.addedDentalRecord').click(function(){
 	$('#confirm_additional_dental_record').modal('show');
 });
+
+counter = 0;
+$('.additionaldentalrecordforms').change(function(){
+	counter++;
+	var max = 18;
+  if(counter > 6){
+  	if($('#teethPresent').val()){
+  		if($('#teethPresent').val() >= 0 && $('#teethPresent').val() <= max && $('#teethPresent').val()){
+  			$('.addedDentalRecord').removeAttr('disabled');
+  		}
+  		$('#teethPresent').keyup(function(){
+				if($('#teethPresent').val() >= 0 && $('#teethPresent').val() <= max && $('#teethPresent').val()){
+					$('.addedDentalRecord').removeAttr('disabled');
+				}
+				else{
+					$('.addedDentalRecord').attr('disabled', 'disabled');
+				}
+			})
+  	}
+  	else{
+  		$('#teethPresent').keyup(function(){
+				if($('#teethPresent').val() >= 0 && $('#teethPresent').val() <= max && $('#teethPresent').val()){
+					$('.addedDentalRecord').removeAttr('disabled');
+				}
+				else{
+					$('.addedDentalRecord').attr('disabled', 'disabled');
+				}
+			})
+  	}
+  }
+  else{
+  	$('.addedDentalRecord').attr('disabled', 'disabled');
+  }
+})
+
+
+
+//mej final
+// counter = 0;
+// $('.additionaldentalrecordforms').change(function(){
+// 	counter++;
+//   if(counter > 6){
+//   	if($('#teethPresent').val()){
+//   		if(($('#teethPresent').val() >= $(this).attr('min')) && ($('#teethPresent').val() <= $(this).attr('max'))){
+//   			$('.addedDentalRecord').removeAttr('disabled');
+//   		}
+//   	}
+//   	else{
+//   		$('#teethPresent').keyup(function(){
+//   			console.log($('#teethPresent').val());
+// 				if(($('#teethPresent').val() >= $(this).attr('min')) && ($('#teethPresent').val() <= $(this).attr('max'))){
+// 					$('.addedDentalRecord').removeAttr('disabled');
+// 				}
+// 				else{
+// 					// $('#teethPresent').val('');
+// 					$('.addedDentalRecord').attr('disabled', 'disabled');
+// 				}
+// 			})
+//   	}
+//   }
+//   else{
+//   	$('.addedDentalRecord').attr('disabled', 'disabled');
+//   }
+// })
+
+// counter = 0;
+// $('.additionaldentalrecordforms').change(function(){
+// 	counter++;
+//   if(counter > 6){
+//   	$('#teethPresent').keyup(function(){
+//   		console.log($(this).attr('min'));
+//   		console.log($(this).attr('max'));
+//   		console.log($('#teethPresent').val());
+// 			if($('#teethPresent').val() >= $(this).attr('min') && $('#teethPresent').val() <= $(this).attr('max')){
+// 				console.log("correct");
+// 				$('.addedDentalRecord').removeAttr('disabled');
+// 			}
+// 			else{
+// 				console.log("wrong"); 
+// 				$('#teethPresent').val('');
+// 				$('.addedDentalRecord').attr('disabled', 'disabled');
+// 			}
+// 		})
+//   }
+//   else{
+//   	$('.addedDentalRecord').attr('disabled', 'disabled');
+//   }
+// })
 
 $('.confirmAdditionalDentalRecord').click(function(){
 	var id = $(this).attr('id').split("_");
@@ -272,11 +374,13 @@ $('.checkboxDentalService').click(function(){
 	}
 	if(checkboxDentalServiceCounter>0)
 	{
-		$('.additionaldentalrecordforms').removeAttr('disabled')
+		$('.additionaldentalrecordforms').removeAttr('disabled');
+		$('#teethPresent').removeAttr('disabled');
 	}
 	else
 	{
 		$('.additionaldentalrecordforms').attr('disabled', 'disabled');
+		$('#teethPresent').attr('disabled', 'disabled');
 		$(".additionaldentalrecordforms").val($(".additionaldentalrecordforms option:first").val());
 		$('#teethPresent').val('');
 	}
