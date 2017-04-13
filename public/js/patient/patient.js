@@ -308,7 +308,7 @@ function capitalizeFirstLetter(str){
         result+=arr[x].substring(0,1).toUpperCase()+arr[x].substring(1)+' ';
     return result.substring(0, result.length-1);
   }
-$('form#patient-edit-profile input[type="text"]').keyup(function() {
+$('form#patient-edit-profile input[type="text"]').bind('keyup change', function() {
 	$(this).val(capitalizeFirstLetter($(this).val()));
 });
 // ------------------VISITS HISTORY---------------

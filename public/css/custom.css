@@ -507,3 +507,9 @@ a.btn-danger {
 .xray_radio{
     display: inline;
 }
+.required-asterisk, .not-required-asterisk{
+    color: red;
+}
+.not-required-asterisk{
+    display: none;
+}

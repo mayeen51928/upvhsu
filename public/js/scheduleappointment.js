@@ -289,31 +289,31 @@ $(document).ready( function(){
 
     // NEW APRIL 7 ------------------------------------------------------------------------------------------------------------------------------------------------------------
     
-    $('#loginmodaldental input[type="text"], #loginmodalmedical input[type="text"]').keyup(function(event) {
+    $('#loginmodaldental input[type="text"], #loginmodalmedical input[type="text"]').bind('keyup change', function(event) {
       $(this).val(capitalizeFirstLetter($(this).val()));
     });
-    $('#residencetelephone_medical, #residencecellphone_medical, #personalcontactnumber_medical, #guardianresidencetelephone_medical, #guardianresidencecellphone_medical, #residencetelephone_dental, #residencecellphone_dental, #personalcontactnumber_dental, #guardianresidencetelephone_dental, #guardianresidencecellphone_dental, #residence_telephone_number, #residence_contact_number, #personal_contact_number, #guardian_tel_number, #guardian_cellphone').keyup(function(event) {
+    $('#residencetelephone_medical, #residencecellphone_medical, #personalcontactnumber_medical, #guardianresidencetelephone_medical, #guardianresidencecellphone_medical, #residencetelephone_dental, #residencecellphone_dental, #personalcontactnumber_dental, #guardianresidencetelephone_dental, #guardianresidencecellphone_dental, #residence_telephone_number, #residence_contact_number, #personal_contact_number, #guardian_tel_number, #guardian_cellphone').bind('keyup change', function(event) {
      if(!$.isNumeric($(this).val().substr($(this).val().length-1))){
         $(this).val($(this).val().substr(0, $(this).val().length-1));
       }
     });
-    $('#town_medical, #province_medical, #guardian_town_medical, #guardian_province_medical, #town_dental, #province_dental, #guardian_town_dental, #guardian_province_dental, #town, #province, #guardian_town, #guardian_province').keyup(function(event) {
+    $('#town_medical, #province_medical, #guardian_town_medical, #guardian_province_medical, #town_dental, #province_dental, #guardian_town_dental, #guardian_province_dental, #town, #province, #guardian_town, #guardian_province').bind('keyup change', function(event) {
       if($.isNumeric($(this).val().substr($(this).val().length-1))){
         $(this).val($(this).val().substr(0, $(this).val().length-1));
       }
     });
     $('#signupMedical_modal').click(function(event) {
-      $('#user_name_modal_medical, #password_modal_medical, #first_name_medical, #last_name_medical').keyup(function() {
+      $('#user_name_modal_medical, #password_modal_medical, #first_name_medical, #last_name_medical').bind('keyup change', function() {
         checkIfComplete1();
       });
-      $('.signup2_medical input').keyup(function(event) {
+      $('.signup2_medical input').bind('keyup change', function(event) {
 
       	checkIfComplete2();
       });
-      $('.signup3_medical input').keyup(function(event) {
+      $('.signup3_medical input').bind('keyup change', function(event) {
       	checkIfComplete3();
       });
-      $('.signup4_medical input').keyup(function(event) {
+      $('.signup4_medical input').bind('keyup change', function(event) {
       	checkIfComplete4();
       });
     });
@@ -398,16 +398,16 @@ $(document).ready( function(){
     	}
     }
     $('#signupDental_modal').click(function(event) {
-      $('#user_name_modal_dental, #password_modal_dental, #first_name_dental, #last_name_dental').keyup(function() {
+      $('#user_name_modal_dental, #password_modal_dental, #first_name_dental, #last_name_dental').bind('keyup change', function() {
         checkIfCompleteDental1();
       });
-      $('.signup2_dental input').keyup(function(event) {
+      $('.signup2_dental input').bind('keyup change', function(event) {
       	checkIfCompleteDental2();
       });
-      $('.signup3_dental input').keyup(function(event) {
+      $('.signup3_dental input').bind('keyup change', function(event) {
       	checkIfCompleteDental3();
       });
-      $('.signup4_dental input').keyup(function(event) {
+      $('.signup4_dental input').bind('keyup change', function(event) {
       	checkIfCompleteDental4();
       });
     });
@@ -626,6 +626,7 @@ $(document).ready( function(){
     $("input[name=patient_type_dental]").click(function(){
     	if($("input[name=patient_type_dental]:checked").val() == 1)
     	{
+        $('.not-required-asterisk').show();
 	    	$("#degree_program_dental").removeAttr('disabled');
 	    	$('#yearlevel_dental').removeAttr('disabled');
         $('#senior_citizen_id_dental').attr('disabled', 'disabled');
@@ -633,6 +634,7 @@ $(document).ready( function(){
       else if($("input[name=patient_type_dental]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_dental').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
+        $('.not-required-asterisk').hide();
       	$("#degree_program_dental option[value=default]").prop('selected', true);
         $('#yearlevel_dental').val('');
         $("#degree_program_dental").attr('disabled', 'disabled');
@@ -641,6 +643,7 @@ $(document).ready( function(){
       }
 	    else
 	    {
+        $('.not-required-asterisk').hide();
         $('#senior_citizen_id_dental').attr('disabled', 'disabled');
         $("#degree_program_dental option[value=default]").prop('selected', true);
         $('#yearlevel_dental').val('');
@@ -657,10 +660,12 @@ $(document).ready( function(){
 	    	$("#degree_program_medical").removeAttr('disabled').attr('required', 'required');
 	    	$('#yearlevel_medical').removeAttr('disabled').attr('required', 'required');
         $('#senior_citizen_id_medical').attr('disabled', 'disabled');
+        $('.not-required-asterisk').show();
 	    }
       else if($("input[name=patient_type_medical]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_medical').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
+        $('.not-required-asterisk').hide();
         $("#degree_program_medical option[value=default]").prop('selected', true);
         $('#yearlevel_medical').val('');
         $("#degree_program_medical").attr('disabled', 'disabled');
@@ -669,6 +674,7 @@ $(document).ready( function(){
       }
 	    else
 	    {
+        $('.not-required-asterisk').hide();
         $('#senior_citizen_id_medical').val('');
         $('#senior_citizen_id_medical').attr('disabled', 'disabled');
         $("#degree_program_medical option[value=default]").prop('selected', true);

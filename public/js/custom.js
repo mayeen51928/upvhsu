@@ -1,8 +1,8 @@
 $(document).ready( function(){
-  $('input[type="text"], textarea').keyup(function(event) {
+  $('input[type="text"], textarea').bind('keyup change', function(event) {
       $(this).val($(this).val().charAt(0).toUpperCase() + $(this).val().substr(1));
     });
-  $('input[type="date"]').keyup(function() {
+  $('input[type="date"]').bind('keyup change', function() {
     if(Math.floor((new Date() - new Date($(this).val()))) <= 0
       ){
         $(this).val('');
