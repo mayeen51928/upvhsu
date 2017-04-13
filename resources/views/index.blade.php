@@ -50,13 +50,13 @@
 					@if(Auth::user()->user_type_id == 1)
 						<p>Hello {{ Auth::user()->patient->patient_first_name }}</p>
 						<div class="col-md-4 accountOption">
-							<a href="{{ url('/account') }}" class="btn btn-info btn-sm" role="button">View Account</a>
+							<a href="{{ url('/account') }}" class="btn btn-info btn-sm" role="button">Dashboard</a>
+						</div>
+						<div class="col-md-4 accountOption">
+							<a href="{{ url('/account/profile') }}" class="btn btn-info btn-sm" role="button">Profile</a>
 						</div>
 						<div class="col-md-4 accountOption">
 							<a href="{{ url('/account/visits') }}" class="btn btn-info btn-sm" role="button">Visits History</a>
-						</div>
-						<div class="col-md-4 accountOption">
-							<a href="{{ url('/account/bills') }}" class="btn btn-info btn-sm" role="button">Billing Records</a>
 						</div>
 					@elseif(Auth::user()->user_type_id == 2)
 						@if(Auth::user()->staff->staff_type_id == 1)
