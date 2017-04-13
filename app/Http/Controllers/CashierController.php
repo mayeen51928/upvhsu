@@ -276,7 +276,7 @@ class CashierController extends Controller
 		if (Input::file('picture') != NULL) { 
 			$path = 'images';
 			$file_name = Input::file('picture')->getClientOriginalName(); 
-			$file_name_fin = $cashier->patient_id.'_'.$file_name;
+			$file_name_fin = $cashier->staff_id.'_'.$file_name;
 			$image_type = pathinfo($file_name_fin,PATHINFO_EXTENSION);
 			if($image_type == 'jpg' || $image_type == 'jpeg' || $image_type == 'png'  || $image_type == 'JPG' || $image_type == 'JPEG' || $image_type == 'PNG'){
 				Input::file('picture')->move($path, $file_name_fin);
