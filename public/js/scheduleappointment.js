@@ -3,7 +3,7 @@ $(document).ready( function(){
 		headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
 	});
 
-  function captalizeFirstLetter(str){
+  function capitalizeFirstLetter(str){
     var arr = str.split(' ');
     var result = "";
     for (var x=0; x<arr.length; x++)
@@ -100,40 +100,39 @@ $(document).ready( function(){
 
   	$("#selectdentaldate").change(function(){
   		var dentalDate = $(this).find(':selected')[0].value;
+      $('#selectdentaltime').attr('disabled', 'disabled');
   		$.ajax({
   			type: "POST",
   			url: displayDentalSchedule,
   			data: {dental_date:  dentalDate, _token: token},
   			success: function(data)
   			{
-  				$('#selectdentaltime').removeAttr('disabled');
-  				// console.log(data["start"]);
-  				// console.log(data["end"]);
-  				// console.log(data["staff"]);
-  				
           if(data['start'].length>0){
             $('#selectdentaltime').html("").append("<option disabled selected>Select dentist and time</option>");
     				for(var i=0; i < data['start'].length; i++)
     				{
     					$('#selectdentaltime').append("<option id="+data['id'][i]+">"+data['staff'][i]+" "+data['start'][i]+" - "+data['end'][i]+"</option>");
     				}
+            $('#selectdentaltime').removeAttr('disabled');
           }
           else{
             $('#selectdentaltime').html("").append("<option disabled selected>No available dentist in the specified schedule</option>");
           }
+          
   			}
   		});
   	});
 
   	$("#selectmedicaldate").change(function(){
   		var medicalDate = $(this).find(':selected')[0].value;
+      $('#selectmedicaldoctor').attr('disabled', 'disabled');
   		$.ajax({
   			type: "POST",
   			url: displayMedicalSchedule,
   			data: {medical_date:  medicalDate, _token: token},
   			success: function(data)
   			{
-  				$('#selectmedicaldoctor').removeAttr('disabled');
+  				
   				// console.log(data["staff"]);
           if(data['staff'].length > 0){
     				$('#selectmedicaldoctor').html("").append("<option disabled selected>Select doctor</option>");
@@ -141,55 +140,43 @@ $(document).ready( function(){
     				{
     					$('#selectmedicaldoctor').append("<option id="+data['id'][i]+">"+data['staff'][i]+"</option>");
     				}
+            $('#selectmedicaldoctor').removeAttr('disabled');
           }
           else{
             $('#selectmedicaldoctor').html("").append("<option disabled selected>No available doctor in the specified schedule</option>");
-          }
+          } 
   			}
   		});
   	});
 
   	$("#submitdentalappointment").click(function(){
+      var scheduleDate = $('#selectdentaldate').val();
   		var scheduleID = $('#selectdentaltime').find(':selected')[0].id;
-  		// console.log("Schedule ID is " + scheduleID);
-  		if(!($('#dentalNotes').val()) && scheduleID)
-  		{
-  			$('#dentalNotesErrorMsg').css('color', 'red');
-  			$('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace): REQUIRED');
-  			$('#selectdentaldateErrorMsg').css('color', 'black');
-  			$('#selectdentaldateErrorMsg').html('Date:');
-  			$('#selectdentaltimeErrorMsg').css('color', 'black');
-  			$('#selectdentaltimeErrorMsg').html('Doctor and Time:');
-  		}
-  		if($('#dentalNotes').val() && !scheduleID)
-  		{
-  			$('#dentalNotesErrorMsg').css('color', 'black');
-  			$('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace):');
-  			$('#selectdentaldateErrorMsg').css('color', 'red');
-  			$('#selectdentaldateErrorMsg').html('Date: REQUIRED');
-  			$('#selectdentaltimeErrorMsg').css('color', 'red');
-  			$('#selectdentaltimeErrorMsg').html('Doctor and Time: REQUIRED');
-  		}
-  		if($('#dentalNotes').val() && scheduleID)
-  		{
-  			$('#dentalNotesErrorMsg').css('color', 'black');
-  			$('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace):');
-  			$('#selectdentaldateErrorMsg').css('color', 'black');
-  			$('#selectdentaldateErrorMsg').html('Date:');
-  			$('#selectdentaltimeErrorMsg').css('color', 'black');
-  			$('#selectdentaltimeErrorMsg').html('Doctor and Time:');
-  		}
-  		if(!$('#dentalNotes').val() && !scheduleID)
-  		{
-  			$('#dentalNotesErrorMsg').css('color', 'red');
-  			$('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothace): REQUIRED');
-  			$('#selectdentaldateErrorMsg').css('color', 'red');
-  			$('#selectdentaldateErrorMsg').html('Date: REQUIRED');
-  			$('#selectdentaltimeErrorMsg').css('color', 'red');
-  			$('#selectdentaltimeErrorMsg').html('Doctor and Time: REQUIRED');
-  		}
-  		// event.preventDefault();
-  		if($('#dentalNotes').val() && scheduleID)
+      if(!$('#dentalNotes').val()){
+        $('#dentalNotesErrorMsg').css('color', 'red');
+        $('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothache): REQUIRED');
+      }
+      else{
+        $('#dentalNotesErrorMsg').css('color', 'black');
+        $('#dentalNotesErrorMsg').html('Reasons (e.g. molar toothache):');
+      }
+      if(!scheduleDate){
+        $('#selectdentaldateErrorMsg').css('color', 'red');
+        $('#selectdentaldateErrorMsg').html('Date: REQUIRED');
+      }
+      else{
+        $('#selectdentaldateErrorMsg').css('color', 'black');
+        $('#selectdentaldateErrorMsg').html('Date:');
+      }
+      if(!scheduleID){
+        $('#selectdentaltimeErrorMsg').css('color', 'red');
+        $('#selectdentaltimeErrorMsg').html('Dentist and Time: REQUIRED');
+      }
+      else{
+        $('#selectdentaltimeErrorMsg').css('color', 'black');
+        $('#selectdentaltimeErrorMsg').html('Dentist and Time:');
+      }
+  		if($('#dentalNotes').val() && scheduleID && scheduleDate)
   		{
   			$.post('/createappointment_dental',{reasons:$('#dentalNotes').val(), dental_schedule_id: scheduleID} , function(data){
   				if(data['success']=='yes')
@@ -223,44 +210,32 @@ $(document).ready( function(){
 
   	$("#submitmedicalappointment").click(function(){
   		var scheduleID = $('#selectmedicaldoctor').find(':selected')[0].id;
-  		// console.log("Schedule ID is " + scheduleID);
-  		if(!($('#medicalNotes').val()) && scheduleID)
-  		{
-  			$('#medicalNotesErrorMsg').css('color', 'red');
-  			$('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt): REQUIRED');
-  			$('#selectmedicaldateErrorMsg').css('color', 'black');
-  			$('#selectmedicaldateErrorMsg').html('Date:');
-  			$('#selectmedicaldoctorErrorMsg').css('color', 'black');
-  			$('#selectmedicaldoctorErrorMsg').html('Doctor:');
-  		}
-  		if($('#medicalNotes').val() && !scheduleID)
-  		{
-  			$('#medicalNotesErrorMsg').css('color', 'black');
-  			$('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt):');
-  			$('#selectmedicaldateErrorMsg').css('color', 'red');
-  			$('#selectmedicaldateErrorMsg').html('Date: REQUIRED');
-  			$('#selectmedicaldoctorErrorMsg').css('color', 'red');
-  			$('#selectmedicaldoctorErrorMsg').html('Doctor: REQUIRED');
-  		}
-  		if($('#medicalNotes').val() && scheduleID)
-  		{
-  			$('#medicalNotesErrorMsg').css('color', 'black');
-  			$('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt):');
-  			$('#selectmedicaldateErrorMsg').css('color', 'black');
-  			$('#selectmedicaldateErrorMsg').html('Date:');
-  			$('#selectmedicaldoctorErrorMsg').css('color', 'black');
-  			$('#selectmedicaldoctorErrorMsg').html('Doctor:');
-  		}
-  		if(!$('#medicalNotes').val() && !scheduleID)
-  		{
-  			$('#medicalNotesErrorMsg').css('color', 'red');
-  			$('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt): REQUIRED');
-  			$('#selectmedicaldateErrorMsg').css('color', 'red');
-  			$('#selectmedicaldateErrorMsg').html('Date: REQUIRED');
-  			$('#selectmedicaldoctorErrorMsg').css('color', 'red');
-  			$('#selectmedicaldoctorErrorMsg').html('Doctor: REQUIRED');
-  		}
-  		if($('#medicalNotes').val() && scheduleID)
+  		var scheduleDate = $('#selectmedicaldate').val();
+  		if(!$('#medicalNotes').val()){
+        $('#medicalNotesErrorMsg').css('color', 'red');
+        $('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt): REQUIRED');
+      }
+      else{
+        $('#medicalNotesErrorMsg').css('color', 'black');
+        $('#medicalNotesErrorMsg').html('Reasons (e.g. physical pain felt):');
+      }
+      if(!scheduleDate){
+        $('#selectmedicaldateErrorMsg').css('color', 'red');
+        $('#selectmedicaldateErrorMsg').html('Date: REQUIRED');
+      }
+      else{
+        $('#selectmedicaldateErrorMsg').css('color', 'black');
+        $('#selectmedicaldateErrorMsg').html('Date:');
+      }
+      if(!scheduleID){
+        $('#selectmedicaldoctorErrorMsg').css('color', 'red');
+        $('#selectmedicaldoctorErrorMsg').html('Doctor: REQUIRED');
+      }
+      else{
+        $('#selectmedicaldoctorErrorMsg').css('color', 'black');
+        $('#selectmedicaldoctorErrorMsg').html('Doctor:');
+      }
+  		if($('#medicalNotes').val() && scheduleID && scheduleDate)
   		{
   			$.post('/createappointment_medical',{reasons:$('#medicalNotes').val(), medical_schedule_id: scheduleID} , function(data){
   				if(data['success']=='yes')
@@ -292,34 +267,32 @@ $(document).ready( function(){
   	});
 
     // NEW APRIL 7 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-    $('input[type="text"], textarea').keyup(function(event) {
-      $(this).val($(this).val().charAt(0).toUpperCase() + $(this).val().substr(1));
+    
+    $('#loginmodaldental input[type="text"], #loginmodalmedical input[type="text"]').bind('keyup change', function(event) {
+      $(this).val(capitalizeFirstLetter($(this).val()));
     });
-    $('#loginmodaldental input[type="text"], #loginmodalmedical input[type="text"]').keyup(function(event) {
-      $(this).val(captalizeFirstLetter($(this).val()));
-    });
-    $('#residencetelephone_medical, #residencecellphone_medical, #personalcontactnumber_medical, #guardianresidencetelephone_medical, #guardianresidencecellphone_medical, #residencetelephone_dental, #residencecellphone_dental, #personalcontactnumber_dental, #guardianresidencetelephone_dental, #guardianresidencecellphone_dental, #residence_telephone_number, #residence_contact_number, #personal_contact_number, #guardian_tel_number, #guardian_cellphone').keyup(function(event) {
+    $('#residencetelephone_medical, #residencecellphone_medical, #personalcontactnumber_medical, #guardianresidencetelephone_medical, #guardianresidencecellphone_medical, #residencetelephone_dental, #residencecellphone_dental, #personalcontactnumber_dental, #guardianresidencetelephone_dental, #guardianresidencecellphone_dental, #residence_telephone_number, #residence_contact_number, #personal_contact_number, #guardian_tel_number, #guardian_cellphone').bind('keyup change', function(event) {
      if(!$.isNumeric($(this).val().substr($(this).val().length-1))){
         $(this).val($(this).val().substr(0, $(this).val().length-1));
       }
     });
-    $('#town_medical, #province_medical, #guardian_town_medical, #guardian_province_medical, #town_dental, #province_dental, #guardian_town_dental, #guardian_province_dental, #town, #province, #guardian_town, #guardian_province').keyup(function(event) {
+    $('#town_medical, #province_medical, #guardian_town_medical, #guardian_province_medical, #town_dental, #province_dental, #guardian_town_dental, #guardian_province_dental, #town, #province, #guardian_town, #guardian_province').bind('keyup change', function(event) {
       if($.isNumeric($(this).val().substr($(this).val().length-1))){
         $(this).val($(this).val().substr(0, $(this).val().length-1));
       }
     });
     $('#signupMedical_modal').click(function(event) {
-      $('#user_name_modal_medical, #password_modal_medical, #first_name_medical, #last_name_medical').keyup(function() {
+      $('#user_name_modal_medical, #password_modal_medical, #first_name_medical, #last_name_medical').bind('keyup change', function() {
         checkIfComplete1();
       });
-      $('.signup2_medical input').keyup(function(event) {
+      $('.signup2_medical input').bind('keyup change', function(event) {
 
       	checkIfComplete2();
       });
-      $('.signup3_medical input').keyup(function(event) {
+      $('.signup3_medical input').bind('keyup change', function(event) {
       	checkIfComplete3();
       });
-      $('.signup4_medical input').keyup(function(event) {
+      $('.signup4_medical input').bind('keyup change', function(event) {
       	checkIfComplete4();
       });
     });
@@ -404,16 +377,16 @@ $(document).ready( function(){
     	}
     }
     $('#signupDental_modal').click(function(event) {
-      $('#user_name_modal_dental, #password_modal_dental, #first_name_dental, #last_name_dental').keyup(function() {
+      $('#user_name_modal_dental, #password_modal_dental, #first_name_dental, #last_name_dental').bind('keyup change', function() {
         checkIfCompleteDental1();
       });
-      $('.signup2_dental input').keyup(function(event) {
+      $('.signup2_dental input').bind('keyup change', function(event) {
       	checkIfCompleteDental2();
       });
-      $('.signup3_dental input').keyup(function(event) {
+      $('.signup3_dental input').bind('keyup change', function(event) {
       	checkIfCompleteDental3();
       });
-      $('.signup4_dental input').keyup(function(event) {
+      $('.signup4_dental input').bind('keyup change', function(event) {
       	checkIfCompleteDental4();
       });
     });
@@ -632,6 +605,7 @@ $(document).ready( function(){
     $("input[name=patient_type_dental]").click(function(){
     	if($("input[name=patient_type_dental]:checked").val() == 1)
     	{
+        $('.not-required-asterisk').show();
 	    	$("#degree_program_dental").removeAttr('disabled');
 	    	$('#yearlevel_dental').removeAttr('disabled');
         $('#senior_citizen_id_dental').attr('disabled', 'disabled');
@@ -639,6 +613,7 @@ $(document).ready( function(){
       else if($("input[name=patient_type_dental]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_dental').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
+        $('.not-required-asterisk').hide();
       	$("#degree_program_dental option[value=default]").prop('selected', true);
         $('#yearlevel_dental').val('');
         $("#degree_program_dental").attr('disabled', 'disabled');
@@ -647,6 +622,7 @@ $(document).ready( function(){
       }
 	    else
 	    {
+        $('.not-required-asterisk').hide();
         $('#senior_citizen_id_dental').attr('disabled', 'disabled');
         $("#degree_program_dental option[value=default]").prop('selected', true);
         $('#yearlevel_dental').val('');
@@ -663,10 +639,12 @@ $(document).ready( function(){
 	    	$("#degree_program_medical").removeAttr('disabled').attr('required', 'required');
 	    	$('#yearlevel_medical').removeAttr('disabled').attr('required', 'required');
         $('#senior_citizen_id_medical').attr('disabled', 'disabled');
+        $('.not-required-asterisk').show();
 	    }
       else if($("input[name=patient_type_medical]:checked").val() == 5
         && (Math.floor((new Date() - new Date($('#birthdate_medical').val())) / (365.25 * 24 * 60 * 60 * 1000)) >= 60))
       {
+        $('.not-required-asterisk').hide();
         $("#degree_program_medical option[value=default]").prop('selected', true);
         $('#yearlevel_medical').val('');
         $("#degree_program_medical").attr('disabled', 'disabled');
@@ -675,6 +653,7 @@ $(document).ready( function(){
       }
 	    else
 	    {
+        $('.not-required-asterisk').hide();
         $('#senior_citizen_id_medical').val('');
         $('#senior_citizen_id_medical').attr('disabled', 'disabled');
         $("#degree_program_medical option[value=default]").prop('selected', true);

@@ -509,7 +509,6 @@ a.btn-danger {
     display: inline;
 }
 
-
 .gallery{
     overflow: hidden;
 }
@@ -517,3 +516,9 @@ a.btn-danger {
 /*.svg{
     pointer-events: none;
 }*/
+.required-asterisk, .not-required-asterisk{
+    color: red;
+}
+.not-required-asterisk{
+    display: none;
+}

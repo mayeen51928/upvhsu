@@ -1,5 +1,13 @@
 $(document).ready( function(){
-
+  $('input[type="text"], textarea').bind('keyup change', function(event) {
+      $(this).val($(this).val().charAt(0).toUpperCase() + $(this).val().substr(1));
+    });
+  // $('input[type="date"]').bind('keyup change', function() {
+  //   if(Math.floor((new Date() - new Date($(this).val()))) <= 0
+  //     ){
+  //       $(this).val('');
+  //     }
+  //   });
   var homeJumbotron = 1 + Math.floor(Math.random() * 3);
   if(homeJumbotron == 1)
   {
