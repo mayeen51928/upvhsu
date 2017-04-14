@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Add Staff Account | UP Visayas Health Services Unit')
+@section('title', 'Manage Accounts | UP Visayas Health Services Unit')
 @section('content')
 <div class="container-fluid">
 	<div class="row">
