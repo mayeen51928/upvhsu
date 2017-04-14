@@ -153,8 +153,10 @@ Route::post('/display_medical_services', 'AdminController@viewservicesmedical');
 Route::post('/display_dental_services', 'AdminController@viewservicesdental');
 Route::post('/edit_medical_services', 'AdminController@editmedicalservices');
 Route::post('/update_medical_services', 'AdminController@updatemedicalservices');
+Route::get('/admin/manageaccounts', 'AdminController@manageaccounts');
+Route::post('/admin/changepassword', 'AdminController@changepassword');
 
 //For wrong URLs
-// Route::get('/{any}', function($any){
-// 	return back();
-// })->where('any', '.*');
+Route::get('/{any}', function($any){
+	return back();
+})->where('any', '.*');

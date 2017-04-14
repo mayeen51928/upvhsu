@@ -73,8 +73,8 @@
   			<li id="editServices" @if($sidebar_active == 'editservices')class="active" @endif><a href="{{ url('/admin/editservices') }}"><i class="fa fa-money"></i> Edit Services' Rates</a></li>
   			<li id="generateSched" @if($sidebar_active == 'generateschedule')class="active" @endif><a href="{{ url('/admin/generateschedule') }}"><i class="fa fa-calendar"></i> Generate Upperclassmen Physical Examination Schedule</a></li>
   		</ul>
-  		{{-- <ul class="nav nav-sidebar">
-  			<li id="searchPatient" @if($sidebar_active == 'searchpatient')class="active" @endif><a href="{{ url('/admin/searchpatient') }}">Patient Records</a></li>
-  		</ul> --}}
+  		<ul class="nav nav-sidebar">
+  			<li id="manageAccounts" @if($sidebar_active == 'manageaccounts')class="active" @endif><a href="{{ url('/admin/manageaccounts') }}"><i class="fa fa-users"></i>  Manage Accounts</a></li>
+  		</ul>
 	  	@endif
 </div>
