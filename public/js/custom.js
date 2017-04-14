@@ -70,8 +70,26 @@ $(document).ready( function(){
       $('#password').attr('disabled', 'disabled');
   }
   });
-  $('#announcement_modal').modal();
-  $('.announcement_title').click(function(event) {
+  if(getCookie('displaywelcomemodal')==''){
+    document.cookie = "displaywelcomemodal=yes";
+    $('#announcement_modal').modal();
+  }
+  function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+$('.announcement_title').click(function(event) {
     var announcementId = $(this).attr('id');
     $.post('/announcementmodal', {announcement_id: announcementId}, function(data, textStatus, xhr) {
       $('#announcementTitleModal').html(data['announcement']['announcement_title']);
