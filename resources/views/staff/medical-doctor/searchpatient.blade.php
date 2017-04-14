@@ -5,28 +5,34 @@
 	<div class="row">
 		@include('layouts.sidebar')
 		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
-			<div class="col-md-4 col-md-offset-4" style="text-align: center;">
-				<h4>Patient Records</h4>
+			<div class="col-md-4 col-md-offset-4">
+				<h4 class="text-center">Patient Records</h4>
         <div class="accountOption">
         <a role="button" class="btn btn-success" href="{{ url('/doctor/searchpatient/date') }}">Click here to search by date</a>
         </div>
         <input class="form-control" type="text" name="search_patient" id="search_patient" placeholder="Enter patient's name here" />
         <br/>
         <img class="img-responsive center-block" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
-				<table id="searchTable" class="table" style="display: none">
+				<table id="searchTable" class="table table-hover" style="display: none">
+          <thead>
           <tr><th>Search Results</th></tr>
+          </thead>
           <tbody id="searchResults">
           </tbody>
 				</table>
-        <table class="table" id="searchlistofallpatients">
-        <tr><th>List of All Patients Who Have Existing Medical Records</th></tr>
+        <table class="table table-hover" id="searchlistofallpatients">
+        <thead>
+        <tr><th colspan="2">List of All Patients Who Have Existing Medical Records</th></tr>
+        </thead>
           <tbody>
+            <?php $row_number = 1 * $patients->firstItem(); ?>
             @foreach($patients as $patient)
-              <tr><td><a class="listofallpatients" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
+              <tr><td>{{$row_number}}.</td><td><a class="listofallpatients" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
+              <?php $row_number++; ?>
             @endforeach
           </tbody>
         </table>
-        <div class="text-center">{{ $patients->links() }} </div>
+        <div id="paginateMedical" class="text-center">{{ $patients->links() }} </div>
 			</div>
 		</div>
 	</div>

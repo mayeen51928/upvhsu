@@ -748,9 +748,7 @@ $("#search_year").change(function(){
 	}
 });
 $('#searchbydatebutton').click(function() {
-	// console.log($('#search_month').find(':selected')[0].value);
-	// console.log($('#search_date').find(':selected')[0].value);
-	// console.log($('#search_year').find(':selected')[0].value);
+	$('#paginateMedical').hide();
 	$('#searchlistofallpatients').hide();
 		$('#searchTable').hide();
 		// $('#searchResults').html("");
@@ -766,6 +764,7 @@ $('#searchbydatebutton').click(function() {
 				// $('#searchTable').hide();
 				if(data['counter']>0)
 				{
+					$('#paginateMedical').hide();
 			  		output = '';
 	  				for(var i=0; i < data['searchpatientappointmentidyarray'].length; i++)
 	  				{
@@ -895,6 +894,7 @@ $('#searchbydatebutton').click(function() {
   				}
   				else if(data['counter'] == 'blankstring')
   				{
+  					$('#paginateMedical').show();
   					$('#searchloading').hide();
 					$('#searchTable').hide();
 					$('#searchResults').html("");
@@ -910,6 +910,7 @@ $('#searchbydatebutton').click(function() {
   			});
 });
 $("#search_patient").keyup(function(){
+	$('#paginateMedical').hide();
 	// if($('#search_patient').val()){
 		$('#searchlistofallpatients').hide();
 		$('#searchTable').hide();
@@ -1004,6 +1005,7 @@ $("#search_patient").keyup(function(){
   				}
   				else if(data['counter'] == 'blankstring')
   				{
+  					$('#paginateMedical').show();
   					$('#searchloading').hide();
 					$('#searchTable').hide();
 					$('#searchResults').html("");

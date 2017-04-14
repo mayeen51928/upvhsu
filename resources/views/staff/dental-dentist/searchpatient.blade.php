@@ -5,8 +5,8 @@
   <div class="row">
     @include('layouts.sidebar')
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="cashierSearchPatient">
-      <div class="col-md-4 col-md-offset-4" style="text-align: center;">
-        <h4>Search Patient Record</h4>
+      <div class="col-md-4 col-md-offset-4">
+        <h4 class="text-center">Search Patient Record</h4>
         <div class="accountOption">
         <a role="button" class="btn btn-success" href="{{ url('/dentist/searchpatient/date') }}">Click here to search by date</a>
         </div>
@@ -14,18 +14,25 @@
         <br/>
         <img class="img-responsive center-block" src="{{asset('images/loading.gif')}}" id="searchloadingdental" style="display: none;"/>
         <table id="searchTabledental" class="table" style="display: none">
+          <thead>
           <tr><th>Search Results</th></tr>
+          </thead>
           <tbody id="searchResultsdental">
           </tbody>
         </table>
-        <table class="table" id="searchlistofallpatientsdental">
-        <tr><th>List of All Patients Who Have Existing Dental Records</th></tr>
+        <table class="table table-hover" id="searchlistofallpatientsdental">
+          <thead>
+        <tr><th colspan="2">List of All Patients Who Have Existing Dental Records</th></tr>
+        </thead>
           <tbody>
+          <?php $row_number = 1 * $patients->firstItem(); ?>
             @foreach($patients as $patient)
-              <tr><td><a class="listofallpatientsdental" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
+              <tr><td>{{$row_number}}.</td><td><a class="listofallpatientsdental" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
+              <?php $row_number++; ?>
             @endforeach
           </tbody>
         </table>
+        <div id="paginateDental" class="text-center">{{ $patients->links() }} </div>
       </div>
     </div>
   </div>

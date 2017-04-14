@@ -218,14 +218,15 @@ $('.addedDentalRecord').click(function(){
 counter = 0;
 $('.additionaldentalrecordforms').change(function(){
 	counter++;
-	var max = 18;
+	var max = 40;
+	var min = 0
   if(counter > 6){
   	if($('#teethPresent').val()){
-  		if($('#teethPresent').val() >= 0 && $('#teethPresent').val() <= max && $('#teethPresent').val()){
+  		if($('#teethPresent').val() >= 0 && $('#teethPresent').val() <= max && $('#teethPresent').val() && $('#teethPresent').val()>=min){
   			$('.addedDentalRecord').removeAttr('disabled');
   		}
   		$('#teethPresent').keyup(function(){
-				if($('#teethPresent').val() >= 0 && $('#teethPresent').val() <= max && $('#teethPresent').val()){
+				if($('#teethPresent').val() >= 0 && $('#teethPresent').val() <= max && $('#teethPresent').val() && $('#teethPresent').val()>=min){
 					$('.addedDentalRecord').removeAttr('disabled');
 				}
 				else{
@@ -235,7 +236,7 @@ $('.additionaldentalrecordforms').change(function(){
   	}
   	else{
   		$('#teethPresent').keyup(function(){
-				if($('#teethPresent').val() >= 0 && $('#teethPresent').val() <= max && $('#teethPresent').val()){
+				if($('#teethPresent').val() >= 0 && $('#teethPresent').val() <= max && $('#teethPresent').val() && $('#teethPresent').val()>=min){
 					$('.addedDentalRecord').removeAttr('disabled');
 				}
 				else{
@@ -575,6 +576,7 @@ $('#adddentalschedule').click(function(){
 // ------------------------------ Search Patient ----------------------------
 $("#search_patientdental").keyup(function(){
 	// if($('#search_patient').val()){
+		$('#paginateDental').hide();
 		$('#searchlistofallpatientsdental').hide();
 		$('#searchTabledental').hide();
 		// $('#searchResultsdental').html("");
@@ -668,6 +670,7 @@ $("#search_patientdental").keyup(function(){
   				}
   				else if(data['counter'] == 'blankstring')
   				{
+  					$('#paginateDental').show();
   					$('#searchloadingdental').hide();
 					$('#searchTabledental').hide();
 					$('#searchResultsdental').html("");
@@ -824,6 +827,7 @@ $("#search_year").change(function(){
 	}
 });
 $('#searchbydatebuttondental').click(function() {
+	$('#paginateDental').hide();
 	// console.log($('#search_month').find(':selected')[0].value);
 	// console.log($('#search_date').find(':selected')[0].value);
 	// console.log($('#search_year').find(':selected')[0].value);
@@ -864,6 +868,7 @@ $('#searchbydatebuttondental').click(function() {
   				}
   				else if(data['counter'] == 'blankstring')
   				{
+  					$('#paginateDental').show();
   					$('#searchloading').hide();
 					$('#searchTable').hide();
 					$('#searchResults').html("");
