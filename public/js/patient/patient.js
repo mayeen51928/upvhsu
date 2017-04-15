@@ -300,6 +300,9 @@ else
 {
 	$("#medical_appointments_dashboard_patient .panel").height($("#dental_appointments_dashboard_patient .panel").height());
 }
+setTimeout(function(){
+	$('#patient_appointments').css('visibility', 'visible');
+}, 200);
 // ------------------PROFILE---------------
 function capitalizeFirstLetter(str){
     var arr = str.split(' ');

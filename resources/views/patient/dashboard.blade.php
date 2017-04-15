@@ -63,15 +63,15 @@
 			        </div>
         		</div>
 			</div>
-			{{-- @endif --}}
 			<hr/>
+			<div class="row" id="patient_appointments" style="visibility: hidden;">
 			<div class="col-md-6" id="medical_appointments_dashboard_patient">
 				<div class="panel panel-default">
 				<div class="panel-body">
 				<h3 class="sub-header h3Title">Medical Appointments</h3>
-				@if(count($medical_appointments) > 0)
-				<div class="table-responsive">
 				
+				<div class="table-responsive">
+					@if(count($medical_appointments) > 0)
 					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
@@ -79,7 +79,7 @@
 								<th>Doctor</th>
 								<th>Priority #</th>
 							</tr>
-            </thead>
+            			</thead>
 						<tbody>
 							@foreach($medical_appointments as $medical_appointment)
 							<tr>
@@ -94,16 +94,17 @@
 						<p>No appointments yet.</p>
 					@endif
 				</div>
+				
 				</div>
 				</div>
 			</div>
 			<div class="col-md-6" id="dental_appointments_dashboard_patient">
-				
 				<div class="panel panel-default">
 				<div class="panel-body">
 				<h3 class="sub-header h3Title">Dental Appointments</h3>
-				@if(count($dental_appointments) > 0)
+				
 				<div class="table-responsive">
+				@if(count($dental_appointments) > 0)
 					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
@@ -129,8 +130,7 @@
 				</div>
 				</div>
 			</div>
-			
-			
+			</div>	
 		</div>
 	</div>
 </div>
