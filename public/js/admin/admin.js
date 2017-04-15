@@ -209,4 +209,39 @@ $(document).ready( function(){
 			}
 		});
 	});
+	$('.changepwbutton').click(function(event) {
+		$('#changepwerrormessage').text('');
+		var user_id = $(this).attr('id').split("_")[1];
+		$('#changepwmodaluser').text(user_id);
+		$('#changepwmodal input').val('');
+		$('#changepwmodal').modal();
+		$('#newpassword').bind('keyup change', function(){
+			$('#changepwerrormessage').text('');
+			if($(this).val() != $('#confirmnewpassword').val() && $('#confirmnewpassword').val()){
+				$('#changepwerrormessage').text('Error! Passwords do not match.').css('color', 'red');
+			}
+			$('#confirmnewpassword').bind('keyup change', function(event) {
+				$('#changepwerrormessage').text('');
+				if($(this).val() != $('#newpassword').val()){
+					$('#changepwerrormessage').text('Error! Passwords do not match.').css('color', 'red');
+				}
+				if($('#confirmnewpassword').val() && $('#newpassword').val() && $('#confirmnewpassword').val() == $('#newpassword').val()){
+					$('#changepwerrormessage').text('Passwords match.').css('color', 'green');
+				}
+			});
+		});
+		$('#savepwbutton').click(function(event) {
+		if($('#confirmnewpassword').val() && $('#newpassword').val() && $('#newpassword').val() == $('#confirmnewpassword').val()){
+			$.post('/admin/changepassword', {user_id: user_id, password:$('#newpassword').val()}, function(data, textStatus, xhr) {
+				if(data['success'] == 'yes'){
+					$('#changepwmodal').modal('hide');
+				}
+			});
+		}
+		
+		
+	});
+		
+	});
+	
 });

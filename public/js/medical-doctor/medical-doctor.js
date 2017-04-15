@@ -172,6 +172,7 @@ $('.addMedicalRecordButton').click(function() {
 	$('#create-medical-record-modal #hemoglobin, #create-medical-record-modal #hemasocrit, #create-medical-record-modal #wbc, #create-medical-record-modal #pus-cells, #create-medical-record-modal #rbc, #create-medical-record-modal #albumin, #create-medical-record-modal #sugar, #create-medical-record-modal #macroscopic, #create-medical-record-modal #microscopic, #create-medical-record-modal #drug-test, #create-medical-record-modal #chest-xray').attr('disabled', 'disabled');
 	$('#create-medical-record-modal #height').focus();
 	$('.medical-button-container').html("");
+	$('#create-medical-record-modal input, #create-medical-record-modal textarea').val('');
 	$('.checkboxMedicalService').removeAttr('checked').removeAttr('disabled');
 	$('#physicalexamaccordion input').attr('disabled', 'disabled');
 	if($(this).attr('id')){
@@ -330,6 +331,21 @@ $('.addMedicalRecordButton').click(function() {
 							function(data){
 								// console.log(data['appointment_id']);
 								$('#create-medical-record-modal').modal("hide");
+								$('#requestsFromDoctor').load(location.href + " #requestsFromDoctor");
+								setTimeout(function(){
+									numOfClicksMedical_Diagnosis = 0;
+									percentageMedical_Diagnosis = 20;
+									if(numOfClicksMedical_Diagnosis == 0){
+										$('#physicalexamination').show();
+										$('#laboratoryresult').hide();
+										$('#remarksDiv').hide();
+										$('#prescriptionDiv').hide();
+										$('#nextButtonMedicalDiagnosis').show();
+										$('#backButtonMedicalDiagnosis').hide();
+										$('#requestLabXrayDiv').hide();
+										$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('1 of 5');
+									}
+								}, 1000);
 							}
 						);
 					}
@@ -594,6 +610,21 @@ $('.addMedicalRecordButton').click(function() {
 									$('#addMedicalRecordButton_'+appointment_id).closest("tr").remove();
 								}
 								$('#create-medical-record-modal').modal("hide");
+								$('#requestsFromDoctor').load(location.href + " #requestsFromDoctor");
+								setTimeout(function(){
+									numOfClicksMedical_Diagnosis = 0;
+									percentageMedical_Diagnosis = 20;
+									if(numOfClicksMedical_Diagnosis == 0){
+										$('#physicalexamination').show();
+										$('#laboratoryresult').hide();
+										$('#remarksDiv').hide();
+										$('#prescriptionDiv').hide();
+										$('#nextButtonMedicalDiagnosis').show();
+										$('#backButtonMedicalDiagnosis').hide();
+										$('#requestLabXrayDiv').hide();
+										$('#changeProgress_MedicalDiagnosis').attr('aria-valuenow', percentageMedical_Diagnosis).css('width', percentageMedical_Diagnosis+'%').html('1 of 5');
+									}
+								}, 1000);
 							}
 						);
 					
@@ -748,9 +779,7 @@ $("#search_year").change(function(){
 	}
 });
 $('#searchbydatebutton').click(function() {
-	// console.log($('#search_month').find(':selected')[0].value);
-	// console.log($('#search_date').find(':selected')[0].value);
-	// console.log($('#search_year').find(':selected')[0].value);
+	$('#paginateMedical').hide();
 	$('#searchlistofallpatients').hide();
 		$('#searchTable').hide();
 		// $('#searchResults').html("");
@@ -766,6 +795,7 @@ $('#searchbydatebutton').click(function() {
 				// $('#searchTable').hide();
 				if(data['counter']>0)
 				{
+					$('#paginateMedical').hide();
 			  		output = '';
 	  				for(var i=0; i < data['searchpatientappointmentidyarray'].length; i++)
 	  				{
@@ -895,6 +925,7 @@ $('#searchbydatebutton').click(function() {
   				}
   				else if(data['counter'] == 'blankstring')
   				{
+  					$('#paginateMedical').show();
   					$('#searchloading').hide();
 					$('#searchTable').hide();
 					$('#searchResults').html("");
@@ -910,6 +941,7 @@ $('#searchbydatebutton').click(function() {
   			});
 });
 $("#search_patient").keyup(function(){
+	$('#paginateMedical').hide();
 	// if($('#search_patient').val()){
 		$('#searchlistofallpatients').hide();
 		$('#searchTable').hide();
@@ -1004,6 +1036,7 @@ $("#search_patient").keyup(function(){
   				}
   				else if(data['counter'] == 'blankstring')
   				{
+  					$('#paginateMedical').show();
   					$('#searchloading').hide();
 					$('#searchTable').hide();
 					$('#searchResults').html("");

@@ -66,6 +66,7 @@
 								<li @if(isset($sidebar_active) and $sidebar_active == 'addpatientaccount')class="active" @endif><a href="{{ url('/admin/addpatientaccount') }}">Add Patient Account</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'editservices')class="active" @endif><a href="{{ url('/admin/editservices') }}">Edit Services' Rates</a></li>
 								<li @if(isset($sidebar_active) and $sidebar_active == 'generateschedule')class="active" @endif><a href="{{ url('/admin/generateschedule') }}">Generate PE Schedule</a></li>
+								<li @if(isset($sidebar_active) and $sidebar_active == 'manageaccounts')class="active" @endif><a href="{{ url('/admin/manageaccounts') }}">Manage Accounts</a></li>
 						@endif
 						<li>
 							<a href="{{ url('/logout') }}" 

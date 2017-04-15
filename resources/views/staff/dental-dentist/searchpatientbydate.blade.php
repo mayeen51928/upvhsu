@@ -88,19 +88,26 @@
 			</div>
       <div class="col-md-7">
       <img class="img-responsive" src="{{asset('images/loading.gif')}}" id="searchloading" style="display: none;"/>
-        <table id="searchTable" class="table" style="display: none">
+        <table id="searchTable" class="table table-hover" style="display: none">
+        <thead>
           <tr><th colspan="3">Search Results</th></tr>
+          </thead>
           <tbody id="searchResults">
           </tbody>
         </table>
-        <table class="table" id="searchlistofallpatients">
-        <tr><th>List of All Patients Who Have Existing Dental Records</th></tr>
+        <table class="table table-hover" id="searchlistofallpatients">
+        <thead>
+        <tr><th colspan="2">List of All Patients Who Have Existing Dental Records</th></tr>
+        </thead>
           <tbody>
+          <?php $row_number = 1 * $patients->firstItem(); ?>
             @foreach($patients as $patient)
-              <tr><td><a class="listofallpatientsdental" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
+              <tr><td>{{$row_number}}.</td><td><a class="listofallpatientsdental" id="resultId_{{$patient->patient_id}}">{{$patient->patient_last_name}}, {{$patient->patient_first_name}}</a></td></tr>
+              <?php $row_number++; ?>
             @endforeach
           </tbody>
         </table>
+        <div id="paginateDental" class="text-center">{{ $patients->links() }} </div>
       </div>
       </div>
 		</div>

@@ -441,7 +441,7 @@ class DentistController extends Controller
 
 		public function searchpatient()
 		{
-			$params['patients'] = DentalAppointment::select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
+			$params['patients'] = DentalAppointment::select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->groupBy('dental_appointments.patient_id')->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->paginate(20);
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'searchpatient';
 			return view('staff.dental-dentist.searchpatient', $params);
@@ -554,7 +554,7 @@ class DentistController extends Controller
 			return view('staff.dental-dentist.viewrecords', $params);
 		}
 		public function searchpatientbydate(){
-			$params['patients'] = DentalAppointment::select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->distinct()->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->get();
+			$params['patients'] = DentalAppointment::select('dental_appointments.patient_id', 'patient_info.patient_first_name', 'patient_info.patient_last_name')->groupBy('dental_appointments.patient_id')->join('patient_info', 'patient_info.patient_id', 'dental_appointments.patient_id')->orderBy('patient_last_name', 'asc')->paginate(20);
 			$params['years'] = DentalSchedule::select(DB::raw("YEAR(schedule_start) as year"))->groupBy(DB::raw("YEAR(schedule_start)"))->get();
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'searchpatient';
