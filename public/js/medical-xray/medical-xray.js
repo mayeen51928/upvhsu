@@ -9,6 +9,7 @@ $('input:radio[name="xray_radio"]').change(function(){
 		$('#chest-xray').removeAttr('disabled');
 		$('.addXrayResultButton').fadeIn();
 		$('.checkboxXrayService').attr('disabled', 'disabled');
+		$('.checkboxXrayService').removeAttr('checked');
 	}
 	else{
 		$('.addXrayResultButton').fadeOut();

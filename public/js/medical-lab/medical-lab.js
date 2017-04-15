@@ -9,6 +9,7 @@ $('input:radio[name="cbc_radio"]').change(function(){
 	if ($(this).val() == 'outside') {
 		// console.log("outside");
 		$('.checkboxLabService').attr('disabled', 'disabled');
+		$('.checkboxLabService').removeAttr('checked');
 		$('#hemoglobin-lab').removeAttr('disabled');
 		$('#hemasocrit-lab').removeAttr('disabled');
 		$('#wbc-lab').removeAttr('disabled');

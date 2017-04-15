@@ -180,6 +180,9 @@
 			</div>
 			</div>
 			<div class="modal-footer text-center">
+				<div class="pull-left">
+					<button type="button" class="btn btn-primary" id="printMedicalReceiptButton">Print Receipt</button>
+				</div>
 				<button type="button" class="btn btn-primary" id="addMedicalBillingButton">Confirm</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			</div>
