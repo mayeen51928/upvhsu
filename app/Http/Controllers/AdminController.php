@@ -488,10 +488,44 @@ class AdminController extends Controller
 
 	public function generateschedule()
 	{
-		$params['schedules'] = DB::table('patient_info')->join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->where('patient_type_id', 1)->where('graduated', '0')->orderBy('distance_to_miagao', 'desc')->get();
-		// check also if the student has graduated
+		$student_patients = Patient::where('patient_type_id', 1)->where('graduated', '0')->get();
+		foreach ($student_patients as $student_patient) {
+			$student_patient->year_level = intval(date("Y")) - intval(substr($student_patient->patient_id, 0, 4));
+			if((intval(substr($student_patient->patient_id, 0, 4)) < intval(date("Y")) - 3 && ($student_patient->degree_program_id!=34 && $student_patient->degree_program_id!=40))
+				||
+				(intval(substr($student_patient->patient_id, 0, 4)) < intval(date("Y")) - 4 && ($student_patient->degree_program_id==34 || $student_patient->degree_program_id==40))){
+				// $student_patient->degree_program_id = 34 ---->BS Accountancy
+				// $student_patient->degree_program_id = 34 ---->BS Chemical Engineering
+				$student_patient->graduated = '1';
+			}
+			$student_patient->update();
+		}
+		$params['schedules'] = Patient::join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->where('patient_type_id', 1)->where('graduated', '0')->orderBy('distance_to_miagao', 'desc')->paginate(20);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'generateschedule';
 		return view('admin.generateschedule', $params);
+	}
+	public function postschedule(Request $request){
+		$announcement_sched = new Announcement;
+		$schedules = Patient::join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->join('degree_programs', 'patient_info.degree_program_id', 'degree_programs.id')->where('patient_type_id', 1)->where('graduated', '0')->orderBy('distance_to_miagao', 'desc')->get();
+		$day_counter=1;
+		$day_accommodate=1;
+		$announcement = '<table id="generatescheduletable" class="table table-striped schedule-bordered table-condensed"><thead><tr><th class="info text-center">Day '.$day_counter.'</th><th class="info"></th><th class="info"></th></tr></thead>';
+		foreach ($schedules as $schedule) {
+			if($day_accommodate>20){
+				$day_counter ++;
+				$announcement = $announcement.'<thead><tr><th class="info text-center">Day '.$day_counter.'</th class="info"><th></th><th class="info"></th></tr></thead>';
+				$day_accommodate=1;
+			}
+			if($day_accommodate<=20){
+				$announcement = $announcement.'<tr><td>'.$schedule->patient_last_name.'</td><td>'.$schedule->patient_first_name.'</td><td>'.$schedule->degree_program_description.'</td></tr>';
+				$day_accommodate++;
+			}
+		}
+		$announcement = $announcement.'</table>';
+		// dd($announcement);
+		$announcement_sched->announcement_title = 'Schedule for Upperclassmen Physical Exam';
+		$announcement_sched->announcement_body = $announcement;
+		$announcement_sched->save();
 	}
 }

@@ -522,3 +522,9 @@ a.btn-danger {
 .not-required-asterisk{
     display: none;
 }
+.schedule-bordered, .schedule-bordered td{
+    border: 1px solid #ddd !important;
+}
+.schedule-bordered td{
+    width: 0% !important;
+}

@@ -302,5 +302,11 @@ $(document).ready( function(){
 	});
 		
 	});
-	
+	//-------------GENERATE SCHEDULE --------------
+	$("#generatescheduletable").tablesorter( {sortList: [[0,0], [2,0]]} ); 
+	$('#postpeschedule').click(function(event) {
+		$.post('/admin/postschedule', {}, function(data, textStatus, xhr) {
+			$('#postpeschedule').attr('disabled', 'disabled');
+		});
+	});
 });

@@ -157,6 +157,7 @@ Route::post('/edit_dental_services', 'AdminController@editdentalservices');
 Route::post('/update_dental_services', 'AdminController@updatedentalservices');
 Route::get('/admin/manageaccounts', 'AdminController@manageaccounts');
 Route::post('/admin/changepassword', 'AdminController@changepassword');
+Route::post('/admin/postschedule', 'AdminController@postschedule');
 
 //For wrong URLs
 Route::get('/{any}', function($any){
