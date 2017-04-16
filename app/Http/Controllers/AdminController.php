@@ -461,8 +461,22 @@ class AdminController extends Controller
 
 	public function generateschedule()
 	{
+		// dd(intval(date("Y")) - 3);
+		$student_patients = Patient::where('patient_type_id', 1)->where('graduated', '0')->get();
+		foreach ($student_patients as $student_patient) {
+			$student_patient->year_level = intval(date("Y")) - intval(substr($student_patient->patient_id, 0, 4));
+			if((intval(substr($student_patient->patient_id, 0, 4)) < intval(date("Y")) - 3 && ($student_patient->degree_program_id!=34 && $student_patient->degree_program_id!=40))
+				||
+				(intval(substr($student_patient->patient_id, 0, 4)) < intval(date("Y")) - 4 && ($student_patient->degree_program_id==34 || $student_patient->degree_program_id==40))){
+				// $student_patient->degree_program_id = 34 ---->BS Accountancy
+				// $student_patient->degree_program_id = 34 ---->BS Chemical Engineering
+				
+				$student_patient->graduated = '1';
+				
+			}
+			$student_patient->update();
+		}
 		$params['schedules'] = DB::table('patient_info')->join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->where('patient_type_id', 1)->where('graduated', '0')->orderBy('distance_to_miagao', 'desc')->get();
-		// check also if the student has graduated
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'generateschedule';
 		return view('admin.generateschedule', $params);
