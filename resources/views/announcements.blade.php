@@ -40,9 +40,9 @@
 					      	posted on <span class="announcement_date">{{ Carbon\Carbon::parse($announcement->created_at)->toDayDateTimeString() }}</span><br/><br/>
 					      	@if($announcement->announcement_title == 'Schedule for Upperclassmen Physical Exam')
 					      		<div class="announcement_body" id="announcement_body_{{ $announcement->id }}">
-					      		<div class="col-md-7 col-md-offset-2">
+					      		{{-- <div class="col-md-7 col-md-offset-2"> --}}
 					      		{!! $announcement->announcement_body !!}
-					      		</div>
+					      		{{-- </div> --}}
 					      		</div>
 					      	@else
 					      	<p style="text-align:justify; width:100%; " class="announcement_body" id="announcement_body_{{ $announcement->id }}">{!! nl2br(e($announcement->announcement_body)) !!}</p>

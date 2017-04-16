@@ -525,3 +525,6 @@ a.btn-danger {
 .schedule-bordered, .schedule-bordered td{
     border: 1px solid #ddd !important;
 }
+.schedule-bordered td{
+    width: 0% !important;
+}
