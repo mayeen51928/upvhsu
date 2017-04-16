@@ -461,7 +461,6 @@ class AdminController extends Controller
 
 	public function generateschedule()
 	{
-		// dd(intval(date("Y")) - 3);
 		$student_patients = Patient::where('patient_type_id', 1)->where('graduated', '0')->get();
 		foreach ($student_patients as $student_patient) {
 			$student_patient->year_level = intval(date("Y")) - intval(substr($student_patient->patient_id, 0, 4));
@@ -470,9 +469,7 @@ class AdminController extends Controller
 				(intval(substr($student_patient->patient_id, 0, 4)) < intval(date("Y")) - 4 && ($student_patient->degree_program_id==34 || $student_patient->degree_program_id==40))){
 				// $student_patient->degree_program_id = 34 ---->BS Accountancy
 				// $student_patient->degree_program_id = 34 ---->BS Chemical Engineering
-				
 				$student_patient->graduated = '1';
-				
 			}
 			$student_patient->update();
 		}
