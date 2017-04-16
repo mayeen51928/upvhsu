@@ -473,9 +473,32 @@ class AdminController extends Controller
 			}
 			$student_patient->update();
 		}
-		$params['schedules'] = DB::table('patient_info')->join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->where('patient_type_id', 1)->where('graduated', '0')->orderBy('distance_to_miagao', 'desc')->get();
+		$params['schedules'] = Patient::join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->where('patient_type_id', 1)->where('graduated', '0')->orderBy('distance_to_miagao', 'desc')->paginate(20);
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'generateschedule';
 		return view('admin.generateschedule', $params);
+	}
+	public function postschedule(Request $request){
+		$announcement_sched = new Announcement;
+		$schedules = Patient::join('towns', 'patient_info.town_id', '=', 'towns.id')->join('provinces', 'towns.province_id', '=', 'provinces.id')->join('degree_programs', 'patient_info.degree_program_id', 'degree_programs.id')->where('patient_type_id', 1)->where('graduated', '0')->orderBy('distance_to_miagao', 'desc')->get();
+		$day_counter=1;
+		$day_accommodate=1;
+		$announcement = '<table class="table table-striped schedule-bordered table-condensed"><thead><tr><th class="info text-center" colspan="3">Day '.$day_counter.'</th></tr></thead>';
+		foreach ($schedules as $schedule) {
+			if($day_accommodate>20){
+				$day_counter ++;
+				$announcement = $announcement.'<thead><tr><th class="info text-center" colspan="3">Day '.$day_counter.'</th></tr></thead>';
+				$day_accommodate=1;
+			}
+			if($day_accommodate<=20){
+				$announcement = $announcement.'<tr><td>'.$schedule->patient_last_name.'</td><td>'.$schedule->patient_first_name.'</td><td>'.$schedule->degree_program_description.'</td></tr>';
+				$day_accommodate++;
+			}
+		}
+		$announcement = $announcement.'</table>';
+		// dd($announcement);
+		$announcement_sched->announcement_title = 'Schedule for Upperclassmen Physical Exam';
+		$announcement_sched->announcement_body = $announcement;
+		$announcement_sched->save();
 	}
 }

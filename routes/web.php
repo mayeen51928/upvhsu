@@ -155,6 +155,7 @@ Route::post('/edit_medical_services', 'AdminController@editmedicalservices');
 Route::post('/update_medical_services', 'AdminController@updatemedicalservices');
 Route::get('/admin/manageaccounts', 'AdminController@manageaccounts');
 Route::post('/admin/changepassword', 'AdminController@changepassword');
+Route::post('/admin/postschedule', 'AdminController@postschedule');
 
 //For wrong URLs
 Route::get('/{any}', function($any){
