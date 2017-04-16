@@ -69,10 +69,9 @@
 				<div class="panel panel-default">
 				<div class="panel-body">
 				<h3 class="sub-header h3Title">Medical Appointments</h3>
-				@if(count($medical_appointments) > 0)
 				<div class="table-responsive">
-				
-					<table class="table table-bordered table-hover">
+					@if(count($medical_appointments) > 0)
+					<table class="table table-bordered">
 						<thead>
 							<tr>
 								<th>Date</th>
@@ -98,13 +97,12 @@
 				</div>
 			</div>
 			<div class="col-md-6" id="dental_appointments_dashboard_patient">
-				
 				<div class="panel panel-default">
 				<div class="panel-body">
 				<h3 class="sub-header h3Title">Dental Appointments</h3>
-				@if(count($dental_appointments) > 0)
 				<div class="table-responsive">
-					<table class="table table-bordered table-hover">
+					@if(count($dental_appointments) > 0)
+					<table class="table table-bordered">
 						<thead>
 							<tr>
 								<th>Date</th>
@@ -129,8 +127,6 @@
 				</div>
 				</div>
 			</div>
-			
-			
 		</div>
 	</div>
 </div>
@@ -165,9 +161,11 @@
 								    </tbody>
 								  </table>
 								  <div class="row">
-								  	<div class="col-md-6 col-md-offset-6">
-								  		<label>Total</label>
-								  		<input type="text" id="total_medical_billing" class="form-control" disabled>
+								  	<div class="col-md-6 col-md-offset-6" id="medical_billing_info">
+								  		<div class="input-group">
+											  <span class="input-group-addon" id="basic-addon1">Total</span>
+											  <input type="text" class="form-control" id="total_medical_billing" aria-describedby="basic-addon1" disabled style="background-color:white;">
+											</div>
 								  	</div>
 								  </div>
 					      </div>
@@ -299,9 +297,11 @@
 								    </tbody>
 								  </table>
 								  <div class="row">
-								  	<div class="col-md-6 col-md-offset-6">
-								  		<label>Total</label>
-								  		<input type="text" id="total_dental_billing" class="form-control" disabled>
+								  	<div class="col-md-6 col-md-offset-6" id="dental_billing_info">
+								  		<div class="input-group">
+											  <span class="input-group-addon" id="basic-addon1">Total</span>
+											  <input type="text" class="form-control" id="total_dental_billing" aria-describedby="basic-addon1" disabled style="background-color:white;">
+											</div>
 								  	</div>
 								  </div>
 					      </div>
