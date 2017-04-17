@@ -11,7 +11,7 @@
 					<div class="panel-heading">Edit Medical Services Rate</div>
 					<div class="panel-body">
 						<select class="form-control" id="typeOfMedicalService">
-							<option selected disabled>Select type of Service</option>
+							<option selected disabled>Select Type of Service</option>
 							<option value="medical">Medical</option>
 							<option value="cbc">Cbc</option>
 							<option value="drugtest">Drugtest</option>

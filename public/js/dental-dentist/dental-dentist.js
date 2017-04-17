@@ -67,32 +67,30 @@ $('#staffnotesdentist').keyup(function() {
 $('.dental_chart').click(function(){
 	var id = $(this).attr('id').split("_");
 	teethId = id[1];
-	$.ajax({
-		  type: "POST",
-		  url: updateDentalRecordModal,
-		  data: {teeth_id:  teethId, _token: token},
-		  success: function(data)
-		  {
-		  	// console.log(data['condition_id']);
-		  	// console.log(data['operation_id']);
-		  	if (data['condition_id'] != null) {
-		  		$('.condition').val(data['condition_id']);
-		  	}
-		  	else{
-		  		$('.condition').val(0);
-		  	}
-		  	if(data['operation_id'] != null){
-		  		$('.operation').val(data['operation_id']);
-		  	}
-		  	else{
-		  		$('.operation').val(0);
-		  	}
-				
-		  }
-	  });
-		window.setTimeout(function(){
+	$.post('/update_dental_record_modal', {
+		teeth_id:  teethId,
+	}, function(data){
+		if (data['condition_id'] != null) {
+			console.log("Condition exists!");
+  		$('.condition').val(data['condition_id']);
+  	}
+  	else{
+  		console.log("Condition is zero!");
+  		$('.condition').val('0');
+  	}
+  	if(data['operation_id'] != null){
+  		console.log("operation exists!");
+  		$('.operation').val(data['operation_id']);
+  	}
+  	else{
+  		console.log("Operation is zero!");
+  		$('.operation').val('0');
+  	}
+
+  	window.setTimeout(function(){
 			$('#update-dental-record-modal').modal('show');
-    }, 5000)
+    }, 3000)
+	})		
 });
 
 var timer;
@@ -122,93 +120,69 @@ $('.updateDentalRecord').click(function(){
 		var operationId = $('.operation').val();
 		if (operationId == null) { operationId = 0; };
 		if (conditionId == null) { conditionId = 0; };
-		$.ajax({
-			  type: "POST",
-			  url: insertDentalRecordModal,
-			  data: {teeth_id:  teethId, condition_id:  conditionId, operation_id:  operationId, appointment_id:  appointmentId,  _token: token},
-			  success: function(data)
-			  {
-			  	$('#condition_'+teethId).attr('condition_id', conditionId);
-			  	if (conditionId == 1) {
-			  		$('#condition_'+teethId).css({ fill: "#ff4000" });
-			  	}
-			  	else if (conditionId == 2) {
-			  		$('#condition_'+teethId).css({ fill: "#ffff00" });
-			  	}
-			  	else if (conditionId == 3) {
-			  		$('#condition_'+teethId).css({ fill: "#00ff00" });
-			  	}
-			  	else if (conditionId == 4) {
-			  		$('#condition_'+teethId).css({ fill: "#00ffff" });
-			  	}
-			  	else if (conditionId == 5) {
-			  		$('#condition_'+teethId).css({ fill: "#0000ff" });
-			  	}
-			  	else {
-			  		$('#condition_'+teethId).css({ fill: "white" });
-			  	}
-			  	
-			  	$('#operation_'+teethId).attr('operation_id', operationId);
-			  	if (operationId == 1) {
-			  		$('#operation_'+teethId).css({ fill: "#bf00ff" });
-			  	}
-			  	else if (operationId == 2) {
-			  		$('#operation_'+teethId).css({ fill: "#ff0080" });
-			  	}
-			  	else if (operationId == 3) {
-			  		$('#operation_'+teethId).css({ fill: "#ff0000" });
-			  	}
-			  	else if (operationId == 4) {
-			  		$('#operation_'+teethId).css({ fill: "#808080" });
-			  	}
-			  	else if (operationId == 5) {
-			  		$('#operation_'+teethId).css({ fill: "#194d19" });
-			  	}
-			  	else {
-			  		$('#operation_'+teethId).css({ fill: "white" });
-			  	};
+		$.post('/insert_dental_record_modal', {
+			teeth_id:  teethId, 
+			condition_id:  conditionId, 
+			operation_id:  operationId, 
+			appointment_id:  appointmentId,
+		}, function(data){
+			$('#condition_'+teethId).attr('condition_id', conditionId);
+	  	if (conditionId == 1) {
+	  		$('#condition_'+teethId).css({ fill: "#ff4000" });
+	  	}
+	  	else if (conditionId == 2) {
+	  		$('#condition_'+teethId).css({ fill: "#ffff00" });
+	  	}
+	  	else if (conditionId == 3) {
+	  		$('#condition_'+teethId).css({ fill: "#00ff00" });
+	  	}
+	  	else if (conditionId == 4) {
+	  		$('#condition_'+teethId).css({ fill: "#00ffff" });
+	  	}
+	  	else if (conditionId == 5) {
+	  		$('#condition_'+teethId).css({ fill: "#0000ff" });
+	  	}
+	  	else {
+	  		$('#condition_'+teethId).css({ fill: "white" });
+	  	}
+	  	
+	  	$('#operation_'+teethId).attr('operation_id', operationId);
+	  	if (operationId == 1) {
+	  		$('#operation_'+teethId).css({ fill: "#bf00ff" });
+	  	}
+	  	else if (operationId == 2) {
+	  		$('#operation_'+teethId).css({ fill: "#ff0080" });
+	  	}
+	  	else if (operationId == 3) {
+	  		$('#operation_'+teethId).css({ fill: "#ff0000" });
+	  	}
+	  	else if (operationId == 4) {
+	  		$('#operation_'+teethId).css({ fill: "#808080" });
+	  	}
+	  	else if (operationId == 5) {
+	  		$('#operation_'+teethId).css({ fill: "#194d19" });
+	  	}
+	  	else {
+	  		$('#operation_'+teethId).css({ fill: "white" });
+	  	};
 
-					$('#update-dental-record-modal').modal("hide");
-			  }
-		  });
+			$('#update-dental-record-modal').modal("hide");
+		})
 	}
-	
-	
 });
-
-// $('.dental_chart').mouseover(function(){
-//     var id = $(this).attr('id').split("_");
-//     var teethId = id[1];
-//     var type = id[0];
-//     $.ajax({
-//     	type: "POST",
-//     	url: hoverDentalChart,
-//     	data: {teeth_id:  teethId, type:  type, _token: token},
-//     	success: function(data)
-//     	{
-//     		$('#'+data['type']+'_'+data['id']).effect( "pulsate", {times:1}, 1000 );
-//     	}
-//     });
-// });
 
 
 
 $('.updateDentalDiagnosis').click(function(){
 	var id = $(this).attr('id').split("_");
 	appointmentId = id[1];
-	// console.log(appointmentId);
-		$.ajax({
-		  type: "POST",
-		  url: updateDentalDiagnosis,
-		  data: {appointment_id:  appointmentId, _token: token},
-		  success: function(data)
-		  {
-		  	// console.log(data['success']);
-		  	setTimeout(function() {
-			  window.location.href = "http://localhost:8000/dentist";
-			}, 5000);
-		  }
-	  });
+	$.post('/update_dental_diagnosis', {
+		appointment_id:  appointmentId,
+	}, function(data){
+		setTimeout(function() {
+		  window.location.href = "http://localhost:8000/dentist";
+		}, 5000);
+	})
 });
 
 $('.addedDentalRecord').click(function(){
@@ -322,40 +296,34 @@ $('.confirmAdditionalDentalRecord').click(function(){
 			}
 	});
   if(dentalCaries && gingivitis && peridontalPocket && oralDebris && calculus && neoplasm && dentalFacioAnomaly && teethPresent){
-  	$.ajax({
-		  type: "POST",
-		  url: additionalDentalRecord, 
-		  data: {	appointment_id:appointmentId,
-		  				dental_caries:dentalCaries, 
-		  				gingivitis:gingivitis, 
-		  				peridontal_pocket:peridontalPocket, 
-		  				oral_debris:oralDebris,
-		  				calculus:calculus,
-		  				neoplasm:neoplasm,
-		  				dental_facio_anomaly:dentalFacioAnomaly,
-		  				teeth_present:teethPresent,
-		  				dental_services_id:dental_services_id,
-		  				_token: token
-		  			},
-		  success: function(data)
-		  {
-		  	$('#confirm_additional_dental_record').modal('hide');
-		  	$('#selDentalCaries').attr("disabled", "disabled");
-		  	$('#selGingivitis').attr("disabled", "disabled");
-		  	$('#selPeridontalPocket').attr("disabled", "disabled");
-		  	$('#selOralDebris').attr("disabled", "disabled");
-		  	$('#selCalculus').attr("disabled", "disabled");
-		  	$('#selNeoplasm').attr("disabled", "disabled");
-		  	$('#selDentalFacioAnomaly').attr("disabled", "disabled");
-		  	$('#teethPresent').attr("disabled", "disabled");
-		  	$('#additionalDentalRecordInput').attr("disabled", "disabled");
-				$('.addedDentalRecord').attr("disabled", "disabled");
-				$('#confirm_additional_dental_record').modal('hide');
-				$('#additionalDentalRecordPanelBody').css('background-color', '#d6e9c6');
-				window.location.href = 'http://upvhsu.pe.hu/dentist';
-    		return false;
-		  }
-	 });
+  	$.post('/additional_dental_record', {
+  		appointment_id:appointmentId,
+			dental_caries:dentalCaries, 
+			gingivitis:gingivitis, 
+			peridontal_pocket:peridontalPocket, 
+			oral_debris:oralDebris,
+			calculus:calculus,
+			neoplasm:neoplasm,
+			dental_facio_anomaly:dentalFacioAnomaly,
+			teeth_present:teethPresent,
+			dental_services_id:dental_services_id,
+  	}, function(data){
+  		$('#confirm_additional_dental_record').modal('hide');
+	  	$('#selDentalCaries').attr("disabled", "disabled");
+	  	$('#selGingivitis').attr("disabled", "disabled");
+	  	$('#selPeridontalPocket').attr("disabled", "disabled");
+	  	$('#selOralDebris').attr("disabled", "disabled");
+	  	$('#selCalculus').attr("disabled", "disabled");
+	  	$('#selNeoplasm').attr("disabled", "disabled");
+	  	$('#selDentalFacioAnomaly').attr("disabled", "disabled");
+	  	$('#teethPresent').attr("disabled", "disabled");
+	  	$('#additionalDentalRecordInput').attr("disabled", "disabled");
+			$('.addedDentalRecord').attr("disabled", "disabled");
+			$('#confirm_additional_dental_record').modal('hide');
+			$('#additionalDentalRecordPanelBody').css('background-color', '#d6e9c6');
+			window.location.href = 'http://upvhsu.pe.hu/dentist';
+  		return false;
+  	})
   }
   else{
   	$('#confirm_additional_dental_record').modal('hide');
@@ -555,21 +523,14 @@ $('#adddentalschedule').click(function(){
 		}
 	});
 	if(schedules.length > 0){
-		$.ajax({
-			url: addDentalSchedule,
-			type: 'POST',
-			dataType: 'json',
-			data: {schedules:  schedules, _token: token},
-			success: function(data) {
-				$('button').attr('disabled', 'disabled');
-				$('input').attr('disabled', 'disabled');
-				$('#manageschedulepanel').css('background-color', '#d6e9c6');
-			},
-			error: function(xhr, textStatus, errorThrown) {
-			}
-		});
+		$.post('/addschedule_dental', {
+			schedules:  schedules,
+		}, function(data){
+			$('button').attr('disabled', 'disabled');
+			$('input').attr('disabled', 'disabled');
+			$('#manageschedulepanel').css('background-color', '#d6e9c6');
+		})
 	}
-	
 });
 
 // ----------------------------- End of Manage Schedule ----------------------

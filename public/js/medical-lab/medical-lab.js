@@ -258,6 +258,7 @@ $('.addLabResult').click(function(){
 					urinalysis_service_id: data['urinalysis_billing_service'].id,
 
 			}, function(data, textStatus, xhr) {
+				console.log('hello');
 				$('#cbccountpanel').load(location.href + " #cbccount");
 				$('#drugtestcountpanel').load(location.href + " #drugtestcount");
 				$('#fecalysiscountpanel').load(location.href + " #fecalysiscount");

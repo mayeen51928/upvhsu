@@ -162,10 +162,4 @@
 	</div>
 </div>
 
-<script>
-	// token and createPostUrl are needed to be passed to AJAX method call
-	var token = '{{csrf_token()}}';
-	var addBillingXray = '/add_billing_xray';
-	var confirmBillingXray = '/confirm_billing_xray';
-</script>
 @endsection

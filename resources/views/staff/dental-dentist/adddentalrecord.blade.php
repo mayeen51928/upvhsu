@@ -465,15 +465,4 @@
 		</div>
   </div>
 </div>
-
-<script>
-  // token and createPostUrl are needed to be passed to AJAX method call
-  var token = '{{csrf_token()}}';
-  var updateDentalRecordModal = '/update_dental_record_modal';
-  var insertDentalRecordModal = '/insert_dental_record_modal';
-  var updateDentalDiagnosis = '/update_dental_diagnosis';
-  var hoverDentalChart = '/hover_dental_chart';
-  var additionalDentalRecord = '/additional_dental_record';
-</script>
-
 @endsection

@@ -237,11 +237,4 @@
     </div>
   </div>
 </div>
-
-<script>
-  // token and createPostUrl are needed to be passed to AJAX method call
-  var token = '{{csrf_token()}}';
-  var viewDentalRecordDashboard = '/view_dental_record_dashboard';
-  var printMedicalReceipt = '/print_medical_receipt';
-</script>
 @endsection
