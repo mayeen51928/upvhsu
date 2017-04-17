@@ -10,6 +10,7 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">Manage Accounts</div>
 					<div class="panel-body">
+						<div class="table-responsive">
 						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
@@ -34,6 +35,7 @@
 				          		@endforeach
 			          		</tbody>
 			          	</table>
+			          	</div>
 			        </div>
 			    </div>
 			</div>
