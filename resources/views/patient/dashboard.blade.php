@@ -69,10 +69,9 @@
 				<div class="panel panel-default">
 				<div class="panel-body">
 				<h3 class="sub-header h3Title">Medical Appointments</h3>
-				
 				<div class="table-responsive">
 					@if(count($medical_appointments) > 0)
-					<table class="table table-bordered table-hover">
+					<table class="table table-bordered">
 						<thead>
 							<tr>
 								<th>Date</th>
@@ -102,10 +101,9 @@
 				<div class="panel panel-default">
 				<div class="panel-body">
 				<h3 class="sub-header h3Title">Dental Appointments</h3>
-				
 				<div class="table-responsive">
-				@if(count($dental_appointments) > 0)
-					<table class="table table-bordered table-hover">
+					@if(count($dental_appointments) > 0)
+					<table class="table table-bordered">
 						<thead>
 							<tr>
 								<th>Date</th>
@@ -130,6 +128,7 @@
 				</div>
 				</div>
 			</div>
+
 			</div>	
 		</div>
 	</div>
@@ -165,9 +164,11 @@
 								    </tbody>
 								  </table>
 								  <div class="row">
-								  	<div class="col-md-6 col-md-offset-6">
-								  		<label>Total</label>
-								  		<input type="text" id="total_medical_billing" class="form-control" disabled>
+								  	<div class="col-md-6 col-md-offset-6" id="medical_billing_info">
+								  		<div class="input-group">
+											  <span class="input-group-addon" id="basic-addon1">Total</span>
+											  <input type="text" class="form-control" id="total_medical_billing" aria-describedby="basic-addon1" disabled style="background-color:white;">
+											</div>
 								  	</div>
 								  </div>
 					      </div>
@@ -299,9 +300,11 @@
 								    </tbody>
 								  </table>
 								  <div class="row">
-								  	<div class="col-md-6 col-md-offset-6">
-								  		<label>Total</label>
-								  		<input type="text" id="total_dental_billing" class="form-control" disabled>
+								  	<div class="col-md-6 col-md-offset-6" id="dental_billing_info">
+								  		<div class="input-group">
+											  <span class="input-group-addon" id="basic-addon1">Total</span>
+											  <input type="text" class="form-control" id="total_dental_billing" aria-describedby="basic-addon1" disabled style="background-color:white;">
+											</div>
 								  	</div>
 								  </div>
 					      </div>
@@ -315,11 +318,5 @@
     </div>
   </div>
 </div>
-<script>
-  // token and createPostUrl are needed to be passed to AJAX method call
-  var token = '{{csrf_token()}}';
-  var viewDentalRecordDashboard = '/view_dental_record_dashboard';
-  var printMedicalReceipt = '/print_medical_receipt';
-</script>
 
 @endsection

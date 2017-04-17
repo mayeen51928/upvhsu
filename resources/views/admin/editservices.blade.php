@@ -10,17 +10,15 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">Edit Medical Services Rate</div>
 					<div class="panel-body">
-						<div>
-							<select class="form-control" id="typeOfMedicalService">
-								<option selected disabled>Select type of Services</option>
-								<option value="medical">Medical</option>
-								<option value="cbc">Cbc</option>
-								<option value="drugtest">Drugtest</option>
-								<option value="fecalysis">Fecalysis</option>
-								<option value="urinalysis">Urinalysis</option>
-								<option value="xray">X-ray</option>
-							</select>
-						</div>
+						<select class="form-control" id="typeOfMedicalService">
+							<option selected disabled>Select Type of Service</option>
+							<option value="medical">Medical</option>
+							<option value="cbc">Cbc</option>
+							<option value="drugtest">Drugtest</option>
+							<option value="fecalysis">Fecalysis</option>
+							<option value="urinalysis">Urinalysis</option>
+							<option value="xray">X-ray</option>
+						</select>
 						<br/>
 						<table id="displayMedicalServicesTable" class="table" style="display: none">
 							<tbody id="displayMedicalServices">
@@ -33,20 +31,12 @@
 				<div class="panel panel-info">
 					<div class="panel-heading">Edit Dental Services Rate</div>
 					<div class="panel-body">
-						<div>
-							<select class="form-control" id="typeOfPatientDental">
-								<option selected disabled>Select type of patient</option>
-								<option value="1">Student</option>
-								<option value="2">Faculty</option>
-								<option value="3">Staff</option>
-								<option value="4">Dependent</option>
-								<option value="5">OPD</option>
-								<option value="6">Senior Citizen</option>
-							</select>
-						</div>
+						<button type="button" class="btn btn-success btn-block editDentalServicesButton" data-toggle="modal">Add/Edit Record</button>
 						<br/>
-						<div>
-						</div>
+						<table id="displayDentalServicesTable" class="table">
+							<tbody id="displayDentalServices">
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -72,17 +62,33 @@
 				</div>
 			</div>
 			<div class="modal-footer" id="savechangesbuttonmedical">
-				
+				<div class="error_msg_medical" style="color:red; float:left;">Please fill all fields.</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="editDentalServices" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Edit Dental Services</h4>
+			</div>
+			<div class="modal-body">
+				<div class="add-more-dental">
+					<button type="button" class="btn btn-success btn-xs addmoredentalservices">Add more services</button>
+					<br/><br/>
+					<table id="displayDentalServicesTableModal" class="table table-responsive" style="display: none">
+						<tbody id="displayDentalServicesModal">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer" id="savechangesbuttondental">
+				<div class="error_msg_dental" style="color:red; float:left;">Please fill all fields.</div>
+			</div>
+		</div>
 	</div>
-<script>
-	// token and createPostUrl are needed to be passed to AJAX method call
-	var token = '{{csrf_token()}}';
-	var displayMedicalServices = '/display_medical_services';
-	var displayDentalServices = '/display_dental_services';
-	var editMedicalServices = '/edit_medical_services';
-	var updateMedicalServices = '/update_medical_services';
-</script>
+</div>
 @endsection

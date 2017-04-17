@@ -114,12 +114,4 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	// token and createPostUrl are needed to be passed to AJAX method call
-	var token = '{{csrf_token()}}';
-	var addBillingDental = '/add_billing_dental';
-	var confirmBillingDental = '/confirm_billing_dental';
-</script>
-
 @endsection

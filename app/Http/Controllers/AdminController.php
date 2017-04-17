@@ -19,6 +19,7 @@ use App\ChestXrayResult;
 use App\StaffNote;
 use App\MedicalBilling;
 use App\DentalBilling;
+use App\DentalService;
 use App\Patient;
 use App\Province;
 Use App\Town;
@@ -372,16 +373,6 @@ class AdminController extends Controller
 		return response()->json(['display_medical_services' => $display_medical_services]); 
 	}
 
-	public function viewservicesdental(Request $request)
-	{
-		$params['navbar_active'] = 'account';
-		$params['sidebar_active'] = 'editservices';
-
-		$patient_type_id = $request->patient_type_id;
-
-		return view('admin.editservices', $params);
-	}
-
 	public function editmedicalservices(Request $request)
 	{
 		$service_type = $request->service_type;
@@ -392,6 +383,17 @@ class AdminController extends Controller
 
 		return response()->json(['display_medical_services' => $display_medical_services]); 
 	}
+
+	public function editdentalservices(Request $request)
+	{
+		$params['navbar_active'] = 'account';
+		$params['sidebar_active'] = 'editservices';
+
+		$display_dental_services = DentalService::get();
+
+		return response()->json(['display_dental_services' => $display_dental_services]); 
+	}
+
 
 	public function updatemedicalservices(Request $request)
 	{
@@ -414,6 +416,31 @@ class AdminController extends Controller
 				$medical_service->senior_rate = $senior_rate;
 				$medical_service->service_type = $request->service_type;
 				$medical_service->save();
+			}
+		}
+		return response()->json(['success' => 'success']); 
+	}
+
+	public function updatedentalservices(Request $request)
+	{
+		$dentalservices = $request->dental_services;
+		DB::table('dental_services')->delete();
+		for($i = 0; $i < sizeof($dentalservices); $i++){
+			if($dentalservices[$i]!=''){
+				$explode_dental_services = explode("(:::)", $dentalservices[$i]);
+				$service_description = $explode_dental_services[0];
+				$student_rate = $explode_dental_services[1];
+				$faculty_staff_dependent_rate = $explode_dental_services[2];
+				$opd_rate = $explode_dental_services[3];
+				$senior_rate = $explode_dental_services[4];
+
+				$dental_service = new DentalService();
+				$dental_service->service_description = $service_description;
+				$dental_service->student_rate = $student_rate;
+				$dental_service->faculty_staff_dependent_rate = $faculty_staff_dependent_rate;
+				$dental_service->opd_rate = $opd_rate;
+				$dental_service->senior_rate = $senior_rate;
+				$dental_service->save();
 			}
 		}
 		return response()->json(['success' => 'success']); 

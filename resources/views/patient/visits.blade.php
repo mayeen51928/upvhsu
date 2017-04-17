@@ -84,8 +84,10 @@
                   </table>
                   <div class="row">
                     <div class="col-md-6 col-md-offset-6">
-                      <label>Total</label>
-                      <input type="text" id="total_medical_billing" class="form-control" disabled>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Total</span>
+                        <input type="text" class="form-control" id="total_medical_billing" aria-describedby="basic-addon1" disabled style="background-color:white;">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -218,8 +220,10 @@
                   </table>
                   <div class="row">
                     <div class="col-md-6 col-md-offset-6">
-                      <label>Total</label>
-                      <input type="text" id="total_dental_billing" class="form-control" disabled>
+                      <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Total</span>
+                        <input type="text" class="form-control" id="total_dental_billing" aria-describedby="basic-addon1" disabled style="background-color:white;">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -233,11 +237,4 @@
     </div>
   </div>
 </div>
-
-<script>
-  // token and createPostUrl are needed to be passed to AJAX method call
-  var token = '{{csrf_token()}}';
-  var viewDentalRecordDashboard = '/view_dental_record_dashboard';
-  var printMedicalReceipt = '/print_medical_receipt';
-</script>
 @endsection

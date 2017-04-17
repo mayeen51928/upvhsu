@@ -174,8 +174,10 @@
 				</table>
 			<div class="row">
 				<div class="col-md-6 col-md-offset-6">
-					<label>Total</label>
-					<input type="text" id="display_amount_modal_medical" class="form-control" disabled>
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon1">Total</span>
+					  <input type="text" class="form-control" id="display_amount_modal_medical" aria-describedby="basic-addon1" disabled style="background-color:white;">
+					</div>
 				</div>
 			</div>
 			</div>
@@ -204,24 +206,21 @@
 				</table>
 			<div class="row">
 				<div class="col-md-6 col-md-offset-6">
-					<label>Total</label>
-					<input type="text" id="display_amount_modal_dental" class="form-control" disabled>
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon1">Total</span>
+					  <input type="text" class="form-control" id="display_amount_modal_dental" aria-describedby="basic-addon1" disabled style="background-color:white;">
+					</div>
 				</div>
 			</div>
 			</div>
 			<div class="modal-footer text-center">
+				<div class="pull-left">
+					<button type="button" class="btn btn-primary" id="printDentalReceiptButton">Print Receipt</button>
+				</div>
 				<button type="button" class="btn btn-primary" id="addDentalBillingButton">Confirm</button>
 				<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 			</div>
 		</div>
 	</div>
 </div>
-<script>
-	// token and createPostUrl are needed to be passed to AJAX method call
-	var token = '{{csrf_token()}}';
-	var confirmMedicalBilling = '/confirm_medical_billing';
-	var displayMedicalBilling = '/display_medical_billing';
-	var confirmDentalBilling = '/confirm_dental_billing';
-	var displayDentalBilling = '/display_dental_billing';
-</script>
 @endsection

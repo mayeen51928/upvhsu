@@ -176,7 +176,7 @@ class LabController extends Controller
 				if($drug_test->status == '0' && $request->drug_radio == 'inside')
 				{
 					$billing = new MedicalBilling;
-					$billing->medical_service_id = 36;
+					$billing->medical_service_id = $request->drug_service_id;
 					$billing->medical_appointment_id = $request->medical_appointment_id;
 					$billing->status = 'unpaid';
 					if($patient_type_id == 1){
