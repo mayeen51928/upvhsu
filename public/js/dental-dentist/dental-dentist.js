@@ -67,23 +67,21 @@ $('#staffnotesdentist').keyup(function() {
 $('.dental_chart').click(function(){
 	var id = $(this).attr('id').split("_");
 	teethId = id[1];
+	patient_id = $('.patient_id_dental').val();
 	$.post('/update_dental_record_modal', {
 		teeth_id:  teethId,
+		patient_id: patient_id,
 	}, function(data){
 		if (data['condition_id'] != null) {
-			console.log("Condition exists!");
   		$('.condition').val(data['condition_id']);
   	}
   	else{
-  		console.log("Condition is zero!");
   		$('.condition').val('0');
   	}
   	if(data['operation_id'] != null){
-  		console.log("operation exists!");
   		$('.operation').val(data['operation_id']);
   	}
   	else{
-  		console.log("Operation is zero!");
   		$('.operation').val('0');
   	}
 

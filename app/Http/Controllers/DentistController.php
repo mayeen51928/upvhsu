@@ -259,7 +259,7 @@ class DentistController extends Controller
 		public function updatedentalrecordmodal(Request $request)
 		{
 			$teeth_id = $request->teeth_id;
-			$teeth_info = DentalRecord::where('teeth_id', $teeth_id)->orderBy('created_at', 'desc')->select('condition_id', 'operation_id')->first();
+			$teeth_info = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', 'dental_appointments.id')->where('dental_appointments.patient_id', $request->patient_id)->where('teeth_id', $teeth_id)->where('patient_id')->orderBy('dental_records.created_at', 'desc')->select('condition_id', 'operation_id')->first();
 			if(count($teeth_info) == 0){
 				$condition_id = NULL;
 				$operation_id = NULL;

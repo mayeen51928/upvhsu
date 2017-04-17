@@ -50,6 +50,7 @@
 				</div>
 				<div class="row table-responsive tab-pane fade" id="dentalchart">
 					<div class="col-md-9 col-sm-12 col-xs-12">
+						<input type="hidden" class="patient_id_dental" value="{{ $patient_info->patient_id }}">
 						<svg class="svg" id="frame_svg" viewBox="0 0 867 545" >
 							<polygon class="dental_chart" id="operation_55" operation_id="{{ $stacks_operation[0] }}" points="234,78,244,74,256,75,262,76,267,79,269,84,271,92,271,102,271,108,266,113,260,113,256,112,253,110,246,112,237,111,233,105,230,97,230,89,232,82,233,79" style="fill:{{ $stacks_operation_color[0] }};stroke:black;stroke-width:3" />
 							<polygon class="dental_chart" id="condition_55" condition_id="{{ $stacks_condition[0] }}" points="234,78,244,74,256,75,262,76,267,79,267,69,268,62,270,55,273,48,275,41,274,33,273,26,270,24,268,26,267,33,267,40,266,44,261,51,257,56, 255, 59, 254, 64,250,71,245,64,240,57,238,47,236,39,234,29,232,24,229,23,227,26,227,36,229,46,231,54,234,62,235,69,234,77" style="fill:{{ $stacks_condition_color[0] }};stroke:black;stroke-width:3" />
