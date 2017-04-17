@@ -23,7 +23,7 @@
 	{{-- <script src="{{asset('js/scheduleappointment.min.js')}}"></script> --}}
 	{{-- <script src="{{asset('js/seemoreannouncements.min.js')}}"></script> --}}
 
-	{{-- <script src="{{asset('js/dental-dentist/dental-dentist.js')}}"></script>
+	<script src="{{asset('js/dental-dentist/dental-dentist.js')}}"></script>
 	<script src="{{asset('js/medical-doctor/medical-doctor.js')}}"></script>
 	<script src="{{asset('js/medical-lab/medical-lab.js')}}"></script>
 	<script src="{{asset('js/medical-xray/medical-xray.js')}}"></script>
@@ -32,9 +32,8 @@
 	<script src="{{asset('js/admin/admin.js')}}"></script>
 	<script src="{{asset('js/custom.js')}}"></script>
 	<script src="{{asset('js/scheduleappointment.js')}}"></script>
-	<script src="{{asset('js/seemoreannouncements.js')}}"></script> --}}
+	<script src="{{asset('js/seemoreannouncements.js')}}"></script>
 
-	<script src="{{asset('js/minified.min.js')}}"></script>
 	<script src="{{asset('js/jquery-tablesorter.js')}}"></script>
 	<script src="{{asset('js/highcharts.js')}}"></script>
 	<script src="{{asset('js/highcharts-3d.js')}}"></script>

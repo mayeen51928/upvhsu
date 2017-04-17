@@ -287,7 +287,7 @@ class DentistController extends Controller
     	}
     	else
     	{
-    		DentalRecord::where('appointment_id', $request->appointment_id)->update(['condition_id' => $request->condition_id, 'operation_id' => $request->operation_id]);
+    		DentalRecord::where('appointment_id', $request->appointment_id)->where('teeth_id', $request->teeth_id)->update(['condition_id' => $request->condition_id, 'operation_id' => $request->operation_id]);
     	}
 
     	return response()->json(['success' => 'success']); 
