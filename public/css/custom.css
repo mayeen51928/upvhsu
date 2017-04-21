@@ -528,3 +528,9 @@ a.btn-danger {
 .schedule-bordered td{
     width: 0% !important;
 }
+#stickynotespanel .panel-heading, #stickynotespanel #savingstatus{
+    background-color: #ffffb2;
+}
+#stickynotespanel .panel-body{
+    background-color: #ffffcc;
+}

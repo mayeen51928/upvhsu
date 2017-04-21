@@ -19,7 +19,7 @@
 					</div>
 				</div>
 					<div class="col-md-6">
-						<div class="panel panel-default">
+						<div class="panel panel-default" id="stickynotespanel">
 							<div class="panel-heading">Side Notes</div>
 							<div class="panel-body"><textarea id="staffnotesdentist" placeholder="Enter your notes here..." class="form-control" rows="11">{{$staff_notes}}</textarea></div>
 							<div class="panel-footer" id="savingstatus">&nbsp;</div>
