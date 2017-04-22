@@ -38,6 +38,7 @@ $('.checkboxLabService').click(function(){
 	}
 	if(checkboxLabServiceCounter>0)
 	{
+		$('input:radio[name="cbc_radio"][value="inside"]').prop("checked",true);
 		$('#hemoglobin-lab').removeAttr('disabled');
 		$('#hemasocrit-lab').removeAttr('disabled');
 		$('#wbc-lab').removeAttr('disabled');
@@ -45,6 +46,7 @@ $('.checkboxLabService').click(function(){
 	}
 	else
 	{
+		// $('input:radio[name="cbc_radio"][value="inside"]').prop("checked",false);
 		$('#hemoglobin-lab').val('');
 		$('#hemasocrit-lab').val('');
 		$('#wbc-lab').val('');
@@ -56,7 +58,7 @@ $('.checkboxLabService').click(function(){
 });
 $('.addLabResult').click(function(){
 	$('#labdiagnosisaccordion textarea, #labdiagnosisaccordion select').removeAttr('disabled');
-	$('input[value="inside"]').prop("checked",true)
+	// $('input[value="inside"]').prop("checked",true)
 	$('.cbc_radio').removeAttr('disabled');
 	$('.drug_radio').removeAttr('disabled');
 	$('.fecalysis_radio').removeAttr('disabled');
@@ -66,6 +68,7 @@ $('.addLabResult').click(function(){
 	var medical_appointment_id = $(this).attr('id').split("_")[1];
 	$('#laboratoryresult-lab #cbc_div, #laboratoryresult-lab #drug_test_div, #laboratoryresult-lab #fecalysis_div, #laboratoryresult-lab #urinalysis_div').hide();
 	$('#hemoglobin-lab, #hemasocrit-lab, #wbc-lab, #macroscopic-lab, #microscopic-lab, #rbc-lab, #pus-cells-lab').val('');
+	// $('#hemoglobin-lab, #hemasocrit-lab, #wbc-lab, #macroscopic-lab, #microscopic-lab, #rbc-lab, #pus-cells-lab').attr('disabled', 'disabled');
 	$('#drug-test-lab option').prop('selected', function()
 	{
 		return this.defaultSelected;
@@ -79,58 +82,94 @@ $('.addLabResult').click(function(){
 	$.post('/viewlabdiagnosis', {medical_appointment_id: medical_appointment_id}, function(data, textStatus, xhr) {
 		if(data['cbc_result'])
 		{
+			if((data['cbc_billing_status'].length)>0){
+				for (var i = 0; i < data['cbc_billing_status'].length; i++){
+					$('#'+data['cbc_billing_status'][i].medical_service_id+'.checkboxLabService').prop('checked', true);
+					$('.checkboxLabService').prop('disabled', true);
+				}
+				$('input:radio[name="cbc_radio"][value="inside"]').prop("checked",true);
+			}
+			else{
+				$('input:radio[name="cbc_radio"][value="outside"]').prop("checked",true);
+			}
+			var checkboxLabServiceCounter = 0;
+			$('.checkboxLabService').each(function() {
+				if($(this).is(':checked'))
+				{
+					checkboxLabServiceCounter=1;
+				}
+			});
 			$('#cbcaccordion').show();
 			$('#hemoglobin-lab').val(data['cbc_result']['hemoglobin']);
-			if(data['cbc_result']['hemoglobin'])
+			if((data['cbc_result']['hemoglobin'] && $('input:radio[name="cbc_radio"][value="inside"]').is(':checked')) || (data['cbc_result']['hemoglobin'] && $('input:radio[name="cbc_radio"][value="outside"]').is(':checked')))
 			{
 				$('#hemoglobin-lab').attr('disabled', 'disabled');
 			}
-			// else
-			// {
-			// 	$('#hemoglobin-lab').removeAttr('disabled');
-			// }
+			else
+			{
+				$('#hemoglobin-lab').attr('disabled', 'disabled');
+				if(checkboxLabServiceCounter>0 && $('input:radio[name="cbc_radio"][value="inside"]').is(':checked')){
+					$('#hemoglobin-lab').removeAttr('disabled');
+				}
+				if($('input:radio[name="cbc_radio"][value="outside"]').is(':checked')){
+					$('#hemoglobin-lab').removeAttr('disabled');
+					$('.checkboxLabService').attr('disabled', 'disabled');
+				}
+			}
 
 			$('#hemasocrit-lab').val(data['cbc_result']['hemasocrit']);
-			if(data['cbc_result']['hemasocrit'])
+			if((data['cbc_result']['hemasocrit'] && $('input:radio[name="cbc_radio"][value="inside"]').is(':checked')) || (data['cbc_result']['hemasocrit'] && $('input:radio[name="cbc_radio"][value="outside"]').is(':checked')))
 			{
 				$('#hemasocrit-lab').attr('disabled', 'disabled');
 			}
-			// else
-			// {
-			// 	$('#hemasocrit-lab').removeAttr('disabled');
-			// }
+			else
+			{
+				$('#hemasocrit-lab').attr('disabled', 'disabled');
+				if(checkboxLabServiceCounter>0 && $('input:radio[name="cbc_radio"][value="inside"]').is(':checked')){
+					$('#hemasocrit-lab').removeAttr('disabled');
+				}
+				if($('input:radio[name="cbc_radio"][value="outside"]').is(':checked')){
+					$('#hemasocrit-lab').removeAttr('disabled');
+					$('.checkboxLabService').attr('disabled', 'disabled');
+				}
+			}
 
 			$('#wbc-lab').val(data['cbc_result']['wbc']);
-			if(data['cbc_result']['wbc'])
+			if((data['cbc_result']['wbc']  && $('input:radio[name="cbc_radio"][value="inside"]').is(':checked')) || (data['cbc_result']['wbc'] && $('input:radio[name="cbc_radio"][value="outside"]').is(':checked')))
 			{
 				$('#wbc-lab').attr('disabled', 'disabled');
 			}
-			// else
-			// {
-			// 	$('#wbc-lab').removeAttr('disabled');
-			// }
+			else
+			{
+				$('#wbc-lab').attr('disabled', 'disabled');
+				if(checkboxLabServiceCounter>0 && $('input:radio[name="cbc_radio"][value="inside"]').is(':checked')){
+					$('#wbc-lab').removeAttr('disabled');
+				}
+				if($('input:radio[name="cbc_radio"][value="outside"]').is(':checked')){
+					$('#wbc-lab').removeAttr('disabled');
+					$('.checkboxLabService').attr('disabled', 'disabled');
+				}
+			}
 
 			if(data['cbc_result']['hemoglobin'] || data['cbc_result']['hemasocrit'] || data['cbc_result']['wbc']){
 				$('.checkboxLabService').prop('disabled', true);
 				$('.cbc_radio').prop('disabled', true);
 			}
 			$('#laboratoryresult-lab #cbc_div').show();
-			if(data['cbc_billing_status']){
-				for (var i = 0; i < data['cbc_billing_status'].length; i++){
-					$('#'+data['cbc_billing_status'][i].medical_service_id+'.checkboxLabService').prop('checked', true);
-					$('.checkboxLabService').prop('disabled', true);
-					$('#patient_type_radio_lab').prop('disabled', true);
-				}
-			}
 		}
 
 		if(data['drug_test_result'])
 		{
+			if((data['drug_billing_status'].length)>0){
+				$('input:radio[name="drug_radio"][value="inside"]').prop("checked",true);
+			}
+			else{
+				$('input:radio[name="drug_radio"][value="outside"]').prop("checked",true);
+			}
 			$('#drug-test-lab').val(data['drug_test_result']['drug_test_result']);
 			if(data['drug_test_result']['drug_test_result'])
 			{
 				$('#drug-test-lab').attr('disabled', 'disabled');
-				$('.checkboxLabService').prop('disabled', true);
 				$('.drug_radio').prop('disabled', true);
 			}
 			else
@@ -146,6 +185,12 @@ $('.addLabResult').click(function(){
 
 		if(data['fecalysis_result'])
 		{
+			if((data['fecalysis_billing_status'].length)>0){
+				$('input:radio[name="fecalysis_radio"][value="inside"]').prop("checked",true);
+			}
+			else{
+				$('input:radio[name="fecalysis_radio"][value="outside"]').prop("checked",true);
+			}
 			$('#macroscopic-lab').val(data['fecalysis_result']['macroscopic']);
 			if(data['fecalysis_result']['macroscopic'])
 			{
@@ -166,12 +211,17 @@ $('.addLabResult').click(function(){
 			}
 			$('#laboratoryresult-lab #fecalysis_div').show();
 			if(data['fecalysis_result']['macroscopic'] || data['fecalysis_result']['microscopic']){
-				$('.checkboxLabService').prop('disabled', true);
 				$('.fecalysis_radio').prop('disabled', true);
 			}
 		}
 		if(data['urinalysis_result'])
 		{
+			if((data['urinalysis_billing_status'].length)>0){
+				$('input:radio[name="urinalysis_radio"][value="inside"]').prop("checked",true);
+			}
+			else{
+				$('input:radio[name="urinalysis_radio"][value="outside"]').prop("checked",true);
+			}
 			$('#pus-cells-lab').val(data['urinalysis_result']['pus_cells']);
 			if(data['urinalysis_result']['pus_cells'])
 			{
@@ -218,7 +268,7 @@ $('.addLabResult').click(function(){
 			}
 			$('#laboratoryresult-lab #urinalysis_div').show();
 			if(data['urinalysis_result']['pus_cells'] || data['urinalysis_result']['rbc'] || data['urinalysis_result']['albumin'] || data['urinalysis_result']['sugar']){
-				$('.checkboxLabService').prop('disabled', true);
+				// $('.checkboxLabService').prop('disabled', true);
 				$('.urinalysis_radio').prop('disabled', true);
 			}
 		}
@@ -258,7 +308,6 @@ $('.addLabResult').click(function(){
 					urinalysis_service_id: data['urinalysis_billing_service'].id,
 
 			}, function(data, textStatus, xhr) {
-				console.log('hello');
 				$('#cbccountpanel').load(location.href + " #cbccount");
 				$('#drugtestcountpanel').load(location.href + " #drugtestcount");
 				$('#fecalysiscountpanel').load(location.href + " #fecalysiscount");

@@ -95,7 +95,10 @@ class LabController extends Controller
 			$fecalysis_billing_service = MedicalService::where('service_type', 'fecalysis')->first();
 			$urinalysis_billing_service = MedicalService::where('service_type', 'urinalysis')->first();
 			$cbc_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'cbc')->get();
-
+			$cbc_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'cbc')->get();
+			$drug_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'drugtest')->get();
+			$fecalysis_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'fecalysis')->get();
+			$urinalysis_billing_status = MedicalBilling::join('medical_appointments', 'medical_billings.medical_appointment_id', 'medical_appointments.id')->join('medical_services', 'medical_billings.medical_service_id', 'medical_services.id')->where('medical_billings.medical_appointment_id', $appointment_id)->where('medical_services.service_type', 'urinalysis')->get();
 			return response()->json([
 				'patient_type_id' => $patient_type_id,
 				'cbc_result' => $cbc_result,
@@ -107,6 +110,9 @@ class LabController extends Controller
 				'fecalysis_billing_service' => $fecalysis_billing_service,
 				'urinalysis_billing_service' => $urinalysis_billing_service,
 				'cbc_billing_status' => $cbc_billing_status,
+				'drug_billing_status' => $drug_billing_status,
+				'fecalysis_billing_status' => $fecalysis_billing_status,
+				'urinalysis_billing_status' => $urinalysis_billing_status,
 				]);
 		}
 
@@ -155,9 +161,9 @@ class LabController extends Controller
 						}
 						$billing->save();
 					}
-					$cbc->status = '1';
+					
 				}
-
+				$cbc->status = '1';
 				$cbc->update();
 
 				if($request->hemoglobin!='' && $request->hemasocrit!='' && $request->wbc!=''){
@@ -195,8 +201,9 @@ class LabController extends Controller
 						}
 					}
 					$billing->save();
-					$drug_test->status = '1';
+					
 				}
+				$drug_test->status = '1';
 				$drug_test->update();
 				$counter++;
 			}
@@ -235,8 +242,9 @@ class LabController extends Controller
 						}
 					}
 					$billing->save();
-					$fecalysis->status = '1';
+					
 				}
+				$fecalysis->status = '1';
 				$fecalysis->update();
 
 				if($request->macroscopic !='' && $request->microscopic !=''){
@@ -285,8 +293,9 @@ class LabController extends Controller
 						}
 					}
 					$billing->save();
-					$urinalysis->status = '1';
+					
 				}
+				$urinalysis->status = '1';
 				$urinalysis->update();
 
 				if($request->pus_cells !='' && $request->rbc !='' && $request->albumin !='' && $request->sugar !=''){

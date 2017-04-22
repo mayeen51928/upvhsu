@@ -166,15 +166,15 @@
 									<div class="col-md-10">
 									<div class="form-group">
 										<label for="hemoglobin-lab">Hemoglobin:</label>
-										<textarea class="form-control" rows="2" name="hemoglobin-lab" id="hemoglobin-lab" required disabled></textarea>
+										<textarea class="form-control" rows="2" name="hemoglobin-lab" id="hemoglobin-lab" disabled></textarea>
 									</div>
 									<div class="form-group">
 										<label for="hemasocrit-lab">Hemasocrit:</label>
-										<textarea class="form-control" rows="2" name="hemasocrit-lab" id="hemasocrit-lab" required disabled></textarea>
+										<textarea class="form-control" rows="2" name="hemasocrit-lab" id="hemasocrit-lab" disabled></textarea>
 									</div>
 									<div class="form-group">
 										<label for="wbc-lab">WBC:</label>
-										<textarea class="form-control" rows="2" name="wbc-lab" id="wbc-lab" required disabled></textarea>
+										<textarea class="form-control" rows="2" name="wbc-lab" id="wbc-lab" disabled></textarea>
 									</div>
 									</div>
 									</div>
