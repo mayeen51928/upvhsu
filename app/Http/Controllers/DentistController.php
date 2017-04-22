@@ -738,7 +738,13 @@ class DentistController extends Controller
 						$start = $explode_schedules[0];
 						$end = $explode_schedules[1];
 						$checker_if_exists = DentalSchedule::where('staff_id', Auth::user()->user_id)->where('schedule_start', $start)->where('schedule_end', $end)->first();
-						if(count($checker_if_exists) == 0){
+						$conflict_checker = DentalSchedule::where('staff_id', Auth::user()->user_id)
+						->where('schedule_start', '>=', explode(" ", $start)[0].' '.'00:00:00')
+						->where('schedule_start', '<=', explode(" ", $start)[0].' '.'23:59:59')
+						->where('schedule_end', '>', $start)
+						->where('schedule_start', '<', $end)
+						->get();
+						if(count($checker_if_exists) == 0 && count($conflict_checker) == 0){
 							$schedule = new DentalSchedule();
 							$schedule->staff_id = Auth::user()->user_id;
 							$schedule->schedule_start = $start;
