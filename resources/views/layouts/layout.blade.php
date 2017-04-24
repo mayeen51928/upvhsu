@@ -34,10 +34,10 @@
 	<script src="{{asset('js/scheduleappointment.js')}}"></script>
 	<script src="{{asset('js/seemoreannouncements.js')}}"></script>
 
-	<script src="{{asset('js/jquery-tablesorter.js')}}"></script>
-	<script src="{{asset('js/highcharts.js')}}"></script>
-	<script src="{{asset('js/highcharts-3d.js')}}"></script>
-	<script src="{{asset('js/exporting.js')}}"></script>	
+	<script src="{{asset('js/jquery-tablesorter.js')}}"></script> 
+	<script src="{{asset('js/highcharts.js')}}"></script> 
+	<script src="{{asset('js/highcharts-3d.js')}}"></script> 
+	<script src="{{asset('js/exporting.js')}}"></script> 	 
 </head>
 <body>
 @include('layouts.navbar')

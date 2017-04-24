@@ -76,20 +76,43 @@ class XrayController extends Controller
 				$billing = new MedicalBilling;
 				$billing->medical_service_id = $request->xray_services_id[$i];
 				$billing->medical_appointment_id = $request->medical_appointment_id;
-				$billing->status = 'unpaid';
 				if($patient_type_id == 1){
 					$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('student_rate')->first();
+					if($billing->amount == 0){
+						$billing->status = 'paid';
+					}
+					else{
+						$billing->status = 'unpaid';
+					}
 				}
 				elseif($patient_type_id == 2 || $patient_type_id == 3 || $patient_type_id == 4){
 					$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('faculty_staff_dependent_rate')->first();
+					if($billing->amount == 0){
+						$billing->status = 'paid';
+					}
+					else{
+						$billing->status = 'unpaid';
+					}
 				}
 				else{
 					$patient_senior_checker = Patient::join('senior_citizen_ids', 'patient_info.patient_id', 'senior_citizen_ids.patient_id')->join('medical_appointments', 'medical_appointments.patient_id', 'patient_info.patient_id')->where('medical_appointments.id', $request->medical_appointment_id)->get();
 					if(count($patient_senior_checker) > 0){
 						$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('senior_rate')->first();
+						if($billing->amount == 0){
+							$billing->status = 'paid';
+						}
+						else{
+							$billing->status = 'unpaid';
+						}
 					}
 					else{
 						$billing->amount = MedicalService::where('id', $request->xray_services_id[$i])->pluck('opd_rate')->first();
+						if($billing->amount == 0){
+							$billing->status = 'paid';
+						}
+						else{
+							$billing->status = 'unpaid';
+						}
 					}
 				}
 				$billing->save();

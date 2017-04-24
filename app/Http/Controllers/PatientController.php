@@ -78,13 +78,26 @@ class PatientController extends Controller
         		->get();
  
     $payment_status = "unpaid";
+    $payment_status_counter = 0;
     $medical_billing_status = DB::table('medical_billings')
         		->where('medical_billings.medical_appointment_id', '=', $request->medical_appointment_id)
-        		->first();
+        		->get();
 
-    if(count($medical_billing_status) == 1 && $medical_billing_status->status=="paid"){
-    	$payment_status = "paid";
+    if(count($medical_billing_status)>0){
+    	foreach($medical_billing_status as $status){
+	    	if($status->status == 'unpaid'){
+	    		$payment_status_counter++;
+	    	}
+	    }
+
+	    if($payment_status_counter > 0){
+	    	$payment_status = "unpaid";
+	    }
+	    else{
+	    	$payment_status = "paid";
+	    }
     }
+
     $medical_receipt = DB::table('medical_appointments')
     				->join('patient_info', 'medical_appointments.patient_id', '=', 'patient_info.patient_id')
     				->join('medical_schedules', 'medical_appointments.medical_schedule_id', '=', 'medical_schedules.id')
@@ -588,14 +601,26 @@ class PatientController extends Controller
         		->where('dental_billings.appointment_id', '=', $appointment_id)
         		->get();
 
+    $payment_status_counter = 0;
     $payment_status = "unpaid";
     $dental_billing_status = DB::table('dental_billings')
         		->where('dental_billings.appointment_id', '=', $appointment_id)
-        		->first();
+        		->get();
 
-    if(count($dental_billing_status) == 1 && $dental_billing_status->status=="paid"){
-    	$payment_status = "paid";
+    if(count($dental_billing_status)){
+    	foreach($dental_billing_status as $status){
+	    	if($status->status=="unpaid"){
+		    	$payment_status_counter++;
+		    }
+	    }
+	    if($payment_status_counter > 0){
+	    	$payment_status = "unpaid";
+	    }
+	    else{
+	    	$payment_status = "paid";
+	    }
     }
+    
     $dental_receipt = DB::table('dental_appointments')
     				->join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')
     				->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')
