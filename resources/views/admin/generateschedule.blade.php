@@ -20,7 +20,7 @@
 							<tr class="info">
 								<th><a>Name</a></th>
 								<th>Hometown</th>
-								<th><a>Travel Distance</a></th>
+								<th><a>Travel Distance (km)</a></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -28,7 +28,7 @@
 							<tr>
 								<td>{{$schedule->patient_last_name}}, {{$schedule->patient_first_name}}</td>
 								<td>{{$schedule->town_name}}, {{$schedule->province_name}}</td>
-								<td>{{$schedule->distance_to_miagao}} km</td>
+								<td>{{$schedule->distance_to_miagao}}</td>
 							</tr>
 							@endforeach
 						</tbody>
