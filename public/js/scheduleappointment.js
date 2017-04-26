@@ -271,15 +271,11 @@ $(document).ready( function(){
     $('#loginmodaldental input[type="text"], #loginmodalmedical input[type="text"]').bind('keyup change', function(event) {
       $(this).val(capitalizeFirstLetter($(this).val()));
     });
-    $('#residencetelephone_medical, #residencecellphone_medical, #personalcontactnumber_medical, #guardianresidencetelephone_medical, #guardianresidencecellphone_medical, #residencetelephone_dental, #residencecellphone_dental, #personalcontactnumber_dental, #guardianresidencetelephone_dental, #guardianresidencecellphone_dental, #residence_telephone_number, #residence_contact_number, #personal_contact_number, #guardian_tel_number, #guardian_cellphone').bind('keyup change', function(event) {
-     if(!$.isNumeric($(this).val().substr($(this).val().length-1))){
-        $(this).val($(this).val().substr(0, $(this).val().length-1));
-      }
+    $('#loginmodalmedical #user_name_modal_medical, #loginmodaldental #user_name_modal_dental, #residencetelephone_medical, #residencecellphone_medical, #personalcontactnumber_medical, #guardianresidencetelephone_medical, #guardianresidencecellphone_medical, #residencetelephone_dental, #residencecellphone_dental, #personalcontactnumber_dental, #guardianresidencetelephone_dental, #guardianresidencecellphone_dental, #residence_telephone_number, #residence_contact_number, #personal_contact_number, #guardian_tel_number, #guardian_cellphone').bind('keyup change', function(event) {
+      $(this).val($(this).val().replace(/\D/g,''));
     });
-    $('#town_medical, #province_medical, #guardian_town_medical, #guardian_province_medical, #town_dental, #province_dental, #guardian_town_dental, #guardian_province_dental, #town, #province, #guardian_town, #guardian_province').bind('keyup change', function(event) {
-      if($.isNumeric($(this).val().substr($(this).val().length-1))){
-        $(this).val($(this).val().substr(0, $(this).val().length-1));
-      }
+    $('.signup1_medical input[type="text"], .signup2_medical .signup input[type="text"]:not(#street_medical), .signup3_medical input[type="text"]:not(#guardian_street_medical):not(#guardianresidencetelephone_medical):not(#guardianresidencecellphone_medical), .signup4_medical input[type="text"], .signup1_dental input[type="text"], .signup2_dental .signup input[type="text"]:not(#street_dental), .signup3_dental input[type="text"]:not(#guardian_street_dental):not(#guardianresidencetelephone_dental):not(#guardianresidencecellphone_dental), .signup4_dental input[type="text"], #town_medical, #province_medical, #guardian_town_medical, #guardian_province_medical, #town_dental, #province_dental, #guardian_town_dental, #guardian_province_dental, #religion, #nationality, #father_first_name, #father_middle_name, #father_last_name, #mother_first_name, #mother_middle_name, #mother_last_name, #guardian_first_name, #guardian_middle_name, #guardian_last_name, #relationship, #town, #province, #guardian_town, #guardian_province').bind('keyup change', function(event) {
+      $(this).val($(this).val().replace(/\d+/g,''));
     });
     $('#signupMedical_modal').click(function(event) {
       $('#user_name_modal_medical, #password_modal_medical, #first_name_medical, #last_name_medical').bind('keyup change', function() {

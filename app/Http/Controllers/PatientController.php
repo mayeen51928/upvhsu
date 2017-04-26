@@ -51,8 +51,8 @@ class PatientController extends Controller
 	public function dashboard()
 	{
 
-		$params['medical_appointments'] = MedicalSchedule::join('medical_appointments', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'desc')->get();
-		$params['dental_appointments'] = DentalSchedule::join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->orderBy('schedule_start', 'desc')->get();
+		$params['medical_appointments'] = MedicalSchedule::join('medical_appointments', 'medical_schedules.id', '=', 'medical_appointments.medical_schedule_id')->join('staff_info', 'medical_schedules.staff_id', '=', 'staff_info.staff_id')->where('medical_appointments.patient_id', '=', Auth::user()->user_id)->orderBy('schedule_day', 'desc')->take(5)->get();
+		$params['dental_appointments'] = DentalSchedule::join('dental_appointments', 'dental_schedules.id', '=', 'dental_appointments.dental_schedule_id')->join('staff_info', 'dental_schedules.staff_id', '=', 'staff_info.staff_id')->where('dental_appointments.patient_id', '=', Auth::user()->user_id)->orderBy('schedule_start', 'desc')->take(5)->get();
     	$params['current_physical_status'] = PhysicalExamination::join('medical_appointments', 'medical_appointments.id', 'physical_examinations.medical_appointment_id')->where('patient_id', Auth::user()->user_id)->latest('physical_examinations.created_at')->select('physical_examinations.*', 'medical_appointments.*', 'physical_examinations.created_at as date_latest')->first();
         // dd($params['current_physical_status']);
 		$params['navbar_active'] = 'account';
@@ -238,7 +238,7 @@ class PatientController extends Controller
 		if(Auth::user()->patient->patient_type_id == 1)
 		{
 			$patient->degree_program_id = $request->input('degree_program');
-			$patient->year_level = $request->input('year_level');
+			// $patient->year_level = $request->input('year_level');
 		}
 		
 		// $patient->birthday = $request->input('birthdate');
