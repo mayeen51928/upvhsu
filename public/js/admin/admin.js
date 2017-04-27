@@ -302,6 +302,7 @@ $(document).ready( function(){
 	});
 		
 	});
+	$("#manageaccountstable").tablesorter( {sortList: [[0,0]]} ); 
 	//-------------GENERATE SCHEDULE --------------
 	$("#generatescheduletable").tablesorter( {sortList: [[0,0], [1,0]]} ); 
 	$('#postpeschedule').click(function(event) {
