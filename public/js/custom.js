@@ -2,12 +2,12 @@ $(document).ready( function(){
   $('input[type="text"], textarea').bind('keyup change', function(event) {
       $(this).val($(this).val().charAt(0).toUpperCase() + $(this).val().substr(1));
     });
-  $(document).bind('contextmenu', function(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    return false;
-});
+//   $(document).bind('contextmenu', function(e) {
+//     e.stopPropagation();
+//     e.preventDefault();
+//     e.stopImmediatePropagation();
+//     return false;
+// });
   var homeJumbotron = 1 + Math.floor(Math.random() * 3);
   if(homeJumbotron == 1)
   {
@@ -70,25 +70,25 @@ $(document).ready( function(){
       $('#password').attr('disabled', 'disabled');
   }
   });
-  if(getCookie('displaywelcomemodal')==''){
-    document.cookie = "displaywelcomemodal=yes";
-    $('#announcement_modal').modal();
-  }
-  function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
+//   if(getCookie('displaywelcomemodal')==''){
+//     document.cookie = "displaywelcomemodal=yes";
+//     $('#announcement_modal').modal();
+//   }
+//   function getCookie(cname) {
+//     var name = cname + "=";
+//     var decodedCookie = decodeURIComponent(document.cookie);
+//     var ca = decodedCookie.split(';');
+//     for(var i = 0; i <ca.length; i++) {
+//         var c = ca[i];
+//         while (c.charAt(0) == ' ') {
+//             c = c.substring(1);
+//         }
+//         if (c.indexOf(name) == 0) {
+//             return c.substring(name.length, c.length);
+//         }
+//     }
+//     return "";
+// }
 $('.announcement_title').click(function(event) {
     var announcementId = $(this).attr('id');
     $.post('/announcementmodal', {announcement_id: announcementId}, function(data, textStatus, xhr) {
