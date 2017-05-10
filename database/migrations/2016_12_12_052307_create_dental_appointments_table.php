@@ -21,6 +21,7 @@ class CreateDentalAppointmentsTable extends Migration
             $table->foreign('dental_schedule_id')->references('id')->on('dental_schedules')->onDelete('cascade');
             $table->text('reasons');
             $table->enum('status', ['0', '1', '2']);
+            $table->text('prescription')->nullable();
             $table->timestamps();
         });
     }

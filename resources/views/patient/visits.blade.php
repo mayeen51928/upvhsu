@@ -114,6 +114,7 @@
         <ul class="nav nav-pills nav-justified">
           <li class="active"><a data-toggle="pill" href="#dental_chart_dashboard">Dental Chart</a></li>
           <li><a data-toggle="pill" href="#additional_dental_record_dashboard">Additional Dental Record</a></li>
+          <li><a data-toggle="pill" href="#dental_prescription">Prescription</a></li>
           <li><a data-toggle="pill" href="#dental_billing_dashboard">Dental Billing Record</a></li>
         </ul>
         <br/>
@@ -206,6 +207,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="table-responsive tab-pane" id="dental_prescription">
+            <div class="well" id="dentalPrescription"></div>
           </div>
           <div class="table-responsive tab-pane" id="dental_billing_dashboard">
             <div class="panel-group">

@@ -183,7 +183,6 @@
   </div>
 </div>
 
-
 <div class="modal fade" id="view-dental-record-modal" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content" style="width:900px; ">
@@ -195,6 +194,7 @@
       	<ul class="nav nav-pills nav-justified">
 	        <li class="active"><a data-toggle="pill" href="#dental_chart_dashboard">Dental Chart</a></li>
 	        <li><a data-toggle="pill" href="#additional_dental_record_dashboard">Additional Dental Record</a></li>
+	        <li><a data-toggle="pill" href="#dental_prescription">Prescription</a></li>
 	        <li><a data-toggle="pill" href="#dental_billing_dashboard">Dental Billing Record</a></li>
 	      </ul>
 	      <br/>
@@ -288,11 +288,14 @@
 						  </div>
       			</div>
       		</div>
+      		<div class="table-responsive tab-pane" id="dental_prescription">
+	      		<div class="well" id="dentalPrescription"></div>
+	      	</div>
 					<div class="table-responsive tab-pane" id="dental_billing_dashboard">
 	      		<div class="panel-group">
 					    <div class="panel panel-success">
 					      <div class="panel-heading">
-					      	<h5 class="text-center">Medical Billing Record</h5>
+					      	<h5 class="text-center">Dental Billing Record</h5>
 					      </div>
 					      <div class="panel-body">
 					      	<table class="table" id="dental_billing_record_dashboard_table"  style="display: none">

@@ -25,6 +25,7 @@
 				<li class="active"><a data-toggle="tab" href="#servicesperformed">Tests Performed</a></li>
 				<li><a data-toggle="tab" href="#dentalchart">Dental Chart</a></li>
 				<li><a data-toggle="tab" href="#additionalrecord">Additional Dental Record</a></li>
+				<li><a data-toggle="tab" href="#dentalprescription">Prescription</a></li>
 			</ul>
 			
 			<div class="tab-content">
@@ -397,15 +398,18 @@
 										</div>
 									</div>
 			  				</div>
-			  				<div class="panel-footer">
-									<button class="btn btn-primary btn-block addedDentalRecord" id="addedDentalRecord_{{ $patient_info->id }}" disabled>Save diagnosis</button>
-						    </div>
 			  				@endif
 						  </div>
 						</div>
 					</div>
 				</div>
-				
+				<div class="row table-responsive tab-pane fade" id="dentalprescription">
+					<center><label>Prescription:</label></center>
+					<div class="form-group">
+						<textarea class="form-control" rows="10" id="dental_prescription" disabled></textarea>
+					</div>	
+					<button class="btn btn-primary addedDentalRecord" disabled>Save diagnosis</button>
+				</div>
 			</div>
 		</div>
 	</div>

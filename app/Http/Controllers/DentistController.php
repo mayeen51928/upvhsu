@@ -134,8 +134,7 @@ class DentistController extends Controller
 
 			for ($x = 21; $x <= 28; $x++)
 			{
-		    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
+				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
 		  	if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
 		  		$operation_id = 6;
@@ -149,7 +148,6 @@ class DentistController extends Controller
 			}
 			for ($x = 48; $x >= 41; $x--)
 			{
-		    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
 				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
 		  	if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
@@ -164,7 +162,6 @@ class DentistController extends Controller
 			}
 			for ($x = 31; $x <= 38; $x++)
 			{
-		  	$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
 				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
 		  	if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
@@ -179,7 +176,6 @@ class DentistController extends Controller
 			}
 			for ($x = 85; $x >= 81; $x--)
 			{
-		  	$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
 				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
 		  	if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
@@ -194,7 +190,6 @@ class DentistController extends Controller
 			}
 			for ($x = 71; $x <= 75; $x++)
 			{
-				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
 				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
 		  	if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
@@ -787,6 +782,7 @@ class DentistController extends Controller
 			$dental_appointment_id = $request->appointment_id;
 			$change_status = DentalAppointment::where('id', $request->appointment_id)->first();
 			$change_status->status = '1';
+			$change_status->prescription = $request->dental_prescription;
 			$change_status->update();
 
 			$patient_type_id = Patient::join('dental_appointments', 'patient_info.patient_id', 'dental_appointments.patient_id')->where('dental_appointments.id', $dental_appointment_id)->pluck('patient_type_id')->first();
@@ -867,8 +863,8 @@ class DentistController extends Controller
 			$stacks_operation = array();
 			for ($x = 55; $x >= 51; $x--)
 			{
-		    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		  	if(count($dental_chart_results) == 0){
+				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')->where('dental_appointments.id', $appointment_id)->where('teeth_id', $x)->select('condition_id', 'operation_id')->first();
+				if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
 		  		$operation_id = 6;
 		  	}
@@ -881,8 +877,8 @@ class DentistController extends Controller
 		  }
 			for ($x = 61; $x <= 65; $x++)
 			{
-				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		  	if(count($dental_chart_results) == 0){
+				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')->where('dental_appointments.id', $appointment_id)->where('teeth_id', $x)->select('condition_id', 'operation_id')->first();
+				if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
 		  		$operation_id = 6;
 		  	}
@@ -896,8 +892,8 @@ class DentistController extends Controller
 
 			for ($x = 18; $x >= 11; $x--)
 			{
-				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		  	if(count($dental_chart_results) == 0){
+				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')->where('dental_appointments.id', $appointment_id)->where('teeth_id', $x)->select('condition_id', 'operation_id')->first();
+				if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
 		  		$operation_id = 6;
 		  	}
@@ -911,9 +907,8 @@ class DentistController extends Controller
 
 			for ($x = 21; $x <= 28; $x++)
 			{
-		    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		  	if(count($dental_chart_results) == 0){
+				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')->where('dental_appointments.id', $appointment_id)->where('teeth_id', $x)->select('condition_id', 'operation_id')->first();
+				if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
 		  		$operation_id = 6;
 		  	}
@@ -926,9 +921,8 @@ class DentistController extends Controller
 			}
 			for ($x = 48; $x >= 41; $x--)
 			{
-		    $dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		  	if(count($dental_chart_results) == 0){
+				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')->where('dental_appointments.id', $appointment_id)->where('teeth_id', $x)->select('condition_id', 'operation_id')->first();
+				if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
 		  		$operation_id = 6;
 		  	}
@@ -941,9 +935,8 @@ class DentistController extends Controller
 			}
 			for ($x = 31; $x <= 38; $x++)
 			{
-		  	$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		  	if(count($dental_chart_results) == 0){
+				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')->where('dental_appointments.id', $appointment_id)->where('teeth_id', $x)->select('condition_id', 'operation_id')->first();
+				if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
 		  		$operation_id = 6;
 		  	}
@@ -956,9 +949,8 @@ class DentistController extends Controller
 			}
 			for ($x = 85; $x >= 81; $x--)
 			{
-		  	$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		  	if(count($dental_chart_results) == 0){
+				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')->where('dental_appointments.id', $appointment_id)->where('teeth_id', $x)->select('condition_id', 'operation_id')->first();
+				if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
 		  		$operation_id = 6;
 		  	}
@@ -971,9 +963,8 @@ class DentistController extends Controller
 			}
 			for ($x = 71; $x <= 75; $x++)
 			{
-				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id') ->orderBy('dental_records.created_at', 'desc')->where('teeth_id', $x)->where('patient_id', $patient_id)->select('condition_id', 'operation_id')->first();
-		  	if(count($dental_chart_results) == 0){
+				$dental_chart_results = DentalRecord::join('dental_appointments', 'dental_records.appointment_id', '=', 'dental_appointments.id')->where('dental_appointments.id', $appointment_id)->where('teeth_id', $x)->select('condition_id', 'operation_id')->first();
+				if(count($dental_chart_results) == 0){
 		  		$condition_id = 6;
 		  		$operation_id = 6;
 		  	}

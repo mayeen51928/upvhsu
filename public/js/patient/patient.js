@@ -165,6 +165,8 @@ $('.dental_appointments_prescription').click(function(){
 			$('#selDentalFacioAnomaly').html('<option selected>No existing record yet.</option>');		
 			$('#teethPresent').attr('value', 'No existing record yet.');	
 	  }
+	  console.log(data['dental_prescription']['prescription']);
+	  $('#dentalPrescription').html(data['dental_prescription']['prescription']);
 
 		if(data['payment_status']=="unpaid")
 		{

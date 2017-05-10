@@ -24,6 +24,7 @@
 			<ul class="nav nav-pills nav-justified">
 				<li class="active"><a data-toggle="pill" href="#dentalchart">Dental Chart</a></li>
 				<li><a data-toggle="pill" href="#additionalrecord">Additional Dental Record</a></li>
+				<li><a data-toggle="pill" href="#dentalprescription">Prescription</a></li>
 			</ul>
 			<div class="tab-content">
 				<div class="row table-responsive tab-pane fade in active" id="dentalchart">
@@ -276,9 +277,6 @@
 										</div>
 									</div>
 								</div>
-								<div class="panel-footer">
-									<button class="btn btn-primary btn-block addedDentalRecord" id="addedDentalRecord_{{ $patient_info->id }}" disabled>Save diagnosis</button>
-						    </div>
 			  				@else
 			  				<div class="panel-body" id="additionalDentalRecordPanelBody">
 			  					<div class="row" style="background-color:#f8f8f8; padding:5px">
@@ -374,14 +372,23 @@
 										</div>
 									</div>
 			  				</div>
-			  				<div class="panel-footer">
-									<button class="btn btn-primary btn-block addedDentalRecord" id="addedDentalRecord_{{ $patient_info->id }}" disabled>Save diagnosis</button>
-						    </div>
 			  				@endif
 						  </div>
 						</div>
 					</div>
 				</div>
+				<br>
+				<div class="row table-responsive tab-pane fade" id="dentalprescription">
+			  	<div class="col-md-8 col-md-offset-2">
+			  		<div class="panel panel-primary">
+			  			@if(count($patient_info->prescription) > 0)
+				      	<div class="panel-body">{{ $patient_info->prescription }}</div>
+				      @else
+				      	<div class="panel-body">No prescription yet.</div>
+				      @endif
+				    </div>
+			  	</div>
+			  </div>
 			</div>
 		</div>
 	</div>
