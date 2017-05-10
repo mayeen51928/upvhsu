@@ -542,7 +542,7 @@ class DentistController extends Controller
 		}
 		public function viewrecords($id)
 		{
-			$params['records'] = DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->where('patient_id', $id)->whereDay('schedule_start', '<=', date('Y-m-d'))->get();
+			$params['records'] = DentalSchedule::join('dental_appointments', 'dental_appointments.dental_schedule_id', 'dental_schedules.id')->where('patient_id', $id)->whereDay('schedule_start', '<=', date('Y-m-d'))->orderBy('schedule_start', 'desc')->get();
 			// dd($params['records']);
 			$params['navbar_active'] = 'account';
 			$params['sidebar_active'] = 'searchpatient';
