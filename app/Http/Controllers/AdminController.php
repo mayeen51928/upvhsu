@@ -119,8 +119,8 @@ class AdminController extends Controller
 	}
 
 	public function manageaccounts(){
-		$staff = User::where('user_type_id', '2')->join('staff_info', 'staff_info.staff_id', 'users.user_id')->join('user_types', 'user_types.id', 'users.user_type_id')->select('staff_first_name as user_first_name', 'staff_last_name as user_last_name', 'staff_id as user_id', 'user_type_description');
-		$params['users'] = User::where('user_type_id', '1')->join('patient_info', 'patient_info.patient_id', 'users.user_id')->join('user_types', 'user_types.id', 'users.user_type_id')->select('patient_first_name as user_first_name', 'patient_last_name as user_last_name', 'patient_id as user_id', 'user_type_description')->union($staff)->orderBy('user_last_name', 'asc')->get();
+		$staff = User::where('user_type_id', '2')->join('staff_info', 'staff_info.staff_id', 'users.user_id')->join('user_types', 'user_types.id', 'users.user_type_id')->select('staff_first_name as user_first_name', 'staff_last_name as user_last_name', 'staff_id as user_id', 'user_type_description', 'staff_info.created_at as created_at', 'staff_info.updated_at as updated_at');
+		$params['users'] = User::where('user_type_id', '1')->join('patient_info', 'patient_info.patient_id', 'users.user_id')->join('user_types', 'user_types.id', 'users.user_type_id')->select('patient_first_name as user_first_name', 'patient_last_name as user_last_name', 'patient_id as user_id', 'user_type_description', 'patient_info.created_at as created_at', 'patient_info.updated_at as updated_at')->union($staff)->orderBy('user_last_name', 'asc')->get();
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'manageaccounts';
 		return view('admin.manageaccounts', $params);

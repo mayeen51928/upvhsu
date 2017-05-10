@@ -11,13 +11,15 @@
 					<div class="panel-heading">Manage Accounts</div>
 					<div class="panel-body">
 						<div class="table-responsive">
-						<table class="table table-bordered table-hover">
+						<table class="table table-bordered table-hover" id="manageaccountstable">
 							<thead>
 								<tr>
 				          			<th></th>
 				          			<th>Name</th>
 				          			<th>User type</th>
 				          			<th>User ID</th>
+				          			<th>Account Created</th>
+				          			<th>Last Profile Update</th>
 				          			<th></th>
 				          		</tr>
 				          	</thead>
@@ -29,6 +31,8 @@
 				          			<td>{{$user->user_last_name}}, {{$user->user_first_name}}</td>
 				          			<td>{{$user->user_type_description}}</td>
 				          			<td>{{$user->user_id}}</td>
+				          			<td>{{date_format(date_create($user->created_at), 'F j, Y')}}<br/>{{date_format(date_create($user->created_at), 'h:i A')}}</td>
+				          			<td>{{date_format(date_create($user->updated_at), 'F j, Y')}}<br/>{{date_format(date_create($user->updated_at), 'h:i A')}}</td>
 				          			<td><button type="button" class="btn btn-xs changepwbutton" id="changepw_{{$user->user_id}}">Change Password</button></td>
 				          		</tr>
 				          		<?php $row_number++; ?>

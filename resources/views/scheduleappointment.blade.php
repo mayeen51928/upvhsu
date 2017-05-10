@@ -138,14 +138,14 @@
 				<div class="form-group">
 					<input type="password" class="form-control signup0_dental" name="password_modal_dental" id="password_modal_dental" placeholder="Password"/>
 				</div>
-				<div class="form-group signup">
-					<input type="text" class="form-control signup1_dental" name="first_name_dental" id="first_name_dental" placeholder="First Name"/>
+				<div class="form-group signup1_dental">
+					<input type="text" maxlength="40" class="form-control signup1_dental" name="first_name_dental" id="first_name_dental" placeholder="First Name"/>
 				</div>
-				<div class="form-group signup">
-					<input type="text" class="form-control signup1_dental" name="middle_name_dental" id="middle_name_dental" placeholder="Middle Name"/>
+				<div class="form-group signup1_dental">
+					<input type="text" maxlength="40" class="form-control signup1_dental" name="middle_name_dental" id="middle_name_dental" placeholder="Middle Name"/>
 				</div>
-				<div class="form-group signup">
-					<input type="text" class="form-control signup1_dental" name="last_name_dental" id="last_name_dental" placeholder="Last Name"/>
+				<div class="form-group signup1_dental">
+					<input type="text" maxlength="40" class="form-control signup1_dental" name="last_name_dental" id="last_name_dental" placeholder="Last Name"/>
 				</div>
 				<div class="form-group signup2_dental">
 					<div class="form-group signup">
@@ -228,7 +228,7 @@
 						</div>
 						<div class="form-group signup" id="senior_citizen_dental">
 							<label>Senior Citizen ID # (For out-patients only):</label>
-							<input type="text" class="form-control" name="senior_citizen_id_dental" id="senior_citizen_id_dental" placeholder="Enter senior citizen ID number" disabled/>
+							<input type="text" maxlength="40" class="form-control" name="senior_citizen_id_dental" id="senior_citizen_id_dental" placeholder="Enter senior citizen ID number" disabled/>
 						</div>
 						<div class="form-group signup">
 							<label>Civil Status: <i class="fa fa-asterisk required-asterisk"></i></label></label>
@@ -242,39 +242,39 @@
 						</div>
 						<div class="form-group signup">
 							<label>Religion: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" placeholder="Enter religion" name="religion_dental" id="religion_dental" maxlength="30" />
+							<input type="text" maxlength="40" class="form-control" placeholder="Enter religion" name="religion_dental" id="religion_dental"/>
 						</div>
 						<div class="form-group signup">
 							<label>Nationality: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" name="nationality_dental" placeholder="Enter nationality" id="nationality_dental" maxlength="20" />
+							<input type="text" maxlength="40" class="form-control" name="nationality_dental" placeholder="Enter nationality" id="nationality_dental"/>
 						</div>
 						<div class="form-group signup">
 							<label>Father: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" name="father_first_dental" placeholder="Enter father's given name" id="father_first_dental"/>
-							<input type="text" class="form-control" name="father_middle_dental" placeholder="Enter father's middle name" id="father_middle_dental"/>
-							<input type="text" class="form-control" name="father_last_dental" placeholder="Enter father's last name" id="father_last_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="father_first_dental" placeholder="Enter father's given name" id="father_first_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="father_middle_dental" placeholder="Enter father's middle name" id="father_middle_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="father_last_dental" placeholder="Enter father's last name" id="father_last_dental"/>
 						</div>
 						<div class="form-group signup">
 							<label>Mother: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" name="mother_first_dental" placeholder="Enter mother's first name" id="mother_first_dental"/>
-							<input type="text" class="form-control" name="mother_middle_dental" placeholder="Enter mother's middle name" id="mother_middle_dental"/>
-							<input type="text" class="form-control" name="mother_last_dental" placeholder="Enter mother's last name" id="mother_last_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="mother_first_dental" placeholder="Enter mother's first name" id="mother_first_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="mother_middle_dental" placeholder="Enter mother's middle name" id="mother_middle_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="mother_last_dental" placeholder="Enter mother's last name" id="mother_last_dental"/>
 						</div>
 						<div class="form-group signup">
 							<label>Home Address: <i class="fa fa-asterisk required-asterisk"></i></label></label>
 							<div class="form-inline">
-								<input type="text" class="form-control" name="street_dental" id="street_dental" placeholder="Street"/>
-								<input type="text" class="form-control" name="town_dental" id="town_dental" placeholder="Town / City"/>
-								<input type="text" class="form-control" name="province_dental" id="province_dental" placeholder="Province"/>
+								<input type="text" maxlength="40" class="form-control" name="street_dental" id="street_dental" placeholder="Street"/>
+								<input type="text" maxlength="40" class="form-control" name="town_dental" id="town_dental" placeholder="Town / City"/>
+								<input type="text" maxlength="40" class="form-control" name="province_dental" id="province_dental" placeholder="Province"/>
 							</div>
 						</div>
 						<div class="form-inline">
 							<label>Residence Telephone Number: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" name="residencetelephonedental" id="residencetelephone_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="residencetelephonedental" id="residencetelephone_dental"/>
 							<label>Residence Cellphone Number: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" name="residencecellphone_dental" id="residencecellphone_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="residencecellphone_dental" id="residencecellphone_dental"/>
 							<label>Personal Contact Number: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" name="personalcontactnumber_dental" id="personalcontactnumber_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="personalcontactnumber_dental" id="personalcontactnumber_dental"/>
 						</div>
 					</div>
 				</div>
@@ -282,26 +282,26 @@
 					<label>GUARDIAN/PERSON TO BE CONTACTED IN CASE OF EMERGENCY (OTHER THAN PARENTS)</label><br/>
 					<div class="form-group signup">
 						<label>Name: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-						<input type="text" class="form-control" name="guardian_first_dental" placeholder="Enter guardian's first name" id="guardian_first_dental"/>
-						<input type="text" class="form-control" name="guardian_middle_dental" placeholder="Enter guardian's middle name" id="guardian_middle_dental"/>
-						<input type="text" class="form-control" name="guardian_last_dental" placeholder="Enter guardian's last name" id="guardian_last_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_first_dental" placeholder="Enter guardian's first name" id="guardian_first_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_middle_dental" placeholder="Enter guardian's middle name" id="guardian_middle_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_last_dental" placeholder="Enter guardian's last name" id="guardian_last_dental"/>
 					</div>
 					<div class="form-group signup">
 						<label>Relationship: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-						<input type="text" class="form-control" name="guardian_relationship_dental" placeholder="Enter relationship with guardian" id="guardian_relationship_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_relationship_dental" placeholder="Enter relationship with guardian" id="guardian_relationship_dental"/>
 					</div>
 					<div class="form-inline signup">
 						<label>Address: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-						<input type="text" class="form-control" name="guardian_street_dental" placeholder="Street" id="guardian_street_dental"/>
-						<input type="text" class="form-control" name="guardian_town_dental" placeholder="Town / City" id="guardian_town_dental"/>
-						<input type="text" class="form-control" name="guardian_province_dental" placeholder="Province" id="guardian_province_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_street_dental" placeholder="Street" id="guardian_street_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_town_dental" placeholder="Town / City" id="guardian_town_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_province_dental" placeholder="Province" id="guardian_province_dental"/>
 					</div>
 					<div class="form-group signup">
 						<div class="form-inline">
 							<label>Residence Telephone Number:</label>
-							<input type="text" class="form-control" name="guardianresidencetelephone_dental" id="guardianresidencetelephone_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="guardianresidencetelephone_dental" id="guardianresidencetelephone_dental"/>
 							<label>Residence Cellphone Number: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" name="guardianresidencecellphone_dental" id="guardianresidencecellphone_dental"/>
+							<input type="text" maxlength="40" class="form-control" name="guardianresidencecellphone_dental" id="guardianresidencecellphone_dental"/>
 						</div>
 					</div>
 				</div>
@@ -309,23 +309,23 @@
 					<label>PAST MEDICAL HISTORY</label><br/>
 					<div class="form-group signup">
 						<label>Past illnesses since birth: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-						<input type="text" class="form-control" name="illness_history_dental" placeholder="Enter past illnesses since birth" id="illness_history_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="illness_history_dental" placeholder="Enter past illnesses since birth" id="illness_history_dental"/>
 					</div>
 					<div class="form-group signup">
 						<label>Operation undergone since birth: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-						<input type="text" class="form-control" name="operation_history_dental" placeholder="Enter operation undergone since birth" id="operation_history_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="operation_history_dental" placeholder="Enter operation undergone since birth" id="operation_history_dental"/>
 					</div>
 					<div class="form-group signup">
 						<label>Allergies to either food or drugs: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-						<input type="text" class="form-control" name="allergies_history_dental" placeholder="Enter allergies to either food or drugs" id="allergies_history_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="allergies_history_dental" placeholder="Enter allergies to either food or drugs" id="allergies_history_dental"/>
 					</div>
 					<div class="form-group signup">
 						<label>Family history of diseases: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-						<input type="text" class="form-control" name="family_history_dental" placeholder="Enter family history of diseases" id="family_history_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="family_history_dental" placeholder="Enter family history of diseases" id="family_history_dental"/>
 					</div>
 					<div class="form-group signup">
 						<label>Maintenance medication: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-						<input type="text" class="form-control" name="maintenance_medication_history_dental" placeholder="Enter maintenance medication" id="maintenance_medication_history_dental"/>
+						<input type="text" maxlength="40" class="form-control" name="maintenance_medication_history_dental" placeholder="Enter maintenance medication" id="maintenance_medication_history_dental"/>
 					</div>
 				</div>
 				<p id="login_dental_error"></p>
@@ -364,13 +364,13 @@
 					</div>
 					
 					<div class="form-group signup1_medical">
-						<input type="text" class="form-control" name="first_name_medical" id="first_name_medical" placeholder="First Name">
+						<input type="text" maxlength="40" class="form-control" name="first_name_medical" id="first_name_medical" placeholder="First Name">
 					</div>
 					<div class="form-group signup1_medical">
-						<input type="text" class="form-control" name="middle_name_medical" id="middle_name_medical" placeholder="Middle Name">
+						<input type="text" maxlength="40" class="form-control" name="middle_name_medical" id="middle_name_medical" placeholder="Middle Name">
 					</div>
 					<div class="form-group signup1_medical">
-						<input type="text" class="form-control" name="last_name_medical" id="last_name_medical" placeholder="Last Name">
+						<input type="text" maxlength="40" class="form-control" name="last_name_medical" id="last_name_medical" placeholder="Last Name">
 					</div><div class="form-group signup2_medical">
 					<div class="form-group signup">
 						<label>Type of patient: <i class="fa fa-asterisk required-asterisk"></i></label><br/>
@@ -452,7 +452,7 @@
 						</div>
 						<div class="form-group signup" id="senior_citizen_medical">
 							<label>Senior Citizen ID # (For out-patients only):</label>
-							<input type="text" class="form-control" name="senior_citizen_id_medical" id="senior_citizen_id_medical" placeholder="Enter senior citizen ID number" disabled/>
+							<input type="text" maxlength="40" class="form-control" name="senior_citizen_id_medical" id="senior_citizen_id_medical" placeholder="Enter senior citizen ID number" disabled/>
 						</div>
 						<div class="form-group signup">
 							<label>Civil Status: <i class="fa fa-asterisk required-asterisk"></i></label>
@@ -466,39 +466,39 @@
 						</div>
 						<div class="form-group signup">
 							<label>Religion: <i class="fa fa-asterisk required-asterisk"></i></label>
-							<input type="text" class="form-control" placeholder="Enter religion" name="religion_medical" id="religion_medical" maxlength="30" />
+							<input type="text" maxlength="40" class="form-control" placeholder="Enter religion" name="religion_medical" id="religion_medical"/>
 						</div>
 						<div class="form-group signup">
 							<label>Nationality: <i class="fa fa-asterisk required-asterisk"></i></label>
-							<input type="text" class="form-control" name="nationality_medical" placeholder="Enter nationality" id="nationality_medical" maxlength="20" />
+							<input type="text" maxlength="40" class="form-control" name="nationality_medical" placeholder="Enter nationality" id="nationality_medical" />
 						</div>
 						<div class="form-group signup">
 							<label>Father: <i class="fa fa-asterisk required-asterisk"></i></label>
-							<input type="text" class="form-control" name="father_first_medical" placeholder="Enter father's given name" id="father_first_medical"/>
-							<input type="text" class="form-control" name="father_middle_medical" placeholder="Enter father's middle name" id="father_middle_medical"/>
-							<input type="text" class="form-control" name="father_last_medical" placeholder="Enter father's last name" id="father_last_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="father_first_medical" placeholder="Enter father's given name" id="father_first_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="father_middle_medical" placeholder="Enter father's middle name" id="father_middle_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="father_last_medical" placeholder="Enter father's last name" id="father_last_medical"/>
 						</div>
 						<div class="form-group signup">
 							<label>Mother: <i class="fa fa-asterisk required-asterisk"></i></label>
-							<input type="text" class="form-control" name="mother_first_medical" placeholder="Enter mother's first name" id="mother_first_medical"/>
-							<input type="text" class="form-control" name="mother_middle_medical" placeholder="Enter mother's middle name" id="mother_middle_medical"/>
-							<input type="text" class="form-control" name="mother_last_medical" placeholder="Enter mother's last name" id="mother_last_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="mother_first_medical" placeholder="Enter mother's first name" id="mother_first_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="mother_middle_medical" placeholder="Enter mother's middle name" id="mother_middle_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="mother_last_medical" placeholder="Enter mother's last name" id="mother_last_medical"/>
 						</div>
 						<div class="form-group signup">
 							<label>Home Address: <i class="fa fa-asterisk required-asterisk"></i></label>
 							<div class="form-inline">
-								<input type="text" class="form-control" name="street_medical" id="street_medical" placeholder="Street"/>
-								<input type="text" class="form-control" name="town_medical" id="town_medical" placeholder="Town / City"/>
-								<input type="text" class="form-control" name="province_medical" id="province_medical" placeholder="Province"/>
+								<input type="text" maxlength="40" class="form-control" name="street_medical" id="street_medical" placeholder="Street"/>
+								<input type="text" maxlength="40" class="form-control" name="town_medical" id="town_medical" placeholder="Town / City"/>
+								<input type="text" maxlength="40" class="form-control" name="province_medical" id="province_medical" placeholder="Province"/>
 							</div>
 						</div>
 						<div class="form-inline">
 							<label>Residence Telephone Number: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" name="residencetelephone_medical" id="residencetelephone_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="residencetelephone_medical" id="residencetelephone_medical"/>
 							<label>Residence Cellphone Number: <i class="fa fa-asterisk required-asterisk"></i></label></label>
-							<input type="text" class="form-control" name="residencecellphone_medical" id="residencecellphone_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="residencecellphone_medical" id="residencecellphone_medical"/>
 							<label>Personal Contact Number: <i class="fa fa-asterisk required-asterisk"></i></label>
-							<input type="text" class="form-control" name="personalcontactnumber_medical" id="personalcontactnumber_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="personalcontactnumber_medical" id="personalcontactnumber_medical"/>
 						</div>
 					</div>
 				</div>
@@ -506,26 +506,26 @@
 					<label>GUARDIAN/PERSON TO BE CONTACTED IN CASE OF EMERGENCY (OTHER THAN PARENTS)</label><br/>
 					<div class="form-group signup">
 						<label>Name: <i class="fa fa-asterisk required-asterisk"></i></label>
-						<input type="text" class="form-control" name="guardian_first_medical" placeholder="Enter guardian's first name" id="guardian_first_medical"/>
-						<input type="text" class="form-control" name="guardian_middle_medical" placeholder="Enter guardian's middle name" id="guardian_middle_medical"/>
-						<input type="text" class="form-control" name="guardian_last_medical" placeholder="Enter guardian's last name" id="guardian_last_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_first_medical" placeholder="Enter guardian's first name" id="guardian_first_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_middle_medical" placeholder="Enter guardian's middle name" id="guardian_middle_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_last_medical" placeholder="Enter guardian's last name" id="guardian_last_medical"/>
 					</div>
 					<div class="form-group signup">
 						<label>Relationship: <i class="fa fa-asterisk required-asterisk"></i></label>
-						<input type="text" class="form-control" name="guardian_relationship_medical" placeholder="Enter relationship with guardian" id="guardian_relationship_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_relationship_medical" placeholder="Enter relationship with guardian" id="guardian_relationship_medical"/>
 					</div>
 					<div class="form-inline signup">
 						<label>Address: <i class="fa fa-asterisk required-asterisk"></i></label>
-						<input type="text" class="form-control" name="guardian_street_medical" placeholder="Street" id="guardian_street_medical"/>
-						<input type="text" class="form-control" name="guardian_town_medical" placeholder="Town / City" id="guardian_town_medical"/>
-						<input type="text" class="form-control" name="guardian_province_medical" placeholder="Province" id="guardian_province_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_street_medical" placeholder="Street" id="guardian_street_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_town_medical" placeholder="Town / City" id="guardian_town_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="guardian_province_medical" placeholder="Province" id="guardian_province_medical"/>
 					</div>
 					<div class="form-group signup">
 						<div class="form-inline">
 							<label>Residence Telephone Number:</label>
-							<input type="text" class="form-control" name="guardianresidencetelephone_medical" id="guardianresidencetelephone_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="guardianresidencetelephone_medical" id="guardianresidencetelephone_medical"/>
 							<label>Residence Cellphone Number: <i class="fa fa-asterisk required-asterisk"></i></label>
-							<input type="text" class="form-control" name="guardianresidencecellphone_medical" id="guardianresidencecellphone_medical"/>
+							<input type="text" maxlength="40" class="form-control" name="guardianresidencecellphone_medical" id="guardianresidencecellphone_medical"/>
 						</div>
 					</div>
 				</div>
@@ -533,23 +533,23 @@
 					<label>PAST MEDICAL HISTORY</label><br/>
 					<div class="form-group signup">
 						<label>Past illnesses since birth: <i class="fa fa-asterisk required-asterisk"></i></label>
-						<input type="text" class="form-control" name="illness_history_medical" placeholder="Enter past illnesses since birth" id="illness_history_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="illness_history_medical" placeholder="Enter past illnesses since birth" id="illness_history_medical"/>
 					</div>
 					<div class="form-group signup">
 						<label>Operation undergone since birth: <i class="fa fa-asterisk required-asterisk"></i></label>
-						<input type="text" class="form-control" name="operation_history_medical" placeholder="Enter operation undergone since birth" id="operation_history_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="operation_history_medical" placeholder="Enter operation undergone since birth" id="operation_history_medical"/>
 					</div>
 					<div class="form-group signup">
 						<label>Allergies to either food or drugs: <i class="fa fa-asterisk required-asterisk"></i></label>
-						<input type="text" class="form-control" name="allergies_history_medical" placeholder="Enter allergies to either food or drugs" id="allergies_history_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="allergies_history_medical" placeholder="Enter allergies to either food or drugs" id="allergies_history_medical"/>
 					</div>
 					<div class="form-group signup">
 						<label>Family history of diseases: <i class="fa fa-asterisk required-asterisk"></i></label>
-						<input type="text" class="form-control" name="family_history_medical" placeholder="Enter family history of diseases" id="family_history_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="family_history_medical" placeholder="Enter family history of diseases" id="family_history_medical"/>
 					</div>
 					<div class="form-group signup">
 						<label>Maintenance medication: <i class="fa fa-asterisk required-asterisk"></i></label>
-						<input type="text" class="form-control" name="maintenance_medication_history_medical" placeholder="Enter maintenance medication" id="maintenance_medication_history_medical"/>
+						<input type="text" maxlength="40" class="form-control" name="maintenance_medication_history_medical" placeholder="Enter maintenance medication" id="maintenance_medication_history_medical"/>
 					</div>
 				</div>
 				<p id="login_medical_error"></p>

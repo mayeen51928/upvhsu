@@ -80,10 +80,10 @@
 												</select>
 											</td>
 										</tr>
-										<tr>
+										{{-- <tr>
 											<td>Year Level</td>
 											<td><input type="number" class="form-control" value="{{$year_level}}" placeholder="Year Level" name="year_level" id="year_level" required/></td>
-										</tr>
+										</tr> --}}
 										@endif
 									</tbody>
 								</table>
@@ -116,7 +116,7 @@
 											<td>Father</td>
 											<td>
 												<input type="text" maxlength="30" class="form-control" value="{{$father_first_name}}" placeholder="Father's Given Name" name="father_first_name" id="father_first_name" required/>
-												<input type="text" maxlength="30" class="form-control" value="{{$father_middle_name}}" placeholder="Father's Middle Name" name="father_middle_name" id="father_middle_name" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$father_middle_name}}" placeholder="Father's Middle Name" name="father_middle_name" id="father_middle_name"/>
 												<input type="text" maxlength="30" class="form-control" value="{{$father_last_name}}" placeholder="Father's Last Name" name="father_last_name" id="father_last_name" required/>
 											</td>
 										</tr>
@@ -124,7 +124,7 @@
 											<td>Mother</td>
 											<td>
 												<input type="text" maxlength="30" class="form-control" value="{{$mother_first_name}}" placeholder="Mother's Given Name" name="mother_first_name" id="mother_first_name" required/>
-												<input type="text" maxlength="30" class="form-control" value="{{$mother_middle_name}}" placeholder="Mother's Middle Name" name="mother_middle_name" id="mother_middle_name" required/>
+												<input type="text" maxlength="30" class="form-control" value="{{$mother_middle_name}}" placeholder="Mother's Middle Name" name="mother_middle_name" id="mother_middle_name"/>
 												<input type="text" maxlength="30" class="form-control" value="{{$mother_last_name}}" placeholder="Mother's Last Name" name="mother_last_name" id="mother_last_name" required/>
 											</td>
 										</tr>
