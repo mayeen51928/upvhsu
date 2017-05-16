@@ -398,24 +398,22 @@ class AdminController extends Controller
 	public function updatemedicalservices(Request $request)
 	{
 		$medicalservices = $request->medical_services;
-		DB::table('medical_services')->where('service_type', '=', $request->service_type)->delete();
 		for($i = 0; $i < sizeof($medicalservices); $i++){
 			if($medicalservices[$i]!=''){
 				$explode_medical_services = explode("(:::)", $medicalservices[$i]);
-				$service_description = $explode_medical_services[0];
-				$student_rate = $explode_medical_services[1];
-				$faculty_staff_dependent_rate = $explode_medical_services[2];
-				$opd_rate = $explode_medical_services[3];
-				$senior_rate = $explode_medical_services[4];
+				$student_rate = $explode_medical_services[0];
+				$faculty_staff_dependent_rate = $explode_medical_services[1];
+				$opd_rate = $explode_medical_services[2];
+				$senior_rate = $explode_medical_services[3];
+				$service_id = $explode_medical_services[4];
 
-				$medical_service = new MedicalService();
-				$medical_service->service_description = $service_description;
+				$medical_service = MedicalService::where('id', $service_id)->first();
 				$medical_service->student_rate = $student_rate;
 				$medical_service->faculty_staff_dependent_rate = $faculty_staff_dependent_rate;
 				$medical_service->opd_rate = $opd_rate;
 				$medical_service->senior_rate = $senior_rate;
 				$medical_service->service_type = $request->service_type;
-				$medical_service->save();
+				$medical_service->update();
 			}
 		}
 		return response()->json(['success' => 'success']); 
@@ -424,23 +422,21 @@ class AdminController extends Controller
 	public function updatedentalservices(Request $request)
 	{
 		$dentalservices = $request->dental_services;
-		DB::table('dental_services')->delete();
 		for($i = 0; $i < sizeof($dentalservices); $i++){
 			if($dentalservices[$i]!=''){
 				$explode_dental_services = explode("(:::)", $dentalservices[$i]);
-				$service_description = $explode_dental_services[0];
-				$student_rate = $explode_dental_services[1];
-				$faculty_staff_dependent_rate = $explode_dental_services[2];
-				$opd_rate = $explode_dental_services[3];
-				$senior_rate = $explode_dental_services[4];
+				$student_rate = $explode_dental_services[0];
+				$faculty_staff_dependent_rate = $explode_dental_services[1];
+				$opd_rate = $explode_dental_services[2];
+				$senior_rate = $explode_dental_services[3];
+				$service_id = $explode_dental_services[4];
 
-				$dental_service = new DentalService();
-				$dental_service->service_description = $service_description;
+				$dental_service = DentalService::where('id', $service_id)->first();
 				$dental_service->student_rate = $student_rate;
 				$dental_service->faculty_staff_dependent_rate = $faculty_staff_dependent_rate;
 				$dental_service->opd_rate = $opd_rate;
 				$dental_service->senior_rate = $senior_rate;
-				$dental_service->save();
+				$dental_service->update();
 			}
 		}
 		return response()->json(['success' => 'success']); 

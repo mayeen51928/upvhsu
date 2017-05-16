@@ -53,8 +53,6 @@
 			</div>
 			<div class="modal-body">
 				<div class="add-more-medical">
-					<button type="button" class="btn btn-success btn-xs addmoremedicalservices" style="display:none">Add more services</button>
-					<br/><br/>
 					<table id="displayMedicalServicesTableModal" class="table table-responsive" style="display: none">
 						<tbody id="displayMedicalServicesModal">
 						</tbody>
@@ -77,8 +75,6 @@
 			</div>
 			<div class="modal-body">
 				<div class="add-more-dental">
-					<button type="button" class="btn btn-success btn-xs addmoredentalservices">Add more services</button>
-					<br/><br/>
 					<table id="displayDentalServicesTableModal" class="table table-responsive" style="display: none">
 						<tbody id="displayDentalServicesModal">
 						</tbody>
