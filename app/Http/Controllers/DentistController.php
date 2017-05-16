@@ -317,8 +317,6 @@ class DentistController extends Controller
 	        }
 	        $params['navbar_active'] = 'account';
 	        $params['sidebar_active'] = 'profile';
-	        $params['navbar_active'] = 'account';
-	        $params['sidebar_active'] = 'profile';
 	        return view('staff.dental-dentist.profile', $params);
 	    }
 
@@ -852,7 +850,7 @@ class DentistController extends Controller
 			$patient_id = DentalAppointment::find($id)->patient_id;
 			$params['appointment_id'] = $appointment_id;
 			$params['navbar_active'] = 'account';
-			$params['sidebar_active'] = 'dashboard';
+			$params['sidebar_active'] = 'searchpatient';
 
 			$patient_info = DentalAppointment::join('patient_info', 'dental_appointments.patient_id', '=', 'patient_info.patient_id')->join('dental_schedules', 'dental_appointments.dental_schedule_id', '=', 'dental_schedules.id')->orderBy('dental_schedules.schedule_start', 'desc')->where('dental_appointments.id', $appointment_id)->first();
 			$date_of_birth = $patient_info->birthday;

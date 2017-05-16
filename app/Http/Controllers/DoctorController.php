@@ -126,8 +126,6 @@ class DoctorController extends Controller
 		}
 		$params['navbar_active'] = 'account';
 		$params['sidebar_active'] = 'profile';
-		$params['navbar_active'] = 'account';
-		$params['sidebar_active'] = 'profile';
 		return view('staff.medical-doctor.profile', $params);
 	}
 	public function editprofile()
